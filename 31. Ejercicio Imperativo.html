@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Imperativo</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <style>
+    :root {
+      --bg1: #f7efe5;
+      --bg2: #e8f3ff;
+      --card: rgba(255, 255, 255, 0.9);
+      --ink: #233044;
+      --muted: #667085;
+      --accent: #7c3aed;
+      --accent2: #0891b2;
+      --ok: #15803d;
+      --bad: #b91c1c;
+      --ok-bg: #dcfce7;
+      --bad-bg: #fee2e2;
+      --border: rgba(35, 48, 68, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 20% 10%, rgba(124, 58, 237, 0.20), transparent 28%),
+        radial-gradient(circle at 80% 0%, rgba(8, 145, 178, 0.20), transparent 30%),
+        linear-gradient(135deg, var(--bg1), var(--bg2));
+      padding: 34px 18px;
+    }
+
+    .wrap { max-width: 1080px; margin: 0 auto; }
+
+    header {
+      background: linear-gradient(135deg, rgba(124, 58, 237, 0.95), rgba(8, 145, 178, 0.92));
+      color: white;
+      border-radius: 30px;
+      padding: 34px;
+      box-shadow: 0 24px 60px rgba(36, 44, 82, 0.22);
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::after {
+      content: "";
+      position: absolute;
+      width: 210px;
+      height: 210px;
+      border-radius: 999px;
+      right: -70px;
+      top: -70px;
+      background: rgba(255,255,255,0.16);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 3.8rem);
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      margin-top: 24px;
+    }
+
+    .card {
+      background: var(--card);
+      backdrop-filter: blur(14px);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 26px;
+      box-shadow: 0 18px 50px rgba(36, 44, 82, 0.12);
+    }
+
+    h2 {
+      margin: 0 0 18px;
+      font-size: 1.35rem;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    h2 .pill {
+      font-size: 0.8rem;
+      color: white;
+      background: var(--accent);
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-weight: 700;
+    }
+
+    ol {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 12px;
+    }
+
+    li {
+      display: block;
+      padding: 15px 16px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: rgba(255,255,255,0.62);
+      line-height: 2.35;
+      font-size: 1.02rem;
+    }
+
+    .number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 28px;
+      margin-right: 8px;
+      border-radius: 999px;
+      color: white;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      font-weight: 800;
+      font-size: 0.78rem;
+      vertical-align: middle;
+    }
+
+    .text-box {
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 22px;
+      background: rgba(255,255,255,0.64);
+      font-size: 1.05rem;
+      line-height: 2.45;
+    }
+
+    .verb-select {
+      appearance: none;
+      min-width: 155px;
+      max-width: 100%;
+      margin: 0 5px;
+      padding: 10px 42px 10px 14px;
+      border-radius: 999px;
+      border: 2px solid rgba(124, 58, 237, 0.26);
+      background:
+        linear-gradient(45deg, transparent 50%, var(--accent) 50%) calc(100% - 18px) calc(50% - 3px) / 7px 7px no-repeat,
+        linear-gradient(135deg, #ffffff, #f8fbff);
+      color: var(--ink);
+      font-weight: 700;
+      font-size: 0.96rem;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(36, 44, 82, 0.08);
+      transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+    }
+
+    .verb-select:hover {
+      transform: translateY(-1px);
+      border-color: rgba(124, 58, 237, 0.55);
+      box-shadow: 0 12px 28px rgba(36, 44, 82, 0.12);
+    }
+
+    .verb-select:focus {
+      outline: 4px solid rgba(124, 58, 237, 0.18);
+      border-color: var(--accent);
+    }
+
+    .verb-select.correct {
+      border-color: var(--ok);
+      background:
+        linear-gradient(45deg, transparent 50%, var(--ok) 50%) calc(100% - 18px) calc(50% - 3px) / 7px 7px no-repeat,
+        var(--ok-bg);
+    }
+
+    .verb-select.incorrect {
+      border-color: var(--bad);
+      background:
+        linear-gradient(45deg, transparent 50%, var(--bad) 50%) calc(100% - 18px) calc(50% - 3px) / 7px 7px no-repeat,
+        var(--bad-bg);
+    }
+
+    .feedback {
+      display: none;
+      margin-left: 6px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .feedback.correct {
+      display: inline-block;
+      color: var(--ok);
+      background: var(--ok-bg);
+    }
+
+    .feedback.incorrect {
+      display: inline-block;
+      color: var(--bad);
+      background: var(--bad-bg);
+    }
+
+    .actions {
+      position: sticky;
+      bottom: 18px;
+      z-index: 5;
+      margin-top: 24px;
+      padding: 14px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.76);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(16px);
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      box-shadow: 0 18px 50px rgba(36, 44, 82, 0.16);
+    }
+
+    button {
+      border: 0;
+      border-radius: 999px;
+      padding: 14px 26px;
+      font-size: 1rem;
+      font-weight: 900;
+      cursor: pointer;
+      transition: transform 160ms ease, box-shadow 160ms ease;
+    }
+
+    button:hover { transform: translateY(-2px); }
+
+    #checkBtn {
+      color: white;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 14px 30px rgba(124, 58, 237, 0.26);
+    }
+
+    #resetBtn {
+      color: var(--ink);
+      background: white;
+      border: 1px solid var(--border);
+    }
+
+    #score {
+      min-width: 220px;
+      color: var(--muted);
+      font-weight: 800;
+      text-align: center;
+    }
+
+    @media (max-width: 720px) {
+      body { padding: 18px 10px; }
+      header, .card { padding: 22px; border-radius: 22px; }
+      .verb-select { width: 100%; margin: 7px 0; }
+      li, .text-box { line-height: 1.85; }
+      .actions { position: static; }
+      .feedback { margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header>
+      <h1>Imperativo</h1>
+    </header>
+
+    <section class="grid">
+      <article class="card">
+        <h2><span class="pill">20</span> Oraciones</h2>
+        <ol id="sentenceList"></ol>
+      </article>
+
+      <article class="card">
+        <h2><span class="pill">Texto</span> Excursión al museo</h2>
+        <div class="text-box" id="textBox"></div>
+      </article>
+    </section>
+
+    <div class="actions">
+      <button id="checkBtn" type="button">Revisar</button>
+      <button id="resetBtn" type="button">Reiniciar</button>
+      <span id="score" aria-live="polite"></span>
+    </div>
+  </main>
+
+  <script>
+    const sentenceItems = [
+      { id: 'q1', n: '01', pre: 'Juan, ', verb: 'abrir', answer: 'abre', opts: ['abre', 'abras', 'abra', 'abramos', 'abran'], post: ' la ventana, por favor.' },
+      { id: 'q2', n: '02', pre: 'Señora García, ', verb: 'esperar', answer: 'espere', opts: ['espera', 'esperes', 'espere', 'esperemos', 'esperen'], post: ' aquí un momento.' },
+      { id: 'q3', n: '03', pre: 'Chicos, ', verb: 'escuchar', answer: 'escuchen', opts: ['escucha', 'escuches', 'escuche', 'escuchemos', 'escuchen'], post: ' la explicación antes de empezar.' },
+      { id: 'q4', n: '04', pre: 'Amigos, ', verb: 'salir', answer: 'salgamos', opts: ['sal', 'salgas', 'salga', 'salgamos', 'salgan'], post: ' temprano para llegar a tiempo.' },
+      { id: 'q5', n: '05', pre: 'No ', verb: 'comer', answer: 'comas', opts: ['come', 'comas', 'coma', 'comamos', 'coman'], post: ' tantos dulces antes de cenar.' },
+      { id: 'q6', n: '06', pre: 'Señor, no ', verb: 'firmar', answer: 'firme', opts: ['firma', 'firmes', 'firme', 'firmemos', 'firmen'], post: ' el documento sin leerlo.' },
+      { id: 'q7', n: '07', pre: 'Niños, no ', verb: 'correr', answer: 'corran', opts: ['corre', 'corras', 'corra', 'corramos', 'corran'], post: ' en el pasillo.' },
+      { id: 'q8', n: '08', pre: 'María, ', verb: 'hacer', answer: 'haz', opts: ['haz', 'hagas', 'haga', 'hagamos', 'hagan'], post: ' la tarea antes de salir.' },
+      { id: 'q9', n: '09', pre: 'No ', verb: 'hacer', answer: 'hagas', opts: ['haz', 'hagas', 'haga', 'hagamos', 'hagan'], post: ' ruido durante la clase.' },
+      { id: 'q10', n: '10', pre: 'Profesor, ', verb: 'decir', answer: 'diga', opts: ['di', 'digas', 'diga', 'digamos', 'digan'], post: ' la respuesta otra vez, por favor.' },
+      { id: 'q11', n: '11', pre: 'No ', verb: 'decir', answer: 'digas', opts: ['di', 'digas', 'diga', 'digamos', 'digan'], post: ' mentiras.' },
+      { id: 'q12', n: '12', pre: 'Por favor, ', verb: 'traer', answer: 'traigan', opts: ['trae', 'traigas', 'traiga', 'traigamos', 'traigan'], post: ' sus cuadernos mañana.' },
+      { id: 'q13', n: '13', pre: 'Compañeros, ', verb: 'leer', answer: 'leamos', opts: ['lee', 'leas', 'lea', 'leamos', 'lean'], post: ' el texto en voz alta.' },
+      { id: 'q14', n: '14', pre: 'Carlos, ', verb: 'venir', answer: 'ven', opts: ['ven', 'vengas', 'venga', 'vengamos', 'vengan'], post: ' conmigo a la oficina.' },
+      { id: 'q15', n: '15', pre: 'No ', verb: 'venir', answer: 'vengas', opts: ['ven', 'vengas', 'venga', 'vengamos', 'vengan'], post: ' tarde a la reunión.' },
+      { id: 'q16', n: '16', pre: 'Señor López, ', verb: 'ir', answer: 'vaya', opts: ['ve', 'vayas', 'vaya', 'vayamos', 'vayan'], post: ' por esta calle hasta la plaza.' },
+      { id: 'q17', n: '17', pre: 'No ', verb: 'ir', answer: 'vayamos', opts: ['ve', 'vayas', 'vaya', 'vayamos', 'vayan'], post: ' en autobús; mejor caminemos.' },
+      { id: 'q18', n: '18', pre: 'Ana, ', verb: 'ser', answer: 'sé', opts: ['sé', 'seas', 'sea', 'seamos', 'sean'], post: ' paciente con tu hermano.' },
+      { id: 'q19', n: '19', pre: 'Señora, no ', verb: 'ser', answer: 'sea', opts: ['sé', 'seas', 'sea', 'seamos', 'sean'], post: ' tan dura con los estudiantes.' },
+      { id: 'q20', n: '20', pre: 'Estudiantes, ', verb: 'practicar', answer: 'practiquen', opts: ['practica', 'practiques', 'practique', 'practiquemos', 'practiquen'], post: ' todos los días.' }
+    ];
+
+    const textParts = [
+      'Para la excursión de mañana, la profesora dice: chicos, ',
+      { id: 'q21', verb: 'llegar', answer: 'lleguen', opts: ['llega', 'llegues', 'llegue', 'lleguemos', 'lleguen'] },
+      ' a las ocho. Pedro, ',
+      { id: 'q22', verb: 'traer', answer: 'trae', opts: ['trae', 'traigas', 'traiga', 'traigamos', 'traigan'] },
+      ' tu documento. Laura, no ',
+      { id: 'q23', verb: 'olvidar', answer: 'olvides', opts: ['olvida', 'olvides', 'olvide', 'olvidemos', 'olviden'] },
+      ' la botella de agua. Señor conductor, ',
+      { id: 'q24', verb: 'esperar', answer: 'espere', opts: ['espera', 'esperes', 'espere', 'esperemos', 'esperen'] },
+      ' en la entrada. Antes de salir, ',
+      { id: 'q25', verb: 'revisar', answer: 'revisemos', opts: ['revisa', 'revises', 'revise', 'revisemos', 'revisen'] },
+      ' la lista juntos. Durante el viaje, no ',
+      { id: 'q26', verb: 'gritar', answer: 'griten', opts: ['grita', 'grites', 'grite', 'gritemos', 'griten'] },
+      ' en el autobús y ',
+      { id: 'q27', verb: 'escuchar', answer: 'escuchen', opts: ['escucha', 'escuches', 'escuche', 'escuchemos', 'escuchen'] },
+      ' las indicaciones. En el museo, no ',
+      { id: 'q28', verb: 'tocar', answer: 'toquen', opts: ['toca', 'toques', 'toque', 'toquemos', 'toquen'] },
+      ' las piezas. Ana, ',
+      { id: 'q29', verb: 'escribir', answer: 'escribe', opts: ['escribe', 'escribas', 'escriba', 'escribamos', 'escriban'] },
+      ' tres ideas importantes. Todos, ',
+      { id: 'q30', verb: 'tener', answer: 'tengan', opts: ['ten', 'tengas', 'tenga', 'tengamos', 'tengan'] },
+      ' cuidado al cruzar la calle y no ',
+      { id: 'q31', verb: 'poner', answer: 'pongan', opts: ['pon', 'pongas', 'ponga', 'pongamos', 'pongan'] },
+      ' mochilas en el pasillo. Al final, ',
+      { id: 'q32', verb: 'volver', answer: 'vuelvan', opts: ['vuelve', 'vuelvas', 'vuelva', 'volvamos', 'vuelvan'] },
+      ' al autobús con calma.'
+    ];
+
+    const score = document.getElementById('score');
+    const checkBtn = document.getElementById('checkBtn');
+    const resetBtn = document.getElementById('resetBtn');
+
+    function shuffle(array) {
+      const copy = [...array];
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+
+    function escapeHTML(text) {
+      return String(text)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function makeSelect(item) {
+      const options = shuffle(item.opts);
+      let html = `<select class="verb-select" id="${item.id}" data-answer="${escapeHTML(item.answer)}" aria-label="${escapeHTML(item.verb)}">`;
+      html += `<option value="" disabled selected>${escapeHTML(item.verb)}</option>`;
+      options.forEach(form => {
+        html += `<option value="${escapeHTML(form)}">${escapeHTML(form)}</option>`;
+      });
+      html += `</select><span class="feedback" id="fb-${item.id}"></span>`;
+      return html;
+    }
+
+    function renderSentences() {
+      const list = document.getElementById('sentenceList');
+      list.innerHTML = '';
+      sentenceItems.forEach(item => {
+        const li = document.createElement('li');
+        li.innerHTML = `<span class="number">${item.n}</span><span>${item.pre}</span>${makeSelect(item)}<span>${item.post}</span>`;
+        list.appendChild(li);
+      });
+    }
+
+    function renderText() {
+      const textBox = document.getElementById('textBox');
+      textBox.innerHTML = textParts.map(part => typeof part === 'string' ? part : makeSelect(part)).join('');
+    }
+
+    function allItems() {
+      return [...sentenceItems, ...textParts.filter(part => typeof part !== 'string')];
+    }
+
+    function revisar() {
+      let correctas = 0;
+      allItems().forEach(item => {
+        const select = document.getElementById(item.id);
+        const feedback = document.getElementById(`fb-${item.id}`);
+        select.classList.remove('correct', 'incorrect');
+        feedback.className = 'feedback';
+        feedback.textContent = '';
+
+        if (select.value === item.answer) {
+          select.classList.add('correct');
+          feedback.classList.add('correct');
+          feedback.textContent = '✓';
+          correctas++;
+        } else {
+          select.classList.add('incorrect');
+          feedback.classList.add('incorrect');
+          feedback.textContent = `→ ${item.answer}`;
+        }
+      });
+      score.textContent = `${correctas} / ${allItems().length} correctas`;
+    }
+
+    function reiniciar() {
+      renderSentences();
+      renderText();
+      score.textContent = '';
+    }
+
+    checkBtn.addEventListener('click', revisar);
+    resetBtn.addEventListener('click', reiniciar);
+
+    renderSentences();
+    renderText();
+  </script>
+</body>
+</html>

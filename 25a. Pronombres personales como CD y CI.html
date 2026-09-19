@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Местоимения в винительном и дательном падеже — Parte 2</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+<style>
+:root{
+  --ink:#18314f; --muted:#5c6b7a; --paper:#fffdf8; --bg1:#eef7ff; --bg2:#fff0e5;
+  --accent:#ff7a59; --accent2:#3b82f6; --accent3:#13a38b; --good:#147a3d; --bad:#ba1a1a;
+  --line:rgba(24,49,79,.14); --shadow:0 18px 45px rgba(24,49,79,.13);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; color:var(--ink);
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  background:
+    radial-gradient(circle at 12% 10%,rgba(255,122,89,.22),transparent 30%),
+    radial-gradient(circle at 85% 8%,rgba(59,130,246,.18),transparent 32%),
+    linear-gradient(135deg,var(--bg1),var(--bg2));
+  line-height:1.56;
+}
+header.hero{max-width:1180px;margin:0 auto;padding:52px 22px 24px}
+.hero-card{
+  background:rgba(255,253,248,.92);border:1px solid rgba(255,255,255,.75);border-radius:30px;
+  box-shadow:var(--shadow);padding:34px;backdrop-filter:blur(10px)
+}
+.eyebrow{
+  display:inline-flex;padding:8px 13px;border-radius:999px;background:#fff;color:#c25235;font-weight:800;
+  letter-spacing:.03em;text-transform:uppercase;font-size:.78rem
+}
+h1{margin:18px 0 10px;font-size:clamp(2rem,4.4vw,4rem);line-height:1.03;letter-spacing:-.04em;color:#10243d}
+.subtitle{margin:0;color:var(--muted);font-size:1.05rem}
+.source-note{
+  margin-top:20px;padding:14px 17px;background:#fff5ef;border-left:6px solid var(--accent);
+  border-radius:16px;font-weight:800
+}
+main{max-width:1180px;margin:0 auto;padding:0 22px 64px}
+.book-rules,.exercise-section{
+  background:rgba(255,253,248,.94);border:1px solid rgba(255,255,255,.78);border-radius:28px;
+  padding:30px;box-shadow:var(--shadow);margin:22px 0
+}
+.book-rules{font-family:Georgia,"Times New Roman",serif;font-size:1.08rem;color:#111}
+.book-rules h2{text-align:center;font-style:italic;font-size:clamp(1.8rem,3vw,2.55rem);line-height:1.06;margin:2px 0 28px}
+.book-rules h2 span{font-size:.84em}
+.book-rules p{max-width:860px;margin:14px auto;text-align:left}
+.book-rules .compare-title{font-size:1.2em;margin-top:28px}
+.book-rules .example-label{margin-bottom:0}
+.book-rules .attention{
+  margin-top:28px;padding:14px 18px 14px 48px;border-left:6px solid #88929c;background:#f7f7f7;
+  border-radius:12px;position:relative
+}
+.book-rules .attention::before{content:"!";position:absolute;left:17px;top:12px;font-size:2rem;color:#7a7f86;font-weight:900}
+.book-rules .bullet-head{font-size:1.08em;margin-top:26px}
+.rule-divider{border:0;border-top:1px solid rgba(0,0,0,.14);margin:36px auto;max-width:900px}
+.book-table{border-collapse:collapse;margin:22px auto;max-width:760px;width:84%;background:#fff}
+.book-table th,.book-table td{border:1.5px solid #111;padding:7px 10px;vertical-align:middle}
+.book-table th{text-align:center;font-weight:700}
+.book-table.two-col td:first-child{width:57%}
+.compare-table td,.compare-table th{font-size:1rem}
+.section-heading{display:flex;align-items:start;gap:16px;margin-bottom:20px}
+.section-badge{
+  width:48px;height:48px;border-radius:16px;display:grid;place-items:center;
+  background:linear-gradient(135deg,var(--accent),#ffb86b);color:white;font-size:1.2rem;font-weight:900;flex:0 0 48px
+}
+.section-heading h2{margin:0;font-size:clamp(1.45rem,2.4vw,2.1rem);letter-spacing:-.025em}
+.section-heading p{margin:5px 0 0;color:var(--muted)}
+.answer-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.answer-card{
+  display:grid;grid-template-columns:44px 1fr;gap:14px;padding:17px;border-radius:22px;
+  border:1px solid var(--line);background:linear-gradient(180deg,#fff,#fbfdff);
+  box-shadow:0 8px 22px rgba(24,49,79,.06);overflow:visible
+}
+.item-num{
+  width:38px;height:38px;border-radius:14px;display:grid;place-items:center;font-weight:900;
+  background:linear-gradient(135deg,#13a38b,#2dd4bf);color:white
+}
+.source-sentence{margin:0 0 10px;font-weight:750}
+.has-tooltip{position:relative;cursor:help;outline:none}
+.has-tooltip::after{
+  content:attr(data-ru);position:absolute;left:0;bottom:calc(100% + 9px);z-index:50;
+  width:min(390px,85vw);padding:10px 12px;border-radius:12px;background:#10243d;color:#fff;
+  font-size:.9rem;line-height:1.35;font-weight:600;box-shadow:0 10px 28px rgba(0,0,0,.22);
+  opacity:0;transform:translateY(4px);pointer-events:none;transition:.16s ease
+}
+.has-tooltip::before{
+  content:"";position:absolute;left:24px;bottom:calc(100% + 2px);z-index:51;border:7px solid transparent;
+  border-top-color:#10243d;opacity:0;pointer-events:none;transition:.16s ease
+}
+.has-tooltip:hover::after,.has-tooltip:focus::after,.has-tooltip:hover::before,.has-tooltip:focus::before{opacity:1;transform:translateY(0)}
+.answer-input{
+  width:100%;resize:vertical;border:2px solid #d8e3ef;background:#fbfdff;border-radius:16px;
+  padding:12px 14px;font:inherit;color:var(--ink);outline:none;transition:.2s
+}
+.answer-input:focus{border-color:var(--accent2);box-shadow:0 0 0 4px rgba(59,130,246,.12);background:#fff}
+.answer-input.ok{border-color:var(--good);background:#f0fdf4}
+.answer-input.no{border-color:var(--bad);background:#fff1f1}
+.feedback{min-height:24px;margin-top:8px;font-weight:800}
+.feedback.good{color:var(--good)}
+.feedback.bad{color:var(--bad)}
+.model-answer{
+  margin-top:9px;padding:10px 12px;border-radius:13px;background:#eef7ff;color:#24435f;font-size:.94rem
+}
+.exercise-actions{
+  display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:20px;padding-top:18px;border-top:1px solid var(--line)
+}
+button{
+  border:0;cursor:pointer;border-radius:15px;padding:12px 18px;background:linear-gradient(135deg,var(--accent2),#7c3aed);
+  color:white;font-weight:900;box-shadow:0 10px 20px rgba(59,130,246,.22);transition:.16s
+}
+button:hover{transform:translateY(-1px);filter:brightness(1.03)}
+button.secondary{background:#eef2f7;color:#24435f;box-shadow:none}
+.score{font-weight:900;color:#24435f;padding:8px 11px;border-radius:999px;background:#fff;border:1px solid var(--line)}
+.footer-note{text-align:center;color:var(--muted);margin:34px 0 0;font-size:.94rem}
+@media(max-width:920px){.answer-grid{grid-template-columns:1fr}.hero-card{padding:24px}.book-table{width:100%}}
+@media(max-width:560px){
+  body{line-height:1.5}.hero{padding-top:28px}.book-rules,.exercise-section{padding:18px;border-radius:22px}
+  .answer-card{grid-template-columns:1fr}.item-num{width:34px;height:34px}.book-rules{font-size:1rem}
+}
+
+.model-hint{
+  margin-top:8px;
+  color:var(--muted);
+  font-size:.94rem;
+}
+.model-hint summary{
+  cursor:pointer;
+  font-weight:800;
+  color:#315e91;
+}
+.model-hint p{
+  margin:6px 0 0;
+  padding:8px 10px;
+  border-radius:12px;
+  background:#f6f9fc;
+}
+</style>
+</head>
+<body>
+<header class="hero">
+<div class="hero-card">
+<span class="eyebrow">Грамматика испанского языка</span>
+<h1>Местоимения в винительном и дательном падеже<br/><span style="font-size:.58em;font-weight:700;letter-spacing:-.02em">(pronombres como objeto directo e indirecto). Parte 2</span></h1>
+<p class="source-note">правила из учебника "Экспресс самоучитель испанского языка" Марии Малинской, стр. 124 и 184.</p>
+</div>
+</header>
+<main>
+<section aria-labelledby="rules-title" class="book-rules">
+<h2 id="rules-title">Местоимения в дательном падеже<br/>(косвенные дополнения)</h2>
+<p>Как видно из двух предыдущих упражнений, перед глаголом <strong>gustar</strong> обязательно должно стоять слово, указывающее, <em>кому</em> именно что-то нравится. В предыдущих двух упражнениях это было слово <strong>me</strong> – мне.</p>
+<p>Это личное местоимение «я», стоящее в позиции дополнения в форме дательного падежа (отвечает на вопрос «кому?»).</p>
+<p>Естественно, такая форма есть и у всех остальных личных местоимений.</p>
+<p>Рассмотрим эти формы:</p>
+<table class="book-table two-col">
+<tbody>
+<tr><td>мне</td><td><strong>me</strong></td></tr>
+<tr><td>тебе</td><td><strong>te</strong></td></tr>
+<tr><td>ему/ей/Вам (ед.ч.)</td><td><strong>le</strong></td></tr>
+<tr><td>нам</td><td><strong>nos</strong></td></tr>
+<tr><td>вам</td><td><strong>os</strong></td></tr>
+<tr><td>им/Вам (мн.ч.)</td><td><strong>les</strong></td></tr>
+</tbody>
+</table>
+<p>Как видно из таблицы, личные местоимения в дательном падеже очень напоминают спряжение возвратных глаголов.</p>
+<p class="compare-title">Сравните:</p>
+<table class="book-table compare-table">
+<thead>
+<tr>
+<th>возвратные глаголы</th>
+<th>лич.мест. в дательном падеже<br/>+ gustar</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><strong>me</strong> lavo</td><td><strong>me</strong> gusta</td></tr>
+<tr><td><strong>te</strong> lavas</td><td><strong>te</strong> gusta</td></tr>
+<tr><td><u>se</u> lava</td><td><u>le</u> gusta</td></tr>
+<tr><td><strong>nos</strong> lavamos</td><td><strong>nos</strong> gusta</td></tr>
+<tr><td><strong>os</strong> laváis</td><td><strong>os</strong> gusta</td></tr>
+<tr><td><u>se</u> lavan</td><td><u>les</u> gusta</td></tr>
+</tbody>
+</table>
+<p>Различия есть только в формах 3 лица единственного и множественного чисел, все остальные формы совпадают. Однако по значению это совсем разные вещи: в левой колонке <strong>me, te</strong> и т.д. – не самостоятельные слова, а часть возвратного глагола (постфикс -se, принявший другую форму), а в правой колонке это самостоятельные слова, личные местоимения (мне, тебе и т.д.)</p>
+<hr class="rule-divider"/>
+<h2>Сочетание двух местоимений-дополнений<br/><span>(в дательном и в винительном падежах)</span></h2>
+<p>В русском и в испанском языках есть два вида дополнений — прямое и косвенное.</p>
+<p><strong>1) Прямое дополнение</strong> в русском языке выражается существительным или местоимением в винительном падеже (вопросы «кого? что?») без предлога.</p>
+<p class="example-label">Например:</p>
+<p>Я читаю <strong>книгу.</strong> Он смотрит <strong>кино.</strong> Они едят <strong>салат.</strong><br/>Мы видим <strong>вас.</strong></p>
+<p>В испанском языке прямое дополнение тоже отвечает на вопросы «кого? что?», но если оно выражено одушевленным существительным, то перед ним ставится предлог <strong>a.</strong></p>
+<p class="example-label">Например:</p>
+<p>Leo un libro. Ve una película. Comen la ensalada. Vemos <strong>a Marta.</strong></p>
+<p><strong>2) Косвенное дополнение</strong> в русском языке выражается существительным или местоимением в других падежах (кроме творительного) с предлогами.</p>
+<p class="example-label">Например:</p>
+<p>Я пишу письмо <strong>сестре.</strong> Мы готовим ужин <strong>родителям.</strong></p>
+<p>В испанском языке косвенное дополнение отвечает на вопросы дательного падежа («кому? чему?»):</p>
+<p class="example-label">Например:</p>
+<p>Escribo una carta <strong>a mi hermana.</strong> Preparamos la cena <strong>a / para nuestros padres.</strong></p>
+<p class="attention"><strong>Обратите внимание:</strong> когда прямое или косвенное дополнение выражены личным местоимением, это местоимение стоит в особой форме.</p>
+<p>(Обычно в испанском функции падежей выполняют предлоги, однако в случае с личными местоимениями это не так: у личных местоимений есть падежные формы).</p>
+<p>Рассмотрим эти формы:</p>
+<p class="bullet-head">•  прямое дополнение</p>
+<table class="book-table two-col">
+<tbody>
+<tr><td>меня</td><td><strong>me</strong></td></tr>
+<tr><td>тебя</td><td><strong>te</strong></td></tr>
+<tr><td>его/ее</td><td><u><strong>lo/la</strong></u></td></tr>
+<tr><td>нас</td><td><strong>nos</strong></td></tr>
+<tr><td>вас</td><td><strong>os</strong></td></tr>
+<tr><td>их</td><td><u><strong>los/las</strong></u></td></tr>
+</tbody>
+</table>
+<p class="bullet-head">•  косвенное дополнение</p>
+<table class="book-table two-col">
+<tbody>
+<tr><td>мне</td><td><strong>me</strong></td></tr>
+<tr><td>тебе</td><td><strong>te</strong></td></tr>
+<tr><td>ему/ей</td><td><u><strong>le</strong></u></td></tr>
+<tr><td>нам</td><td><strong>nos</strong></td></tr>
+<tr><td>вам</td><td><strong>os</strong></td></tr>
+<tr><td>им</td><td><u><strong>les</strong></u></td></tr>
+</tbody>
+</table>
+<p>Из этих двух таблиц видно, что прямое и косвенное дополнения различаются только в третьем лице единственного и множественного числа.</p>
+<p>Однако чтобы правильно употреблять местоимения-дополнения, недостаточно просто выучить их, нужно также знать, какое место в предложении они занимают. Рассмотрим алгоритм употребления косвенных местоимений на примере следующей фразы:<br/>
+<u>Mis padres van a regalar (una bicicleta) (a mi hermano menor).</u></p>
+<p><strong>1.</strong> Определим, какое из дополнений прямое, а какое — косвенное.<br/>
+  Для этого нужно задать к ним вопросы:<br/>
+  Mis padres van a regalar (кого? что?) una bicicleta<br/>
+  (кому? чему?) a mi hermano.<br/>
+  Значит, <strong>una bicicleta</strong> — прямое дополнение, <strong>a mi hermano</strong> — косвенное.<br/>
+  Посмотрим в таблицы выше и заменим существительные на местоимения:<br/>
+  Una bicicleta — <strong>la</strong>, a mi hermano — <strong>le</strong>.</p>
+<p><strong>2.</strong> Определим, какое место занимают местоимения-дополнения относительно друг друга.<br/>
+  По правилу косвенное дополнение всегда ставится перед прямым, значит, получаем <strong>le la.</strong></p>
+<p><strong>3.</strong> Определим, какое место занимают оба дополнения в предложении. Дополнение ставится <em>перед</em> сказуемым, кроме трех случаев:<br/>
+  1) если сказуемое стоит в форме императива (повелительного наклонения), то дополнение ставится после сказуемого.<br/>
+  Escribe la carta. — Escríbela.<br/>
+  Comprad esa chaqueta. — Compradla.<br/>
+  Diga (a nosotros) (la verdad). — <strong>Díganosla.</strong><br/>
+  2) если сказуемое стоит в форме <strong>estar + gerundio</strong>, то дополнение может ставиться как перед сказуемым, так и после него. При этом если оно стоит после сказуемого, то пишется слитно с ним.</p>
+<p>Estoy comiendo (la ensalada). — <strong>La</strong> estoy comiendo. /<br/>
+  Estoy comiéndo<strong>la</strong>.<br/>
+  Estamos preparando el desayuno. — <strong>Lo</strong> estamos preparando. / Estamos preparándo<strong>lo</strong>.<br/>
+  ¿Estás escribiendo (un correo electrónico) (a nosotros)? — ¿<strong>Nos lo</strong> estás escribiendo? / ¿Estás escribiéndo<strong>noslo</strong>?</p>
+<p>3) если сказуемое стоит в форме инфинитивной конструкции (например, tener que + inf / ir a + inf / poder + inf / querer + inf), то дополнение может ставиться как перед сказуемым, так и после него. При этом если оно стоит после сказуемого, то пишется слитно с ним.<br/>
+  Voy a tomar (paella). — <strong>La</strong> voy a tomar. / Voy a tomar<strong>la</strong>.<br/>
+  Vamos a comprar (un regalo) (para vosotros). — <strong>Os lo</strong> vamos a comprar. / Vamos a comprár<strong>oslo</strong>.<br/>
+  Tienes que enviar (un mensaje) (a mí). — <strong>Me lo</strong> tienes que enviar. / Tienes que enviár<strong>melo</strong>.</p>
+<p><strong>4)</strong> Если и прямое, и косвенное дополнение стоят в форме 3 лица (неважно, единственного или множественного числа), то косвенное дополнение заменяется на <strong>se.</strong><br/>
+  Можно запомнить простую фразу: «Если встретится <strong>lelo</strong>, то иди через село (<strong>selo</strong>)».<br/>
+  Впрочем, это касается не только <strong>lelo</strong>, но и <strong>lelos, lela, lelas, leslo, leslos, lesla, leslas.</strong><br/>
+  Tienes que decir (la verdad) (a tu novio). — Tienes que decírse<strong>la</strong> / <strong>Se la</strong> tienes que decir.<br/>
+  Vamos a comprar (un monopatín) (para nuestra hija). — Vamos a comprárse<strong>lo</strong> / <strong>Se lo</strong> vamos a comprar.</p>
+</section>
+<section class="exercise-section" id="ejercicio1">
+<div class="section-heading"><span class="section-badge">✦</span><div>
+<h2>Упражнение 1. Замените прямое дополнение соответствующим местоимением и поставьте его на правильное место.</h2>
+<p>Напишите преобразованное предложение в поле ответа.</p>
+</div></div><div class="answer-grid">
+<article class="answer-card" data-answer='["El maestro las va a repartir.", "El maestro va a repartirlas."]'>
+<div class="item-num">1</div><div class="item-body">
+<p class="source-sentence has-tooltip" data-ru="Учитель собирается раздать экзаменационные листы." tabindex="0" title="Учитель собирается раздать экзаменационные листы.">El maestro va a repartir las hojas del examen.</p>
+<textarea class="answer-input" placeholder="Введите преобразованное предложение..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div><details class="model-hint"><summary>Ver modelo</summary><p>El maestro las va a repartir.</p></details>
+<div class="model-answer" hidden=""><strong>Правильный ответ:</strong> El maestro las va a repartir. / El maestro va a repartirlas.</div>
+</div></article>
+<article class="answer-card" data-answer='["Paz la ha cortado en varias piezas."]'>
+<div class="item-num">2</div><div class="item-body">
+<p class="source-sentence has-tooltip" data-ru="Пас разрезала арбуз на несколько частей." tabindex="0" title="Пас разрезала арбуз на несколько частей.">Paz ha cortado la sandía en varias piezas.</p>
+<textarea class="answer-input" placeholder="Введите преобразованное предложение..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<div class="model-answer" hidden=""><strong>Правильный ответ:</strong> Paz la ha cortado en varias piezas.</div>
+</div></article>
+<article class="answer-card" data-answer='["Los estamos mezclando.", "Estamos mezclándolos."]'>
+<div class="item-num">3</div><div class="item-body">
+<p class="source-sentence has-tooltip" data-ru="Мы смешиваем ингредиенты." tabindex="0" title="Мы смешиваем ингредиенты.">Estamos mezclando los ingredientes.</p>
+<textarea class="answer-input" placeholder="Введите преобразованное предложение..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<div class="model-answer" hidden=""><strong>Правильный ответ:</strong> Los estamos mezclando. / Estamos mezclándolos.</div>
+</div></article>
+<article class="answer-card" data-answer='["La quieren ordenar.", "Quieren ordenarla."]'>
+<div class="item-num">4</div><div class="item-body">
+<p class="source-sentence has-tooltip" data-ru="Они хотят заказать пиццу." tabindex="0" title="Они хотят заказать пиццу.">Quieren ordenar una pizza.</p>
+<textarea class="answer-input" placeholder="Введите преобразованное предложение..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<div class="model-answer" hidden=""><strong>Правильный ответ:</strong> La quieren ordenar. / Quieren ordenarla.</div>
+</div></article>
+<article class="answer-card" data-answer='["Carolina lo está haciendo ahora.", "Carolina está haciéndolo ahora."]'>
+<div class="item-num">5</div><div class="item-body">
+<p class="source-sentence has-tooltip" data-ru="Каролина сейчас занимается спортом." tabindex="0" title="Каролина сейчас занимается спортом.">Carolina está haciendo deporte ahora.</p>
+<textarea class="answer-input" placeholder="Введите преобразованное предложение..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<div class="model-answer" hidden=""><strong>Правильный ответ:</strong> Carolina lo está haciendo ahora. / Carolina está haciéndolo ahora.</div>
+</div></article>
+<article class="answer-card" data-answer='["Las vamos a pelar.", "Vamos a pelarlas."]'>
+<div class="item-num">6</div><div class="item-body">
+<p class="source-sentence has-tooltip" data-ru="Мы собираемся очистить груши." tabindex="0" title="Мы собираемся очистить груши.">Vamos a pelar las peras.</p>
+<textarea class="answer-input" placeholder="Введите преобразованное предложение..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<div class="model-answer" hidden=""><strong>Правильный ответ:</strong> Las vamos a pelar. / Vamos a pelarlas.</div>
+</div></article>
+<article class="answer-card" data-answer='["¿La usan hoy?", "La usan hoy."]'>
+<div class="item-num">7</div><div class="item-body">
+<p class="source-sentence has-tooltip" data-ru="Вы сегодня пользуетесь стиральной машиной?" tabindex="0" title="Вы сегодня пользуетесь стиральной машиной?">¿Usan la lavadora hoy?</p>
+<textarea class="answer-input" placeholder="Введите преобразованное предложение..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<div class="model-answer" hidden=""><strong>Правильный ответ:</strong> ¿La usan hoy? / La usan hoy.</div>
+</div></article>
+<article class="answer-card" data-answer='["Los han repartido en la colonia."]'>
+<div class="item-num">8</div><div class="item-body">
+<p class="source-sentence has-tooltip" data-ru="Они раздали бутерброды в районе." tabindex="0" title="Они раздали бутерброды в районе.">Han repartido los bocadillos en la colonia.</p>
+<textarea class="answer-input" placeholder="Введите преобразованное предложение..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<div class="model-answer" hidden=""><strong>Правильный ответ:</strong> Los han repartido en la colonia.</div>
+</div></article>
+<article class="answer-card" data-answer='["Salgo y la saco."]'>
+<div class="item-num">9</div><div class="item-body">
+<p class="source-sentence has-tooltip" data-ru="Я выхожу и выношу мусор." tabindex="0" title="Я выхожу и выношу мусор.">Salgo y saco la basura.</p>
+<textarea class="answer-input" placeholder="Введите преобразованное предложение..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<div class="model-answer" hidden=""><strong>Правильный ответ:</strong> Salgo y la saco.</div>
+</div></article>
+<article class="answer-card" data-answer='["Las estamos utilizando.", "Estamos utilizándolas."]'>
+<div class="item-num">10</div><div class="item-body">
+<p class="source-sentence has-tooltip" data-ru="Мы используем кастрюлю и крышку." tabindex="0" title="Мы используем кастрюлю и крышку.">Estamos utilizando la cacerola y la tapa.</p>
+<textarea class="answer-input" placeholder="Введите преобразованное предложение..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<div class="model-answer" hidden=""><strong>Правильный ответ:</strong> Las estamos utilizando. / Estamos utilizándolas.</div>
+</div></article>
+<article class="answer-card" data-answer='["Lo he cortado en piezas."]'>
+<div class="item-num">11</div><div class="item-body">
+<p class="source-sentence has-tooltip" data-ru="Я нарезал(а) хлеб на куски." tabindex="0" title="Я нарезал(а) хлеб на куски.">He cortado el pan en piezas.</p>
+<textarea class="answer-input" placeholder="Введите преобразованное предложение..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<div class="model-answer" hidden=""><strong>Правильный ответ:</strong> Lo he cortado en piezas.</div>
+</div></article>
+<article class="answer-card" data-answer='["La van a cruzar en el cruce.", "Van a cruzarla en el cruce."]'>
+<div class="item-num">12</div><div class="item-body">
+<p class="source-sentence has-tooltip" data-ru="Они собираются перейти улицу на перекрёстке." tabindex="0" title="Они собираются перейти улицу на перекрёстке.">Van a cruzar la calle en el cruce.</p>
+<textarea class="answer-input" placeholder="Введите преобразованное предложение..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<div class="model-answer" hidden=""><strong>Правильный ответ:</strong> La van a cruzar en el cruce. / Van a cruzarla en el cruce.</div>
+</div></article>
+<article class="answer-card" data-answer='["Habitualmente los mezclamos en la bandeja."]'>
+<div class="item-num">13</div><div class="item-body">
+<p class="source-sentence has-tooltip" data-ru="Обычно мы смешиваем продукты на подносе." tabindex="0" title="Обычно мы смешиваем продукты на подносе.">Habitualmente mezclamos los alimentos en la bandeja.</p>
+<textarea class="answer-input" placeholder="Введите преобразованное предложение..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<div class="model-answer" hidden=""><strong>Правильный ответ:</strong> Habitualmente los mezclamos en la bandeja.</div>
+</div></article>
+<article class="answer-card" data-answer='["Nos lo vamos a comunicar por teléfono.", "Nos la vamos a comunicar por teléfono.", "Vamos a comunicárnoslo por teléfono.", "Vamos a comunicárnosla por teléfono."]'>
+<div class="item-num">14</div><div class="item-body">
+<p class="source-sentence has-tooltip" data-ru="Мы свяжемся с Вами по телефону." tabindex="0" title="Мы свяжемся с Вами по телефону.">Vamos a comunicarnos con usted por teléfono.</p>
+<textarea class="answer-input" placeholder="Введите преобразованное предложение..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<div class="model-answer" hidden=""><strong>Правильный ответ:</strong> Nos lo vamos a comunicar por teléfono. / Nos la vamos a comunicar por teléfono. / Vamos a comunicárnoslo por teléfono. / Vamos a comunicárnosla por teléfono.</div>
+</div></article>
+<article class="answer-card" data-answer='["Los he utilizado."]'>
+<div class="item-num">15</div><div class="item-body">
+<p class="source-sentence has-tooltip" data-ru="Я использовал(а) дуршлаг и тёрку." tabindex="0" title="Я использовал(а) дуршлаг и тёрку.">He utilizado el colador y el rallador.</p>
+<textarea class="answer-input" placeholder="Введите преобразованное предложение..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<div class="model-answer" hidden=""><strong>Правильный ответ:</strong> Los he utilizado.</div>
+</div></article>
+<article class="answer-card" data-answer='["Las están repartiendo en la tabla de cortar.", "Están repartiéndolas en la tabla de cortar."]'>
+<div class="item-num">16</div><div class="item-body">
+<p class="source-sentence has-tooltip" data-ru="Они раскладывают кусочки на разделочной доске." tabindex="0" title="Они раскладывают кусочки на разделочной доске.">Están repartiendo las piezas en la tabla de cortar.</p>
+<textarea class="answer-input" placeholder="Введите преобразованное предложение..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<div class="model-answer" hidden=""><strong>Правильный ответ:</strong> Las están repartiendo en la tabla de cortar. / Están repartiéndolas en la tabla de cortar.</div>
+</div></article>
+<article class="answer-card" data-answer='["La vamos a ordenar para ellos.", "Vamos a ordenarla para ellos."]'>
+<div class="item-num">17</div><div class="item-body">
+<p class="source-sentence has-tooltip" data-ru="Мы собираемся заказать для них пиццу." tabindex="0" title="Мы собираемся заказать для них пиццу.">Vamos a ordenar una pizza para ellos.</p>
+<textarea class="answer-input" placeholder="Введите преобразованное предложение..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<div class="model-answer" hidden=""><strong>Правильный ответ:</strong> La vamos a ordenar para ellos. / Vamos a ordenarla para ellos.</div>
+</div></article>
+<article class="answer-card" data-answer='["He salido y lo he visto en rojo."]'>
+<div class="item-num">18</div><div class="item-body">
+<p class="source-sentence has-tooltip" data-ru="Я вышел(вышла) и увидел(а) красный сигнал светофора." tabindex="0" title="Я вышел(вышла) и увидел(а) красный сигнал светофора.">He salido y he visto el semáforo en rojo.</p>
+<textarea class="answer-input" placeholder="Введите преобразованное предложение..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<div class="model-answer" hidden=""><strong>Правильный ответ:</strong> He salido y lo he visto en rojo.</div>
+</div></article>
+<article class="answer-card" data-answer='["La utilizamos en la lavandería."]'>
+<div class="item-num">19</div><div class="item-body">
+<p class="source-sentence has-tooltip" data-ru="Мы пользуемся стиральной машиной в прачечной." tabindex="0" title="Мы пользуемся стиральной машиной в прачечной.">Utilizamos la lavadora en la lavandería.</p>
+<textarea class="answer-input" placeholder="Введите преобразованное предложение..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<div class="model-answer" hidden=""><strong>Правильный ответ:</strong> La utilizamos en la lavandería.</div>
+</div></article>
+<article class="answer-card" data-answer='["Lo van a estar haciendo en la colonia tranquila.", "Van a estar haciéndolo en la colonia tranquila."]'>
+<div class="item-num">20</div><div class="item-body">
+<p class="source-sentence has-tooltip" data-ru="Они будут заниматься спортом в тихом районе." tabindex="0" title="Они будут заниматься спортом в тихом районе.">Van a estar haciendo deporte en la colonia tranquila.</p>
+<textarea class="answer-input" placeholder="Введите преобразованное предложение..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<div class="model-answer" hidden=""><strong>Правильный ответ:</strong> Lo van a estar haciendo en la colonia tranquila. / Van a estar haciéndolo en la colonia tranquila.</div>
+</div></article>
+</div>
+<div class="exercise-actions">
+<button class="toggleAnswers" data-target="ejercicio1">показать правильный ответ</button>
+<button class="checkText" data-target="ejercicio1">проверить</button>
+<button class="resetText secondary" data-target="ejercicio1">очистить</button>
+<span aria-live="polite" class="score" id="score-ejercicio1"></span>
+</div>
+</section>
+<section class="exercise-section" id="ejercicio2">
+<div class="section-heading"><span class="section-badge">✦</span><div>
+<h2>Упражнение 2. Замените косвенное дополнение соответствующим местоимением и поставьте его на правильное место.</h2>
+<p>Напишите преобразованное предложение в поле ответа.</p>
+</div></div><div class="answer-grid">
+<article class="answer-card" data-answer='["El casero le explica el problema."]'>
+<div class="item-num">1</div><div class="item-body">
+<p class="source-sentence has-tooltip" data-ru="Хозяин квартиры объясняет проблему Мариане." tabindex="0" title="Хозяин квартиры объясняет проблему Мариане.">El casero explica el problema a Mariana.</p>
+<textarea class="answer-input" placeholder="Введите преобразованное предложение..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div><details class="model-hint"><summary>Ver modelo</summary><p>El casero le explica el problema.</p></details>
+<div class="model-answer" hidden=""><strong>Правильный ответ:</strong> El casero le explica el problema.</div>
+</div></article>
+<article class="answer-card" data-answer='["Le he entregado la tarjeta del metro."]'>
+<div class="item-num">2</div><div class="item-body">
+<p class="source-sentence has-tooltip" data-ru="Я передал(а) проездную карточку метро своей сестре." tabindex="0" title="Я передал(а) проездную карточку метро своей сестре.">He entregado la tarjeta del metro a mi hermana.</p>
+<textarea class="answer-input" placeholder="Введите преобразованное предложение..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<div class="model-answer" hidden=""><strong>Правильный ответ:</strong> Le he entregado la tarjeta del metro.</div>
+</div></article>
+<article class="answer-card" data-answer='["Tú les has leído las instrucciones."]'>
+<div class="item-num">3</div><div class="item-body">
+<p class="source-sentence has-tooltip" data-ru="Ты прочитал(а) инструкции студентам." tabindex="0" title="Ты прочитал(а) инструкции студентам.">Tú has leído las instrucciones a los estudiantes.</p>
+<textarea class="answer-input" placeholder="Введите преобразованное предложение..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<div class="model-answer" hidden=""><strong>Правильный ответ:</strong> Tú les has leído las instrucciones.</div>
+</div></article>
+<article class="answer-card" data-answer='["Le presento la situación del grifo."]'>
+<div class="item-num">4</div><div class="item-body">
+<p class="source-sentence has-tooltip" data-ru="Я объясняю администратору ситуацию с краном." tabindex="0" title="Я объясняю администратору ситуацию с краном.">Presento la situación del grifo a la administradora.</p>
+<textarea class="answer-input" placeholder="Введите преобразованное предложение..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<div class="model-answer" hidden=""><strong>Правильный ответ:</strong> Le presento la situación del grifo.</div>
+</div></article>
+<article class="answer-card" data-answer='["El encargado os ha descrito el arreglo.", "El encargado les ha descrito el arreglo."]'>
+<div class="item-num">5</div><div class="item-body">
+<p class="source-sentence has-tooltip" data-ru="Ответственный сотрудник описал вам ремонт." tabindex="0" title="Ответственный сотрудник описал вам ремонт.">El encargado ha descrito el arreglo a vosotros / a ustedes.</p>
+<textarea class="answer-input" placeholder="Введите преобразованное предложение..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<div class="model-answer" hidden=""><strong>Правильный ответ:</strong> El encargado os ha descrito el arreglo. / El encargado les ha descrito el arreglo.</div>
+</div></article>
+<article class="answer-card" data-answer='["Le comunico la novedad."]'>
+<div class="item-num">6</div><div class="item-body">
+<p class="source-sentence has-tooltip" data-ru="Я сообщаю новость своему соседу." tabindex="0" title="Я сообщаю новость своему соседу.">Comunico la novedad a mi vecino.</p>
+<textarea class="answer-input" placeholder="Введите преобразованное предложение..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<div class="model-answer" hidden=""><strong>Правильный ответ:</strong> Le comunico la novedad.</div>
+</div></article>
+<article class="answer-card" data-answer='["Tú le estás ofreciendo un mate.", "Tú estás ofreciéndole un mate."]'>
+<div class="item-num">7</div><div class="item-body">
+<p class="source-sentence has-tooltip" data-ru="Ты предлагаешь Лусии мате." tabindex="0" title="Ты предлагаешь Лусии мате.">Tú estás ofreciendo un mate a Lucía.</p>
+<textarea class="answer-input" placeholder="Введите преобразованное предложение..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<div class="model-answer" hidden=""><strong>Правильный ответ:</strong> Tú le estás ofreciendo un mate. / Tú estás ofreciéndole un mate.</div>
+</div></article>
+<article class="answer-card" data-answer='["Manuel le entrega las llaves."]'>
+<div class="item-num">8</div><div class="item-body">
+<p class="source-sentence has-tooltip" data-ru="Мануэль передаёт ключи консьержке." tabindex="0" title="Мануэль передаёт ключи консьержке.">Manuel entrega las llaves a la portera.</p>
+<textarea class="answer-input" placeholder="Введите преобразованное предложение..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<div class="model-answer" hidden=""><strong>Правильный ответ:</strong> Manuel le entrega las llaves.</div>
+</div></article>
+<article class="answer-card" data-answer='["El maestro les explica la tarea."]'>
+<div class="item-num">9</div><div class="item-body">
+<p class="source-sentence has-tooltip" data-ru="Учитель объясняет им задание." tabindex="0" title="Учитель объясняет им задание.">El maestro explica la tarea a ellos.</p>
+<textarea class="answer-input" placeholder="Введите преобразованное предложение..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<div class="model-answer" hidden=""><strong>Правильный ответ:</strong> El maestro les explica la tarea.</div>
+</div></article>
+<article class="answer-card" data-answer='["Le hemos pasado la información del departamento."]'>
+<div class="item-num">10</div><div class="item-body">
+<p class="source-sentence has-tooltip" data-ru="Мы передали администратору информацию о квартире." tabindex="0" title="Мы передали администратору информацию о квартире.">Hemos pasado la información del departamento al administrador.</p>
+<textarea class="answer-input" placeholder="Введите преобразованное предложение..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<div class="model-answer" hidden=""><strong>Правильный ответ:</strong> Le hemos pasado la información del departamento.</div>
+</div></article>
+<article class="answer-card" data-answer='["Tú le estás mostrando las fotos.", "Tú estás mostrándole las fotos."]'>
+<div class="item-num">11</div><div class="item-body">
+<p class="source-sentence has-tooltip" data-ru="Ты показываешь фотографии своему соседу по квартире." tabindex="0" title="Ты показываешь фотографии своему соседу по квартире.">Tú estás mostrando las fotos a tu compañero de piso.</p>
+<textarea class="answer-input" placeholder="Введите преобразованное предложение..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<div class="model-answer" hidden=""><strong>Правильный ответ:</strong> Tú le estás mostrando las fotos. / Tú estás mostrándole las fotos.</div>
+</div></article>
+<article class="answer-card" data-answer='["¿Le has presentado el informe?", "Le has presentado el informe."]'>
+<div class="item-num">12</div><div class="item-body">
+<p class="source-sentence has-tooltip" data-ru="Ты представил(а) отчёт своему коллеге?" tabindex="0" title="Ты представил(а) отчёт своему коллеге?">¿Has presentado el informe a tu compañero?</p>
+<textarea class="answer-input" placeholder="Введите преобразованное предложение..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<div class="model-answer" hidden=""><strong>Правильный ответ:</strong> ¿Le has presentado el informe? / Le has presentado el informe.</div>
+</div></article>
+<article class="answer-card" data-answer='["La dueña del local les comunica el horario."]'>
+<div class="item-num">13</div><div class="item-body">
+<p class="source-sentence has-tooltip" data-ru="Владелица заведения сообщает клиентам расписание." tabindex="0" title="Владелица заведения сообщает клиентам расписание.">La dueña del local comunica el horario a los clientes.</p>
+<textarea class="answer-input" placeholder="Введите преобразованное предложение..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<div class="model-answer" hidden=""><strong>Правильный ответ:</strong> La dueña del local les comunica el horario.</div>
+</div></article>
+<article class="answer-card" data-answer='["Juan e Inés le piden ayuda."]'>
+<div class="item-num">14</div><div class="item-body">
+<p class="source-sentence has-tooltip" data-ru="Хуан и Инес просят помощи у женщины из киоска." tabindex="0" title="Хуан и Инес просят помощи у женщины из киоска.">Juan e Inés piden ayuda a la señora del kiosco.</p>
+<textarea class="answer-input" placeholder="Введите преобразованное предложение..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<div class="model-answer" hidden=""><strong>Правильный ответ:</strong> Juan e Inés le piden ayuda.</div>
+</div></article>
+<article class="answer-card" data-answer='["Le he enviado el mensaje."]'>
+<div class="item-num">15</div><div class="item-body">
+<p class="source-sentence has-tooltip" data-ru="Я отправил(а) сообщение Маркосу." tabindex="0" title="Я отправил(а) сообщение Маркосу.">He enviado el mensaje a Marcos.</p>
+<textarea class="answer-input" placeholder="Введите преобразованное предложение..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<div class="model-answer" hidden=""><strong>Правильный ответ:</strong> Le he enviado el mensaje.</div>
+</div></article>
+<article class="answer-card" data-answer='["Le explico el recorrido."]'>
+<div class="item-num">16</div><div class="item-body">
+<p class="source-sentence has-tooltip" data-ru="Я объясняю пассажирке маршрут." tabindex="0" title="Я объясняю пассажирке маршрут.">Explico el recorrido a la pasajera.</p>
+<textarea class="answer-input" placeholder="Введите преобразованное предложение..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<div class="model-answer" hidden=""><strong>Правильный ответ:</strong> Le explico el recorrido.</div>
+</div></article>
+<article class="answer-card" data-answer='["¿Les has contado la situación?", "Les has contado la situación."]'>
+<div class="item-num">17</div><div class="item-body">
+<p class="source-sentence has-tooltip" data-ru="Ты рассказал(а) им о ситуации?" tabindex="0" title="Ты рассказал(а) им о ситуации?">¿Has contado la situación a ellos?</p>
+<textarea class="answer-input" placeholder="Введите преобразованное предложение..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<div class="model-answer" hidden=""><strong>Правильный ответ:</strong> ¿Les has contado la situación? / Les has contado la situación.</div>
+</div></article>
+<article class="answer-card" data-answer='["Ellos nos han presentado la receta."]'>
+<div class="item-num">18</div><div class="item-body">
+<p class="source-sentence has-tooltip" data-ru="Они представили нам рецепт." tabindex="0" title="Они представили нам рецепт.">Ellos han presentado la receta a nosotros.</p>
+<textarea class="answer-input" placeholder="Введите преобразованное предложение..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<div class="model-answer" hidden=""><strong>Правильный ответ:</strong> Ellos nos han presentado la receta.</div>
+</div></article>
+<article class="answer-card" data-answer='["Os voy a enviar el aviso.", "Voy a enviaros el aviso.", "Les voy a enviar el aviso.", "Voy a enviarles el aviso."]'>
+<div class="item-num">19</div><div class="item-body">
+<p class="source-sentence has-tooltip" data-ru="Я собираюсь отправить вам уведомление." tabindex="0" title="Я собираюсь отправить вам уведомление.">Voy a enviar el aviso a vosotros / a ustedes.</p>
+<textarea class="answer-input" placeholder="Введите преобразованное предложение..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<div class="model-answer" hidden=""><strong>Правильный ответ:</strong> Os voy a enviar el aviso. / Voy a enviaros el aviso. / Les voy a enviar el aviso. / Voy a enviarles el aviso.</div>
+</div></article>
+</div>
+<div class="exercise-actions">
+<button class="toggleAnswers" data-target="ejercicio2">показать правильный ответ</button>
+<button class="checkText" data-target="ejercicio2">проверить</button>
+<button class="resetText secondary" data-target="ejercicio2">очистить</button>
+<span aria-live="polite" class="score" id="score-ejercicio2"></span>
+</div>
+</section>
+<section class="exercise-section" id="ejercicio3">
+<div class="section-heading"><span class="section-badge">✦</span><div>
+<h2>Упражнение 3. Замените прямое и косвенное дополнения соответствующими местоимениями и поставьте их на правильное место.</h2>
+<p>Напишите преобразованное предложение в поле ответа.</p>
+</div></div><div class="answer-grid">
+<article class="answer-card" data-answer='["Te la paso."]'>
+<div class="item-num">1</div><div class="item-body">
+<p class="source-sentence has-tooltip" data-ru="Я передаю тебе карточку метро." tabindex="0" title="Я передаю тебе карточку метро.">Paso la tarjeta del subte a ti.</p>
+<textarea class="answer-input" placeholder="Введите преобразованное предложение..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div><details class="model-hint"><summary>Ver modelo</summary><p>Te la paso.</p></details>
+<div class="model-answer" hidden=""><strong>Правильный ответ:</strong> Te la paso.</div>
+</div></article>
+<article class="answer-card" data-answer='["María se la da."]'>
+<div class="item-num">2</div><div class="item-body">
+<p class="source-sentence has-tooltip" data-ru="Мария даёт своей дочери чистую лопатку." tabindex="0" title="Мария даёт своей дочери чистую лопатку.">María da la espátula limpia a su hija.</p>
+<textarea class="answer-input" placeholder="Введите преобразованное предложение..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<div class="model-answer" hidden=""><strong>Правильный ответ:</strong> María se la da.</div>
+</div></article>
+<article class="answer-card" data-answer='["Se la he alcanzado."]'>
+<div class="item-num">3</div><div class="item-body">
+<p class="source-sentence has-tooltip" data-ru="Я подал(а) даме чемодан." tabindex="0" title="Я подал(а) даме чемодан.">He alcanzado la valija a la señora.</p>
+<textarea class="answer-input" placeholder="Введите преобразованное предложение..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<div class="model-answer" hidden=""><strong>Правильный ответ:</strong> Se la he alcanzado.</div>
+</div></article>
+<article class="answer-card" data-answer='["Tú se la pasas en la cocina.", "Se la pasas en la cocina."]'>
+<div class="item-num">4</div><div class="item-body">
+<p class="source-sentence has-tooltip" data-ru="Ты передаёшь Хуане кастрюлю на кухне." tabindex="0" title="Ты передаёшь Хуане кастрюлю на кухне.">Tú pasas la cacerola a Juana en la cocina.</p>
+<textarea class="answer-input" placeholder="Введите преобразованное предложение..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<div class="model-answer" hidden=""><strong>Правильный ответ:</strong> Tú se la pasas en la cocina. / Se la pasas en la cocina.</div>
+</div></article>
+<article class="answer-card" data-answer='["Te la enseño esta noche."]'>
+<div class="item-num">5</div><div class="item-body">
+<p class="source-sentence has-tooltip" data-ru="Сегодня вечером я покажу тебе рецепт." tabindex="0" title="Сегодня вечером я покажу тебе рецепт.">Enseño la receta a ti esta noche.</p>
+<textarea class="answer-input" placeholder="Введите преобразованное предложение..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<div class="model-answer" hidden=""><strong>Правильный ответ:</strong> Te la enseño esta noche.</div>
+</div></article>
+<article class="answer-card" data-answer='["Quiero que se lo preparemos."]'>
+<div class="item-num">6</div><div class="item-body">
+<p class="source-sentence has-tooltip" data-ru="Я хочу, чтобы мы приготовили для друзей пенистый мате." tabindex="0" title="Я хочу, чтобы мы приготовили для друзей пенистый мате.">Quiero que preparemos un mate espumoso para los amigos.</p>
+<textarea class="answer-input" placeholder="Введите преобразованное предложение..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<div class="model-answer" hidden=""><strong>Правильный ответ:</strong> Quiero que se lo preparemos.</div>
+</div></article>
+<article class="answer-card" data-answer='["Se las he enviado."]'>
+<div class="item-num">7</div><div class="item-body">
+<p class="source-sentence has-tooltip" data-ru="Я отправил(а) хозяину квартиры фотографии раковины." tabindex="0" title="Я отправил(а) хозяину квартиры фотографии раковины.">He enviado las fotos del fregadero al casero.</p>
+<textarea class="answer-input" placeholder="Введите преобразованное предложение..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<div class="model-answer" hidden=""><strong>Правильный ответ:</strong> Se las he enviado.</div>
+</div></article>
+<article class="answer-card" data-answer='["Ramón se lo explica de nuevo."]'>
+<div class="item-num">8</div><div class="item-body">
+<p class="source-sentence has-tooltip" data-ru="Рамон снова объясняет администратору проблему с краном." tabindex="0" title="Рамон снова объясняет администратору проблему с краном.">Ramón explica el problema del grifo al administrador de nuevo.</p>
+<textarea class="answer-input" placeholder="Введите преобразованное предложение..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<div class="model-answer" hidden=""><strong>Правильный ответ:</strong> Ramón se lo explica de nuevo.</div>
+</div></article>
+<article class="answer-card" data-answer='["Maribel se lo pasa para la cena."]'>
+<div class="item-num">9</div><div class="item-body">
+<p class="source-sentence has-tooltip" data-ru="Марибель передаёт Хосе сыр к ужину." tabindex="0" title="Марибель передаёт Хосе сыр к ужину.">Maribel pasa el queso a José para la cena.</p>
+<textarea class="answer-input" placeholder="Введите преобразованное предложение..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<div class="model-answer" hidden=""><strong>Правильный ответ:</strong> Maribel se lo pasa para la cena.</div>
+</div></article>
+<article class="answer-card" data-answer='["Usted me la ha dejado en la silla."]'>
+<div class="item-num">10</div><div class="item-body">
+<p class="source-sentence has-tooltip" data-ru="Вы оставили для меня рюкзак на стуле." tabindex="0" title="Вы оставили для меня рюкзак на стуле.">Usted ha dejado la mochila en la silla para mí.</p>
+<textarea class="answer-input" placeholder="Введите преобразованное предложение..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<div class="model-answer" hidden=""><strong>Правильный ответ:</strong> Usted me la ha dejado en la silla.</div>
+</div></article>
+<article class="answer-card" data-answer='["Inés nos la da cuando vuelva."]'>
+<div class="item-num">11</div><div class="item-body">
+<p class="source-sentence has-tooltip" data-ru="Инес даст нам одеяло, когда вернётся." tabindex="0" title="Инес даст нам одеяло, когда вернётся.">Inés da la manta a nosotros cuando vuelva.</p>
+<textarea class="answer-input" placeholder="Введите преобразованное предложение..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<div class="model-answer" hidden=""><strong>Правильный ответ:</strong> Inés nos la da cuando vuelva.</div>
+</div></article>
+<article class="answer-card" data-answer='["Tú me lo agradeces con una sonrisa."]'>
+<div class="item-num">12</div><div class="item-body">
+<p class="source-sentence has-tooltip" data-ru="Ты благодаришь меня за услугу улыбкой." tabindex="0" title="Ты благодаришь меня за услугу улыбкой.">Tú agradeces el favor a mí con una sonrisa.</p>
+<textarea class="answer-input" placeholder="Введите преобразованное предложение..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<div class="model-answer" hidden=""><strong>Правильный ответ:</strong> Tú me lo agradeces con una sonrisa.</div>
+</div></article>
+<article class="answer-card" data-answer='["La cargo y se la entrego."]'>
+<div class="item-num">13</div><div class="item-body">
+<p class="source-sentence has-tooltip" data-ru="Я пополняю карточку и передаю её своему другу." tabindex="0" title="Я пополняю карточку и передаю её своему другу.">Cargo la tarjeta y entrego la tarjeta a mi amigo.</p>
+<textarea class="answer-input" placeholder="Введите преобразованное предложение..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<div class="model-answer" hidden=""><strong>Правильный ответ:</strong> La cargo y se la entrego.</div>
+</div></article>
+<article class="answer-card" data-answer='["Tú nos la pides con la valija."]'>
+<div class="item-num">14</div><div class="item-body">
+<p class="source-sentence has-tooltip" data-ru="Ты просишь нас помочь с чемоданом." tabindex="0" title="Ты просишь нас помочь с чемоданом.">Tú pides ayuda con la valija a nosotros.</p>
+<textarea class="answer-input" placeholder="Введите преобразованное предложение..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<div class="model-answer" hidden=""><strong>Правильный ответ:</strong> Tú nos la pides con la valija.</div>
+</div></article>
+<article class="answer-card" data-answer='["Tú me lo ofreces mientras cocino."]'>
+<div class="item-num">15</div><div class="item-body">
+<p class="source-sentence has-tooltip" data-ru="Ты предлагаешь мне мате, пока я готовлю." tabindex="0" title="Ты предлагаешь мне мате, пока я готовлю.">Tú ofreces un mate a mí mientras cocino.</p>
+<textarea class="answer-input" placeholder="Введите преобразованное предложение..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<div class="model-answer" hidden=""><strong>Правильный ответ:</strong> Tú me lo ofreces mientras cocino.</div>
+</div></article>
+<article class="answer-card" data-answer='["Se la hemos dejado antes de dormir."]'>
+<div class="item-num">16</div><div class="item-body">
+<p class="source-sentence has-tooltip" data-ru="Перед сном мы оставили запасной ключ нашему соседу." tabindex="0" title="Перед сном мы оставили запасной ключ нашему соседу.">Hemos dejado la llave de repuesto a nuestro vecino antes de dormir.</p>
+<textarea class="answer-input" placeholder="Введите преобразованное предложение..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<div class="model-answer" hidden=""><strong>Правильный ответ:</strong> Se la hemos dejado antes de dormir.</div>
+</div></article>
+<article class="answer-card" data-answer='["Tú me lo pides en el supermercado."]'>
+<div class="item-num">17</div><div class="item-body">
+<p class="source-sentence has-tooltip" data-ru="В супермаркете ты просишь у меня шоколад." tabindex="0" title="В супермаркете ты просишь у меня шоколад.">Tú pides el chocolate a mí en el supermercado.</p>
+<textarea class="answer-input" placeholder="Введите преобразованное предложение..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<div class="model-answer" hidden=""><strong>Правильный ответ:</strong> Tú me lo pides en el supermercado.</div>
+</div></article>
+<article class="answer-card" data-answer='["Os lo voy a enviar.", "Voy a enviároslo.", "Se lo voy a enviar a ustedes.", "Voy a enviárselo a ustedes.", "Se lo voy a enviar.", "Voy a enviárselo."]'>
+<div class="item-num">18</div><div class="item-body">
+<p class="source-sentence has-tooltip" data-ru="Я собираюсь отправить вам уведомление." tabindex="0" title="Я собираюсь отправить вам уведомление.">Voy a enviar el aviso a vosotros / a ustedes.</p>
+<textarea class="answer-input" placeholder="Введите преобразованное предложение..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<div class="model-answer" hidden=""><strong>Правильный ответ:</strong> Os lo voy a enviar. / Voy a enviároslo. / Se lo voy a enviar a ustedes. / Voy a enviárselo a ustedes. / Se lo voy a enviar. / Voy a enviárselo.</div>
+</div></article>
+</div>
+<div class="exercise-actions">
+<button class="toggleAnswers" data-target="ejercicio3">показать правильный ответ</button>
+<button class="checkText" data-target="ejercicio3">проверить</button>
+<button class="resetText secondary" data-target="ejercicio3">очистить</button>
+<span aria-live="polite" class="score" id="score-ejercicio3"></span>
+</div>
+</section>
+<p class="footer-note">Наведите курсор на испанское предложение, чтобы увидеть перевод на русский язык.</p>
+</main>
+<script>
+const normalize = (text) => (text || '')
+  .toLowerCase()
+  .normalize('NFD')
+  .replace(/[\u0300-\u036f]/g, '')
+  .replace(/[¿?¡!.,;:]/g, '')
+  .replace(/[“”"'«»]/g, '')
+  .replace(/\s+/g, ' ')
+  .trim();
+
+document.querySelectorAll('.checkText').forEach(button => {
+  button.addEventListener('click', () => {
+    const section = document.getElementById(button.dataset.target);
+    const cards = section.querySelectorAll('.answer-card');
+    let ok = 0;
+    cards.forEach(card => {
+      const input = card.querySelector('.answer-input');
+      const feedback = card.querySelector('.feedback');
+      const answers = JSON.parse(card.dataset.answer);
+      const user = normalize(input.value);
+      const isCorrect = answers.some(ans => normalize(ans) === user);
+      input.classList.remove('ok','no');
+      feedback.className = 'feedback';
+      if (isCorrect) {
+        ok++;
+        input.classList.add('ok');
+        feedback.classList.add('good');
+        feedback.textContent = '✓ Правильно';
+      } else {
+        input.classList.add('no');
+        feedback.classList.add('bad');
+        feedback.textContent = '✗ Проверьте местоимение и его позицию.';
+      }
+    });
+    document.getElementById(`score-${button.dataset.target}`).textContent = `Результат: ${ok} / ${cards.length}`;
+  });
+});
+
+document.querySelectorAll('.resetText').forEach(button => {
+  button.addEventListener('click', () => {
+    const section = document.getElementById(button.dataset.target);
+    section.querySelectorAll('.answer-input').forEach(input => {
+      input.value = '';
+      input.classList.remove('ok','no');
+    });
+    section.querySelectorAll('.feedback').forEach(f => {
+      f.textContent = '';
+      f.className = 'feedback';
+    });
+    section.querySelectorAll('.model-answer').forEach(a => a.hidden = true);
+    const toggle = section.querySelector('.toggleAnswers');
+    if (toggle) {
+      toggle.dataset.open = 'false';
+      toggle.textContent = 'показать правильный ответ';
+    }
+    document.getElementById(`score-${button.dataset.target}`).textContent = '';
+  });
+});
+
+document.querySelectorAll('.toggleAnswers').forEach(button => {
+  button.dataset.open = 'false';
+  button.addEventListener('click', () => {
+    const section = document.getElementById(button.dataset.target);
+    const willOpen = button.dataset.open !== 'true';
+    section.querySelectorAll('.model-answer').forEach(a => a.hidden = !willOpen);
+    button.dataset.open = willOpen ? 'true' : 'false';
+    button.textContent = willOpen ? 'скрыть правильный ответ' : 'показать правильный ответ';
+  });
+});
+</script>
+</body>
+</html>

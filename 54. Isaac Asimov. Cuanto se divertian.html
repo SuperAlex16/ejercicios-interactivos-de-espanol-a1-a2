@@ -1,0 +1,1185 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cuánto se divertían — cuento interactivo ES-RU</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <style>
+    :root {
+      --bg: #dff3ff;
+      --panel: #ffffff;
+      --ink: #1d2a35;
+      --muted: #5f6f7d;
+      --accent: #216b8f;
+      --accent-soft: #c7eefe;
+      --verb: #8a3f00;
+      --verb-bg: #ffe8c7;
+      --border: #9ed2e8;
+      --shadow: 0 18px 45px rgba(18, 63, 91, .16);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top left, rgba(255,255,255,.85), transparent 34rem),
+        linear-gradient(180deg, var(--bg), #eefaff 58%, #d9f1ff);
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.68;
+    }
+
+    .page {
+      width: min(1120px, 94vw);
+      margin: 0 auto;
+      padding: 34px 0 60px;
+    }
+
+    header {
+      background: rgba(255, 255, 255, .78);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      border-radius: 28px;
+      padding: 28px 32px;
+      margin-bottom: 24px;
+      backdrop-filter: blur(8px);
+    }
+
+    h1 {
+      margin: 0 0 6px;
+      font-size: clamp(2.1rem, 5vw, 4.2rem);
+      letter-spacing: -.03em;
+      line-height: 1.05;
+      color: #12384c;
+    }
+
+    .subtitle {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+      align-items: center;
+    }
+
+    button {
+      font-family: Georgia, "Times New Roman", serif;
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--accent);
+      border-radius: 999px;
+      padding: 10px 16px;
+      cursor: pointer;
+      font-size: .96rem;
+      transition: transform .14s ease, background .14s ease, border .14s ease;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+      background: var(--accent-soft);
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 340px;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .story {
+      background: rgba(255, 255, 255, .86);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 30px 34px;
+      box-shadow: var(--shadow);
+      font-size: 1.18rem;
+    }
+
+    .story p {
+      margin: 0 0 1.05em;
+    }
+
+    .story p.title-line {
+      font-size: 1.72rem;
+      color: #12384c;
+      line-height: 1.15;
+      margin-bottom: .25em;
+    }
+
+    .story p.author-line {
+      color: var(--muted);
+      margin-bottom: 1.3em;
+      font-size: 1rem;
+    }
+
+    .word {
+      border: 0;
+      border-bottom: 1px dotted rgba(33, 107, 143, .42);
+      background: transparent;
+      border-radius: 5px;
+      padding: 0 1px;
+      color: inherit;
+      cursor: pointer;
+      font: inherit;
+      line-height: inherit;
+    }
+
+    .word:hover,
+    .word:focus-visible {
+      outline: none;
+      background: var(--accent-soft);
+      color: #0e4b67;
+    }
+
+    .special {
+      background: var(--verb-bg);
+      color: var(--verb);
+      border-bottom: 2px solid #e0a250;
+      border-radius: 8px;
+      padding: 1px 4px;
+      font-weight: 600;
+    }
+
+    .panel {
+      position: sticky;
+      top: 18px;
+      background: rgba(255, 255, 255, .92);
+      border: 1px solid var(--border);
+      border-radius: 26px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .panel h2 {
+      margin: 0 0 12px;
+      font-size: 1.25rem;
+      color: #12384c;
+    }
+
+    .label {
+      font-size: .78rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 14px;
+      margin-bottom: 4px;
+    }
+
+    .value {
+      font-size: 1.15rem;
+      margin: 0;
+    }
+
+    .explanation {
+      margin-top: 12px;
+      border-left: 4px solid #e0a250;
+      background: #fff7ea;
+      padding: 12px 13px;
+      border-radius: 14px;
+      color: #57320b;
+    }
+
+    .hint {
+      color: var(--muted);
+      font-size: .95rem;
+      margin: 10px 0 0;
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    .legend span {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 5px 10px;
+    }
+
+    .footer {
+      margin-top: 22px;
+      color: var(--muted);
+      font-size: .92rem;
+      text-align: center;
+    }
+
+    @media (max-width: 860px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+      .panel {
+        position: static;
+      }
+      .story {
+        padding: 24px 20px;
+        font-size: 1.08rem;
+      }
+      header {
+        padding: 24px 20px;
+      }
+    }
+
+    @media print {
+      body { background: #fff; }
+      .toolbar, .panel { display: none; }
+      .layout { display: block; }
+      .story { box-shadow: none; border: none; }
+      .word { border-bottom: none; }
+      .special { background: #fff; border-bottom: 1px solid #000; color: #000; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header>
+      <h1>Cuánto se divertían</h1>
+      <p class="subtitle">Cuento interactivo español-ruso: pulsa cualquier palabra para ver su traducción contextual. Las formas compuestas, artículos, preposiciones, posesivos y verbos pronominales se muestran como unidades de sentido; los verbos destacados incluyen explicación gramatical.</p>
+      <div class="toolbar">
+        <button type="button" id="highlightBtn">Resaltar verbos explicados</button>
+        <button type="button" id="resetBtn">Limpiar panel</button>
+      </div>
+      <div class="legend">
+        <span>Palabras y grupos: traducción al ruso</span>
+        <span>Verbos en color: explicación gramatical</span>
+        <span>Texto autocontenido: no usa internet</span>
+      </div>
+    </header>
+
+    <section class="layout">
+      <article class="story" id="story" aria-label="Texto interactivo"></article>
+
+      <aside class="panel" aria-live="polite">
+        <h2>Ficha de la palabra</h2>
+        <p class="hint" id="introHint">Pulsa una palabra del texto.</p>
+
+        <div id="details" hidden>
+          <div class="label">Español</div>
+          <p class="value" id="esValue"></p>
+
+          <div class="label">Ruso</div>
+          <p class="value" id="ruValue"></p>
+
+          <div id="grammarBox" class="explanation" hidden></div>
+        </div>
+      </aside>
+    </section>
+
+    <p class="footer">Referencia textual de trabajo: Isaac Asimov, “The Fun They Had” / “Cuánto se divertían”. Adaptación interactiva para uso didáctico.</p>
+  </main>
+
+<script>
+const storyLines = [
+  "Cuánto se divertían",
+  "Isaac Asimov",
+  "",
+  "Margie lo anotó esa noche en el diario. En la página del 17 de mayo de 2157 escribió: “¡Hoy Tommy ha encontrado un libro de verdad!”.",
+  "Era un libro muy viejo. El abuelo de Margie contó una vez que, cuando él era pequeño, su abuelo le había contado que hubo una época en que los cuentos siempre estaban impresos en papel.",
+  "Uno pasaba las páginas, que eran amarillas y se arrugaban, y era divertidísimo ver que las palabras se quedaban quietas en vez de desplazarse por la pantalla. Y, cuando volvías a la página anterior, contenía las mismas palabras que cuando la leías por primera vez.",
+  "-Caray -dijo Tommy-, qué desperdicio. Supongo que cuando terminas el libro lo tiras. Nuestra pantalla de televisión habrá mostrado un millón de libros y sirve para muchos más. Yo nunca la tiraría.",
+  "-Lo mismo digo -contestó Margie. Tenía once años y no había visto tantos telelibros como Tommy. Él tenía trece-. ¿En dónde lo encontraste?",
+  "-En mi casa -Tommy señaló sin mirar, porque estaba ocupado leyendo-. En el ático.",
+  "-¿De qué trata?",
+  "-De la escuela.",
+  "-¿De la escuela? ¿Qué se puede escribir sobre la escuela? Odio la escuela.",
+  "Margie siempre había odiado la escuela, pero ahora más que nunca. El maestro automático le había hecho un examen de geografía tras otro y los resultados eran cada vez peores. La madre de Margie había sacudido tristemente la cabeza y había llamado al inspector del condado.",
+  "Era un hombrecillo regordete y de rostro rubicundo, que llevaba una caja de herramientas con perillas y cables. Le sonrió a Margie y le dio una manzana; luego, desmanteló al maestro. Margie esperaba que no supiera ensamblarlo de nuevo, pero sí sabía y, al cabo de una hora, allí estaba de nuevo, grande, negro y feo, con una enorme pantalla en donde se mostraban las lecciones y aparecían las preguntas. Eso no era tan malo. Lo que más odiaba Margie era la ranura por donde debía insertar las tareas y las pruebas. Siempre tenía que redactarlas en un código que le hicieron aprender a los seis años, y el maestro automático calculaba la calificación en un santiamén.",
+  "El inspector sonrió al terminar y acarició la cabeza de Margie.",
+  "-No es culpa de la niña, señora Jones -le dijo a la madre-. Creo que el sector de geografía estaba demasiado acelerado. A veces ocurre. Lo he sintonizado en un nivel adecuado para los diez años de edad. Pero el patrón general de progresos es muy satisfactorio -y acarició de nuevo la cabeza de Margie.",
+  "Margie estaba desilusionada. Había abrigado la esperanza de que se llevaran al maestro. Una vez, se llevaron el maestro de Tommy durante todo un mes porque el sector de historia se había borrado por completo.",
+  "Así que le dijo a Tommy:",
+  "-¿Quién querría escribir sobre la escuela?",
+  "Tommy la miró con aire de superioridad.",
+  "-Porque no es una escuela como la nuestra, tontuela. Es una escuela como la de hace cientos de años -y añadió altivo, pronunciando la palabra muy lentamente-: siglos.",
+  "Margie se sintió dolida.",
+  "-Bueno, yo no sé qué escuela tenían hace tanto tiempo -leyó el libro por encima del hombro de Tommy y añadió-: De cualquier modo, tenían maestro.",
+  "-Claro que tenían maestro, pero no era un maestro normal. Era un hombre.",
+  "-¿Un hombre? ¿Cómo puede un hombre ser maestro?",
+  "-Él les explicaba las cosas a los chicos, les daba tareas y les hacía preguntas.",
+  "-Un hombre no es lo bastante listo.",
+  "-Claro que sí. Mi padre sabe tanto como mi maestro.",
+  "-No es posible. Un hombre no puede saber tanto como un maestro.",
+  "-Te apuesto a que sabe casi lo mismo.",
+  "Margie no estaba dispuesta a discutir sobre eso.",
+  "-Yo no querría que un hombre extraño viniera a casa a enseñarme.",
+  "Tommy soltó una carcajada.",
+  "-Qué ignorante eres, Margie. Los maestros no vivían en la casa. Tenían un edificio especial y todos los chicos iban allí.",
+  "-¿Y todos aprendían lo mismo?",
+  "-Claro, siempre que tuvieran la misma edad.",
+  "-Pero mi madre dice que a un maestro hay que sintonizarlo para adaptarlo a la edad de cada niño al que enseña y que cada chico debe recibir una enseñanza distinta.",
+  "-Pues antes no era así. Si no te gusta, no tienes por qué leer el libro.",
+  "-No he dicho que no me gustara -se apresuró a decir Margie.",
+  "Quería leer todo eso de las extrañas escuelas. Aún no habían terminado cuando la madre de Margie llamó:",
+  "-¡Margie! ¡Escuela!",
+  "Margie alzó la vista.",
+  "-Todavía no, mamá.",
+  "-¡Ahora! -chilló la señora Jones-. Y también debe de ser la hora de Tommy.",
+  "-¿Puedo seguir leyendo el libro contigo después de la escuela? -le preguntó Margie a Tommy.",
+  "-Tal vez -dijo él con petulancia, y se alejó silbando, con el libro viejo y polvoriento debajo del brazo.",
+  "Margie entró en el aula. Estaba al lado del dormitorio, y el maestro automático se hallaba encendido ya y esperando. Siempre se encendía a la misma hora todos los días, excepto sábados y domingos, porque su madre decía que las niñas aprendían mejor si estudiaban con un horario regular. La pantalla estaba iluminada.",
+  "-La lección de aritmética de hoy -habló el maestro- se refiere a la suma de quebrados propios. Por favor, inserta la tarea de ayer en la ranura adecuada.",
+  "Margie obedeció, con un suspiro. Estaba pensando en las viejas escuelas que había cuando el abuelo del abuelo era un chiquillo. Asistían todos los chicos del vecindario, se reían y gritaban en el patio, se sentaban juntos en el aula, regresaban a casa juntos al final del día. Aprendían las mismas cosas, así que podían ayudarse a hacer los deberes y hablar de ellos. Y los maestros eran personas…",
+  "La pantalla del maestro automático centelleó.",
+  "-Cuando sumamos las fracciones ½ y ¼…",
+  "Margie pensaba que los niños debían de adorar la escuela en los viejos tiempos. Pensaba en cuánto se divertían."
+];
+const wordRu = {
+  "a": "к / в / на",
+  "abrigado": "питала, лелеяла",
+  "abuelo": "дедушка",
+  "acarició": "погладил",
+  "acelerado": "ускоренный",
+  "adaptarlo": "адаптировать его",
+  "adecuada": "подходящая",
+  "adecuado": "подходящий",
+  "adorar": "обожать",
+  "ahora": "сейчас",
+  "aire": "вид, манера",
+  "al": "к / в / на + el",
+  "alejó": "удалился",
+  "allí": "там",
+  "altivo": "высокомерный",
+  "alzó": "подняла",
+  "amarillas": "жёлтые",
+  "anotó": "записала",
+  "anterior": "предыдущая",
+  "antes": "раньше",
+  "aparecían": "появлялись",
+  "aprender": "учить, учиться",
+  "aprendían": "учились",
+  "apresuró": "поспешила",
+  "apuesto": "спорю",
+  "aritmética": "арифметика",
+  "arrugaban": "мялись",
+  "asimov": "Азимов",
+  "asistían": "посещали",
+  "así": "так",
+  "aula": "класс, аудитория",
+  "automático": "автоматический",
+  "ayer": "вчера",
+  "ayudarse": "помогать друг другу",
+  "añadió": "добавил(а)",
+  "años": "годы / лет",
+  "aún": "ещё",
+  "bastante": "достаточно",
+  "borrado": "стёрт",
+  "brazo": "рука",
+  "bueno": "хорошо",
+  "cabeza": "голова",
+  "cables": "кабели, провода",
+  "cabo": "конец; в выражении «al cabo de» — через",
+  "cada": "каждый",
+  "caja": "ящик, коробка",
+  "calculaba": "вычислял",
+  "calificación": "оценка",
+  "caray": "чёрт возьми",
+  "carcajada": "громкий смех",
+  "casa": "дом",
+  "casi": "почти",
+  "centelleó": "засветился, мигнул",
+  "chico": "мальчик, ребёнок",
+  "chicos": "мальчики, дети",
+  "chilló": "закричала",
+  "chiquillo": "малыш, ребёнок",
+  "cientos": "сотни",
+  "claro": "конечно; ясно",
+  "como": "как",
+  "completo": "полный, полностью",
+  "con": "с",
+  "condado": "округ",
+  "contado": "рассказал",
+  "contenía": "содержала",
+  "contestó": "ответила",
+  "contigo": "с тобой",
+  "contó": "рассказал",
+  "cosas": "вещи, дела",
+  "creo": "думаю",
+  "cualquier": "любой",
+  "cuando": "когда",
+  "cuentos": "рассказы, сказки",
+  "culpa": "вина",
+  "cuánto": "как много; насколько",
+  "código": "код",
+  "cómo": "как",
+  "daba": "давал",
+  "de": "из / от / о",
+  "debajo": "под",
+  "debe": "должен; вероятно",
+  "deberes": "домашние задания",
+  "debía": "должен был / должна была",
+  "debían": "должны были; вероятно",
+  "decir": "сказать",
+  "decía": "говорила",
+  "del": "из / от + el",
+  "demasiado": "слишком",
+  "desilusionada": "разочарованная",
+  "desmanteló": "разобрал",
+  "desperdicio": "расточительство",
+  "desplazarse": "двигаться, прокручиваться",
+  "después": "после",
+  "diario": "дневник",
+  "dice": "говорит",
+  "dicho": "сказал(а)",
+  "diez": "десять",
+  "digo": "говорю",
+  "dijo": "сказал(а)",
+  "dio": "дал",
+  "discutir": "спорить",
+  "dispuesta": "готова",
+  "distinta": "другая, отличная",
+  "divertidísimo": "очень забавно",
+  "divertían": "развлекались, веселились",
+  "dolida": "обиженная",
+  "domingos": "воскресенья",
+  "donde": "где / куда",
+  "dormitorio": "спальня",
+  "durante": "в течение",
+  "día": "день",
+  "días": "дни",
+  "dónde": "где",
+  "edad": "возраст",
+  "edificio": "здание",
+  "el": "артикль муж. рода; он",
+  "ellos": "они",
+  "en": "в / на",
+  "encendido": "включённый",
+  "encendía": "включался",
+  "encima": "над; поверх",
+  "encontrado": "нашёл",
+  "encontraste": "ты нашёл",
+  "enorme": "огромный",
+  "ensamblarlo": "собрать его",
+  "enseña": "учит",
+  "enseñanza": "обучение",
+  "enseñarme": "учить меня",
+  "entró": "вошла",
+  "era": "был(а)",
+  "eran": "были",
+  "eres": "ты есть",
+  "es": "есть, является",
+  "esa": "эта",
+  "escribir": "писать",
+  "escribió": "написала",
+  "escuela": "школа",
+  "escuelas": "школы",
+  "eso": "это",
+  "especial": "особый, специальный",
+  "esperaba": "надеялась, ожидала",
+  "esperando": "ожидая",
+  "esperanza": "надежда",
+  "estaba": "был(а), находился(ась)",
+  "estaban": "были, находились",
+  "estudiaban": "учились",
+  "examen": "экзамен, тест",
+  "excepto": "кроме",
+  "explicaba": "объяснял",
+  "extrañas": "странные",
+  "extraño": "странный, незнакомый",
+  "favor": "пожалуйста; услуга",
+  "feo": "уродливый",
+  "final": "конец",
+  "fracciones": "дроби",
+  "general": "общий",
+  "geografía": "география",
+  "grande": "большой",
+  "gritaban": "кричали",
+  "gusta": "нравится",
+  "gustara": "нравилось бы",
+  "ha": "вспомогательный глагол haber",
+  "hablar": "говорить",
+  "habló": "заговорил",
+  "habrá": "будет; вероятно",
+  "había": "был(а); вспомогательный haber",
+  "habían": "были; вспомогательный haber",
+  "hace": "назад; делает",
+  "hacer": "делать",
+  "hacía": "делал(а)",
+  "hallaba": "находился",
+  "hay": "есть, имеется",
+  "he": "вспомогательный глагол haber",
+  "hecho": "сделал; сделанный",
+  "herramientas": "инструменты",
+  "hicieron": "заставили; сделали",
+  "historia": "история",
+  "hombre": "мужчина, человек",
+  "hombrecillo": "маленький человечек",
+  "hombro": "плечо",
+  "hora": "час, время",
+  "horario": "расписание",
+  "hoy": "сегодня",
+  "hubo": "была / было",
+  "iban": "шли, ходили",
+  "ignorante": "невежда, несведущий",
+  "iluminada": "освещённая",
+  "impresos": "напечатанные",
+  "inserta": "вставь",
+  "insertar": "вставлять",
+  "inspector": "инспектор",
+  "isaac": "Айзек",
+  "jones": "Джонс",
+  "juntos": "вместе",
+  "la": "артикль жен. рода; её",
+  "lado": "сторона; рядом",
+  "las": "артикль мн. числа; их",
+  "le": "ему / ей",
+  "lecciones": "уроки",
+  "lección": "урок",
+  "leer": "читать",
+  "lentamente": "медленно",
+  "les": "им",
+  "leyendo": "читая",
+  "leyó": "прочитал(а)",
+  "leías": "ты читал(а)",
+  "libro": "книга",
+  "libros": "книги",
+  "listo": "умный",
+  "llamado": "позвала; вызвала",
+  "llamó": "позвала; вызвала",
+  "llevaba": "носил; нёс",
+  "llevaran": "унесли бы",
+  "llevaron": "унесли",
+  "lo": "его; это",
+  "los": "артикль мн. числа; их",
+  "luego": "затем",
+  "madre": "мать",
+  "maestro": "учитель",
+  "maestros": "учителя",
+  "malo": "плохой",
+  "mamá": "мама",
+  "manzana": "яблоко",
+  "margie": "Марджи",
+  "mayo": "май",
+  "me": "меня / мне",
+  "mejor": "лучше",
+  "mes": "месяц",
+  "mi": "мой / моя",
+  "millón": "миллион",
+  "mirar": "смотреть",
+  "miró": "посмотрел",
+  "misma": "та же самая",
+  "mismas": "те же самые",
+  "mismo": "то же самое; сам",
+  "modo": "способ, образ",
+  "mostraban": "показывались",
+  "mostrado": "показал, показывала",
+  "muchos": "многочисленные; многие",
+  "muy": "очень",
+  "más": "больше; более",
+  "negro": "чёрный",
+  "nivel": "уровень",
+  "niña": "девочка",
+  "niñas": "девочки",
+  "niño": "ребёнок",
+  "niños": "дети",
+  "no": "не; нет",
+  "noche": "ночь",
+  "normal": "обычный",
+  "nuestra": "наша",
+  "nuevo": "снова; новый",
+  "nunca": "никогда",
+  "obedeció": "повиновалась",
+  "ocupado": "занят",
+  "ocurre": "случается",
+  "odiaba": "ненавидела",
+  "odiado": "ненавидела",
+  "odio": "ненавижу",
+  "once": "одиннадцать",
+  "otro": "другой",
+  "padre": "отец",
+  "palabra": "слово",
+  "palabras": "слова",
+  "pantalla": "экран",
+  "papel": "бумага",
+  "para": "для; чтобы",
+  "pasaba": "переворачивал; проходил",
+  "patio": "двор",
+  "patrón": "модель, схема",
+  "pensaba": "думала",
+  "pensando": "думая",
+  "peores": "хуже",
+  "pequeño": "маленький",
+  "perillas": "ручки, переключатели",
+  "pero": "но",
+  "personas": "люди",
+  "petulancia": "самодовольство",
+  "podían": "могли",
+  "polvoriento": "пыльный",
+  "por": "по; через; из-за",
+  "porque": "потому что",
+  "posible": "возможно",
+  "preguntas": "вопросы",
+  "preguntó": "спросила",
+  "primera": "первый / первая",
+  "progresos": "успехи, прогресс",
+  "pronunciando": "произнося",
+  "propios": "правильные",
+  "pruebas": "проверочные работы",
+  "puede": "может",
+  "puedo": "могу",
+  "pues": "ну; тогда",
+  "página": "страница",
+  "páginas": "страницы",
+  "que": "что; который",
+  "quebrados": "дроби",
+  "quedaban": "оставались",
+  "querría": "захотел(а) бы",
+  "quería": "хотела",
+  "quietas": "неподвижные",
+  "quién": "кто",
+  "qué": "что; какой",
+  "ranura": "щель, прорезь",
+  "recibir": "получать",
+  "redactarlas": "писать их",
+  "refiere": "относится",
+  "regordete": "полненький",
+  "regresaban": "возвращались",
+  "regular": "регулярный",
+  "resultados": "результаты",
+  "reían": "смеялись",
+  "rostro": "лицо",
+  "rubicundo": "румяный",
+  "sabe": "знает",
+  "saber": "знать",
+  "sabía": "знал(а)",
+  "sacudido": "покачала",
+  "santiamén": "мгновение",
+  "satisfactorio": "удовлетворительный",
+  "se": "возвратная частица; себя",
+  "sector": "сектор, раздел",
+  "seguir": "продолжать",
+  "seis": "шесть",
+  "sentaban": "садились",
+  "ser": "быть",
+  "señaló": "указал",
+  "señora": "госпожа",
+  "si": "если",
+  "siempre": "всегда",
+  "siglos": "века",
+  "silbando": "насвистывая",
+  "sin": "без",
+  "sintió": "почувствовала",
+  "sintonizado": "настроил",
+  "sintonizarlo": "настроить его",
+  "sirve": "служит; годится",
+  "sobre": "о; над",
+  "soltó": "издал; отпустил",
+  "sonrió": "улыбнулся",
+  "su": "его / её / свой",
+  "suma": "сложение",
+  "sumamos": "мы складываем",
+  "superioridad": "превосходство",
+  "supiera": "умел(а) бы, знал(а) бы",
+  "supongo": "предполагаю",
+  "suspiro": "вздох",
+  "sábados": "субботы",
+  "sé": "знаю",
+  "sí": "да",
+  "tal": "такой; возможно",
+  "también": "тоже",
+  "tan": "так, настолько",
+  "tanto": "столько; так много",
+  "tantos": "так много",
+  "tarea": "задание",
+  "tareas": "задания",
+  "te": "тебя / тебе",
+  "telelibros": "телекниги",
+  "televisión": "телевидение",
+  "tenía": "имел(а); было",
+  "tenían": "имели; у них было",
+  "terminado": "закончили",
+  "terminar": "закончить",
+  "terminas": "ты заканчиваешь",
+  "tiempo": "время",
+  "tiempos": "времена",
+  "tienes": "имеешь",
+  "tiraría": "выбросил(а) бы",
+  "tiras": "выбрасываешь",
+  "todavía": "ещё",
+  "todo": "всё",
+  "todos": "все",
+  "tommy": "Томми",
+  "tontuela": "глупышка",
+  "tras": "после; за",
+  "trata": "речь идёт",
+  "trece": "тринадцать",
+  "tristemente": "печально",
+  "tuvieran": "имели бы",
+  "un": "один; неопределённый артикль",
+  "una": "одна; неопределённый артикль",
+  "uno": "один; человек",
+  "veces": "раз; иногда",
+  "vecindario": "окрестность, район",
+  "ver": "видеть",
+  "verdad": "правда; настоящий",
+  "vez": "раз",
+  "viejas": "старые",
+  "viejo": "старый",
+  "viejos": "старые",
+  "viniera": "пришёл бы",
+  "vista": "взгляд",
+  "visto": "видел(а)",
+  "vivían": "жили",
+  "volvías": "ты возвращался",
+  "y": "и",
+  "ya": "уже",
+  "yo": "я",
+  "ático": "чердак",
+  "él": "он",
+  "época": "эпоха, время",
+  "17": "17",
+  "2157": "2157",
+  "½": "одна вторая",
+  "¼": "одна четвёртая"
+};
+const compound = {
+  "ha encontrado": "нашёл",
+  "había contado": "рассказал",
+  "había visto": "видела",
+  "había odiado": "ненавидела",
+  "había hecho": "провёл",
+  "había sacudido": "покачала",
+  "había llamado": "вызвала",
+  "he sintonizado": "настроил",
+  "había abrigado": "лелеяла",
+  "se había borrado": "стёрся",
+  "habían terminado": "закончили",
+  "he dicho": "сказала"
+};
+
+const phraseRu = {
+  "esa noche": "той ночью",
+  "en el diario": "в дневнике",
+  "en la página": "на странице",
+  "del 17 de mayo de 2157": "от 17 мая 2157 года",
+  "de mayo": "мая",
+  "de 2157": "2157 года",
+  "un libro de verdad": "настоящую книгу",
+  "un libro muy viejo": "очень старую книгу",
+  "un libro": "книгу / книга",
+  "el abuelo de margie": "дедушка Марджи",
+  "de margie": "Марджи",
+  "una vez": "однажды",
+  "su abuelo": "его дедушка / её дедушка",
+  "una época": "эпоха / время",
+  "en que": "когда / в котором",
+  "los cuentos": "рассказы, сказки",
+  "en papel": "на бумаге",
+  "las páginas": "страницы",
+  "las palabras": "слова",
+  "en vez de desplazarse": "вместо того чтобы двигаться / прокручиваться",
+  "en vez de": "вместо",
+  "por la pantalla": "по экрану",
+  "a la página anterior": "к предыдущей странице",
+  "la página anterior": "предыдущая страница",
+  "las mismas palabras": "те же самые слова",
+  "por primera vez": "в первый раз",
+  "qué desperdicio": "какая трата / какое расточительство",
+  "el libro": "книгу / книга",
+  "nuestra pantalla de televisión": "наш телевизионный экран",
+  "un millón de libros": "миллион книг",
+  "de libros": "книг",
+  "para muchos más": "для многих других",
+  "lo mismo": "то же самое",
+  "once años": "одиннадцать лет",
+  "tantos telelibros": "так много телекниг",
+  "como tommy": "как Томми",
+  "en dónde": "где",
+  "en mi casa": "у меня дома / в моём доме",
+  "mi casa": "мой дом",
+  "sin mirar": "не глядя",
+  "en el ático": "на чердаке",
+  "el ático": "чердак",
+  "de qué": "о чём",
+  "de la escuela": "о школе",
+  "sobre la escuela": "о школе",
+  "la escuela": "школу / школа",
+  "el maestro automático": "автоматический учитель",
+  "un examen de geografía": "тест по географии / экзамен по географии",
+  "de geografía": "по географии",
+  "los resultados": "результаты",
+  "la madre de margie": "мать Марджи",
+  "la cabeza": "голова",
+  "al inspector del condado": "инспектора округа",
+  "del condado": "округа",
+  "un hombrecillo regordete": "пухлого человечка",
+  "de rostro rubicundo": "с румяным лицом",
+  "una caja de herramientas": "ящик с инструментами",
+  "de herramientas": "инструментов / с инструментами",
+  "con perillas y cables": "с ручками и проводами",
+  "a margie": "Марджи",
+  "una manzana": "яблоко",
+  "al maestro": "учителя",
+  "de nuevo": "снова",
+  "al cabo de una hora": "через час",
+  "de una hora": "одного часа / через час",
+  "una enorme pantalla": "огромный экран",
+  "en donde": "где",
+  "las lecciones": "уроки",
+  "las preguntas": "вопросы",
+  "la ranura": "щель / прорезь",
+  "por donde": "через которую / где",
+  "las tareas": "задания",
+  "las pruebas": "проверочные работы",
+  "en un código": "в коде",
+  "a los seis años": "в шесть лет",
+  "los seis años": "шесть лет",
+  "la calificación": "оценку",
+  "en un santiamén": "в мгновение",
+  "el inspector": "инспектор",
+  "la cabeza de margie": "голову Марджи",
+  "de la niña": "девочки",
+  "señora jones": "госпожа Джонс",
+  "a la madre": "матери",
+  "el sector de geografía": "раздел географии",
+  "a veces": "иногда",
+  "en un nivel adecuado": "на подходящий уровень",
+  "un nivel adecuado": "подходящий уровень",
+  "para los diez años de edad": "для десятилетнего возраста",
+  "los diez años de edad": "десятилетний возраст",
+  "de edad": "возраста",
+  "el patrón general de progresos": "общая модель успеваемости",
+  "de progresos": "успеваемости / прогресса",
+  "la esperanza": "надежду",
+  "el maestro de tommy": "учителя Томми",
+  "de tommy": "Томми",
+  "durante todo un mes": "на целый месяц",
+  "todo un mes": "целый месяц",
+  "el sector de historia": "раздел истории",
+  "de historia": "истории",
+  "por completo": "полностью",
+  "con aire de superioridad": "с видом превосходства",
+  "de superioridad": "превосходства",
+  "una escuela": "школа",
+  "como la nuestra": "как наша",
+  "la nuestra": "наша",
+  "la de hace cientos de años": "та, что была сотни лет назад",
+  "hace cientos de años": "сотни лет назад",
+  "de años": "лет",
+  "la palabra": "слово",
+  "qué escuela": "какая школа",
+  "hace tanto tiempo": "так давно",
+  "por encima del hombro de tommy": "через плечо Томми",
+  "del hombro de tommy": "плеча Томми",
+  "de cualquier modo": "в любом случае",
+  "un maestro normal": "обычный учитель",
+  "un hombre": "мужчина / человек",
+  "las cosas": "вещи / материал",
+  "a los chicos": "детям",
+  "lo bastante listo": "достаточно умный",
+  "mi padre": "мой отец",
+  "mi maestro": "мой учитель",
+  "sobre eso": "об этом",
+  "un hombre extraño": "незнакомый мужчина",
+  "a casa": "домой",
+  "los maestros": "учителя",
+  "en la casa": "в доме",
+  "un edificio especial": "специальное здание",
+  "todos los chicos": "все дети",
+  "la misma edad": "тот же возраст / того же возраста",
+  "mi madre": "моя мама / моя мать",
+  "a un maestro": "учителя",
+  "a la edad de cada niño": "к возрасту каждого ребёнка",
+  "de cada niño": "каждого ребёнка",
+  "cada niño": "каждый ребёнок",
+  "al que enseña": "которого он учит",
+  "cada chico": "каждый ребёнок",
+  "una enseñanza distinta": "разное обучение",
+  "por qué": "почему",
+  "las extrañas escuelas": "странные школы",
+  "extrañas escuelas": "странные школы",
+  "la señora jones": "госпожа Джонс",
+  "la hora de tommy": "время Томми",
+  "después de la escuela": "после школы",
+  "con petulancia": "с самодовольством",
+  "el libro viejo y polvoriento": "старую пыльную книгу",
+  "libro viejo y polvoriento": "старая пыльная книга",
+  "debajo del brazo": "под мышкой",
+  "del brazo": "руки",
+  "el aula": "класс",
+  "al lado del dormitorio": "рядом со спальней",
+  "del dormitorio": "спальни",
+  "a la misma hora": "в одно и то же время",
+  "la misma hora": "то же самое время",
+  "todos los días": "каждый день",
+  "su madre": "её мать / её мама",
+  "las niñas": "девочки",
+  "con un horario regular": "по регулярному расписанию",
+  "un horario regular": "регулярное расписание",
+  "la pantalla": "экран",
+  "la lección de aritmética de hoy": "сегодняшний урок арифметики",
+  "de aritmética": "арифметики",
+  "la suma de quebrados propios": "сложение правильных дробей",
+  "de quebrados propios": "правильных дробей",
+  "por favor": "пожалуйста",
+  "la tarea de ayer": "вчерашнее задание",
+  "de ayer": "вчерашний / вчера",
+  "en la ranura adecuada": "в нужную щель",
+  "la ranura adecuada": "нужная щель",
+  "con un suspiro": "со вздохом",
+  "un suspiro": "вздох",
+  "en las viejas escuelas": "о старых школах / в старых школах",
+  "las viejas escuelas": "старые школы",
+  "el abuelo del abuelo": "прадедушка / дедушка дедушки",
+  "del abuelo": "дедушки",
+  "un chiquillo": "мальчик / ребёнок",
+  "todos los chicos del vecindario": "все дети района",
+  "del vecindario": "района",
+  "en el patio": "во дворе",
+  "en el aula": "в классе",
+  "al final del día": "в конце дня",
+  "del día": "дня",
+  "las mismas cosas": "одни и те же вещи",
+  "los deberes": "домашние задания",
+  "de ellos": "о них",
+  "la pantalla del maestro automático": "экран автоматического учителя",
+  "del maestro automático": "автоматического учителя",
+  "las fracciones ½ y ¼": "дроби ½ и ¼",
+  "los niños": "дети",
+  "en los viejos tiempos": "в старые времена",
+  "los viejos tiempos": "старые времена",
+  "con una enorme pantalla": "с огромным экраном",
+  "al terminar": "закончив / когда закончил",
+  "de que": "что / о том, что",
+  "a tommy": "Томми",
+  "un maestro": "учитель",
+  "a que": "что",
+  "a discutir": "спорить",
+  "a enseñarme": "учить меня",
+  "una carcajada": "громкий смех",
+  "para adaptarlo": "чтобы приспособить его",
+  "a decir": "сказать",
+  "de las extrañas escuelas": "о странных школах",
+  "la vista": "взгляд",
+  "con el libro viejo y polvoriento debajo del brazo": "со старой пыльной книгой под мышкой",
+  "el maestro": "учитель",
+  "a la suma de quebrados propios": "к сложению правильных дробей",
+  "a hacer los deberes": "делать домашние задания",
+  "en cuánto": "о том, как",
+  "se divertían": "веселились / развлекались",
+  "se arrugaban": "мялись",
+  "se quedaban": "оставались",
+  "se puede escribir": "можно написать",
+  "se mostraban": "показывались",
+  "se llevaran": "забрали бы / унесли бы",
+  "se llevaron": "забрали / унесли",
+  "se sintió": "почувствовала себя",
+  "se apresuró": "поспешила",
+  "se alejó": "ушёл",
+  "se hallaba": "находился",
+  "se encendía": "включался",
+  "se reían": "смеялись",
+  "se sentaban": "садились",
+  "se refiere": "относится",
+  "puede escribir": "может написать",
+};
+
+const occurrenceRu = {
+  "20|añadió|1": "добавил",
+  "22|añadió|1": "добавила",
+  "17|dijo|1": "сказала",
+  "6|dijo|1": "сказал",
+  "45|dijo|1": "сказал",
+  "31|querría|1": "не хотела бы",
+  "18|querría|1": "захотел бы",
+  "6|tiraría|1": "не выбросил бы",
+  "7|tenía|1": "ей было",
+  "7|tenía|2": "ему было",
+  "8|estaba|1": "был",
+  "13|esperaba|1": "надеялась",
+  "30|estaba|1": "была",
+  "46|estaba|1": "находился",
+  "48|estaba|1": "была",
+  "48|estaba|1": "думала",
+  "13|sabía|1": "умел",
+  "13|sabía|2": "знал",
+  "13|supiera|1": "умел бы",
+  "22|leyó|1": "прочитала",
+  "19|miró|1": "посмотрел",
+  "32|soltó|1": "рассмеялся",
+  "45|alejó|1": "ушёл",
+  "31|viniera|1": "пришёл бы",
+  "5|la|1": "её",
+  "6|la|1": "его",
+  "19|la|1": "на неё",
+};
+
+const special = {
+  "hubo": {
+    "ru": "однажды была / существовала",
+    "explanation": "hubo: Pretérito Indefinido глагола haber (однажды была)."
+  },
+  "habrá mostrado": {
+    "ru": "наверное показывал / вероятно показал",
+    "explanation": "\"habrá mostrado\": Futuro Perfecto de Indicativo глагола mostrar, выражает предположения в прошлом (наверное показывал ...)."
+  },
+  "tiraría": {
+    "ru": "не выбросил бы",
+    "explanation": "\"tiraría\": Condicional Simple глагола tirar; выражает условные действия. В реплике Tommy «Yo nunca la tiraría» = «я бы никогда его не выбросил» — при переводе «pantalla» как «экран»."
+  },
+  "querría": {
+    "ru": "захотел бы / хотела бы",
+    "explanation": "\"querría\": Condicional Simple глагола querer; выражает условное значение. В вопросе «¿Quién querría...?» = «кто захотел бы», а в реплике Margie «Yo no querría...» = «я бы не хотела»."
+  },
+  "viniera": {
+    "ru": "пришёл бы",
+    "explanation": "\"viniera\": Pretérito Imperfecto de Subjuntivo глагола venir (пришёл бы)."
+  },
+  "debe de ser": {
+    "ru": "должно быть",
+    "explanation": "\"debe de ser\": перифраза (глагольная конструкция) deber de + infinitivo, выражает предположение, догадку или высокую степень вероятности (должно быть)."
+  },
+  "debían de adorar": {
+    "ru": "должно быть, обожали / поклонялись",
+    "explanation": "\"debían de adorar\": перифраза (глагольная конструкция) deber de + infinitivo, выражает предположение, догадку или высокую степень вероятности (должно быть поклонялись)."
+  }
+};
+
+const storyEl = document.getElementById('story');
+const detailsEl = document.getElementById('details');
+const introHint = document.getElementById('introHint');
+const esValue = document.getElementById('esValue');
+const ruValue = document.getElementById('ruValue');
+const grammarBox = document.getElementById('grammarBox');
+
+function escapeRegex(str) {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+const phraseKeys = [...Object.keys(special), ...Object.keys(compound), ...Object.keys(phraseRu)].sort((a, b) => b.length - a.length);
+const phrasePattern = phraseKeys.map(escapeRegex).join('|');
+const tokenRe = new RegExp(phrasePattern + '|[A-Za-zÁÉÍÓÚÜÑáéíóúüñ]+|\\d+|[½¼]|\\s+|[^\\sA-Za-zÁÉÍÓÚÜÑáéíóúüñ\\d½¼]+', 'giu');
+
+function normalize(str) {
+  return str.toLocaleLowerCase('es-ES').trim();
+}
+
+function makeWordSpan(token, kind, contextKey) {
+  const key = normalize(token);
+  const span = document.createElement('span');
+  span.className = kind === 'special' ? 'word special' : 'word';
+  span.textContent = token;
+  span.tabIndex = 0;
+  span.setAttribute('role', 'button');
+
+  const isSpecial = Object.prototype.hasOwnProperty.call(special, key);
+  const isCompound = Object.prototype.hasOwnProperty.call(compound, key);
+  const isPhrase = Object.prototype.hasOwnProperty.call(phraseRu, key);
+  const overrideRu = occurrenceRu[contextKey];
+  const ru = overrideRu || (isSpecial ? special[key].ru : (isCompound ? compound[key] : (isPhrase ? phraseRu[key] : (wordRu[key] || '—'))));
+
+  span.dataset.es = token;
+  span.dataset.ru = ru;
+  if (isSpecial) {
+    span.dataset.explanation = special[key].explanation;
+    span.setAttribute('aria-label', token + ': explicación gramatical');
+  } else {
+    span.setAttribute('aria-label', token + ': ' + ru);
+  }
+
+  span.addEventListener('click', () => showDetails(span));
+  span.addEventListener('keydown', (ev) => {
+    if (ev.key === 'Enter' || ev.key === ' ') {
+      ev.preventDefault();
+      showDetails(span);
+    }
+  });
+  return span;
+}
+
+function renderLine(line, index) {
+  const p = document.createElement('p');
+  const seen = {};
+  if (index === 0) p.className = 'title-line';
+  if (index === 1) p.className = 'author-line';
+
+  if (line === '') {
+    p.innerHTML = '&nbsp;';
+    return p;
+  }
+
+  const parts = line.match(tokenRe) || [];
+  for (const part of parts) {
+    const key = normalize(part);
+    if (/^\s+$/.test(part)) {
+      p.appendChild(document.createTextNode(part));
+    } else {
+      seen[key] = (seen[key] || 0) + 1;
+      const contextKey = `${index}|${key}|${seen[key]}`;
+      if (Object.prototype.hasOwnProperty.call(special, key)) {
+        p.appendChild(makeWordSpan(part, 'special', contextKey));
+      } else if (Object.prototype.hasOwnProperty.call(compound, key)) {
+        p.appendChild(makeWordSpan(part, 'word', contextKey));
+      } else if (Object.prototype.hasOwnProperty.call(phraseRu, key)) {
+        p.appendChild(makeWordSpan(part, 'word', contextKey));
+      } else if (/^[A-Za-zÁÉÍÓÚÜÑáéíóúüñ]+$/.test(part) || /^\d+$/.test(part) || /^[½¼]$/.test(part)) {
+        p.appendChild(makeWordSpan(part, 'word', contextKey));
+      } else {
+        p.appendChild(document.createTextNode(part));
+      }
+    }
+  }
+  return p;
+}
+
+function showDetails(span) {
+  introHint.hidden = true;
+  detailsEl.hidden = false;
+  esValue.textContent = span.dataset.es;
+  ruValue.textContent = span.dataset.ru;
+
+  document.querySelectorAll('.word.active').forEach(el => el.classList.remove('active'));
+  span.classList.add('active');
+
+  if (span.dataset.explanation) {
+    grammarBox.hidden = false;
+    grammarBox.textContent = span.dataset.explanation;
+  } else {
+    grammarBox.hidden = true;
+    grammarBox.textContent = '';
+  }
+}
+
+function resetPanel() {
+  introHint.hidden = false;
+  detailsEl.hidden = true;
+  esValue.textContent = '';
+  ruValue.textContent = '';
+  grammarBox.hidden = true;
+  grammarBox.textContent = '';
+  document.querySelectorAll('.word.active').forEach(el => el.classList.remove('active'));
+}
+
+storyLines.forEach((line, index) => storyEl.appendChild(renderLine(line, index)));
+
+document.getElementById('resetBtn').addEventListener('click', resetPanel);
+
+document.getElementById('highlightBtn').addEventListener('click', () => {
+  const firstSpecial = document.querySelector('.special');
+  document.querySelectorAll('.special').forEach(el => {
+    el.animate(
+      [
+        { transform: 'scale(1)', filter: 'brightness(1)' },
+        { transform: 'scale(1.035)', filter: 'brightness(1.08)' },
+        { transform: 'scale(1)', filter: 'brightness(1)' }
+      ],
+      { duration: 750, iterations: 2 }
+    );
+  });
+  if (firstSpecial) firstSpecial.scrollIntoView({ behavior: 'smooth', block: 'center' });
+});
+</script>
+</body>
+</html>

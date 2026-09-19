@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Perífrasis verbales · Práctica ELE A2</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <style>
+    :root {
+      --bg-1:#fff7ed; --bg-2:#eef2ff; --ink:#1f2937; --muted:#5b6270;
+      --card:rgba(255,255,255,.9); --accent:#7c3aed; --accent-2:#f97316;
+      --accent-3:#0f766e; --ok:#166534; --bad:#b91c1c; --soft-ok:#ecfdf5;
+      --soft-bad:#fef2f2; --shadow:0 18px 45px rgba(31,41,55,.12); --radius:26px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;color:var(--ink);background:radial-gradient(circle at top left,rgba(249,115,22,.24),transparent 30rem),radial-gradient(circle at top right,rgba(124,58,237,.2),transparent 32rem),linear-gradient(135deg,var(--bg-1),var(--bg-2));min-height:100vh;padding:30px 16px 54px}
+    .page{width:min(1120px,100%);margin:0 auto}
+    .hero{position:relative;overflow:hidden;border-radius:34px;padding:clamp(28px,5vw,52px);background:linear-gradient(135deg,rgba(255,255,255,.94),rgba(255,255,255,.76)),repeating-linear-gradient(45deg,rgba(124,58,237,.06) 0 12px,transparent 12px 24px);box-shadow:var(--shadow);border:1px solid rgba(255,255,255,.72)}
+    .hero:after{content:"A2";position:absolute;right:28px;top:18px;font-weight:950;font-size:clamp(4rem,12vw,9rem);line-height:1;color:rgba(124,58,237,.075);letter-spacing:-.08em}
+    h1{margin:0;font-size:clamp(2.2rem,6vw,4.8rem);letter-spacing:-.055em;line-height:.95;text-transform:uppercase}
+    .subtitle{margin:16px 0 0;font-size:clamp(1.05rem,2.2vw,1.45rem);color:var(--muted);font-weight:700;max-width:820px;line-height:1.45}
+    .mode-row{display:flex;flex-wrap:wrap;gap:9px;margin-top:20px}
+    .mode{padding:8px 12px;border-radius:999px;background:rgba(124,58,237,.09);border:1px solid rgba(124,58,237,.13);font-size:.9rem;font-weight:800;color:#4c1d95}
+    .section{margin-top:26px;padding:clamp(20px,3vw,30px);border-radius:var(--radius);background:var(--card);box-shadow:0 12px 30px rgba(31,41,55,.09);border:1px solid rgba(255,255,255,.8)}
+    .section-head{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;flex-wrap:wrap;margin-bottom:18px}
+    .section h2{margin:0;font-size:clamp(1.45rem,3vw,2.05rem);letter-spacing:-.025em}
+    .section p.lead{margin:8px 0 0;color:var(--muted);line-height:1.55;max-width:780px}
+    .tag{display:inline-flex;padding:7px 11px;border-radius:999px;background:#fff7ed;color:#9a3412;font-weight:850;font-size:.86rem;border:1px solid #fed7aa}
+    details.reference{margin-top:26px;border-radius:22px;background:rgba(255,255,255,.76);border:1px solid rgba(124,58,237,.13);overflow:hidden}
+    details.reference summary{cursor:pointer;padding:16px 18px;font-weight:900;color:#312e81;list-style:none}
+    details.reference summary::-webkit-details-marker{display:none}
+    .reference-grid{padding:0 18px 18px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px 16px}
+    .ref-item{padding:10px 12px;border-radius:14px;background:rgba(238,242,255,.75);font-size:.94rem;line-height:1.35}
+    .ref-item b{color:#312e81}
+    .questions{display:grid;gap:12px}
+    .q{padding:16px;border-radius:19px;background:rgba(248,250,252,.9);border:1px solid #e5e7eb;transition:.18s ease}
+    .q.correct{background:var(--soft-ok);border-color:#86efac}
+    .q.wrong{background:var(--soft-bad);border-color:#fca5a5}
+    .q-line{display:flex;gap:12px;align-items:flex-start}
+    .q-num{flex:0 0 36px;width:36px;height:36px;display:grid;place-items:center;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:white;font-weight:900}
+    .q-body{flex:1;min-width:0}
+    .tense{display:inline-block;margin-bottom:8px;font-size:.79rem;font-weight:850;color:#0f766e;background:#ecfeff;border:1px solid #a5f3fc;border-radius:999px;padding:5px 9px}
+    .prompt{font-size:1.03rem;line-height:1.65;font-weight:650}
+    select{max-width:100%;font:inherit;font-weight:750;color:#312e81;background:white;border:1px solid #c4b5fd;border-radius:12px;padding:9px 34px 9px 11px;margin:3px 4px;box-shadow:0 2px 6px rgba(31,41,55,.05)}
+    select:focus,textarea:focus,button:focus-visible{outline:3px solid rgba(124,58,237,.2);outline-offset:2px}
+    .feedback{margin-top:8px;font-size:.9rem;font-weight:800;min-height:1.2em}
+    .correct .feedback{color:var(--ok)} .wrong .feedback{color:var(--bad)}
+    .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+    button{border:0;border-radius:13px;padding:11px 15px;font:inherit;font-weight:850;cursor:pointer;transition:transform .14s ease,box-shadow .14s ease,filter .14s ease}
+    button:hover{transform:translateY(-1px);filter:brightness(1.02)}
+    .primary{background:linear-gradient(135deg,var(--accent),#6d28d9);color:white;box-shadow:0 8px 18px rgba(124,58,237,.2)}
+    .secondary{background:linear-gradient(135deg,var(--accent-3),#0891b2);color:white;box-shadow:0 8px 18px rgba(15,118,110,.17)}
+    .ghost{background:white;color:#374151;border:1px solid #d1d5db}
+    .score{align-self:center;font-weight:900;color:#312e81;min-height:1.3em}
+    .translation-list{display:grid;gap:14px}
+    .translation-card{padding:17px;border-radius:19px;background:rgba(248,250,252,.93);border:1px solid #e5e7eb}
+    .source{display:flex;gap:10px;align-items:flex-start;font-size:1.04rem;line-height:1.55;font-weight:720}
+    .mini-num{flex:0 0 auto;width:30px;height:30px;display:grid;place-items:center;border-radius:10px;background:#ede9fe;color:#5b21b6;font-weight:900;font-size:.9rem}
+    textarea{display:block;width:100%;min-height:70px;resize:vertical;margin:12px 0 10px;padding:11px 12px;border:1px solid #cbd5e1;border-radius:13px;font:inherit;line-height:1.45;background:white;color:#111827}
+    .translation-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    .show-answer{background:#fff;color:#5b21b6;border:1px solid #c4b5fd;padding:9px 12px;font-size:.9rem}
+    .answer{display:none;margin-top:11px;padding:11px 13px;border-left:4px solid var(--accent-3);border-radius:9px;background:#ecfeff;line-height:1.5}
+    .answer.visible{display:block}
+    .answer .label{display:block;font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;color:#0f766e;font-weight:900;margin-bottom:4px}
+    .peri-note{font-size:.82rem;color:var(--muted);font-weight:750}
+    .footer{margin:24px auto 0;text-align:center;color:var(--muted);font-size:.9rem;line-height:1.5}
+    @media(max-width:760px){.reference-grid{grid-template-columns:1fr}.section{padding:18px}.q-line{gap:9px}.q-num{width:32px;height:32px;flex-basis:32px}.hero:after{right:12px;top:14px}}
+    @media print{body{background:white;padding:0}.hero,.section{box-shadow:none}.actions,.show-answer,.footer{display:none}.answer.visible{display:block}}
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <h1>Perífrasis verbales</h1>
+      <p class="subtitle">Práctica ELE A2 · selección de formas verbales y traducción español ↔ ruso</p>
+      <div class="mode-row">
+        <span class="mode">Presente</span><span class="mode">Pretérito perfecto</span><span class="mode">Pretérito imperfecto</span><span class="mode">Pretérito indefinido</span><span class="mode">Presente de subjuntivo</span>
+      </div>
+    </section>
+
+    <details class="reference">
+      <summary>📚 Ver las 20 perífrasis de referencia</summary>
+      <div class="reference-grid" id="referenceGrid"></div>
+    </details>
+
+    <section class="section" id="exercise1">
+      <div class="section-head">
+        <div>
+          <span class="tag">Ejercicio 1 · 20 ítems</span>
+          <h2>Elige la forma correcta</h2>
+          <p class="lead">Completa cada oración. Hay una respuesta correcta por ítem. El tiempo o modo aparece como pista.</p>
+        </div>
+        <div class="score" id="score"></div>
+      </div>
+      <div class="questions" id="selectQuestions"></div>
+      <div class="actions">
+        <button class="ghost" id="resetSelect">Reiniciar</button>
+        <button class="primary" id="checkSelect">Revisar</button>
+        <button class="secondary" id="showSelect">Mostrar respuestas</button>
+      </div>
+    </section>
+
+    <section class="section" id="exercise2">
+      <div class="section-head">
+        <div>
+          <span class="tag">Ejercicio 2 · 20 ítems</span>
+          <h2>Переведите на испанский</h2>
+          <p class="lead">Traduce del ruso al español. Escribe tu versión y abre el modelo de respuesta después de cada oración.</p>
+        </div>
+      </div>
+      <div class="translation-list" id="ruEsList"></div>
+      <div class="actions"><button class="ghost" data-reset="ruEsList">Reiniciar traducciones</button></div>
+    </section>
+
+    <section class="section" id="exercise3">
+      <div class="section-head">
+        <div>
+          <span class="tag">Ejercicio 3 · 20 ítems</span>
+          <h2>Переведите на русский</h2>
+          <p class="lead">Traduce del español al ruso. Cada frase incluye una de las perífrasis de la ficha.</p>
+        </div>
+      </div>
+      <div class="translation-list" id="esRuList"></div>
+      <div class="actions"><button class="ghost" data-reset="esRuList">Reiniciar traducciones</button></div>
+    </section>
+
+    <p class="footer">Las respuestas de traducción son modelos posibles; pueden existir otras versiones correctas.</p>
+  </main>
+
+<script>
+const selectItems = [{"tense": "Presente de subjuntivo", "prompt": "No creo que Laura __SELECT__ sola mañana.", "options": ["va a viajar", "vaya a viajar", "ha vuelto a viajar", "solía viajar"], "answer": "vaya a viajar", "periphrasis": "ir a + infinitivo"}, {"tense": "Pretérito perfecto", "prompt": "Esta mañana nosotros __SELECT__ el autobús durante casi una hora.", "options": ["hemos estado esperando", "estábamos esperando", "vamos a esperar", "anduvimos esperando"], "answer": "hemos estado esperando", "periphrasis": "estar + gerundio"}, {"tense": "Pretérito imperfecto", "prompt": "Cuando vivíamos en Moscú, __SELECT__ español en casa.", "options": ["seguíamos hablando", "hemos seguido hablando", "volvimos a hablar", "vamos a hablar"], "answer": "seguíamos hablando", "periphrasis": "seguir / continuar + gerundio"}, {"tense": "Presente de indicativo", "prompt": "Yo __SELECT__ español desde hace seis meses.", "options": ["llevo estudiando", "estoy por estudiar", "acabé por estudiar", "he de estudiar"], "answer": "llevo estudiando", "periphrasis": "llevar + gerundio"}, {"tense": "Pretérito indefinido", "prompt": "Después de dos semanas, Pablo __SELECT__ a su hermana.", "options": ["volvió a llamar", "ha vuelto a llamar", "solía llamar", "estaba por llamar"], "answer": "volvió a llamar", "periphrasis": "volver a + infinitivo"}, {"tense": "Pretérito imperfecto", "prompt": "Cuando llegaste, nosotros __SELECT__.", "options": ["acabábamos de cenar", "acabamos de cenar", "hemos acabado por cenar", "estábamos por cenar"], "answer": "acabábamos de cenar", "periphrasis": "acabar de + infinitivo"}, {"tense": "Presente de subjuntivo", "prompt": "Quiero que tú __SELECT__ el móvil durante la clase.", "options": ["dejes de mirar", "dejas de mirar", "has dejado de mirar", "dejaste de mirar"], "answer": "dejes de mirar", "periphrasis": "dejar de + infinitivo"}, {"tense": "Pretérito perfecto", "prompt": "Esta semana yo __SELECT__ hasta muy tarde.", "options": ["he tenido que trabajar", "tenía que trabajar", "tuve que trabajar", "he de trabajar"], "answer": "he tenido que trabajar", "periphrasis": "tener que + infinitivo"}, {"tense": "Presente de indicativo", "prompt": "__SELECT__ que esta decisión no fue buena.", "options": ["He de reconocer", "Tengo que reconocí", "Había que reconocer", "Volví a reconocer"], "answer": "He de reconocer", "periphrasis": "haber de + infinitivo"}, {"tense": "Pretérito indefinido", "prompt": "Ayer __SELECT__ dos horas porque el tren llegó tarde.", "options": ["hubo que esperar", "hay que esperar", "había que esperar", "hemos tenido que esperar"], "answer": "hubo que esperar", "periphrasis": "hay que / haber que + infinitivo"}, {"tense": "Pretérito indefinido", "prompt": "No vino a la reunión; __SELECT__ la cita.", "options": ["debió de olvidar", "debía olvidar", "tuvo que olvidar", "volvió a olvidar"], "answer": "debió de olvidar", "periphrasis": "deber de + infinitivo"}, {"tense": "Pretérito indefinido", "prompt": "Al oír el chiste, Marta __SELECT__.", "options": ["se echó a reír", "se ha echado a reír", "solía reír", "estaba a punto de reír"], "answer": "se echó a reír", "periphrasis": "echar(se) / ponerse a + infinitivo"}, {"tense": "Pretérito perfecto", "prompt": "Este mes nosotros __SELECT__ textos más largos.", "options": ["hemos empezado a leer", "empezábamos a leer", "empezamos a leer", "solemos leer"], "answer": "hemos empezado a leer", "periphrasis": "empezar / comenzar a + infinitivo"}, {"tense": "Presente de subjuntivo", "prompt": "Es posible que él __SELECT__ la oferta después de hablar con su familia.", "options": ["termine por aceptar", "termina por aceptar", "terminó por aceptar", "ha terminado por aceptar"], "answer": "termine por aceptar", "periphrasis": "terminar / acabar por + infinitivo"}, {"tense": "Presente de indicativo", "prompt": "Esta expresión __SELECT__ “más o menos lo mismo”.", "options": ["viene a significar", "llega a significar", "está por significar", "ha de significar"], "answer": "viene a significar", "periphrasis": "venir a + infinitivo"}, {"tense": "Presente de subjuntivo", "prompt": "No creo que Ana __SELECT__ todo el trabajo hoy.", "options": ["llegue a terminar", "llega a terminar", "ha llegado a terminar", "andaba terminando"], "answer": "llegue a terminar", "periphrasis": "llegar a + infinitivo"}, {"tense": "Pretérito imperfecto", "prompt": "En aquella época todos __SELECT__ que el profesor era muy estricto.", "options": ["andaban diciendo", "han andado diciendo", "volvieron a decir", "están por decir"], "answer": "andaban diciendo", "periphrasis": "andar + gerundio"}, {"tense": "Pretérito perfecto", "prompt": "Esta mañana nosotros __SELECT__ el tren.", "options": ["hemos estado a punto de perder", "estábamos a punto de perder", "estamos por perder", "hemos acabado de perder"], "answer": "hemos estado a punto de perder", "periphrasis": "estar a punto de + infinitivo"}, {"tense": "Pretérito imperfecto", "prompt": "De niño, yo __SELECT__ el verano con mis abuelos.", "options": ["solía pasar", "he solido pasar", "estuve por pasar", "volví a pasar"], "answer": "solía pasar", "periphrasis": "soler + infinitivo"}, {"tense": "Presente de indicativo", "prompt": "__SELECT__ al director, pero todavía no he decidido qué decirle.", "options": ["Estoy por llamar", "Acabo de llamar", "He vuelto a llamar", "Solía llamar"], "answer": "Estoy por llamar", "periphrasis": "estar por + infinitivo"}];
+const ruEsItems = [["Завтра мы будем покупать билеты.", "Mañana vamos a comprar los billetes.", "ir a + infinitivo"], ["Сейчас Анна разговаривает с преподавателем.", "Ahora Ana está hablando con el profesor.", "estar + gerundio"], ["После перерыва мы продолжили работать.", "Después de la pausa seguimos trabajando.", "seguir + gerundio"], ["Я уже три месяца учу испанский.", "Llevo tres meses estudiando español.", "llevar + gerundio"], ["Вчера он снова позвонил мне.", "Ayer volvió a llamarme.", "volver a + infinitivo"], ["Мы только что позавтракали.", "Acabamos de desayunar.", "acabar de + infinitivo"], ["Я хочу, чтобы ты перестал говорить так громко.", "Quiero que dejes de hablar tan alto.", "dejar de + infinitivo"], ["На этой неделе мне пришлось много работать.", "Esta semana he tenido que trabajar mucho.", "tener que + infinitivo"], ["Я должен признать, что ты прав.", "He de reconocer que tienes razón.", "haber de + infinitivo"], ["Раньше нужно было покупать билеты заранее.", "Antes había que comprar los billetes con antelación.", "haber que + infinitivo"], ["Наверное, они были дома.", "Debían de estar en casa.", "deber de + infinitivo"], ["Услышав шутку, она засмеялась.", "Al oír el chiste, se echó a reír.", "echarse a + infinitivo"], ["В прошлом месяце мы начали готовить проект.", "El mes pasado empezamos a preparar el proyecto.", "empezar a + infinitivo"], ["После долгого разговора он в итоге согласился.", "Después de una larga conversación, acabó por aceptar.", "acabar por + infinitivo"], ["Это примерно означает, что всё в порядке.", "Esto viene a significar que todo está bien.", "venir a + infinitivo"], ["Я не думаю, что он сможет закончить сегодня.", "No creo que llegue a terminar hoy.", "llegar a + infinitivo"], ["В то время все говорили, что преподаватель был очень строгим.", "En aquella época todos andaban diciendo que el profesor era muy estricto.", "andar + gerundio"], ["Сегодня утром мы чуть не опоздали на поезд.", "Esta mañana hemos estado a punto de perder el tren.", "estar a punto de + infinitivo"], ["В детстве я обычно проводил лето у бабушки.", "De niño solía pasar el verano con mi abuela.", "soler + infinitivo"], ["Я собираюсь сейчас написать директору, но ещё этого не сделал.", "Estoy por escribir al director ahora mismo, pero todavía no lo he hecho.", "estar por + infinitivo"]];
+const esRuItems = [["Mañana voy a visitar a mis abuelos.", "Завтра я собираюсь навестить бабушку и дедушку.", "ir a + infinitivo"], ["A las ocho estaba preparando la cena.", "В восемь часов я готовил(а) ужин.", "estar + gerundio"], ["Hemos seguido estudiando después de clase.", "После урока мы продолжили заниматься.", "seguir + gerundio"], ["Llevábamos dos años viviendo allí cuando nos mudamos.", "Мы жили там уже два года, когда переехали.", "llevar + gerundio"], ["Después de dos meses volvió a escribirnos.", "Через два месяца он снова нам написал.", "volver a + infinitivo"], ["Cuando llegaste, acabábamos de salir.", "Когда ты пришёл / пришла, мы только что вышли.", "acabar de + infinitivo"], ["Es importante que dejes de usar el móvil en clase.", "Важно, чтобы ты перестал(а) пользоваться телефоном на уроке.", "dejar de + infinitivo"], ["Ayer tuve que ir al médico.", "Вчера мне пришлось пойти к врачу.", "tener que + infinitivo"], ["He de hablar con la directora hoy.", "Я должен / должна сегодня поговорить с директором.", "haber de + infinitivo"], ["En aquella época había que llevar uniforme.", "В то время нужно было носить форму.", "haber que + infinitivo"], ["Por la luz encendida, debían de estar despiertos.", "Судя по включённому свету, они, наверное, не спали.", "deber de + infinitivo"], ["Al ver el regalo, se puso a sonreír.", "Увидев подарок, она заулыбалась.", "ponerse a + infinitivo"], ["Este año hemos comenzado a leer textos más largos.", "В этом году мы начали читать более длинные тексты.", "comenzar a + infinitivo"], ["Al final terminó por pedir ayuda.", "В конце концов он всё-таки попросил помощи.", "terminar por + infinitivo"], ["La reunión viene a durar una hora.", "Собрание длится примерно час.", "venir a + infinitivo"], ["Espero que llegues a entender esta regla.", "Надеюсь, что тебе удастся понять это правило.", "llegar a + infinitivo"], ["Mis vecinos andaban buscando un piso más grande.", "Мои соседи всё искали квартиру побольше.", "andar + gerundio"], ["Estábamos a punto de salir cuando empezó a llover.", "Мы уже собирались выходить, когда пошёл дождь.", "estar a punto de + infinitivo"], ["Antes solíamos cenar muy tarde.", "Раньше мы обычно ужинали очень поздно.", "soler + infinitivo"], ["Estoy por cambiar de trabajo.", "Я собираюсь сменить работу.", "estar por + infinitivo"]];
+const referenceItems = [["ir a + infinitivo", "будущее / ближайшее намерение"], ["estar + gerundio", "действие в процессе"], ["seguir / continuar + gerundio", "продолжение действия"], ["llevar + gerundio", "длительность процесса"], ["volver a + infinitivo", "повтор действия"], ["acabar de + infinitivo", "только что выполненное действие"], ["dejar de + infinitivo", "прекращение действия"], ["tener que + infinitivo", "личная необходимость"], ["haber de + infinitivo", "формальная обязанность / намерение"], ["hay que / haber que + infinitivo", "безличная необходимость"], ["deber de + infinitivo", "предположение"], ["echar(se) / ponerse a + infinitivo", "внезапное начало"], ["empezar / comenzar a + infinitivo", "начало процесса"], ["terminar / acabar por + infinitivo", "итог после процесса"], ["venir a + infinitivo", "приблизительность / итоговое значение"], ["llegar a + infinitivo", "достижение результата / предела"], ["andar + gerundio", "повторяющееся / нерегулярное действие"], ["estar a punto de + infinitivo", "действие вот-вот произойдёт"], ["soler + infinitivo", "обычное повторяющееся действие"], ["estar por + infinitivo", "намерение; действие ещё не выполнено"]];
+
+function escapeHTML(s){
+  return String(s).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[ch]));
+}
+
+function renderReference(){
+  const grid=document.getElementById('referenceGrid');
+  grid.innerHTML=referenceItems.map((item,i)=>`<div class="ref-item"><b>${i+1}. ${escapeHTML(item[0])}</b><br>${escapeHTML(item[1])}</div>`).join('');
+}
+
+function renderSelectExercise(){
+  const host=document.getElementById('selectQuestions');
+  host.innerHTML=selectItems.map((q,i)=>{
+    const opts=['<option value="">— selecciona —</option>'].concat(q.options.map(o=>`<option value="${escapeHTML(o)}">${escapeHTML(o)}</option>`)).join('');
+    const select=`<select aria-label="Respuesta ${i+1}" data-index="${i}">${opts}</select>`;
+    const prompt=escapeHTML(q.prompt).replace('__SELECT__',select);
+    return `<div class="q" id="q-${i}"><div class="q-line"><div class="q-num">${i+1}</div><div class="q-body"><span class="tense">${escapeHTML(q.tense)}</span><div class="prompt">${prompt}</div><div class="feedback"></div></div></div></div>`;
+  }).join('');
+}
+
+function checkSelect(showAnswers=false){
+  let correct=0;
+  document.querySelectorAll('#selectQuestions select').forEach((sel,i)=>{
+    const q=selectItems[i];
+    const card=document.getElementById(`q-${i}`);
+    const fb=card.querySelector('.feedback');
+    card.classList.remove('correct','wrong');
+    if(showAnswers) sel.value=q.answer;
+    if(sel.value===q.answer){
+      correct++; card.classList.add('correct');
+      fb.textContent=`✓ ${q.periphrasis}`;
+    } else {
+      card.classList.add('wrong');
+      fb.textContent=sel.value ? `✗ Respuesta: ${q.answer} · ${q.periphrasis}` : `Elige una opción. Respuesta: ${q.answer}`;
+    }
+  });
+  document.getElementById('score').textContent=`Resultado: ${correct} / ${selectItems.length}`;
+}
+
+function resetSelect(){
+  document.querySelectorAll('#selectQuestions select').forEach(sel=>sel.value='');
+  document.querySelectorAll('#selectQuestions .q').forEach(card=>{card.classList.remove('correct','wrong');card.querySelector('.feedback').textContent='';});
+  document.getElementById('score').textContent='';
+}
+
+function renderTranslations(hostId,items,placeholder){
+  const host=document.getElementById(hostId);
+  host.innerHTML=items.map((it,i)=>`
+    <article class="translation-card">
+      <div class="source"><span class="mini-num">${i+1}</span><span>${escapeHTML(it[0])}</span></div>
+      <textarea aria-label="Traducción ${i+1}" placeholder="${escapeHTML(placeholder)}"></textarea>
+      <div class="translation-actions">
+        <button class="show-answer" type="button">Mostrar respuesta</button>
+        <span class="peri-note">${escapeHTML(it[2])}</span>
+      </div>
+      <div class="answer"><span class="label">Modelo posible</span>${escapeHTML(it[1])}</div>
+    </article>`).join('');
+
+  host.querySelectorAll('.show-answer').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const ans=btn.closest('.translation-card').querySelector('.answer');
+      const visible=ans.classList.toggle('visible');
+      btn.textContent=visible?'Ocultar respuesta':'Mostrar respuesta';
+    });
+  });
+}
+
+function resetTranslations(hostId){
+  const host=document.getElementById(hostId);
+  host.querySelectorAll('textarea').forEach(t=>t.value='');
+  host.querySelectorAll('.answer').forEach(a=>a.classList.remove('visible'));
+  host.querySelectorAll('.show-answer').forEach(b=>b.textContent='Mostrar respuesta');
+}
+
+renderReference();
+renderSelectExercise();
+renderTranslations('ruEsList',ruEsItems,'Escribe tu traducción al español…');
+renderTranslations('esRuList',esRuItems,'Напишите перевод по-русски…');
+
+document.getElementById('checkSelect').addEventListener('click',()=>checkSelect(false));
+document.getElementById('showSelect').addEventListener('click',()=>checkSelect(true));
+document.getElementById('resetSelect').addEventListener('click',resetSelect);
+document.querySelectorAll('[data-reset]').forEach(btn=>btn.addEventListener('click',()=>resetTranslations(btn.dataset.reset)));
+</script>
+</body>
+</html>

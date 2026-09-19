@@ -1,0 +1,743 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Artículos en español | ELE A1</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+<style>
+  :root {
+    --bg1:#f8fbff; --bg2:#fff7ed; --ink:#1f2937; --muted:#64748b;
+    --card:#ffffff; --line:#dbe4ee; --accent:#2563eb; --accent2:#f59e0b;
+    --ok:#15803d; --bad:#b91c1c; --soft:#eef6ff;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    color:var(--ink); background: radial-gradient(circle at 10% 10%, #dbeafe 0, transparent 28%), radial-gradient(circle at 90% 0%, #ffedd5 0, transparent 32%), linear-gradient(135deg, var(--bg1), var(--bg2));
+    line-height:1.55;
+  }
+  header { padding:42px 18px 26px; text-align:center; }
+  .hero { max-width:1050px; margin:auto; background:rgba(255,255,255,.78); border:1px solid rgba(219,228,238,.9); border-radius:28px; padding:28px; box-shadow: 0 18px 55px rgba(30,41,59,.10); backdrop-filter: blur(8px); }
+  h1 { margin:0; font-size: clamp(2rem, 4vw, 3.3rem); letter-spacing:-.04em; }
+  .subtitle { color:var(--muted); max-width:780px; margin:12px auto 0; font-size:1.05rem; }
+  .nav { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:20px; }
+  .nav a { text-decoration:none; color:#0f172a; background:#fff; border:1px solid var(--line); padding:9px 12px; border-radius:999px; font-weight:700; box-shadow:0 4px 14px rgba(15,23,42,.06); }
+  main { max-width:1120px; margin:0 auto 60px; padding:0 18px; }
+  .note { background:#0f172a; color:white; border-radius:22px; padding:18px 20px; margin:20px 0; box-shadow:0 14px 35px rgba(15,23,42,.18); }
+  .note strong { color:#fde68a; }
+  .exercise { background:var(--card); border:1px solid var(--line); border-radius:26px; padding:24px; margin:24px 0; box-shadow:0 14px 40px rgba(15,23,42,.08); }
+  .exerciseHead { display:flex; align-items:center; justify-content:space-between; gap:16px; border-bottom:1px solid var(--line); padding-bottom:12px; margin-bottom:12px; }
+  h2 { margin:0; font-size:1.35rem; letter-spacing:-.02em; }
+  .tag { background:#e0f2fe; color:#075985; border:1px solid #bae6fd; border-radius:999px; padding:6px 10px; font-weight:800; white-space:nowrap; }
+  .mini { margin:8px 0 18px; color:var(--muted); }
+  .sentences { padding-left:0; list-style:none; display:grid; gap:10px; }
+  .item { background:linear-gradient(180deg, #ffffff, #f8fafc); border:1px solid var(--line); border-radius:16px; padding:12px 14px; display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+  .num { display:inline-flex; align-items:center; justify-content:center; width:30px; height:30px; border-radius:50%; background:var(--soft); color:#1d4ed8; font-weight:900; flex:0 0 auto; }
+  .blankSelect { min-width:86px; padding:7px 10px; border:2px solid #bfdbfe; border-radius:11px; background:#fff; font-weight:800; color:#0f172a; }
+  .blankSelect.ok, .dropzone.ok, .cardMove.ok, .radioItem.ok { border-color:rgba(21,128,61,.7)!important; background:#ecfdf5!important; }
+  .blankSelect.bad, .dropzone.bad, .cardMove.bad, .radioItem.bad { border-color:rgba(185,28,28,.65)!important; background:#fef2f2!important; }
+  button { cursor:pointer; border:none; border-radius:13px; padding:10px 14px; font-weight:900; margin:12px 8px 0 0; }
+  .checkBtn { background:var(--accent); color:white; box-shadow:0 8px 18px rgba(37,99,235,.22); }
+  .resetBtn { background:#f1f5f9; color:#334155; border:1px solid var(--line); }
+  .answerBtn { background:var(--accent2); color:white; box-shadow:0 8px 18px rgba(245,158,11,.26); }
+  .feedback { font-weight:900; margin:12px 0 0; }
+  .bank { display:flex; flex-wrap:wrap; gap:10px; background:#f8fafc; border:1px dashed #93c5fd; padding:12px; border-radius:18px; margin-bottom:14px; }
+  .chip { margin:0; background:#fff7ed; color:#7c2d12; border:1px solid #fed7aa; min-width:58px; font-size:1rem; }
+  .dropzone { display:inline-flex; justify-content:center; align-items:center; min-width:74px; min-height:34px; border:2px dashed #93c5fd; border-radius:12px; background:#eff6ff; color:#1e3a8a; font-weight:900; }
+  .dropzone.hover { outline:3px solid #fbbf24; }
+  .columnWrap { display:grid; grid-template-columns:minmax(230px, 1fr) 2.2fr; gap:14px; align-items:start; }
+  .targetGrid { display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:12px; }
+  .articleColumn { min-height:96px; border:2px dashed #cbd5e1; border-radius:18px; background:#f8fafc; padding:10px; }
+  .articleColumn h3 { margin:0 0 10px; background:#e0f2fe; border-radius:10px; padding:6px 8px; text-align:center; color:#075985; }
+  .source h3 { background:#fef3c7; color:#92400e; }
+  .cardMove { background:white; border:1px solid var(--line); border-radius:13px; padding:9px 10px; margin:8px 0; box-shadow:0 4px 12px rgba(15,23,42,.05); font-weight:650; }
+  .cardMove.dragging { opacity:.45; }
+  .radioList .item { align-items:flex-start; flex-direction:column; }
+  .radioRow { display:flex; flex-wrap:wrap; gap:8px; margin-left:38px; }
+  .pill { display:inline-flex; align-items:center; gap:5px; border:1px solid var(--line); border-radius:999px; padding:7px 10px; background:white; font-weight:800; }
+  .blankLine { color:#2563eb; letter-spacing:.12em; }
+  .finalText { font-size:1.05rem; background:#fffdf7; border:1px solid #fed7aa; border-radius:20px; padding:20px; }
+  .finalText p { margin:0 0 14px; }
+  .finalBlank { margin:0 3px; min-width:78px; }
+  footer { text-align:center; color:var(--muted); padding:28px; }
+  @media (max-width: 850px) { .columnWrap { grid-template-columns:1fr; } .targetGrid { grid-template-columns:repeat(2, minmax(0,1fr)); } }
+  @media (max-width: 560px) { .targetGrid { grid-template-columns:1fr; } .exerciseHead { flex-direction:column; align-items:flex-start; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="hero">
+    <h1>Artículos en español para ELE A1</h1>
+    <p class="subtitle">Ejercicios interactivos con artículos determinados, indeterminados y ausencia de artículo. Léxico básico español-ruso; verbos en Presente de Indicativo.</p>
+    <nav class="nav" aria-label="Navegación de ejercicios">
+      <a href="#ex1">1. Determinados</a><a href="#ex2">2. Indeterminados</a><a href="#ex3">3. Arrastrar</a><a href="#ex4">4. Columnas</a><a href="#ex5">5. Familias y geografía</a><a href="#ex6">6. Test</a><a href="#final">Texto final</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="note"><strong>Regla visual:</strong> Ø significa ausencia de artículo. Los nombres propios como Juan Pérez no llevan artículo; los apellidos usados para nombrar a toda una familia llevan artículo plural: los Pérez.</div>
+  
+    <section class="exercise selectExercise" id="ex1">
+      <div class="exerciseHead"><h2>Ejercicio 1. Artículos determinados y nombres propios</h2><span class="tag">20 oraciones</span></div>
+      <p class="mini">Elige el, la, los, las o Ø. Observa los nombres, los apellidos de familia, ríos y montañas.</p>
+      <ol class="sentences">
+        <li class="item">
+          <span class="num">1</span>
+          <span></span><select class="blankSelect" data-answer="el" data-options='["el", "la", "los", "las", "Ø"]' aria-label="Respuesta 1"></select><span> profesor es español.</span>
+        </li>
+        <li class="item">
+          <span class="num">2</span>
+          <span></span><select class="blankSelect" data-answer="la" data-options='["el", "la", "los", "las", "Ø"]' aria-label="Respuesta 2"></select><span> profesora es rusa.</span>
+        </li>
+        <li class="item">
+          <span class="num">3</span>
+          <span></span><select class="blankSelect" data-answer="los" data-options='["el", "la", "los", "las", "Ø"]' aria-label="Respuesta 3"></select><span> alumnos son jóvenes.</span>
+        </li>
+        <li class="item">
+          <span class="num">4</span>
+          <span></span><select class="blankSelect" data-answer="las" data-options='["el", "la", "los", "las", "Ø"]' aria-label="Respuesta 4"></select><span> estudiantes tienen libros.</span>
+        </li>
+        <li class="item">
+          <span class="num">5</span>
+          <span></span><select class="blankSelect" data-answer="Ø" data-options='["el", "la", "los", "las", "Ø"]' aria-label="Respuesta 5"></select><span> Juan Pérez es médico.</span>
+        </li>
+        <li class="item">
+          <span class="num">6</span>
+          <span></span><select class="blankSelect" data-answer="los" data-options='["el", "la", "los", "las", "Ø"]' aria-label="Respuesta 6"></select><span> Pérez son una familia.</span>
+        </li>
+        <li class="item">
+          <span class="num">7</span>
+          <span></span><select class="blankSelect" data-answer="el" data-options='["el", "la", "los", "las", "Ø"]' aria-label="Respuesta 7"></select><span> río Ebro es un río.</span>
+        </li>
+        <li class="item">
+          <span class="num">8</span>
+          <span></span><select class="blankSelect" data-answer="el" data-options='["el", "la", "los", "las", "Ø"]' aria-label="Respuesta 8"></select><span> Tajo es un río español.</span>
+        </li>
+        <li class="item">
+          <span class="num">9</span>
+          <span></span><select class="blankSelect" data-answer="los" data-options='["el", "la", "los", "las", "Ø"]' aria-label="Respuesta 9"></select><span> Pirineos son montañas.</span>
+        </li>
+        <li class="item">
+          <span class="num">10</span>
+          <span></span><select class="blankSelect" data-answer="la" data-options='["el", "la", "los", "las", "Ø"]' aria-label="Respuesta 10"></select><span> Sierra Nevada es una montaña.</span>
+        </li>
+        <li class="item">
+          <span class="num">11</span>
+          <span></span><select class="blankSelect" data-answer="el" data-options='["el", "la", "los", "las", "Ø"]' aria-label="Respuesta 11"></select><span> Teide es una montaña.</span>
+        </li>
+        <li class="item">
+          <span class="num">12</span>
+          <span></span><select class="blankSelect" data-answer="la" data-options='["el", "la", "los", "las", "Ø"]' aria-label="Respuesta 12"></select><span> camisa es blanca.</span>
+        </li>
+        <li class="item">
+          <span class="num">13</span>
+          <span></span><select class="blankSelect" data-answer="los" data-options='["el", "la", "los", "las", "Ø"]' aria-label="Respuesta 13"></select><span> zapatos son negros.</span>
+        </li>
+        <li class="item">
+          <span class="num">14</span>
+          <span></span><select class="blankSelect" data-answer="las" data-options='["el", "la", "los", "las", "Ø"]' aria-label="Respuesta 14"></select><span> redes sociales son importantes.</span>
+        </li>
+        <li class="item">
+          <span class="num">15</span>
+          <span></span><select class="blankSelect" data-answer="el" data-options='["el", "la", "los", "las", "Ø"]' aria-label="Respuesta 15"></select><span> abrigo es marrón.</span>
+        </li>
+        <li class="item">
+          <span class="num">16</span>
+          <span></span><select class="blankSelect" data-answer="la" data-options='["el", "la", "los", "las", "Ø"]' aria-label="Respuesta 16"></select><span> casa tiene una puerta.</span>
+        </li>
+        <li class="item">
+          <span class="num">17</span>
+          <span></span><select class="blankSelect" data-answer="el" data-options='["el", "la", "los", "las", "Ø"]' aria-label="Respuesta 17"></select><span> hotel tiene un gimnasio.</span>
+        </li>
+        <li class="item">
+          <span class="num">18</span>
+          <span></span><select class="blankSelect" data-answer="la" data-options='["el", "la", "los", "las", "Ø"]' aria-label="Respuesta 18"></select><span> familia García tiene un coche.</span>
+        </li>
+        <li class="item">
+          <span class="num">19</span>
+          <span></span><select class="blankSelect" data-answer="Ø" data-options='["el", "la", "los", "las", "Ø"]' aria-label="Respuesta 19"></select><span> Ana García es estudiante.</span>
+        </li>
+        <li class="item">
+          <span class="num">20</span>
+          <span></span><select class="blankSelect" data-answer="las" data-options='["el", "la", "los", "las", "Ø"]' aria-label="Respuesta 20"></select><span> montañas son españolas.</span>
+        </li></ol>
+      <button class="checkBtn" onclick="checkSelectExercise('ex1')">Comprobar</button>
+      <button class="resetBtn" onclick="resetExercise('ex1')">Reiniciar</button>
+      <button class="answerBtn" onclick="revealAnswers('ex1')">Ver respuestas correctas</button>
+      <p class="feedback" aria-live="polite"></p>
+    </section>
+  
+    <section class="exercise selectExercise" id="ex2">
+      <div class="exerciseHead"><h2>Ejercicio 2. Artículos indeterminados con ser, tener y hay</h2><span class="tag">20 oraciones</span></div>
+      <p class="mini">Elige un, una, unos, unas o Ø. Usa solo el sentido de ser, tener y hay.</p>
+      <ol class="sentences">
+        <li class="item">
+          <span class="num">1</span>
+          <span>Hay </span><select class="blankSelect" data-answer="un" data-options='["un", "una", "unos", "unas", "Ø"]' aria-label="Respuesta 1"></select><span> libro en la mesa.</span>
+        </li>
+        <li class="item">
+          <span class="num">2</span>
+          <span>Hay </span><select class="blankSelect" data-answer="una" data-options='["un", "una", "unos", "unas", "Ø"]' aria-label="Respuesta 2"></select><span> taza en la mesa.</span>
+        </li>
+        <li class="item">
+          <span class="num">3</span>
+          <span>Juan tiene </span><select class="blankSelect" data-answer="un" data-options='["un", "una", "unos", "unas", "Ø"]' aria-label="Respuesta 3"></select><span> coche.</span>
+        </li>
+        <li class="item">
+          <span class="num">4</span>
+          <span>María tiene </span><select class="blankSelect" data-answer="una" data-options='["un", "una", "unos", "unas", "Ø"]' aria-label="Respuesta 4"></select><span> casa.</span>
+        </li>
+        <li class="item">
+          <span class="num">5</span>
+          <span>Hay </span><select class="blankSelect" data-answer="unos" data-options='["un", "una", "unos", "unas", "Ø"]' aria-label="Respuesta 5"></select><span> libros en la escuela.</span>
+        </li>
+        <li class="item">
+          <span class="num">6</span>
+          <span>Hay </span><select class="blankSelect" data-answer="unas" data-options='["un", "una", "unos", "unas", "Ø"]' aria-label="Respuesta 6"></select><span> sillas en la casa.</span>
+        </li>
+        <li class="item">
+          <span class="num">7</span>
+          <span>José es </span><select class="blankSelect" data-answer="un" data-options='["un", "una", "unos", "unas", "Ø"]' aria-label="Respuesta 7"></select><span> médico.</span>
+        </li>
+        <li class="item">
+          <span class="num">8</span>
+          <span>Ana es </span><select class="blankSelect" data-answer="una" data-options='["un", "una", "unos", "unas", "Ø"]' aria-label="Respuesta 8"></select><span> profesora.</span>
+        </li>
+        <li class="item">
+          <span class="num">9</span>
+          <span>Ellos son </span><select class="blankSelect" data-answer="unos" data-options='["un", "una", "unos", "unas", "Ø"]' aria-label="Respuesta 9"></select><span> estudiantes.</span>
+        </li>
+        <li class="item">
+          <span class="num">10</span>
+          <span>Ellas son </span><select class="blankSelect" data-answer="unas" data-options='["un", "una", "unos", "unas", "Ø"]' aria-label="Respuesta 10"></select><span> alumnas.</span>
+        </li>
+        <li class="item">
+          <span class="num">11</span>
+          <span>Hay </span><select class="blankSelect" data-answer="Ø" data-options='["un", "una", "unos", "unas", "Ø"]' aria-label="Respuesta 11"></select><span> agua sin gas.</span>
+        </li>
+        <li class="item">
+          <span class="num">12</span>
+          <span>Tengo </span><select class="blankSelect" data-answer="Ø" data-options='["un", "una", "unos", "unas", "Ø"]' aria-label="Respuesta 12"></select><span> dinero.</span>
+        </li>
+        <li class="item">
+          <span class="num">13</span>
+          <span>Hay </span><select class="blankSelect" data-answer="un" data-options='["un", "una", "unos", "unas", "Ø"]' aria-label="Respuesta 13"></select><span> río cerca de la ciudad.</span>
+        </li>
+        <li class="item">
+          <span class="num">14</span>
+          <span>Hay </span><select class="blankSelect" data-answer="una" data-options='["un", "una", "unos", "unas", "Ø"]' aria-label="Respuesta 14"></select><span> montaña cerca de la ciudad.</span>
+        </li>
+        <li class="item">
+          <span class="num">15</span>
+          <span>Hay </span><select class="blankSelect" data-answer="unos" data-options='["un", "una", "unos", "unas", "Ø"]' aria-label="Respuesta 15"></select><span> hoteles en la ciudad.</span>
+        </li>
+        <li class="item">
+          <span class="num">16</span>
+          <span>Hay </span><select class="blankSelect" data-answer="unas" data-options='["un", "una", "unos", "unas", "Ø"]' aria-label="Respuesta 16"></select><span> casas en el barrio.</span>
+        </li>
+        <li class="item">
+          <span class="num">17</span>
+          <span>El hotel tiene </span><select class="blankSelect" data-answer="un" data-options='["un", "una", "unos", "unas", "Ø"]' aria-label="Respuesta 17"></select><span> ascensor.</span>
+        </li>
+        <li class="item">
+          <span class="num">18</span>
+          <span>La casa tiene </span><select class="blankSelect" data-answer="una" data-options='["un", "una", "unos", "unas", "Ø"]' aria-label="Respuesta 18"></select><span> ventana.</span>
+        </li>
+        <li class="item">
+          <span class="num">19</span>
+          <span>Hay </span><select class="blankSelect" data-answer="Ø" data-options='["un", "una", "unos", "unas", "Ø"]' aria-label="Respuesta 19"></select><span> aceite de oliva.</span>
+        </li>
+        <li class="item">
+          <span class="num">20</span>
+          <span>Hay </span><select class="blankSelect" data-answer="una" data-options='["un", "una", "unos", "unas", "Ø"]' aria-label="Respuesta 20"></select><span> camisa blanca.</span>
+        </li></ol>
+      <button class="checkBtn" onclick="checkSelectExercise('ex2')">Comprobar</button>
+      <button class="resetBtn" onclick="resetExercise('ex2')">Reiniciar</button>
+      <button class="answerBtn" onclick="revealAnswers('ex2')">Ver respuestas correctas</button>
+      <p class="feedback" aria-live="polite"></p>
+    </section>
+  
+    <section class="exercise" id="ex3">
+      <div class="exerciseHead"><h2>Ejercicio 3. Arrastra y pega el artículo correcto</h2><span class="tag">20 oraciones</span></div>
+      <p class="mini">Toma un artículo del banco y suéltalo en cada espacio.</p>
+      <div class="bank" aria-label="Banco de artículos"><button class="chip" draggable="true" data-value="el">el</button><button class="chip" draggable="true" data-value="la">la</button><button class="chip" draggable="true" data-value="los">los</button><button class="chip" draggable="true" data-value="las">las</button><button class="chip" draggable="true" data-value="un">un</button><button class="chip" draggable="true" data-value="una">una</button><button class="chip" draggable="true" data-value="unos">unos</button><button class="chip" draggable="true" data-value="unas">unas</button><button class="chip" draggable="true" data-value="Ø">Ø</button></div>
+      <ol class="sentences">
+        <li class="item dragItem">
+          <span class="num">1</span>
+          <span></span><span class="dropzone" data-answer="el" data-value="" tabindex="0">...</span><span> teléfono es nuevo.</span>
+        </li>
+        <li class="item dragItem">
+          <span class="num">2</span>
+          <span></span><span class="dropzone" data-answer="la" data-value="" tabindex="0">...</span><span> flor es amarilla.</span>
+        </li>
+        <li class="item dragItem">
+          <span class="num">3</span>
+          <span></span><span class="dropzone" data-answer="los" data-value="" tabindex="0">...</span><span> calcetines son blancos.</span>
+        </li>
+        <li class="item dragItem">
+          <span class="num">4</span>
+          <span></span><span class="dropzone" data-answer="las" data-value="" tabindex="0">...</span><span> bayas son rojas.</span>
+        </li>
+        <li class="item dragItem">
+          <span class="num">5</span>
+          <span>Hay </span><span class="dropzone" data-answer="un" data-value="" tabindex="0">...</span><span> abrelatas en la mesa.</span>
+        </li>
+        <li class="item dragItem">
+          <span class="num">6</span>
+          <span>Hay </span><span class="dropzone" data-answer="una" data-value="" tabindex="0">...</span><span> bandeja en la mesa.</span>
+        </li>
+        <li class="item dragItem">
+          <span class="num">7</span>
+          <span>Tenemos </span><span class="dropzone" data-answer="unos" data-value="" tabindex="0">...</span><span> bocadillos.</span>
+        </li>
+        <li class="item dragItem">
+          <span class="num">8</span>
+          <span>Tenemos </span><span class="dropzone" data-answer="unas" data-value="" tabindex="0">...</span><span> galletas.</span>
+        </li>
+        <li class="item dragItem">
+          <span class="num">9</span>
+          <span></span><span class="dropzone" data-answer="Ø" data-value="" tabindex="0">...</span><span> José López es periodista.</span>
+        </li>
+        <li class="item dragItem">
+          <span class="num">10</span>
+          <span></span><span class="dropzone" data-answer="los" data-value="" tabindex="0">...</span><span> López son una familia.</span>
+        </li>
+        <li class="item dragItem">
+          <span class="num">11</span>
+          <span></span><span class="dropzone" data-answer="el" data-value="" tabindex="0">...</span><span> río Duero es español.</span>
+        </li>
+        <li class="item dragItem">
+          <span class="num">12</span>
+          <span></span><span class="dropzone" data-answer="el" data-value="" tabindex="0">...</span><span> Teide es una montaña.</span>
+        </li>
+        <li class="item dragItem">
+          <span class="num">13</span>
+          <span></span><span class="dropzone" data-answer="la" data-value="" tabindex="0">...</span><span> camisa es azul.</span>
+        </li>
+        <li class="item dragItem">
+          <span class="num">14</span>
+          <span>Hay </span><span class="dropzone" data-answer="una" data-value="" tabindex="0">...</span><span> chaqueta en el armario.</span>
+        </li>
+        <li class="item dragItem">
+          <span class="num">15</span>
+          <span></span><span class="dropzone" data-answer="los" data-value="" tabindex="0">...</span><span> estudiantes tienen lápices.</span>
+        </li>
+        <li class="item dragItem">
+          <span class="num">16</span>
+          <span>Hay </span><span class="dropzone" data-answer="una" data-value="" tabindex="0">...</span><span> mesa en la casa.</span>
+        </li>
+        <li class="item dragItem">
+          <span class="num">17</span>
+          <span></span><span class="dropzone" data-answer="el" data-value="" tabindex="0">...</span><span> coche es caro.</span>
+        </li>
+        <li class="item dragItem">
+          <span class="num">18</span>
+          <span></span><span class="dropzone" data-answer="los" data-value="" tabindex="0">...</span><span> padres tienen una casa.</span>
+        </li>
+        <li class="item dragItem">
+          <span class="num">19</span>
+          <span></span><span class="dropzone" data-answer="Ø" data-value="" tabindex="0">...</span><span> María García es arquitecta.</span>
+        </li>
+        <li class="item dragItem">
+          <span class="num">20</span>
+          <span>Hay </span><span class="dropzone" data-answer="una" data-value="" tabindex="0">...</span><span> universidad en la ciudad.</span>
+        </li></ol>
+      <button class="checkBtn" onclick="checkDropExercise('ex3')">Comprobar</button>
+      <button class="resetBtn" onclick="resetExercise('ex3')">Reiniciar</button>
+      <button class="answerBtn" onclick="revealAnswers('ex3')">Ver respuestas correctas</button>
+      <p class="feedback" aria-live="polite"></p>
+    </section>
+  
+    <section class="exercise" id="ex4">
+      <div class="exerciseHead"><h2>Ejercicio 4. Columnas: clasifica cada oración por artículo</h2><span class="tag">20 oraciones</span></div>
+      <p class="mini">Mueve cada tarjeta a la columna del artículo que completa la oración.</p>
+      <div class="columnWrap">
+        <div class="sourceColumn articleColumn source" data-col="source"><h3>Tarjetas</h3><div class="cardMove" draggable="true" data-answer="Ø">1. ___ Juan Pérez es director.</div><div class="cardMove" draggable="true" data-answer="Ø">2. ___ María Pérez es profesora.</div><div class="cardMove" draggable="true" data-answer="los">3. ___ Pérez son una familia.</div><div class="cardMove" draggable="true" data-answer="los">4. ___ García son argentinos.</div><div class="cardMove" draggable="true" data-answer="el">5. ___ profesor tiene un libro.</div><div class="cardMove" draggable="true" data-answer="la">6. ___ profesora tiene una mesa.</div><div class="cardMove" draggable="true" data-answer="un">7. Hay ___ libro.</div><div class="cardMove" draggable="true" data-answer="una">8. Hay ___ mesa.</div><div class="cardMove" draggable="true" data-answer="unos">9. Hay ___ bocadillos.</div><div class="cardMove" draggable="true" data-answer="unas">10. Hay ___ galletas.</div><div class="cardMove" draggable="true" data-answer="el">11. ___ río Ebro es un río.</div><div class="cardMove" draggable="true" data-answer="el">12. ___ Tajo es un río.</div><div class="cardMove" draggable="true" data-answer="los">13. ___ Pirineos son montañas.</div><div class="cardMove" draggable="true" data-answer="la">14. ___ Sierra Nevada es una montaña.</div><div class="cardMove" draggable="true" data-answer="la">15. ___ casa tiene una puerta.</div><div class="cardMove" draggable="true" data-answer="el">16. ___ coche tiene un cargador.</div><div class="cardMove" draggable="true" data-answer="los">17. ___ estudiantes son jóvenes.</div><div class="cardMove" draggable="true" data-answer="las">18. ___ alumnas son españolas.</div><div class="cardMove" draggable="true" data-answer="el">19. ___ agua sin gas es una bebida.</div><div class="cardMove" draggable="true" data-answer="Ø">20. Hay ___ aceite de oliva.</div></div>
+        <div class="targetGrid"><div class="articleColumn" data-col="el"><h3>el</h3></div><div class="articleColumn" data-col="la"><h3>la</h3></div><div class="articleColumn" data-col="los"><h3>los</h3></div><div class="articleColumn" data-col="las"><h3>las</h3></div><div class="articleColumn" data-col="un"><h3>un</h3></div><div class="articleColumn" data-col="una"><h3>una</h3></div><div class="articleColumn" data-col="unos"><h3>unos</h3></div><div class="articleColumn" data-col="unas"><h3>unas</h3></div><div class="articleColumn" data-col="Ø"><h3>Ø</h3></div></div>
+      </div>
+      <button class="checkBtn" onclick="checkColumnExercise('ex4')">Comprobar</button>
+      <button class="resetBtn" onclick="resetExercise('ex4')">Reiniciar</button>
+      <button class="answerBtn" onclick="revealAnswers('ex4')">Ver respuestas correctas</button>
+      <p class="feedback" aria-live="polite"></p>
+    </section>
+  
+    <section class="exercise selectExercise" id="ex5">
+      <div class="exerciseHead"><h2>Ejercicio 5. Familias, ríos y montañas españolas</h2><span class="tag">20 oraciones</span></div>
+      <p class="mini">Selecciona el artículo correcto. Atiende a nombres, apellidos de familia, ríos y montañas.</p>
+      <ol class="sentences">
+        <li class="item">
+          <span class="num">1</span>
+          <span></span><select class="blankSelect" data-answer="los" data-options='["el", "la", "los", "las", "un", "una", "unos", "unas", "Ø"]' aria-label="Respuesta 1"></select><span> Pérez tienen una casa.</span>
+        </li>
+        <li class="item">
+          <span class="num">2</span>
+          <span></span><select class="blankSelect" data-answer="Ø" data-options='["el", "la", "los", "las", "un", "una", "unos", "unas", "Ø"]' aria-label="Respuesta 2"></select><span> Juan Pérez tiene un carro.</span>
+        </li>
+        <li class="item">
+          <span class="num">3</span>
+          <span></span><select class="blankSelect" data-answer="los" data-options='["el", "la", "los", "las", "un", "una", "unos", "unas", "Ø"]' aria-label="Respuesta 3"></select><span> García son una familia argentina.</span>
+        </li>
+        <li class="item">
+          <span class="num">4</span>
+          <span></span><select class="blankSelect" data-answer="Ø" data-options='["el", "la", "los", "las", "un", "una", "unos", "unas", "Ø"]' aria-label="Respuesta 4"></select><span> Ana García es estudiante.</span>
+        </li>
+        <li class="item">
+          <span class="num">5</span>
+          <span></span><select class="blankSelect" data-answer="los" data-options='["el", "la", "los", "las", "un", "una", "unos", "unas", "Ø"]' aria-label="Respuesta 5"></select><span> López tienen un hotel.</span>
+        </li>
+        <li class="item">
+          <span class="num">6</span>
+          <span></span><select class="blankSelect" data-answer="Ø" data-options='["el", "la", "los", "las", "un", "una", "unos", "unas", "Ø"]' aria-label="Respuesta 6"></select><span> José López es profesor.</span>
+        </li>
+        <li class="item">
+          <span class="num">7</span>
+          <span></span><select class="blankSelect" data-answer="el" data-options='["el", "la", "los", "las", "un", "una", "unos", "unas", "Ø"]' aria-label="Respuesta 7"></select><span> Ebro es un río español.</span>
+        </li>
+        <li class="item">
+          <span class="num">8</span>
+          <span></span><select class="blankSelect" data-answer="el" data-options='["el", "la", "los", "las", "un", "una", "unos", "unas", "Ø"]' aria-label="Respuesta 8"></select><span> Tajo es un río español.</span>
+        </li>
+        <li class="item">
+          <span class="num">9</span>
+          <span></span><select class="blankSelect" data-answer="el" data-options='["el", "la", "los", "las", "un", "una", "unos", "unas", "Ø"]' aria-label="Respuesta 9"></select><span> Duero es un río español.</span>
+        </li>
+        <li class="item">
+          <span class="num">10</span>
+          <span></span><select class="blankSelect" data-answer="el" data-options='["el", "la", "los", "las", "un", "una", "unos", "unas", "Ø"]' aria-label="Respuesta 10"></select><span> Guadiana es un río español.</span>
+        </li>
+        <li class="item">
+          <span class="num">11</span>
+          <span></span><select class="blankSelect" data-answer="el" data-options='["el", "la", "los", "las", "un", "una", "unos", "unas", "Ø"]' aria-label="Respuesta 11"></select><span> Guadalquivir es un río español.</span>
+        </li>
+        <li class="item">
+          <span class="num">12</span>
+          <span></span><select class="blankSelect" data-answer="el" data-options='["el", "la", "los", "las", "un", "una", "unos", "unas", "Ø"]' aria-label="Respuesta 12"></select><span> Segura es un río español.</span>
+        </li>
+        <li class="item">
+          <span class="num">13</span>
+          <span></span><select class="blankSelect" data-answer="el" data-options='["el", "la", "los", "las", "un", "una", "unos", "unas", "Ø"]' aria-label="Respuesta 13"></select><span> Miño es un río español.</span>
+        </li>
+        <li class="item">
+          <span class="num">14</span>
+          <span></span><select class="blankSelect" data-answer="los" data-options='["el", "la", "los", "las", "un", "una", "unos", "unas", "Ø"]' aria-label="Respuesta 14"></select><span> Pirineos son montañas españolas.</span>
+        </li>
+        <li class="item">
+          <span class="num">15</span>
+          <span></span><select class="blankSelect" data-answer="la" data-options='["el", "la", "los", "las", "un", "una", "unos", "unas", "Ø"]' aria-label="Respuesta 15"></select><span> Sierra Nevada es una montaña española.</span>
+        </li>
+        <li class="item">
+          <span class="num">16</span>
+          <span></span><select class="blankSelect" data-answer="el" data-options='["el", "la", "los", "las", "un", "una", "unos", "unas", "Ø"]' aria-label="Respuesta 16"></select><span> Teide es una montaña española.</span>
+        </li>
+        <li class="item">
+          <span class="num">17</span>
+          <span></span><select class="blankSelect" data-answer="el" data-options='["el", "la", "los", "las", "un", "una", "unos", "unas", "Ø"]' aria-label="Respuesta 17"></select><span> Aneto es una montaña española.</span>
+        </li>
+        <li class="item">
+          <span class="num">18</span>
+          <span></span><select class="blankSelect" data-answer="el" data-options='["el", "la", "los", "las", "un", "una", "unos", "unas", "Ø"]' aria-label="Respuesta 18"></select><span> Mulhacén es una montaña española.</span>
+        </li>
+        <li class="item">
+          <span class="num">19</span>
+          <span>Hay </span><select class="blankSelect" data-answer="un" data-options='["el", "la", "los", "las", "un", "una", "unos", "unas", "Ø"]' aria-label="Respuesta 19"></select><span> río cerca de la ciudad.</span>
+        </li>
+        <li class="item">
+          <span class="num">20</span>
+          <span>Hay </span><select class="blankSelect" data-answer="una" data-options='["el", "la", "los", "las", "un", "una", "unos", "unas", "Ø"]' aria-label="Respuesta 20"></select><span> montaña cerca del barrio.</span>
+        </li></ol>
+      <button class="checkBtn" onclick="checkSelectExercise('ex5')">Comprobar</button>
+      <button class="resetBtn" onclick="resetExercise('ex5')">Reiniciar</button>
+      <button class="answerBtn" onclick="revealAnswers('ex5')">Ver respuestas correctas</button>
+      <p class="feedback" aria-live="polite"></p>
+    </section>
+  
+    <section class="exercise" id="ex6">
+      <div class="exerciseHead"><h2>Ejercicio 6. Tipo test: artículo exacto</h2><span class="tag">20 oraciones</span></div>
+      <p class="mini">Marca una opción para cada oración. Hay artículos determinados, indeterminados y ausencia de artículo.</p>
+      <ol class="sentences radioList">
+        <li class="item radioItem" data-answer="el">
+          <span class="num">1</span>
+          <span><strong class="blankLine">___</strong> señor Pérez es profesor.</span>
+          <div class="radioRow"><label class="pill"><input type="radio" name="ex6_1" value="la"> la</label><label class="pill"><input type="radio" name="ex6_1" value="unas"> unas</label><label class="pill"><input type="radio" name="ex6_1" value="las"> las</label><label class="pill"><input type="radio" name="ex6_1" value="Ø"> Ø</label><label class="pill"><input type="radio" name="ex6_1" value="el"> el</label><label class="pill"><input type="radio" name="ex6_1" value="unos"> unos</label><label class="pill"><input type="radio" name="ex6_1" value="una"> una</label><label class="pill"><input type="radio" name="ex6_1" value="un"> un</label><label class="pill"><input type="radio" name="ex6_1" value="los"> los</label></div>
+        </li>
+        <li class="item radioItem" data-answer="la">
+          <span class="num">2</span>
+          <span><strong class="blankLine">___</strong> señora García tiene una tienda.</span>
+          <div class="radioRow"><label class="pill"><input type="radio" name="ex6_2" value="el"> el</label><label class="pill"><input type="radio" name="ex6_2" value="un"> un</label><label class="pill"><input type="radio" name="ex6_2" value="una"> una</label><label class="pill"><input type="radio" name="ex6_2" value="la"> la</label><label class="pill"><input type="radio" name="ex6_2" value="unas"> unas</label><label class="pill"><input type="radio" name="ex6_2" value="Ø"> Ø</label><label class="pill"><input type="radio" name="ex6_2" value="unos"> unos</label><label class="pill"><input type="radio" name="ex6_2" value="las"> las</label><label class="pill"><input type="radio" name="ex6_2" value="los"> los</label></div>
+        </li>
+        <li class="item radioItem" data-answer="la">
+          <span class="num">3</span>
+          <span><strong class="blankLine">___</strong> señorita López es estudiante.</span>
+          <div class="radioRow"><label class="pill"><input type="radio" name="ex6_3" value="las"> las</label><label class="pill"><input type="radio" name="ex6_3" value="unas"> unas</label><label class="pill"><input type="radio" name="ex6_3" value="los"> los</label><label class="pill"><input type="radio" name="ex6_3" value="Ø"> Ø</label><label class="pill"><input type="radio" name="ex6_3" value="una"> una</label><label class="pill"><input type="radio" name="ex6_3" value="un"> un</label><label class="pill"><input type="radio" name="ex6_3" value="el"> el</label><label class="pill"><input type="radio" name="ex6_3" value="unos"> unos</label><label class="pill"><input type="radio" name="ex6_3" value="la"> la</label></div>
+        </li>
+        <li class="item radioItem" data-answer="Ø">
+          <span class="num">4</span>
+          <span><strong class="blankLine">___</strong> don Juan Pérez es médico.</span>
+          <div class="radioRow"><label class="pill"><input type="radio" name="ex6_4" value="los"> los</label><label class="pill"><input type="radio" name="ex6_4" value="un"> un</label><label class="pill"><input type="radio" name="ex6_4" value="unos"> unos</label><label class="pill"><input type="radio" name="ex6_4" value="unas"> unas</label><label class="pill"><input type="radio" name="ex6_4" value="el"> el</label><label class="pill"><input type="radio" name="ex6_4" value="Ø"> Ø</label><label class="pill"><input type="radio" name="ex6_4" value="una"> una</label><label class="pill"><input type="radio" name="ex6_4" value="la"> la</label><label class="pill"><input type="radio" name="ex6_4" value="las"> las</label></div>
+        </li>
+        <li class="item radioItem" data-answer="Ø">
+          <span class="num">5</span>
+          <span><strong class="blankLine">___</strong> doña María García es profesora.</span>
+          <div class="radioRow"><label class="pill"><input type="radio" name="ex6_5" value="las"> las</label><label class="pill"><input type="radio" name="ex6_5" value="el"> el</label><label class="pill"><input type="radio" name="ex6_5" value="Ø"> Ø</label><label class="pill"><input type="radio" name="ex6_5" value="unos"> unos</label><label class="pill"><input type="radio" name="ex6_5" value="un"> un</label><label class="pill"><input type="radio" name="ex6_5" value="una"> una</label><label class="pill"><input type="radio" name="ex6_5" value="unas"> unas</label><label class="pill"><input type="radio" name="ex6_5" value="los"> los</label><label class="pill"><input type="radio" name="ex6_5" value="la"> la</label></div>
+        </li>
+        <li class="item radioItem" data-answer="la">
+          <span class="num">6</span>
+          <span><strong class="blankLine">___</strong> familia Pérez tiene una casa.</span>
+          <div class="radioRow"><label class="pill"><input type="radio" name="ex6_6" value="unos"> unos</label><label class="pill"><input type="radio" name="ex6_6" value="el"> el</label><label class="pill"><input type="radio" name="ex6_6" value="un"> un</label><label class="pill"><input type="radio" name="ex6_6" value="Ø"> Ø</label><label class="pill"><input type="radio" name="ex6_6" value="una"> una</label><label class="pill"><input type="radio" name="ex6_6" value="unas"> unas</label><label class="pill"><input type="radio" name="ex6_6" value="los"> los</label><label class="pill"><input type="radio" name="ex6_6" value="la"> la</label><label class="pill"><input type="radio" name="ex6_6" value="las"> las</label></div>
+        </li>
+        <li class="item radioItem" data-answer="la">
+          <span class="num">7</span>
+          <span><strong class="blankLine">___</strong> casa tiene un patio.</span>
+          <div class="radioRow"><label class="pill"><input type="radio" name="ex6_7" value="unos"> unos</label><label class="pill"><input type="radio" name="ex6_7" value="un"> un</label><label class="pill"><input type="radio" name="ex6_7" value="la"> la</label><label class="pill"><input type="radio" name="ex6_7" value="Ø"> Ø</label><label class="pill"><input type="radio" name="ex6_7" value="unas"> unas</label><label class="pill"><input type="radio" name="ex6_7" value="las"> las</label><label class="pill"><input type="radio" name="ex6_7" value="los"> los</label><label class="pill"><input type="radio" name="ex6_7" value="el"> el</label><label class="pill"><input type="radio" name="ex6_7" value="una"> una</label></div>
+        </li>
+        <li class="item radioItem" data-answer="un">
+          <span class="num">8</span>
+          <span>Hay <strong class="blankLine">___</strong> patio en la casa.</span>
+          <div class="radioRow"><label class="pill"><input type="radio" name="ex6_8" value="unas"> unas</label><label class="pill"><input type="radio" name="ex6_8" value="el"> el</label><label class="pill"><input type="radio" name="ex6_8" value="los"> los</label><label class="pill"><input type="radio" name="ex6_8" value="un"> un</label><label class="pill"><input type="radio" name="ex6_8" value="unos"> unos</label><label class="pill"><input type="radio" name="ex6_8" value="la"> la</label><label class="pill"><input type="radio" name="ex6_8" value="Ø"> Ø</label><label class="pill"><input type="radio" name="ex6_8" value="una"> una</label><label class="pill"><input type="radio" name="ex6_8" value="las"> las</label></div>
+        </li>
+        <li class="item radioItem" data-answer="el">
+          <span class="num">9</span>
+          <span><strong class="blankLine">___</strong> barrio tiene un parque.</span>
+          <div class="radioRow"><label class="pill"><input type="radio" name="ex6_9" value="Ø"> Ø</label><label class="pill"><input type="radio" name="ex6_9" value="una"> una</label><label class="pill"><input type="radio" name="ex6_9" value="unos"> unos</label><label class="pill"><input type="radio" name="ex6_9" value="los"> los</label><label class="pill"><input type="radio" name="ex6_9" value="las"> las</label><label class="pill"><input type="radio" name="ex6_9" value="unas"> unas</label><label class="pill"><input type="radio" name="ex6_9" value="la"> la</label><label class="pill"><input type="radio" name="ex6_9" value="el"> el</label><label class="pill"><input type="radio" name="ex6_9" value="un"> un</label></div>
+        </li>
+        <li class="item radioItem" data-answer="un">
+          <span class="num">10</span>
+          <span>Hay <strong class="blankLine">___</strong> parque en el barrio.</span>
+          <div class="radioRow"><label class="pill"><input type="radio" name="ex6_10" value="el"> el</label><label class="pill"><input type="radio" name="ex6_10" value="una"> una</label><label class="pill"><input type="radio" name="ex6_10" value="unos"> unos</label><label class="pill"><input type="radio" name="ex6_10" value="un"> un</label><label class="pill"><input type="radio" name="ex6_10" value="Ø"> Ø</label><label class="pill"><input type="radio" name="ex6_10" value="unas"> unas</label><label class="pill"><input type="radio" name="ex6_10" value="las"> las</label><label class="pill"><input type="radio" name="ex6_10" value="los"> los</label><label class="pill"><input type="radio" name="ex6_10" value="la"> la</label></div>
+        </li>
+        <li class="item radioItem" data-answer="la">
+          <span class="num">11</span>
+          <span><strong class="blankLine">___</strong> ciudad tiene un aeropuerto.</span>
+          <div class="radioRow"><label class="pill"><input type="radio" name="ex6_11" value="Ø"> Ø</label><label class="pill"><input type="radio" name="ex6_11" value="un"> un</label><label class="pill"><input type="radio" name="ex6_11" value="el"> el</label><label class="pill"><input type="radio" name="ex6_11" value="las"> las</label><label class="pill"><input type="radio" name="ex6_11" value="los"> los</label><label class="pill"><input type="radio" name="ex6_11" value="unas"> unas</label><label class="pill"><input type="radio" name="ex6_11" value="la"> la</label><label class="pill"><input type="radio" name="ex6_11" value="unos"> unos</label><label class="pill"><input type="radio" name="ex6_11" value="una"> una</label></div>
+        </li>
+        <li class="item radioItem" data-answer="un">
+          <span class="num">12</span>
+          <span>Hay <strong class="blankLine">___</strong> aeropuerto en la ciudad.</span>
+          <div class="radioRow"><label class="pill"><input type="radio" name="ex6_12" value="unos"> unos</label><label class="pill"><input type="radio" name="ex6_12" value="una"> una</label><label class="pill"><input type="radio" name="ex6_12" value="el"> el</label><label class="pill"><input type="radio" name="ex6_12" value="los"> los</label><label class="pill"><input type="radio" name="ex6_12" value="las"> las</label><label class="pill"><input type="radio" name="ex6_12" value="la"> la</label><label class="pill"><input type="radio" name="ex6_12" value="un"> un</label><label class="pill"><input type="radio" name="ex6_12" value="unas"> unas</label><label class="pill"><input type="radio" name="ex6_12" value="Ø"> Ø</label></div>
+        </li>
+        <li class="item radioItem" data-answer="la">
+          <span class="num">13</span>
+          <span><strong class="blankLine">___</strong> oficina tiene un teléfono.</span>
+          <div class="radioRow"><label class="pill"><input type="radio" name="ex6_13" value="un"> un</label><label class="pill"><input type="radio" name="ex6_13" value="una"> una</label><label class="pill"><input type="radio" name="ex6_13" value="los"> los</label><label class="pill"><input type="radio" name="ex6_13" value="las"> las</label><label class="pill"><input type="radio" name="ex6_13" value="unas"> unas</label><label class="pill"><input type="radio" name="ex6_13" value="la"> la</label><label class="pill"><input type="radio" name="ex6_13" value="unos"> unos</label><label class="pill"><input type="radio" name="ex6_13" value="Ø"> Ø</label><label class="pill"><input type="radio" name="ex6_13" value="el"> el</label></div>
+        </li>
+        <li class="item radioItem" data-answer="un">
+          <span class="num">14</span>
+          <span>Hay <strong class="blankLine">___</strong> teléfono en la oficina.</span>
+          <div class="radioRow"><label class="pill"><input type="radio" name="ex6_14" value="los"> los</label><label class="pill"><input type="radio" name="ex6_14" value="las"> las</label><label class="pill"><input type="radio" name="ex6_14" value="unos"> unos</label><label class="pill"><input type="radio" name="ex6_14" value="el"> el</label><label class="pill"><input type="radio" name="ex6_14" value="una"> una</label><label class="pill"><input type="radio" name="ex6_14" value="Ø"> Ø</label><label class="pill"><input type="radio" name="ex6_14" value="la"> la</label><label class="pill"><input type="radio" name="ex6_14" value="un"> un</label><label class="pill"><input type="radio" name="ex6_14" value="unas"> unas</label></div>
+        </li>
+        <li class="item radioItem" data-answer="los">
+          <span class="num">15</span>
+          <span><strong class="blankLine">___</strong> estudiantes tienen un libro.</span>
+          <div class="radioRow"><label class="pill"><input type="radio" name="ex6_15" value="los"> los</label><label class="pill"><input type="radio" name="ex6_15" value="un"> un</label><label class="pill"><input type="radio" name="ex6_15" value="el"> el</label><label class="pill"><input type="radio" name="ex6_15" value="Ø"> Ø</label><label class="pill"><input type="radio" name="ex6_15" value="una"> una</label><label class="pill"><input type="radio" name="ex6_15" value="la"> la</label><label class="pill"><input type="radio" name="ex6_15" value="las"> las</label><label class="pill"><input type="radio" name="ex6_15" value="unas"> unas</label><label class="pill"><input type="radio" name="ex6_15" value="unos"> unos</label></div>
+        </li>
+        <li class="item radioItem" data-answer="un">
+          <span class="num">16</span>
+          <span>Hay <strong class="blankLine">___</strong> libro en la escuela.</span>
+          <div class="radioRow"><label class="pill"><input type="radio" name="ex6_16" value="un"> un</label><label class="pill"><input type="radio" name="ex6_16" value="las"> las</label><label class="pill"><input type="radio" name="ex6_16" value="unas"> unas</label><label class="pill"><input type="radio" name="ex6_16" value="unos"> unos</label><label class="pill"><input type="radio" name="ex6_16" value="la"> la</label><label class="pill"><input type="radio" name="ex6_16" value="los"> los</label><label class="pill"><input type="radio" name="ex6_16" value="Ø"> Ø</label><label class="pill"><input type="radio" name="ex6_16" value="una"> una</label><label class="pill"><input type="radio" name="ex6_16" value="el"> el</label></div>
+        </li>
+        <li class="item radioItem" data-answer="los">
+          <span class="num">17</span>
+          <span><strong class="blankLine">___</strong> padres tienen un carro.</span>
+          <div class="radioRow"><label class="pill"><input type="radio" name="ex6_17" value="unos"> unos</label><label class="pill"><input type="radio" name="ex6_17" value="los"> los</label><label class="pill"><input type="radio" name="ex6_17" value="el"> el</label><label class="pill"><input type="radio" name="ex6_17" value="una"> una</label><label class="pill"><input type="radio" name="ex6_17" value="un"> un</label><label class="pill"><input type="radio" name="ex6_17" value="unas"> unas</label><label class="pill"><input type="radio" name="ex6_17" value="la"> la</label><label class="pill"><input type="radio" name="ex6_17" value="Ø"> Ø</label><label class="pill"><input type="radio" name="ex6_17" value="las"> las</label></div>
+        </li>
+        <li class="item radioItem" data-answer="un">
+          <span class="num">18</span>
+          <span>Hay <strong class="blankLine">___</strong> carro cerca de la casa.</span>
+          <div class="radioRow"><label class="pill"><input type="radio" name="ex6_18" value="las"> las</label><label class="pill"><input type="radio" name="ex6_18" value="un"> un</label><label class="pill"><input type="radio" name="ex6_18" value="unos"> unos</label><label class="pill"><input type="radio" name="ex6_18" value="unas"> unas</label><label class="pill"><input type="radio" name="ex6_18" value="el"> el</label><label class="pill"><input type="radio" name="ex6_18" value="una"> una</label><label class="pill"><input type="radio" name="ex6_18" value="los"> los</label><label class="pill"><input type="radio" name="ex6_18" value="la"> la</label><label class="pill"><input type="radio" name="ex6_18" value="Ø"> Ø</label></div>
+        </li>
+        <li class="item radioItem" data-answer="las">
+          <span class="num">19</span>
+          <span><strong class="blankLine">___</strong> montañas son luminosas.</span>
+          <div class="radioRow"><label class="pill"><input type="radio" name="ex6_19" value="unas"> unas</label><label class="pill"><input type="radio" name="ex6_19" value="unos"> unos</label><label class="pill"><input type="radio" name="ex6_19" value="el"> el</label><label class="pill"><input type="radio" name="ex6_19" value="la"> la</label><label class="pill"><input type="radio" name="ex6_19" value="los"> los</label><label class="pill"><input type="radio" name="ex6_19" value="Ø"> Ø</label><label class="pill"><input type="radio" name="ex6_19" value="las"> las</label><label class="pill"><input type="radio" name="ex6_19" value="un"> un</label><label class="pill"><input type="radio" name="ex6_19" value="una"> una</label></div>
+        </li>
+        <li class="item radioItem" data-answer="unas">
+          <span class="num">20</span>
+          <span>Hay <strong class="blankLine">___</strong> montañas cerca de la ciudad.</span>
+          <div class="radioRow"><label class="pill"><input type="radio" name="ex6_20" value="unos"> unos</label><label class="pill"><input type="radio" name="ex6_20" value="la"> la</label><label class="pill"><input type="radio" name="ex6_20" value="una"> una</label><label class="pill"><input type="radio" name="ex6_20" value="un"> un</label><label class="pill"><input type="radio" name="ex6_20" value="unas"> unas</label><label class="pill"><input type="radio" name="ex6_20" value="los"> los</label><label class="pill"><input type="radio" name="ex6_20" value="Ø"> Ø</label><label class="pill"><input type="radio" name="ex6_20" value="el"> el</label><label class="pill"><input type="radio" name="ex6_20" value="las"> las</label></div>
+        </li></ol>
+      <button class="checkBtn" onclick="checkRadioExercise('ex6')">Comprobar</button>
+      <button class="resetBtn" onclick="resetExercise('ex6')">Reiniciar</button>
+      <button class="answerBtn" onclick="revealAnswers('ex6')">Ver respuestas correctas</button>
+      <p class="feedback" aria-live="polite"></p>
+    </section>
+  <section class="exercise selectExercise" id="final">
+    <div class="exerciseHead"><h2>Texto final. Coloca artículo determinado, indeterminado o ninguno</h2><span class="tag">texto breve</span></div>
+    <p class="mini">Lee el texto y completa cada espacio. Ø significa sin artículo.</p>
+    <div class="finalText"><p><select class="blankSelect finalBlank" data-answer="Ø" aria-label="Blanco 1"></select> Juan Pérez es <select class="blankSelect finalBlank" data-answer="un" aria-label="Blanco 2"></select> profesor español y <select class="blankSelect finalBlank" data-answer="Ø" aria-label="Blanco 3"></select> María García es <select class="blankSelect finalBlank" data-answer="una" aria-label="Blanco 4"></select> arquitecta argentina. <select class="blankSelect finalBlank" data-answer="los" aria-label="Blanco 5"></select> Pérez, <select class="blankSelect finalBlank" data-answer="los" aria-label="Blanco 6"></select> García y <select class="blankSelect finalBlank" data-answer="los" aria-label="Blanco 7"></select> López son familias de <select class="blankSelect finalBlank" data-answer="la" aria-label="Blanco 8"></select> ciudad. <select class="blankSelect finalBlank" data-answer="el" aria-label="Blanco 9"></select> señor Pérez tiene <select class="blankSelect finalBlank" data-answer="un" aria-label="Blanco 10"></select> carro caro, <select class="blankSelect finalBlank" data-answer="una" aria-label="Blanco 11"></select> camisa blanca y <select class="blankSelect finalBlank" data-answer="unos" aria-label="Blanco 12"></select> zapatos negros. <select class="blankSelect finalBlank" data-answer="la" aria-label="Blanco 13"></select> señora Pérez tiene <select class="blankSelect finalBlank" data-answer="una" aria-label="Blanco 14"></select> tienda, <select class="blankSelect finalBlank" data-answer="un" aria-label="Blanco 15"></select> teléfono, <select class="blankSelect finalBlank" data-answer="una" aria-label="Blanco 16"></select> tarjeta y <select class="blankSelect finalBlank" data-answer="un" aria-label="Blanco 17"></select> ordenador. <select class="blankSelect finalBlank" data-answer="Ø" aria-label="Blanco 18"></select> Ana Pérez es <select class="blankSelect finalBlank" data-answer="una" aria-label="Blanco 19"></select> estudiante joven; <select class="blankSelect finalBlank" data-answer="Ø" aria-label="Blanco 20"></select> José Pérez es <select class="blankSelect finalBlank" data-answer="un" aria-label="Blanco 21"></select> alumno. <select class="blankSelect finalBlank" data-answer="los" aria-label="Blanco 22"></select> alumnos tienen <select class="blankSelect finalBlank" data-answer="unos" aria-label="Blanco 23"></select> libros, <select class="blankSelect finalBlank" data-answer="unos" aria-label="Blanco 24"></select> lápices y <select class="blankSelect finalBlank" data-answer="unas" aria-label="Blanco 25"></select> tarjetas. En <select class="blankSelect finalBlank" data-answer="la" aria-label="Blanco 26"></select> ciudad hay <select class="blankSelect finalBlank" data-answer="un" aria-label="Blanco 27"></select> hotel, <select class="blankSelect finalBlank" data-answer="una" aria-label="Blanco 28"></select> escuela, <select class="blankSelect finalBlank" data-answer="un" aria-label="Blanco 29"></select> instituto, <select class="blankSelect finalBlank" data-answer="una" aria-label="Blanco 30"></select> universidad, <select class="blankSelect finalBlank" data-answer="un" aria-label="Blanco 31"></select> hospital, <select class="blankSelect finalBlank" data-answer="una" aria-label="Blanco 32"></select> oficina y <select class="blankSelect finalBlank" data-answer="un" aria-label="Blanco 33"></select> aeropuerto. <select class="blankSelect finalBlank" data-answer="el" aria-label="Blanco 34"></select> hotel es caro y <select class="blankSelect finalBlank" data-answer="la" aria-label="Blanco 35"></select> escuela es importante. En <select class="blankSelect finalBlank" data-answer="la" aria-label="Blanco 36"></select> casa de <select class="blankSelect finalBlank" data-answer="los" aria-label="Blanco 37"></select> Pérez hay <select class="blankSelect finalBlank" data-answer="un" aria-label="Blanco 38"></select> patio, <select class="blankSelect finalBlank" data-answer="una" aria-label="Blanco 39"></select> puerta, <select class="blankSelect finalBlank" data-answer="una" aria-label="Blanco 40"></select> pared, <select class="blankSelect finalBlank" data-answer="una" aria-label="Blanco 41"></select> alfombra, <select class="blankSelect finalBlank" data-answer="un" aria-label="Blanco 42"></select> armario, <select class="blankSelect finalBlank" data-answer="una" aria-label="Blanco 43"></select> mesa, <select class="blankSelect finalBlank" data-answer="una" aria-label="Blanco 44"></select> silla, <select class="blankSelect finalBlank" data-answer="una" aria-label="Blanco 45"></select> taza y <select class="blankSelect finalBlank" data-answer="un" aria-label="Blanco 46"></select> refrigerador. <select class="blankSelect finalBlank" data-answer="la" aria-label="Blanco 47"></select> casa es luminosa y <select class="blankSelect finalBlank" data-answer="el" aria-label="Blanco 48"></select> ambiente es tranquilo. En <select class="blankSelect finalBlank" data-answer="la" aria-label="Blanco 49"></select> casa hay <select class="blankSelect finalBlank" data-answer="un" aria-label="Blanco 50"></select> abrelatas, <select class="blankSelect finalBlank" data-answer="una" aria-label="Blanco 51"></select> bandeja, <select class="blankSelect finalBlank" data-answer="un" aria-label="Blanco 52"></select> salero, <select class="blankSelect finalBlank" data-answer="una" aria-label="Blanco 53"></select> cacerola, <select class="blankSelect finalBlank" data-answer="una" aria-label="Blanco 54"></select> tapa, <select class="blankSelect finalBlank" data-answer="un" aria-label="Blanco 55"></select> cuchillo, <select class="blankSelect finalBlank" data-answer="una" aria-label="Blanco 56"></select> cuchara, <select class="blankSelect finalBlank" data-answer="un" aria-label="Blanco 57"></select> tenedor y <select class="blankSelect finalBlank" data-answer="una" aria-label="Blanco 58"></select> copa.</p><p>En <select class="blankSelect finalBlank" data-answer="el" aria-label="Blanco 59"></select> barrio hay <select class="blankSelect finalBlank" data-answer="un" aria-label="Blanco 60"></select> parque, <select class="blankSelect finalBlank" data-answer="una" aria-label="Blanco 61"></select> calle, <select class="blankSelect finalBlank" data-answer="una" aria-label="Blanco 62"></select> acera, <select class="blankSelect finalBlank" data-answer="un" aria-label="Blanco 63"></select> semáforo, <select class="blankSelect finalBlank" data-answer="una" aria-label="Blanco 64"></select> fuente, <select class="blankSelect finalBlank" data-answer="una" aria-label="Blanco 65"></select> papelera, <select class="blankSelect finalBlank" data-answer="un" aria-label="Blanco 66"></select> bar y <select class="blankSelect finalBlank" data-answer="una" aria-label="Blanco 67"></select> peluquería. Cerca de <select class="blankSelect finalBlank" data-answer="la" aria-label="Blanco 68"></select> ciudad hay <select class="blankSelect finalBlank" data-answer="un" aria-label="Blanco 69"></select> río y <select class="blankSelect finalBlank" data-answer="unas" aria-label="Blanco 70"></select> montañas. <select class="blankSelect finalBlank" data-answer="el" aria-label="Blanco 71"></select> Ebro es <select class="blankSelect finalBlank" data-answer="un" aria-label="Blanco 72"></select> río español; <select class="blankSelect finalBlank" data-answer="el" aria-label="Blanco 73"></select> Tajo, <select class="blankSelect finalBlank" data-answer="el" aria-label="Blanco 74"></select> Duero, <select class="blankSelect finalBlank" data-answer="el" aria-label="Blanco 75"></select> Guadiana y <select class="blankSelect finalBlank" data-answer="el" aria-label="Blanco 76"></select> Guadalquivir son ríos españoles. <select class="blankSelect finalBlank" data-answer="los" aria-label="Blanco 77"></select> Pirineos son montañas españolas; <select class="blankSelect finalBlank" data-answer="la" aria-label="Blanco 78"></select> Sierra Nevada es <select class="blankSelect finalBlank" data-answer="una" aria-label="Blanco 79"></select> montaña famosa; <select class="blankSelect finalBlank" data-answer="el" aria-label="Blanco 80"></select> Teide, <select class="blankSelect finalBlank" data-answer="el" aria-label="Blanco 81"></select> Aneto y <select class="blankSelect finalBlank" data-answer="el" aria-label="Blanco 82"></select> Mulhacén son montañas españolas. En <select class="blankSelect finalBlank" data-answer="la" aria-label="Blanco 83"></select> mesa hay <select class="blankSelect finalBlank" data-answer="un" aria-label="Blanco 84"></select> agua sin gas, <select class="blankSelect finalBlank" data-answer="un" aria-label="Blanco 85"></select> aceite de oliva, <select class="blankSelect finalBlank" data-answer="un" aria-label="Blanco 86"></select> queso, <select class="blankSelect finalBlank" data-answer="una" aria-label="Blanco 87"></select> manzana, <select class="blankSelect finalBlank" data-answer="una" aria-label="Blanco 88"></select> pera, <select class="blankSelect finalBlank" data-answer="Ø" aria-label="Blanco 89"></select> uvas, <select class="blankSelect finalBlank" data-answer="un" aria-label="Blanco 90"></select> melón, <select class="blankSelect finalBlank" data-answer="una" aria-label="Blanco 91"></select> sandía, <select class="blankSelect finalBlank" data-answer="una" aria-label="Blanco 92"></select> sal y <select class="blankSelect finalBlank" data-answer="una" aria-label="Blanco 93"></select> pimienta. <select class="blankSelect finalBlank" data-answer="la" aria-label="Blanco 94"></select> comida es sencilla y <select class="blankSelect finalBlank" data-answer="las" aria-label="Blanco 95"></select> bebidas son suficientes. <select class="blankSelect finalBlank" data-answer="los" aria-label="Blanco 96"></select> nombres Juan Pérez, Ana Pérez y María García son nombres propios; <select class="blankSelect finalBlank" data-answer="los" aria-label="Blanco 97"></select> apellidos de familia tienen artículo: <select class="blankSelect finalBlank" data-answer="los" aria-label="Blanco 98"></select> Pérez, <select class="blankSelect finalBlank" data-answer="los" aria-label="Blanco 99"></select> García y <select class="blankSelect finalBlank" data-answer="los" aria-label="Blanco 100"></select> López.</p></div>
+    <button class="checkBtn" onclick="checkSelectExercise('final')">Comprobar texto</button>
+    <button class="resetBtn" onclick="resetExercise('final')">Reiniciar</button>
+      <button class="answerBtn" onclick="revealAnswers('final')">Ver respuestas correctas del texto</button>
+    <p class="feedback" aria-live="polite"></p>
+  </section>
+</main>
+<footer>Material ELE A1 · Artículos determinados e indeterminados · Presente de Indicativo</footer>
+<script>
+const ARTICLE_OPTIONS = ["el", "la", "los", "las", "un", "una", "unos", "unas", "Ø"];
+function shuffleWithSeed(arr, seed) {
+  const a = arr.slice();
+  let x = seed || 12345;
+  for (let i=a.length-1;i>0;i--) {
+    x = (x * 9301 + 49297) % 233280;
+    const j = Math.floor((x / 233280) * (i+1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+function fillSelects(root=document) {
+  root.querySelectorAll('select.blankSelect').forEach((sel, idx) => {
+    if (sel.options.length) return;
+    let opts = ARTICLE_OPTIONS;
+    if (sel.dataset.options) opts = JSON.parse(sel.dataset.options);
+    opts = shuffleWithSeed(opts, idx*17 + 31);
+    const def = document.createElement('option');
+    def.value = ''; def.textContent = '—';
+    sel.appendChild(def);
+    opts.forEach(o => {
+      const op = document.createElement('option');
+      op.value = o; op.textContent = o;
+      sel.appendChild(op);
+    });
+  });
+}
+function scoreMessage(ok,total) {
+  if (ok === total) return `Excelente: ${ok}/${total}.`;
+  if (ok >= Math.ceil(total*.75)) return `Muy bien: ${ok}/${total}. Revisa las marcas rojas.`;
+  return `Resultado: ${ok}/${total}. Repite el ejercicio con calma.`;
+}
+function checkSelectExercise(id) {
+  const root = document.getElementById(id);
+  const selects = root.querySelectorAll('select.blankSelect');
+  let ok = 0;
+  selects.forEach(sel => {
+    sel.classList.remove('ok','bad');
+    if (sel.value === sel.dataset.answer) { sel.classList.add('ok'); ok++; }
+    else { sel.classList.add('bad'); }
+  });
+  root.querySelector('.feedback').textContent = scoreMessage(ok, selects.length);
+}
+function checkDropExercise(id) {
+  const root = document.getElementById(id);
+  const drops = root.querySelectorAll('.dropzone');
+  let ok = 0;
+  drops.forEach(d => {
+    d.classList.remove('ok','bad');
+    if (d.dataset.value === d.dataset.answer) { d.classList.add('ok'); ok++; }
+    else { d.classList.add('bad'); }
+  });
+  root.querySelector('.feedback').textContent = scoreMessage(ok, drops.length);
+}
+function checkColumnExercise(id) {
+  const root = document.getElementById(id);
+  const cards = root.querySelectorAll('.cardMove');
+  let ok = 0;
+  cards.forEach(c => {
+    c.classList.remove('ok','bad');
+    const col = c.closest('.articleColumn')?.dataset.col || '';
+    if (col === c.dataset.answer) { c.classList.add('ok'); ok++; }
+    else { c.classList.add('bad'); }
+  });
+  root.querySelector('.feedback').textContent = scoreMessage(ok, cards.length);
+}
+function checkRadioExercise(id) {
+  const root = document.getElementById(id);
+  const items = root.querySelectorAll('.radioItem');
+  let ok = 0;
+  items.forEach(item => {
+    item.classList.remove('ok','bad');
+    const checked = item.querySelector('input[type="radio"]:checked');
+    if (checked && checked.value === item.dataset.answer) { item.classList.add('ok'); ok++; }
+    else { item.classList.add('bad'); }
+  });
+  root.querySelector('.feedback').textContent = scoreMessage(ok, items.length);
+}
+
+function revealAnswers(id) {
+  const root = document.getElementById(id);
+  const selects = root.querySelectorAll('select.blankSelect');
+  const drops = root.querySelectorAll('.dropzone');
+  const cards = root.querySelectorAll('.cardMove');
+  const radioItems = root.querySelectorAll('.radioItem');
+  selects.forEach(sel => {
+    sel.value = sel.dataset.answer;
+    sel.classList.remove('bad');
+    sel.classList.add('ok');
+  });
+  drops.forEach(d => {
+    d.dataset.value = d.dataset.answer;
+    d.textContent = d.dataset.answer;
+    d.classList.remove('bad');
+    d.classList.add('ok');
+  });
+  cards.forEach(c => {
+    const target = root.querySelector(`.articleColumn[data-col="${c.dataset.answer}"]`);
+    if (target) target.appendChild(c);
+    c.classList.remove('bad');
+    c.classList.add('ok');
+  });
+  radioItems.forEach(item => {
+    const answer = item.dataset.answer;
+    item.querySelectorAll('input[type="radio"]').forEach(r => { r.checked = (r.value === answer); });
+    item.classList.remove('bad');
+    item.classList.add('ok');
+  });
+  const total = selects.length + drops.length + cards.length + radioItems.length;
+  const feedback = root.querySelector('.feedback');
+  if (feedback) feedback.textContent = `Respuestas correctas visibles: ${total}/${total}. Usa Reiniciar para volver a practicar.`;
+}
+
+function resetExercise(id) {
+  const root = document.getElementById(id);
+  root.querySelectorAll('select').forEach(s => { s.value=''; s.classList.remove('ok','bad'); });
+  root.querySelectorAll('.dropzone').forEach(d => { d.dataset.value=''; d.textContent='...'; d.classList.remove('ok','bad'); });
+  root.querySelectorAll('input[type="radio"]').forEach(r => { r.checked=false; });
+  root.querySelectorAll('.ok,.bad').forEach(el => el.classList.remove('ok','bad'));
+  if (id === 'ex4') {
+    const source = root.querySelector('.sourceColumn');
+    const cards = Array.from(root.querySelectorAll('.cardMove')).sort((a,b) => parseInt(a.textContent)-parseInt(b.textContent));
+    cards.forEach(c => source.appendChild(c));
+  }
+  root.querySelector('.feedback').textContent='';
+}
+let draggedValue = null;
+let draggedCard = null;
+document.addEventListener('dragstart', e => {
+  if (e.target.classList.contains('chip')) { draggedValue = e.target.dataset.value; e.dataTransfer.setData('text/plain', draggedValue); }
+  if (e.target.classList.contains('cardMove')) { draggedCard = e.target; e.target.classList.add('dragging'); e.dataTransfer.setData('text/plain', 'card'); }
+});
+document.addEventListener('dragend', e => {
+  if (e.target.classList.contains('cardMove')) e.target.classList.remove('dragging');
+  draggedCard = null;
+});
+document.addEventListener('dragover', e => {
+  if (e.target.classList.contains('dropzone') || e.target.closest('.articleColumn')) { e.preventDefault(); }
+});
+document.addEventListener('dragenter', e => { if(e.target.classList.contains('dropzone')) e.target.classList.add('hover'); });
+document.addEventListener('dragleave', e => { if(e.target.classList.contains('dropzone')) e.target.classList.remove('hover'); });
+document.addEventListener('drop', e => {
+  if (e.target.classList.contains('dropzone')) {
+    e.preventDefault(); e.target.classList.remove('hover');
+    const val = e.dataTransfer.getData('text/plain') || draggedValue;
+    if (val) { e.target.dataset.value = val; e.target.textContent = val; e.target.classList.remove('ok','bad'); }
+  }
+  const col = e.target.closest('.articleColumn');
+  if (col && draggedCard) {
+    e.preventDefault(); col.appendChild(draggedCard); draggedCard.classList.remove('ok','bad');
+  }
+});
+document.addEventListener('click', e => {
+  if (e.target.classList.contains('dropzone')) {
+    const now = e.target.dataset.value || 'Ø';
+    const idx = ARTICLE_OPTIONS.indexOf(now);
+    const next = ARTICLE_OPTIONS[(idx + 1) % ARTICLE_OPTIONS.length];
+    e.target.dataset.value = next;
+    e.target.textContent = next;
+    e.target.classList.remove('ok','bad');
+  }
+});
+fillSelects();
+</script>
+</body>
+</html>

@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pretérito Imperfecto de Indicativo</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <style>
+    :root {
+      --ink: #1b1b2f;
+      --muted: #5b6174;
+      --paper: #fffaf2;
+      --cream: #fff7e6;
+      --lav: #ece9ff;
+      --blue: #dff4ff;
+      --green: #e7f8e9;
+      --rose: #ffe8ee;
+      --gold: #ffd166;
+      --violet: #6f4bd8;
+      --cyan: #0787a8;
+      --red: #c0392b;
+      --ok: #18845b;
+      --shadow: 0 18px 42px rgba(59, 38, 128, 0.16);
+      --radius: 24px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(255, 209, 102, .38), transparent 28rem),
+        radial-gradient(circle at 85% 18%, rgba(111, 75, 216, .18), transparent 22rem),
+        linear-gradient(135deg, #f8fbff 0%, #fff7ea 48%, #f2efff 100%);
+      line-height: 1.55;
+    }
+
+    .page {
+      width: min(1120px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 28px 0 56px;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      border-radius: 34px;
+      padding: 38px;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.93), rgba(255,250,240,.92)),
+        url("data:image/svg+xml,%3Csvg width='240' height='240' viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%236f4bd8' stroke-opacity='.17' stroke-width='3'%3E%3Cpath d='M32 88c28-46 84-57 124-31s52 89 12 128c-34 33-103 28-127-15-13-23-12-56-9-82z'/%3E%3Cpath d='M144 24c32 14 58 45 62 80M35 183c34 28 75 34 122 18'/%3E%3C/g%3E%3Cg fill='%23ffd166' fill-opacity='.38'%3E%3Ccircle cx='56' cy='54' r='10'/%3E%3Ccircle cx='196' cy='154' r='7'/%3E%3Ccircle cx='90' cy='205' r='5'/%3E%3C/g%3E%3C/svg%3E");
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(111,75,216,.16);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -60px;
+      bottom: -90px;
+      width: 280px;
+      height: 280px;
+      background: radial-gradient(circle, rgba(255,209,102,.72), rgba(255,209,102,0) 64%);
+      pointer-events: none;
+    }
+
+    .badge {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: #ffffff;
+      color: var(--violet);
+      font-weight: 800;
+      box-shadow: 0 8px 18px rgba(111,75,216,.13);
+      border: 1px solid rgba(111,75,216,.16);
+    }
+
+    h1 {
+      margin: 16px 0 10px;
+      font-size: clamp(2.05rem, 5vw, 4rem);
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+
+    .subtitle {
+      max-width: 760px;
+      font-size: 1.1rem;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .section {
+      margin-top: 26px;
+      padding: 28px;
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.88);
+      border: 1px solid rgba(111,75,216,.12);
+      box-shadow: 0 12px 30px rgba(31, 32, 80, .08);
+      backdrop-filter: blur(6px);
+    }
+
+    h2 {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 0 18px;
+      font-size: clamp(1.35rem, 3vw, 2rem);
+      letter-spacing: -0.02em;
+    }
+
+    .icon {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--gold), #ff8fab);
+      color: white;
+      box-shadow: 0 10px 22px rgba(255, 143, 171, .28);
+      flex: 0 0 auto;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .rule-card {
+      padding: 18px;
+      border-radius: 22px;
+      background: linear-gradient(180deg, #fff, #fffaf1);
+      border: 1px solid rgba(255, 209, 102, .45);
+      box-shadow: 0 10px 24px rgba(93, 64, 55, .08);
+    }
+
+    .rule-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.05rem;
+      color: #5a3cc7;
+    }
+
+    .endings {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .ending {
+      padding: 8px 10px;
+      border-radius: 12px;
+      background: var(--lav);
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .uses {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .use-card {
+      padding: 16px 18px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #ffffff, #f3fbff);
+      border: 1px solid rgba(7, 135, 168, .16);
+    }
+
+    .use-card strong { color: var(--cyan); }
+    .example { color: #3c4054; margin-top: 6px; font-style: italic; }
+
+    .exercise-header {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .instruction {
+      color: var(--muted);
+      margin: 0;
+      max-width: 760px;
+    }
+
+    .bank {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 14px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, #fff7d7, #ffeaf0);
+      border: 1px dashed rgba(111,75,216,.32);
+      margin-bottom: 18px;
+      min-height: 74px;
+    }
+
+    .token {
+      border: 0;
+      border-radius: 999px;
+      padding: 11px 16px;
+      font-weight: 900;
+      color: #3b236f;
+      background: #ffffff;
+      cursor: grab;
+      box-shadow: 0 8px 18px rgba(59,35,111,.12);
+      border: 1px solid rgba(111,75,216,.16);
+      transition: transform .16s ease, box-shadow .16s ease, opacity .16s ease;
+      font-size: 1rem;
+    }
+
+    .token:hover { transform: translateY(-2px); }
+    .token:active { cursor: grabbing; }
+    .token.selected { outline: 3px solid rgba(255, 209, 102, .75); transform: translateY(-2px) scale(1.02); }
+    .token.used { opacity: .42; }
+
+    .drag-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .drag-sentence, .select-card {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 68px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: #ffffff;
+      border: 1px solid rgba(31,31,47,.08);
+      box-shadow: 0 8px 18px rgba(31, 32, 80, .06);
+    }
+
+    .num {
+      width: 34px;
+      height: 34px;
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: #1b1b2f;
+      color: #fff;
+      font-weight: 900;
+    }
+
+    .num.small { width: 30px; height: 30px; font-size: .88rem; }
+
+    .dropzone {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 126px;
+      min-height: 36px;
+      padding: 5px 12px;
+      margin: 0 5px;
+      border-radius: 13px;
+      border: 2px dashed rgba(111,75,216,.55);
+      color: #6f4bd8;
+      background: #f7f2ff;
+      font-weight: 900;
+      transition: .16s ease;
+      vertical-align: middle;
+    }
+
+    .dropzone.over { background: #fff2bd; border-color: #e99f00; transform: scale(1.03); }
+    .dropzone.filled { border-style: solid; background: #fff; color: #241448; }
+    .dropzone.correct, .select-card.correct select { border-color: var(--ok) !important; background: var(--green) !important; color: #0b5b3a; }
+    .dropzone.incorrect, .select-card.incorrect select { border-color: var(--red) !important; background: var(--rose) !important; color: #8f1f16; }
+
+    .actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 16px;
+      padding: 12px 18px;
+      font-weight: 900;
+      color: white;
+      cursor: pointer;
+      background: linear-gradient(135deg, #6f4bd8, #0787a8);
+      box-shadow: 0 12px 22px rgba(111,75,216,.22);
+      font-size: 1rem;
+    }
+
+    .btn.secondary {
+      background: #fff;
+      color: #5a3cc7;
+      border: 1px solid rgba(111,75,216,.2);
+      box-shadow: 0 8px 18px rgba(31,31,47,.08);
+    }
+
+    .score { font-weight: 900; color: #3b236f; }
+
+    .select-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .select-card { align-items: flex-start; }
+    .select-sentence { flex: 1; padding-top: 2px; }
+
+    select {
+      appearance: none;
+      min-width: 142px;
+      margin: 0 6px;
+      padding: 9px 40px 9px 12px;
+      border-radius: 14px;
+      border: 2px solid #d9d6f5;
+      background:
+        linear-gradient(45deg, transparent 50%, #6f4bd8 50%),
+        linear-gradient(135deg, #6f4bd8 50%, transparent 50%),
+        linear-gradient(to right, #ffffff, #ffffff);
+      background-position:
+        calc(100% - 18px) calc(1em + 2px),
+        calc(100% - 13px) calc(1em + 2px),
+        100% 0;
+      background-size: 5px 5px, 5px 5px, 2.5em 2.5em;
+      background-repeat: no-repeat;
+      color: var(--ink);
+      font-weight: 800;
+      font-size: 1rem;
+    }
+
+    .mini-feedback {
+      min-width: 110px;
+      font-weight: 900;
+      text-align: right;
+      color: var(--muted);
+      padding-top: 8px;
+    }
+
+    .select-card.correct .mini-feedback { color: var(--ok); }
+    .select-card.incorrect .mini-feedback { color: var(--red); }
+
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; border-radius: 18px; overflow: hidden; }
+    th, td { padding: 12px; text-align: left; border-bottom: 1px solid rgba(31,31,47,.08); }
+    th { background: #1b1b2f; color: white; }
+    tr:nth-child(even) td { background: rgba(236,233,255,.35); }
+    code { background: #f1edff; padding: 2px 6px; border-radius: 8px; font-weight: 800; }
+
+    @media (max-width: 860px) {
+      .hero { padding: 28px; }
+      .grid, .uses, .drag-grid { grid-template-columns: 1fr; }
+      .section { padding: 22px; }
+      .select-card { flex-direction: column; }
+      .mini-feedback { text-align: left; padding-top: 0; }
+      select { margin: 8px 0; width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <div class="badge">⏳ Gramática interactiva</div>
+      <h1>Pretérito Imperfecto de Indicativo</h1>
+      <p class="subtitle">Formación, usos y ejercicios para reconocer acciones habituales, descripciones y situaciones de fondo en el pasado.</p>
+    </header>
+
+    <section class="section" id="formacion">
+      <h2><span class="icon">✍️</span>Formación</h2>
+      <div class="grid">
+        <article class="rule-card">
+          <h3>Verbos en -AR</h3>
+          <p>Se elimina <code>-ar</code> y se añaden las terminaciones del imperfecto.</p>
+          <p><strong>hablar →</strong></p>
+          <div class="endings"><span class="ending">hablaba</span><span class="ending">hablabas</span><span class="ending">hablaba</span><span class="ending">hablábamos</span><span class="ending">hablabais</span><span class="ending">hablaban</span></div>
+        </article>
+        <article class="rule-card">
+          <h3>Verbos en -ER</h3>
+          <p>Se elimina <code>-er</code> y se añaden las terminaciones <code>-ía</code>.</p>
+          <p><strong>comer →</strong></p>
+          <div class="endings"><span class="ending">comía</span><span class="ending">comías</span><span class="ending">comía</span><span class="ending">comíamos</span><span class="ending">comíais</span><span class="ending">comían</span></div>
+        </article>
+        <article class="rule-card">
+          <h3>Verbos en -IR</h3>
+          <p>Se conjugan igual que los verbos en <code>-er</code>.</p>
+          <p><strong>vivir →</strong></p>
+          <div class="endings"><span class="ending">vivía</span><span class="ending">vivías</span><span class="ending">vivía</span><span class="ending">vivíamos</span><span class="ending">vivíais</span><span class="ending">vivían</span></div>
+        </article>
+      </div>
+      <div class="section" style="margin-top:18px; padding:18px; background:#fff7e6; box-shadow:none;">
+        <h3 style="margin-top:0; color:#5a3cc7;">Verbos irregulares</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Infinitivo</th><th>Formas</th></tr></thead>
+            <tbody>
+              <tr><td><strong>ser</strong></td><td>era, eras, era, éramos, erais, eran</td></tr>
+              <tr><td><strong>ir</strong></td><td>iba, ibas, iba, íbamos, ibais, iban</td></tr>
+              <tr><td><strong>ver</strong></td><td>veía, veías, veía, veíamos, veíais, veían</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="uso">
+      <h2><span class="icon">🧭</span>Uso del Pretérito Imperfecto</h2>
+      <div class="uses">
+        <article class="use-card"><strong>Повторяющиеся действия в прошлом.</strong><div class="example">Cada verano viajábamos a la costa.</div></article>
+        <article class="use-card"><strong>Привычки и распорядок в прошлом.</strong><div class="example">Antes estudiaba por la noche.</div></article>
+        <article class="use-card"><strong>Описание людей, мест, предметов и обстоятельств.</strong><div class="example">La ciudad era tranquila y las calles estaban vacías.</div></article>
+        <article class="use-card"><strong>Фоновое действие, без указания начала или конца.</strong><div class="example">Mientras caminaba, escuchaba música.</div></article>
+        <article class="use-card"><strong>Возраст, время, погода и состояние в прошлом.</strong><div class="example">Eran las ocho, hacía frío y yo tenía sueño.</div></article>
+        <article class="use-card"><strong>Ситуация, которая объясняет контекст другого действия.</strong><div class="example">Cuando vivía en Madrid, iba al Retiro los domingos.</div></article>
+      </div>
+    </section>
+
+    <section class="section" id="drag">
+      <div class="exercise-header">
+        <div>
+          <h2><span class="icon">🧩</span>Ejercicio 1. Arrastrar y colocar</h2>
+          <p class="instruction">Arrastra cada forma verbal al espacio correspondiente. En pantalla táctil, toca primero la forma y después el espacio.</p>
+        </div>
+      </div>
+      <div class="bank" id="bank">
+        <button class="token" draggable="true" data-value="escuchabais" type="button">escuchabais</button><button class="token" draggable="true" data-value="vivía" type="button">vivía</button><button class="token" draggable="true" data-value="leían" type="button">leían</button><button class="token" draggable="true" data-value="estaban" type="button">estaban</button><button class="token" draggable="true" data-value="visitaba" type="button">visitaba</button><button class="token" draggable="true" data-value="íbamos" type="button">íbamos</button><button class="token" draggable="true" data-value="explicaba" type="button">explicaba</button><button class="token" draggable="true" data-value="eran" type="button">eran</button><button class="token" draggable="true" data-value="tomaba" type="button">tomaba</button><button class="token" draggable="true" data-value="viajábamos" type="button">viajábamos</button><button class="token" draggable="true" data-value="había" type="button">había</button><button class="token" draggable="true" data-value="trabajabas" type="button">trabajabas</button>
+      </div>
+      <div class="drag-grid">
+        <div class="drag-sentence"><span class="num small">1</span>De niña, Ana <span class="dropzone" data-answer="vivía" data-index="1" tabindex="0">arrastra aquí</span> en Sevilla.</div><div class="drag-sentence"><span class="num small">2</span>Nosotros <span class="dropzone" data-answer="íbamos" data-index="2" tabindex="0">arrastra aquí</span> al colegio a pie.</div><div class="drag-sentence"><span class="num small">3</span>Mi padre <span class="dropzone" data-answer="tomaba" data-index="3" tabindex="0">arrastra aquí</span> café cada mañana.</div><div class="drag-sentence"><span class="num small">4</span>Ellos <span class="dropzone" data-answer="leían" data-index="4" tabindex="0">arrastra aquí</span> mucho cuando eran niños.</div><div class="drag-sentence"><span class="num small">5</span>Tú <span class="dropzone" data-answer="trabajabas" data-index="5" tabindex="0">arrastra aquí</span> en una librería del barrio.</div><div class="drag-sentence"><span class="num small">6</span>En la casa <span class="dropzone" data-answer="había" data-index="6" tabindex="0">arrastra aquí</span> tres habitaciones.</div><div class="drag-sentence"><span class="num small">7</span>Yo <span class="dropzone" data-answer="visitaba" data-index="7" tabindex="0">arrastra aquí</span> a mi abuela los domingos.</div><div class="drag-sentence"><span class="num small">8</span>Vosotros <span class="dropzone" data-answer="escuchabais" data-index="8" tabindex="0">arrastra aquí</span> música clásica por la noche.</div><div class="drag-sentence"><span class="num small">9</span>Mis hermanas <span class="dropzone" data-answer="eran" data-index="9" tabindex="0">arrastra aquí</span> muy pequeñas.</div><div class="drag-sentence"><span class="num small">10</span>Ustedes <span class="dropzone" data-answer="estaban" data-index="10" tabindex="0">arrastra aquí</span> en el centro de la ciudad.</div><div class="drag-sentence"><span class="num small">11</span>El profesor <span class="dropzone" data-answer="explicaba" data-index="11" tabindex="0">arrastra aquí</span> la lección despacio.</div><div class="drag-sentence"><span class="num small">12</span>Cada verano nosotros <span class="dropzone" data-answer="viajábamos" data-index="12" tabindex="0">arrastra aquí</span> al mar.</div>
+      </div>
+      <div class="actions">
+        <button class="btn" type="button" onclick="checkDrag()">Revisar</button>
+        <button class="btn secondary" type="button" onclick="resetDrag()">Reiniciar</button>
+        <span class="score" id="dragScore"></span>
+      </div>
+    </section>
+
+    <section class="section" id="seleccion">
+      <div class="exercise-header">
+        <div>
+          <h2><span class="icon">🎯</span>Ejercicio 2. Elegir la forma correcta</h2>
+          <p class="instruction">Selecciona la forma adecuada del verbo en cada oración.</p>
+        </div>
+      </div>
+      <div class="select-list">
+        
+      <div class="select-card" id="s-card-1">
+        <div class="num">1</div>
+        <div class="select-sentence"><span>Cuando vivía en Madrid,</span>
+          <select id="s1" data-answer="iba" aria-label="Respuesta 1">
+            <option value="">— elegir —</option><option value="fui">fui</option><option value="iba">iba</option><option value="voy">voy</option>
+          </select>
+          <span>al Parque del Retiro cada domingo.</span>
+        </div>
+        <div class="mini-feedback" id="sf1"></div>
+      </div>
+    
+
+      <div class="select-card" id="s-card-2">
+        <div class="num">2</div>
+        <div class="select-sentence"><span>De niños,</span>
+          <select id="s2" data-answer="teníamos" aria-label="Respuesta 2">
+            <option value="">— elegir —</option><option value="tuvimos">tuvimos</option><option value="teníamos">teníamos</option><option value="tenemos">tenemos</option>
+          </select>
+          <span>una bicicleta roja en Buenos Aires.</span>
+        </div>
+        <div class="mini-feedback" id="sf2"></div>
+      </div>
+    
+
+      <div class="select-card" id="s-card-3">
+        <div class="num">3</div>
+        <div class="select-sentence"><span>Mi abuela siempre</span>
+          <select id="s3" data-answer="contaba" aria-label="Respuesta 3">
+            <option value="">— elegir —</option><option value="contó">contó</option><option value="contaba">contaba</option><option value="cuenta">cuenta</option>
+          </select>
+          <span>historias de su vida en Córdoba, Argentina.</span>
+        </div>
+        <div class="mini-feedback" id="sf3"></div>
+      </div>
+    
+
+      <div class="select-card" id="s-card-4">
+        <div class="num">4</div>
+        <div class="select-sentence"><span>Yo</span>
+          <select id="s4" data-answer="jugaba" aria-label="Respuesta 4">
+            <option value="">— elegir —</option><option value="juego">juego</option><option value="jugué">jugué</option><option value="jugaba">jugaba</option>
+          </select>
+          <span>con mis amigos en la plaza hasta que se hacía de noche.</span>
+        </div>
+        <div class="mini-feedback" id="sf4"></div>
+      </div>
+    
+
+      <div class="select-card" id="s-card-5">
+        <div class="num">5</div>
+        <div class="select-sentence"><span>Antes, tú</span>
+          <select id="s5" data-answer="estudiabas" aria-label="Respuesta 5">
+            <option value="">— elegir —</option><option value="estudias">estudias</option><option value="estudiabas">estudiabas</option><option value="estudiaste">estudiaste</option>
+          </select>
+          <span>en la Universidad de Sevilla, ¿verdad?</span>
+        </div>
+        <div class="mini-feedback" id="sf5"></div>
+      </div>
+    
+
+      <div class="select-card" id="s-card-6">
+        <div class="num">6</div>
+        <div class="select-sentence"><span>Cada verano, mis padres y yo</span>
+          <select id="s6" data-answer="viajábamos" aria-label="Respuesta 6">
+            <option value="">— elegir —</option><option value="viajaremos">viajaremos</option><option value="viajamos">viajamos</option><option value="viajábamos">viajábamos</option>
+          </select>
+          <span>a la Costa Brava.</span>
+        </div>
+        <div class="mini-feedback" id="sf6"></div>
+      </div>
+    
+
+      <div class="select-card" id="s-card-7">
+        <div class="num">7</div>
+        <div class="select-sentence"><span>Cuando vivíamos en Granada, siempre nos</span>
+          <select id="s7" data-answer="daba" aria-label="Respuesta 7">
+            <option value="">— elegir —</option><option value="dio">dio</option><option value="daba">daba</option><option value="da">da</option>
+          </select>
+          <span>la lata con sus historias.</span>
+        </div>
+        <div class="mini-feedback" id="sf7"></div>
+      </div>
+    
+
+      <div class="select-card" id="s-card-8">
+        <div class="num">8</div>
+        <div class="select-sentence"><span>Tú</span>
+          <select id="s8" data-answer="leías" aria-label="Respuesta 8">
+            <option value="">— elegir —</option><option value="lees">lees</option><option value="leíste">leíste</option><option value="leías">leías</option>
+          </select>
+          <span>novelas de García Márquez cuando eras adolescente.</span>
+        </div>
+        <div class="mini-feedback" id="sf8"></div>
+      </div>
+    
+
+      <div class="select-card" id="s-card-9">
+        <div class="num">9</div>
+        <div class="select-sentence"><span>Cada invierno, ellos</span>
+          <select id="s9" data-answer="bebían" aria-label="Respuesta 9">
+            <option value="">— elegir —</option><option value="beben">beben</option><option value="bebieron">bebieron</option><option value="bebían">bebían</option>
+          </select>
+          <span>chocolate caliente en una cafetería de Zaragoza.</span>
+        </div>
+        <div class="mini-feedback" id="sf9"></div>
+      </div>
+    
+
+      <div class="select-card" id="s-card-10">
+        <div class="num">10</div>
+        <div class="select-sentence"><span>En aquellos días, yo</span>
+          <select id="s10" data-answer="trabajaba" aria-label="Respuesta 10">
+            <option value="">— elegir —</option><option value="trabajé">trabajé</option><option value="trabajaba">trabajaba</option><option value="trabajo">trabajo</option>
+          </select>
+          <span>en una librería de Rosario.</span>
+        </div>
+        <div class="mini-feedback" id="sf10"></div>
+      </div>
+    
+
+      <div class="select-card" id="s-card-11">
+        <div class="num">11</div>
+        <div class="select-sentence"><span>Cuando éramos jóvenes,</span>
+          <select id="s11" data-answer="éramos" aria-label="Respuesta 11">
+            <option value="">— elegir —</option><option value="somos">somos</option><option value="fuimos">fuimos</option><option value="éramos">éramos</option>
+          </select>
+          <span>muy amigos y nos veíamos cada día.</span>
+        </div>
+        <div class="mini-feedback" id="sf11"></div>
+      </div>
+    
+
+      <div class="select-card" id="s-card-12">
+        <div class="num">12</div>
+        <div class="select-sentence"><span>Durante la pandemia,</span>
+          <select id="s12" data-answer="había" aria-label="Respuesta 12">
+            <option value="">— elegir —</option><option value="hubo">hubo</option><option value="había">había</option><option value="hay">hay</option>
+          </select>
+          <span>menos gente en las calles de Madrid.</span>
+        </div>
+        <div class="mini-feedback" id="sf12"></div>
+      </div>
+    
+
+      <div class="select-card" id="s-card-13">
+        <div class="num">13</div>
+        <div class="select-sentence"><span>De pequeña, mi prima</span>
+          <select id="s13" data-answer="quería" aria-label="Respuesta 13">
+            <option value="">— elegir —</option><option value="quiso">quiso</option><option value="quiere">quiere</option><option value="quería">quería</option>
+          </select>
+          <span>ser bailarina en el Teatro Colón de Buenos Aires.</span>
+        </div>
+        <div class="mini-feedback" id="sf13"></div>
+      </div>
+    
+
+      <div class="select-card" id="s-card-14">
+        <div class="num">14</div>
+        <div class="select-sentence"><span>Los domingos por la tarde, él</span>
+          <select id="s14" data-answer="estaba" aria-label="Respuesta 14">
+            <option value="">— elegir —</option><option value="estuvo">estuvo</option><option value="estaba">estaba</option><option value="está">está</option>
+          </select>
+          <span>en la luna y se olvidaba de llamar.</span>
+        </div>
+        <div class="mini-feedback" id="sf14"></div>
+      </div>
+    
+
+      <div class="select-card" id="s-card-15">
+        <div class="num">15</div>
+        <div class="select-sentence"><span>Cada mañana, ellos</span>
+          <select id="s15" data-answer="escuchaban" aria-label="Respuesta 15">
+            <option value="">— elegir —</option><option value="escuchan">escuchan</option><option value="escucharon">escucharon</option><option value="escuchaban">escuchaban</option>
+          </select>
+          <span>el programa de radio del barrio.</span>
+        </div>
+        <div class="mini-feedback" id="sf15"></div>
+      </div>
+    
+
+      <div class="select-card" id="s-card-16">
+        <div class="num">16</div>
+        <div class="select-sentence"><span>Cuando salíamos al campo, yo</span>
+          <select id="s16" data-answer="metía" aria-label="Respuesta 16">
+            <option value="">— elegir —</option><option value="metí">metí</option><option value="metía">metía</option><option value="meto">meto</option>
+          </select>
+          <span>la pata al intentar encender el fuego.</span>
+        </div>
+        <div class="mini-feedback" id="sf16"></div>
+      </div>
+    
+
+      <div class="select-card" id="s-card-17">
+        <div class="num">17</div>
+        <div class="select-sentence"><span>De niños, tú y yo</span>
+          <select id="s17" data-answer="íbamos" aria-label="Respuesta 17">
+            <option value="">— elegir —</option><option value="fuimos">fuimos</option><option value="íbamos">íbamos</option><option value="vamos">vamos</option>
+          </select>
+          <span>a pescar al río Paraná con nuestro abuelo.</span>
+        </div>
+        <div class="mini-feedback" id="sf17"></div>
+      </div>
+    
+
+      <div class="select-card" id="s-card-18">
+        <div class="num">18</div>
+        <div class="select-sentence"><span>Mi madre siempre</span>
+          <select id="s18" data-answer="decía" aria-label="Respuesta 18">
+            <option value="">— elegir —</option><option value="dijo">dijo</option><option value="decía">decía</option><option value="dice">dice</option>
+          </select>
+          <span>que a quien madruga, Dios le ayuda.</span>
+        </div>
+        <div class="mini-feedback" id="sf18"></div>
+      </div>
+    
+
+      <div class="select-card" id="s-card-19">
+        <div class="num">19</div>
+        <div class="select-sentence"><span>Durante esas tardes en Zaragoza, me</span>
+          <select id="s19" data-answer="hacía" aria-label="Respuesta 19">
+            <option value="">— elegir —</option><option value="hice">hice</option><option value="hago">hago</option><option value="hacía">hacía</option>
+          </select>
+          <span>un nudo en la garganta al escuchar tangos.</span>
+        </div>
+        <div class="mini-feedback" id="sf19"></div>
+      </div>
+    
+
+      <div class="select-card" id="s-card-20">
+        <div class="num">20</div>
+        <div class="select-sentence"><span>Cuando intentaba cocinar, no</span>
+          <select id="s20" data-answer="daba" aria-label="Respuesta 20">
+            <option value="">— elegir —</option><option value="doy">doy</option><option value="daba">daba</option><option value="di">di</option>
+          </select>
+          <span>pie con bola.</span>
+        </div>
+        <div class="mini-feedback" id="sf20"></div>
+      </div>
+    
+      </div>
+      <div class="actions">
+        <button class="btn" type="button" onclick="checkSelects()">Revisar</button>
+        <button class="btn secondary" type="button" onclick="resetSelects()">Reiniciar</button>
+        <span class="score" id="selectScore"></span>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    let selectedToken = null;
+
+    function setTokenUsed(value, used) {
+      const tokens = document.querySelectorAll(`.token[data-value="${CSS.escape(value)}"]`);
+      tokens.forEach(t => t.classList.toggle('used', used));
+    }
+
+    document.querySelectorAll('.token').forEach(token => {
+      token.addEventListener('dragstart', e => {
+        e.dataTransfer.setData('text/plain', token.dataset.value);
+      });
+      token.addEventListener('click', () => {
+        document.querySelectorAll('.token').forEach(t => t.classList.remove('selected'));
+        selectedToken = token.dataset.value;
+        token.classList.add('selected');
+      });
+    });
+
+    document.querySelectorAll('.dropzone').forEach(zone => {
+      zone.addEventListener('dragover', e => {
+        e.preventDefault();
+        zone.classList.add('over');
+      });
+      zone.addEventListener('dragleave', () => zone.classList.remove('over'));
+      zone.addEventListener('drop', e => {
+        e.preventDefault();
+        zone.classList.remove('over');
+        const value = e.dataTransfer.getData('text/plain');
+        fillDrop(zone, value);
+      });
+      zone.addEventListener('click', () => {
+        if (selectedToken) fillDrop(zone, selectedToken);
+      });
+    });
+
+    function fillDrop(zone, value) {
+      if (!value) return;
+      if (zone.dataset.value) setTokenUsed(zone.dataset.value, false);
+      zone.textContent = value;
+      zone.dataset.value = value;
+      zone.classList.add('filled');
+      zone.classList.remove('correct', 'incorrect');
+      setTokenUsed(value, true);
+      document.querySelectorAll('.token').forEach(t => t.classList.remove('selected'));
+      selectedToken = null;
+      document.getElementById('dragScore').textContent = '';
+    }
+
+    function checkDrag() {
+      let total = 0;
+      let correct = 0;
+      document.querySelectorAll('.dropzone').forEach(zone => {
+        total++;
+        zone.classList.remove('correct', 'incorrect');
+        if (zone.dataset.value === zone.dataset.answer) {
+          correct++;
+          zone.classList.add('correct');
+        } else {
+          zone.classList.add('incorrect');
+        }
+      });
+      document.getElementById('dragScore').textContent = `${correct} / ${total}`;
+    }
+
+    function resetDrag() {
+      document.querySelectorAll('.dropzone').forEach(zone => {
+        zone.textContent = 'arrastra aquí';
+        delete zone.dataset.value;
+        zone.classList.remove('filled', 'correct', 'incorrect', 'over');
+      });
+      document.querySelectorAll('.token').forEach(t => t.classList.remove('used', 'selected'));
+      selectedToken = null;
+      document.getElementById('dragScore').textContent = '';
+    }
+
+    function checkSelects() {
+      let total = 0;
+      let correct = 0;
+      document.querySelectorAll('.select-card').forEach((card, idx) => {
+        const select = card.querySelector('select');
+        const feedback = card.querySelector('.mini-feedback');
+        total++;
+        card.classList.remove('correct', 'incorrect');
+        if (select.value === select.dataset.answer) {
+          correct++;
+          card.classList.add('correct');
+          feedback.textContent = '✓ correcto';
+        } else {
+          card.classList.add('incorrect');
+          feedback.textContent = select.value ? `✗ ${select.dataset.answer}` : '✗ falta respuesta';
+        }
+      });
+      document.getElementById('selectScore').textContent = `${correct} / ${total}`;
+    }
+
+    function resetSelects() {
+      document.querySelectorAll('.select-card').forEach(card => {
+        const select = card.querySelector('select');
+        const feedback = card.querySelector('.mini-feedback');
+        select.value = '';
+        feedback.textContent = '';
+        card.classList.remove('correct', 'incorrect');
+      });
+      document.getElementById('selectScore').textContent = '';
+    }
+  </script>
+</body>
+</html>

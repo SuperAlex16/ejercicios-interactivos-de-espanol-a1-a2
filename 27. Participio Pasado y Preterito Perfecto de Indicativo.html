@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Repaso de Participio Pasado y Pretérito Perfecto de Indicativo</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <style>
+    :root{
+      --ink:#172033;
+      --muted:#667085;
+      --blue:#2563eb;
+      --violet:#7c3aed;
+      --orange:#f97316;
+      --green:#16a34a;
+      --red:#dc2626;
+      --card:#ffffff;
+      --line:#e4e7ec;
+      --soft:#f8fafc;
+      --shadow:0 18px 46px rgba(30,41,59,.13);
+      --radius:26px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family:Inter,Arial,Helvetica,sans-serif;
+      color:var(--ink);
+      line-height:1.55;
+      background:
+        radial-gradient(circle at 8% 4%,rgba(37,99,235,.16),transparent 30%),
+        radial-gradient(circle at 94% 13%,rgba(249,115,22,.14),transparent 27%),
+        linear-gradient(135deg,#eef6ff,#fff8ef 58%,#f7f3ff);
+    }
+    button,input{font:inherit}
+    .page{width:min(1160px,94vw);margin:0 auto;padding:30px 0 72px}
+    .hero{
+      position:relative;overflow:hidden;border-radius:34px;padding:44px;
+      color:#fff;box-shadow:var(--shadow);
+      background:linear-gradient(135deg,rgba(37,99,235,.98),rgba(124,58,237,.95));
+    }
+    .hero::before,.hero::after{content:"";position:absolute;border-radius:999px;background:rgba(255,255,255,.12)}
+    .hero::before{width:250px;height:250px;right:-65px;top:-95px}
+    .hero::after{width:170px;height:170px;left:55%;bottom:-90px}
+    .hero-content{position:relative;z-index:1}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.28);font-weight:800}
+    h1{margin:18px 0 12px;font-size:clamp(2.25rem,5.2vw,4.7rem);line-height:.98;letter-spacing:-.055em}
+    .subtitle{max-width:830px;margin:0;color:rgba(255,255,255,.92);font-size:1.12rem}
+    .toc{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 0}
+    .toc a{text-decoration:none;color:#2d3748;background:rgba(255,255,255,.87);border:1px solid rgba(255,255,255,.96);padding:9px 13px;border-radius:999px;font-weight:800;box-shadow:0 7px 16px rgba(30,41,59,.08)}
+    .section{margin-top:28px;background:rgba(255,255,255,.82);border:1px solid rgba(255,255,255,.9);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;backdrop-filter:blur(10px)}
+    .section-head{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;padding:26px 28px 17px;border-bottom:1px solid rgba(228,231,236,.85);background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(255,255,255,.64))}
+    .section-title{margin:0;font-size:1.6rem;letter-spacing:-.025em}
+    .section-note{margin:6px 0 0;color:var(--muted)}
+    .badge{flex:0 0 auto;border-radius:17px;padding:9px 13px;background:#eef2ff;color:#3730a3;border:1px solid #c7d2fe;font-weight:900}
+    .content{padding:26px 28px 30px}
+    .theory-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .theory-box{background:#fff;border:1px solid var(--line);border-radius:22px;padding:21px;box-shadow:0 10px 28px rgba(28,40,70,.07)}
+    .theory-box h3{margin:0 0 12px;color:#1d4ed8;font-size:1.12rem}
+    .formula-box{margin:14px 0;padding:14px 16px;border-radius:16px;background:linear-gradient(135deg,#eff6ff,#eef2ff);border:1px solid #bfdbfe;color:#1e3a8a;font-weight:900;text-align:center}
+    table{width:100%;border-collapse:collapse;margin:14px 0 8px;font-size:.96rem}
+    th,td{padding:10px 11px;border-bottom:1px solid #e5e7eb;text-align:left}
+    th{background:#f8fafc;color:#475467}
+    tr:last-child td{border-bottom:none}
+    .rule-list,.use-list{padding-left:21px;margin:10px 0}
+    .rule-list li,.use-list li{margin:7px 0}
+    .example-pair{margin-top:10px;padding:12px 14px;border-radius:14px;background:#f8fafc;border-left:4px solid #818cf8}
+    .grammar-note{margin-top:15px;padding:14px 16px;border-radius:16px;background:linear-gradient(135deg,#fff7ed,#fffbeb);border:1px solid #fed7aa;color:#7c2d12}
+    .exercise-panel{background:#fff;border:1px solid var(--line);border-radius:24px;padding:20px;box-shadow:0 12px 30px rgba(28,40,70,.07)}
+    .instruction{margin:0 0 18px;color:var(--muted)}
+    .exercise-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+    .exercise-item{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:14px;border-radius:18px;background:#f8fafc;border:1px solid #e2e8f0;min-height:74px}
+    .num{width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;border-radius:999px;background:#eef2ff;color:#3730a3;font-weight:900}
+    .sentence{flex:1 1 280px}
+    input.answer{display:inline-block;width:148px;max-width:42vw;border:2px solid #cbd5e1;border-radius:11px;padding:8px 10px;background:#fff;outline:none;transition:.18s ease}
+    input.answer:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(37,99,235,.12)}
+    input.answer.correct{border-color:var(--green);background:#f0fdf4}
+    input.answer.incorrect{border-color:var(--red);background:#fef2f2}
+    .feedback{font-size:.9rem;font-weight:900;min-width:34px}
+    .feedback.ok{color:var(--green)}
+    .feedback.bad{color:var(--red)}
+    .actions{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin-top:18px}
+    button{border:none;border-radius:999px;padding:11px 18px;color:#fff;font-weight:900;cursor:pointer;background:linear-gradient(135deg,var(--blue),var(--violet));box-shadow:0 10px 22px rgba(37,99,235,.2)}
+    button.secondary{color:#1f2937;background:#fff;border:1px solid #d1d5db;box-shadow:none}
+    .score{padding:8px 12px;border-radius:999px;background:#f3f4f6;color:#111827;font-weight:900}
+    .score.perfect{background:#ecfdf3;color:#166534}
+    .irregular-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(168px,1fr));gap:14px}
+    .flip-card{min-height:118px;perspective:900px;outline:none;cursor:pointer}
+    .flip-inner{position:relative;width:100%;height:100%;min-height:118px;transition:transform .45s ease;transform-style:preserve-3d}
+    .flip-card:hover .flip-inner,.flip-card:focus .flip-inner,.flip-card.is-flipped .flip-inner{transform:rotateY(180deg)}
+    .flip-front,.flip-back{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;backface-visibility:hidden;border-radius:20px;padding:16px;text-align:center;border:1px solid var(--line);box-shadow:0 10px 28px rgba(28,40,70,.08)}
+    .flip-front{background:#fff}
+    .flip-back{background:linear-gradient(135deg,#eff6ff,#f5f3ff);transform:rotateY(180deg)}
+    .verb{font-size:1.18rem;font-weight:900;color:#111827}
+    .meaning{font-size:.86rem;color:var(--muted);margin-top:4px}
+    .participle{font-size:1.08rem;font-weight:900;color:#4c1d95}
+    .mini{font-size:.82rem;color:var(--muted);margin-top:6px}
+    .footer-tip{text-align:center;color:var(--muted);font-size:.92rem;margin-top:23px}
+    .source-note{font-size:.82rem;color:#667085;margin-top:12px}
+    @media(max-width:880px){.hero{padding:31px 24px}.theory-grid,.exercise-list{grid-template-columns:1fr}.section-head{flex-direction:column}.content,.section-head{padding-left:20px;padding-right:20px}}
+    @media(max-width:560px){.page{width:95vw;padding-top:18px}.hero{border-radius:26px}h1{font-size:2.55rem}.exercise-item{align-items:flex-start}.sentence{flex-basis:100%}input.answer{width:138px;max-width:58vw}.toc{gap:7px}.toc a{font-size:.88rem}}
+
+    /* Actividades de selección y ejercicios del Pretérito Perfecto */
+    select.pp-select{
+      min-width:220px;max-width:100%;border:2px solid #cbd5e1;border-radius:12px;
+      padding:9px 38px 9px 11px;background:#fff;color:var(--ink);font:inherit;font-weight:800;
+      outline:none;cursor:pointer;transition:.18s ease;
+    }
+    select.pp-select:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(37,99,235,.12)}
+    select.pp-select.correct{border-color:var(--green);background:#f0fdf4}
+    select.pp-select.incorrect{border-color:var(--red);background:#fef2f2}
+    .dropdown-list{grid-template-columns:1fr}
+    .dropdown-list .exercise-item{align-items:center}
+    .dropdown-list .sentence{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+    .show-btn{background:linear-gradient(135deg,#0f766e,#0891b2)}
+    .match-layout{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(290px,.85fr);gap:18px;align-items:start}
+    .match-prompts{display:grid;gap:11px}
+    .match-row{display:grid;grid-template-columns:34px minmax(0,1fr) minmax(240px,.88fr);gap:10px;align-items:center;padding:12px;border-radius:18px;background:#f8fafc;border:1px solid #e2e8f0}
+    .match-row.correct{border-color:#86efac;background:#f0fdf4}
+    .match-row.incorrect{border-color:#fca5a5;background:#fef2f2}
+    .match-prompt{font-weight:800}
+    .drop-slot{min-height:52px;width:100%;border:2px dashed #b7c6e5;border-radius:14px;background:#fff;color:#64748b;padding:10px 12px;text-align:left;box-shadow:none;font-weight:700}
+    .drop-slot.filled{border-style:solid;border-color:#93c5fd;color:#172033;background:#eff6ff}
+    .drop-slot.selected-target{box-shadow:0 0 0 3px rgba(37,99,235,.13)}
+    .choice-bank{position:sticky;top:14px;background:linear-gradient(180deg,#f8fafc,#f3f6fb);border:1px solid #dbe3ef;border-radius:22px;padding:14px}
+    .choice-bank-title{margin:0 0 10px;font-weight:900;color:#475467}
+    .choice-list{display:grid;gap:8px}
+    .choice-chip{display:block;width:100%;border:1px solid #e2e8f0;border-radius:14px;background:#fff;color:#172033;padding:10px 12px;text-align:left;box-shadow:0 5px 14px rgba(30,41,59,.06);font-weight:800;cursor:pointer}
+    .choice-chip:hover{border-color:#93c5fd}
+    .choice-chip.selected{outline:3px solid rgba(37,99,235,.18);border-color:#60a5fa;background:#eff6ff}
+    .choice-chip.used{display:none}
+    .match-feedback{font-size:.86rem;font-weight:900;margin-top:5px}
+    .match-feedback.ok{color:var(--green)}
+    .match-feedback.bad{color:var(--red)}
+    .copied-theory{border-top:4px solid #c7d2fe}
+    @media(max-width:900px){.match-layout{grid-template-columns:1fr}.choice-bank{position:static}.match-row{grid-template-columns:34px 1fr}.drop-slot{grid-column:2}}
+    @media(max-width:560px){.match-row{grid-template-columns:30px 1fr;padding:10px}.drop-slot{grid-column:1 / -1}select.pp-select{min-width:190px;width:100%}}
+
+
+
+    /* Ejercicios 7–9: transcripción de la foto con campos de escritura */
+    .photo-exercise{display:grid;gap:12px}
+    .photo-intro{margin:0 0 14px;font-weight:800;color:#344054}
+    .verb-bank{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin:12px 0 20px;padding:12px 16px;border-left:5px solid #facc15;border-right:5px solid #facc15;background:#fffbeb;border-radius:14px}
+    .verb-bank span{font-weight:800;padding:3px 7px}
+    .verb-bank .used-verb{text-decoration:line-through;color:#64748b}
+    .source-example{padding:13px 15px;border-radius:15px;background:#eff6ff;border:1px solid #bfdbfe;margin-bottom:12px}
+    .source-example strong{color:#2563eb}
+    .source-item{display:grid;grid-template-columns:34px minmax(0,1fr);gap:10px;align-items:start;padding:13px 14px;border-radius:17px;background:#f8fafc;border:1px solid #e2e8f0}
+    .source-item .item-text{min-width:0;line-height:1.9}
+    .dialogue-line{margin:2px 0}
+    input.fill-input{display:inline-block;width:180px;max-width:74vw;border:2px solid #cbd5e1;border-radius:10px;padding:7px 9px;background:#fff;outline:none;transition:.18s ease;vertical-align:middle;margin:2px 4px}
+    input.fill-input.short{width:150px}
+    input.fill-input.wide{width:210px}
+    input.fill-input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(37,99,235,.12)}
+    input.fill-input.correct{border-color:var(--green);background:#f0fdf4}
+    input.fill-input.incorrect{border-color:var(--red);background:#fef2f2}
+    .inline-feedback{display:inline-block;min-width:18px;font-size:.86rem;font-weight:900;vertical-align:middle}
+    .inline-feedback.ok{color:var(--green)}
+    .inline-feedback.bad{color:var(--red)}
+    @media(max-width:560px){.source-item{grid-template-columns:30px minmax(0,1fr)}input.fill-input,input.fill-input.short,input.fill-input.wide{width:min(190px,72vw)}}
+
+
+    /* Regla inicial: formación del Participio Pasado */
+    .participle-rule-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+    .participle-rule-card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:21px;box-shadow:0 10px 28px rgba(28,40,70,.07)}
+    .participle-rule-card h3{margin:0 0 14px;color:#1d4ed8;font-size:1.12rem}
+    .participle-formula{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;margin:0 0 12px;border-radius:16px;background:#f8fafc;font-weight:900;font-size:1.05rem}
+    .participle-formula .arrow{color:var(--orange);font-size:1.5rem}
+    .participle-note{margin-top:18px;padding:15px 17px;border-radius:17px;background:linear-gradient(135deg,#fff7ed,#fffbeb);border:1px solid #fed7aa;color:#7c2d12}
+    @media(max-width:880px){.participle-rule-grid{grid-template-columns:1fr}}
+
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <div class="hero-content">
+        <span class="eyebrow">✦ Repaso interactivo</span>
+        <h1>Participio Pasado y Pretérito Perfecto de Indicativo</h1>
+        <p class="subtitle">Formación y concordancia del Participio Pasado, participios irregulares frecuentes y práctica del Pretérito Perfecto de Indicativo.</p>
+      </div>
+    </header>
+
+    <nav class="toc" aria-label="Índice">
+      <a href="#reglas">📘 Participio Pasado</a>
+      <a href="#tarjetas">🃏 Irregulares</a>
+      <a href="#ejercicio1">✍️ Ejercicio 1</a>
+      <a href="#reglas-finales">📗 Pretérito Perfecto</a>
+      <a href="#regulares">✍️ Ejercicio 2</a>
+      <a href="#irregulares">✅ Ejercicio 3</a>
+      <a href="#ejercicio4">🔽 Ejercicio 4</a>
+      <a href="#ejercicio5">⇄ Ejercicio 5</a>
+      <a href="#ejercicio6">🌐 Ejercicio 6</a>
+      <a href="#ejercicio7">🏛️ Ejercicio 7</a>
+      <a href="#ejercicio8">✏️ Ejercicio 8</a>
+      <a href="#ejercicio9">🧳 Ejercicio 9</a>
+    </nav>
+
+    <section class="section" id="reglas">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">Как образуется и употребляется Participio Pasado</h2>
+          <p class="section-note">Participio образуется от инфинитива. Основная форма даётся в мужском роде единственного числа.</p>
+        </div>
+        <span class="badge">Regulares</span>
+      </div>
+      <div class="content">
+        <div class="participle-rule-grid">
+          <article class="participle-rule-card">
+            <h3>Verbos en -AR</h3>
+            <div class="participle-formula"><span>habl-ar</span><span class="arrow">→</span><span>hablado</span></div>
+            <p>У глаголов на <strong>-AR</strong> окончание инфинитива заменяется на <strong>-ado</strong>: estudiar → estudiado, trabajar → trabajado.</p>
+          </article>
+          <article class="participle-rule-card">
+            <h3>Verbos en -ER</h3>
+            <div class="participle-formula"><span>com-er</span><span class="arrow">→</span><span>comido</span></div>
+            <p>У глаголов на <strong>-ER</strong> окончание инфинитива заменяется на <strong>-ido</strong>: aprender → aprendido, vender → vendido.</p>
+          </article>
+          <article class="participle-rule-card">
+            <h3>Verbos en -IR</h3>
+            <div class="participle-formula"><span>viv-ir</span><span class="arrow">→</span><span>vivido</span></div>
+            <p>У глаголов на <strong>-IR</strong> окончание инфинитива заменяется на <strong>-ido</strong>: salir → salido, recibir → recibido.</p>
+          </article>
+        </div>
+        <div class="participle-note"><strong>Обратите внимание на ударение:</strong> если основа заканчивается на гласную, пишется <strong>-ído</strong>: leer → <strong>leído</strong>, caer → <strong>caído</strong>, oír → <strong>oído</strong>, traer → <strong>traído</strong>.</div>
+        <div class="participle-note">Когда participio употребляется как прилагательное, оно согласуется с существительным в роде и числе: <strong>libro cerrado, puerta cerrada, documentos cerrados, ventanas cerradas.</strong></div>
+      </div>
+    </section>
+
+    <section class="section" id="tarjetas">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">Verbos irregulares frecuentes</h2>
+          <p class="section-note">Pasa el cursor por cada tarjeta o tócala para ver la forma del participio irregular y su traducción al ruso.</p>
+        </div>
+        <span class="badge">16 tarjetas</span>
+      </div>
+      <div class="content">
+        <div class="irregular-grid" id="irregularGrid"></div>
+      </div>
+    </section>
+
+    <section class="section" id="ejercicio1">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">Ejercicio 1. Escribe la forma correcta</h2>
+          <p class="section-note">Completa con el participio correspondiente al infinitivo entre paréntesis.</p>
+        </div>
+        <span class="badge">Escribir</span>
+      </div>
+      <div class="content">
+        <div class="exercise-panel">
+          <p class="instruction">Respeta la concordancia cuando el sustantivo lo exija.</p>
+          <div class="exercise-list" id="adjectiveParticipleList"></div>
+          <div class="actions">
+            <button id="checkAdjectiveParticiple">Revisar ejercicio 1</button>
+            <button class="secondary" id="resetAdjectiveParticiple">Reiniciar</button>
+            <button class="show-btn" id="showAdjectiveParticiple">Mostrar respuestas</button>
+            <span class="score" id="adjectiveParticipleScore">0 / 16</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section copied-theory" id="reglas-finales">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">Как образуется и употребляется Pretérito Perfecto de Indicativo</h2>
+          <p class="section-note">Краткое правило на русском языке перед выполнением новых упражнений.</p>
+        </div>
+        <span class="badge">Teoría</span>
+      </div>
+      <div class="content">
+        <div class="theory-grid">
+          <article class="theory-box">
+            <h3>1. Образование</h3>
+            <p><strong>Pretérito Perfecto de Indicativo</strong> образуется при помощи глагола <strong>haber</strong> в Presente de Indicativo и причастия прошедшего времени (<strong>participio</strong>) смыслового глагола.</p>
+            <div class="formula-box">haber в настоящем времени + participio</div>
+            <table aria-label="Formas del verbo haber repetidas al final">
+              <thead><tr><th>Лицо</th><th>haber</th><th>Пример с hablar</th></tr></thead>
+              <tbody>
+                <tr><td>yo</td><td><strong>he</strong></td><td>he hablado</td></tr>
+                <tr><td>tú</td><td><strong>has</strong></td><td>has hablado</td></tr>
+                <tr><td>él / ella / usted</td><td><strong>ha</strong></td><td>ha hablado</td></tr>
+                <tr><td>nosotros/as</td><td><strong>hemos</strong></td><td>hemos hablado</td></tr>
+                <tr><td>vosotros/as</td><td><strong>habéis</strong></td><td>habéis hablado</td></tr>
+                <tr><td>ellos / ellas / ustedes</td><td><strong>han</strong></td><td>han hablado</td></tr>
+              </tbody>
+            </table>
+            <p><strong>Как образовать participio:</strong></p>
+            <ul class="rule-list">
+              <li>глаголы на <strong>-ar</strong>: основа + <strong>-ado</strong> → hablar → <strong>hablado</strong>;</li>
+              <li>глаголы на <strong>-er / -ir</strong>: основа + <strong>-ido</strong> → comer → <strong>comido</strong>, vivir → <strong>vivido</strong>.</li>
+            </ul>
+            <p><strong>Частые неправильные причастия:</strong> hacer → <strong>hecho</strong>, decir → <strong>dicho</strong>, ver → <strong>visto</strong>, poner → <strong>puesto</strong>, escribir → <strong>escrito</strong>, volver → <strong>vuelto</strong>, abrir → <strong>abierto</strong>, romper → <strong>roto</strong>.</p>
+            <div class="example-pair"><strong>He terminado el trabajo.</strong><br>Я закончил работу.</div>
+          </article>
+
+          <article class="theory-box">
+            <h3>2. Употребление</h3>
+            <p>Pretérito Perfecto de Indicativo обычно обозначает действие в прошлом, которое связано с настоящим моментом или произошло в период времени, который говорящий воспринимает как ещё не завершённый.</p>
+            <ul class="use-list">
+              <li><strong>Незавершённый временной период:</strong> hoy, esta mañana, esta semana, este mes, este año.</li>
+              <li><strong>Результат важен сейчас:</strong> действие завершилось, но его последствие актуально в настоящем.</li>
+              <li><strong>Жизненный опыт:</strong> когда важно, происходило ли что-либо когда-либо до настоящего момента.</li>
+              <li><strong>Недавнее действие или новость:</strong> событие воспринимается как близкое к настоящему.</li>
+              <li><strong>Частые маркеры:</strong> ya, todavía no, aún no, nunca, siempre, alguna vez, últimamente, recientemente.</li>
+            </ul>
+            <div class="example-pair"><strong>Hoy he hablado con Ana.</strong><br>Сегодня я поговорил с Аной. Период «сегодня» ещё не завершён.</div>
+            <div class="example-pair"><strong>¿Has estado alguna vez en España?</strong><br>Ты когда-нибудь был в Испании?</div>
+            <div class="example-pair"><strong>Ya hemos comido.</strong><br>Мы уже поели; результат важен сейчас.</div>
+            <div class="grammar-note"><strong>Важно:</strong> если речь идёт о явно завершённом прошлом периоде — например, <em>ayer</em>, <em>la semana pasada</em>, <em>en 2020</em> — в стандартном учебном противопоставлении обычно употребляется <strong>Pretérito Indefinido</strong>: <em>Ayer hablé con Ana.</em></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="regulares">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">Ejercicio 2. Participios regulares</h2>
+          <p class="section-note">Completa el Pretérito Perfecto. Escribe solamente el participio del verbo entre paréntesis.</p>
+        </div>
+        <span class="badge">12 oraciones</span>
+      </div>
+      <div class="content">
+        <div class="exercise-panel">
+          <p class="instruction">Ejemplo: <strong>Hoy he ___ con Ana. (hablar)</strong> → <strong>hablado</strong>.</p>
+          <div class="exercise-list" id="regularList"></div>
+          <div class="actions">
+            <button id="checkRegular">Revisar ejercicio 2</button>
+            <button class="secondary" id="resetRegular">Reiniciar</button>
+            <button class="show-btn" id="showRegular">Mostrar respuestas</button>
+            <span class="score" id="regularScore">0 / 12</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="irregulares">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">Ejercicio 3. Participios irregulares</h2>
+          <p class="section-note">Completa el Pretérito Perfecto. Escribe solamente el participio irregular.</p>
+        </div>
+        <span class="badge">16 verbos</span>
+      </div>
+      <div class="content">
+        <div class="exercise-panel">
+          <p class="instruction">Cada oración corresponde a una de las tarjetas anteriores. En <em>imprimir</em> y <em>freír</em> se aceptan las dos formas indicadas en las tarjetas.</p>
+          <div class="exercise-list" id="irregularList"></div>
+          <div class="actions">
+            <button id="checkIrregular">Revisar ejercicio 3</button>
+            <button class="secondary" id="resetIrregular">Reiniciar</button>
+            <button class="show-btn" id="showIrregular">Mostrar respuestas</button>
+            <span class="score" id="irregularScore">0 / 16</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="ejercicio4">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">Ejercicio 4. Completar</h2>
+          <p class="section-note">Completa cada oración con el marcador indicado y la forma correcta del Pretérito Perfecto de Indicativo del verbo entre paréntesis.</p>
+        </div>
+        <span class="badge">15 oraciones</span>
+      </div>
+      <div class="content">
+        <div class="exercise-panel">
+          <p class="instruction">En cada desplegable aparecen las <strong>6 formas</strong> del verbo en Pretérito Perfecto de Indicativo.</p>
+          <div class="exercise-list dropdown-list" id="perfectDropdownList"></div>
+          <div class="actions">
+            <button id="checkPerfectDropdown">Revisar ejercicio 4</button>
+            <button class="secondary" id="resetPerfectDropdown">Reiniciar</button>
+            <button class="show-btn" id="showPerfectDropdown">Mostrar respuestas</button>
+            <span class="score" id="perfectDropdownScore">0 / 15</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="ejercicio5">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">Ejercicio 5. Traducción ruso → español</h2>
+          <p class="section-note">Traduce al español con Pretérito Perfecto de Indicativo y el marcador temporal indicado en ruso.</p>
+        </div>
+        <span class="badge">15 pares</span>
+      </div>
+      <div class="content">
+        <div class="exercise-panel">
+          <p class="instruction">Selecciona una traducción de la columna derecha y después pulsa el espacio correspondiente. También puedes arrastrarla.</p>
+          <div class="match-layout">
+            <div class="match-prompts" id="ruEsPrompts"></div>
+            <aside class="choice-bank" aria-label="Traducciones barajadas">
+              <p class="choice-bank-title">🟥 Traducciones barajadas</p>
+              <div class="choice-list" id="ruEsBank"></div>
+            </aside>
+          </div>
+          <div class="actions">
+            <button id="checkRuEs">Revisar ejercicio 5</button>
+            <button class="secondary" id="resetRuEs">Reiniciar</button>
+            <button class="show-btn" id="showRuEs">Mostrar respuestas</button>
+            <span class="score" id="ruEsScore">0 / 15</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="ejercicio6">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">Ejercicio 6. Traducción español → ruso</h2>
+          <p class="section-note">Traduce al ruso. Mantén el uso del Pretérito Perfecto de Indicativo y de los marcadores.</p>
+        </div>
+        <span class="badge">15 pares</span>
+      </div>
+      <div class="content">
+        <div class="exercise-panel">
+          <p class="instruction">Selecciona una frase rusa de la columna derecha y después pulsa el espacio correspondiente. También puedes arrastrarla.</p>
+          <div class="match-layout">
+            <div class="match-prompts" id="esRuPrompts"></div>
+            <aside class="choice-bank" aria-label="Frases rusas barajadas">
+              <p class="choice-bank-title">🧩 Frases rusas barajadas</p>
+              <div class="choice-list" id="esRuBank"></div>
+            </aside>
+          </div>
+          <div class="actions">
+            <button id="checkEsRu">Revisar ejercicio 6</button>
+            <button class="secondary" id="resetEsRu">Reiniciar</button>
+            <button class="show-btn" id="showEsRu">Mostrar respuestas</button>
+            <span class="score" id="esRuScore">0 / 15</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="ejercicio7">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">Ejercicio 7. El primer día de Robert en Madrid</h2>
+          <p class="section-note">Robert, el amigo inglés de Luis, ha pasado su primer día en Madrid. Por la noche Luis le hace preguntas. Complétalas con el pretérito perfecto de los verbos siguientes.</p>
+        </div>
+        <span class="badge">5 respuestas</span>
+      </div>
+      <div class="content">
+        <div class="exercise-panel fill-exercise" id="photoEx6" data-score-id="photoEx6Score">
+          <div class="verb-bank" aria-label="Verbos del ejercicio 7">
+            <span class="used-verb">visitar</span><span>comer</span><span>salir</span><span>pasear</span><span>encontrar</span><span>coger</span>
+          </div>
+          <div class="source-example"><strong>0.</strong> A: Robert, ¿<strong>has visitado</strong> el Museo del Prado? &nbsp; B: No, hoy estaba cerrado.</div>
+          <div class="photo-exercise">
+            <div class="source-item"><span class="num">1</span><div class="item-text">A: ¿A qué hora <input class="fill-input" type="text" data-answer="has salido" autocomplete="off" spellcheck="false" aria-label="Ejercicio 7, respuesta 1"><span class="inline-feedback"></span> de casa? &nbsp; B: A las 11.00.</div></div>
+            <div class="source-item"><span class="num">2</span><div class="item-text">A: ¿<input class="fill-input wide" type="text" data-answer="has encontrado" autocomplete="off" spellcheck="false" aria-label="Ejercicio 7, respuesta 2"><span class="inline-feedback"></span> el libro que buscabas? &nbsp; B: Sí, en una librería del centro.</div></div>
+            <div class="source-item"><span class="num">3</span><div class="item-text">A: ¿Dónde <input class="fill-input" type="text" data-answer="has comido" autocomplete="off" spellcheck="false" aria-label="Ejercicio 7, respuesta 3"><span class="inline-feedback"></span>? &nbsp; B: En una bocatería de la Gran Vía.</div></div>
+            <div class="source-item"><span class="num">4</span><div class="item-text">A: ¿<input class="fill-input" type="text" data-answer="has paseado" autocomplete="off" spellcheck="false" aria-label="Ejercicio 7, respuesta 4"><span class="inline-feedback"></span> por el Parque del Retiro? &nbsp; B: Sí, después de comer.</div></div>
+            <div class="source-item"><span class="num">5</span><div class="item-text">A: ¿<input class="fill-input" type="text" data-answer="has cogido" autocomplete="off" spellcheck="false" aria-label="Ejercicio 7, respuesta 5"><span class="inline-feedback"></span> el metro para volver? &nbsp; B: Sí, en la estación Sol.</div></div>
+          </div>
+          <div class="actions">
+            <button type="button" data-fill-action="check" data-target="photoEx6">Revisar ejercicio 7</button>
+            <button type="button" class="secondary" data-fill-action="reset" data-target="photoEx6">Reiniciar</button>
+            <button type="button" class="show-btn" data-fill-action="show" data-target="photoEx6">Mostrar respuestas</button>
+            <span class="score" id="photoEx6Score">0 / 5</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="ejercicio8">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">Ejercicio 8. Completa con el pretérito perfecto</h2>
+          <p class="section-note">Completa con el pretérito perfecto del verbo entre paréntesis.</p>
+        </div>
+        <span class="badge">8 respuestas</span>
+      </div>
+      <div class="content">
+        <div class="exercise-panel fill-exercise" id="photoEx7" data-score-id="photoEx7Score">
+          <div class="source-example"><strong>0.</strong> A: ¿<em>(Ver, vosotros)</em> <strong>Habéis visto</strong> el cielo? &nbsp; B: Está muy nublado.</div>
+          <div class="photo-exercise">
+            <div class="source-item"><span class="num">1</span><div class="item-text">A: ¿Por qué estás triste? &nbsp; B: <em>(Morir)</em> <input class="fill-input" type="text" data-answer="ha muerto" autocomplete="off" spellcheck="false" aria-label="Ejercicio 8, respuesta 1"><span class="inline-feedback"></span> mi gata Clarita.</div></div>
+            <div class="source-item"><span class="num">2</span><div class="item-text"><em>(Discutir, nosotros)</em> <input class="fill-input wide" type="text" data-answer="hemos discutido" autocomplete="off" spellcheck="false" aria-label="Ejercicio 8, respuesta 2"><span class="inline-feedback"></span> tres horas pero no <em>(resolver, nosotros)</em> <input class="fill-input wide" type="text" data-answer="hemos resuelto" autocomplete="off" spellcheck="false" aria-label="Ejercicio 8, respuesta 3"><span class="inline-feedback"></span> el problema.</div></div>
+            <div class="source-item"><span class="num">3</span><div class="item-text">Recientemente los arqueólogos <em>(descubrir)</em> <input class="fill-input wide" type="text" data-answer="han descubierto" autocomplete="off" spellcheck="false" aria-label="Ejercicio 8, respuesta 4"><span class="inline-feedback"></span> momias muy antiguas en Perú.</div></div>
+            <div class="source-item"><span class="num">4</span><div class="item-text">Ricardo, ¿dónde <em>(poner, tú)</em> <input class="fill-input" type="text" data-answer="has puesto" autocomplete="off" spellcheck="false" aria-label="Ejercicio 8, respuesta 5"><span class="inline-feedback"></span> las llaves del coche?</div></div>
+            <div class="source-item"><span class="num">5</span><div class="item-text">¿Qué <em>(decir, ellos)</em> <input class="fill-input" type="text" data-answer="han dicho" autocomplete="off" spellcheck="false" aria-label="Ejercicio 8, respuesta 6"><span class="inline-feedback"></span>? No <em>(entender, yo)</em> <input class="fill-input wide" type="text" data-answer="he entendido" autocomplete="off" spellcheck="false" aria-label="Ejercicio 8, respuesta 7"><span class="inline-feedback"></span> nada.</div></div>
+            <div class="source-item"><span class="num">6</span><div class="item-text"><em>(Abrir, yo)</em> <input class="fill-input" type="text" data-answer="he abierto" autocomplete="off" spellcheck="false" aria-label="Ejercicio 8, respuesta 8"><span class="inline-feedback"></span> la ventana porque hace calor. ¿Te molesta?</div></div>
+          </div>
+          <div class="actions">
+            <button type="button" data-fill-action="check" data-target="photoEx7">Revisar ejercicio 8</button>
+            <button type="button" class="secondary" data-fill-action="reset" data-target="photoEx7">Reiniciar</button>
+            <button type="button" class="show-btn" data-fill-action="show" data-target="photoEx7">Mostrar respuestas</button>
+            <span class="score" id="photoEx7Score">0 / 8</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="ejercicio9">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">Ejercicio 9. Carmen prepara las vacaciones</h2>
+          <p class="section-note">Carmen y su familia salen de vacaciones mañana. Carmen controla si todo está listo. Completa los diálogos con el pretérito perfecto del verbo entre paréntesis.</p>
+        </div>
+        <span class="badge">9 respuestas</span>
+      </div>
+      <div class="content">
+        <div class="exercise-panel fill-exercise" id="photoEx8" data-score-id="photoEx8Score">
+          <div class="photo-exercise">
+            <div class="source-item"><span class="num">1</span><div class="item-text">
+              <div class="dialogue-line">Carmen: Sara, ¿<em>(terminar)</em> <strong style="color:#2563eb">has terminado</strong> con la maleta?</div>
+              <div class="dialogue-line">Sara: Sí, la <em>(hacer)</em> <input class="fill-input" type="text" data-answer="he hecho" autocomplete="off" spellcheck="false" aria-label="Ejercicio 9, respuesta 1"><span class="inline-feedback"></span> y <em>(deshacer)</em> <input class="fill-input wide" type="text" data-answer="he deshecho" autocomplete="off" spellcheck="false" aria-label="Ejercicio 9, respuesta 2"><span class="inline-feedback"></span> tres veces.</div>
+            </div></div>
+            <div class="source-item"><span class="num">2</span><div class="item-text">
+              <div class="dialogue-line">Carmen: Chicos, ¿les <em>(escribir, vosotros)</em> <input class="fill-input wide" type="text" data-answer="habéis escrito" autocomplete="off" spellcheck="false" aria-label="Ejercicio 9, respuesta 3"><span class="inline-feedback"></span> la nota a los abuelos?</div>
+              <div class="dialogue-line">Chicos: Sí, la <em>(poner, nosotros)</em> <input class="fill-input wide" type="text" data-answer="hemos puesto" autocomplete="off" spellcheck="false" aria-label="Ejercicio 9, respuesta 4"><span class="inline-feedback"></span> sobre la mesa.</div>
+            </div></div>
+            <div class="source-item"><span class="num">3</span><div class="item-text">
+              <div class="dialogue-line">Carmen: Sara, ¿<em>(avisar, tú)</em> <input class="fill-input" type="text" data-answer="has avisado" autocomplete="off" spellcheck="false" aria-label="Ejercicio 9, respuesta 5"><span class="inline-feedback"></span> a los vecinos?</div>
+              <div class="dialogue-line">Sara: Sí, les <em>(decir, yo)</em> <input class="fill-input" type="text" data-answer="he dicho" autocomplete="off" spellcheck="false" aria-label="Ejercicio 9, respuesta 6"><span class="inline-feedback"></span> que nos vamos mañana por la mañana.</div>
+            </div></div>
+            <div class="source-item"><span class="num">4</span><div class="item-text">
+              <div class="dialogue-line">Iñaqui: Mamá, <em>(abrir, yo)</em> <input class="fill-input" type="text" data-answer="he abierto" autocomplete="off" spellcheck="false" aria-label="Ejercicio 9, respuesta 7"><span class="inline-feedback"></span> la ventanilla del jardín para el gato. ¿Podemos ir a dormir ahora?</div>
+              <div class="dialogue-line">Carmen: Creo que sí, lo <em>(hacer, nosotros)</em> <input class="fill-input wide" type="text" data-answer="hemos hecho" autocomplete="off" spellcheck="false" aria-label="Ejercicio 9, respuesta 8"><span class="inline-feedback"></span> todo. Pero yo estoy preocupada; son las 12.00 de la noche y Alicia no <em>(volver)</em> <input class="fill-input" type="text" data-answer="ha vuelto" autocomplete="off" spellcheck="false" aria-label="Ejercicio 9, respuesta 9"><span class="inline-feedback"></span> todavía.</div>
+            </div></div>
+          </div>
+          <div class="actions">
+            <button type="button" data-fill-action="check" data-target="photoEx8">Revisar ejercicio 9</button>
+            <button type="button" class="secondary" data-fill-action="reset" data-target="photoEx8">Reiniciar</button>
+            <button type="button" class="show-btn" data-fill-action="show" data-target="photoEx8">Mostrar respuestas</button>
+            <span class="score" id="photoEx8Score">0 / 9</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <p class="footer-tip">Consejo: identifica primero la forma de <strong>haber</strong> y después forma o recuerda el <strong>participio</strong>.</p>
+  </main>
+
+  <script>
+    const irregulars = [
+      ['abrir','abierto','открытый'],
+      ['cubrir','cubierto','покрытый'],
+      ['decir','dicho','сказанный'],
+      ['escribir','escrito','написанный'],
+      ['hacer','hecho','сделанный'],
+      ['morir','muerto','умерший'],
+      ['poner','puesto','положенный'],
+      ['resolver','resuelto','решённый'],
+      ['romper','roto','сломанный'],
+      ['ver','visto','увиденный'],
+      ['volver','vuelto','вернувшийся'],
+      ['devolver','devuelto','возвращённый'],
+      ['descubrir','descubierto','открытый / обнаруженный'],
+      ['componer','compuesto','составленный'],
+      ['imprimir','impreso / imprimido','напечатанный'],
+      ['freír','frito / freído','жареный']
+    ];
+
+    const adjectiveParticipleItems = [
+      {text:'La puerta ___ (cerrar).', answers:['cerrada']},
+      {text:'Los libros ___ (abrir).', answers:['abiertos']},
+      {text:'La tarea ___ (hacer).', answers:['hecha']},
+      {text:'El vaso ___ (romper).', answers:['roto']},
+      {text:'Las cartas ___ (escribir).', answers:['escritas']},
+      {text:'El documento ___ (imprimir).', answers:['impreso','imprimido']},
+      {text:'Los problemas ___ (resolver).', answers:['resueltos']},
+      {text:'La comida ___ (freír).', answers:['frita','freída']},
+      {text:'El niño ___ (dormir).', answers:['dormido']},
+      {text:'Las palabras ___ (decir).', answers:['dichas']},
+      {text:'El informe ___ (traducir).', answers:['traducido']},
+      {text:'La señal ___ (ver).', answers:['vista']},
+      {text:'Los regalos ___ (envolver).', answers:['envueltos']},
+      {text:'La carta ___ (leer).', answers:['leída']},
+      {text:'Las hojas ___ (caer).', answers:['caídas']},
+      {text:'El ejercicio ___ (terminar).', answers:['terminado']}
+    ];
+
+    const regularItems = [
+      {text:'Hoy he ___ con mi profesor. (hablar)', answers:['hablado']},
+      {text:'Esta semana hemos ___ mucho español. (estudiar)', answers:['estudiado']},
+      {text:'¿Ya has ___ el desayuno? (preparar)', answers:['preparado']},
+      {text:'Mis amigos han ___ en un restaurante nuevo. (comer)', answers:['comido']},
+      {text:'Este mes ella ha ___ dos libros. (comprar)', answers:['comprado']},
+      {text:'Todavía no habéis ___ el ejercicio. (terminar)', answers:['terminado']},
+      {text:'Últimamente he ___ más agua. (beber)', answers:['bebido']},
+      {text:'¿Alguna vez has ___ en otro país? (vivir)', answers:['vivido']},
+      {text:'Hoy los estudiantes han ___ muchas preguntas. (preguntar)', answers:['preguntado']},
+      {text:'Esta mañana hemos ___ un correo importante. (recibir)', answers:['recibido']},
+      {text:'Ya he ___ la gramática de esta unidad. (aprender)', answers:['aprendido']},
+      {text:'Este año ustedes han ___ mucho. (trabajar)', answers:['trabajado']}
+    ];
+
+    const irregularItems = [
+      {text:'Hoy he ___ la ventana porque hace calor. (abrir)', answers:['abierto']},
+      {text:'Esta mañana las nubes han ___ el cielo. (cubrir)', answers:['cubierto']},
+      {text:'Ya te he ___ la verdad. (decir)', answers:['dicho']},
+      {text:'¿Has ___ el mensaje para Ana? (escribir)', answers:['escrito']},
+      {text:'Esta semana hemos ___ muchos ejercicios. (hacer)', answers:['hecho']},
+      {text:'La planta ha ___ por falta de agua. (morir)', answers:['muerto']},
+      {text:'¿Dónde has ___ las llaves? (poner)', answers:['puesto']},
+      {text:'Los estudiantes ya han ___ el problema. (resolver)', answers:['resuelto']},
+      {text:'Mi hermano ha ___ su teléfono. (romper)', answers:['roto']},
+      {text:'¿Ustedes ya han ___ esta película? (ver)', answers:['visto']},
+      {text:'Mis padres ya han ___ de vacaciones. (volver)', answers:['vuelto']},
+      {text:'Hoy he ___ el libro a la biblioteca. (devolver)', answers:['devuelto']},
+      {text:'Los científicos han ___ algo interesante. (descubrir)', answers:['descubierto']},
+      {text:'Ella ha ___ una canción nueva. (componer)', answers:['compuesto']},
+      {text:'Ya hemos ___ todos los documentos. (imprimir)', answers:['impreso','imprimido']},
+      {text:'Esta noche mi padre ha ___ las patatas. (freír)', answers:['frito','freído']}
+    ];
+
+    const perfectDropdownItems = [
+      {before:'Siempre (nosotros)', verb:'cocinar', participle:'cocinado', after:'comida italiana.', correct:'hemos cocinado'},
+      {before:'Ellos todavía no', verb:'acompañar', participle:'acompañado', after:'a su madre al hospital.', correct:'han acompañado'},
+      {before:'¿Ya (tú)', verb:'cobrar', participle:'cobrado', after:'el dinero del trabajo?', correct:'has cobrado'},
+      {before:'Nunca (yo)', verb:'olvidar', participle:'olvidado', after:'las llaves en casa.', correct:'he olvidado'},
+      {before:'Mis amigos siempre', verb:'preferir', participle:'preferido', after:'viajar a la playa.', correct:'han preferido'},
+      {before:'¿Ustedes ya', verb:'ver', participle:'visto', after:'la peli en el cine?', correct:'han visto'},
+      {before:'Aún no (nosotros)', verb:'buscar', participle:'buscado', after:'la parada de autobús.', correct:'hemos buscado'},
+      {before:'Ella todavía no', verb:'lavar', participle:'lavado', after:'los platos después de la cena.', correct:'ha lavado'},
+      {before:'¿Ustedes ya', verb:'volver', participle:'vuelto', after:'a casa?', correct:'han vuelto'},
+      {before:'Nunca (yo)', verb:'hacer', participle:'hecho', after:'fotos del monumento.', correct:'he hecho'},
+      {before:'Este invierno todavía no', verb:'llover', participle:'llovido', after:'en nuestra ciudad.', correct:'ha llovido'},
+      {before:'Ellos nunca', verb:'conocer', participle:'conocido', after:'Barcelona.', correct:'han conocido'},
+      {before:'Todavía no (nosotros)', verb:'ver', participle:'visto', after:'la tele.', correct:'hemos visto'},
+      {before:'Ella ya', verb:'poner', participle:'puesto', after:'la mesa.', correct:'ha puesto'},
+      {before:'Usted nunca', verb:'dirigir', participle:'dirigido', after:'una compañía grande.', correct:'ha dirigido'}
+    ];
+
+    const ruEsItems = [
+      {prompt:'Я ещё не видел этот фильм.', answer:'Todavía no he visto esta película.'},
+      {prompt:'Ты уже приготовил ужин?', answer:'¿Ya has preparado la cena?'},
+      {prompt:'Мы никогда не работали по выходным.', answer:'Nunca hemos trabajado los fines de semana.'},
+      {prompt:'Они всегда забывали ключи.', answer:'Ellos siempre han olvidado las llaves.'},
+      {prompt:'Она ещё не пошла на работу.', answer:'Ella todavía no ha ido al trabajo.'},
+      {prompt:'Вы уже накрыли на стол?', answer:'¿Ustedes ya han puesto la mesa?'},
+      {prompt:'Он никогда не искал этот супермаркет.', answer:'Él nunca ha buscado este supermercado.'},
+      {prompt:'Я всегда предпочитал отдыхать на пляже.', answer:'Siempre he preferido descansar en la playa.'},
+      {prompt:'Ты уже сделал фото музея?', answer:'¿Ya has sacado fotos del museo?'},
+      {prompt:'Мы ещё не смотрели телевизор сегодня.', answer:'Todavía no hemos visto la tele hoy.'},
+      {prompt:'Она никогда не сопровождала маму в больницу.', answer:'Ella nunca ha acompañado a su madre al hospital.'},
+      {prompt:'Вы уже вернулись домой?', answer:'¿Ustedes ya han vuelto a casa?'},
+      {prompt:'Я ещё не положил карточку в кошелёк.', answer:'Todavía no he puesto la tarjeta en la billetera.'},
+      {prompt:'Он всегда знал ответ.', answer:'Él siempre ha sabido la respuesta.'},
+      {prompt:'Они уже посмотрели фильм в кино.', answer:'Ellos ya han visto la película en el cine.'}
+    ];
+
+    const ruEsBank = [
+      '¿Ya has sacado fotos del museo?',
+      'Él siempre ha sabido la respuesta.',
+      'Todavía no he puesto la tarjeta en la billetera.',
+      '¿Ya has preparado la cena?',
+      'Todavía no he visto esta película.',
+      '¿Ustedes ya han vuelto a casa?',
+      'Todavía no hemos visto la tele hoy.',
+      '¿Ustedes ya han puesto la mesa?',
+      'Ella nunca ha acompañado a su madre al hospital.',
+      'Ella todavía no ha ido al trabajo.',
+      'Ellos siempre han olvidado las llaves.',
+      'Nunca hemos trabajado los fines de semana.',
+      'Siempre he preferido descansar en la playa.',
+      'Ellos ya han visto la película en el cine.',
+      'Él nunca ha buscado este supermercado.'
+    ];
+
+    const esRuItems = [
+      {prompt:'¿Ya has puesto la mesa?', answer:'Ты уже накрыл на стол?'},
+      {prompt:'Hoy no hemos visto la tele todavía.', answer:'Сегодня мы ещё не смотрели телевизор.'},
+      {prompt:'Ellos siempre han preferido descansar en la playa.', answer:'Они всегда предпочитали отдыхать на пляже.'},
+      {prompt:'Nunca hemos buscado este supermercado.', answer:'Мы никогда не искали этот супермаркет.'},
+      {prompt:'Aún no me he encontrado con mis amigos.', answer:'Я ещё не встретился со своими друзьями.'},
+      {prompt:'¿Ya has cobrado el dinero del trabajo?', answer:'Ты уже получил деньги за работу?'},
+      {prompt:'Mis padres nunca han almorzado en ese restaurante.', answer:'Мои родители никогда не обедали в этом ресторане.'},
+      {prompt:'Ya hemos trabajado dos turnos esta semana.', answer:'На этой неделе мы уже отработали две смены.'},
+      {prompt:'Todavía no he lavado los platos después de la cena.', answer:'Я ещё не помыл посуду после ужина.'},
+      {prompt:'Siempre hemos visto los monumentos en cada ciudad.', answer:'Мы всегда осматривали памятники в каждом городе.'},
+      {prompt:'Nunca he necesitado una tarjeta de crédito.', answer:'Мне никогда не была нужна кредитная карта.'},
+      {prompt:'¿Ya has sacado fotos en el parque?', answer:'Ты уже сделал фотографии в парке?'},
+      {prompt:'Aún no ha llovido este invierno.', answer:'Этой зимой ещё не шёл дождь.'},
+      {prompt:'Siempre hemos creído que es fácil.', answer:'Мы всегда считали, что это легко.'},
+      {prompt:'Nunca hemos conocido Barcelona.', answer:'Мы никогда не были в Барселоне.'}
+    ];
+
+    const esRuBank = [
+      'На этой неделе мы уже отработали две смены.',
+      'Сегодня мы ещё не смотрели телевизор.',
+      'Мы никогда не были в Барселоне.',
+      'Мы всегда осматривали памятники в каждом городе.',
+      'Я ещё не встретился со своими друзьями.',
+      'Мы никогда не искали этот супермаркет.',
+      'Мы всегда считали, что это легко.',
+      'Ты уже накрыл на стол?',
+      'Мне никогда не была нужна кредитная карта.',
+      'Мои родители никогда не обедали в этом ресторане.',
+      'Ты уже получил деньги за работу?',
+      'Они всегда предпочитали отдыхать на пляже.',
+      'Ты уже сделал фотографии в парке?',
+      'Я ещё не помыл посуду после ужина.',
+      'Этой зимой ещё не шёл дождь.'
+    ];
+
+    const matchState = {
+      ruEs: {selected:null, assignments:Array(ruEsItems.length).fill(null)},
+      esRu: {selected:null, assignments:Array(esRuItems.length).fill(null)}
+    };
+
+    function normalize(text){
+      return (text || '').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ');
+    }
+
+    function renderCards(){
+      const grid = document.getElementById('irregularGrid');
+      grid.innerHTML = '';
+      irregulars.forEach(([inf,part,meaning]) => {
+        const card = document.createElement('article');
+        card.className = 'flip-card';
+        card.tabIndex = 0;
+        card.setAttribute('role','button');
+        card.setAttribute('aria-label',`${inf}: mostrar participio`);
+        card.innerHTML = `
+          <div class="flip-inner">
+            <div class="flip-front">
+              <div class="verb">${inf}</div>
+              <div class="meaning">Pasa el cursor o toca</div>
+            </div>
+            <div class="flip-back">
+              <div class="participle">${part}</div>
+              <div class="mini">${meaning}</div>
+            </div>
+          </div>`;
+        card.addEventListener('click',()=>card.classList.toggle('is-flipped'));
+        card.addEventListener('keydown',e=>{
+          if(e.key === 'Enter' || e.key === ' '){e.preventDefault();card.classList.toggle('is-flipped');}
+        });
+        grid.appendChild(card);
+      });
+    }
+
+    function renderExercise(listId,items,scoreId){
+      const list = document.getElementById(listId);
+      list.innerHTML = '';
+      items.forEach((item,index)=>{
+        const row = document.createElement('div');
+        row.className = 'exercise-item';
+        const sentenceHTML = item.text.replace('___','<input class="answer" type="text" autocomplete="off" spellcheck="false" aria-label="Respuesta" />');
+        row.innerHTML = `<span class="num">${index+1}</span><span class="sentence">${sentenceHTML}</span><span class="feedback"></span>`;
+        const input = row.querySelector('input');
+        input.dataset.answers = item.answers.join('|');
+        list.appendChild(row);
+      });
+      const score = document.getElementById(scoreId);
+      score.textContent = `0 / ${items.length}`;
+      score.classList.remove('perfect');
+    }
+
+    function checkExercise(listId,items,scoreId){
+      let correct = 0;
+      document.querySelectorAll(`#${listId} .exercise-item`).forEach(row=>{
+        const input = row.querySelector('input.answer');
+        const feedback = row.querySelector('.feedback');
+        const valid = input.dataset.answers.split('|').map(normalize);
+        const ok = valid.includes(normalize(input.value));
+        input.classList.remove('correct','incorrect');
+        feedback.className = 'feedback ' + (ok ? 'ok' : 'bad');
+        if(ok){
+          correct++;
+          input.classList.add('correct');
+          feedback.textContent = '✓';
+        }else{
+          input.classList.add('incorrect');
+          feedback.textContent = '✗ ' + input.dataset.answers.replaceAll('|',' / ');
+        }
+      });
+      const score = document.getElementById(scoreId);
+      score.textContent = `${correct} / ${items.length}`;
+      score.classList.toggle('perfect',correct === items.length);
+    }
+
+    function resetExercise(listId,items,scoreId){
+      renderExercise(listId,items,scoreId);
+    }
+
+    function showExerciseAnswers(listId,items,scoreId){
+      document.querySelectorAll(`#${listId} .exercise-item`).forEach((row,index)=>{
+        const input = row.querySelector('input.answer');
+        const feedback = row.querySelector('.feedback');
+        input.value = items[index].answers[0];
+        input.classList.remove('incorrect');
+        input.classList.add('correct');
+        feedback.className = 'feedback ok';
+        feedback.textContent = '✓';
+      });
+      const score = document.getElementById(scoreId);
+      score.textContent = `${items.length} / ${items.length}`;
+      score.classList.add('perfect');
+    }
+
+    function sixPerfectForms(participle){
+      return ['he','has','ha','hemos','habéis','han'].map(aux=>`${aux} ${participle}`);
+    }
+
+    function renderPerfectDropdown(){
+      const list = document.getElementById('perfectDropdownList');
+      list.innerHTML = '';
+      perfectDropdownItems.forEach((item,index)=>{
+        const row = document.createElement('div');
+        row.className = 'exercise-item';
+        const select = document.createElement('select');
+        select.className = 'pp-select';
+        select.setAttribute('aria-label',`Forma de ${item.verb}`);
+        select.dataset.correct = item.correct;
+        select.innerHTML = '<option value="">— selecciona —</option>' + sixPerfectForms(item.participle).map(form=>`<option value="${form}">${form}</option>`).join('');
+        const sentence = document.createElement('span');
+        sentence.className = 'sentence';
+        const before = document.createElement('span'); before.textContent = item.before;
+        const verb = document.createElement('strong'); verb.textContent = `(${item.verb})`;
+        const after = document.createElement('span'); after.textContent = item.after;
+        sentence.append(before, select, verb, after);
+        const feedback = document.createElement('span'); feedback.className = 'feedback';
+        row.innerHTML = `<span class="num">${index+1}</span>`;
+        row.append(sentence, feedback);
+        list.appendChild(row);
+      });
+      const score = document.getElementById('perfectDropdownScore');
+      score.textContent = `0 / ${perfectDropdownItems.length}`;
+      score.classList.remove('perfect');
+    }
+
+    function checkPerfectDropdown(){
+      let correct = 0;
+      document.querySelectorAll('#perfectDropdownList .exercise-item').forEach(row=>{
+        const select = row.querySelector('select');
+        const feedback = row.querySelector('.feedback');
+        const ok = normalize(select.value) === normalize(select.dataset.correct);
+        select.classList.remove('correct','incorrect');
+        feedback.className = 'feedback ' + (ok ? 'ok' : 'bad');
+        if(ok){correct++;select.classList.add('correct');feedback.textContent='✓';}
+        else{select.classList.add('incorrect');feedback.textContent='✗ ' + select.dataset.correct;}
+      });
+      const score = document.getElementById('perfectDropdownScore');
+      score.textContent = `${correct} / ${perfectDropdownItems.length}`;
+      score.classList.toggle('perfect',correct === perfectDropdownItems.length);
+    }
+
+    function showPerfectDropdown(){
+      document.querySelectorAll('#perfectDropdownList .exercise-item').forEach(row=>{
+        const select = row.querySelector('select');
+        select.value = select.dataset.correct;
+        select.classList.remove('incorrect');
+        select.classList.add('correct');
+        const feedback = row.querySelector('.feedback');
+        feedback.className = 'feedback ok';
+        feedback.textContent = '✓';
+      });
+      const score = document.getElementById('perfectDropdownScore');
+      score.textContent = `${perfectDropdownItems.length} / ${perfectDropdownItems.length}`;
+      score.classList.add('perfect');
+    }
+
+    function clearMatchFeedback(row){
+      row.classList.remove('correct','incorrect');
+      const fb = row.querySelector('.match-feedback');
+      fb.className = 'match-feedback';
+      fb.textContent = '';
+    }
+
+    function renderMatchExercise(key,promptsId,bankId,items,bank,scoreId){
+      const state = matchState[key];
+      state.selected = null;
+      state.assignments = Array(items.length).fill(null);
+      const prompts = document.getElementById(promptsId);
+      const bankEl = document.getElementById(bankId);
+      prompts.innerHTML = '';
+      bankEl.innerHTML = '';
+
+      items.forEach((item,index)=>{
+        const row = document.createElement('div');
+        row.className = 'match-row';
+        row.dataset.index = index;
+        row.innerHTML = `<span class="num">${index+1}</span><div class="match-prompt">${item.prompt}</div>`;
+        const slotWrap = document.createElement('div');
+        const slot = document.createElement('button');
+        slot.type = 'button';
+        slot.className = 'drop-slot';
+        slot.textContent = 'Suelta aquí la respuesta';
+        slot.setAttribute('aria-label',`Respuesta para el ítem ${index+1}`);
+        const fb = document.createElement('div');
+        fb.className = 'match-feedback';
+        slotWrap.append(slot,fb);
+        row.appendChild(slotWrap);
+        prompts.appendChild(row);
+
+        slot.addEventListener('click',()=>{
+          if(state.selected !== null) assignChoice(key,index,state.selected,bankId,promptsId);
+          else if(state.assignments[index] !== null) releaseChoice(key,index,bankId,promptsId);
+        });
+        slot.addEventListener('dragover',e=>e.preventDefault());
+        slot.addEventListener('drop',e=>{
+          e.preventDefault();
+          const choiceIndex = Number(e.dataTransfer.getData('text/plain'));
+          if(Number.isInteger(choiceIndex)) assignChoice(key,index,choiceIndex,bankId,promptsId);
+        });
+      });
+
+      bank.forEach((text,index)=>{
+        const chip = document.createElement('button');
+        chip.type = 'button';
+        chip.className = 'choice-chip';
+        chip.textContent = text;
+        chip.draggable = true;
+        chip.dataset.choiceIndex = index;
+        chip.addEventListener('click',()=>selectChoice(key,index,bankId));
+        chip.addEventListener('dragstart',e=>e.dataTransfer.setData('text/plain',String(index)));
+        bankEl.appendChild(chip);
+      });
+
+      const score = document.getElementById(scoreId);
+      score.textContent = `0 / ${items.length}`;
+      score.classList.remove('perfect');
+    }
+
+    function selectChoice(key,choiceIndex,bankId){
+      const state = matchState[key];
+      state.selected = state.selected === choiceIndex ? null : choiceIndex;
+      document.querySelectorAll(`#${bankId} .choice-chip`).forEach(chip=>{
+        chip.classList.toggle('selected',Number(chip.dataset.choiceIndex) === state.selected);
+      });
+    }
+
+    function releaseChoice(key,rowIndex,bankId,promptsId){
+      const state = matchState[key];
+      state.assignments[rowIndex] = null;
+      updateMatchUI(key,bankId,promptsId);
+    }
+
+    function assignChoice(key,rowIndex,choiceIndex,bankId,promptsId){
+      const state = matchState[key];
+      const oldRow = state.assignments.findIndex(v=>v === choiceIndex);
+      if(oldRow !== -1) state.assignments[oldRow] = null;
+      state.assignments[rowIndex] = choiceIndex;
+      state.selected = null;
+      updateMatchUI(key,bankId,promptsId);
+    }
+
+    function updateMatchUI(key,bankId,promptsId){
+      const state = matchState[key];
+      const bank = key === 'ruEs' ? ruEsBank : esRuBank;
+      document.querySelectorAll(`#${bankId} .choice-chip`).forEach(chip=>{
+        const idx = Number(chip.dataset.choiceIndex);
+        chip.classList.toggle('used',state.assignments.includes(idx));
+        chip.classList.toggle('selected',idx === state.selected);
+      });
+      document.querySelectorAll(`#${promptsId} .match-row`).forEach((row,rowIndex)=>{
+        clearMatchFeedback(row);
+        const slot = row.querySelector('.drop-slot');
+        const choiceIndex = state.assignments[rowIndex];
+        if(choiceIndex === null){slot.textContent='Suelta aquí la respuesta';slot.classList.remove('filled');}
+        else{slot.textContent=bank[choiceIndex];slot.classList.add('filled');}
+      });
+    }
+
+    function checkMatchExercise(key,promptsId,items,bank,scoreId){
+      const state = matchState[key];
+      let correct = 0;
+      document.querySelectorAll(`#${promptsId} .match-row`).forEach((row,index)=>{
+        const choiceIndex = state.assignments[index];
+        const value = choiceIndex === null ? '' : bank[choiceIndex];
+        const ok = normalize(value) === normalize(items[index].answer);
+        row.classList.remove('correct','incorrect');
+        row.classList.add(ok ? 'correct' : 'incorrect');
+        const fb = row.querySelector('.match-feedback');
+        fb.className = 'match-feedback ' + (ok ? 'ok' : 'bad');
+        if(ok){correct++;fb.textContent='✓';}
+        else{fb.textContent='✗ Respuesta: ' + items[index].answer;}
+      });
+      const score = document.getElementById(scoreId);
+      score.textContent = `${correct} / ${items.length}`;
+      score.classList.toggle('perfect',correct === items.length);
+    }
+
+    function showMatchAnswers(key,promptsId,bankId,items,bank,scoreId){
+      const state = matchState[key];
+      state.assignments = items.map(item=>bank.findIndex(choice=>normalize(choice) === normalize(item.answer)));
+      state.selected = null;
+      updateMatchUI(key,bankId,promptsId);
+      document.querySelectorAll(`#${promptsId} .match-row`).forEach(row=>{
+        row.classList.add('correct');
+        const fb = row.querySelector('.match-feedback');
+        fb.className = 'match-feedback ok';
+        fb.textContent = '✓';
+      });
+      const score = document.getElementById(scoreId);
+      score.textContent = `${items.length} / ${items.length}`;
+      score.classList.add('perfect');
+    }
+
+    document.getElementById('checkAdjectiveParticiple').addEventListener('click',()=>checkExercise('adjectiveParticipleList',adjectiveParticipleItems,'adjectiveParticipleScore'));
+    document.getElementById('resetAdjectiveParticiple').addEventListener('click',()=>resetExercise('adjectiveParticipleList',adjectiveParticipleItems,'adjectiveParticipleScore'));
+    document.getElementById('showAdjectiveParticiple').addEventListener('click',()=>showExerciseAnswers('adjectiveParticipleList',adjectiveParticipleItems,'adjectiveParticipleScore'));
+
+    document.getElementById('checkRegular').addEventListener('click',()=>checkExercise('regularList',regularItems,'regularScore'));
+    document.getElementById('resetRegular').addEventListener('click',()=>resetExercise('regularList',regularItems,'regularScore'));
+    document.getElementById('showRegular').addEventListener('click',()=>showExerciseAnswers('regularList',regularItems,'regularScore'));
+    document.getElementById('checkIrregular').addEventListener('click',()=>checkExercise('irregularList',irregularItems,'irregularScore'));
+    document.getElementById('resetIrregular').addEventListener('click',()=>resetExercise('irregularList',irregularItems,'irregularScore'));
+    document.getElementById('showIrregular').addEventListener('click',()=>showExerciseAnswers('irregularList',irregularItems,'irregularScore'));
+
+    document.getElementById('checkPerfectDropdown').addEventListener('click',checkPerfectDropdown);
+    document.getElementById('resetPerfectDropdown').addEventListener('click',renderPerfectDropdown);
+    document.getElementById('showPerfectDropdown').addEventListener('click',showPerfectDropdown);
+
+    document.getElementById('checkRuEs').addEventListener('click',()=>checkMatchExercise('ruEs','ruEsPrompts',ruEsItems,ruEsBank,'ruEsScore'));
+    document.getElementById('resetRuEs').addEventListener('click',()=>renderMatchExercise('ruEs','ruEsPrompts','ruEsBank',ruEsItems,ruEsBank,'ruEsScore'));
+    document.getElementById('showRuEs').addEventListener('click',()=>showMatchAnswers('ruEs','ruEsPrompts','ruEsBank',ruEsItems,ruEsBank,'ruEsScore'));
+
+    document.getElementById('checkEsRu').addEventListener('click',()=>checkMatchExercise('esRu','esRuPrompts',esRuItems,esRuBank,'esRuScore'));
+    document.getElementById('resetEsRu').addEventListener('click',()=>renderMatchExercise('esRu','esRuPrompts','esRuBank',esRuItems,esRuBank,'esRuScore'));
+    document.getElementById('showEsRu').addEventListener('click',()=>showMatchAnswers('esRu','esRuPrompts','esRuBank',esRuItems,esRuBank,'esRuScore'));
+
+
+    function getFillInputs(panelId){
+      return Array.from(document.querySelectorAll(`#${panelId} input.fill-input`));
+    }
+
+    function clearFillFeedback(input){
+      input.classList.remove('correct','incorrect');
+      const fb = input.nextElementSibling;
+      if(fb && fb.classList.contains('inline-feedback')){
+        fb.className = 'inline-feedback';
+        fb.textContent = '';
+      }
+    }
+
+    function checkFillExercise(panelId){
+      const panel = document.getElementById(panelId);
+      const inputs = getFillInputs(panelId);
+      let correct = 0;
+      inputs.forEach(input=>{
+        const ok = normalize(input.value) === normalize(input.dataset.answer);
+        clearFillFeedback(input);
+        input.classList.add(ok ? 'correct' : 'incorrect');
+        const fb = input.nextElementSibling;
+        if(fb && fb.classList.contains('inline-feedback')){
+          fb.className = 'inline-feedback ' + (ok ? 'ok' : 'bad');
+          fb.textContent = ok ? '✓' : '✗';
+        }
+        if(ok) correct++;
+      });
+      const score = document.getElementById(panel.dataset.scoreId);
+      score.textContent = `${correct} / ${inputs.length}`;
+      score.classList.toggle('perfect',correct === inputs.length);
+    }
+
+    function resetFillExercise(panelId){
+      const panel = document.getElementById(panelId);
+      const inputs = getFillInputs(panelId);
+      inputs.forEach(input=>{input.value='';clearFillFeedback(input);});
+      const score = document.getElementById(panel.dataset.scoreId);
+      score.textContent = `0 / ${inputs.length}`;
+      score.classList.remove('perfect');
+      if(inputs[0]) inputs[0].focus();
+    }
+
+    function showFillAnswers(panelId){
+      const panel = document.getElementById(panelId);
+      const inputs = getFillInputs(panelId);
+      inputs.forEach(input=>{
+        input.value = input.dataset.answer;
+        clearFillFeedback(input);
+        input.classList.add('correct');
+        const fb = input.nextElementSibling;
+        if(fb && fb.classList.contains('inline-feedback')){
+          fb.className = 'inline-feedback ok';
+          fb.textContent = '✓';
+        }
+      });
+      const score = document.getElementById(panel.dataset.scoreId);
+      score.textContent = `${inputs.length} / ${inputs.length}`;
+      score.classList.add('perfect');
+    }
+
+    document.querySelectorAll('[data-fill-action]').forEach(button=>{
+      button.addEventListener('click',()=>{
+        const panelId = button.dataset.target;
+        if(button.dataset.fillAction === 'check') checkFillExercise(panelId);
+        if(button.dataset.fillAction === 'reset') resetFillExercise(panelId);
+        if(button.dataset.fillAction === 'show') showFillAnswers(panelId);
+      });
+    });
+
+    document.addEventListener('keydown',e=>{
+      if(e.key !== 'Enter' || e.target.tagName !== 'INPUT') return;
+      if(e.target.closest('#adjectiveParticipleList')) checkExercise('adjectiveParticipleList',adjectiveParticipleItems,'adjectiveParticipleScore');
+      if(e.target.closest('#regularList')) checkExercise('regularList',regularItems,'regularScore');
+      if(e.target.closest('#irregularList')) checkExercise('irregularList',irregularItems,'irregularScore');
+      const fillPanel = e.target.closest('.fill-exercise');
+      if(fillPanel) checkFillExercise(fillPanel.id);
+    });
+
+    renderCards();
+    renderExercise('adjectiveParticipleList',adjectiveParticipleItems,'adjectiveParticipleScore');
+    renderExercise('regularList',regularItems,'regularScore');
+    renderExercise('irregularList',irregularItems,'irregularScore');
+    renderPerfectDropdown();
+    renderMatchExercise('ruEs','ruEsPrompts','ruEsBank',ruEsItems,ruEsBank,'ruEsScore');
+    renderMatchExercise('esRu','esRuPrompts','esRuBank',esRuItems,esRuBank,'esRuScore');
+  </script>
+</body>
+</html>

@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Испанская лаборатория приставок</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <style>
+    :root{
+      --bg:#0d1020;
+      --panel:#151936;
+      --panel2:#1d2448;
+      --text:#f5f7ff;
+      --muted:#b9c1df;
+      --accent:#69e2ff;
+      --accent2:#ffcf5a;
+      --good:#47d18c;
+      --bad:#ff6b6b;
+      --line:rgba(255,255,255,.13);
+      --shadow:0 20px 60px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(105,226,255,.28), transparent 32rem),
+        radial-gradient(circle at 80% 10%, rgba(255,207,90,.18), transparent 26rem),
+        linear-gradient(135deg, #090b16 0%, #111630 48%, #0b1024 100%);
+      min-height:100vh;
+    }
+    .wrap{width:min(1180px, calc(100% - 32px)); margin:0 auto; padding:28px 0 64px}
+    .hero{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:22px;
+      align-items:stretch;
+      min-height:430px;
+    }
+    .hero-card{
+      position:relative;
+      overflow:hidden;
+      border:1px solid var(--line);
+      border-radius:32px;
+      background:linear-gradient(160deg, rgba(29,36,72,.92), rgba(21,25,54,.72));
+      box-shadow:var(--shadow);
+      padding:34px;
+      isolation:isolate;
+    }
+    .hero-card::after{
+      content:"";
+      position:absolute;
+      inset:auto -8% -22% 45%;
+      height:260px;
+      background:radial-gradient(circle, rgba(105,226,255,.22), transparent 68%);
+      z-index:-1;
+    }
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(105,226,255,.12);
+      color:#d9f8ff;
+      font-weight:700;
+      letter-spacing:.02em;
+      border:1px solid rgba(105,226,255,.25);
+    }
+    h1{font-size:clamp(2.4rem, 5vw, 5.2rem); line-height:.96; margin:22px 0 18px; letter-spacing:-.07em}
+    h2{font-size:clamp(1.55rem, 3vw, 2.2rem); margin:0 0 12px; letter-spacing:-.03em}
+    h3{margin:0 0 8px; font-size:1.1rem}
+    p{color:var(--muted); line-height:1.62; margin:0}
+    .hero-actions{display:flex; flex-wrap:wrap; gap:12px; margin-top:26px}
+    button, .btn{
+      appearance:none;
+      border:0;
+      cursor:pointer;
+      border-radius:18px;
+      padding:12px 16px;
+      font-weight:800;
+      color:#08111d;
+      background:linear-gradient(135deg, var(--accent), #a8f1ff);
+      box-shadow:0 12px 30px rgba(105,226,255,.18);
+      transition:transform .18s ease, filter .18s ease, background .18s ease;
+    }
+    button:hover{transform:translateY(-2px); filter:brightness(1.06)}
+    button.secondary{background:rgba(255,255,255,.08); color:var(--text); border:1px solid var(--line); box-shadow:none}
+    button.gold{background:linear-gradient(135deg, var(--accent2), #ffe39c)}
+    .photo-grid{display:grid; grid-template-columns:1fr; gap:16px}
+    .photo-tile{position:relative; overflow:hidden; border-radius:28px; min-height:132px; border:1px solid var(--line); background:#20284f}
+    .photo-tile img{width:100%; height:100%; object-fit:cover; position:absolute; inset:0; filter:saturate(1.02) contrast(1.04)}
+    .photo-tile::after{content:""; position:absolute; inset:0; background:linear-gradient(90deg, rgba(7,9,21,.72), transparent 72%)}
+    .photo-tile span{position:absolute; left:18px; bottom:16px; z-index:1; font-weight:900; font-size:1.15rem; text-shadow:0 2px 10px rgba(0,0,0,.45)}
+    .scorebar{position:sticky; top:12px; z-index:10; margin:20px 0; display:grid; grid-template-columns:1fr auto; gap:12px; align-items:center; padding:12px; border-radius:22px; background:rgba(13,16,32,.8); backdrop-filter:blur(16px); border:1px solid var(--line)}
+    .meter{height:14px; border-radius:999px; background:rgba(255,255,255,.09); overflow:hidden}
+    .meter > div{height:100%; width:0%; background:linear-gradient(90deg, var(--accent), var(--accent2)); transition:width .45s ease}
+    .score-text{font-weight:900; white-space:nowrap}
+    section{margin-top:24px; padding:24px; border:1px solid var(--line); border-radius:30px; background:rgba(21,25,54,.78); box-shadow:0 18px 45px rgba(0,0,0,.22)}
+    .section-head{display:flex; justify-content:space-between; gap:16px; align-items:flex-start; margin-bottom:18px}
+    .badge{display:inline-flex; align-items:center; justify-content:center; min-width:38px; height:38px; border-radius:14px; background:rgba(255,207,90,.16); color:#ffe8a2; border:1px solid rgba(255,207,90,.22); font-weight:900}
+    .grid{display:grid; gap:16px}
+    .cards{grid-template-columns:repeat(3, minmax(0,1fr))}
+    .case{overflow:hidden; border-radius:24px; border:1px solid var(--line); background:rgba(255,255,255,.055)}
+    .case img{width:100%; height:150px; object-fit:cover; display:block; background:#222a4d}
+    .case-body{padding:16px}
+    .options{display:flex; flex-wrap:wrap; gap:8px; margin-top:14px}
+    .choice{background:rgba(255,255,255,.08); color:var(--text); border:1px solid var(--line); box-shadow:none; padding:10px 12px; border-radius:14px}
+    .choice.correct{background:rgba(71,209,140,.18); color:#caffdf; border-color:rgba(71,209,140,.55)}
+    .choice.wrong{background:rgba(255,107,107,.14); color:#ffd2d2; border-color:rgba(255,107,107,.5)}
+    .feedback{min-height:24px; margin-top:10px; font-weight:800; color:var(--muted)}
+    .feedback.good{color:#baffd8}.feedback.bad{color:#ffd0d0}
+    .fill-grid{grid-template-columns:repeat(2, minmax(0,1fr))}
+    .fill-card{padding:16px; border-radius:22px; background:rgba(255,255,255,.06); border:1px solid var(--line)}
+    .sentence{font-size:1.05rem; color:#fff; line-height:1.55}
+    .fill-drop{display:inline-flex; align-items:center; justify-content:center; min-width:160px; min-height:42px; margin:0 6px; padding:8px 12px; border-radius:14px; border:1px dashed rgba(255,255,255,.32); background:rgba(255,255,255,.07); color:#fff; font-weight:900; vertical-align:middle; cursor:pointer; transition:.18s ease}
+    .fill-drop.empty{color:rgba(255,255,255,.58)}
+    .fill-drop.drag-over{border-color:var(--accent); background:rgba(105,226,255,.14); transform:translateY(-1px)}
+    .fill-drop.ok{border-style:solid; border-color:rgba(71,209,140,.8); background:rgba(71,209,140,.13)}
+    .fill-drop.no{border-style:solid; border-color:rgba(255,107,107,.8); background:rgba(255,107,107,.12)}
+    .verb-bank-wrap{margin-top:18px; padding:16px; border-radius:24px; background:rgba(105,226,255,.07); border:1px solid rgba(105,226,255,.22)}
+    .verb-bank-title{font-weight:1000; color:#dff9ff; margin-bottom:10px}
+    .verb-bank{display:flex; flex-wrap:wrap; gap:10px}
+    .verb-chip{user-select:none; border-radius:999px; padding:10px 13px; background:rgba(255,207,90,.15); border:1px solid rgba(255,207,90,.35); color:#fff1c5; font-weight:1000; cursor:grab; transition:.18s ease}
+    .verb-chip:active{cursor:grabbing}
+    .verb-chip.selected{transform:translateY(-2px); box-shadow:0 10px 24px rgba(255,207,90,.14); background:rgba(255,207,90,.24)}
+    .verb-chip.used{opacity:.34; cursor:not-allowed; text-decoration:line-through}
+    input[type="text"]{width:170px; max-width:100%; border:1px solid rgba(255,255,255,.2); border-radius:14px; padding:10px 12px; background:rgba(255,255,255,.08); color:var(--text); font-weight:800; outline:none; margin:0 4px}
+    input[type="text"]:focus{border-color:var(--accent); box-shadow:0 0 0 3px rgba(105,226,255,.12)}
+    input.ok{border-color:rgba(71,209,140,.8); background:rgba(71,209,140,.13)}
+    input.no{border-color:rgba(255,107,107,.8); background:rgba(255,107,107,.12)}
+    .station{display:grid; grid-template-columns:280px 1fr; gap:18px}
+    .chips, .targets{display:grid; gap:12px}
+    .chips{align-content:start}
+    .chip{display:flex; align-items:center; justify-content:space-between; gap:10px; border-radius:18px; padding:12px 14px; background:rgba(105,226,255,.1); border:1px solid rgba(105,226,255,.24); font-weight:900; color:#e8fbff; cursor:pointer; transition:.18s ease}
+    .chip.selected{transform:scale(1.02); background:rgba(255,207,90,.16); border-color:rgba(255,207,90,.55); color:#fff0bd}
+    .chip.used{opacity:.45; pointer-events:none}
+    .target{min-height:76px; display:grid; grid-template-columns:86px 1fr; gap:14px; align-items:center; padding:10px; border-radius:22px; border:1px dashed rgba(255,255,255,.22); background:rgba(255,255,255,.045); cursor:pointer}
+    .target img{width:86px; height:62px; border-radius:16px; object-fit:cover; background:#26305c}
+    .target .drop{font-weight:900; color:#fff; margin-top:4px; min-height:22px}
+    .target.filled{border-style:solid; border-color:rgba(105,226,255,.42); background:rgba(105,226,255,.06)}
+    .target.good{border-color:rgba(71,209,140,.85)}
+    .target.bad{border-color:rgba(255,107,107,.85)}
+    .memory-board{display:grid; grid-template-columns:repeat(5, minmax(0,1fr)); gap:12px; margin-top:16px}
+    .mem{min-height:92px; border-radius:20px; border:1px solid var(--line); background:linear-gradient(145deg, rgba(255,255,255,.08), rgba(255,255,255,.035)); display:flex; align-items:center; justify-content:center; padding:10px; text-align:center; font-weight:900; cursor:pointer; user-select:none; transition:transform .18s ease, background .18s ease, border-color .18s ease; position:relative; overflow:hidden}
+    .mem::before{content:"?"; position:absolute; font-size:2rem; color:rgba(255,255,255,.55)}
+    .mem.open::before, .mem.done::before{display:none}
+    .mem.open, .mem.done{background:rgba(255,207,90,.14); border-color:rgba(255,207,90,.4); transform:translateY(-2px)}
+    .mem.done{background:rgba(71,209,140,.14); border-color:rgba(71,209,140,.55); cursor:default}
+    .mem span{opacity:0; transition:.12s ease}.mem.open span,.mem.done span{opacity:1}
+    .mini{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:14px}
+    select{width:100%; border-radius:14px; border:1px solid rgba(255,255,255,.2); background:rgba(255,255,255,.08); color:var(--text); padding:10px 12px; font-weight:800; outline:none}
+    option{color:#111}
+    .panel-note{padding:14px 16px; border-radius:18px; background:rgba(255,207,90,.11); border:1px solid rgba(255,207,90,.24); color:#ffe8b0; font-weight:700; margin-top:14px}
+    .meaning-grid{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:16px; margin-top:18px}
+    .meaning-card{padding:18px; border-radius:24px; background:rgba(255,255,255,.06); border:1px solid var(--line)}
+    .prefix-mark{display:inline-flex; align-items:center; justify-content:center; min-width:72px; height:44px; padding:0 14px; border-radius:16px; background:rgba(105,226,255,.14); border:1px solid rgba(105,226,255,.35); color:#dff9ff; font-weight:1000; font-size:1.35rem; margin-bottom:12px}
+    .example-strip{display:flex; flex-wrap:wrap; gap:8px; margin-top:14px}
+    .example-pill{padding:8px 10px; border-radius:999px; background:rgba(255,255,255,.08); border:1px solid var(--line); color:#fff; font-weight:800}
+    .prefix-catalog{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:16px; margin-top:16px}
+    .prefix-category{padding:18px; border-radius:24px; background:rgba(255,255,255,.055); border:1px solid var(--line)}
+    .prefix-category h3{display:flex; align-items:center; gap:10px; color:#fff}
+    .prefix-category p{font-size:.96rem}
+    .tag-row{display:flex; flex-wrap:wrap; gap:8px; margin:13px 0}
+    .tag{display:inline-flex; align-items:center; border-radius:999px; padding:7px 10px; background:rgba(105,226,255,.11); border:1px solid rgba(105,226,255,.24); color:#e8fbff; font-weight:900}
+    .tag.gold{background:rgba(255,207,90,.13); border-color:rgba(255,207,90,.26); color:#fff0bd}
+    .micro-list{margin:12px 0 0; padding-left:18px; color:var(--muted); line-height:1.55}
+    .micro-list li{margin:4px 0}
+    .prefix-chooser{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:14px}
+    .chooser-card{padding:16px; border-radius:22px; background:rgba(255,255,255,.06); border:1px solid var(--line)}
+    .big-word{font-size:1.45rem; font-weight:1000; color:#fff; letter-spacing:.01em; margin-bottom:8px}
+    .build-row{display:grid; grid-template-columns:1fr; gap:10px; align-items:center; margin-top:10px}
+    .word-piece{font-weight:900; color:#fff; line-height:1.5}
+    .tiny-hint{font-size:.9rem; color:var(--muted); margin-top:8px}
+    .result-box{margin-top:18px; padding:18px; border-radius:24px; background:rgba(255,255,255,.07); border:1px solid var(--line); display:none}
+    .spark{display:inline-block; animation:pop .55s ease both}@keyframes pop{0%{transform:scale(.7); opacity:.3}70%{transform:scale(1.08)}100%{transform:scale(1); opacity:1}}
+    @media (max-width:900px){.hero{grid-template-columns:1fr}.cards,.fill-grid,.mini,.meaning-grid,.prefix-catalog,.prefix-chooser{grid-template-columns:1fr}.station{grid-template-columns:1fr}.memory-board{grid-template-columns:repeat(4,1fr)}}
+    @media (max-width:560px){.wrap{width:min(100% - 18px, 1180px); padding-top:12px}.hero-card,section{padding:18px;border-radius:24px}.scorebar{grid-template-columns:1fr}.memory-board{grid-template-columns:repeat(2,1fr)}input[type="text"]{width:135px}.section-head{display:block}.badge{margin-bottom:12px}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="hero">
+      <div class="hero-card">
+        <span class="eyebrow">🧭 интерактивная миссия</span>
+        <h1>Испанская лаборатория приставок</h1>
+        <p>Цель: быстро распознавать, как испанские приставки меняют значение слова. Здесь есть отрицание, противопоставление, место, время, степень, количество, повтор, совместное действие и самостоятельность. Сначала прочитайте карту смыслов, затем выбирайте, пишите, соединяйте пары и проверяйте результат.</p>
+        <div class="hero-actions">
+          <button onclick="document.querySelector('#act1').scrollIntoView({behavior:'smooth'})">Начать</button>
+          <button class="secondary" onclick="resetAll()">Сбросить всё</button>
+        </div>
+        <div class="panel-note">Подсказка: приставка обычно работает как короткий «код» перед основой: она добавляет идею отрицания, направления, времени, степени, количества или способа действия.</div>
+      </div>
+      <div class="photo-grid" aria-label="Реалистичные фотографии для темы">
+        <div class="photo-tile"><img alt="Офисная встреча" src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1100&q=80"><span>formal / informal</span></div>
+        <div class="photo-tile"><img alt="Разблокированный телефон" src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1100&q=80"><span>bloquear / desbloquear</span></div>
+        <div class="photo-tile"><img alt="Уборка и дезинфекция" src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1100&q=80"><span>infectar / desinfectar</span></div>
+      </div>
+    </div>
+
+    <div class="scorebar" aria-live="polite">
+      <div class="meter"><div id="meterFill"></div></div>
+      <div class="score-text" id="scoreText">Баллы: 0 / 0</div>
+    </div>
+
+    <section id="meaning">
+      <div class="section-head">
+        <div><span class="badge">0</span><h2>Карта значений приставок</h2><p>Приставка стоит перед основой слова и меняет его значение. Ниже — рабочая карта: она помогает быстро понять, какую идею добавляет начало слова.</p></div>
+      </div>
+
+      <div class="prefix-catalog">
+        <article class="prefix-category">
+          <h3>🚫 Отрицание, противопоставление, снятие действия</h3>
+          <p>Приставка показывает отсутствие признака, противоположное качество, противодействие или отмену результата.</p>
+          <div class="tag-row">
+            <span class="tag">a- / an-</span><span class="tag">anti-</span><span class="tag">contra-</span><span class="tag">des-</span><span class="tag">in- / im- / i- / ir-</span>
+          </div>
+          <ul class="micro-list">
+            <li><strong>moral → amoral</strong>: признак исчезает или не применяется.</li>
+            <li><strong>virus → antivirus</strong>: действие направлено против чего-то.</li>
+            <li><strong>activar → desactivar</strong>: действие отменяет состояние.</li>
+            <li><strong>justo → injusto</strong>, <strong>posible → imposible</strong>, <strong>legal → ilegal</strong>, <strong>regular → irregular</strong>: качество становится противоположным.</li>
+          </ul>
+        </article>
+
+        <article class="prefix-category">
+          <h3>📍 Место, пространство, направление</h3>
+          <p>Приставка указывает положение: впереди, внутри, между, над, под, через, за пределами или вокруг.</p>
+          <div class="tag-row">
+            <span class="tag gold">ante-</span><span class="tag gold">entre- / inter-</span><span class="tag gold">sobre- / super-</span><span class="tag gold">sub-</span><span class="tag gold">trans- / tras-</span><span class="tag gold">infra-</span><span class="tag gold">intra-</span><span class="tag gold">extra-</span><span class="tag gold">circun-</span><span class="tag gold">ultra-</span>
+          </div>
+          <ul class="micro-list">
+            <li><strong>antesala</strong>: помещение перед основным залом.</li>
+            <li><strong>internacional</strong>: связь между странами.</li>
+            <li><strong>sobrevolar</strong>: лететь над чем-то.</li>
+            <li><strong>subterráneo</strong>: под землей.</li>
+            <li><strong>transportar</strong>: переносить через пространство.</li>
+            <li><strong>extraterrestre</strong>: за пределами Земли.</li>
+          </ul>
+        </article>
+
+        <article class="prefix-category">
+          <h3>⏳ Время и порядок</h3>
+          <p>Приставка показывает, что действие или событие происходит раньше, позже или перед другим моментом.</p>
+          <div class="tag-row">
+            <span class="tag">pre-</span><span class="tag">pos- / post-</span><span class="tag">ante-</span><span class="tag">ex-</span>
+          </div>
+          <ul class="micro-list">
+            <li><strong>prehistoria</strong>: период до письменной истории.</li>
+            <li><strong>posguerra / postoperatorio</strong>: период после события.</li>
+            <li><strong>antedatar</strong>: поставить более раннюю дату.</li>
+            <li><strong>exalumno</strong>: человек, который раньше был учеником.</li>
+          </ul>
+        </article>
+
+        <article class="prefix-category">
+          <h3>📈 Степень, интенсивность, превышение</h3>
+          <p>Приставка усиливает признак, показывает избыток, превосходство или очень высокую степень.</p>
+          <div class="tag-row">
+            <span class="tag gold">archi-</span><span class="tag gold">hiper-</span><span class="tag gold">re-</span><span class="tag gold">super-</span><span class="tag gold">ultra-</span><span class="tag gold">sobre-</span><span class="tag gold">extra-</span><span class="tag gold">mega-</span>
+          </div>
+          <ul class="micro-list">
+            <li><strong>archiconocido</strong>: очень известный.</li>
+            <li><strong>hiperactivo</strong>: чрезмерно активный.</li>
+            <li><strong>superútil</strong>: очень полезный.</li>
+            <li><strong>sobrecargar</strong>: нагружать сверх меры.</li>
+          </ul>
+        </article>
+
+        <article class="prefix-category">
+          <h3>🔢 Количество и размер</h3>
+          <p>Приставка указывает число, множество, половину, малый или крупный масштаб.</p>
+          <div class="tag-row">
+            <span class="tag">mono- / mon-</span><span class="tag">bi- / bis- / biz-</span><span class="tag">tri-</span><span class="tag">multi-</span><span class="tag">pluri-</span><span class="tag">semi-</span><span class="tag">uni-</span><span class="tag">mini-</span><span class="tag">micro-</span><span class="tag">macro-</span><span class="tag">poli-</span>
+          </div>
+          <ul class="micro-list">
+            <li><strong>monolingüe</strong>: один язык.</li>
+            <li><strong>bilingüe</strong>: два языка.</li>
+            <li><strong>multicultural</strong>: много культур.</li>
+            <li><strong>semicírculo</strong>: половина круга.</li>
+            <li><strong>microondas</strong> и <strong>macroeconomía</strong>: малый и крупный масштаб.</li>
+          </ul>
+        </article>
+
+        <article class="prefix-category">
+          <h3>🔁 Способ действия и отношение</h3>
+          <p>Приставка показывает повтор, совместность, самостоятельность, поддержку, ложность или новое качество.</p>
+          <div class="tag-row">
+            <span class="tag gold">re-</span><span class="tag gold">co- / con- / com-</span><span class="tag gold">auto-</span><span class="tag gold">pro-</span><span class="tag gold">pseudo-</span><span class="tag gold">neo-</span><span class="tag gold">vice-</span>
+          </div>
+          <ul class="micro-list">
+            <li><strong>reorganizar</strong>: organizar de nuevo.</li>
+            <li><strong>codirigir</strong>: dirigir вместе с другим человеком.</li>
+            <li><strong>autoevaluar</strong>: оценивать себя.</li>
+            <li><strong>proambiental</strong>: в пользу окружающей среды.</li>
+            <li><strong>pseudociencia</strong>: falsa ciencia.</li>
+            <li><strong>vicepresidente</strong>: заместитель президента.</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="meaning-grid">
+        <article class="meaning-card">
+          <div class="prefix-mark">in-</div>
+          <h3>Идея отрицания или противоположного качества</h3>
+          <p>Приставка <strong>in-</strong> часто показывает, что качество отсутствует или становится противоположным. Перед <strong>p</strong> и <strong>b</strong> обычно появляется форма <strong>im-</strong>: <em>posible → imposible</em>. Перед <strong>l</strong> и <strong>r</strong> употребляются формы <strong>i-</strong> и <strong>ir-</strong>: <em>legal → ilegal</em>, <em>regular → irregular</em>.</p>
+          <div class="example-strip" aria-label="Примеры с in">
+            <span class="example-pill">justo → injusto</span>
+            <span class="example-pill">visible → invisible</span>
+            <span class="example-pill">correcto → incorrecto</span>
+          </div>
+        </article>
+        <article class="meaning-card">
+          <div class="prefix-mark">des-</div>
+          <h3>Идея обратного действия, снятия или отмены</h3>
+          <p>Приставка <strong>des-</strong> часто показывает, что действие идет в обратную сторону, отменяет результат или убирает состояние. Например, <em>hacer</em> означает «делать», а <em>deshacer</em> — «разбирать / отменять сделанное»; <em>bloquear</em> — «блокировать», а <em>desbloquear</em> — «разблокировать».</p>
+          <div class="example-strip" aria-label="Примеры с des">
+            <span class="example-pill">armar → desarmar</span>
+            <span class="example-pill">activar → desactivar</span>
+            <span class="example-pill">infectar → desinfectar</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="act1">
+      <div class="section-head">
+        <div><span class="badge">1</span><h2>Фоторадар: выберите точное слово</h2><p>Посмотрите на ситуацию и нажмите на слово, которое лучше завершает испанскую фразу.</p></div>
+      </div>
+      <div class="grid cards" id="quizCards"></div>
+    </section>
+
+    <section id="act2">
+      <div class="section-head">
+        <div><span class="badge">2</span><h2>Редактор фраз: перетащите форму</h2><p>В каждом предложении есть пустое место. Перетащите подходящий глагол с приставкой <strong>des-</strong> из банка в конце задания. Можно также нажать на глагол, а затем на пустое место.</p></div>
+        <button class="gold" onclick="checkFills()">Проверить</button>
+      </div>
+      <div class="grid fill-grid" id="fillCards"></div>
+      <div class="verb-bank-wrap">
+        <div class="verb-bank-title">Банк глаголов: перетащите форму в нужное предложение</div>
+        <div class="verb-bank" id="fillVerbBank"></div>
+      </div>
+      <div class="feedback" id="fillFeedback"></div>
+    </section>
+
+    <section id="act3">
+      <div class="section-head">
+        <div><span class="badge">3</span><h2>Станция действий: перенесите смысл</h2><p>Нажмите на испанскую форму слева, затем нажмите на подходящую карточку справа. После заполнения всех карточек запустите проверку.</p></div>
+        <button class="gold" onclick="checkStation()">Проверить станцию</button>
+      </div>
+      <div class="station">
+        <div class="chips" id="chips"></div>
+        <div class="targets" id="targets"></div>
+      </div>
+      <div class="feedback" id="stationFeedback"></div>
+    </section>
+
+    <section id="act4">
+      <div class="section-head">
+        <div><span class="badge">4</span><h2>Память исследователя: найдите пары</h2><p>Открывайте карточки и соединяйте исходное слово с его вариантом. Пара засчитывается только при точном совпадении.</p></div>
+        <button class="secondary" onclick="buildMemory()">Перемешать</button>
+      </div>
+      <div class="memory-board" id="memoryBoard"></div>
+      <div class="feedback" id="memoryFeedback"></div>
+    </section>
+
+    <section id="act5">
+      <div class="section-head">
+        <div><span class="badge">5</span><h2>Мини-детектив: выберите слово по контексту</h2><p>В каждом блоке одна фраза звучит логично только с одним вариантом. Выберите его в списке.</p></div>
+        <button class="gold" onclick="checkMini()">Проверить выбор</button>
+      </div>
+      <div class="mini" id="miniCards"></div>
+      <div class="feedback" id="miniFeedback"></div>
+      <div class="result-box" id="finalBox"></div>
+    </section>
+    <section id="act6">
+      <div class="section-head">
+        <div><span class="badge">6</span><h2>Пульт смыслов: определите функцию приставки</h2><p>Посмотрите на слово и выберите, какую идею добавляет его приставка.</p></div>
+        <button class="gold" onclick="checkPrefixMeanings()">Проверить пульт</button>
+      </div>
+      <div class="prefix-chooser" id="prefixMeaningCards"></div>
+      <div class="feedback" id="prefixMeaningFeedback"></div>
+    </section>
+
+    <section id="act7">
+      <div class="section-head">
+        <div><span class="badge">7</span><h2>Конструктор слов: выберите начало</h2><p>В каждой фразе не хватает приставки. Выберите её так, чтобы вся испанская фраза стала логичной.</p></div>
+        <button class="gold" onclick="checkBuilders()">Проверить конструктор</button>
+      </div>
+      <div class="prefix-chooser" id="builderCards"></div>
+      <div class="feedback" id="builderFeedback"></div>
+    </section>
+
+  </main>
+
+<script>
+const state = {points:0, total:0, earned:{}};
+function norm(s){return (s||'').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
+function addPoint(key, value, possible=1){
+  if(!(key in state.earned)){state.earned[key]=0; state.total += possible;}
+  state.points += value - state.earned[key];
+  state.earned[key] = value;
+  updateScore();
+}
+function updateScore(){
+  const pct = state.total ? Math.round((state.points/state.total)*100) : 0;
+  document.getElementById('meterFill').style.width = pct + '%';
+  document.getElementById('scoreText').textContent = `Баллы: ${state.points} / ${state.total}`;
+}
+
+const quiz = [
+  {img:'https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1000&q=80', prompt:'La reunión es seria y de etiqueta. El correo no debe ser...', options:['formal','informal','inútil'], correct:'informal', why:'Верно: informal противопоставляется formal.'},
+  {img:'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1000&q=80', prompt:'La señal se pierde en la niebla. La torre casi es...', options:['visible','invisible','indecente'], correct:'invisible', why:'Верно: invisible противопоставляется visible.'},
+  {img:'https://images.unsplash.com/photo-1542327897-d73f4005b533?auto=format&fit=crop&w=1000&q=80', prompt:'La baranda se mueve demasiado. El puente parece...', options:['seguro','inseguro','incorrecto'], correct:'inseguro', why:'Верно: inseguro противопоставляется seguro.'},
+  {img:'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1000&q=80', prompt:'El cálculo tiene errores. El resultado es...', options:['correcto','incorrecto','conveniente'], correct:'incorrecto', why:'Верно: incorrecto противопоставляется correcto.'},
+  {img:'https://images.unsplash.com/photo-1527689368864-3a821dbccc34?auto=format&fit=crop&w=1000&q=80', prompt:'La historia parece imposible, casi...', options:['creíble','increíble','discreto'], correct:'increíble', why:'Верно: increíble противопоставляется creíble.'},
+  {img:'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?auto=format&fit=crop&w=1000&q=80', prompt:'La persona revela un secreto ajeno. Su comentario es...', options:['discreto','indiscreto','útil'], correct:'indiscreto', why:'Верно: indiscreto противопоставляется discreto.'}
+];
+
+function buildQuiz(){
+  const box=document.getElementById('quizCards'); box.innerHTML='';
+  quiz.forEach((q,i)=>{
+    const div=document.createElement('div'); div.className='case';
+    div.innerHTML=`<img src="${q.img}" alt="Ситуация ${i+1}"><div class="case-body"><h3>Сцена ${i+1}</h3><p>${q.prompt}</p><div class="options">${q.options.map(o=>`<button class="choice" data-v="${o}">${o}</button>`).join('')}</div><div class="feedback" id="qf${i}"></div></div>`;
+    div.querySelectorAll('.choice').forEach(btn=>btn.addEventListener('click',()=>{
+      div.querySelectorAll('.choice').forEach(b=>{b.classList.remove('correct','wrong'); b.disabled=false;});
+      const ok=btn.dataset.v===q.correct;
+      btn.classList.add(ok?'correct':'wrong');
+      if(ok){div.querySelectorAll('.choice').forEach(b=>{if(b.dataset.v!==q.correct) b.disabled=true;});}
+      document.getElementById('qf'+i).textContent= ok ? q.why : 'Проверьте противоположное значение и попробуйте другой вариант.';
+      document.getElementById('qf'+i).className='feedback '+(ok?'good':'bad');
+      addPoint('quiz'+i, ok?1:0);
+    }));
+    box.appendChild(div);
+  });
+}
+
+const fills = [
+  {s:'Yo ___ la alarma antes de dormir.', a:'desactivo'},
+  {s:'Tú ___ el teléfono con la huella.', a:'desbloqueas'},
+  {s:'El técnico ___ la máquina con calma.', a:'desarma'},
+  {s:'Nosotros ___ el archivo en segundos.', a:'descargamos'},
+  {s:'Ellas ___ las sillas después del evento.', a:'desmontan'},
+  {s:'La enfermera ___ la mesa.', a:'desinfecta'},
+  {s:'El calor ___ la fruta.', a:'deshidrata'},
+  {s:'Carlos ___ el paquete.', a:'desata'}
+];
+let selectedFillChip=null;
+function clearFillSelection(){
+  document.querySelectorAll('.verb-chip').forEach(c=>c.classList.remove('selected'));
+  selectedFillChip=null;
+}
+function setChipUsed(word, used){
+  const chip=[...document.querySelectorAll('.verb-chip')].find(c=>c.dataset.word===word);
+  if(chip){
+    chip.classList.toggle('used', used);
+    chip.setAttribute('aria-disabled', used ? 'true' : 'false');
+  }
+}
+function placeFillAnswer(index, word){
+  const drop=document.getElementById('fill'+index);
+  if(!drop || !word) return;
+  const previous=drop.dataset.value;
+  if(previous && previous!==word) setChipUsed(previous, false);
+  const occupied=[...document.querySelectorAll('.fill-drop')].find(d=>d.dataset.value===word && d.id!==drop.id);
+  if(occupied){
+    occupied.dataset.value='';
+    occupied.textContent='—';
+    occupied.classList.add('empty');
+    occupied.classList.remove('ok','no');
+  }
+  drop.dataset.value=word;
+  drop.textContent=word;
+  drop.classList.remove('empty','ok','no','drag-over');
+  setChipUsed(word, true);
+  clearFillSelection();
+}
+function buildFills(){
+  selectedFillChip=null;
+  const box=document.getElementById('fillCards'); box.innerHTML='';
+  fills.forEach((f,i)=>{
+    const before=f.s.split('___')[0], after=f.s.split('___')[1];
+    const div=document.createElement('div'); div.className='fill-card';
+    div.innerHTML=`<div class="sentence">${before}<span class="fill-drop empty" id="fill${i}" data-value="" role="button" tabindex="0" aria-label="пустое место ${i+1}">—</span>${after}</div><div class="feedback" id="ff${i}"></div>`;
+    const drop=div.querySelector('.fill-drop');
+    drop.addEventListener('dragover', e=>{e.preventDefault(); drop.classList.add('drag-over');});
+    drop.addEventListener('dragleave', ()=>drop.classList.remove('drag-over'));
+    drop.addEventListener('drop', e=>{
+      e.preventDefault();
+      drop.classList.remove('drag-over');
+      const word=e.dataTransfer.getData('text/plain');
+      placeFillAnswer(i, word);
+    });
+    drop.addEventListener('click', ()=>{
+      if(selectedFillChip && !selectedFillChip.classList.contains('used')) placeFillAnswer(i, selectedFillChip.dataset.word);
+    });
+    drop.addEventListener('keydown', e=>{
+      if((e.key==='Enter' || e.key===' ') && selectedFillChip && !selectedFillChip.classList.contains('used')){
+        e.preventDefault(); placeFillAnswer(i, selectedFillChip.dataset.word);
+      }
+    });
+    box.appendChild(div);
+  });
+  const bank=document.getElementById('fillVerbBank'); bank.innerHTML='';
+  shuffle(fills.map(f=>f.a)).forEach(word=>{
+    const chip=document.createElement('div');
+    chip.className='verb-chip';
+    chip.textContent=word;
+    chip.dataset.word=word;
+    chip.draggable=true;
+    chip.setAttribute('role','button');
+    chip.setAttribute('tabindex','0');
+    chip.addEventListener('dragstart', e=>{
+      if(chip.classList.contains('used')){e.preventDefault(); return;}
+      e.dataTransfer.setData('text/plain', word);
+      e.dataTransfer.effectAllowed='move';
+    });
+    chip.addEventListener('click', ()=>{
+      if(chip.classList.contains('used')) return;
+      document.querySelectorAll('.verb-chip').forEach(c=>c.classList.remove('selected'));
+      chip.classList.add('selected');
+      selectedFillChip=chip;
+    });
+    chip.addEventListener('keydown', e=>{
+      if((e.key==='Enter' || e.key===' ') && !chip.classList.contains('used')){
+        e.preventDefault();
+        document.querySelectorAll('.verb-chip').forEach(c=>c.classList.remove('selected'));
+        chip.classList.add('selected');
+        selectedFillChip=chip;
+      }
+    });
+    bank.appendChild(chip);
+  });
+}
+function checkFills(){
+  let ok=0;
+  fills.forEach((f,i)=>{
+    const drop=document.getElementById('fill'+i); const good=norm(drop.dataset.value)===norm(f.a);
+    drop.classList.toggle('ok', good); drop.classList.toggle('no', !good);
+    document.getElementById('ff'+i).textContent= good ? 'Верно.' : `Нужный вариант: ${f.a}`;
+    document.getElementById('ff'+i).className='feedback '+(good?'good':'bad');
+    if(good) ok++;
+  });
+  addPoint('fills', ok, fills.length);
+  document.getElementById('fillFeedback').textContent = `Результат: ${ok} из ${fills.length}.`;
+  document.getElementById('fillFeedback').className='feedback '+(ok===fills.length?'good':'bad');
+}
+
+const station = [
+  {text:'desactivo', img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=700&q=80', sentence:'Yo ___ la alarma.', correct:'desactivo'},
+  {text:'desbloquea', img:'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=700&q=80', sentence:'Laura ___ el teléfono.', correct:'desbloquea'},
+  {text:'descargamos', img:'https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=700&q=80', sentence:'Nosotros ___ las fotos.', correct:'descargamos'},
+  {text:'desinfecta', img:'https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=700&q=80', sentence:'La médica ___ la mesa.', correct:'desinfecta'},
+  {text:'desmontan', img:'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&w=700&q=80', sentence:'Los técnicos ___ el escenario.', correct:'desmontan'},
+  {text:'desordenan', img:'https://images.unsplash.com/photo-1558611848-73f7eb4001a1?auto=format&fit=crop&w=700&q=80', sentence:'Los niños ___ la habitación.', correct:'desordenan'}
+];
+let selectedChip=null;
+function shuffle(arr){return [...arr].sort(()=>Math.random()-.5)}
+function buildStation(){
+  selectedChip=null;
+  const chips=document.getElementById('chips'), targets=document.getElementById('targets'); chips.innerHTML=''; targets.innerHTML='';
+  shuffle(station).forEach((item)=>{
+    const chip=document.createElement('div'); chip.className='chip'; chip.dataset.text=item.text; chip.innerHTML=`<span>${item.text}</span><span>↦</span>`;
+    chip.onclick=()=>{document.querySelectorAll('.chip').forEach(c=>c.classList.remove('selected')); chip.classList.add('selected'); selectedChip=chip;};
+    chips.appendChild(chip);
+  });
+  station.forEach((item,i)=>{
+    const target=document.createElement('div'); target.className='target'; target.dataset.correct=item.correct; target.dataset.given='';
+    target.innerHTML=`<img src="${item.img}" alt="Карточка действия ${i+1}"><div><div>${item.sentence}</div><div class="drop">—</div></div>`;
+    target.onclick=()=>{
+      if(!selectedChip || selectedChip.classList.contains('used')) return;
+      const old=target.dataset.given;
+      if(old){
+        const oldChip=[...document.querySelectorAll('.chip')].find(c=>c.dataset.text===old);
+        if(oldChip){oldChip.classList.remove('used');}
+      }
+      target.dataset.given=selectedChip.dataset.text;
+      target.querySelector('.drop').textContent=selectedChip.dataset.text;
+      target.classList.add('filled'); target.classList.remove('good','bad');
+      selectedChip.classList.remove('selected'); selectedChip.classList.add('used');
+      selectedChip=null;
+    };
+    targets.appendChild(target);
+  });
+}
+function checkStation(){
+  const targets=[...document.querySelectorAll('.target')]; let ok=0;
+  targets.forEach(t=>{const good=t.dataset.given===t.dataset.correct; t.classList.toggle('good',good); t.classList.toggle('bad',!good); if(good)ok++;});
+  addPoint('station', ok, station.length);
+  const msg=document.getElementById('stationFeedback'); msg.textContent=`Станция: ${ok} из ${station.length}.`; msg.className='feedback '+(ok===station.length?'good':'bad');
+}
+
+const pairs = [
+  ['formal','informal'], ['justo','injusto'], ['seguro','inseguro'], ['útil','inútil'], ['visible','invisible'],
+  ['correcto','incorrecto'], ['hacer','deshacer'], ['armar','desarmar'], ['montar','desmontar'], ['bloquear','desbloquear']
+];
+let openCards=[]; let lock=false; let memoryFound=0;
+function buildMemory(){
+  openCards=[]; lock=false; memoryFound=0;
+  document.getElementById('memoryFeedback').textContent='';
+  const board=document.getElementById('memoryBoard'); board.innerHTML='';
+  const deck=[];
+  pairs.forEach((p,idx)=>{deck.push({word:p[0], pair:idx}); deck.push({word:p[1], pair:idx});});
+  shuffle(deck).forEach((card)=>{
+    const div=document.createElement('div'); div.className='mem'; div.dataset.pair=card.pair; div.dataset.word=card.word; div.innerHTML=`<span>${card.word}</span>`;
+    div.onclick=()=>{
+      if(lock || div.classList.contains('open') || div.classList.contains('done')) return;
+      div.classList.add('open'); openCards.push(div);
+      if(openCards.length===2){
+        lock=true;
+        const [a,b]=openCards;
+        if(a.dataset.pair===b.dataset.pair && a.dataset.word!==b.dataset.word){
+          setTimeout(()=>{a.classList.add('done'); b.classList.add('done'); a.classList.remove('open'); b.classList.remove('open'); openCards=[]; lock=false; memoryFound++; addPoint('memory', memoryFound, pairs.length); document.getElementById('memoryFeedback').textContent=`Найдено пар: ${memoryFound} из ${pairs.length}.`; document.getElementById('memoryFeedback').className='feedback good';},250);
+        } else {
+          setTimeout(()=>{a.classList.remove('open'); b.classList.remove('open'); openCards=[]; lock=false;},760);
+        }
+      }
+    };
+    board.appendChild(div);
+  });
+  addPoint('memory', 0, pairs.length);
+}
+
+const mini = [
+  {sentence:'El plan ayuda poco; por eso es...', options:['útil','inútil','visible'], correct:'inútil'},
+  {sentence:'La ruta ahorra tiempo; por eso es...', options:['conveniente','inconveniente','indecente'], correct:'conveniente'},
+  {sentence:'El comentario respeta la privacidad; por eso es...', options:['discreto','indiscreto','incorrecto'], correct:'discreto'},
+  {sentence:'El virus está en la superficie; la médica la...', options:['infecta','desinfecta','deshidrata'], correct:'desinfecta'},
+  {sentence:'La caja queda abierta porque Marta la...', options:['ata','desata','monta'], correct:'desata'},
+  {sentence:'La puerta ya no tiene seguro porque Ana la...', options:['bloquea','desbloquea','descarga'], correct:'desbloquea'}
+];
+function buildMini(){
+  const box=document.getElementById('miniCards'); box.innerHTML='';
+  mini.forEach((m,i)=>{
+    const div=document.createElement('div'); div.className='fill-card';
+    div.innerHTML=`<p class="sentence">${m.sentence}</p><select id="mini${i}" aria-label="mini ${i+1}"><option value="">Выберите вариант</option>${m.options.map(o=>`<option value="${o}">${o}</option>`).join('')}</select><div class="feedback" id="mf${i}"></div>`;
+    box.appendChild(div);
+  });
+}
+function checkMini(){
+  let ok=0;
+  mini.forEach((m,i)=>{
+    const sel=document.getElementById('mini'+i); const good=sel.value===m.correct;
+    document.getElementById('mf'+i).textContent= good ? 'Верно.' : `Нужный вариант: ${m.correct}`;
+    document.getElementById('mf'+i).className='feedback '+(good?'good':'bad');
+    if(good) ok++;
+  });
+  addPoint('mini', ok, mini.length);
+  const msg=document.getElementById('miniFeedback'); msg.textContent=`Мини-детектив: ${ok} из ${mini.length}.`; msg.className='feedback '+(ok===mini.length?'good':'bad');
+  showFinal();
+}
+function showFinal(){
+  const box=document.getElementById('finalBox'); const pct=state.total?Math.round(state.points/state.total*100):0;
+  box.style.display='block';
+  const line = pct>=90 ? 'Отличная работа: вы уверенно распознаёте значения приставок.' : pct>=65 ? 'Хороший результат: повторите карточки с ошибками и попробуйте ещё раз.' : 'Стоит пройти задания ещё раз: обращайте внимание на противоположное значение.';
+  box.innerHTML=`<h2><span class="spark">🏁</span> Итог</h2><p>${line}</p><div class="panel-note">Ваш результат: <strong>${state.points} / ${state.total}</strong> (${pct}%).</div>`;
+}
+
+const prefixMeaningItems = [
+  {word:'antivirus', img:'https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?auto=format&fit=crop&w=900&q=80', meaning:'противодействие или защита', correct:'oposicion'},
+  {word:'subterráneo', img:'https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=900&q=80', meaning:'место ниже поверхности', correct:'lugar'},
+  {word:'prehistoria', img:'https://images.unsplash.com/photo-1518709268805-4e9042af2176?auto=format&fit=crop&w=900&q=80', meaning:'время раньше события', correct:'tiempo'},
+  {word:'hiperactivo', img:'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80', meaning:'очень высокая степень', correct:'intensidad'},
+  {word:'bilingüe', img:'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=900&q=80', meaning:'количество: два', correct:'cantidad'},
+  {word:'codirige', img:'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=900&q=80', meaning:'совместное действие', correct:'relacion'},
+  {word:'reorganiza', img:'https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=900&q=80', meaning:'действие снова', correct:'repeticion'},
+  {word:'autoevalúa', img:'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=900&q=80', meaning:'действие над собой', correct:'auto'}
+];
+const meaningLabels = {
+  oposicion:'отрицание / противодействие',
+  lugar:'место / пространство',
+  tiempo:'время',
+  intensidad:'степень / интенсивность',
+  cantidad:'количество / размер',
+  relacion:'совместное действие',
+  repeticion:'повтор',
+  auto:'самостоятельное действие'
+};
+function buildPrefixMeanings(){
+  const box=document.getElementById('prefixMeaningCards'); if(!box) return; box.innerHTML='';
+  prefixMeaningItems.forEach((item,i)=>{
+    const div=document.createElement('div'); div.className='chooser-card';
+    div.innerHTML=`<img src="${item.img}" alt="${item.word}" style="width:100%;height:130px;object-fit:cover;border-radius:18px;margin-bottom:12px"><div class="big-word">${item.word}</div><p>${item.meaning}</p><select id="pm${i}" aria-label="значение приставки ${i+1}"><option value="">Выберите функцию</option>${Object.entries(meaningLabels).map(([k,v])=>`<option value="${k}">${v}</option>`).join('')}</select><div class="feedback" id="pmf${i}"></div>`;
+    box.appendChild(div);
+  });
+}
+function checkPrefixMeanings(){
+  let ok=0;
+  prefixMeaningItems.forEach((item,i)=>{
+    const sel=document.getElementById('pm'+i); const good=sel.value===item.correct;
+    document.getElementById('pmf'+i).textContent = good ? 'Верно.' : `Нужный вариант: ${meaningLabels[item.correct]}.`;
+    document.getElementById('pmf'+i).className = 'feedback '+(good?'good':'bad');
+    if(good) ok++;
+  });
+  addPoint('prefixMeanings', ok, prefixMeaningItems.length);
+  const msg=document.getElementById('prefixMeaningFeedback'); msg.textContent=`Пульт смыслов: ${ok} из ${prefixMeaningItems.length}.`; msg.className='feedback '+(ok===prefixMeaningItems.length?'good':'bad');
+}
+
+const builderItems = [
+  {before:'La doctora ', prefix:'des', after:'infecta la mesa antes de trabajar.', options:['in','des','pre','sub'], hint:'убирает загрязнение'},
+  {before:'El equipo ', prefix:'re', after:'organiza la agenda cada lunes.', options:['anti','re','trans','semi'], hint:'делает снова'},
+  {before:'Carlos ', prefix:'contra', after:'dice una afirmación falsa.', options:['contra','mini','pre','auto'], hint:'говорит против'},
+  {before:'El camión ', prefix:'trans', after:'porta mercancías al puerto.', options:['sub','trans','hiper','co'], hint:'переносит через пространство'},
+  {before:'Ana ', prefix:'co', after:'dirige el proyecto con Luis.', options:['co','pos','ultra','a'], hint:'делает вместе с другим человеком'},
+  {before:'El sistema ', prefix:'des', after:'activa la alarma por la noche.', options:['des','inter','multi','archi'], hint:'отменяет действие'},
+  {before:'El estudiante ', prefix:'pre', after:'dice el resultado con los datos.', options:['pre','extra','mono','circun'], hint:'говорит заранее'},
+  {before:'La empresa ', prefix:'super', after:'visa el proceso completo.', options:['super','micro','ir','biz'], hint:'наблюдает сверху / контролирует'}
+];
+function buildBuilders(){
+  const box=document.getElementById('builderCards'); if(!box) return; box.innerHTML='';
+  builderItems.forEach((item,i)=>{
+    const div=document.createElement('div'); div.className='chooser-card';
+    div.innerHTML=`<div class="build-row"><div class="word-piece">${item.before}<select id="bd${i}" aria-label="приставка ${i+1}" style="width:105px;display:inline-block"><option value="">—</option>${item.options.map(o=>`<option value="${o}">${o}-</option>`).join('')}</select>${item.after}</div></div><div class="tiny-hint">Подсказка: ${item.hint}.</div><div class="feedback" id="bdf${i}"></div>`;
+    box.appendChild(div);
+  });
+}
+function checkBuilders(){
+  let ok=0;
+  builderItems.forEach((item,i)=>{
+    const sel=document.getElementById('bd'+i); const good=sel.value===item.prefix;
+    document.getElementById('bdf'+i).textContent = good ? 'Верно.' : `Нужная приставка: ${item.prefix}-.`;
+    document.getElementById('bdf'+i).className='feedback '+(good?'good':'bad');
+    if(good) ok++;
+  });
+  addPoint('builders', ok, builderItems.length);
+  const msg=document.getElementById('builderFeedback'); msg.textContent=`Конструктор: ${ok} из ${builderItems.length}.`; msg.className='feedback '+(ok===builderItems.length?'good':'bad');
+  showFinal();
+}
+
+
+function resetAll(){
+  state.points=0; state.total=0; state.earned={}; updateScore(); buildQuiz(); buildFills(); buildStation(); buildMemory(); buildMini(); buildPrefixMeanings(); buildBuilders(); document.getElementById('finalBox').style.display='none';
+}
+
+resetAll();
+</script>
+</body>
+</html>

@@ -1,0 +1,581 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ejercicio interactivo: “tratar” (ES→RU)</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <style>
+    :root{
+      --ok:#0a7a0a;
+      --bad:#b00020;
+      --ink:#111;
+      --muted:#555;
+      --line:#e6e6e6;
+      --card:#ffffff;
+    }
+    html,body{height:100%;}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      color:var(--ink);
+      background:#fff;
+    }
+    .wrap{
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 24px 16px 48px;
+    }
+    h1{
+      font-size: 20px;
+      font-weight: 700;
+      margin: 0 0 14px;
+      letter-spacing: .2px;
+    }
+    p.note{
+      margin: 0 0 18px;
+      color: var(--muted);
+      line-height: 1.35;
+      font-size: 14px;
+    }
+    .toolbar{
+      position: sticky;
+      top: 0;
+      background: #fff;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--line);
+      z-index: 2;
+      display:flex;
+      align-items:center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    button{
+      border: 1px solid #111;
+      background: #111;
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-weight: 650;
+      cursor: pointer;
+      letter-spacing: .2px;
+    }
+    button.secondary{
+      background:#fff;
+      color:#111;
+    }
+    .score{
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .grid{
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-top: 14px;
+    }
+    .card{
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--card);
+      padding: 14px;
+    }
+    .row{
+      display:grid;
+      grid-template-columns: 92px 1fr;
+      gap: 12px;
+      align-items: start;
+    }
+    .imgbox{
+      width: 92px;
+      height: 92px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:#fff;
+    }
+    .meta{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: baseline;
+      margin-bottom: 6px;
+    }
+    .tag{
+      font-size: 12px;
+      color: #111;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 4px 8px;
+      background: #fff;
+    }
+    .es{
+      font-size: 16px;
+      font-weight: 700;
+      margin: 0 0 10px;
+      line-height: 1.25;
+    }
+    label{
+      font-size: 13px;
+      color: var(--muted);
+      display:block;
+      margin-bottom: 6px;
+    }
+    select{
+      width: 100%;
+      max-width: 560px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background:#fff;
+      font-size: 14px;
+    }
+    .feedback{
+      margin-top: 10px;
+      font-size: 13px;
+      line-height: 1.3;
+      display:none;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background:#fff;
+    }
+    .feedback.ok{
+      display:block;
+      border-color: rgba(10,122,10,.25);
+      color: var(--ok);
+    }
+    .feedback.bad{
+      display:block;
+      border-color: rgba(176,0,32,.25);
+      color: var(--bad);
+    }
+    details{
+      margin-top: 10px;
+      border-top: 1px dashed var(--line);
+      padding-top: 10px;
+    }
+    summary{
+      cursor:pointer;
+      font-size: 13px;
+      color: var(--muted);
+      user-select:none;
+      list-style: none;
+    }
+    summary::-webkit-details-marker{display:none;}
+    .detailbox{
+      margin-top: 8px;
+      font-size: 13px;
+      color: var(--ink);
+      line-height: 1.35;
+    }
+    .ru{
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Noto Sans";
+    }
+    .legend{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .kbd{
+      border:1px solid var(--line);
+      border-bottom-width: 2px;
+      padding: 2px 6px;
+      border-radius: 6px;
+      color: #111;
+      background:#fff;
+      font-weight: 650;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>“Tratar” (todos los usos): selecciona la traducción rusa adecuada</h1>
+
+    <div class="toolbar">
+      <button id="btnCheck" type="button">Revisar</button>
+      <button id="btnReset" type="button" class="secondary">Reiniciar</button>
+      <div class="score" id="score">Sin revisar todavía.</div>
+      <div class="legend">
+        <span><span class="kbd">Tab</span> cambia de campo</span>
+        <span><span class="kbd">↧</span> abre opciones</span>
+      </div>
+    </div>
+
+    <div class="grid" id="grid"></div>
+  </div>
+
+<script>
+const ICONS = {
+  attempt: `
+  <svg width="58" height="58" viewBox="0 0 64 64" aria-label="intentar" role="img">
+    <circle cx="32" cy="32" r="26" fill="none" stroke="#111" stroke-width="2"/>
+    <path d="M20 34l7 7 18-18" fill="none" stroke="#111" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M32 10v8" stroke="#111" stroke-width="2" stroke-linecap="round"/>
+  </svg>`,
+  topic: `
+  <svg width="58" height="58" viewBox="0 0 64 64" aria-label="tema" role="img">
+    <rect x="14" y="14" width="36" height="36" rx="6" fill="none" stroke="#111" stroke-width="2"/>
+    <path d="M22 26h20M22 34h20M22 42h14" stroke="#111" stroke-width="2" stroke-linecap="round"/>
+  </svg>`,
+  treat_person: `
+  <svg width="58" height="58" viewBox="0 0 64 64" aria-label="trato" role="img">
+    <path d="M20 36c3-4 7-6 12-6s9 2 12 6" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round"/>
+    <circle cx="24" cy="26" r="5" fill="none" stroke="#111" stroke-width="2"/>
+    <circle cx="40" cy="26" r="5" fill="none" stroke="#111" stroke-width="2"/>
+    <path d="M26 44h12" stroke="#111" stroke-width="3" stroke-linecap="round"/>
+  </svg>`,
+  medical: `
+  <svg width="58" height="58" viewBox="0 0 64 64" aria-label="medicina" role="img">
+    <rect x="16" y="16" width="32" height="32" rx="8" fill="none" stroke="#111" stroke-width="2"/>
+    <path d="M32 22v20M22 32h20" stroke="#111" stroke-width="3" stroke-linecap="round"/>
+  </svg>`,
+  negotiate: `
+  <svg width="58" height="58" viewBox="0 0 64 64" aria-label="negociar" role="img">
+    <path d="M18 28h14l-3-6m17 6H32l3-6" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M22 40c4 4 16 4 20 0" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round"/>
+    <path d="M22 40l-6 6M42 40l6 6" stroke="#111" stroke-width="2" stroke-linecap="round"/>
+  </svg>`,
+  deal: `
+  <svg width="58" height="58" viewBox="0 0 64 64" aria-label="tener que ver con" role="img">
+    <circle cx="26" cy="26" r="7" fill="none" stroke="#111" stroke-width="2"/>
+    <circle cx="42" cy="30" r="7" fill="none" stroke="#111" stroke-width="2"/>
+    <path d="M19 45c2-6 14-8 20-3 6-5 18-3 20 3" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round"/>
+  </svg>`
+};
+
+const ITEMS = [
+  {
+    id: "q1",
+    tense: "Presente de indicativo",
+    use: "Intentar / procurar",
+    icon: "attempt",
+    es: "Trato de entender el texto.",
+    options: [
+      {ru:"Я пытаюсь понять текст.", ok:true},
+      {ru:"Я лечу пациента.", ok:false},
+      {ru:"Со мной плохо обращаются.", ok:false},
+      {ru:"Мы ведём переговоры о цене.", ok:false},
+    ],
+    hint: "Aquí “tratar de + infinitivo” expresa intento (aspecto imperfectivo habitual).",
+    key: "пытаться + infinitivo (imperfectivo)"
+  },
+  {
+    id: "q2",
+    tense: "Presente de subjuntivo",
+    use: "Abordar un tema / versar sobre",
+    icon: "topic",
+    es: "Es importante que el informe trate de ética profesional.",
+    options: [
+      {ru:"Важно, чтобы доклад касался профессиональной этики.", ok:true},
+      {ru:"Я пытаюсь понять текст.", ok:false},
+      {ru:"Мы договорились о скидке.", ok:false},
+      {ru:"Я общаюсь с поставщиком.", ok:false},
+    ],
+    hint: "“Tratar de” aquí no es “intentar”, sino “versar sobre / касаться”.",
+    key: "касаться / быть посвящённым"
+  },
+  {
+    id: "q3",
+    tense: "Pretérito perfecto compuesto (indicativo)",
+    use: "Dar un trato (bien/mal)",
+    icon: "treat_person",
+    es: "En esta tienda me han tratado muy bien.",
+    options: [
+      {ru:"В этом магазине со мной обращались очень хорошо.", ok:true},
+      {ru:"В этом магазине я пытался купить хлеб.", ok:false},
+      {ru:"В этом магазине лечили инфекцию.", ok:false},
+      {ru:"В этом магазине шли переговоры о контракте.", ok:false},
+    ],
+    hint: "Construcción típica: “tratar bien/mal a alguien” → “обращаться хорошо/плохо с кем-либо”.",
+    key: "обращаться с кем-либо"
+  },
+  {
+    id: "q4",
+    tense: "Pretérito indefinido",
+    use: "Tratar una enfermedad (médico)",
+    icon: "medical",
+    es: "El médico trató la infección con antibióticos.",
+    options: [
+      {ru:"Врач лечил инфекцию антибиотиками.", ok:true},
+      {ru:"Врач касался темы антибиотиков.", ok:false},
+      {ru:"Врач договаривался о цене антибиотиков.", ok:false},
+      {ru:"Врач плохо обращался со мной.", ok:false},
+    ],
+    hint: "En ruso, “лечить” suele ser la opción directa para “tratar (una enfermedad)”.",
+    key: "лечить"
+  },
+  {
+    id: "q5",
+    tense: "Pretérito imperfecto (indicativo)",
+    use: "Negociar / gestionar un asunto",
+    icon: "negotiate",
+    es: "Antes tratábamos el precio cada año con el proveedor.",
+    options: [
+      {ru:"Раньше мы каждый год вели переговоры о цене с поставщиком.", ok:true},
+      {ru:"Раньше мы каждый год лечили поставщика.", ok:false},
+      {ru:"Раньше мы каждый год касались цены.", ok:false},
+      {ru:"Раньше со мной плохо обращались.", ok:false},
+    ],
+    hint: "“Tratar el precio” se interpreta como “negociar el precio”.",
+    key: "вести переговоры / договариваться"
+  },
+  {
+    id: "q6",
+    tense: "Estar + gerundio",
+    use: "Relacionarse / tener trato con (contexto institucional)",
+    icon: "deal",
+    es: "Estoy tratando con el proveedor esta semana.",
+    options: [
+      {ru:"На этой неделе я имею дело с поставщиком.", ok:true},
+      {ru:"На этой неделе мой доклад касается поставщика.", ok:false},
+      {ru:"На этой неделе я лечу поставщика.", ok:false},
+      {ru:"На этой неделе я пытался с поставщиком.", ok:false},
+    ],
+    hint: "“Tratar con” en este contexto: “иметь дело с / общаться по делу с”.",
+    key: "иметь дело с / общаться"
+  },
+
+  // Extras: para reforzar todos los usos y alternar posiciones correctas
+  {
+    id: "q7",
+    tense: "Presente de indicativo",
+    use: "Tratar a alguien (bien/mal)",
+    icon: "treat_person",
+    es: "No me tratan bien en el trabajo.",
+    options: [
+      {ru:"Ко мне плохо относятся на работе.", ok:true},
+      {ru:"Я пытаюсь работать лучше.", ok:false},
+      {ru:"На работе лечат сотрудников.", ok:false},
+      {ru:"На работе обсуждают тему отношений.", ok:false},
+    ],
+    hint: "Otra formulación frecuente: “ко мне плохо относятся”.",
+    key: "относиться к кому-либо"
+  },
+  {
+    id: "q8",
+    tense: "Presente de subjuntivo",
+    use: "Intentar / procurar",
+    icon: "attempt",
+    es: "Dudo que él trate de explicarlo con calma.",
+    options: [
+      {ru:"Я сомневаюсь, что он пытается объяснить это спокойно.", ok:true},
+      {ru:"Я сомневаюсь, что он лечит это спокойно.", ok:false},
+      {ru:"Я сомневаюсь, что это касается спокойствия.", ok:false},
+      {ru:"Я сомневаюсь, что он ведёт переговоры о спокойствии.", ok:false},
+    ],
+    hint: "Subjuntivo español; en ruso se mantiene “сомневаюсь, что…” + presente.",
+    key: "пытаться"
+  },
+  {
+    id: "q9",
+    tense: "Pretérito perfecto compuesto (indicativo)",
+    use: "Negociar / llegar a un acuerdo",
+    icon: "negotiate",
+    es: "Esta semana hemos tratado el contrato con el cliente.",
+    options: [
+      {ru:"На этой неделе мы обсудили контракт с клиентом.", ok:true},
+      {ru:"На этой неделе мы лечили контракт.", ok:false},
+      {ru:"На этой неделе контракт касался клиента.", ok:false},
+      {ru:"На этой неделе мы плохо обращались с клиентом.", ok:false},
+    ],
+    hint: "Aquí “tratar” ≈ “discutir/abordar” el contrato (deliberación).",
+    key: "обсудить / рассмотреть"
+  },
+  {
+    id: "q10",
+    tense: "Pretérito indefinido",
+    use: "Abordar un tema (en una reunión)",
+    icon: "topic",
+    es: "En la reunión trataron el tema de la seguridad.",
+    options: [
+      {ru:"На встрече обсудили вопрос безопасности.", ok:true},
+      {ru:"На встрече пытались безопасность.", ok:false},
+      {ru:"На встрече лечили безопасность.", ok:false},
+      {ru:"На встрече хорошо обращались с безопасностью.", ok:false},
+    ],
+    hint: "“Tratar un tema” suele corresponder a “обсудить вопрос/тему”.",
+    key: "обсудить"
+  },
+  {
+    id: "q11",
+    tense: "Pretérito imperfecto (indicativo)",
+    use: "Tratar una enfermedad (proceso)",
+    icon: "medical",
+    es: "Cuando era niño, me trataban la alergia con jarabes.",
+    options: [
+      {ru:"Когда я был ребёнком, мне лечили аллергию сиропами.", ok:true},
+      {ru:"Когда я был ребёнком, со мной лечили сиропы.", ok:false},
+      {ru:"Когда я был ребёнком, обсуждали аллергию сиропами.", ok:false},
+      {ru:"Когда я был ребёнком, я вёл переговоры об аллергии.", ok:false},
+    ],
+    hint: "Imperfecto: hábito/proceso en el pasado; en ruso suele ser imperfectivo (“лечили”).",
+    key: "лечить (imperfectivo)"
+  },
+  {
+    id: "q12",
+    tense: "Estar + gerundio",
+    use: "Intentar (en curso)",
+    icon: "attempt",
+    es: "Estoy tratando de llamarte, pero no respondes.",
+    options: [
+      {ru:"Я пытаюсь тебе позвонить, но ты не отвечаешь.", ok:true},
+      {ru:"Я обсуждаю тебе позвонить, но ты не отвечаешь.", ok:false},
+      {ru:"Я лечу тебе позвонить, но ты не отвечаешь.", ok:false},
+      {ru:"Я имею дело с тобой позвонить, но ты не отвечаешь.", ok:false},
+    ],
+    hint: "Progresivo: acción en desarrollo → “пытаться” (proceso en curso).",
+    key: "пытаться"
+  },
+];
+
+function shuffle(arr){
+  // Fisher–Yates (in place)
+  for(let i=arr.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [arr[i],arr[j]]=[arr[j],arr[i]];
+  }
+  return arr;
+}
+
+function el(tag, attrs={}, children=[]){
+  const node=document.createElement(tag);
+  for(const [k,v] of Object.entries(attrs)){
+    if(k==="class") node.className=v;
+    else if(k==="html") node.innerHTML=v;
+    else node.setAttribute(k,v);
+  }
+  for(const c of children){
+    if(typeof c==="string") node.appendChild(document.createTextNode(c));
+    else node.appendChild(c);
+  }
+  return node;
+}
+
+function render(){
+  const grid=document.getElementById("grid");
+  grid.innerHTML="";
+  // Randomize the order of questions each time page loads (but stable within session)
+  const order = shuffle([...ITEMS]);
+  for(const item of order){
+    const card=el("div",{class:"card", "data-id": item.id});
+    const row=el("div",{class:"row"});
+
+    const imgbox=el("div",{class:"imgbox", html: ICONS[item.icon] || ""});
+    const right=el("div",{});
+
+    const meta=el("div",{class:"meta"},[
+      el("span",{class:"tag"},[item.tense]),
+      el("span",{class:"tag"},[item.use])
+    ]);
+
+    const es=el("p",{class:"es"},[item.es]);
+
+    const label=el("label",{"for": `sel_${item.id}`},["Elige la traducción rusa:"]);
+
+    // Shuffle options and ensure correct answer is not always first
+    const opts = shuffle(item.options.map(o => ({...o})));
+    const select=el("select",{id:`sel_${item.id}`, "data-correct": opts.findIndex(o=>o.ok), "aria-label": "selección"});
+    select.appendChild(el("option",{value:"", selected:"selected"},["— Selecciona —"]));
+    opts.forEach((o, idx)=>{
+      const opt=el("option",{value:String(idx)},[o.ru]);
+      select.appendChild(opt);
+    });
+
+    const fb=el("div",{class:"feedback", id:`fb_${item.id}`},[""]);
+
+    const details=el("details",{},[
+      el("summary",{},["Ver ayuda / respuesta"]),
+      el("div",{class:"detailbox"},[
+        el("div",{},[el("strong",{},["Pista: "]), item.hint]),
+        el("div",{style:"margin-top:6px;"},[el("strong",{},["Clave RU: "]), el("span",{class:"ru"},[item.key])])
+      ])
+    ]);
+
+    right.appendChild(meta);
+    right.appendChild(es);
+    right.appendChild(label);
+    right.appendChild(select);
+    right.appendChild(fb);
+    right.appendChild(details);
+
+    row.appendChild(imgbox);
+    row.appendChild(right);
+    card.appendChild(row);
+    grid.appendChild(card);
+  }
+}
+
+function check(){
+  const cards=[...document.querySelectorAll(".card")];
+  let answered=0, correct=0;
+
+  for(const card of cards){
+    const id=card.getAttribute("data-id");
+    const sel=document.getElementById(`sel_${id}`);
+    const fb=document.getElementById(`fb_${id}`);
+
+    const picked = sel.value === "" ? null : Number(sel.value);
+    const correctIndex = Number(sel.getAttribute("data-correct"));
+
+    if(picked !== null) answered += 1;
+
+    // Remove old feedback styles
+    fb.classList.remove("ok","bad");
+    fb.style.display="none";
+
+    if(picked === null){
+      fb.textContent = "Sin respuesta.";
+      fb.classList.add("bad");
+      fb.style.display="block";
+      continue;
+    }
+
+    if(picked === correctIndex){
+      correct += 1;
+      fb.textContent = "Correcto.";
+      fb.classList.add("ok");
+      fb.style.display="block";
+    }else{
+      // Show the correct option text
+      const correctText = sel.options[correctIndex+1].textContent; // +1 because placeholder
+      fb.textContent = `Incorrecto. Respuesta correcta: ${correctText}`;
+      fb.classList.add("bad");
+      fb.style.display="block";
+    }
+  }
+
+  const score=document.getElementById("score");
+  score.textContent = `Resultado: ${correct}/${cards.length} (respondidas: ${answered}/${cards.length}).`;
+}
+
+function resetAll(){
+  const cards=[...document.querySelectorAll(".card")];
+  for(const card of cards){
+    const id=card.getAttribute("data-id");
+    const sel=document.getElementById(`sel_${id}`);
+    const fb=document.getElementById(`fb_${id}`);
+    sel.value="";
+    fb.classList.remove("ok","bad");
+    fb.style.display="none";
+    fb.textContent="";
+    const det=card.querySelector("details");
+    if(det) det.open=false;
+  }
+  document.getElementById("score").textContent="Sin revisar todavía.";
+}
+
+document.getElementById("btnCheck").addEventListener("click", check);
+document.getElementById("btnReset").addEventListener("click", resetAll);
+
+render();
+</script>
+</body>
+</html>

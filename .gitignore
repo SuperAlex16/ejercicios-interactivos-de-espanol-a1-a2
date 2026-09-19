@@ -2,3 +2,5 @@
 Thumbs.db
 *.tmp
 .claude/settings.local.json
+Actividades interactivas A0-B1/
+.claude/scheduled_tasks.lock

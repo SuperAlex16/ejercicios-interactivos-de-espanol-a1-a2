@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pronombres personales en español</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+<style>
+    :root {
+      --ink: #18314f;
+      --muted: #5c6b7a;
+      --paper: #fffdf8;
+      --bg1: #eef7ff;
+      --bg2: #fff0e5;
+      --accent: #ff7a59;
+      --accent2: #3b82f6;
+      --accent3: #13a38b;
+      --good: #147a3d;
+      --bad: #ba1a1a;
+      --line: rgba(24,49,79,.14);
+      --shadow: 0 18px 45px rgba(24, 49, 79, .13);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% 10%, rgba(255, 122, 89, .25), transparent 30%),
+        radial-gradient(circle at 85% 8%, rgba(59, 130, 246, .18), transparent 32%),
+        linear-gradient(135deg, var(--bg1), var(--bg2));
+      line-height: 1.55;
+    }
+    .hero {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 56px 22px 24px;
+    }
+    .hero-card {
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1.45fr .8fr;
+      gap: 28px;
+      background: rgba(255, 253, 248, .88);
+      border: 1px solid rgba(255, 255, 255, .7);
+      border-radius: 30px;
+      box-shadow: var(--shadow);
+      padding: 34px;
+      backdrop-filter: blur(10px);
+    }
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: -80px auto auto -70px;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: rgba(255, 122, 89, .16);
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 8px 13px;
+      border-radius: 999px;
+      background: #ffffff;
+      color: #c25235;
+      font-weight: 800;
+      letter-spacing: .03em;
+      text-transform: uppercase;
+      font-size: .78rem;
+      box-shadow: 0 8px 24px rgba(255,122,89,.16);
+    }
+    h1 {
+      margin: 18px 0 10px;
+      font-size: clamp(2.2rem, 5vw, 4.4rem);
+      line-height: .98;
+      letter-spacing: -.05em;
+      color: #10243d;
+    }
+    .subtitle {
+      margin: 0;
+      max-width: 790px;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+    .hero-visual {
+      min-height: 240px;
+      position: relative;
+      display: grid;
+      place-items: center;
+      border-radius: 26px;
+      background:
+        linear-gradient(140deg, rgba(59,130,246,.15), rgba(19,163,139,.13)),
+        #fff;
+      border: 1px solid var(--line);
+    }
+    .pronoun-orbit {
+      width: 270px;
+      height: 270px;
+      border-radius: 50%;
+      border: 2px dashed rgba(24,49,79,.18);
+      position: relative;
+      animation: float 5s ease-in-out infinite;
+    }
+    .bubble {
+      position: absolute;
+      padding: 10px 14px;
+      min-width: 48px;
+      text-align: center;
+      border-radius: 18px;
+      color: #fff;
+      font-weight: 900;
+      box-shadow: 0 10px 22px rgba(24,49,79,.18);
+    }
+    .b1 { top: 6px; left: 94px; background: var(--accent); }
+    .b2 { top: 74px; right: -14px; background: var(--accent2); }
+    .b3 { bottom: 36px; right: 22px; background: var(--accent3); }
+    .b4 { bottom: 14px; left: 40px; background: #8b5cf6; }
+    .b5 { top: 78px; left: -18px; background: #eab308; color: #442a00; }
+    .center-mark {
+      position: absolute;
+      inset: 84px;
+      border-radius: 40px;
+      background: #fff;
+      display: grid;
+      place-items: center;
+      font-size: 3.2rem;
+      box-shadow: inset 0 0 0 1px var(--line), 0 12px 24px rgba(24,49,79,.08);
+    }
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    main {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 22px 64px;
+    }
+    .panel {
+      background: rgba(255, 253, 248, .92);
+      border: 1px solid rgba(255,255,255,.78);
+      border-radius: 28px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+      margin: 22px 0;
+    }
+    .panel h2 {
+      margin: 0 0 12px;
+      font-size: clamp(1.4rem, 2.3vw, 2rem);
+      letter-spacing: -.02em;
+    }
+    .basic-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      overflow: hidden;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: #fff;
+      margin-top: 14px;
+    }
+    .basic-table th, .basic-table td {
+      padding: 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+    .basic-table th {
+      background: linear-gradient(135deg, #18314f, #2f5e92);
+      color: white;
+      font-size: .95rem;
+    }
+    .basic-table tr:last-child td { border-bottom: none; }
+    .note {
+      margin: 18px 0 0;
+      padding: 16px 18px;
+      border-left: 6px solid var(--accent);
+      border-radius: 18px;
+      background: #fff5ef;
+    }
+    .rules-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 16px;
+    }
+    .rule-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 10px 30px rgba(24,49,79,.06);
+    }
+    .rule-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.12rem;
+    }
+    ul { margin: 0; padding-left: 1.25rem; }
+    li + li { margin-top: 8px; }
+    .exercise-section {
+      margin: 28px 0;
+      padding: 28px;
+      border-radius: 30px;
+      background: rgba(255,255,255,.88);
+      border: 1px solid rgba(255,255,255,.72);
+      box-shadow: var(--shadow);
+    }
+    .section-heading {
+      display: flex;
+      align-items: start;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .section-badge {
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--accent), #ffb86b);
+      color: white;
+      box-shadow: 0 12px 22px rgba(255,122,89,.24);
+      flex: 0 0 48px;
+      font-size: 1.2rem;
+    }
+    .section-heading h2 {
+      margin: 0;
+      font-size: clamp(1.5rem, 2.4vw, 2.2rem);
+      letter-spacing: -.025em;
+    }
+    .section-heading p {
+      margin: 4px 0 0;
+      color: var(--muted);
+    }
+    .drag-layout {
+      display: grid;
+      grid-template-columns: 250px 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+    .bank {
+      position: sticky;
+      top: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 18px;
+      border-radius: 22px;
+      border: 1px dashed rgba(24,49,79,.24);
+      background: #f9fcff;
+      min-height: 112px;
+    }
+    .chip {
+      user-select: none;
+      cursor: grab;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 54px;
+      padding: 10px 13px;
+      border-radius: 999px;
+      color: white;
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      font-weight: 900;
+      box-shadow: 0 9px 18px rgba(37,99,235,.21);
+      border: 0;
+    }
+    .chip.selected { outline: 4px solid rgba(255, 122, 89, .35); }
+    .drop-grid {
+      display: grid;
+      gap: 14px;
+    }
+    .drop-card {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 12px;
+      align-items: center;
+      padding: 16px;
+      border-radius: 20px;
+      background: #fff;
+      border: 1px solid var(--line);
+      box-shadow: 0 8px 22px rgba(24,49,79,.06);
+    }
+    .mini-num {
+      width: 32px;
+      height: 32px;
+      border-radius: 11px;
+      display: grid;
+      place-items: center;
+      background: #eef2ff;
+      color: #3730a3;
+      font-weight: 900;
+    }
+    .drop-sentence { font-size: 1.03rem; }
+    .dropzone {
+      display: inline-flex;
+      vertical-align: middle;
+      align-items: center;
+      justify-content: center;
+      min-width: 78px;
+      min-height: 42px;
+      margin: 0 6px;
+      border: 2px dashed #9ab3d1;
+      border-radius: 14px;
+      background: #f5fbff;
+      color: var(--muted);
+      font-weight: 900;
+    }
+    .dropzone.filled { border-style: solid; background: #fff7ed; color: var(--ink); }
+    .dropzone.correct { border-color: var(--good); background: #edfdf4; }
+    .dropzone.incorrect { border-color: var(--bad); background: #fff1f1; }
+    .prompt-tag {
+      display: inline-block;
+      margin-left: 8px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: #f1f5f9;
+      color: #475569;
+      font-size: .86rem;
+    }
+    .answer-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 15px;
+    }
+    .answer-card {
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: 14px;
+      padding: 17px;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, #ffffff, #fbfdff);
+      box-shadow: 0 8px 22px rgba(24,49,79,.06);
+    }
+    .item-num {
+      width: 38px;
+      height: 38px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      background: linear-gradient(135deg, #13a38b, #2dd4bf);
+      color: white;
+    }
+    .source-sentence {
+      margin: 0 0 10px;
+      font-weight: 700;
+    }
+    .answer-input {
+      width: 100%;
+      resize: vertical;
+      border: 2px solid #d8e3ef;
+      background: #fbfdff;
+      border-radius: 16px;
+      padding: 12px 14px;
+      font: inherit;
+      color: var(--ink);
+      outline: none;
+      transition: border-color .2s, box-shadow .2s, background .2s;
+    }
+    .answer-input:focus {
+      border-color: var(--accent2);
+      box-shadow: 0 0 0 4px rgba(59,130,246,.12);
+      background: #fff;
+    }
+    .answer-input.ok { border-color: var(--good); background: #f0fdf4; }
+    .answer-input.no { border-color: var(--bad); background: #fff1f1; }
+    .feedback {
+      min-height: 24px;
+      margin-top: 8px;
+      font-weight: 800;
+    }
+    .feedback.good { color: var(--good); }
+    .feedback.bad { color: var(--bad); }
+    details.model-answer {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: .94rem;
+    }
+    details.model-answer summary { cursor: pointer; font-weight: 800; color: #315e91; }
+    details.model-answer p { margin: 6px 0 0; }
+    .exercise-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      margin-top: 20px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+    }
+    button {
+      border: 0;
+      cursor: pointer;
+      border-radius: 15px;
+      padding: 12px 18px;
+      background: linear-gradient(135deg, var(--accent2), #7c3aed);
+      color: white;
+      font-weight: 900;
+      box-shadow: 0 10px 20px rgba(59,130,246,.22);
+      transition: transform .16s, filter .16s;
+    }
+    button:hover { transform: translateY(-1px); filter: brightness(1.03); }
+    button.secondary {
+      background: #eef2f7;
+      color: #24435f;
+      box-shadow: none;
+    }
+    .score {
+      font-weight: 900;
+      color: #24435f;
+      padding: 8px 11px;
+      border-radius: 999px;
+      background: #fff;
+      border: 1px solid var(--line);
+    }
+    .footer-note {
+      text-align: center;
+      color: var(--muted);
+      margin: 34px 0 0;
+      font-size: .94rem;
+    }
+    @media (max-width: 920px) {
+      .hero-card, .rules-grid, .drag-layout, .answer-grid { grid-template-columns: 1fr; }
+      .bank { position: static; }
+      .hero-card { padding: 24px; }
+      .hero-visual { min-height: 210px; }
+    }
+    @media (max-width: 560px) {
+      body { line-height: 1.48; }
+      .hero { padding-top: 28px; }
+      .panel, .exercise-section { padding: 18px; border-radius: 22px; }
+      .basic-table th, .basic-table td { padding: 11px; font-size: .9rem; }
+      .answer-card { grid-template-columns: 1fr; }
+      .item-num { width: 34px; height: 34px; }
+    }
+  </style>
+</head>
+<body>
+<header class="hero">
+<div class="hero-card">
+<div>
+<span class="eyebrow">Gramática práctica</span>
+<h1>PRONOMBRES PERSONALES EN ESPAÑOL</h1>
+<p class="subtitle">Material interactivo para practicar complemento directo, complemento indirecto y posición de los pronombres en perífrasis verbales.</p>
+</div>
+<div aria-hidden="true" class="hero-visual">
+<div class="pronoun-orbit">
+<span class="bubble b1">me</span>
+<span class="bubble b2">te</span>
+<span class="bubble b3">lo</span>
+<span class="bubble b4">se</span>
+<span class="bubble b5">les</span>
+<span class="center-mark">🧩</span>
+</div>
+</div>
+</div>
+</header>
+<main>
+<section class="panel">
+<h2>Tabla básica</h2>
+<table class="basic-table">
+<thead><tr><th>Función</th><th>Singular</th><th>Plural</th></tr></thead>
+<tbody>
+<tr><td>Nominativo (sujeto)</td><td>yo · tú · él · ella · usted</td><td>nosotros/as · vosotros/as · ellos · ellas · ustedes</td></tr>
+<tr><td>Acusativo (CD)</td><td>me · te · lo / la</td><td>nos · os · los / las</td></tr>
+<tr><td>Dativo (CI)</td><td>me · te · le</td><td>nos · os · les</td></tr>
+</tbody>
+</table>
+<p class="note"><strong>Decir:</strong> Tengo una noticia, debo decírtela. Tengo una noticia, te la debo decir. Tengo una noticia, se la debo decir a ustedes.</p>
+</section>
+<section class="panel">
+<h2>Reglas esenciales:</h2>
+<div class="rules-grid">
+<div class="rule-card"><ul>
+<li>Use <strong>lo/la/los/las</strong> para el <strong>complemento directo (CD)</strong> y <strong>le/les</strong> para el <strong>complemento indirecto (CI)</strong>.</li>
+<li>Con combinación <strong>CI + CD</strong>, el orden es <strong>CI + CD</strong> y <strong>le/les → se</strong> ante <strong>lo/la/los/las</strong>: <strong>Se lo doy.</strong></li>
+</ul></div>
+<div class="rule-card"><ul>
+<li>En perífrasis, el pronombre puede ir <strong>antes del verbo conjugado</strong> o <strong>pospuesto</strong> y unido al <strong>infinitivo</strong> o al <strong>gerundio</strong>: <strong>la vamos a ordenar / vamos a ordenárla</strong>; <strong>lo estamos haciendo / estamos haciéndolo</strong>.</li>
+<li>En <strong>pretérito perfecto compuesto</strong>, el pronombre se coloca <strong>antes</strong> del auxiliar <strong>haber</strong>: <strong>La he visto. SE LA HE HECHO a ustedes la pizza</strong></li>
+</ul></div>
+</div>
+</section>
+<section class="panel">
+<h2>Reglas prácticas:</h2>
+<div class="rules-grid">
+<div class="rule-card">
+<h3>1. Complemento directo (CD) – responde a “¿qué?” o “¿a quién?”</h3>
+<ul>
+<li>Personas y cosas ya mencionadas: <strong>lo/la/los/las</strong>.</li>
+<li>Posición:</li>
+<li>Antes del verbo conjugado: <strong>La profesora los reparte.</strong></li>
+<li>Unido a infinitivo/gerundio: <strong>repartirlos, repartiéndolos.</strong></li>
+</ul>
+</div>
+<div class="rule-card">
+<h3>2. Complemento indirecto (CI) – responde a “¿a quién?” o “¿para quién?”</h3>
+<ul>
+<li><strong>me, te, le, nos, os, les</strong>: El maestro <strong>les</strong> va a repartir las hojas. / Va a repartirles las hojas. El encargado <strong>os</strong> explica el arreglo.</li>
+<li><strong>le/les → se</strong> cuando aparece un <strong>CD</strong> de tercera persona: <strong>Se lo damos.</strong></li>
+</ul>
+</div>
+<div class="rule-card">
+<h3>3. Perífrasis frecuentes:</h3>
+<ul>
+<li><strong>Estar + gerundio</strong> (acción en progreso): Carolina <strong>lo</strong> está haciendo / está haciéndolo.</li>
+<li><strong>Ir a + infinitivo</strong> (futuro próximo): El maestro <strong>las</strong> va a repartir / va a repartirlas.</li>
+</ul>
+</div>
+</div>
+</section>
+<section class="exercise-section" id="drag-pronouns">
+<div class="section-heading">
+<span class="section-badge">↔</span>
+<div>
+<h2>Ejercicio inicial. Arrastrar y soltar los pronombres</h2>
+<p>Arrastra cada pronombre al recuadro correcto. También puedes hacer clic en un pronombre y después en el recuadro.</p>
+</div>
+</div>
+<div class="drag-layout">
+<div aria-label="Banco de pronombres" class="bank" id="pronoun-bank">
+<button class="chip" data-value="las" draggable="true">las</button><button class="chip" data-value="la" draggable="true">la</button><button class="chip" data-value="le" draggable="true">le</button><button class="chip" data-value="te" draggable="true">te</button><button class="chip" data-value="se" draggable="true">se</button><button class="chip" data-value="los" draggable="true">los</button><button class="chip" data-value="me" draggable="true">me</button><button class="chip" data-value="nos" draggable="true">nos</button>
+</div>
+<div class="drop-grid">
+<div class="drop-card" data-answer="las">
+<div class="mini-num">1</div>
+<div class="drop-sentence">El maestro <span aria-label="Suelta aquí" class="dropzone" tabindex="0"></span> va a repartir. <span class="prompt-tag">las hojas</span></div>
+</div>
+<div class="drop-card" data-answer="la">
+<div class="mini-num">2</div>
+<div class="drop-sentence">Paz <span aria-label="Suelta aquí" class="dropzone" tabindex="0"></span> ha cortado en varias piezas. <span class="prompt-tag">la sandía</span></div>
+</div>
+<div class="drop-card" data-answer="le">
+<div class="mini-num">3</div>
+<div class="drop-sentence">El casero <span aria-label="Suelta aquí" class="dropzone" tabindex="0"></span> explica el problema. <span class="prompt-tag">a Mariana</span></div>
+</div>
+<div class="drop-card" data-answer="te">
+<div class="mini-num">4</div>
+<div class="drop-sentence"><span aria-label="Suelta aquí" class="dropzone" tabindex="0"></span> la paso. <span class="prompt-tag">a ti</span></div>
+</div>
+<div class="drop-card" data-answer="se">
+<div class="mini-num">5</div>
+<div class="drop-sentence">Ramón <span aria-label="Suelta aquí" class="dropzone" tabindex="0"></span> lo explica de nuevo. <span class="prompt-tag">al administrador</span></div>
+</div>
+<div class="drop-card" data-answer="los">
+<div class="mini-num">6</div>
+<div class="drop-sentence"><span aria-label="Suelta aquí" class="dropzone" tabindex="0"></span> estamos mezclando. <span class="prompt-tag">los ingredientes</span></div>
+</div>
+<div class="drop-card" data-answer="me">
+<div class="mini-num">7</div>
+<div class="drop-sentence">Tú <span aria-label="Suelta aquí" class="dropzone" tabindex="0"></span> lo ofreces mientras cocino. <span class="prompt-tag">a mí</span></div>
+</div>
+<div class="drop-card" data-answer="nos">
+<div class="mini-num">8</div>
+<div class="drop-sentence">Ellos <span aria-label="Suelta aquí" class="dropzone" tabindex="0"></span> han presentado la receta. <span class="prompt-tag">a nosotros</span></div>
+</div>
+</div>
+</div>
+<div class="exercise-actions">
+<button id="checkDrag">Comprobar</button>
+<button class="secondary" id="resetDrag">Reiniciar</button>
+<span class="score" id="score-drag"></span>
+</div>
+</section>
+<section class="exercise-section" id="ejercicio1">
+<div class="section-heading">
+<span class="section-badge">✦</span>
+<div>
+<h2>Ejercicio 1. Reemplazar el complemento directo por el pronombre correcto y colocarlo en lugar adecuado.</h2>
+<p>Escribe la frase transformada en el recuadro.</p>
+</div>
+</div>
+<div class="answer-grid">
+<article class="answer-card" data-answer='["El maestro las va a repartir.", "El maestro va a repartirlas."]'>
+<div class="item-num">1</div>
+<div class="item-body">
+<p class="source-sentence">El maestro va a repartir las hojas del examen.</p>
+<textarea class="answer-input" placeholder="Escribe la frase transformada..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<details class="model-answer"><summary>Ver modelo</summary><p>El maestro las va a repartir.</p></details>
+</div>
+</article>
+<article class="answer-card" data-answer='["Paz la ha cortado en varias piezas."]'>
+<div class="item-num">2</div>
+<div class="item-body">
+<p class="source-sentence">Paz ha cortado la sandía en varias piezas.</p>
+<textarea class="answer-input" placeholder="Escribe la frase transformada..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+
+</div>
+</article>
+<article class="answer-card" data-answer='["Los estamos mezclando.", "Estamos mezclándolos."]'>
+<div class="item-num">3</div>
+<div class="item-body">
+<p class="source-sentence">Estamos mezclando los ingredientes.</p>
+<textarea class="answer-input" placeholder="Escribe la frase transformada..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+
+</div>
+</article>
+<article class="answer-card" data-answer='["La quieren ordenar.", "Quieren ordenarla."]'>
+<div class="item-num">4</div>
+<div class="item-body">
+<p class="source-sentence">Quieren ordenar una pizza.</p>
+<textarea class="answer-input" placeholder="Escribe la frase transformada..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+
+</div>
+</article>
+<article class="answer-card" data-answer='["Carolina lo está haciendo ahora.", "Carolina está haciéndolo ahora."]'>
+<div class="item-num">5</div>
+<div class="item-body">
+<p class="source-sentence">Carolina está haciendo deporte ahora.</p>
+<textarea class="answer-input" placeholder="Escribe la frase transformada..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+
+</div>
+</article>
+<article class="answer-card" data-answer='["Las vamos a pelar.", "Vamos a pelarlas."]'>
+<div class="item-num">6</div>
+<div class="item-body">
+<p class="source-sentence">Vamos a pelar las peras.</p>
+<textarea class="answer-input" placeholder="Escribe la frase transformada..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+
+</div>
+</article>
+<article class="answer-card" data-answer='["¿La usan hoy?", "La usan hoy."]'>
+<div class="item-num">7</div>
+<div class="item-body">
+<p class="source-sentence">¿Usan la lavadora hoy?</p>
+<textarea class="answer-input" placeholder="Escribe la frase transformada..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+
+</div>
+</article>
+<article class="answer-card" data-answer='["Los han repartido en la colonia."]'>
+<div class="item-num">8</div>
+<div class="item-body">
+<p class="source-sentence">Han repartido los bocadillos en la colonia.</p>
+<textarea class="answer-input" placeholder="Escribe la frase transformada..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+
+</div>
+</article>
+<article class="answer-card" data-answer='["Salgo y la saco."]'>
+<div class="item-num">9</div>
+<div class="item-body">
+<p class="source-sentence">Salgo y saco la basura.</p>
+<textarea class="answer-input" placeholder="Escribe la frase transformada..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+
+</div>
+</article>
+<article class="answer-card" data-answer='["Las estamos utilizando.", "Estamos utilizándolas."]'>
+<div class="item-num">10</div>
+<div class="item-body">
+<p class="source-sentence">Estamos utilizando la cacerola y la tapa.</p>
+<textarea class="answer-input" placeholder="Escribe la frase transformada..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+
+</div>
+</article>
+<article class="answer-card" data-answer='["Lo he cortado en piezas."]'>
+<div class="item-num">11</div>
+<div class="item-body">
+<p class="source-sentence">He cortado el pan en piezas.</p>
+<textarea class="answer-input" placeholder="Escribe la frase transformada..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+
+</div>
+</article>
+<article class="answer-card" data-answer='["La van a cruzar en el cruce.", "Van a cruzarla en el cruce."]'>
+<div class="item-num">12</div>
+<div class="item-body">
+<p class="source-sentence">Van a cruzar la calle en el cruce.</p>
+<textarea class="answer-input" placeholder="Escribe la frase transformada..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+
+</div>
+</article>
+<article class="answer-card" data-answer='["Habitualmente los mezclamos en la bandeja."]'>
+<div class="item-num">13</div>
+<div class="item-body">
+<p class="source-sentence">Habitualmente mezclamos los alimentos en la bandeja.</p>
+<textarea class="answer-input" placeholder="Escribe la frase transformada..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+
+</div>
+</article>
+<article class="answer-card" data-answer='["Nos lo vamos a comunicar por teléfono.", "Nos la vamos a comunicar por teléfono.", "Vamos a comunicárnoslo por teléfono.", "Vamos a comunicárnosla por teléfono."]'>
+<div class="item-num">14</div>
+<div class="item-body">
+<p class="source-sentence">Vamos a comunicarnos con usted por teléfono.</p>
+<textarea class="answer-input" placeholder="Escribe la frase transformada..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+
+</div>
+</article>
+<article class="answer-card" data-answer='["Los he utilizado."]'>
+<div class="item-num">15</div>
+<div class="item-body">
+<p class="source-sentence">He utilizado el colador y el rallador.</p>
+<textarea class="answer-input" placeholder="Escribe la frase transformada..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+
+</div>
+</article>
+<article class="answer-card" data-answer='["Las están repartiendo en la tabla de cortar.", "Están repartiéndolas en la tabla de cortar."]'>
+<div class="item-num">16</div>
+<div class="item-body">
+<p class="source-sentence">Están repartiendo las piezas en la tabla de cortar.</p>
+<textarea class="answer-input" placeholder="Escribe la frase transformada..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+
+</div>
+</article>
+<article class="answer-card" data-answer='["La vamos a ordenar para ellos.", "Vamos a ordenarla para ellos."]'>
+<div class="item-num">17</div>
+<div class="item-body">
+<p class="source-sentence">Vamos a ordenar una pizza para ellos.</p>
+<textarea class="answer-input" placeholder="Escribe la frase transformada..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+
+</div>
+</article>
+<article class="answer-card" data-answer='["He salido y lo he visto en rojo."]'>
+<div class="item-num">18</div>
+<div class="item-body">
+<p class="source-sentence">He salido y he visto el semáforo en rojo.</p>
+<textarea class="answer-input" placeholder="Escribe la frase transformada..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+
+</div>
+</article>
+<article class="answer-card" data-answer='["La utilizamos en la lavandería."]'>
+<div class="item-num">19</div>
+<div class="item-body">
+<p class="source-sentence">Utilizamos la lavadora en la lavandería.</p>
+<textarea class="answer-input" placeholder="Escribe la frase transformada..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+
+</div>
+</article>
+<article class="answer-card" data-answer='["Lo van a estar haciendo en la colonia tranquila.", "Van a estar haciéndolo en la colonia tranquila."]'>
+<div class="item-num">20</div>
+<div class="item-body">
+<p class="source-sentence">Van a estar haciendo deporte en la colonia tranquila.</p>
+<textarea class="answer-input" placeholder="Escribe la frase transformada..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+
+</div>
+</article>
+</div>
+<div class="exercise-actions">
+<button class="checkText" data-target="ejercicio1">Comprobar</button>
+<button class="resetText secondary" data-target="ejercicio1">Reiniciar</button>
+<span class="score" id="score-ejercicio1"></span>
+</div>
+</section>
+<section class="exercise-section" id="ejercicio2">
+<div class="section-heading">
+<span class="section-badge">✦</span>
+<div>
+<h2>Ejercicio 2. Reemplazar el complemento indirecto por el pronombre correcto y colocarlos en lugar adecuado.</h2>
+<p>Escribe la frase transformada en el recuadro.</p>
+</div>
+</div>
+<div class="answer-grid">
+<article class="answer-card" data-answer='["El casero le explica el problema."]'>
+<div class="item-num">1</div>
+<div class="item-body">
+<p class="source-sentence">El casero explica el problema a Mariana.</p>
+<textarea class="answer-input" placeholder="Escribe la frase transformada..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<details class="model-answer"><summary>Ver modelo</summary><p>El casero le explica el problema.</p></details>
+</div>
+</article>
+<article class="answer-card" data-answer='["Le he entregado la tarjeta del metro."]'>
+<div class="item-num">2</div>
+<div class="item-body">
+<p class="source-sentence">He entregado la tarjeta del metro a mi hermana.</p>
+<textarea class="answer-input" placeholder="Escribe la frase transformada..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+
+</div>
+</article>
+<article class="answer-card" data-answer='["Tú les has leído las instrucciones."]'>
+<div class="item-num">3</div>
+<div class="item-body">
+<p class="source-sentence">Tú has leído las instrucciones a los estudiantes.</p>
+<textarea class="answer-input" placeholder="Escribe la frase transformada..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+
+</div>
+</article>
+<article class="answer-card" data-answer='["Le presento la situación del grifo."]'>
+<div class="item-num">4</div>
+<div class="item-body">
+<p class="source-sentence">Presento la situación del grifo a la administradora.</p>
+<textarea class="answer-input" placeholder="Escribe la frase transformada..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+
+</div>
+</article>
+<article class="answer-card" data-answer='["El encargado os ha descrito el arreglo.", "El encargado les ha descrito el arreglo."]'>
+<div class="item-num">5</div>
+<div class="item-body">
+<p class="source-sentence">El encargado ha descrito el arreglo a vosotros / a ustedes.</p>
+<textarea class="answer-input" placeholder="Escribe la frase transformada..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+
+</div>
+</article>
+<article class="answer-card" data-answer='["Le comunico la novedad."]'>
+<div class="item-num">6</div>
+<div class="item-body">
+<p class="source-sentence">Comunico la novedad a mi vecino.</p>
+<textarea class="answer-input" placeholder="Escribe la frase transformada..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+
+</div>
+</article>
+<article class="answer-card" data-answer='["Tú le estás ofreciendo un mate.", "Tú estás ofreciéndole un mate."]'>
+<div class="item-num">7</div>
+<div class="item-body">
+<p class="source-sentence">Tú estás ofreciendo un mate a Lucía.</p>
+<textarea class="answer-input" placeholder="Escribe la frase transformada..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+
+</div>
+</article>
+<article class="answer-card" data-answer='["Manuel le entrega las llaves."]'>
+<div class="item-num">8</div>
+<div class="item-body">
+<p class="source-sentence">Manuel entrega las llaves a la portera.</p>
+<textarea class="answer-input" placeholder="Escribe la frase transformada..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+
+</div>
+</article>
+<article class="answer-card" data-answer='["El maestro les explica la tarea."]'>
+<div class="item-num">9</div>
+<div class="item-body">
+<p class="source-sentence">El maestro explica la tarea a ellos.</p>
+<textarea class="answer-input" placeholder="Escribe la frase transformada..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+
+</div>
+</article>
+<article class="answer-card" data-answer='["Le hemos pasado la información del departamento."]'>
+<div class="item-num">10</div>
+<div class="item-body">
+<p class="source-sentence">Hemos pasado la información del departamento al administrador.</p>
+<textarea class="answer-input" placeholder="Escribe la frase transformada..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+
+</div>
+</article>
+<article class="answer-card" data-answer='["Tú le estás mostrando las fotos.", "Tú estás mostrándole las fotos."]'>
+<div class="item-num">11</div>
+<div class="item-body">
+<p class="source-sentence">Tú estás mostrando las fotos a tu compañero de piso.</p>
+<textarea class="answer-input" placeholder="Escribe la frase transformada..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+
+</div>
+</article>
+<article class="answer-card" data-answer='["¿Le has presentado el informe?", "Le has presentado el informe."]'>
+<div class="item-num">12</div>
+<div class="item-body">
+<p class="source-sentence">¿Has presentado el informe a tu compañero?</p>
+<textarea class="answer-input" placeholder="Escribe la frase transformada..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+
+</div>
+</article>
+<article class="answer-card" data-answer='["La dueña del local les comunica el horario."]'>
+<div class="item-num">13</div>
+<div class="item-body">
+<p class="source-sentence">La dueña del local comunica el horario a los clientes.</p>
+<textarea class="answer-input" placeholder="Escribe la frase transformada..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+
+</div>
+</article>
+<article class="answer-card" data-answer='["Juan e Inés le piden ayuda."]'>
+<div class="item-num">14</div>
+<div class="item-body">
+<p class="source-sentence">Juan e Inés piden ayuda a la señora del kiosco.</p>
+<textarea class="answer-input" placeholder="Escribe la frase transformada..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+
+</div>
+</article>
+<article class="answer-card" data-answer='["Le he enviado el mensaje."]'>
+<div class="item-num">15</div>
+<div class="item-body">
+<p class="source-sentence">He enviado el mensaje a Marcos.</p>
+<textarea class="answer-input" placeholder="Escribe la frase transformada..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+
+</div>
+</article>
+<article class="answer-card" data-answer='["Le explico el recorrido."]'>
+<div class="item-num">16</div>
+<div class="item-body">
+<p class="source-sentence">Explico el recorrido a la pasajera.</p>
+<textarea class="answer-input" placeholder="Escribe la frase transformada..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+
+</div>
+</article>
+<article class="answer-card" data-answer='["¿Les has contado la situación?", "Les has contado la situación."]'>
+<div class="item-num">17</div>
+<div class="item-body">
+<p class="source-sentence">¿Has contado la situación a ellos?</p>
+<textarea class="answer-input" placeholder="Escribe la frase transformada..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+
+</div>
+</article>
+<article class="answer-card" data-answer='["Ellos nos han presentado la receta."]'>
+<div class="item-num">18</div>
+<div class="item-body">
+<p class="source-sentence">Ellos han presentado la receta a nosotros.</p>
+<textarea class="answer-input" placeholder="Escribe la frase transformada..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+
+</div>
+</article>
+<article class="answer-card" data-answer='["Os voy a enviar el aviso.", "Voy a enviaros el aviso.", "Les voy a enviar el aviso.", "Voy a enviarles el aviso."]'>
+<div class="item-num">19</div>
+<div class="item-body">
+<p class="source-sentence">Voy a enviar el aviso a vosotros / a ustedes.</p>
+<textarea class="answer-input" placeholder="Escribe la frase transformada..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<details class="model-answer"><summary>Ver modelo</summary><p>Os voy a enviar el aviso. / Les voy a enviar el aviso.</p></details>
+</div>
+</article>
+</div>
+<div class="exercise-actions">
+<button class="checkText" data-target="ejercicio2">Comprobar</button>
+<button class="resetText secondary" data-target="ejercicio2">Reiniciar</button>
+<span class="score" id="score-ejercicio2"></span>
+</div>
+</section>
+<section class="exercise-section" id="ejercicio3">
+<div class="section-heading">
+<span class="section-badge">✦</span>
+<div>
+<h2>Ejercicio 3. Reemplazar los complementos indirecto y directo por los pronombres correctos y colocarlos en lugar adecuado.</h2>
+<p>Escribe la frase transformada en el recuadro.</p>
+</div>
+</div>
+<div class="answer-grid">
+<article class="answer-card" data-answer='["Te la paso."]'>
+<div class="item-num">1</div>
+<div class="item-body">
+<p class="source-sentence">Paso la tarjeta del subte a ti.</p>
+<textarea class="answer-input" placeholder="Escribe la frase transformada..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<details class="model-answer"><summary>Ver modelo</summary><p>Te la paso.</p></details>
+</div>
+</article>
+<article class="answer-card" data-answer='["María se la da."]'>
+<div class="item-num">2</div>
+<div class="item-body">
+<p class="source-sentence">María da la espátula limpia a su hija.</p>
+<textarea class="answer-input" placeholder="Escribe la frase transformada..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+
+</div>
+</article>
+<article class="answer-card" data-answer='["Se la he alcanzado."]'>
+<div class="item-num">3</div>
+<div class="item-body">
+<p class="source-sentence">He alcanzado la valija a la señora.</p>
+<textarea class="answer-input" placeholder="Escribe la frase transformada..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+
+</div>
+</article>
+<article class="answer-card" data-answer='["Tú se la pasas en la cocina.", "Se la pasas en la cocina."]'>
+<div class="item-num">4</div>
+<div class="item-body">
+<p class="source-sentence">Tú pasas la cacerola a Juana en la cocina.</p>
+<textarea class="answer-input" placeholder="Escribe la frase transformada..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+
+</div>
+</article>
+<article class="answer-card" data-answer='["Te la enseño esta noche."]'>
+<div class="item-num">5</div>
+<div class="item-body">
+<p class="source-sentence">Enseño la receta a ti esta noche.</p>
+<textarea class="answer-input" placeholder="Escribe la frase transformada..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+
+</div>
+</article>
+<article class="answer-card" data-answer='["Quiero que se lo preparemos."]'>
+<div class="item-num">6</div>
+<div class="item-body">
+<p class="source-sentence">Quiero que preparemos un mate espumoso para los amigos.</p>
+<textarea class="answer-input" placeholder="Escribe la frase transformada..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+
+</div>
+</article>
+<article class="answer-card" data-answer='["Se las he enviado."]'>
+<div class="item-num">7</div>
+<div class="item-body">
+<p class="source-sentence">He enviado las fotos del fregadero al casero.</p>
+<textarea class="answer-input" placeholder="Escribe la frase transformada..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+
+</div>
+</article>
+<article class="answer-card" data-answer='["Ramón se lo explica de nuevo."]'>
+<div class="item-num">8</div>
+<div class="item-body">
+<p class="source-sentence">Ramón explica el problema del grifo al administrador de nuevo.</p>
+<textarea class="answer-input" placeholder="Escribe la frase transformada..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+
+</div>
+</article>
+<article class="answer-card" data-answer='["Maribel se lo pasa para la cena."]'>
+<div class="item-num">9</div>
+<div class="item-body">
+<p class="source-sentence">Maribel pasa el queso a José para la cena.</p>
+<textarea class="answer-input" placeholder="Escribe la frase transformada..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+
+</div>
+</article>
+<article class="answer-card" data-answer='["Usted me la ha dejado en la silla."]'>
+<div class="item-num">10</div>
+<div class="item-body">
+<p class="source-sentence">Usted ha dejado la mochila en la silla para mí.</p>
+<textarea class="answer-input" placeholder="Escribe la frase transformada..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+
+</div>
+</article>
+<article class="answer-card" data-answer='["Inés nos la da cuando vuelva."]'>
+<div class="item-num">11</div>
+<div class="item-body">
+<p class="source-sentence">Inés da la manta a nosotros cuando vuelva.</p>
+<textarea class="answer-input" placeholder="Escribe la frase transformada..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+
+</div>
+</article>
+<article class="answer-card" data-answer='["Tú me lo agradeces con una sonrisa."]'>
+<div class="item-num">12</div>
+<div class="item-body">
+<p class="source-sentence">Tú agradeces el favor a mí con una sonrisa.</p>
+<textarea class="answer-input" placeholder="Escribe la frase transformada..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+
+</div>
+</article>
+<article class="answer-card" data-answer='["La cargo y se la entrego."]'>
+<div class="item-num">13</div>
+<div class="item-body">
+<p class="source-sentence">Cargo la tarjeta y entrego la tarjeta a mi amigo.</p>
+<textarea class="answer-input" placeholder="Escribe la frase transformada..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+
+</div>
+</article>
+<article class="answer-card" data-answer='["Tú nos la pides con la valija."]'>
+<div class="item-num">14</div>
+<div class="item-body">
+<p class="source-sentence">Tú pides ayuda con la valija a nosotros.</p>
+<textarea class="answer-input" placeholder="Escribe la frase transformada..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+
+</div>
+</article>
+<article class="answer-card" data-answer='["Tú me lo ofreces mientras cocino."]'>
+<div class="item-num">15</div>
+<div class="item-body">
+<p class="source-sentence">Tú ofreces un mate a mí mientras cocino.</p>
+<textarea class="answer-input" placeholder="Escribe la frase transformada..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+
+</div>
+</article>
+<article class="answer-card" data-answer='["Se la hemos dejado antes de dormir."]'>
+<div class="item-num">16</div>
+<div class="item-body">
+<p class="source-sentence">Hemos dejado la llave de repuesto a nuestro vecino antes de dormir.</p>
+<textarea class="answer-input" placeholder="Escribe la frase transformada..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+
+</div>
+</article>
+<article class="answer-card" data-answer='["Tú me lo pides en el supermercado."]'>
+<div class="item-num">17</div>
+<div class="item-body">
+<p class="source-sentence">Tú pides el chocolate a mí en el supermercado.</p>
+<textarea class="answer-input" placeholder="Escribe la frase transformada..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+
+</div>
+</article>
+<article class="answer-card" data-answer='["Os lo voy a enviar.", "Voy a enviároslo.", "Se lo voy a enviar a ustedes.", "Voy a enviárselo a ustedes.", "Se lo voy a enviar.", "Voy a enviárselo."]'>
+<div class="item-num">18</div>
+<div class="item-body">
+<p class="source-sentence">Voy a enviar el aviso a vosotros / a ustedes.</p>
+<textarea class="answer-input" placeholder="Escribe la frase transformada..." rows="2" spellcheck="false"></textarea>
+<div aria-live="polite" class="feedback"></div>
+<details class="model-answer"><summary>Ver modelo</summary><p>Os lo voy a enviar. / Se lo voy a enviar a ustedes.</p></details>
+</div>
+</article>
+</div>
+<div class="exercise-actions">
+<button class="checkText" data-target="ejercicio3">Comprobar</button>
+<button class="resetText secondary" data-target="ejercicio3">Reiniciar</button>
+<span class="score" id="score-ejercicio3"></span>
+</div>
+</section>
+<p class="footer-note">Material interactivo de práctica.</p>
+</main>
+<script>
+    const normalize = (text) => (text || '')
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[̀-ͯ]/g, '')
+      .replace(/[¿?¡!.,;:]/g, '')
+      .replace(/[“”"'«»]/g, '')
+      .replace(/\s+/g, ' ')
+      .trim();
+
+    let selectedChip = null;
+
+    function setChipEvents() {
+      document.querySelectorAll('.chip').forEach(chip => {
+        chip.addEventListener('dragstart', event => {
+          event.dataTransfer.setData('text/plain', chip.dataset.value);
+          event.dataTransfer.setData('text/id', Array.from(document.querySelectorAll('.chip')).indexOf(chip));
+          chip.classList.add('selected');
+          selectedChip = chip;
+        });
+        chip.addEventListener('dragend', () => chip.classList.remove('selected'));
+        chip.addEventListener('click', () => {
+          document.querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+          selectedChip = chip;
+          chip.classList.add('selected');
+        });
+      });
+    }
+
+    function fillZone(zone, value, chip=null) {
+      if (zone.textContent.trim()) {
+        const old = document.createElement('button');
+        old.className = 'chip';
+        old.draggable = true;
+        old.dataset.value = zone.textContent.trim();
+        old.textContent = zone.textContent.trim();
+        document.getElementById('pronoun-bank').appendChild(old);
+        setChipEvents();
+      }
+      zone.textContent = value;
+      zone.classList.add('filled');
+      zone.classList.remove('correct', 'incorrect');
+      if (chip) chip.remove();
+      selectedChip = null;
+      document.querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+    }
+
+    document.querySelectorAll('.dropzone').forEach(zone => {
+      zone.addEventListener('dragover', event => event.preventDefault());
+      zone.addEventListener('drop', event => {
+        event.preventDefault();
+        const value = event.dataTransfer.getData('text/plain');
+        const chip = selectedChip;
+        if (value) fillZone(zone, value, chip);
+      });
+      zone.addEventListener('click', () => {
+        if (selectedChip) fillZone(zone, selectedChip.dataset.value, selectedChip);
+      });
+      zone.addEventListener('keydown', (event) => {
+        if ((event.key === 'Enter' || event.key === ' ') && selectedChip) {
+          event.preventDefault();
+          fillZone(zone, selectedChip.dataset.value, selectedChip);
+        }
+      });
+    });
+    setChipEvents();
+
+    document.getElementById('checkDrag').addEventListener('click', () => {
+      let ok = 0;
+      const cards = document.querySelectorAll('#drag-pronouns .drop-card');
+      cards.forEach(card => {
+        const zone = card.querySelector('.dropzone');
+        const good = normalize(zone.textContent) === normalize(card.dataset.answer);
+        zone.classList.remove('correct', 'incorrect');
+        zone.classList.add(good ? 'correct' : 'incorrect');
+        if (good) ok += 1;
+      });
+      document.getElementById('score-drag').textContent = `${ok} / ${cards.length}`;
+    });
+
+    document.getElementById('resetDrag').addEventListener('click', () => {
+      const bank = document.getElementById('pronoun-bank');
+      document.querySelectorAll('.dropzone').forEach(zone => {
+        const value = zone.textContent.trim();
+        if (value) {
+          const chip = document.createElement('button');
+          chip.className = 'chip';
+          chip.draggable = true;
+          chip.dataset.value = value;
+          chip.textContent = value;
+          bank.appendChild(chip);
+        }
+        zone.textContent = '';
+        zone.className = 'dropzone';
+      });
+      document.getElementById('score-drag').textContent = '';
+      selectedChip = null;
+      setChipEvents();
+    });
+
+    document.querySelectorAll('.checkText').forEach(button => {
+      button.addEventListener('click', () => {
+        const section = document.getElementById(button.dataset.target);
+        const cards = section.querySelectorAll('.answer-card');
+        let ok = 0;
+        cards.forEach(card => {
+          const input = card.querySelector('.answer-input');
+          const feedback = card.querySelector('.feedback');
+          const answers = JSON.parse(card.dataset.answer);
+          const user = normalize(input.value);
+          const isCorrect = answers.some(ans => normalize(ans) === user);
+          input.classList.remove('ok', 'no');
+          feedback.className = 'feedback';
+          if (isCorrect) {
+            ok += 1;
+            input.classList.add('ok');
+            feedback.classList.add('good');
+            feedback.textContent = '✓ Correcto';
+          } else {
+            input.classList.add('no');
+            feedback.classList.add('bad');
+            feedback.textContent = '✗ Revisa la posición y el pronombre.';
+          }
+        });
+        document.getElementById(`score-${button.dataset.target}`).textContent = `${ok} / ${cards.length}`;
+      });
+    });
+
+    document.querySelectorAll('.resetText').forEach(button => {
+      button.addEventListener('click', () => {
+        const section = document.getElementById(button.dataset.target);
+        section.querySelectorAll('.answer-input').forEach(input => {
+          input.value = '';
+          input.classList.remove('ok', 'no');
+        });
+        section.querySelectorAll('.feedback').forEach(f => {
+          f.textContent = '';
+          f.className = 'feedback';
+        });
+        section.querySelectorAll('details').forEach(d => d.open = false);
+        document.getElementById(`score-${button.dataset.target}`).textContent = '';
+      });
+    });
+  </script>
+</body>
+</html>

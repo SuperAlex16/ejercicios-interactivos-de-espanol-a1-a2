@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Artículos en español — teoría y ejercicios</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+<style>
+  :root{
+    --rojo:#9b1c20;
+    --oro:#b58a23;
+    --tinta:#1d1d1f;
+    --gris:#5c5c63;
+    --papel:#fbf8f1;
+    --tarjeta:#ffffff;
+    --linea:#e6ddcb;
+    --det:#1b5e7a;   /* determinado */
+    --indet:#8a5a12; /* indeterminado */
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--papel);
+    color:var(--tinta);
+    font-family:Georgia,"Times New Roman",serif;
+    line-height:1.65;
+    font-size:17px;
+  }
+  header{
+    background:linear-gradient(180deg,#fff,#fbf6ea);
+    border-bottom:3px solid var(--rojo);
+    padding:34px 22px 26px;
+    text-align:center;
+  }
+  header h1{
+    margin:0;
+    font-size:2.1rem;
+    letter-spacing:.5px;
+  }
+  header h1 .ru{color:var(--rojo);}
+  header .sub{
+    margin-top:6px;
+    color:var(--gris);
+    font-style:italic;
+    font-size:1.05rem;
+  }
+  .aviso{
+    max-width:880px;
+    margin:18px auto 0;
+    background:#fff7e6;
+    border:1px solid var(--oro);
+    border-radius:10px;
+    padding:10px 16px;
+    font-size:.92rem;
+    color:#6b5410;
+  }
+  main{
+    max-width:900px;
+    margin:0 auto;
+    padding:26px 20px 70px;
+  }
+  section{
+    background:var(--tarjeta);
+    border:1px solid var(--linea);
+    border-radius:14px;
+    padding:22px 26px;
+    margin:0 0 22px;
+    box-shadow:0 1px 2px rgba(0,0,0,.03);
+  }
+  section h2{
+    margin:0 0 4px;
+    font-size:1.32rem;
+    color:var(--rojo);
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+  }
+  section h2 .n{
+    font-size:.85rem;
+    color:#fff;
+    background:var(--rojo);
+    border-radius:50%;
+    min-width:1.9em;
+    height:1.9em;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    flex:0 0 auto;
+  }
+  h3{
+    font-size:1.05rem;
+    color:var(--oro);
+    margin:20px 0 6px;
+  }
+  p{margin:8px 0;}
+  ul{margin:6px 0 6px;padding-left:22px;}
+  li{margin:5px 0;}
+  .ru-rule{color:var(--tinta);}
+  .nota{
+    color:var(--gris);
+    font-size:.95rem;
+    font-style:italic;
+  }
+  /* artículos resaltados dentro de los ejemplos */
+  b.art-det{color:var(--det);}
+  b.art-indet{color:var(--indet);}
+  /* ejemplo con tooltip */
+  .ej{
+    position:relative;
+    cursor:help;
+    border-bottom:1.5px dotted var(--rojo);
+    color:#222;
+    white-space:nowrap;
+    font-style:italic;
+    font-weight:600;
+  }
+  .ej::after{
+    content:attr(data-ru);
+    position:absolute;
+    left:50%;
+    bottom:135%;
+    transform:translateX(-50%) translateY(4px);
+    background:var(--tinta);
+    color:#fff;
+    font-family:Arial,Helvetica,sans-serif;
+    font-style:normal;
+    font-weight:400;
+    font-size:.85rem;
+    line-height:1.35;
+    padding:7px 11px;
+    border-radius:8px;
+    white-space:normal;
+    width:max-content;
+    max-width:260px;
+    text-align:center;
+    box-shadow:0 4px 14px rgba(0,0,0,.22);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .15s ease, transform .15s ease;
+    z-index:20;
+  }
+  .ej::before{
+    content:"";
+    position:absolute;
+    left:50%;
+    bottom:135%;
+    transform:translateX(-50%) translateY(4px);
+    border:6px solid transparent;
+    border-top-color:var(--tinta);
+    margin-bottom:-12px;
+    opacity:0;
+    transition:opacity .15s ease, transform .15s ease;
+    z-index:21;
+  }
+  .ej:hover::after,.ej:focus::after,.ej.activo::after,
+  .ej:hover::before,.ej:focus::before,.ej.activo::before{
+    opacity:1;
+    transform:translateX(-50%) translateY(0);
+  }
+  .bloque-ej{
+    background:#faf6ec;
+    border-left:3px solid var(--oro);
+    border-radius:0 8px 8px 0;
+    padding:8px 14px;
+    margin:8px 0;
+  }
+  .bloque-ej .ej{margin-right:4px;}
+  .si{color:#1d6b2f;font-weight:700;}
+  .no{color:#9b1c20;font-weight:700;}
+  .tabla{
+    width:100%;
+    border-collapse:collapse;
+    margin:10px 0;
+    font-size:.97rem;
+  }
+  .tabla th,.tabla td{
+    border:1px solid var(--linea);
+    padding:8px 10px;
+    text-align:left;
+    vertical-align:top;
+  }
+  .tabla th{background:#f3ece0;color:var(--rojo);}
+  .leyenda{
+    font-size:.9rem;
+    color:var(--gris);
+    margin-top:4px;
+  }
+  .leyenda b.art-det{font-weight:700;}
+  .leyenda b.art-indet{font-weight:700;}
+  footer{
+    text-align:center;
+    color:var(--gris);
+    font-size:.85rem;
+    padding:0 20px 40px;
+  }
+  @media(max-width:560px){
+    body{font-size:16px;}
+    section{padding:18px 16px;}
+    header h1{font-size:1.6rem;}
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>Chuleta · <span class="ru">Шпаргалка</span></h1>
+  <div class="sub">Артикли в испанском языке — правила и примеры</div>
+  <div class="aviso">
+    Наведите курсор на <span class="ej" data-ru="пример (наведите курсор — появится перевод)">пример</span>
+    (или коснитесь его на сенсорном экране), чтобы увидеть перевод на русский.
+    <span style="color:var(--det)">■</span> определённый артикль ·
+    <span style="color:var(--indet)">■</span> неопределённый артикль.
+  </div>
+</header>
+
+<main>
+
+  <!-- 0 -->
+  <section>
+    <h2><span class="n">0</span> Общие сведения</h2>
+    <p class="ru-rule">В испанском языке различают две группы артиклей:</p>
+    <ul class="ru-rule">
+      <li><b class="art-det">Определённые</b>: <b class="art-det">el</b> (м. р., ед. ч.),
+        <b class="art-det">la</b> (ж. р., ед. ч.), <b class="art-det">los</b> (м. р., мн. ч.),
+        <b class="art-det">las</b> (ж. р., мн. ч.). Указывают на известный, конкретный или единственный предмет.</li>
+      <li><b class="art-indet">Неопределённые</b>: <b class="art-indet">un</b> (м. р.),
+        <b class="art-indet">una</b> (ж. р.). Указывают на новый, неизвестный или один из многих предметов.</li>
+    </ul>
+    <p class="nota">Артикль всегда согласуется с существительным в роде и числе и ставится перед ним.</p>
+
+    <h3>Важное замечание о «unos / unas»</h3>
+    <p class="ru-rule">Формы <span class="ej" data-ru="несколько / некоторые (≈ algunos)">unos</span> и
+      <span class="ej" data-ru="несколько / некоторые (ж. р.)">unas</span>
+      <strong>не являются артиклями</strong>. Это <strong>относительные прилагательные</strong>,
+      которые выражают неопределённое количество («несколько», «некоторые», «примерно»).</p>
+    <div class="bloque-ej">
+      <span class="ej" data-ru="несколько книг">unos libros</span> ·
+      <span class="ej" data-ru="несколько цветов">unas flores</span> ·
+      <span class="ej" data-ru="примерно двадцать минут">unos veinte minutos</span>
+    </div>
+  </section>
+
+  <!-- 1 -->
+  <section>
+    <h2><span class="n">1</span> Определённый артикль (el, la, los, las)</h2>
+    <p class="ru-rule">Употребляется, когда предмет известен, конкретен или единственен в своём роде.</p>
+    <ul class="ru-rule">
+      <li>Предмет уже упомянут или известен из контекста:
+        <div class="bloque-ej"><span class="ej" data-ru="книга (та самая, известная)"><b class="art-det">el</b> libro</span> ·
+          <span class="ej" data-ru="дом (тот самый)"><b class="art-det">la</b> casa</span></div></li>
+      <li>Единственный в своём роде предмет:
+        <div class="bloque-ej"><span class="ej" data-ru="солнце"><b class="art-det">el</b> sol</span> ·
+          <span class="ej" data-ru="луна"><b class="art-det">la</b> luna</span></div></li>
+      <li>Обобщение — весь класс предметов или понятие в целом:
+        <div class="bloque-ej"><span class="ej" data-ru="Испанский язык — лёгкий."><b class="art-det">El</b> español es fácil.</span></div></li>
+      <li>С названиями дней недели (в значении «в … день»):
+        <div class="bloque-ej"><span class="ej" data-ru="Я работаю в понедельник."> Trabajo <b class="art-det">el</b> lunes.</span></div></li>
+      <li>С частями тела и одеждой — вместо притяжательного местоимения:
+        <div class="bloque-ej"><span class="ej" data-ru="Я чищу зубы."> Lavo <b class="art-det">los</b> dientes.</span> ·
+          <span class="ej" data-ru="Я надеваю одежду."> Pongo <b class="art-det">la</b> ropa.</span></div></li>
+    </ul>
+  </section>
+
+  <!-- 2 -->
+  <section>
+    <h2><span class="n">2</span> Неопределённый артикль (un, una)</h2>
+    <p class="ru-rule">Употребляется, когда предмет новый, неизвестный или один из многих.</p>
+    <ul class="ru-rule">
+      <li>Предмет вводится впервые, неизвестен слушателю:
+        <div class="bloque-ej"><span class="ej" data-ru="книга (некая, одна из)"><b class="art-indet">un</b> libro</span> ·
+          <span class="ej" data-ru="дом (некий)"><b class="art-indet">una</b> casa</span></div></li>
+      <li>При описании или характеристике (часто с прилагательным):
+        <div class="bloque-ej"><span class="ej" data-ru="Она — известная преподавательница."> Ella es <b class="art-indet">una</b> profesora famosa.</span></div></li>
+      <li>В значении «один», «одна порция»:
+        <div class="bloque-ej"><span class="ej" data-ru="Я хочу (чашку) кофе."> Quiero <b class="art-indet">un</b> café.</span></div></li>
+    </ul>
+    <p class="nota"><strong>Важно:</strong> испанское предложение редко начинается с существительного
+      с неопределённым артиклем. См. правило 8.</p>
+  </section>
+
+  <!-- 3 -->
+  <section>
+    <h2><span class="n">3</span> Артикли с глаголами ser, tener, hay, existir</h2>
+
+    <h3>ser — «быть, являться»</h3>
+    <p class="ru-rule">Перед названием профессии или рода занятий артикль <strong>не ставится</strong>:</p>
+    <div class="bloque-ej">
+      <span class="ej" data-ru="Я врач.">Soy médico.</span> ·
+      <span class="ej" data-ru="Она студентка.">Ella es estudiante.</span>
+    </div>
+    <p class="ru-rule">Но при наличии определения (прилагательного) ставится
+      <b class="art-indet">неопределённый</b> артикль:</p>
+    <div class="bloque-ej">
+      <span class="ej" data-ru="Он известный врач.">Es <b class="art-indet">un</b> médico famoso.</span>
+    </div>
+
+    <h3>tener — «иметь»</h3>
+    <p class="ru-rule">Глагол <strong>tener</strong> требует <b class="art-indet">неопределённого</b>
+      артикля (<b class="art-indet">un</b> / <b class="art-indet">una</b>):</p>
+    <div class="bloque-ej">
+      <span class="ej" data-ru="У меня есть семья.">Tengo <b class="art-indet">una</b> familia.</span> ·
+      <span class="ej" data-ru="У меня есть машина.">Tengo <b class="art-indet">un</b> coche.</span>
+    </div>
+    <p class="ru-rule">С глаголом <strong>tener</strong> <b class="art-det">определённый</b> артикль
+      употребляется <strong>только с частями тела</strong>:</p>
+    <div class="bloque-ej">
+      <span class="ej" data-ru="У меня голубые глаза.">Tengo <b class="art-det">los</b> ojos azules.</span>
+    </div>
+
+    <h3>hay — «есть, имеется» (безличный оборот)</h3>
+    <p class="ru-rule">В <strong>единственном числе</strong> требует
+      <b class="art-indet">неопределённый</b> артикль:</p>
+    <div class="bloque-ej">
+      <span class="ej" data-ru="В городе есть больница.">Hay <b class="art-indet">un</b> hospital en la ciudad.</span>
+    </div>
+    <p class="ru-rule">Во <strong>множественном числе</strong> и в <strong>отрицании</strong>
+      артикль <strong>не употребляется</strong>:</p>
+    <div class="bloque-ej">
+      <span class="ej" data-ru="В городе есть больницы.">Hay hospitales en la ciudad.</span> ·
+      <span class="ej" data-ru="Кофе нет.">No hay café.</span>
+    </div>
+
+    <h3>existir — «существовать»</h3>
+    <p class="ru-rule">Аналогично: в единственном числе — неопределённый артикль; во множественном
+      числе и в отрицании — без артикля:</p>
+    <div class="bloque-ej">
+      <span class="ej" data-ru="Существует (некая) связь.">Existe <b class="art-indet">una</b> relación.</span> ·
+      <span class="ej" data-ru="Связей не существует.">No existen relaciones.</span>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section>
+    <h2><span class="n">4</span> Артикли с именами собственными</h2>
+    <p class="ru-rule">Имена и фамилии людей, как правило, употребляются <strong>без артикля</strong>:</p>
+    <div class="bloque-ej">
+      <span class="ej" data-ru="Мария живёт в Лондоне.">María vive en Londres.</span>
+    </div>
+
+    <h3>Фамилии: семья целиком (los + apellido)</h3>
+    <p class="ru-rule">Чтобы обозначить семью целиком, перед фамилией ставится артикль
+      <b class="art-det">los</b>. При этом сама фамилия <strong>не получает</strong> окончания
+      множественного числа:</p>
+    <div class="bloque-ej">
+      <span class="ej" data-ru="семья Гонсалес"><b class="art-det">los</b> González</span>
+    </div>
+
+    <h3>Обращение и 3-е лицо</h3>
+    <p class="ru-rule">Слова <span class="ej" data-ru="господин (с именем)">don</span> и
+      <span class="ej" data-ru="госпожа (с именем)">doña</span> всегда употребляются <strong>без артикля</strong>.
+      Слова <strong>señor / señora</strong> при обращении идут без артикля, а в 3-м лице — с
+      <b class="art-det">определённым</b> артиклем:</p>
+    <div class="bloque-ej">
+      <span class="ej" data-ru="господин (этот)"><b class="art-det">el</b> señor</span> ·
+      <span class="ej" data-ru="госпожа (эта)"><b class="art-det">la</b> señora</span>
+    </div>
+
+    <h3>Особые (разговорные и переносные) случаи</h3>
+    <ul class="ru-rule">
+      <li><span class="ej" data-ru="Мария (с артиклем — разговорный, фамильярный оттенок)"><b class="art-det">la</b> María</span>
+        — артикль перед женским именем в разговорной речи.</li>
+      <li><span class="ej" data-ru="картина Пикассо (произведение автора)"><b class="art-det">el</b> Picasso</span>
+        — артикль + фамилия художника в значении «его произведение».</li>
+    </ul>
+    <p class="nota">Эти употребления стилистически окрашены и не являются нейтральной нормой.</p>
+  </section>
+
+  <!-- 5 -->
+  <section>
+    <h2><span class="n">5</span> Артикли с географическими названиями</h2>
+    <p class="ru-rule">Большинство городов и стран употребляются <strong>без артикля</strong>:</p>
+    <div class="bloque-ej">
+      <span class="ej" data-ru="Я живу в Польше.">Vivo en Polonia.</span> ·
+      <span class="ej" data-ru="Берлин — город.">Berlín es una ciudad.</span>
+    </div>
+
+    <h3>Названия, в которых артикль — часть имени</h3>
+    <p class="ru-rule">У некоторых стран и городов артикль входит в состав названия:</p>
+    <div class="bloque-ej">
+      <span class="ej" data-ru="Аргентина"><b class="art-det">la</b> Argentina</span> ·
+      <span class="ej" data-ru="Перу"><b class="art-det">el</b> Perú</span> ·
+      <span class="ej" data-ru="Каир"><b class="art-det">El</b> Cairo</span> ·
+      <span class="ej" data-ru="Ла-Корунья"><b class="art-det">La</b> Coruña</span> ·
+      <span class="ej" data-ru="Соединённые Штаты"><b class="art-det">los</b> Estados Unidos</span>
+    </div>
+
+    <h3>Когда артикль обязателен: реки, моря, океаны, горы, острова</h3>
+    <p class="ru-rule">В отличие от городов и большинства стран, <strong>названия географических
+      объектов</strong> — рек, морей, океанов, гор и островов — употребляются
+      <strong>всегда с <b class="art-det">определённым</b> артиклем</strong>. Это правило
+      действует для всей категории целиком:</p>
+    <table class="tabla">
+      <tr><th>Категория</th><th>Артикль</th><th>Пример</th></tr>
+      <tr><td>Реки</td><td><b class="art-det">el</b></td>
+        <td><span class="ej" data-ru="река"><b class="art-det">el</b> río</span></td></tr>
+      <tr><td>Моря, океаны</td><td><b class="art-det">el</b></td>
+        <td><span class="ej" data-ru="море"><b class="art-det">el</b> mar</span></td></tr>
+      <tr><td>Горы</td><td><b class="art-det">el</b></td>
+        <td><span class="ej" data-ru="гора"><b class="art-det">el</b> monte</span></td></tr>
+    </table>
+    <div class="bloque-ej">
+      <span class="ej" data-ru="Море близко.">El mar está cerca.</span>
+    </div>
+    <p class="nota">Названия островов относятся к этой же категории и тоже требуют артикля
+      (в данном словаре нет названий островов для примера).</p>
+  </section>
+
+  <!-- 6 -->
+  <section>
+    <h2><span class="n">6</span> Артикли при некоторых глаголах</h2>
+    <p class="ru-rule">Ряд глаголов по-разному ведёт себя с артиклями в зависимости от смысла.</p>
+    <table class="tabla">
+      <tr><th>Глагол</th><th>С артиклем</th><th>Без артикля</th></tr>
+      <tr>
+        <td>preferir</td>
+        <td><span class="ej" data-ru="Я предпочитаю (этот, конкретный) чай.">Prefiero <b class="art-det">el</b> té.</span><br>
+            <span class="leyenda">конкретное → определённый артикль</span></td>
+        <td><span class="ej" data-ru="Я предпочитаю чай (в общем).">Prefiero té.</span><br>
+            <span class="leyenda">общее значение → без артикля</span></td>
+      </tr>
+      <tr>
+        <td>comer</td>
+        <td><span class="ej" data-ru="Я ем (это конкретное) мясо.">Como <b class="art-det">la</b> carne.</span><br>
+            <span class="leyenda">конкретное</span></td>
+        <td><span class="ej" data-ru="Я ем мясо (вообще, частично).">Como carne.</span><br>
+            <span class="leyenda">неопределённое количество</span></td>
+      </tr>
+      <tr>
+        <td>estudiar / hablar</td>
+        <td><span class="ej" data-ru="Я учусь в университете.">Estudio en <b class="art-det">la</b> universidad.</span><br>
+            <span class="leyenda">конкретное место</span></td>
+        <td><span class="ej" data-ru="Я изучаю испанский.">Estudio español.</span><br>
+            <span class="leyenda">название языка</span></td>
+      </tr>
+      <tr>
+        <td>comprar</td>
+        <td><span class="ej" data-ru="Я покупаю (эту) еду.">Compro <b class="art-det">la</b> comida.</span><br>
+            <span class="leyenda">конкретное</span></td>
+        <td><span class="ej" data-ru="Я покупаю еду.">Compro comida.</span><br>
+            <span class="leyenda">неопределённое количество</span></td>
+      </tr>
+    </table>
+  </section>
+
+  <!-- 7 -->
+  <section>
+    <h2><span class="n">7</span> Существительные на ударный á- (el agua)</h2>
+    <p class="ru-rule">Существительные <strong>женского рода</strong>, начинающиеся с
+      <strong>ударного</strong> <em>a-</em> (или <em>ha-</em>), в единственном числе для благозвучия
+      берут артикли <b class="art-det">el</b> / <b class="art-indet">un</b>, хотя сами остаются
+      женского рода.</p>
+    <div class="bloque-ej">
+      <span class="ej" data-ru="вода"><b class="art-det">el</b> agua</span> ·
+      <span class="ej" data-ru="(одна) вода с газом"><b class="art-indet">un</b> agua con gas</span>
+    </div>
+    <p class="ru-rule">Во <strong>множественном числе</strong> артикль снова становится
+      <strong>женским</strong> (<b class="art-det">las</b>), и прилагательные тоже согласуются в женском роде:</p>
+    <div class="bloque-ej">
+      <span class="ej" data-ru="воды"><b class="art-det">las</b> aguas</span> ·
+      <span class="ej" data-ru="воды без газа"><b class="art-det">las</b> aguas sin gas</span>
+    </div>
+    <p class="nota">Правило касается только <strong>ударного</strong> начального a-: например, слово
+      <em>agua</em> — женского рода (<em>el agua → las aguas</em>).</p>
+  </section>
+
+  <!-- 8 -->
+  <section>
+    <h2><span class="n">8</span> Существительное в начале предложения</h2>
+    <p class="ru-rule">Испанское предложение <strong>редко начинается</strong> с существительного
+      с <b class="art-indet">неопределённым</b> артиклем. Вместо этого используют оборот
+      <strong>hay</strong> или ставят подлежащее с <b class="art-det">определённым</b> артиклем.</p>
+    <table class="tabla">
+      <tr><th></th><th>Пример</th></tr>
+      <tr>
+        <td><span class="no">редко</span></td>
+        <td><span class="ej" data-ru="(Некая) книга на столе. — нетипичное начало">Un libro está en la mesa.</span></td>
+      </tr>
+      <tr>
+        <td><span class="si">верно</span></td>
+        <td><span class="ej" data-ru="На столе есть книга.">Hay <b class="art-indet">un</b> libro en la mesa.</span></td>
+      </tr>
+      <tr>
+        <td><span class="si">верно</span></td>
+        <td><span class="ej" data-ru="Книга на столе."><b class="art-det">El</b> libro está en la mesa.</span></td>
+      </tr>
+    </table>
+  </section>
+
+</main>
+
+<footer>
+  Chuleta · Шпаргалка — артикли в испанском языке. Уровень A2 (ELE).<br>
+  Все примеры построены на изученной лексике.
+</footer>
+
+<script>
+  // На сенсорных экранах: касание показывает/скрывает перевод.
+  document.addEventListener('click', function(e){
+    var t = e.target.closest('.ej');
+    document.querySelectorAll('.ej.activo').forEach(function(el){
+      if(el !== t) el.classList.remove('activo');
+    });
+    if(t){ t.classList.toggle('activo'); }
+  });
+  // Доступность с клавиатуры.
+  document.querySelectorAll('.ej').forEach(function(el){
+    el.setAttribute('tabindex','0');
+  });
+</script>
+
+<section id="ejercicios-integrados" style="max-width:1120px;margin:34px auto 0;padding:0 18px;">
+  <div style="border-top:3px solid #9b1c20;padding-top:24px;margin-bottom:12px;text-align:center;">
+    <h2 style="margin:0 0 8px;font-family:Georgia,'Times New Roman',serif;color:#9b1c20;font-size:1.7rem;">Ejercicios interactivos</h2>
+    <p style="margin:0;color:#5c5c63;font-family:Georgia,'Times New Roman',serif;">Actividad 2b</p>
+  </div>
+  <iframe id="actividad-2b" title="Ejercicios interactivos de artículos" style="display:block;width:100%;height:1400px;border:0;background:transparent;" srcdoc="&lt;!doctype html&gt;
+&lt;html lang=&quot;es&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+&lt;title&gt;Artículos en español | ELE A1&lt;/title&gt;
+&lt;style&gt;
+  :root {
+    --bg1:#f8fbff; --bg2:#fff7ed; --ink:#1f2937; --muted:#64748b;
+    --card:#ffffff; --line:#dbe4ee; --accent:#2563eb; --accent2:#f59e0b;
+    --ok:#15803d; --bad:#b91c1c; --soft:#eef6ff;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    color:var(--ink); background: radial-gradient(circle at 10% 10%, #dbeafe 0, transparent 28%), radial-gradient(circle at 90% 0%, #ffedd5 0, transparent 32%), linear-gradient(135deg, var(--bg1), var(--bg2));
+    line-height:1.55;
+  }
+  header { padding:42px 18px 26px; text-align:center; }
+  .hero { max-width:1050px; margin:auto; background:rgba(255,255,255,.78); border:1px solid rgba(219,228,238,.9); border-radius:28px; padding:28px; box-shadow: 0 18px 55px rgba(30,41,59,.10); backdrop-filter: blur(8px); }
+  h1 { margin:0; font-size: clamp(2rem, 4vw, 3.3rem); letter-spacing:-.04em; }
+  .subtitle { color:var(--muted); max-width:780px; margin:12px auto 0; font-size:1.05rem; }
+  .nav { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:20px; }
+  .nav a { text-decoration:none; color:#0f172a; background:#fff; border:1px solid var(--line); padding:9px 12px; border-radius:999px; font-weight:700; box-shadow:0 4px 14px rgba(15,23,42,.06); }
+  main { max-width:1120px; margin:0 auto 60px; padding:0 18px; }
+  .note { background:#0f172a; color:white; border-radius:22px; padding:18px 20px; margin:20px 0; box-shadow:0 14px 35px rgba(15,23,42,.18); }
+  .note strong { color:#fde68a; }
+  .exercise { background:var(--card); border:1px solid var(--line); border-radius:26px; padding:24px; margin:24px 0; box-shadow:0 14px 40px rgba(15,23,42,.08); }
+  .exerciseHead { display:flex; align-items:center; justify-content:space-between; gap:16px; border-bottom:1px solid var(--line); padding-bottom:12px; margin-bottom:12px; }
+  h2 { margin:0; font-size:1.35rem; letter-spacing:-.02em; }
+  .tag { background:#e0f2fe; color:#075985; border:1px solid #bae6fd; border-radius:999px; padding:6px 10px; font-weight:800; white-space:nowrap; }
+  .mini { margin:8px 0 18px; color:var(--muted); }
+  .sentences { padding-left:0; list-style:none; display:grid; gap:10px; }
+  .item { background:linear-gradient(180deg, #ffffff, #f8fafc); border:1px solid var(--line); border-radius:16px; padding:12px 14px; display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+  .num { display:inline-flex; align-items:center; justify-content:center; width:30px; height:30px; border-radius:50%; background:var(--soft); color:#1d4ed8; font-weight:900; flex:0 0 auto; }
+  .blankSelect { min-width:86px; padding:7px 10px; border:2px solid #bfdbfe; border-radius:11px; background:#fff; font-weight:800; color:#0f172a; }
+  .blankSelect.ok, .dropzone.ok, .cardMove.ok, .radioItem.ok { border-color:rgba(21,128,61,.7)!important; background:#ecfdf5!important; }
+  .blankSelect.bad, .dropzone.bad, .cardMove.bad, .radioItem.bad { border-color:rgba(185,28,28,.65)!important; background:#fef2f2!important; }
+  button { cursor:pointer; border:none; border-radius:13px; padding:10px 14px; font-weight:900; margin:12px 8px 0 0; }
+  .checkBtn { background:var(--accent); color:white; box-shadow:0 8px 18px rgba(37,99,235,.22); }
+  .resetBtn { background:#f1f5f9; color:#334155; border:1px solid var(--line); }
+  .answerBtn { background:var(--accent2); color:white; box-shadow:0 8px 18px rgba(245,158,11,.26); }
+  .feedback { font-weight:900; margin:12px 0 0; }
+  .bank { display:flex; flex-wrap:wrap; gap:10px; background:#f8fafc; border:1px dashed #93c5fd; padding:12px; border-radius:18px; margin-bottom:14px; }
+  .chip { margin:0; background:#fff7ed; color:#7c2d12; border:1px solid #fed7aa; min-width:58px; font-size:1rem; }
+  .dropzone { display:inline-flex; justify-content:center; align-items:center; min-width:74px; min-height:34px; border:2px dashed #93c5fd; border-radius:12px; background:#eff6ff; color:#1e3a8a; font-weight:900; }
+  .dropzone.hover { outline:3px solid #fbbf24; }
+  .columnWrap { display:grid; grid-template-columns:minmax(230px, 1fr) 2.2fr; gap:14px; align-items:start; }
+  .targetGrid { display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:12px; }
+  .articleColumn { min-height:96px; border:2px dashed #cbd5e1; border-radius:18px; background:#f8fafc; padding:10px; }
+  .articleColumn h3 { margin:0 0 10px; background:#e0f2fe; border-radius:10px; padding:6px 8px; text-align:center; color:#075985; }
+  .source h3 { background:#fef3c7; color:#92400e; }
+  .cardMove { background:white; border:1px solid var(--line); border-radius:13px; padding:9px 10px; margin:8px 0; box-shadow:0 4px 12px rgba(15,23,42,.05); font-weight:650; }
+  .cardMove.dragging { opacity:.45; }
+  .radioList .item { align-items:flex-start; flex-direction:column; }
+  .radioRow { display:flex; flex-wrap:wrap; gap:8px; margin-left:38px; }
+  .pill { display:inline-flex; align-items:center; gap:5px; border:1px solid var(--line); border-radius:999px; padding:7px 10px; background:white; font-weight:800; }
+  .blankLine { color:#2563eb; letter-spacing:.12em; }
+  .finalText { font-size:1.05rem; background:#fffdf7; border:1px solid #fed7aa; border-radius:20px; padding:20px; }
+  .finalText p { margin:0 0 14px; }
+  .finalBlank { margin:0 3px; min-width:78px; }
+  footer { text-align:center; color:var(--muted); padding:28px; }
+  @media (max-width: 850px) { .columnWrap { grid-template-columns:1fr; } .targetGrid { grid-template-columns:repeat(2, minmax(0,1fr)); } }
+  @media (max-width: 560px) { .targetGrid { grid-template-columns:1fr; } .exerciseHead { flex-direction:column; align-items:flex-start; } }
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;header&gt;
+  &lt;div class=&quot;hero&quot;&gt;
+    &lt;h1&gt;Artículos en español para ELE A1&lt;/h1&gt;
+    &lt;p class=&quot;subtitle&quot;&gt;Ejercicios interactivos con artículos determinados, indeterminados y ausencia de artículo. Léxico básico español-ruso; verbos en Presente de Indicativo.&lt;/p&gt;
+    &lt;nav class=&quot;nav&quot; aria-label=&quot;Navegación de ejercicios&quot;&gt;
+      &lt;a href=&quot;#ex1&quot;&gt;1. Determinados&lt;/a&gt;&lt;a href=&quot;#ex2&quot;&gt;2. Indeterminados&lt;/a&gt;&lt;a href=&quot;#ex3&quot;&gt;3. Arrastrar&lt;/a&gt;&lt;a href=&quot;#ex4&quot;&gt;4. Columnas&lt;/a&gt;&lt;a href=&quot;#ex5&quot;&gt;5. Familias y geografía&lt;/a&gt;&lt;a href=&quot;#ex6&quot;&gt;6. Test&lt;/a&gt;&lt;a href=&quot;#final&quot;&gt;Texto final&lt;/a&gt;
+    &lt;/nav&gt;
+  &lt;/div&gt;
+&lt;/header&gt;
+&lt;main&gt;
+  &lt;div class=&quot;note&quot;&gt;&lt;strong&gt;Regla visual:&lt;/strong&gt; Ø significa ausencia de artículo. Los nombres propios como Juan Pérez no llevan artículo; los apellidos usados para nombrar a toda una familia llevan artículo plural: los Pérez.&lt;/div&gt;
+  
+    &lt;section class=&quot;exercise selectExercise&quot; id=&quot;ex1&quot;&gt;
+      &lt;div class=&quot;exerciseHead&quot;&gt;&lt;h2&gt;Ejercicio 1. Artículos determinados y nombres propios&lt;/h2&gt;&lt;span class=&quot;tag&quot;&gt;20 oraciones&lt;/span&gt;&lt;/div&gt;
+      &lt;p class=&quot;mini&quot;&gt;Elige el, la, los, las o Ø. Observa los nombres, los apellidos de familia, ríos y montañas.&lt;/p&gt;
+      &lt;ol class=&quot;sentences&quot;&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;1&lt;/span&gt;
+          &lt;span&gt;&lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;el&quot; data-options=&#x27;[&quot;el&quot;, &quot;la&quot;, &quot;los&quot;, &quot;las&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 1&quot;&gt;&lt;/select&gt;&lt;span&gt; profesor es español.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;2&lt;/span&gt;
+          &lt;span&gt;&lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;la&quot; data-options=&#x27;[&quot;el&quot;, &quot;la&quot;, &quot;los&quot;, &quot;las&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 2&quot;&gt;&lt;/select&gt;&lt;span&gt; profesora es rusa.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;3&lt;/span&gt;
+          &lt;span&gt;&lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;los&quot; data-options=&#x27;[&quot;el&quot;, &quot;la&quot;, &quot;los&quot;, &quot;las&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 3&quot;&gt;&lt;/select&gt;&lt;span&gt; alumnos son jóvenes.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;4&lt;/span&gt;
+          &lt;span&gt;&lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;las&quot; data-options=&#x27;[&quot;el&quot;, &quot;la&quot;, &quot;los&quot;, &quot;las&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 4&quot;&gt;&lt;/select&gt;&lt;span&gt; estudiantes tienen libros.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;5&lt;/span&gt;
+          &lt;span&gt;&lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;Ø&quot; data-options=&#x27;[&quot;el&quot;, &quot;la&quot;, &quot;los&quot;, &quot;las&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 5&quot;&gt;&lt;/select&gt;&lt;span&gt; Juan Pérez es médico.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;6&lt;/span&gt;
+          &lt;span&gt;&lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;los&quot; data-options=&#x27;[&quot;el&quot;, &quot;la&quot;, &quot;los&quot;, &quot;las&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 6&quot;&gt;&lt;/select&gt;&lt;span&gt; Pérez son una familia.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;7&lt;/span&gt;
+          &lt;span&gt;&lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;el&quot; data-options=&#x27;[&quot;el&quot;, &quot;la&quot;, &quot;los&quot;, &quot;las&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 7&quot;&gt;&lt;/select&gt;&lt;span&gt; río Ebro es un río.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;8&lt;/span&gt;
+          &lt;span&gt;&lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;el&quot; data-options=&#x27;[&quot;el&quot;, &quot;la&quot;, &quot;los&quot;, &quot;las&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 8&quot;&gt;&lt;/select&gt;&lt;span&gt; Tajo es un río español.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;9&lt;/span&gt;
+          &lt;span&gt;&lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;los&quot; data-options=&#x27;[&quot;el&quot;, &quot;la&quot;, &quot;los&quot;, &quot;las&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 9&quot;&gt;&lt;/select&gt;&lt;span&gt; Pirineos son montañas.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;10&lt;/span&gt;
+          &lt;span&gt;&lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;la&quot; data-options=&#x27;[&quot;el&quot;, &quot;la&quot;, &quot;los&quot;, &quot;las&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 10&quot;&gt;&lt;/select&gt;&lt;span&gt; Sierra Nevada es una montaña.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;11&lt;/span&gt;
+          &lt;span&gt;&lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;el&quot; data-options=&#x27;[&quot;el&quot;, &quot;la&quot;, &quot;los&quot;, &quot;las&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 11&quot;&gt;&lt;/select&gt;&lt;span&gt; Teide es una montaña.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;12&lt;/span&gt;
+          &lt;span&gt;&lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;la&quot; data-options=&#x27;[&quot;el&quot;, &quot;la&quot;, &quot;los&quot;, &quot;las&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 12&quot;&gt;&lt;/select&gt;&lt;span&gt; camisa es blanca.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;13&lt;/span&gt;
+          &lt;span&gt;&lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;los&quot; data-options=&#x27;[&quot;el&quot;, &quot;la&quot;, &quot;los&quot;, &quot;las&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 13&quot;&gt;&lt;/select&gt;&lt;span&gt; zapatos son negros.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;14&lt;/span&gt;
+          &lt;span&gt;&lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;las&quot; data-options=&#x27;[&quot;el&quot;, &quot;la&quot;, &quot;los&quot;, &quot;las&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 14&quot;&gt;&lt;/select&gt;&lt;span&gt; redes sociales son importantes.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;15&lt;/span&gt;
+          &lt;span&gt;&lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;el&quot; data-options=&#x27;[&quot;el&quot;, &quot;la&quot;, &quot;los&quot;, &quot;las&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 15&quot;&gt;&lt;/select&gt;&lt;span&gt; abrigo es marrón.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;16&lt;/span&gt;
+          &lt;span&gt;&lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;la&quot; data-options=&#x27;[&quot;el&quot;, &quot;la&quot;, &quot;los&quot;, &quot;las&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 16&quot;&gt;&lt;/select&gt;&lt;span&gt; casa tiene una puerta.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;17&lt;/span&gt;
+          &lt;span&gt;&lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;el&quot; data-options=&#x27;[&quot;el&quot;, &quot;la&quot;, &quot;los&quot;, &quot;las&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 17&quot;&gt;&lt;/select&gt;&lt;span&gt; hotel tiene un gimnasio.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;18&lt;/span&gt;
+          &lt;span&gt;&lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;la&quot; data-options=&#x27;[&quot;el&quot;, &quot;la&quot;, &quot;los&quot;, &quot;las&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 18&quot;&gt;&lt;/select&gt;&lt;span&gt; familia García tiene un coche.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;19&lt;/span&gt;
+          &lt;span&gt;&lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;Ø&quot; data-options=&#x27;[&quot;el&quot;, &quot;la&quot;, &quot;los&quot;, &quot;las&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 19&quot;&gt;&lt;/select&gt;&lt;span&gt; Ana García es estudiante.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;20&lt;/span&gt;
+          &lt;span&gt;&lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;las&quot; data-options=&#x27;[&quot;el&quot;, &quot;la&quot;, &quot;los&quot;, &quot;las&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 20&quot;&gt;&lt;/select&gt;&lt;span&gt; montañas son españolas.&lt;/span&gt;
+        &lt;/li&gt;&lt;/ol&gt;
+      &lt;button class=&quot;checkBtn&quot; onclick=&quot;checkSelectExercise(&#x27;ex1&#x27;)&quot;&gt;Comprobar&lt;/button&gt;
+      &lt;button class=&quot;resetBtn&quot; onclick=&quot;resetExercise(&#x27;ex1&#x27;)&quot;&gt;Reiniciar&lt;/button&gt;
+      &lt;button class=&quot;answerBtn&quot; onclick=&quot;revealAnswers(&#x27;ex1&#x27;)&quot;&gt;Ver respuestas correctas&lt;/button&gt;
+      &lt;p class=&quot;feedback&quot; aria-live=&quot;polite&quot;&gt;&lt;/p&gt;
+    &lt;/section&gt;
+  
+    &lt;section class=&quot;exercise selectExercise&quot; id=&quot;ex2&quot;&gt;
+      &lt;div class=&quot;exerciseHead&quot;&gt;&lt;h2&gt;Ejercicio 2. Artículos indeterminados con ser, tener y hay&lt;/h2&gt;&lt;span class=&quot;tag&quot;&gt;20 oraciones&lt;/span&gt;&lt;/div&gt;
+      &lt;p class=&quot;mini&quot;&gt;Elige un, una, unos, unas o Ø. Usa solo el sentido de ser, tener y hay.&lt;/p&gt;
+      &lt;ol class=&quot;sentences&quot;&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;1&lt;/span&gt;
+          &lt;span&gt;Hay &lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;un&quot; data-options=&#x27;[&quot;un&quot;, &quot;una&quot;, &quot;unos&quot;, &quot;unas&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 1&quot;&gt;&lt;/select&gt;&lt;span&gt; libro en la mesa.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;2&lt;/span&gt;
+          &lt;span&gt;Hay &lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;una&quot; data-options=&#x27;[&quot;un&quot;, &quot;una&quot;, &quot;unos&quot;, &quot;unas&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 2&quot;&gt;&lt;/select&gt;&lt;span&gt; taza en la mesa.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;3&lt;/span&gt;
+          &lt;span&gt;Juan tiene &lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;un&quot; data-options=&#x27;[&quot;un&quot;, &quot;una&quot;, &quot;unos&quot;, &quot;unas&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 3&quot;&gt;&lt;/select&gt;&lt;span&gt; coche.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;4&lt;/span&gt;
+          &lt;span&gt;María tiene &lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;una&quot; data-options=&#x27;[&quot;un&quot;, &quot;una&quot;, &quot;unos&quot;, &quot;unas&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 4&quot;&gt;&lt;/select&gt;&lt;span&gt; casa.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;5&lt;/span&gt;
+          &lt;span&gt;Hay &lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;unos&quot; data-options=&#x27;[&quot;un&quot;, &quot;una&quot;, &quot;unos&quot;, &quot;unas&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 5&quot;&gt;&lt;/select&gt;&lt;span&gt; libros en la escuela.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;6&lt;/span&gt;
+          &lt;span&gt;Hay &lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;unas&quot; data-options=&#x27;[&quot;un&quot;, &quot;una&quot;, &quot;unos&quot;, &quot;unas&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 6&quot;&gt;&lt;/select&gt;&lt;span&gt; sillas en la casa.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;7&lt;/span&gt;
+          &lt;span&gt;José es &lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;un&quot; data-options=&#x27;[&quot;un&quot;, &quot;una&quot;, &quot;unos&quot;, &quot;unas&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 7&quot;&gt;&lt;/select&gt;&lt;span&gt; médico.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;8&lt;/span&gt;
+          &lt;span&gt;Ana es &lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;una&quot; data-options=&#x27;[&quot;un&quot;, &quot;una&quot;, &quot;unos&quot;, &quot;unas&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 8&quot;&gt;&lt;/select&gt;&lt;span&gt; profesora.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;9&lt;/span&gt;
+          &lt;span&gt;Ellos son &lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;unos&quot; data-options=&#x27;[&quot;un&quot;, &quot;una&quot;, &quot;unos&quot;, &quot;unas&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 9&quot;&gt;&lt;/select&gt;&lt;span&gt; estudiantes.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;10&lt;/span&gt;
+          &lt;span&gt;Ellas son &lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;unas&quot; data-options=&#x27;[&quot;un&quot;, &quot;una&quot;, &quot;unos&quot;, &quot;unas&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 10&quot;&gt;&lt;/select&gt;&lt;span&gt; alumnas.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;11&lt;/span&gt;
+          &lt;span&gt;Hay &lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;Ø&quot; data-options=&#x27;[&quot;un&quot;, &quot;una&quot;, &quot;unos&quot;, &quot;unas&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 11&quot;&gt;&lt;/select&gt;&lt;span&gt; agua sin gas.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;12&lt;/span&gt;
+          &lt;span&gt;Tengo &lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;Ø&quot; data-options=&#x27;[&quot;un&quot;, &quot;una&quot;, &quot;unos&quot;, &quot;unas&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 12&quot;&gt;&lt;/select&gt;&lt;span&gt; dinero.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;13&lt;/span&gt;
+          &lt;span&gt;Hay &lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;un&quot; data-options=&#x27;[&quot;un&quot;, &quot;una&quot;, &quot;unos&quot;, &quot;unas&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 13&quot;&gt;&lt;/select&gt;&lt;span&gt; río cerca de la ciudad.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;14&lt;/span&gt;
+          &lt;span&gt;Hay &lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;una&quot; data-options=&#x27;[&quot;un&quot;, &quot;una&quot;, &quot;unos&quot;, &quot;unas&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 14&quot;&gt;&lt;/select&gt;&lt;span&gt; montaña cerca de la ciudad.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;15&lt;/span&gt;
+          &lt;span&gt;Hay &lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;unos&quot; data-options=&#x27;[&quot;un&quot;, &quot;una&quot;, &quot;unos&quot;, &quot;unas&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 15&quot;&gt;&lt;/select&gt;&lt;span&gt; hoteles en la ciudad.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;16&lt;/span&gt;
+          &lt;span&gt;Hay &lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;unas&quot; data-options=&#x27;[&quot;un&quot;, &quot;una&quot;, &quot;unos&quot;, &quot;unas&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 16&quot;&gt;&lt;/select&gt;&lt;span&gt; casas en el barrio.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;17&lt;/span&gt;
+          &lt;span&gt;El hotel tiene &lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;un&quot; data-options=&#x27;[&quot;un&quot;, &quot;una&quot;, &quot;unos&quot;, &quot;unas&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 17&quot;&gt;&lt;/select&gt;&lt;span&gt; ascensor.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;18&lt;/span&gt;
+          &lt;span&gt;La casa tiene &lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;una&quot; data-options=&#x27;[&quot;un&quot;, &quot;una&quot;, &quot;unos&quot;, &quot;unas&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 18&quot;&gt;&lt;/select&gt;&lt;span&gt; ventana.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;19&lt;/span&gt;
+          &lt;span&gt;Hay &lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;Ø&quot; data-options=&#x27;[&quot;un&quot;, &quot;una&quot;, &quot;unos&quot;, &quot;unas&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 19&quot;&gt;&lt;/select&gt;&lt;span&gt; aceite de oliva.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;20&lt;/span&gt;
+          &lt;span&gt;Hay &lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;una&quot; data-options=&#x27;[&quot;un&quot;, &quot;una&quot;, &quot;unos&quot;, &quot;unas&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 20&quot;&gt;&lt;/select&gt;&lt;span&gt; camisa blanca.&lt;/span&gt;
+        &lt;/li&gt;&lt;/ol&gt;
+      &lt;button class=&quot;checkBtn&quot; onclick=&quot;checkSelectExercise(&#x27;ex2&#x27;)&quot;&gt;Comprobar&lt;/button&gt;
+      &lt;button class=&quot;resetBtn&quot; onclick=&quot;resetExercise(&#x27;ex2&#x27;)&quot;&gt;Reiniciar&lt;/button&gt;
+      &lt;button class=&quot;answerBtn&quot; onclick=&quot;revealAnswers(&#x27;ex2&#x27;)&quot;&gt;Ver respuestas correctas&lt;/button&gt;
+      &lt;p class=&quot;feedback&quot; aria-live=&quot;polite&quot;&gt;&lt;/p&gt;
+    &lt;/section&gt;
+  
+    &lt;section class=&quot;exercise&quot; id=&quot;ex3&quot;&gt;
+      &lt;div class=&quot;exerciseHead&quot;&gt;&lt;h2&gt;Ejercicio 3. Arrastra y pega el artículo correcto&lt;/h2&gt;&lt;span class=&quot;tag&quot;&gt;20 oraciones&lt;/span&gt;&lt;/div&gt;
+      &lt;p class=&quot;mini&quot;&gt;Toma un artículo del banco y suéltalo en cada espacio.&lt;/p&gt;
+      &lt;div class=&quot;bank&quot; aria-label=&quot;Banco de artículos&quot;&gt;&lt;button class=&quot;chip&quot; draggable=&quot;true&quot; data-value=&quot;el&quot;&gt;el&lt;/button&gt;&lt;button class=&quot;chip&quot; draggable=&quot;true&quot; data-value=&quot;la&quot;&gt;la&lt;/button&gt;&lt;button class=&quot;chip&quot; draggable=&quot;true&quot; data-value=&quot;los&quot;&gt;los&lt;/button&gt;&lt;button class=&quot;chip&quot; draggable=&quot;true&quot; data-value=&quot;las&quot;&gt;las&lt;/button&gt;&lt;button class=&quot;chip&quot; draggable=&quot;true&quot; data-value=&quot;un&quot;&gt;un&lt;/button&gt;&lt;button class=&quot;chip&quot; draggable=&quot;true&quot; data-value=&quot;una&quot;&gt;una&lt;/button&gt;&lt;button class=&quot;chip&quot; draggable=&quot;true&quot; data-value=&quot;unos&quot;&gt;unos&lt;/button&gt;&lt;button class=&quot;chip&quot; draggable=&quot;true&quot; data-value=&quot;unas&quot;&gt;unas&lt;/button&gt;&lt;button class=&quot;chip&quot; draggable=&quot;true&quot; data-value=&quot;Ø&quot;&gt;Ø&lt;/button&gt;&lt;/div&gt;
+      &lt;ol class=&quot;sentences&quot;&gt;
+        &lt;li class=&quot;item dragItem&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;1&lt;/span&gt;
+          &lt;span&gt;&lt;/span&gt;&lt;span class=&quot;dropzone&quot; data-answer=&quot;el&quot; data-value=&quot;&quot; tabindex=&quot;0&quot;&gt;...&lt;/span&gt;&lt;span&gt; teléfono es nuevo.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item dragItem&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;2&lt;/span&gt;
+          &lt;span&gt;&lt;/span&gt;&lt;span class=&quot;dropzone&quot; data-answer=&quot;la&quot; data-value=&quot;&quot; tabindex=&quot;0&quot;&gt;...&lt;/span&gt;&lt;span&gt; flor es amarilla.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item dragItem&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;3&lt;/span&gt;
+          &lt;span&gt;&lt;/span&gt;&lt;span class=&quot;dropzone&quot; data-answer=&quot;los&quot; data-value=&quot;&quot; tabindex=&quot;0&quot;&gt;...&lt;/span&gt;&lt;span&gt; calcetines son blancos.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item dragItem&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;4&lt;/span&gt;
+          &lt;span&gt;&lt;/span&gt;&lt;span class=&quot;dropzone&quot; data-answer=&quot;las&quot; data-value=&quot;&quot; tabindex=&quot;0&quot;&gt;...&lt;/span&gt;&lt;span&gt; bayas son rojas.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item dragItem&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;5&lt;/span&gt;
+          &lt;span&gt;Hay &lt;/span&gt;&lt;span class=&quot;dropzone&quot; data-answer=&quot;un&quot; data-value=&quot;&quot; tabindex=&quot;0&quot;&gt;...&lt;/span&gt;&lt;span&gt; abrelatas en la mesa.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item dragItem&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;6&lt;/span&gt;
+          &lt;span&gt;Hay &lt;/span&gt;&lt;span class=&quot;dropzone&quot; data-answer=&quot;una&quot; data-value=&quot;&quot; tabindex=&quot;0&quot;&gt;...&lt;/span&gt;&lt;span&gt; bandeja en la mesa.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item dragItem&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;7&lt;/span&gt;
+          &lt;span&gt;Tenemos &lt;/span&gt;&lt;span class=&quot;dropzone&quot; data-answer=&quot;unos&quot; data-value=&quot;&quot; tabindex=&quot;0&quot;&gt;...&lt;/span&gt;&lt;span&gt; bocadillos.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item dragItem&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;8&lt;/span&gt;
+          &lt;span&gt;Tenemos &lt;/span&gt;&lt;span class=&quot;dropzone&quot; data-answer=&quot;unas&quot; data-value=&quot;&quot; tabindex=&quot;0&quot;&gt;...&lt;/span&gt;&lt;span&gt; galletas.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item dragItem&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;9&lt;/span&gt;
+          &lt;span&gt;&lt;/span&gt;&lt;span class=&quot;dropzone&quot; data-answer=&quot;Ø&quot; data-value=&quot;&quot; tabindex=&quot;0&quot;&gt;...&lt;/span&gt;&lt;span&gt; José López es periodista.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item dragItem&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;10&lt;/span&gt;
+          &lt;span&gt;&lt;/span&gt;&lt;span class=&quot;dropzone&quot; data-answer=&quot;los&quot; data-value=&quot;&quot; tabindex=&quot;0&quot;&gt;...&lt;/span&gt;&lt;span&gt; López son una familia.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item dragItem&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;11&lt;/span&gt;
+          &lt;span&gt;&lt;/span&gt;&lt;span class=&quot;dropzone&quot; data-answer=&quot;el&quot; data-value=&quot;&quot; tabindex=&quot;0&quot;&gt;...&lt;/span&gt;&lt;span&gt; río Duero es español.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item dragItem&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;12&lt;/span&gt;
+          &lt;span&gt;&lt;/span&gt;&lt;span class=&quot;dropzone&quot; data-answer=&quot;el&quot; data-value=&quot;&quot; tabindex=&quot;0&quot;&gt;...&lt;/span&gt;&lt;span&gt; Teide es una montaña.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item dragItem&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;13&lt;/span&gt;
+          &lt;span&gt;&lt;/span&gt;&lt;span class=&quot;dropzone&quot; data-answer=&quot;la&quot; data-value=&quot;&quot; tabindex=&quot;0&quot;&gt;...&lt;/span&gt;&lt;span&gt; camisa es azul.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item dragItem&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;14&lt;/span&gt;
+          &lt;span&gt;Hay &lt;/span&gt;&lt;span class=&quot;dropzone&quot; data-answer=&quot;una&quot; data-value=&quot;&quot; tabindex=&quot;0&quot;&gt;...&lt;/span&gt;&lt;span&gt; chaqueta en el armario.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item dragItem&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;15&lt;/span&gt;
+          &lt;span&gt;&lt;/span&gt;&lt;span class=&quot;dropzone&quot; data-answer=&quot;los&quot; data-value=&quot;&quot; tabindex=&quot;0&quot;&gt;...&lt;/span&gt;&lt;span&gt; estudiantes tienen lápices.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item dragItem&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;16&lt;/span&gt;
+          &lt;span&gt;Hay &lt;/span&gt;&lt;span class=&quot;dropzone&quot; data-answer=&quot;una&quot; data-value=&quot;&quot; tabindex=&quot;0&quot;&gt;...&lt;/span&gt;&lt;span&gt; mesa en la casa.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item dragItem&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;17&lt;/span&gt;
+          &lt;span&gt;&lt;/span&gt;&lt;span class=&quot;dropzone&quot; data-answer=&quot;el&quot; data-value=&quot;&quot; tabindex=&quot;0&quot;&gt;...&lt;/span&gt;&lt;span&gt; coche es caro.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item dragItem&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;18&lt;/span&gt;
+          &lt;span&gt;&lt;/span&gt;&lt;span class=&quot;dropzone&quot; data-answer=&quot;los&quot; data-value=&quot;&quot; tabindex=&quot;0&quot;&gt;...&lt;/span&gt;&lt;span&gt; padres tienen una casa.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item dragItem&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;19&lt;/span&gt;
+          &lt;span&gt;&lt;/span&gt;&lt;span class=&quot;dropzone&quot; data-answer=&quot;Ø&quot; data-value=&quot;&quot; tabindex=&quot;0&quot;&gt;...&lt;/span&gt;&lt;span&gt; María García es arquitecta.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item dragItem&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;20&lt;/span&gt;
+          &lt;span&gt;Hay &lt;/span&gt;&lt;span class=&quot;dropzone&quot; data-answer=&quot;una&quot; data-value=&quot;&quot; tabindex=&quot;0&quot;&gt;...&lt;/span&gt;&lt;span&gt; universidad en la ciudad.&lt;/span&gt;
+        &lt;/li&gt;&lt;/ol&gt;
+      &lt;button class=&quot;checkBtn&quot; onclick=&quot;checkDropExercise(&#x27;ex3&#x27;)&quot;&gt;Comprobar&lt;/button&gt;
+      &lt;button class=&quot;resetBtn&quot; onclick=&quot;resetExercise(&#x27;ex3&#x27;)&quot;&gt;Reiniciar&lt;/button&gt;
+      &lt;button class=&quot;answerBtn&quot; onclick=&quot;revealAnswers(&#x27;ex3&#x27;)&quot;&gt;Ver respuestas correctas&lt;/button&gt;
+      &lt;p class=&quot;feedback&quot; aria-live=&quot;polite&quot;&gt;&lt;/p&gt;
+    &lt;/section&gt;
+  
+    &lt;section class=&quot;exercise&quot; id=&quot;ex4&quot;&gt;
+      &lt;div class=&quot;exerciseHead&quot;&gt;&lt;h2&gt;Ejercicio 4. Columnas: clasifica cada oración por artículo&lt;/h2&gt;&lt;span class=&quot;tag&quot;&gt;20 oraciones&lt;/span&gt;&lt;/div&gt;
+      &lt;p class=&quot;mini&quot;&gt;Mueve cada tarjeta a la columna del artículo que completa la oración.&lt;/p&gt;
+      &lt;div class=&quot;columnWrap&quot;&gt;
+        &lt;div class=&quot;sourceColumn articleColumn source&quot; data-col=&quot;source&quot;&gt;&lt;h3&gt;Tarjetas&lt;/h3&gt;&lt;div class=&quot;cardMove&quot; draggable=&quot;true&quot; data-answer=&quot;Ø&quot;&gt;1. ___ Juan Pérez es director.&lt;/div&gt;&lt;div class=&quot;cardMove&quot; draggable=&quot;true&quot; data-answer=&quot;Ø&quot;&gt;2. ___ María Pérez es profesora.&lt;/div&gt;&lt;div class=&quot;cardMove&quot; draggable=&quot;true&quot; data-answer=&quot;los&quot;&gt;3. ___ Pérez son una familia.&lt;/div&gt;&lt;div class=&quot;cardMove&quot; draggable=&quot;true&quot; data-answer=&quot;los&quot;&gt;4. ___ García son argentinos.&lt;/div&gt;&lt;div class=&quot;cardMove&quot; draggable=&quot;true&quot; data-answer=&quot;el&quot;&gt;5. ___ profesor tiene un libro.&lt;/div&gt;&lt;div class=&quot;cardMove&quot; draggable=&quot;true&quot; data-answer=&quot;la&quot;&gt;6. ___ profesora tiene una mesa.&lt;/div&gt;&lt;div class=&quot;cardMove&quot; draggable=&quot;true&quot; data-answer=&quot;un&quot;&gt;7. Hay ___ libro.&lt;/div&gt;&lt;div class=&quot;cardMove&quot; draggable=&quot;true&quot; data-answer=&quot;una&quot;&gt;8. Hay ___ mesa.&lt;/div&gt;&lt;div class=&quot;cardMove&quot; draggable=&quot;true&quot; data-answer=&quot;unos&quot;&gt;9. Hay ___ bocadillos.&lt;/div&gt;&lt;div class=&quot;cardMove&quot; draggable=&quot;true&quot; data-answer=&quot;unas&quot;&gt;10. Hay ___ galletas.&lt;/div&gt;&lt;div class=&quot;cardMove&quot; draggable=&quot;true&quot; data-answer=&quot;el&quot;&gt;11. ___ río Ebro es un río.&lt;/div&gt;&lt;div class=&quot;cardMove&quot; draggable=&quot;true&quot; data-answer=&quot;el&quot;&gt;12. ___ Tajo es un río.&lt;/div&gt;&lt;div class=&quot;cardMove&quot; draggable=&quot;true&quot; data-answer=&quot;los&quot;&gt;13. ___ Pirineos son montañas.&lt;/div&gt;&lt;div class=&quot;cardMove&quot; draggable=&quot;true&quot; data-answer=&quot;la&quot;&gt;14. ___ Sierra Nevada es una montaña.&lt;/div&gt;&lt;div class=&quot;cardMove&quot; draggable=&quot;true&quot; data-answer=&quot;la&quot;&gt;15. ___ casa tiene una puerta.&lt;/div&gt;&lt;div class=&quot;cardMove&quot; draggable=&quot;true&quot; data-answer=&quot;el&quot;&gt;16. ___ coche tiene un cargador.&lt;/div&gt;&lt;div class=&quot;cardMove&quot; draggable=&quot;true&quot; data-answer=&quot;los&quot;&gt;17. ___ estudiantes son jóvenes.&lt;/div&gt;&lt;div class=&quot;cardMove&quot; draggable=&quot;true&quot; data-answer=&quot;las&quot;&gt;18. ___ alumnas son españolas.&lt;/div&gt;&lt;div class=&quot;cardMove&quot; draggable=&quot;true&quot; data-answer=&quot;el&quot;&gt;19. ___ agua sin gas es una bebida.&lt;/div&gt;&lt;div class=&quot;cardMove&quot; draggable=&quot;true&quot; data-answer=&quot;Ø&quot;&gt;20. Hay ___ aceite de oliva.&lt;/div&gt;&lt;/div&gt;
+        &lt;div class=&quot;targetGrid&quot;&gt;&lt;div class=&quot;articleColumn&quot; data-col=&quot;el&quot;&gt;&lt;h3&gt;el&lt;/h3&gt;&lt;/div&gt;&lt;div class=&quot;articleColumn&quot; data-col=&quot;la&quot;&gt;&lt;h3&gt;la&lt;/h3&gt;&lt;/div&gt;&lt;div class=&quot;articleColumn&quot; data-col=&quot;los&quot;&gt;&lt;h3&gt;los&lt;/h3&gt;&lt;/div&gt;&lt;div class=&quot;articleColumn&quot; data-col=&quot;las&quot;&gt;&lt;h3&gt;las&lt;/h3&gt;&lt;/div&gt;&lt;div class=&quot;articleColumn&quot; data-col=&quot;un&quot;&gt;&lt;h3&gt;un&lt;/h3&gt;&lt;/div&gt;&lt;div class=&quot;articleColumn&quot; data-col=&quot;una&quot;&gt;&lt;h3&gt;una&lt;/h3&gt;&lt;/div&gt;&lt;div class=&quot;articleColumn&quot; data-col=&quot;unos&quot;&gt;&lt;h3&gt;unos&lt;/h3&gt;&lt;/div&gt;&lt;div class=&quot;articleColumn&quot; data-col=&quot;unas&quot;&gt;&lt;h3&gt;unas&lt;/h3&gt;&lt;/div&gt;&lt;div class=&quot;articleColumn&quot; data-col=&quot;Ø&quot;&gt;&lt;h3&gt;Ø&lt;/h3&gt;&lt;/div&gt;&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;button class=&quot;checkBtn&quot; onclick=&quot;checkColumnExercise(&#x27;ex4&#x27;)&quot;&gt;Comprobar&lt;/button&gt;
+      &lt;button class=&quot;resetBtn&quot; onclick=&quot;resetExercise(&#x27;ex4&#x27;)&quot;&gt;Reiniciar&lt;/button&gt;
+      &lt;button class=&quot;answerBtn&quot; onclick=&quot;revealAnswers(&#x27;ex4&#x27;)&quot;&gt;Ver respuestas correctas&lt;/button&gt;
+      &lt;p class=&quot;feedback&quot; aria-live=&quot;polite&quot;&gt;&lt;/p&gt;
+    &lt;/section&gt;
+  
+    &lt;section class=&quot;exercise selectExercise&quot; id=&quot;ex5&quot;&gt;
+      &lt;div class=&quot;exerciseHead&quot;&gt;&lt;h2&gt;Ejercicio 5. Familias, ríos y montañas españolas&lt;/h2&gt;&lt;span class=&quot;tag&quot;&gt;20 oraciones&lt;/span&gt;&lt;/div&gt;
+      &lt;p class=&quot;mini&quot;&gt;Selecciona el artículo correcto. Atiende a nombres, apellidos de familia, ríos y montañas.&lt;/p&gt;
+      &lt;ol class=&quot;sentences&quot;&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;1&lt;/span&gt;
+          &lt;span&gt;&lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;los&quot; data-options=&#x27;[&quot;el&quot;, &quot;la&quot;, &quot;los&quot;, &quot;las&quot;, &quot;un&quot;, &quot;una&quot;, &quot;unos&quot;, &quot;unas&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 1&quot;&gt;&lt;/select&gt;&lt;span&gt; Pérez tienen una casa.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;2&lt;/span&gt;
+          &lt;span&gt;&lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;Ø&quot; data-options=&#x27;[&quot;el&quot;, &quot;la&quot;, &quot;los&quot;, &quot;las&quot;, &quot;un&quot;, &quot;una&quot;, &quot;unos&quot;, &quot;unas&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 2&quot;&gt;&lt;/select&gt;&lt;span&gt; Juan Pérez tiene un carro.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;3&lt;/span&gt;
+          &lt;span&gt;&lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;los&quot; data-options=&#x27;[&quot;el&quot;, &quot;la&quot;, &quot;los&quot;, &quot;las&quot;, &quot;un&quot;, &quot;una&quot;, &quot;unos&quot;, &quot;unas&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 3&quot;&gt;&lt;/select&gt;&lt;span&gt; García son una familia argentina.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;4&lt;/span&gt;
+          &lt;span&gt;&lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;Ø&quot; data-options=&#x27;[&quot;el&quot;, &quot;la&quot;, &quot;los&quot;, &quot;las&quot;, &quot;un&quot;, &quot;una&quot;, &quot;unos&quot;, &quot;unas&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 4&quot;&gt;&lt;/select&gt;&lt;span&gt; Ana García es estudiante.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;5&lt;/span&gt;
+          &lt;span&gt;&lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;los&quot; data-options=&#x27;[&quot;el&quot;, &quot;la&quot;, &quot;los&quot;, &quot;las&quot;, &quot;un&quot;, &quot;una&quot;, &quot;unos&quot;, &quot;unas&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 5&quot;&gt;&lt;/select&gt;&lt;span&gt; López tienen un hotel.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;6&lt;/span&gt;
+          &lt;span&gt;&lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;Ø&quot; data-options=&#x27;[&quot;el&quot;, &quot;la&quot;, &quot;los&quot;, &quot;las&quot;, &quot;un&quot;, &quot;una&quot;, &quot;unos&quot;, &quot;unas&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 6&quot;&gt;&lt;/select&gt;&lt;span&gt; José López es profesor.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;7&lt;/span&gt;
+          &lt;span&gt;&lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;el&quot; data-options=&#x27;[&quot;el&quot;, &quot;la&quot;, &quot;los&quot;, &quot;las&quot;, &quot;un&quot;, &quot;una&quot;, &quot;unos&quot;, &quot;unas&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 7&quot;&gt;&lt;/select&gt;&lt;span&gt; Ebro es un río español.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;8&lt;/span&gt;
+          &lt;span&gt;&lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;el&quot; data-options=&#x27;[&quot;el&quot;, &quot;la&quot;, &quot;los&quot;, &quot;las&quot;, &quot;un&quot;, &quot;una&quot;, &quot;unos&quot;, &quot;unas&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 8&quot;&gt;&lt;/select&gt;&lt;span&gt; Tajo es un río español.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;9&lt;/span&gt;
+          &lt;span&gt;&lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;el&quot; data-options=&#x27;[&quot;el&quot;, &quot;la&quot;, &quot;los&quot;, &quot;las&quot;, &quot;un&quot;, &quot;una&quot;, &quot;unos&quot;, &quot;unas&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 9&quot;&gt;&lt;/select&gt;&lt;span&gt; Duero es un río español.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;10&lt;/span&gt;
+          &lt;span&gt;&lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;el&quot; data-options=&#x27;[&quot;el&quot;, &quot;la&quot;, &quot;los&quot;, &quot;las&quot;, &quot;un&quot;, &quot;una&quot;, &quot;unos&quot;, &quot;unas&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 10&quot;&gt;&lt;/select&gt;&lt;span&gt; Guadiana es un río español.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;11&lt;/span&gt;
+          &lt;span&gt;&lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;el&quot; data-options=&#x27;[&quot;el&quot;, &quot;la&quot;, &quot;los&quot;, &quot;las&quot;, &quot;un&quot;, &quot;una&quot;, &quot;unos&quot;, &quot;unas&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 11&quot;&gt;&lt;/select&gt;&lt;span&gt; Guadalquivir es un río español.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;12&lt;/span&gt;
+          &lt;span&gt;&lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;el&quot; data-options=&#x27;[&quot;el&quot;, &quot;la&quot;, &quot;los&quot;, &quot;las&quot;, &quot;un&quot;, &quot;una&quot;, &quot;unos&quot;, &quot;unas&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 12&quot;&gt;&lt;/select&gt;&lt;span&gt; Segura es un río español.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;13&lt;/span&gt;
+          &lt;span&gt;&lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;el&quot; data-options=&#x27;[&quot;el&quot;, &quot;la&quot;, &quot;los&quot;, &quot;las&quot;, &quot;un&quot;, &quot;una&quot;, &quot;unos&quot;, &quot;unas&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 13&quot;&gt;&lt;/select&gt;&lt;span&gt; Miño es un río español.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;14&lt;/span&gt;
+          &lt;span&gt;&lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;los&quot; data-options=&#x27;[&quot;el&quot;, &quot;la&quot;, &quot;los&quot;, &quot;las&quot;, &quot;un&quot;, &quot;una&quot;, &quot;unos&quot;, &quot;unas&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 14&quot;&gt;&lt;/select&gt;&lt;span&gt; Pirineos son montañas españolas.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;15&lt;/span&gt;
+          &lt;span&gt;&lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;la&quot; data-options=&#x27;[&quot;el&quot;, &quot;la&quot;, &quot;los&quot;, &quot;las&quot;, &quot;un&quot;, &quot;una&quot;, &quot;unos&quot;, &quot;unas&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 15&quot;&gt;&lt;/select&gt;&lt;span&gt; Sierra Nevada es una montaña española.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;16&lt;/span&gt;
+          &lt;span&gt;&lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;el&quot; data-options=&#x27;[&quot;el&quot;, &quot;la&quot;, &quot;los&quot;, &quot;las&quot;, &quot;un&quot;, &quot;una&quot;, &quot;unos&quot;, &quot;unas&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 16&quot;&gt;&lt;/select&gt;&lt;span&gt; Teide es una montaña española.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;17&lt;/span&gt;
+          &lt;span&gt;&lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;el&quot; data-options=&#x27;[&quot;el&quot;, &quot;la&quot;, &quot;los&quot;, &quot;las&quot;, &quot;un&quot;, &quot;una&quot;, &quot;unos&quot;, &quot;unas&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 17&quot;&gt;&lt;/select&gt;&lt;span&gt; Aneto es una montaña española.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;18&lt;/span&gt;
+          &lt;span&gt;&lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;el&quot; data-options=&#x27;[&quot;el&quot;, &quot;la&quot;, &quot;los&quot;, &quot;las&quot;, &quot;un&quot;, &quot;una&quot;, &quot;unos&quot;, &quot;unas&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 18&quot;&gt;&lt;/select&gt;&lt;span&gt; Mulhacén es una montaña española.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;19&lt;/span&gt;
+          &lt;span&gt;Hay &lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;un&quot; data-options=&#x27;[&quot;el&quot;, &quot;la&quot;, &quot;los&quot;, &quot;las&quot;, &quot;un&quot;, &quot;una&quot;, &quot;unos&quot;, &quot;unas&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 19&quot;&gt;&lt;/select&gt;&lt;span&gt; río cerca de la ciudad.&lt;/span&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;20&lt;/span&gt;
+          &lt;span&gt;Hay &lt;/span&gt;&lt;select class=&quot;blankSelect&quot; data-answer=&quot;una&quot; data-options=&#x27;[&quot;el&quot;, &quot;la&quot;, &quot;los&quot;, &quot;las&quot;, &quot;un&quot;, &quot;una&quot;, &quot;unos&quot;, &quot;unas&quot;, &quot;Ø&quot;]&#x27; aria-label=&quot;Respuesta 20&quot;&gt;&lt;/select&gt;&lt;span&gt; montaña cerca del barrio.&lt;/span&gt;
+        &lt;/li&gt;&lt;/ol&gt;
+      &lt;button class=&quot;checkBtn&quot; onclick=&quot;checkSelectExercise(&#x27;ex5&#x27;)&quot;&gt;Comprobar&lt;/button&gt;
+      &lt;button class=&quot;resetBtn&quot; onclick=&quot;resetExercise(&#x27;ex5&#x27;)&quot;&gt;Reiniciar&lt;/button&gt;
+      &lt;button class=&quot;answerBtn&quot; onclick=&quot;revealAnswers(&#x27;ex5&#x27;)&quot;&gt;Ver respuestas correctas&lt;/button&gt;
+      &lt;p class=&quot;feedback&quot; aria-live=&quot;polite&quot;&gt;&lt;/p&gt;
+    &lt;/section&gt;
+  
+    &lt;section class=&quot;exercise&quot; id=&quot;ex6&quot;&gt;
+      &lt;div class=&quot;exerciseHead&quot;&gt;&lt;h2&gt;Ejercicio 6. Tipo test: artículo exacto&lt;/h2&gt;&lt;span class=&quot;tag&quot;&gt;20 oraciones&lt;/span&gt;&lt;/div&gt;
+      &lt;p class=&quot;mini&quot;&gt;Marca una opción para cada oración. Hay artículos determinados, indeterminados y ausencia de artículo.&lt;/p&gt;
+      &lt;ol class=&quot;sentences radioList&quot;&gt;
+        &lt;li class=&quot;item radioItem&quot; data-answer=&quot;el&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;1&lt;/span&gt;
+          &lt;span&gt;&lt;strong class=&quot;blankLine&quot;&gt;___&lt;/strong&gt; señor Pérez es profesor.&lt;/span&gt;
+          &lt;div class=&quot;radioRow&quot;&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_1&quot; value=&quot;la&quot;&gt; la&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_1&quot; value=&quot;unas&quot;&gt; unas&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_1&quot; value=&quot;las&quot;&gt; las&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_1&quot; value=&quot;Ø&quot;&gt; Ø&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_1&quot; value=&quot;el&quot;&gt; el&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_1&quot; value=&quot;unos&quot;&gt; unos&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_1&quot; value=&quot;una&quot;&gt; una&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_1&quot; value=&quot;un&quot;&gt; un&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_1&quot; value=&quot;los&quot;&gt; los&lt;/label&gt;&lt;/div&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item radioItem&quot; data-answer=&quot;la&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;2&lt;/span&gt;
+          &lt;span&gt;&lt;strong class=&quot;blankLine&quot;&gt;___&lt;/strong&gt; señora García tiene una tienda.&lt;/span&gt;
+          &lt;div class=&quot;radioRow&quot;&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_2&quot; value=&quot;el&quot;&gt; el&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_2&quot; value=&quot;un&quot;&gt; un&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_2&quot; value=&quot;una&quot;&gt; una&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_2&quot; value=&quot;la&quot;&gt; la&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_2&quot; value=&quot;unas&quot;&gt; unas&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_2&quot; value=&quot;Ø&quot;&gt; Ø&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_2&quot; value=&quot;unos&quot;&gt; unos&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_2&quot; value=&quot;las&quot;&gt; las&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_2&quot; value=&quot;los&quot;&gt; los&lt;/label&gt;&lt;/div&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item radioItem&quot; data-answer=&quot;la&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;3&lt;/span&gt;
+          &lt;span&gt;&lt;strong class=&quot;blankLine&quot;&gt;___&lt;/strong&gt; señorita López es estudiante.&lt;/span&gt;
+          &lt;div class=&quot;radioRow&quot;&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_3&quot; value=&quot;las&quot;&gt; las&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_3&quot; value=&quot;unas&quot;&gt; unas&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_3&quot; value=&quot;los&quot;&gt; los&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_3&quot; value=&quot;Ø&quot;&gt; Ø&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_3&quot; value=&quot;una&quot;&gt; una&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_3&quot; value=&quot;un&quot;&gt; un&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_3&quot; value=&quot;el&quot;&gt; el&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_3&quot; value=&quot;unos&quot;&gt; unos&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_3&quot; value=&quot;la&quot;&gt; la&lt;/label&gt;&lt;/div&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item radioItem&quot; data-answer=&quot;Ø&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;4&lt;/span&gt;
+          &lt;span&gt;&lt;strong class=&quot;blankLine&quot;&gt;___&lt;/strong&gt; don Juan Pérez es médico.&lt;/span&gt;
+          &lt;div class=&quot;radioRow&quot;&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_4&quot; value=&quot;los&quot;&gt; los&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_4&quot; value=&quot;un&quot;&gt; un&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_4&quot; value=&quot;unos&quot;&gt; unos&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_4&quot; value=&quot;unas&quot;&gt; unas&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_4&quot; value=&quot;el&quot;&gt; el&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_4&quot; value=&quot;Ø&quot;&gt; Ø&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_4&quot; value=&quot;una&quot;&gt; una&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_4&quot; value=&quot;la&quot;&gt; la&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_4&quot; value=&quot;las&quot;&gt; las&lt;/label&gt;&lt;/div&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item radioItem&quot; data-answer=&quot;Ø&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;5&lt;/span&gt;
+          &lt;span&gt;&lt;strong class=&quot;blankLine&quot;&gt;___&lt;/strong&gt; doña María García es profesora.&lt;/span&gt;
+          &lt;div class=&quot;radioRow&quot;&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_5&quot; value=&quot;las&quot;&gt; las&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_5&quot; value=&quot;el&quot;&gt; el&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_5&quot; value=&quot;Ø&quot;&gt; Ø&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_5&quot; value=&quot;unos&quot;&gt; unos&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_5&quot; value=&quot;un&quot;&gt; un&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_5&quot; value=&quot;una&quot;&gt; una&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_5&quot; value=&quot;unas&quot;&gt; unas&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_5&quot; value=&quot;los&quot;&gt; los&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_5&quot; value=&quot;la&quot;&gt; la&lt;/label&gt;&lt;/div&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item radioItem&quot; data-answer=&quot;la&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;6&lt;/span&gt;
+          &lt;span&gt;&lt;strong class=&quot;blankLine&quot;&gt;___&lt;/strong&gt; familia Pérez tiene una casa.&lt;/span&gt;
+          &lt;div class=&quot;radioRow&quot;&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_6&quot; value=&quot;unos&quot;&gt; unos&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_6&quot; value=&quot;el&quot;&gt; el&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_6&quot; value=&quot;un&quot;&gt; un&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_6&quot; value=&quot;Ø&quot;&gt; Ø&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_6&quot; value=&quot;una&quot;&gt; una&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_6&quot; value=&quot;unas&quot;&gt; unas&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_6&quot; value=&quot;los&quot;&gt; los&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_6&quot; value=&quot;la&quot;&gt; la&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_6&quot; value=&quot;las&quot;&gt; las&lt;/label&gt;&lt;/div&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item radioItem&quot; data-answer=&quot;la&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;7&lt;/span&gt;
+          &lt;span&gt;&lt;strong class=&quot;blankLine&quot;&gt;___&lt;/strong&gt; casa tiene un patio.&lt;/span&gt;
+          &lt;div class=&quot;radioRow&quot;&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_7&quot; value=&quot;unos&quot;&gt; unos&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_7&quot; value=&quot;un&quot;&gt; un&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_7&quot; value=&quot;la&quot;&gt; la&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_7&quot; value=&quot;Ø&quot;&gt; Ø&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_7&quot; value=&quot;unas&quot;&gt; unas&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_7&quot; value=&quot;las&quot;&gt; las&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_7&quot; value=&quot;los&quot;&gt; los&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_7&quot; value=&quot;el&quot;&gt; el&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_7&quot; value=&quot;una&quot;&gt; una&lt;/label&gt;&lt;/div&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item radioItem&quot; data-answer=&quot;un&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;8&lt;/span&gt;
+          &lt;span&gt;Hay &lt;strong class=&quot;blankLine&quot;&gt;___&lt;/strong&gt; patio en la casa.&lt;/span&gt;
+          &lt;div class=&quot;radioRow&quot;&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_8&quot; value=&quot;unas&quot;&gt; unas&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_8&quot; value=&quot;el&quot;&gt; el&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_8&quot; value=&quot;los&quot;&gt; los&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_8&quot; value=&quot;un&quot;&gt; un&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_8&quot; value=&quot;unos&quot;&gt; unos&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_8&quot; value=&quot;la&quot;&gt; la&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_8&quot; value=&quot;Ø&quot;&gt; Ø&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_8&quot; value=&quot;una&quot;&gt; una&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_8&quot; value=&quot;las&quot;&gt; las&lt;/label&gt;&lt;/div&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item radioItem&quot; data-answer=&quot;el&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;9&lt;/span&gt;
+          &lt;span&gt;&lt;strong class=&quot;blankLine&quot;&gt;___&lt;/strong&gt; barrio tiene un parque.&lt;/span&gt;
+          &lt;div class=&quot;radioRow&quot;&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_9&quot; value=&quot;Ø&quot;&gt; Ø&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_9&quot; value=&quot;una&quot;&gt; una&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_9&quot; value=&quot;unos&quot;&gt; unos&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_9&quot; value=&quot;los&quot;&gt; los&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_9&quot; value=&quot;las&quot;&gt; las&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_9&quot; value=&quot;unas&quot;&gt; unas&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_9&quot; value=&quot;la&quot;&gt; la&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_9&quot; value=&quot;el&quot;&gt; el&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_9&quot; value=&quot;un&quot;&gt; un&lt;/label&gt;&lt;/div&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item radioItem&quot; data-answer=&quot;un&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;10&lt;/span&gt;
+          &lt;span&gt;Hay &lt;strong class=&quot;blankLine&quot;&gt;___&lt;/strong&gt; parque en el barrio.&lt;/span&gt;
+          &lt;div class=&quot;radioRow&quot;&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_10&quot; value=&quot;el&quot;&gt; el&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_10&quot; value=&quot;una&quot;&gt; una&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_10&quot; value=&quot;unos&quot;&gt; unos&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_10&quot; value=&quot;un&quot;&gt; un&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_10&quot; value=&quot;Ø&quot;&gt; Ø&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_10&quot; value=&quot;unas&quot;&gt; unas&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_10&quot; value=&quot;las&quot;&gt; las&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_10&quot; value=&quot;los&quot;&gt; los&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_10&quot; value=&quot;la&quot;&gt; la&lt;/label&gt;&lt;/div&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item radioItem&quot; data-answer=&quot;la&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;11&lt;/span&gt;
+          &lt;span&gt;&lt;strong class=&quot;blankLine&quot;&gt;___&lt;/strong&gt; ciudad tiene un aeropuerto.&lt;/span&gt;
+          &lt;div class=&quot;radioRow&quot;&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_11&quot; value=&quot;Ø&quot;&gt; Ø&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_11&quot; value=&quot;un&quot;&gt; un&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_11&quot; value=&quot;el&quot;&gt; el&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_11&quot; value=&quot;las&quot;&gt; las&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_11&quot; value=&quot;los&quot;&gt; los&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_11&quot; value=&quot;unas&quot;&gt; unas&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_11&quot; value=&quot;la&quot;&gt; la&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_11&quot; value=&quot;unos&quot;&gt; unos&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_11&quot; value=&quot;una&quot;&gt; una&lt;/label&gt;&lt;/div&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item radioItem&quot; data-answer=&quot;un&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;12&lt;/span&gt;
+          &lt;span&gt;Hay &lt;strong class=&quot;blankLine&quot;&gt;___&lt;/strong&gt; aeropuerto en la ciudad.&lt;/span&gt;
+          &lt;div class=&quot;radioRow&quot;&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_12&quot; value=&quot;unos&quot;&gt; unos&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_12&quot; value=&quot;una&quot;&gt; una&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_12&quot; value=&quot;el&quot;&gt; el&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_12&quot; value=&quot;los&quot;&gt; los&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_12&quot; value=&quot;las&quot;&gt; las&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_12&quot; value=&quot;la&quot;&gt; la&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_12&quot; value=&quot;un&quot;&gt; un&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_12&quot; value=&quot;unas&quot;&gt; unas&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_12&quot; value=&quot;Ø&quot;&gt; Ø&lt;/label&gt;&lt;/div&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item radioItem&quot; data-answer=&quot;la&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;13&lt;/span&gt;
+          &lt;span&gt;&lt;strong class=&quot;blankLine&quot;&gt;___&lt;/strong&gt; oficina tiene un teléfono.&lt;/span&gt;
+          &lt;div class=&quot;radioRow&quot;&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_13&quot; value=&quot;un&quot;&gt; un&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_13&quot; value=&quot;una&quot;&gt; una&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_13&quot; value=&quot;los&quot;&gt; los&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_13&quot; value=&quot;las&quot;&gt; las&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_13&quot; value=&quot;unas&quot;&gt; unas&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_13&quot; value=&quot;la&quot;&gt; la&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_13&quot; value=&quot;unos&quot;&gt; unos&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_13&quot; value=&quot;Ø&quot;&gt; Ø&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_13&quot; value=&quot;el&quot;&gt; el&lt;/label&gt;&lt;/div&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item radioItem&quot; data-answer=&quot;un&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;14&lt;/span&gt;
+          &lt;span&gt;Hay &lt;strong class=&quot;blankLine&quot;&gt;___&lt;/strong&gt; teléfono en la oficina.&lt;/span&gt;
+          &lt;div class=&quot;radioRow&quot;&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_14&quot; value=&quot;los&quot;&gt; los&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_14&quot; value=&quot;las&quot;&gt; las&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_14&quot; value=&quot;unos&quot;&gt; unos&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_14&quot; value=&quot;el&quot;&gt; el&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_14&quot; value=&quot;una&quot;&gt; una&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_14&quot; value=&quot;Ø&quot;&gt; Ø&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_14&quot; value=&quot;la&quot;&gt; la&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_14&quot; value=&quot;un&quot;&gt; un&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_14&quot; value=&quot;unas&quot;&gt; unas&lt;/label&gt;&lt;/div&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item radioItem&quot; data-answer=&quot;los&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;15&lt;/span&gt;
+          &lt;span&gt;&lt;strong class=&quot;blankLine&quot;&gt;___&lt;/strong&gt; estudiantes tienen un libro.&lt;/span&gt;
+          &lt;div class=&quot;radioRow&quot;&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_15&quot; value=&quot;los&quot;&gt; los&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_15&quot; value=&quot;un&quot;&gt; un&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_15&quot; value=&quot;el&quot;&gt; el&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_15&quot; value=&quot;Ø&quot;&gt; Ø&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_15&quot; value=&quot;una&quot;&gt; una&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_15&quot; value=&quot;la&quot;&gt; la&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_15&quot; value=&quot;las&quot;&gt; las&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_15&quot; value=&quot;unas&quot;&gt; unas&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_15&quot; value=&quot;unos&quot;&gt; unos&lt;/label&gt;&lt;/div&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item radioItem&quot; data-answer=&quot;un&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;16&lt;/span&gt;
+          &lt;span&gt;Hay &lt;strong class=&quot;blankLine&quot;&gt;___&lt;/strong&gt; libro en la escuela.&lt;/span&gt;
+          &lt;div class=&quot;radioRow&quot;&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_16&quot; value=&quot;un&quot;&gt; un&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_16&quot; value=&quot;las&quot;&gt; las&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_16&quot; value=&quot;unas&quot;&gt; unas&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_16&quot; value=&quot;unos&quot;&gt; unos&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_16&quot; value=&quot;la&quot;&gt; la&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_16&quot; value=&quot;los&quot;&gt; los&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_16&quot; value=&quot;Ø&quot;&gt; Ø&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_16&quot; value=&quot;una&quot;&gt; una&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_16&quot; value=&quot;el&quot;&gt; el&lt;/label&gt;&lt;/div&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item radioItem&quot; data-answer=&quot;los&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;17&lt;/span&gt;
+          &lt;span&gt;&lt;strong class=&quot;blankLine&quot;&gt;___&lt;/strong&gt; padres tienen un carro.&lt;/span&gt;
+          &lt;div class=&quot;radioRow&quot;&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_17&quot; value=&quot;unos&quot;&gt; unos&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_17&quot; value=&quot;los&quot;&gt; los&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_17&quot; value=&quot;el&quot;&gt; el&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_17&quot; value=&quot;una&quot;&gt; una&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_17&quot; value=&quot;un&quot;&gt; un&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_17&quot; value=&quot;unas&quot;&gt; unas&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_17&quot; value=&quot;la&quot;&gt; la&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_17&quot; value=&quot;Ø&quot;&gt; Ø&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_17&quot; value=&quot;las&quot;&gt; las&lt;/label&gt;&lt;/div&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item radioItem&quot; data-answer=&quot;un&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;18&lt;/span&gt;
+          &lt;span&gt;Hay &lt;strong class=&quot;blankLine&quot;&gt;___&lt;/strong&gt; carro cerca de la casa.&lt;/span&gt;
+          &lt;div class=&quot;radioRow&quot;&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_18&quot; value=&quot;las&quot;&gt; las&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_18&quot; value=&quot;un&quot;&gt; un&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_18&quot; value=&quot;unos&quot;&gt; unos&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_18&quot; value=&quot;unas&quot;&gt; unas&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_18&quot; value=&quot;el&quot;&gt; el&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_18&quot; value=&quot;una&quot;&gt; una&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_18&quot; value=&quot;los&quot;&gt; los&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_18&quot; value=&quot;la&quot;&gt; la&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_18&quot; value=&quot;Ø&quot;&gt; Ø&lt;/label&gt;&lt;/div&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item radioItem&quot; data-answer=&quot;las&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;19&lt;/span&gt;
+          &lt;span&gt;&lt;strong class=&quot;blankLine&quot;&gt;___&lt;/strong&gt; montañas son luminosas.&lt;/span&gt;
+          &lt;div class=&quot;radioRow&quot;&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_19&quot; value=&quot;unas&quot;&gt; unas&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_19&quot; value=&quot;unos&quot;&gt; unos&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_19&quot; value=&quot;el&quot;&gt; el&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_19&quot; value=&quot;la&quot;&gt; la&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_19&quot; value=&quot;los&quot;&gt; los&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_19&quot; value=&quot;Ø&quot;&gt; Ø&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_19&quot; value=&quot;las&quot;&gt; las&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_19&quot; value=&quot;un&quot;&gt; un&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_19&quot; value=&quot;una&quot;&gt; una&lt;/label&gt;&lt;/div&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;item radioItem&quot; data-answer=&quot;unas&quot;&gt;
+          &lt;span class=&quot;num&quot;&gt;20&lt;/span&gt;
+          &lt;span&gt;Hay &lt;strong class=&quot;blankLine&quot;&gt;___&lt;/strong&gt; montañas cerca de la ciudad.&lt;/span&gt;
+          &lt;div class=&quot;radioRow&quot;&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_20&quot; value=&quot;unos&quot;&gt; unos&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_20&quot; value=&quot;la&quot;&gt; la&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_20&quot; value=&quot;una&quot;&gt; una&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_20&quot; value=&quot;un&quot;&gt; un&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_20&quot; value=&quot;unas&quot;&gt; unas&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_20&quot; value=&quot;los&quot;&gt; los&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_20&quot; value=&quot;Ø&quot;&gt; Ø&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_20&quot; value=&quot;el&quot;&gt; el&lt;/label&gt;&lt;label class=&quot;pill&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;ex6_20&quot; value=&quot;las&quot;&gt; las&lt;/label&gt;&lt;/div&gt;
+        &lt;/li&gt;&lt;/ol&gt;
+      &lt;button class=&quot;checkBtn&quot; onclick=&quot;checkRadioExercise(&#x27;ex6&#x27;)&quot;&gt;Comprobar&lt;/button&gt;
+      &lt;button class=&quot;resetBtn&quot; onclick=&quot;resetExercise(&#x27;ex6&#x27;)&quot;&gt;Reiniciar&lt;/button&gt;
+      &lt;button class=&quot;answerBtn&quot; onclick=&quot;revealAnswers(&#x27;ex6&#x27;)&quot;&gt;Ver respuestas correctas&lt;/button&gt;
+      &lt;p class=&quot;feedback&quot; aria-live=&quot;polite&quot;&gt;&lt;/p&gt;
+    &lt;/section&gt;
+  &lt;section class=&quot;exercise selectExercise&quot; id=&quot;final&quot;&gt;
+    &lt;div class=&quot;exerciseHead&quot;&gt;&lt;h2&gt;Texto final. Coloca artículo determinado, indeterminado o ninguno&lt;/h2&gt;&lt;span class=&quot;tag&quot;&gt;texto breve&lt;/span&gt;&lt;/div&gt;
+    &lt;p class=&quot;mini&quot;&gt;Lee el texto y completa cada espacio. Ø significa sin artículo.&lt;/p&gt;
+    &lt;div class=&quot;finalText&quot;&gt;&lt;p&gt;&lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;Ø&quot; aria-label=&quot;Blanco 1&quot;&gt;&lt;/select&gt; Juan Pérez es &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;un&quot; aria-label=&quot;Blanco 2&quot;&gt;&lt;/select&gt; profesor español y &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;Ø&quot; aria-label=&quot;Blanco 3&quot;&gt;&lt;/select&gt; María García es &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;una&quot; aria-label=&quot;Blanco 4&quot;&gt;&lt;/select&gt; arquitecta argentina. &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;los&quot; aria-label=&quot;Blanco 5&quot;&gt;&lt;/select&gt; Pérez, &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;los&quot; aria-label=&quot;Blanco 6&quot;&gt;&lt;/select&gt; García y &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;los&quot; aria-label=&quot;Blanco 7&quot;&gt;&lt;/select&gt; López son familias de &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;la&quot; aria-label=&quot;Blanco 8&quot;&gt;&lt;/select&gt; ciudad. &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;el&quot; aria-label=&quot;Blanco 9&quot;&gt;&lt;/select&gt; señor Pérez tiene &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;un&quot; aria-label=&quot;Blanco 10&quot;&gt;&lt;/select&gt; carro caro, &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;una&quot; aria-label=&quot;Blanco 11&quot;&gt;&lt;/select&gt; camisa blanca y &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;unos&quot; aria-label=&quot;Blanco 12&quot;&gt;&lt;/select&gt; zapatos negros. &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;la&quot; aria-label=&quot;Blanco 13&quot;&gt;&lt;/select&gt; señora Pérez tiene &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;una&quot; aria-label=&quot;Blanco 14&quot;&gt;&lt;/select&gt; tienda, &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;un&quot; aria-label=&quot;Blanco 15&quot;&gt;&lt;/select&gt; teléfono, &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;una&quot; aria-label=&quot;Blanco 16&quot;&gt;&lt;/select&gt; tarjeta y &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;un&quot; aria-label=&quot;Blanco 17&quot;&gt;&lt;/select&gt; ordenador. &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;Ø&quot; aria-label=&quot;Blanco 18&quot;&gt;&lt;/select&gt; Ana Pérez es &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;una&quot; aria-label=&quot;Blanco 19&quot;&gt;&lt;/select&gt; estudiante joven; &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;Ø&quot; aria-label=&quot;Blanco 20&quot;&gt;&lt;/select&gt; José Pérez es &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;un&quot; aria-label=&quot;Blanco 21&quot;&gt;&lt;/select&gt; alumno. &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;los&quot; aria-label=&quot;Blanco 22&quot;&gt;&lt;/select&gt; alumnos tienen &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;unos&quot; aria-label=&quot;Blanco 23&quot;&gt;&lt;/select&gt; libros, &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;unos&quot; aria-label=&quot;Blanco 24&quot;&gt;&lt;/select&gt; lápices y &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;unas&quot; aria-label=&quot;Blanco 25&quot;&gt;&lt;/select&gt; tarjetas. En &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;la&quot; aria-label=&quot;Blanco 26&quot;&gt;&lt;/select&gt; ciudad hay &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;un&quot; aria-label=&quot;Blanco 27&quot;&gt;&lt;/select&gt; hotel, &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;una&quot; aria-label=&quot;Blanco 28&quot;&gt;&lt;/select&gt; escuela, &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;un&quot; aria-label=&quot;Blanco 29&quot;&gt;&lt;/select&gt; instituto, &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;una&quot; aria-label=&quot;Blanco 30&quot;&gt;&lt;/select&gt; universidad, &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;un&quot; aria-label=&quot;Blanco 31&quot;&gt;&lt;/select&gt; hospital, &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;una&quot; aria-label=&quot;Blanco 32&quot;&gt;&lt;/select&gt; oficina y &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;un&quot; aria-label=&quot;Blanco 33&quot;&gt;&lt;/select&gt; aeropuerto. &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;el&quot; aria-label=&quot;Blanco 34&quot;&gt;&lt;/select&gt; hotel es caro y &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;la&quot; aria-label=&quot;Blanco 35&quot;&gt;&lt;/select&gt; escuela es importante. En &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;la&quot; aria-label=&quot;Blanco 36&quot;&gt;&lt;/select&gt; casa de &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;los&quot; aria-label=&quot;Blanco 37&quot;&gt;&lt;/select&gt; Pérez hay &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;un&quot; aria-label=&quot;Blanco 38&quot;&gt;&lt;/select&gt; patio, &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;una&quot; aria-label=&quot;Blanco 39&quot;&gt;&lt;/select&gt; puerta, &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;una&quot; aria-label=&quot;Blanco 40&quot;&gt;&lt;/select&gt; pared, &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;una&quot; aria-label=&quot;Blanco 41&quot;&gt;&lt;/select&gt; alfombra, &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;un&quot; aria-label=&quot;Blanco 42&quot;&gt;&lt;/select&gt; armario, &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;una&quot; aria-label=&quot;Blanco 43&quot;&gt;&lt;/select&gt; mesa, &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;una&quot; aria-label=&quot;Blanco 44&quot;&gt;&lt;/select&gt; silla, &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;una&quot; aria-label=&quot;Blanco 45&quot;&gt;&lt;/select&gt; taza y &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;un&quot; aria-label=&quot;Blanco 46&quot;&gt;&lt;/select&gt; refrigerador. &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;la&quot; aria-label=&quot;Blanco 47&quot;&gt;&lt;/select&gt; casa es luminosa y &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;el&quot; aria-label=&quot;Blanco 48&quot;&gt;&lt;/select&gt; ambiente es tranquilo. En &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;la&quot; aria-label=&quot;Blanco 49&quot;&gt;&lt;/select&gt; casa hay &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;un&quot; aria-label=&quot;Blanco 50&quot;&gt;&lt;/select&gt; abrelatas, &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;una&quot; aria-label=&quot;Blanco 51&quot;&gt;&lt;/select&gt; bandeja, &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;un&quot; aria-label=&quot;Blanco 52&quot;&gt;&lt;/select&gt; salero, &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;una&quot; aria-label=&quot;Blanco 53&quot;&gt;&lt;/select&gt; cacerola, &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;una&quot; aria-label=&quot;Blanco 54&quot;&gt;&lt;/select&gt; tapa, &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;un&quot; aria-label=&quot;Blanco 55&quot;&gt;&lt;/select&gt; cuchillo, &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;una&quot; aria-label=&quot;Blanco 56&quot;&gt;&lt;/select&gt; cuchara, &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;un&quot; aria-label=&quot;Blanco 57&quot;&gt;&lt;/select&gt; tenedor y &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;una&quot; aria-label=&quot;Blanco 58&quot;&gt;&lt;/select&gt; copa.&lt;/p&gt;&lt;p&gt;En &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;el&quot; aria-label=&quot;Blanco 59&quot;&gt;&lt;/select&gt; barrio hay &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;un&quot; aria-label=&quot;Blanco 60&quot;&gt;&lt;/select&gt; parque, &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;una&quot; aria-label=&quot;Blanco 61&quot;&gt;&lt;/select&gt; calle, &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;una&quot; aria-label=&quot;Blanco 62&quot;&gt;&lt;/select&gt; acera, &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;un&quot; aria-label=&quot;Blanco 63&quot;&gt;&lt;/select&gt; semáforo, &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;una&quot; aria-label=&quot;Blanco 64&quot;&gt;&lt;/select&gt; fuente, &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;una&quot; aria-label=&quot;Blanco 65&quot;&gt;&lt;/select&gt; papelera, &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;un&quot; aria-label=&quot;Blanco 66&quot;&gt;&lt;/select&gt; bar y &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;una&quot; aria-label=&quot;Blanco 67&quot;&gt;&lt;/select&gt; peluquería. Cerca de &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;la&quot; aria-label=&quot;Blanco 68&quot;&gt;&lt;/select&gt; ciudad hay &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;un&quot; aria-label=&quot;Blanco 69&quot;&gt;&lt;/select&gt; río y &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;unas&quot; aria-label=&quot;Blanco 70&quot;&gt;&lt;/select&gt; montañas. &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;el&quot; aria-label=&quot;Blanco 71&quot;&gt;&lt;/select&gt; Ebro es &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;un&quot; aria-label=&quot;Blanco 72&quot;&gt;&lt;/select&gt; río español; &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;el&quot; aria-label=&quot;Blanco 73&quot;&gt;&lt;/select&gt; Tajo, &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;el&quot; aria-label=&quot;Blanco 74&quot;&gt;&lt;/select&gt; Duero, &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;el&quot; aria-label=&quot;Blanco 75&quot;&gt;&lt;/select&gt; Guadiana y &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;el&quot; aria-label=&quot;Blanco 76&quot;&gt;&lt;/select&gt; Guadalquivir son ríos españoles. &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;los&quot; aria-label=&quot;Blanco 77&quot;&gt;&lt;/select&gt; Pirineos son montañas españolas; &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;la&quot; aria-label=&quot;Blanco 78&quot;&gt;&lt;/select&gt; Sierra Nevada es &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;una&quot; aria-label=&quot;Blanco 79&quot;&gt;&lt;/select&gt; montaña famosa; &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;el&quot; aria-label=&quot;Blanco 80&quot;&gt;&lt;/select&gt; Teide, &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;el&quot; aria-label=&quot;Blanco 81&quot;&gt;&lt;/select&gt; Aneto y &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;el&quot; aria-label=&quot;Blanco 82&quot;&gt;&lt;/select&gt; Mulhacén son montañas españolas. En &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;la&quot; aria-label=&quot;Blanco 83&quot;&gt;&lt;/select&gt; mesa hay &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;un&quot; aria-label=&quot;Blanco 84&quot;&gt;&lt;/select&gt; agua sin gas, &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;un&quot; aria-label=&quot;Blanco 85&quot;&gt;&lt;/select&gt; aceite de oliva, &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;un&quot; aria-label=&quot;Blanco 86&quot;&gt;&lt;/select&gt; queso, &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;una&quot; aria-label=&quot;Blanco 87&quot;&gt;&lt;/select&gt; manzana, &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;una&quot; aria-label=&quot;Blanco 88&quot;&gt;&lt;/select&gt; pera, &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;Ø&quot; aria-label=&quot;Blanco 89&quot;&gt;&lt;/select&gt; uvas, &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;un&quot; aria-label=&quot;Blanco 90&quot;&gt;&lt;/select&gt; melón, &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;una&quot; aria-label=&quot;Blanco 91&quot;&gt;&lt;/select&gt; sandía, &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;una&quot; aria-label=&quot;Blanco 92&quot;&gt;&lt;/select&gt; sal y &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;una&quot; aria-label=&quot;Blanco 93&quot;&gt;&lt;/select&gt; pimienta. &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;la&quot; aria-label=&quot;Blanco 94&quot;&gt;&lt;/select&gt; comida es sencilla y &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;las&quot; aria-label=&quot;Blanco 95&quot;&gt;&lt;/select&gt; bebidas son suficientes. &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;los&quot; aria-label=&quot;Blanco 96&quot;&gt;&lt;/select&gt; nombres Juan Pérez, Ana Pérez y María García son nombres propios; &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;los&quot; aria-label=&quot;Blanco 97&quot;&gt;&lt;/select&gt; apellidos de familia tienen artículo: &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;los&quot; aria-label=&quot;Blanco 98&quot;&gt;&lt;/select&gt; Pérez, &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;los&quot; aria-label=&quot;Blanco 99&quot;&gt;&lt;/select&gt; García y &lt;select class=&quot;blankSelect finalBlank&quot; data-answer=&quot;los&quot; aria-label=&quot;Blanco 100&quot;&gt;&lt;/select&gt; López.&lt;/p&gt;&lt;/div&gt;
+    &lt;button class=&quot;checkBtn&quot; onclick=&quot;checkSelectExercise(&#x27;final&#x27;)&quot;&gt;Comprobar texto&lt;/button&gt;
+    &lt;button class=&quot;resetBtn&quot; onclick=&quot;resetExercise(&#x27;final&#x27;)&quot;&gt;Reiniciar&lt;/button&gt;
+      &lt;button class=&quot;answerBtn&quot; onclick=&quot;revealAnswers(&#x27;final&#x27;)&quot;&gt;Ver respuestas correctas del texto&lt;/button&gt;
+    &lt;p class=&quot;feedback&quot; aria-live=&quot;polite&quot;&gt;&lt;/p&gt;
+  &lt;/section&gt;
+&lt;/main&gt;
+&lt;footer&gt;Material ELE A1 · Artículos determinados e indeterminados · Presente de Indicativo&lt;/footer&gt;
+&lt;script&gt;
+const ARTICLE_OPTIONS = [&quot;el&quot;, &quot;la&quot;, &quot;los&quot;, &quot;las&quot;, &quot;un&quot;, &quot;una&quot;, &quot;unos&quot;, &quot;unas&quot;, &quot;Ø&quot;];
+function shuffleWithSeed(arr, seed) {
+  const a = arr.slice();
+  let x = seed || 12345;
+  for (let i=a.length-1;i&gt;0;i--) {
+    x = (x * 9301 + 49297) % 233280;
+    const j = Math.floor((x / 233280) * (i+1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+function fillSelects(root=document) {
+  root.querySelectorAll(&#x27;select.blankSelect&#x27;).forEach((sel, idx) =&gt; {
+    if (sel.options.length) return;
+    let opts = ARTICLE_OPTIONS;
+    if (sel.dataset.options) opts = JSON.parse(sel.dataset.options);
+    opts = shuffleWithSeed(opts, idx*17 + 31);
+    const def = document.createElement(&#x27;option&#x27;);
+    def.value = &#x27;&#x27;; def.textContent = &#x27;—&#x27;;
+    sel.appendChild(def);
+    opts.forEach(o =&gt; {
+      const op = document.createElement(&#x27;option&#x27;);
+      op.value = o; op.textContent = o;
+      sel.appendChild(op);
+    });
+  });
+}
+function scoreMessage(ok,total) {
+  if (ok === total) return `Excelente: ${ok}/${total}.`;
+  if (ok &gt;= Math.ceil(total*.75)) return `Muy bien: ${ok}/${total}. Revisa las marcas rojas.`;
+  return `Resultado: ${ok}/${total}. Repite el ejercicio con calma.`;
+}
+function checkSelectExercise(id) {
+  const root = document.getElementById(id);
+  const selects = root.querySelectorAll(&#x27;select.blankSelect&#x27;);
+  let ok = 0;
+  selects.forEach(sel =&gt; {
+    sel.classList.remove(&#x27;ok&#x27;,&#x27;bad&#x27;);
+    if (sel.value === sel.dataset.answer) { sel.classList.add(&#x27;ok&#x27;); ok++; }
+    else { sel.classList.add(&#x27;bad&#x27;); }
+  });
+  root.querySelector(&#x27;.feedback&#x27;).textContent = scoreMessage(ok, selects.length);
+}
+function checkDropExercise(id) {
+  const root = document.getElementById(id);
+  const drops = root.querySelectorAll(&#x27;.dropzone&#x27;);
+  let ok = 0;
+  drops.forEach(d =&gt; {
+    d.classList.remove(&#x27;ok&#x27;,&#x27;bad&#x27;);
+    if (d.dataset.value === d.dataset.answer) { d.classList.add(&#x27;ok&#x27;); ok++; }
+    else { d.classList.add(&#x27;bad&#x27;); }
+  });
+  root.querySelector(&#x27;.feedback&#x27;).textContent = scoreMessage(ok, drops.length);
+}
+function checkColumnExercise(id) {
+  const root = document.getElementById(id);
+  const cards = root.querySelectorAll(&#x27;.cardMove&#x27;);
+  let ok = 0;
+  cards.forEach(c =&gt; {
+    c.classList.remove(&#x27;ok&#x27;,&#x27;bad&#x27;);
+    const col = c.closest(&#x27;.articleColumn&#x27;)?.dataset.col || &#x27;&#x27;;
+    if (col === c.dataset.answer) { c.classList.add(&#x27;ok&#x27;); ok++; }
+    else { c.classList.add(&#x27;bad&#x27;); }
+  });
+  root.querySelector(&#x27;.feedback&#x27;).textContent = scoreMessage(ok, cards.length);
+}
+function checkRadioExercise(id) {
+  const root = document.getElementById(id);
+  const items = root.querySelectorAll(&#x27;.radioItem&#x27;);
+  let ok = 0;
+  items.forEach(item =&gt; {
+    item.classList.remove(&#x27;ok&#x27;,&#x27;bad&#x27;);
+    const checked = item.querySelector(&#x27;input[type=&quot;radio&quot;]:checked&#x27;);
+    if (checked &amp;&amp; checked.value === item.dataset.answer) { item.classList.add(&#x27;ok&#x27;); ok++; }
+    else { item.classList.add(&#x27;bad&#x27;); }
+  });
+  root.querySelector(&#x27;.feedback&#x27;).textContent = scoreMessage(ok, items.length);
+}
+
+function revealAnswers(id) {
+  const root = document.getElementById(id);
+  const selects = root.querySelectorAll(&#x27;select.blankSelect&#x27;);
+  const drops = root.querySelectorAll(&#x27;.dropzone&#x27;);
+  const cards = root.querySelectorAll(&#x27;.cardMove&#x27;);
+  const radioItems = root.querySelectorAll(&#x27;.radioItem&#x27;);
+  selects.forEach(sel =&gt; {
+    sel.value = sel.dataset.answer;
+    sel.classList.remove(&#x27;bad&#x27;);
+    sel.classList.add(&#x27;ok&#x27;);
+  });
+  drops.forEach(d =&gt; {
+    d.dataset.value = d.dataset.answer;
+    d.textContent = d.dataset.answer;
+    d.classList.remove(&#x27;bad&#x27;);
+    d.classList.add(&#x27;ok&#x27;);
+  });
+  cards.forEach(c =&gt; {
+    const target = root.querySelector(`.articleColumn[data-col=&quot;${c.dataset.answer}&quot;]`);
+    if (target) target.appendChild(c);
+    c.classList.remove(&#x27;bad&#x27;);
+    c.classList.add(&#x27;ok&#x27;);
+  });
+  radioItems.forEach(item =&gt; {
+    const answer = item.dataset.answer;
+    item.querySelectorAll(&#x27;input[type=&quot;radio&quot;]&#x27;).forEach(r =&gt; { r.checked = (r.value === answer); });
+    item.classList.remove(&#x27;bad&#x27;);
+    item.classList.add(&#x27;ok&#x27;);
+  });
+  const total = selects.length + drops.length + cards.length + radioItems.length;
+  const feedback = root.querySelector(&#x27;.feedback&#x27;);
+  if (feedback) feedback.textContent = `Respuestas correctas visibles: ${total}/${total}. Usa Reiniciar para volver a practicar.`;
+}
+
+function resetExercise(id) {
+  const root = document.getElementById(id);
+  root.querySelectorAll(&#x27;select&#x27;).forEach(s =&gt; { s.value=&#x27;&#x27;; s.classList.remove(&#x27;ok&#x27;,&#x27;bad&#x27;); });
+  root.querySelectorAll(&#x27;.dropzone&#x27;).forEach(d =&gt; { d.dataset.value=&#x27;&#x27;; d.textContent=&#x27;...&#x27;; d.classList.remove(&#x27;ok&#x27;,&#x27;bad&#x27;); });
+  root.querySelectorAll(&#x27;input[type=&quot;radio&quot;]&#x27;).forEach(r =&gt; { r.checked=false; });
+  root.querySelectorAll(&#x27;.ok,.bad&#x27;).forEach(el =&gt; el.classList.remove(&#x27;ok&#x27;,&#x27;bad&#x27;));
+  if (id === &#x27;ex4&#x27;) {
+    const source = root.querySelector(&#x27;.sourceColumn&#x27;);
+    const cards = Array.from(root.querySelectorAll(&#x27;.cardMove&#x27;)).sort((a,b) =&gt; parseInt(a.textContent)-parseInt(b.textContent));
+    cards.forEach(c =&gt; source.appendChild(c));
+  }
+  root.querySelector(&#x27;.feedback&#x27;).textContent=&#x27;&#x27;;
+}
+let draggedValue = null;
+let draggedCard = null;
+document.addEventListener(&#x27;dragstart&#x27;, e =&gt; {
+  if (e.target.classList.contains(&#x27;chip&#x27;)) { draggedValue = e.target.dataset.value; e.dataTransfer.setData(&#x27;text/plain&#x27;, draggedValue); }
+  if (e.target.classList.contains(&#x27;cardMove&#x27;)) { draggedCard = e.target; e.target.classList.add(&#x27;dragging&#x27;); e.dataTransfer.setData(&#x27;text/plain&#x27;, &#x27;card&#x27;); }
+});
+document.addEventListener(&#x27;dragend&#x27;, e =&gt; {
+  if (e.target.classList.contains(&#x27;cardMove&#x27;)) e.target.classList.remove(&#x27;dragging&#x27;);
+  draggedCard = null;
+});
+document.addEventListener(&#x27;dragover&#x27;, e =&gt; {
+  if (e.target.classList.contains(&#x27;dropzone&#x27;) || e.target.closest(&#x27;.articleColumn&#x27;)) { e.preventDefault(); }
+});
+document.addEventListener(&#x27;dragenter&#x27;, e =&gt; { if(e.target.classList.contains(&#x27;dropzone&#x27;)) e.target.classList.add(&#x27;hover&#x27;); });
+document.addEventListener(&#x27;dragleave&#x27;, e =&gt; { if(e.target.classList.contains(&#x27;dropzone&#x27;)) e.target.classList.remove(&#x27;hover&#x27;); });
+document.addEventListener(&#x27;drop&#x27;, e =&gt; {
+  if (e.target.classList.contains(&#x27;dropzone&#x27;)) {
+    e.preventDefault(); e.target.classList.remove(&#x27;hover&#x27;);
+    const val = e.dataTransfer.getData(&#x27;text/plain&#x27;) || draggedValue;
+    if (val) { e.target.dataset.value = val; e.target.textContent = val; e.target.classList.remove(&#x27;ok&#x27;,&#x27;bad&#x27;); }
+  }
+  const col = e.target.closest(&#x27;.articleColumn&#x27;);
+  if (col &amp;&amp; draggedCard) {
+    e.preventDefault(); col.appendChild(draggedCard); draggedCard.classList.remove(&#x27;ok&#x27;,&#x27;bad&#x27;);
+  }
+});
+document.addEventListener(&#x27;click&#x27;, e =&gt; {
+  if (e.target.classList.contains(&#x27;dropzone&#x27;)) {
+    const now = e.target.dataset.value || &#x27;Ø&#x27;;
+    const idx = ARTICLE_OPTIONS.indexOf(now);
+    const next = ARTICLE_OPTIONS[(idx + 1) % ARTICLE_OPTIONS.length];
+    e.target.dataset.value = next;
+    e.target.textContent = next;
+    e.target.classList.remove(&#x27;ok&#x27;,&#x27;bad&#x27;);
+  }
+});
+fillSelects();
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;"></iframe>
+</section>
+<script>
+(function(){
+  const frame=document.getElementById('actividad-2b');
+  function fit(){
+    try{
+      const doc=frame.contentDocument;
+      if(!doc) return;
+      const h=Math.max(doc.body ? doc.body.scrollHeight : 0, doc.documentElement ? doc.documentElement.scrollHeight : 0);
+      if(h) frame.style.height=(h+12)+'px';
+    }catch(e){}
+  }
+  frame.addEventListener('load', function(){
+    fit();
+    try{
+      const doc=frame.contentDocument;
+      if(doc && window.ResizeObserver){
+        const ro=new ResizeObserver(fit);
+        ro.observe(doc.documentElement);
+        if(doc.body) ro.observe(doc.body);
+      }
+      doc.addEventListener('click', function(){ setTimeout(fit, 0); setTimeout(fit, 120); });
+      doc.addEventListener('change', function(){ setTimeout(fit, 0); });
+    }catch(e){}
+    setTimeout(fit, 250);
+  });
+  window.addEventListener('resize', fit);
+})();
+</script>
+
+</body>
+</html>

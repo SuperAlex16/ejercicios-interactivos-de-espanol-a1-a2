@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Presente de Subjuntivo · Ejercicios interactivos</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+<style>
+:root {
+  --bg1:#fff7ed; --bg2:#eef2ff; --ink:#1e1b4b; --muted:#64748b; --card:rgba(255,255,255,.92);
+  --purple:#6d28d9; --violet:#8b5cf6; --blue:#0284c7; --gold:#f59e0b; --green:#15803d; --red:#b91c1c;
+  --line:rgba(109,40,217,.16);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;color:var(--ink);background:radial-gradient(circle at 8% 5%,rgba(139,92,246,.25),transparent 30%),radial-gradient(circle at 90% 0%,rgba(2,132,199,.18),transparent 32%),linear-gradient(135deg,var(--bg1),var(--bg2));}
+header{max-width:1180px;margin:26px auto 18px;padding:44px 30px;border-radius:34px;color:white;background:linear-gradient(135deg,#4c1d95,#7c3aed 55%,#0ea5e9);box-shadow:0 22px 70px rgba(30,27,75,.25);position:relative;overflow:hidden}
+header:after{content:"";position:absolute;right:-60px;top:-90px;width:260px;height:260px;border-radius:50%;background:rgba(255,255,255,.14)}
+h1{font-size:clamp(2.2rem,6vw,4.6rem);margin:0;letter-spacing:-.06em;line-height:.95}
+.subtitle{margin:14px 0 0;font-size:1.1rem;opacity:.92;max-width:860px}
+.badge{display:inline-flex;gap:8px;align-items:center;background:rgba(255,255,255,.17);border:1px solid rgba(255,255,255,.25);padding:8px 14px;border-radius:999px;font-weight:800;margin-bottom:16px}
+.container{max-width:1180px;margin:0 auto;padding:0 18px 70px}
+.toc{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 24px}
+.toc a{text-decoration:none;color:#3b0764;background:white;border:1px solid var(--line);padding:10px 14px;border-radius:999px;font-weight:800;box-shadow:0 7px 20px rgba(30,27,75,.07)}
+.section{background:var(--card);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:30px;padding:28px;margin:22px 0;box-shadow:0 16px 50px rgba(30,27,75,.10)}
+h2{margin:0 0 18px;font-size:1.55rem;display:flex;gap:10px;align-items:center;letter-spacing:-.02em}
+h2 .mark{background:linear-gradient(135deg,var(--purple),var(--blue));color:white;border-radius:14px;padding:6px 10px;font-size:.86rem}
+h3{margin:24px 0 12px;font-size:1.16rem}
+p{line-height:1.75}
+.rules-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.rule-card{background:linear-gradient(135deg,#fff,#f5f3ff);border:1px solid var(--line);border-radius:22px;padding:18px;box-shadow:0 8px 24px rgba(30,27,75,.06)}
+.rule-card strong{color:var(--purple)}
+.table-wrap{overflow:auto;border-radius:22px;border:1px solid var(--line);background:white}
+table{border-collapse:collapse;width:100%;min-width:720px}
+th,td{padding:13px 14px;border-bottom:1px solid #e9d5ff;text-align:center}
+th{background:#f3e8ff;color:#4c1d95}
+tr:last-child td,tr:last-child th{border-bottom:0}
+.flip-grid,.mini-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+.flip-card{min-height:108px;border-radius:22px;display:grid;place-items:center;text-align:center;position:relative;overflow:hidden;cursor:pointer;border:1px solid var(--line);background:linear-gradient(135deg,#ffffff,#f0f9ff);box-shadow:0 9px 25px rgba(30,27,75,.08);outline:none}
+.flip-card .front{font-size:1.25rem;font-weight:900;color:#4c1d95}
+.flip-card .back{position:absolute;inset:0;display:grid;place-items:center;padding:14px;background:linear-gradient(135deg,#4c1d95,#0284c7);color:white;font-weight:800;line-height:1.5;opacity:0;transform:translateY(12px);transition:.22s}
+.flip-card:hover .back,.flip-card:focus .back{opacity:1;transform:translateY(0)}
+.mini{background:white;border:1px solid var(--line);border-radius:20px;padding:15px;display:flex;flex-direction:column;gap:7px;box-shadow:0 7px 20px rgba(30,27,75,.06)}
+.mini strong{color:#6d28d9;font-size:1.05rem}
+.mini span{font-weight:700}
+.mini em{font-style:normal;color:var(--muted)}
+.doc-list{columns:2 330px;column-gap:24px;margin:0;padding-left:20px}
+.doc-list li{break-inside:avoid;margin:0 0 10px;line-height:1.55;background:#fff;border:1px solid var(--line);border-radius:16px;padding:10px 12px;list-style-position:inside}
+.note-list{margin:0;padding-left:0;display:grid;gap:10px}
+.note-list li{list-style:none;background:#fffbeb;border:1px solid #fde68a;border-radius:16px;padding:11px 14px;line-height:1.55}
+.instructions{color:var(--muted);font-weight:700;margin:-4px 0 18px}
+.drag-layout{display:grid;grid-template-columns:1fr 270px;gap:18px;align-items:start}
+.drag-lines{display:grid;gap:12px}
+.drag-line,.line{background:white;border:1px solid var(--line);border-radius:18px;padding:12px 14px;line-height:2.25;box-shadow:0 7px 20px rgba(30,27,75,.05)}
+.num{display:inline-flex;width:34px;height:28px;border-radius:999px;align-items:center;justify-content:center;margin-right:8px;background:linear-gradient(135deg,var(--purple),var(--blue));color:white;font-weight:900;font-size:.78rem;vertical-align:middle}
+.dropzone{display:inline-flex;min-width:145px;min-height:38px;align-items:center;justify-content:center;border:2px dashed #c4b5fd;border-radius:12px;padding:4px 12px;background:#faf5ff;color:#7c3aed;font-weight:900;vertical-align:middle;transition:.15s}
+.dropzone.over{background:#dbeafe;border-color:#0284c7}
+.dropzone.correct{border-style:solid;border-color:var(--green);background:#dcfce7;color:var(--green)}
+.dropzone.incorrect{border-style:solid;border-color:var(--red);background:#fee2e2;color:var(--red)}
+.bank{position:sticky;top:18px;background:linear-gradient(135deg,#f8fafc,#ffffff);border:1px solid var(--line);border-radius:24px;padding:16px;box-shadow:0 12px 35px rgba(30,27,75,.1)}
+.bank h3{margin:0 0 12px;font-size:1rem}
+.tokens{display:flex;flex-wrap:wrap;gap:9px}
+.token{border:0;border-radius:999px;padding:9px 13px;background:linear-gradient(135deg,#6d28d9,#0ea5e9);color:white;font-weight:900;cursor:grab;box-shadow:0 6px 16px rgba(30,27,75,.18)}
+.token:active{cursor:grabbing}
+.token.selected{outline:4px solid #fbbf24}
+.section-actions{display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
+button.action{border:0;border-radius:999px;padding:12px 22px;font-weight:900;cursor:pointer;background:linear-gradient(135deg,#6d28d9,#0ea5e9);color:white;box-shadow:0 10px 24px rgba(30,27,75,.18)}
+button.secondary{background:white;color:#4c1d95;border:2px solid #c4b5fd;box-shadow:none}
+.score{font-weight:900;color:#4c1d95;min-width:150px}
+.subj-select{appearance:none;-webkit-appearance:none;min-width:150px;max-width:100%;margin:0 4px;padding:9px 38px 9px 13px;border-radius:999px;border:2px solid #c4b5fd;background:linear-gradient(45deg,transparent 50%,#6d28d9 50%) calc(100% - 17px) calc(50% - 3px)/7px 7px no-repeat,white;color:#312e81;font-weight:900;cursor:pointer;box-shadow:0 7px 18px rgba(30,27,75,.08)}
+.subj-select.correct{border-color:var(--green);background:linear-gradient(45deg,transparent 50%,var(--green) 50%) calc(100% - 17px) calc(50% - 3px)/7px 7px no-repeat,#dcfce7}
+.subj-select.incorrect{border-color:var(--red);background:linear-gradient(45deg,transparent 50%,var(--red) 50%) calc(100% - 17px) calc(50% - 3px)/7px 7px no-repeat,#fee2e2}
+.feedback{display:inline-flex;margin-left:6px;border-radius:999px;padding:3px 8px;font-weight:900}
+.feedback.ok{color:var(--green);background:#dcfce7}
+.feedback.bad{color:var(--red);background:#fee2e2}
+.exercise-list{display:grid;gap:10px}
+.reading-card,.text-box,.texto-card{background:#ffffff;border:1px solid var(--line);border-radius:22px;padding:22px;line-height:2.4;box-shadow:0 9px 24px rgba(30,27,75,.06);margin-top:18px}
+.embedded-exercise .item,.embedded-exercise li,.embedded-exercise .card{background:white;border:1px solid var(--line);border-radius:18px;padding:12px 14px;margin:10px 0;box-shadow:0 7px 18px rgba(30,27,75,.05);line-height:2.25}
+.embedded-exercise ol{list-style:none;padding-left:0;margin:0}
+.embedded-exercise h2{font-size:1.1rem;margin-top:18px}
+.embedded-exercise .number{display:inline-flex;align-items:center;justify-content:center;width:34px;height:28px;margin-right:8px;border-radius:999px;color:white;background:linear-gradient(135deg,var(--purple),var(--blue));font-weight:900;font-size:.78rem;vertical-align:middle}
+.embedded-exercise .pill{background:#7c3aed;color:white;border-radius:999px;padding:4px 9px;font-size:.76rem}
+.small-title{font-weight:900;color:#4c1d95;margin:8px 0 12px}
+@media(max-width:860px){.drag-layout{grid-template-columns:1fr}.bank{position:static}header,.section{border-radius:22px}.doc-list{columns:1}}
+</style>
+<style id="combined-imported-styles">
+/* Imported activity styles from the second HTML, scoped to avoid altering the original page. */
+.imported-subjunctive { --imp-ink:#20223a; --imp-muted:#667085; --imp-line:#e7eaf3; --imp-card:#ffffff; --imp-accent:#7c3aed; --imp-accent2:#0891b2; --imp-good:#157347; --imp-bad:#b42318; --imp-soft:#f8fafc; }
+.imported-subjunctive p{color:var(--imp-muted);line-height:1.65}
+.imported-subjunctive h3{font-size:1.18rem;margin:0 0 12px;color:var(--ink)}
+.imported-subjunctive .toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin:18px 0 22px}
+.imported-subjunctive .searchbox{flex:1 1 300px;padding:14px 16px;border:1px solid var(--imp-line);border-radius:18px;font-size:16px;background:white;outline:none;color:var(--ink)}
+.imported-subjunctive .counter{padding:12px 16px;border-radius:18px;background:#ecfeff;color:#155e75;font-weight:800;border:1px solid #cffafe}
+.imported-subjunctive .cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+@media(max-width:980px){.imported-subjunctive .cards{grid-template-columns:1fr}}
+.imported-subjunctive .verb-card{background:rgba(255,255,255,.93);border:1px solid var(--imp-line);border-radius:28px;overflow:hidden;box-shadow:0 12px 28px rgba(30,41,59,.08)}
+.imported-subjunctive .verb-head{display:grid;grid-template-columns:70px 1fr;gap:14px;align-items:center;padding:20px 20px 14px;background:linear-gradient(135deg,rgba(124,58,237,.10),rgba(8,145,178,.08))}
+.imported-subjunctive .icon{width:66px;height:66px;display:grid;place-items:center;font-size:34px;border-radius:22px;background:#fff;border:1px solid rgba(124,58,237,.22);box-shadow:0 12px 22px rgba(30,41,59,.08)}
+.imported-subjunctive .verb-title{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px}
+.imported-subjunctive .verb-title strong{font-size:24px;color:var(--ink)}
+.imported-subjunctive .ru{color:var(--imp-accent2);font-weight:800}
+.imported-subjunctive .pattern{display:inline-flex;margin-top:8px;padding:7px 10px;border-radius:999px;background:#fff;border:1px solid var(--imp-line);color:#344054;font-size:13px;font-weight:800}
+.imported-subjunctive .verb-body{padding:18px 20px 20px}
+.imported-subjunctive .small-note{background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;padding:10px 12px;border-radius:16px;margin:10px 0;font-weight:700;font-size:14px}
+.imported-subjunctive .exercise-box{margin-top:14px;padding:14px;border:1px solid #e5e7eb;border-radius:18px;background:#fbfdff;line-height:1.7}
+.imported-subjunctive .label{display:inline-flex;align-items:center;gap:6px;font-size:12px;letter-spacing:.04em;text-transform:uppercase;font-weight:900;color:#475467;margin-bottom:8px}
+.imported-subjunctive select{margin:0 4px;padding:8px 10px;border-radius:12px;border:1px solid #cbd5e1;background:white;color:var(--imp-ink);font-weight:800;max-width:100%}
+.imported-subjunctive .inf{color:#64748b;font-style:italic}
+.imported-subjunctive .feedback{margin-top:8px;min-height:22px;font-weight:800}
+.imported-subjunctive .ok{color:var(--imp-good)}
+.imported-subjunctive .no{color:var(--imp-bad)}
+.imported-subjunctive .buttons{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.imported-subjunctive button{border:0;padding:12px 16px;border-radius:16px;font-weight:900;cursor:pointer;box-shadow:0 10px 18px rgba(30,41,59,.10)}
+.imported-subjunctive button.primary{background:linear-gradient(135deg,var(--imp-accent),#2563eb);color:white}
+.imported-subjunctive button.secondary{background:#fff;color:var(--imp-ink);border:1px solid var(--imp-line)}
+.imported-subjunctive .resultbar{margin-top:14px;padding:14px 16px;border-radius:18px;background:#f1f5f9;color:#334155;font-weight:900}
+.imported-subjunctive .warmup-list{display:grid;gap:12px}
+.imported-subjunctive .warm-item{padding:14px;border-radius:18px;border:1px solid var(--imp-line);background:#fff;line-height:1.7}
+.imported-subjunctive .tip{position:relative;display:inline-block;border-bottom:2px dotted var(--imp-accent);color:#4c1d95;font-weight:800;cursor:help}
+.imported-subjunctive .tiptext{visibility:hidden;opacity:0;position:absolute;z-index:30;bottom:130%;left:50%;transform:translateX(-50%) translateY(5px);min-width:220px;max-width:320px;background:#111827;color:white;text-align:left;padding:10px 12px;border-radius:14px;font-size:14px;line-height:1.35;box-shadow:0 12px 25px rgba(0,0,0,.18);transition:.18s ease;font-weight:600}
+.imported-subjunctive .tip:hover .tiptext,.imported-subjunctive .tip:focus .tiptext{visibility:visible;opacity:1;transform:translateX(-50%) translateY(0)}
+.joined-warmup{margin:18px 0 24px;padding:18px;border:1px solid var(--line);border-radius:24px;background:linear-gradient(135deg,#ffffff,#f8fafc);box-shadow:0 7px 20px rgba(30,27,75,.05)}
+</style></head>
+<body>
+<header>
+<div class="badge">ELE · A2/B1</div>
+<h1>Presente de Subjuntivo</h1>
+<p class="subtitle">Formación, verbos irregulares, verbos que lo exigen y práctica interactiva.</p>
+</header>
+<main class="container">
+<nav class="toc">
+<a href="#reglas">Reglas</a><a href="#irregulares">Irregulares</a><a href="#verbos">Глаголы и выражения</a><a href="#arrastrar">Arrastrar</a><a href="#ejercicios">Ejercicios</a>
+</nav>
+<section class="section" id="reglas">
+<h2><span class="mark">1</span> Formación y uso</h2>
+<div class="rules-grid">
+<div class="rule-card"><strong>Употребление.</strong><br/>Presente de Subjuntivo используется после выражений желания, просьбы, необходимости, сомнения, оценки, эмоции и цели: <em>Quiero que vengas</em>, <em>Es importante que estudies</em>, <em>Dudo que sea verdad</em>.</div>
+<div class="rule-card"><strong>Главный принцип.</strong><br/>Форма обычно строится от основы 1-го лица единственного числа Presente de Indicativo: <em>tengo → teng-</em>, <em>hago → hag-</em>, <em>conozco → conozc-</em>.</div>
+<div class="rule-card"><strong>Окончания.</strong><br/>Глаголы на <strong>-AR</strong> получают окончания группы <strong>-ER/-IR</strong>: <em>hable</em>. Глаголы на <strong>-ER/-IR</strong> получают окончания группы <strong>-AR</strong>: <em>coma, viva</em>.</div>
+<div class="rule-card"><strong>После que.</strong><br/>Частая модель: <em>verbo en Indicativo + que + verbo en Subjuntivo</em>: <em>El profesor quiere que leamos</em>.</div>
+</div>
+<h3>Terminaciones regulares</h3>
+<div class="table-wrap"><table><thead><tr><th>Conjugación</th><th>yo</th><th>tú</th><th>él/ella/usted</th><th>nosotros/as</th><th>vosotros/as</th><th>ellos/ustedes</th></tr></thead><tbody><tr><th>-AR</th><td>hable</td><td>hables</td><td>hable</td><td>hablemos</td><td>habléis</td><td>hablen</td></tr><tr><th>-ER</th><td>coma</td><td>comas</td><td>coma</td><td>comamos</td><td>comáis</td><td>coman</td></tr><tr><th>-IR</th><td>viva</td><td>vivas</td><td>viva</td><td>vivamos</td><td>viváis</td><td>vivan</td></tr></tbody></table></div>
+</section>
+<section class="section" id="irregulares">
+<h2><span class="mark">2</span> Verbos irregulares y cambios de formación</h2>
+<p class="instructions">Наведите курсор на каждую карточку, чтобы увидеть все формы.</p>
+<div class="flip-grid"><div class="flip-card" tabindex="0"><div class="front">ser</div><div class="back">sea, seas, sea, seamos, seáis, sean</div></div><div class="flip-card" tabindex="0"><div class="front">estar</div><div class="back">esté, estés, esté, estemos, estéis, estén</div></div><div class="flip-card" tabindex="0"><div class="front">ir</div><div class="back">vaya, vayas, vaya, vayamos, vayáis, vayan</div></div><div class="flip-card" tabindex="0"><div class="front">saber</div><div class="back">sepa, sepas, sepa, sepamos, sepáis, sepan</div></div><div class="flip-card" tabindex="0"><div class="front">haber</div><div class="back">haya, hayas, haya, hayamos, hayáis, hayan</div></div><div class="flip-card" tabindex="0"><div class="front">dar</div><div class="back">dé, des, dé, demos, deis, den</div></div><div class="flip-card" tabindex="0"><div class="front">tener</div><div class="back">tenga, tengas, tenga, tengamos, tengáis, tengan</div></div><div class="flip-card" tabindex="0"><div class="front">venir</div><div class="back">venga, vengas, venga, vengamos, vengáis, vengan</div></div><div class="flip-card" tabindex="0"><div class="front">hacer</div><div class="back">haga, hagas, haga, hagamos, hagáis, hagan</div></div><div class="flip-card" tabindex="0"><div class="front">poner</div><div class="back">ponga, pongas, ponga, pongamos, pongáis, pongan</div></div><div class="flip-card" tabindex="0"><div class="front">salir</div><div class="back">salga, salgas, salga, salgamos, salgáis, salgan</div></div><div class="flip-card" tabindex="0"><div class="front">decir</div><div class="back">diga, digas, diga, digamos, digáis, digan</div></div><div class="flip-card" tabindex="0"><div class="front">traer</div><div class="back">traiga, traigas, traiga, traigamos, traigáis, traigan</div></div><div class="flip-card" tabindex="0"><div class="front">oír</div><div class="back">oiga, oigas, oiga, oigamos, oigáis, oigan</div></div><div class="flip-card" tabindex="0"><div class="front">conocer</div><div class="back">conozca, conozcas, conozca, conozcamos, conozcáis, conozcan</div></div><div class="flip-card" tabindex="0"><div class="front">traducir</div><div class="back">traduzca, traduzcas, traduzca, traduzcamos, traduzcáis, traduzcan</div></div></div>
+<h3>Cambios ortográficos</h3>
+<p>En muchos verbos el cambio no altera el significado: solo conserva la pronunciación ante las nuevas vocales.</p>
+<div class="mini-grid"><div class="mini"><strong>llegar</strong><span>llegue, llegues, llegue...</span><em>g → gu para conservar /g/</em></div><div class="mini"><strong>buscar</strong><span>busque, busques, busque...</span><em>c → qu para conservar /k/</em></div><div class="mini"><strong>empezar</strong><span>empiece, empieces, empiece...</span><em>z → c ante e</em></div><div class="mini"><strong>pagar</strong><span>pague, pagues, pague...</span><em>g → gu</em></div><div class="mini"><strong>practicar</strong><span>practique, practiques...</span><em>c → qu</em></div><div class="mini"><strong>averiguar</strong><span>averigüe, averigües...</span><em>gu → gü ante e</em></div></div>
+<h3>Cambios vocálicos frecuentes</h3>
+<div class="mini-grid"><div class="mini"><strong>pensar</strong><span>piense, pienses, piense, pensemos, penséis, piensen</span></div><div class="mini"><strong>volver</strong><span>vuelva, vuelvas, vuelva, volvamos, volváis, vuelvan</span></div><div class="mini"><strong>pedir</strong><span>pida, pidas, pida, pidamos, pidáis, pidan</span></div><div class="mini"><strong>dormir</strong><span>duerma, duermas, duerma, durmamos, durmáis, duerman</span></div></div>
+</section>
+<section class="section imported-subjunctive imported-activity-3" id="verbos">
+<h2><span class="mark">3</span> Глаголы и выражения, после которых употребляется Subjuntivo</h2>
+<p>После этих глаголов и выражений употребляется Subjuntivo, когда после <strong>que</strong> появляется зависимая часть с нужной семантикой: желание, приказ, эмоция, сомнение, отрицание существования или неопределённость.</p>
+<div class="toolbar"><input class="searchbox" id="search" oninput="renderCards()" placeholder="Поиск: escribir aconsejar, советовать, emoción..."/><div class="counter" id="counter"></div></div>
+<div class="buttons"><button class="primary" onclick="checkAll()">Проверить все карточки</button><button class="secondary" onclick="showAnswers()">Показать ответы в заданиях</button><button class="secondary" onclick="resetAll()">Сбросить</button></div>
+<div class="resultbar" id="globalResult">Выберите формы в карточках и нажмите «Проверить все карточки».</div>
+<div class="cards" id="cards" style="margin-top:18px;"></div>
+</section>
+<section class="section interactive-section" data-type="drag" id="arrastrar">
+<h2><span class="mark">4</span> Ejercicio: arrastra y coloca la forma correcta</h2>
+<p class="instructions">Перетащите каждую глагольную форму в соответствующее поле. Затем нажмите «Проверить».</p>
+<div class="drag-layout">
+<div class="drag-lines"><div class="drag-line"><span class="num">01</span><span>Quiero que tú </span><span class="dropzone" data-answer="vengas" data-placeholder="venir">venir</span><span> a clase mañana.</span></div><div class="drag-line"><span class="num">02</span><span>Es necesario que nosotros </span><span class="dropzone" data-answer="hablemos" data-placeholder="hablar">hablar</span><span> en español.</span></div><div class="drag-line"><span class="num">03</span><span>Ojalá ellos </span><span class="dropzone" data-answer="tengan" data-placeholder="tener">tener</span><span> tiempo para terminar el proyecto.</span></div><div class="drag-line"><span class="num">04</span><span>No creo que ella </span><span class="dropzone" data-answer="sepa" data-placeholder="saber">saber</span><span> la respuesta.</span></div><div class="drag-line"><span class="num">05</span><span>Busco una persona que </span><span class="dropzone" data-answer="traduzca" data-placeholder="traducir">traducir</span><span> ruso y español.</span></div><div class="drag-line"><span class="num">06</span><span>Te pido que </span><span class="dropzone" data-answer="hagas" data-placeholder="hacer, tú">hacer, tú</span><span> la tarea ahora.</span></div><div class="drag-line"><span class="num">07</span><span>Es mejor que ustedes </span><span class="dropzone" data-answer="lleguen" data-placeholder="llegar">llegar</span><span> temprano.</span></div><div class="drag-line"><span class="num">08</span><span>Dudo que vosotros </span><span class="dropzone" data-answer="vayáis" data-placeholder="ir">ir</span><span> solos al centro.</span></div><div class="drag-line"><span class="num">09</span><span>Quiero que él </span><span class="dropzone" data-answer="esté" data-placeholder="estar">estar</span><span> tranquilo durante el examen.</span></div><div class="drag-line"><span class="num">10</span><span>No parece que nosotros </span><span class="dropzone" data-answer="podamos" data-placeholder="poder">poder</span><span> salir hoy.</span></div><div class="drag-line"><span class="num">11</span><span>Mi madre prefiere que yo </span><span class="dropzone" data-answer="coma" data-placeholder="comer">comer</span><span> en casa.</span></div><div class="drag-line"><span class="num">12</span><span>Antes de que ellos </span><span class="dropzone" data-answer="abran" data-placeholder="abrir">abrir</span><span> la puerta.</span></div></div>
+<aside class="bank"><h3>Formas</h3><div class="tokens"><button class="token" data-value="tengan" draggable="true">tengan</button><button class="token" data-value="hablemos" draggable="true">hablemos</button><button class="token" data-value="lleguen" draggable="true">lleguen</button><button class="token" data-value="sepa" draggable="true">sepa</button><button class="token" data-value="podamos" draggable="true">podamos</button><button class="token" data-value="vengas" draggable="true">vengas</button><button class="token" data-value="abran" draggable="true">abran</button><button class="token" data-value="traduzca" draggable="true">traduzca</button><button class="token" data-value="coma" draggable="true">coma</button><button class="token" data-value="hagas" draggable="true">hagas</button><button class="token" data-value="vayáis" draggable="true">vayáis</button><button class="token" data-value="esté" draggable="true">esté</button></div></aside>
+</div>
+<div class="section-actions"><button class="action check-drag">Проверить</button><button class="action secondary reset-drag">Сбросить</button><span class="score"></span></div>
+</section>
+<section class="section interactive-section select-section" id="ejercicios">
+<h2><span class="mark">5</span> Ejercicio: formas del Presente de Subjuntivo</h2>
+<p class="instructions">Выберите правильную форму Presente de Subjuntivo во всех предложениях.</p>
+<div class="embedded-exercise"><div class="exercise-list compact combined-warmup-list" id="warmupList"></div><div id="exercise">
+<div class="item">
+<span class="num">11.</span>
+<span>Quiero que </span>
+<select class="subj-select" data-answer="vengas">
+<option selected="" value="">—</option>
+<option value="vienes">vienes</option><option value="vengas">vengas</option><option value="venir">venir</option><option value="venga">venga</option>
+</select>
+<span> a casa esta tarde para cenar conmigo.</span>
+</div><div class="item">
+<span class="num">12.</span>
+<span>Es importante que </span>
+<select class="subj-select" data-answer="hables">
+<option selected="" value="">—</option>
+<option value="hablar">hablar</option><option value="hablas">hablas</option><option value="hables">hables</option><option value="habla">habla</option>
+</select>
+<span> despacio en la reunión, porque hay gente nueva.</span>
+</div><div class="item">
+<span class="num">13.</span>
+<span>Espero que </span>
+<select class="subj-select" data-answer="llegues">
+<option selected="" value="">—</option>
+<option value="llegas">llegas</option><option value="llega">llega</option><option value="llegues">llegues</option><option value="llegar">llegar</option>
+</select>
+<span> temprano mañana para tomar el bus juntos.</span>
+</div><div class="item">
+<span class="num">14.</span>
+<span>Necesito que </span>
+<select class="subj-select" data-answer="me ayudes">
+<option selected="" value="">—</option>
+<option value="me ayuda">me ayuda</option><option value="me ayudas">me ayudas</option><option value="ayudar">ayudar</option><option value="me ayudes">me ayudes</option>
+</select>
+<span> a encontrar mis llaves, porque no las veo.</span>
+</div><div class="item">
+<span class="num">15.</span>
+<span>Me alegra que </span>
+<select class="subj-select" data-answer="estés">
+<option selected="" value="">—</option>
+<option value="estás">estás</option><option value="estés">estés</option><option value="estar">estar</option><option value="esté">esté</option>
+</select>
+<span> aquí hoy; hacía tiempo que no nos veíamos.</span>
+</div><div class="item">
+<span class="num">16.</span>
+<span>Prefiero que </span>
+<select class="subj-select" data-answer="pidas">
+<option selected="" value="">—</option>
+<option value="pides">pides</option><option value="pide">pide</option><option value="pedir">pedir</option><option value="pidas">pidas</option>
+</select>
+<span> agua sin gas, porque me duele la garganta.</span>
+</div><div class="item">
+<span class="num">17.</span>
+<span>Te recomiendo que </span>
+<select class="subj-select" data-answer="descanses">
+<option selected="" value="">—</option>
+<option value="descansas">descansas</option><option value="descansar">descansar</option><option value="descansa">descansa</option><option value="descanses">descanses</option>
+</select>
+<span> un poco después del trabajo, antes de salir.</span>
+</div><div class="item">
+<span class="num">18.</span>
+<span>Es mejor que </span>
+<select class="subj-select" data-answer="salgas">
+<option selected="" value="">—</option>
+<option value="sale">sale</option><option value="salgas">salgas</option><option value="salir">salir</option><option value="sales">sales</option>
+</select>
+<span> ahora, porque hay mucho tráfico a esta hora.</span>
+</div><div class="item">
+<span class="num">19.</span>
+<span>Ojalá </span>
+<select class="subj-select" data-answer="tenga">
+<option selected="" value="">—</option>
+<option value="tienes">tienes</option><option value="tenga">tenga</option><option value="tengo">tengo</option><option value="tener">tener</option>
+</select>
+<span> tiempo hoy para ir al banco y hacer un trámite.</span>
+</div><div class="item">
+<span class="num">20.</span>
+<span>Dudo que </span>
+<select class="subj-select" data-answer="pueda">
+<option selected="" value="">—</option>
+<option value="puedan">puedan</option><option value="pueda">pueda</option><option value="puede">puede</option><option value="poder">poder</option>
+</select>
+<span> venir, porque está enfermo y tiene fiebre.</span>
+</div><div class="item">
+<span class="num">21.</span>
+<span>No creo que </span>
+<select class="subj-select" data-answer="quiera">
+<option selected="" value="">—</option>
+<option value="quieran">quieran</option><option value="querer">querer</option><option value="quiere">quiere</option><option value="quiera">quiera</option>
+</select>
+<span> salir esta noche; mañana trabaja temprano.</span>
+</div><div class="item">
+<span class="num">22.</span>
+<span>Es posible que </span>
+<select class="subj-select" data-answer="lleguemos">
+<option selected="" value="">—</option>
+<option value="llegamos">llegamos</option><option value="lleguemos">lleguemos</option><option value="llegar">llegar</option><option value="lleguen">lleguen</option>
+</select>
+<span> tarde si llueve y el bus se demora.</span>
+</div><div class="item">
+<span class="num">23.</span>
+<span>Es bueno que </span>
+<select class="subj-select" data-answer="tome">
+<option selected="" value="">—</option>
+<option value="toman">toman</option><option value="tome">tome</option><option value="toma">toma</option><option value="tomar">tomar</option>
+</select>
+<span> agua durante el día, sobre todo cuando hace calor.</span>
+</div><div class="item">
+<span class="num">24.</span>
+<span>Me preocupa que </span>
+<select class="subj-select" data-answer="llegue">
+<option selected="" value="">—</option>
+<option value="llega">llega</option><option value="llegues">llegues</option><option value="llegue">llegue</option><option value="llegar">llegar</option>
+</select>
+<span> tarde al trabajo otra vez; el jefe está molesto.</span>
+</div><div class="item">
+<span class="num">25.</span>
+<span>Quiero que </span>
+<select class="subj-select" data-answer="llame">
+<option selected="" value="">—</option>
+<option value="llamar">llamar</option><option value="llamen">llamen</option><option value="llama">llama</option><option value="llame">llame</option>
+</select>
+<span> a su mamá hoy, porque es su cumpleaños.</span>
+</div><div class="item">
+<span class="num">26.</span>
+<span>Necesitamos que </span>
+<select class="subj-select" data-answer="hagamos">
+<option selected="" value="">—</option>
+<option value="hacen">hacen</option><option value="hagamos">hagamos</option><option value="hacemos">hacemos</option><option value="hacer">hacer</option>
+</select>
+<span> la compra antes de las seis, porque el súper cierra.</span>
+</div><div class="item">
+<span class="num">27.</span>
+<span>Es necesario que </span>
+<select class="subj-select" data-answer="estudien">
+<option selected="" value="">—</option>
+<option value="estudian">estudian</option><option value="estudia">estudia</option><option value="estudiar">estudiar</option><option value="estudien">estudien</option>
+</select>
+<span> un poco cada día para mejorar el español.</span>
+</div><div class="item">
+<span class="num">28.</span>
+<span>Me gusta que </span>
+<select class="subj-select" data-answer="cocines">
+<option selected="" value="">—</option>
+<option value="cocina">cocina</option><option value="cocinar">cocinar</option><option value="cocines">cocines</option><option value="cocinas">cocinas</option>
+</select>
+<span> en casa los fines de semana; la comida queda rica.</span>
+</div><div class="item">
+<span class="num">29.</span>
+<span>No quiero que </span>
+<select class="subj-select" data-answer="llegues">
+<option selected="" value="">—</option>
+<option value="llegar">llegar</option><option value="llegas">llegas</option><option value="llegues">llegues</option><option value="llega">llega</option>
+</select>
+<span> tarde a la cita, porque el médico atiende rápido.</span>
+</div><div class="item">
+<span class="num">30.</span>
+<span>Es raro que </span>
+<select class="subj-select" data-answer="salga">
+<option selected="" value="">—</option>
+<option value="sales">sales</option><option value="salga">salga</option><option value="sale">sale</option><option value="salir">salir</option>
+</select>
+<span> tan temprano los domingos; normalmente duerme más.</span>
+</div><div class="item">
+<span class="num">31.</span>
+<span>Te pido que </span>
+<select class="subj-select" data-answer="cierres">
+<option selected="" value="">—</option>
+<option value="cierra">cierra</option><option value="cierres">cierres</option><option value="cierras">cierras</option><option value="cerrar">cerrar</option>
+</select>
+<span> la puerta con llave cuando salgas, por favor.</span>
+</div><div class="item">
+<span class="num">32.</span>
+<span>Es importante que </span>
+<select class="subj-select" data-answer="haga">
+<option selected="" value="">—</option>
+<option value="hago">hago</option><option value="hacer">hacer</option><option value="haga">haga</option><option value="haces">haces</option>
+</select>
+<span> ejercicio tres veces por semana para sentirme mejor.</span>
+</div><div class="item">
+<span class="num">33.</span>
+<span>Me encanta que </span>
+<select class="subj-select" data-answer="sonrías">
+<option selected="" value="">—</option>
+<option value="sonríe">sonríe</option><option value="sonrías">sonrías</option><option value="sonreír">sonreír</option><option value="sonríes">sonríes</option>
+</select>
+<span> cuando saludas; da una buena impresión.</span>
+</div><div class="item">
+<span class="num">34.</span>
+<span>Busco un restaurante que </span>
+<select class="subj-select" data-answer="tenga">
+<option selected="" value="">—</option>
+<option value="tener">tener</option><option value="tiene">tiene</option><option value="tienen">tienen</option><option value="tenga">tenga</option>
+</select>
+<span> comida casera y precios buenos para almorzar.</span>
+</div><div class="item">
+<span class="num">35.</span>
+<span>Cuando </span>
+<select class="subj-select" data-answer="llegues">
+<option selected="" value="">—</option>
+<option value="llegas">llegas</option><option value="llegar">llegar</option><option value="llegues">llegues</option><option value="llega">llega</option>
+</select>
+<span> a la oficina, me escribes y te paso el documento.</span>
+</div><div class="item">
+<span class="num">36.</span>
+<span>Antes de que </span>
+<select class="subj-select" data-answer="salgas">
+<option selected="" value="">—</option>
+<option value="sales">sales</option><option value="salgas">salgas</option><option value="salir">salir</option><option value="sale">sale</option>
+</select>
+<span>, revisa el gas y apaga las luces de la sala.</span>
+</div><div class="item">
+<span class="num">37.</span>
+<span>Para que </span>
+<select class="subj-select" data-answer="entiendas">
+<option selected="" value="">—</option>
+<option value="entiendes">entiendes</option><option value="entienda">entienda</option><option value="entender">entender</option><option value="entiendas">entiendas</option>
+</select>
+<span>, te explico otra vez con un ejemplo simple.</span>
+</div><div class="item">
+<span class="num">38.</span>
+<span>En caso de que </span>
+<select class="subj-select" data-answer="llame">
+<option selected="" value="">—</option>
+<option value="llamar">llamar</option><option value="llamen">llamen</option><option value="llame">llame</option><option value="llama">llama</option>
+</select>
+<span>, dile que estoy en una reunión y que regreso luego.</span>
+</div><div class="item">
+<span class="num">39.</span>
+<span>Aunque </span>
+<select class="subj-select" data-answer="estés">
+<option selected="" value="">—</option>
+<option value="estás">estás</option><option value="esté">esté</option><option value="estés">estés</option><option value="estar">estar</option>
+</select>
+<span> cansado, intenta caminar diez minutos después de comer.</span>
+</div><div class="item">
+<span class="num">40.</span>
+<span>Puedo ayudarte, siempre que </span>
+<select class="subj-select" data-answer="me digas">
+<option selected="" value="">—</option>
+<option value="decir">decir</option><option value="me digas">me digas</option><option value="me dice">me dice</option><option value="me dices">me dices</option>
+</select>
+<span> la verdad y no escondas nada.</span>
+</div>
+</div></div>
+<div class="section-actions"><button class="action check-selects">Проверить</button><button class="action secondary reset-selects">Сбросить</button><span class="score"></span></div>
+</section>
+<section class="section interactive-section select-section">
+<h2><span class="mark">6</span> Ejercicio: oraciones y texto</h2>
+<p class="instructions">Выберите правильную форму в каждом предложении и в тексте.</p>
+<div class="exercise-list compact"><div class="line"><span class="num">01</span><span>Mi madre quiere que yo </span><select class="subj-select" data-answer="estudie"><option selected="" value="">estudiar</option><option value="estudié">estudié</option><option value="estudio">estudio</option><option value="estudie">estudie</option></select><span> más cada día.</span></div><div class="line"><span class="num">02</span><span>Es importante que tú </span><select class="subj-select" data-answer="llegues"><option selected="" value="">llegar</option><option value="llegaste">llegaste</option><option value="llegas">llegas</option><option value="llegues">llegues</option></select><span> a tiempo a clase.</span></div><div class="line"><span class="num">03</span><span>Ojalá </span><select class="subj-select" data-answer="haga"><option selected="" value="">hacer</option><option value="haga">haga</option><option value="hizo">hizo</option><option value="hace">hace</option></select><span> buen tiempo este fin de semana.</span></div><div class="line"><span class="num">04</span><span>El profesor quiere que nosotros </span><select class="subj-select" data-answer="leamos"><option selected="" value="">leer</option><option value="leímos">leímos</option><option value="leemos">leemos</option><option value="leamos">leamos</option></select><span> el capítulo tres.</span></div><div class="line"><span class="num">05</span><span>Es necesario que vosotros </span><select class="subj-select" data-answer="hagáis"><option selected="" value="">hacer</option><option value="hagáis">hagáis</option><option value="hacéis">hacéis</option><option value="hicisteis">hicisteis</option></select><span> los deberes en casa.</span></div><div class="line"><span class="num">06</span><span>Espero que ella </span><select class="subj-select" data-answer="venga"><option selected="" value="">venir</option><option value="venga">venga</option><option value="vino">vino</option><option value="viene">viene</option></select><span> a mi fiesta de cumpleaños.</span></div><div class="line"><span class="num">07</span><span>No creo que él </span><select class="subj-select" data-answer="tenga"><option selected="" value="">tener</option><option value="tiene">tiene</option><option value="tuvo">tuvo</option><option value="tenga">tenga</option></select><span> razón en este caso.</span></div><div class="line"><span class="num">08</span><span>Quiero que tú </span><select class="subj-select" data-answer="seas"><option selected="" value="">ser</option><option value="seas">seas</option><option value="fuiste">fuiste</option><option value="eres">eres</option></select><span> más responsable con tus cosas.</span></div><div class="line"><span class="num">09</span><span>Es bueno que los niños </span><select class="subj-select" data-answer="duerman"><option selected="" value="">dormir</option><option value="durmieron">durmieron</option><option value="duerman">duerman</option><option value="duermen">duermen</option></select><span> ocho horas cada noche.</span></div><div class="line"><span class="num">10</span><span>Ojalá que tú </span><select class="subj-select" data-answer="puedas"><option selected="" value="">poder</option><option value="puedas">puedas</option><option value="pudiste">pudiste</option><option value="puedes">puedes</option></select><span> venir este fin de semana.</span></div><div class="line"><span class="num">11</span><span>Mi jefe necesita que yo </span><select class="subj-select" data-answer="entregue"><option selected="" value="">entregar</option><option value="entregue">entregue</option><option value="entregué">entregué</option><option value="entrego">entrego</option></select><span> el informe hoy.</span></div><div class="line"><span class="num">12</span><span>Es mejor que ellos </span><select class="subj-select" data-answer="hablen"><option selected="" value="">hablar</option><option value="hablan">hablan</option><option value="hablen">hablen</option><option value="hablaron">hablaron</option></select><span> directamente con el director.</span></div><div class="line"><span class="num">13</span><span>Es importante que tú </span><select class="subj-select" data-answer="bebas"><option selected="" value="">beber</option><option value="bebas">bebas</option><option value="bebiste">bebiste</option><option value="bebes">bebes</option></select><span> más agua todos los días.</span></div><div class="line"><span class="num">14</span><span>Mi amiga quiere que yo la </span><select class="subj-select" data-answer="ayude"><option selected="" value="">ayudar</option><option value="ayude">ayude</option><option value="ayudé">ayudé</option><option value="ayudo">ayudo</option></select><span> con los deberes.</span></div><div class="line"><span class="num">15</span><span>Ojalá que él </span><select class="subj-select" data-answer="apruebe"><option selected="" value="">aprobar</option><option value="aprueba">aprueba</option><option value="aprobó">aprobó</option><option value="apruebe">apruebe</option></select><span> todos los exámenes.</span></div><div class="line"><span class="num">16</span><span>Es necesario que nosotros </span><select class="subj-select" data-answer="vayamos"><option selected="" value="">ir</option><option value="vayamos">vayamos</option><option value="fuimos">fuimos</option><option value="vamos">vamos</option></select><span> al médico esta semana.</span></div><div class="line"><span class="num">17</span><span>No quiero que vosotros </span><select class="subj-select" data-answer="salgáis"><option selected="" value="">salir</option><option value="salís">salís</option><option value="salgáis">salgáis</option><option value="salisteis">salisteis</option></select><span> tan tarde por las noches.</span></div><div class="line"><span class="num">18</span><span>Mis padres esperan que yo </span><select class="subj-select" data-answer="encuentre"><option selected="" value="">encontrar</option><option value="encuentre">encuentre</option><option value="encuentro">encuentro</option><option value="encontré">encontré</option></select><span> trabajo pronto.</span></div><div class="line"><span class="num">19</span><span>Es importante que él </span><select class="subj-select" data-answer="ponga"><option selected="" value="">poner</option><option value="ponga">ponga</option><option value="puso">puso</option><option value="pone">pone</option></select><span> atención en clase.</span></div><div class="line"><span class="num">20</span><span>Ojalá que ella nos </span><select class="subj-select" data-answer="escriba"><option selected="" value="">escribir</option><option value="escribió">escribió</option><option value="escribe">escribe</option><option value="escriba">escriba</option></select><span> pronto con buenas noticias.</span></div></div><div class="reading-card">La familia de Lucía está muy preocupada. Su madre quiere que Lucía <select class="subj-select" data-answer="estudie"><option selected="" value="">estudiar</option><option value="estudie">estudie</option><option value="estudia">estudia</option><option value="estudió">estudió</option></select> más y que no <select class="subj-select" data-answer="salga"><option selected="" value="">salir</option><option value="salga">salga</option><option value="sale">sale</option><option value="salió">salió</option></select> tanto con sus amigos. Su padre espera que ella <select class="subj-select" data-answer="encuentre"><option selected="" value="">encontrar</option><option value="encuentre">encuentre</option><option value="encuentra">encuentra</option><option value="encontró">encontró</option></select> un trabajo a tiempo parcial. Es importante que Lucía <select class="subj-select" data-answer="haga"><option selected="" value="">hacer</option><option value="hace">hace</option><option value="hizo">hizo</option><option value="haga">haga</option></select> un plan para organizar mejor su tiempo. Además, es necesario que <select class="subj-select" data-answer="hable"><option selected="" value="">hablar</option><option value="habla">habla</option><option value="habló">habló</option><option value="hable">hable</option></select> con su profesora para mejorar las notas. Los amigos de Lucía esperan que ella <select class="subj-select" data-answer="venga"><option selected="" value="">venir</option><option value="viene">viene</option><option value="venga">venga</option><option value="vino">vino</option></select> a la fiesta del viernes, pero su madre no quiere que <select class="subj-select" data-answer="llegue"><option selected="" value="">llegar</option><option value="llega">llega</option><option value="llegó">llegó</option><option value="llegue">llegue</option></select> tarde a casa. Ojalá que Lucía <select class="subj-select" data-answer="pueda"><option selected="" value="">poder</option><option value="pueda">pueda</option><option value="pudo">pudo</option><option value="puede">puede</option></select> equilibrar sus estudios y su vida social. Es bueno que <select class="subj-select" data-answer="tenga"><option selected="" value="">tener</option><option value="tenga">tenga</option><option value="tiene">tiene</option><option value="tuvo">tuvo</option></select> muchos amigos, pero también es necesario que <select class="subj-select" data-answer="sea"><option selected="" value="">ser</option><option value="fue">fue</option><option value="sea">sea</option><option value="es">es</option></select> responsable con sus obligaciones.</div>
+<div class="section-actions"><button class="action check-selects">Проверить</button><button class="action secondary reset-selects">Сбросить</button><span class="score"></span></div>
+</section>
+<section class="section interactive-section select-section">
+<h2><span class="mark">7</span> Ejercicio: práctica final</h2>
+<p class="instructions">Дополните полезные предложения и короткий текст подходящей формой.</p>
+<div class="embedded-exercise"><section class="grid">
+<article class="card">
+<h2><span class="pill">20</span> Oraciones útiles</h2>
+<ol>
+<li><span class="number">01</span><span>Quiero que tú </span><select class="subj-select" data-answer="vengas"><option selected="" value="">venir</option><option value="vienes">vienes</option><option value="vengas">vengas</option><option value="viniste">viniste</option></select><span> a mi casa esta tarde.</span></li><li><span class="number">02</span><span>Espero que Ana </span><select class="subj-select" data-answer="tenga"><option selected="" value="">tener</option><option value="tiene">tiene</option><option value="tenga">tenga</option><option value="tuvo">tuvo</option></select><span> tiempo para tomar un café.</span></li><li><span class="number">03</span><span>Es importante que nosotros </span><select class="subj-select" data-answer="bebamos"><option selected="" value="">beber</option><option value="bebemos">bebemos</option><option value="bebamos">bebamos</option><option value="bebimos">bebimos</option></select><span> agua todos los días.</span></li><li><span class="number">04</span><span>Necesito que ustedes </span><select class="subj-select" data-answer="lleguen"><option selected="" value="">llegar</option><option value="llegan">llegan</option><option value="lleguen">lleguen</option><option value="llegaron">llegaron</option></select><span> temprano a la reunión.</span></li><li><span class="number">05</span><span>Ojalá mis amigos </span><select class="subj-select" data-answer="puedan"><option selected="" value="">poder</option><option value="pueden">pueden</option><option value="puedan">puedan</option><option value="pudieron">pudieron</option></select><span> venir al cine.</span></li><li><span class="number">06</span><span>No creo que él </span><select class="subj-select" data-answer="sepa"><option selected="" value="">saber</option><option value="sabe">sabe</option><option value="sepa">sepa</option><option value="supo">supo</option></select><span> la respuesta correcta.</span></li><li><span class="number">07</span><span>Busco una tienda que </span><select class="subj-select" data-answer="abra"><option selected="" value="">abrir</option><option value="abre">abre</option><option value="abra">abra</option><option value="abrió">abrió</option></select><span> los domingos.</span></li><li><span class="number">08</span><span>Te llamo para que tú </span><select class="subj-select" data-answer="recuerdes"><option selected="" value="">recordar</option><option value="recuerdas">recuerdas</option><option value="recuerdes">recuerdes</option><option value="recordaste">recordaste</option></select><span> la cita con el médico.</span></li><li><span class="number">09</span><span>Cuando María </span><select class="subj-select" data-answer="termine"><option selected="" value="">terminar</option><option value="termina">termina</option><option value="termine">termine</option><option value="terminó">terminó</option></select><span> el trabajo, salimos a caminar.</span></li><li><span class="number">10</span><span>Antes de que ellos </span><select class="subj-select" data-answer="salgan"><option selected="" value="">salir</option><option value="salen">salen</option><option value="salgan">salgan</option><option value="salieron">salieron</option></select><span>, hablo con ellos.</span></li><li><span class="number">11</span><span>Es mejor que tú </span><select class="subj-select" data-answer="hagas"><option selected="" value="">hacer</option><option value="haces">haces</option><option value="hagas">hagas</option><option value="hiciste">hiciste</option></select><span> la tarea ahora.</span></li><li><span class="number">12</span><span>Quiero que mi hermano </span><select class="subj-select" data-answer="estudie"><option selected="" value="">estudiar</option><option value="estudia">estudia</option><option value="estudie">estudie</option><option value="estudió">estudió</option></select><span> español conmigo.</span></li><li><span class="number">13</span><span>Espero que ustedes </span><select class="subj-select" data-answer="entiendan"><option selected="" value="">entender</option><option value="entienden">entienden</option><option value="entiendan">entiendan</option><option value="entendieron">entendieron</option></select><span> la explicación.</span></li><li><span class="number">14</span><span>Es necesario que la clase </span><select class="subj-select" data-answer="empiece"><option selected="" value="">empezar</option><option value="empieza">empieza</option><option value="empiece">empiece</option><option value="empezó">empezó</option></select><span> a tiempo.</span></li><li><span class="number">15</span><span>No quiero que el niño </span><select class="subj-select" data-answer="coma"><option selected="" value="">comer</option><option value="come">come</option><option value="coma">coma</option><option value="comió">comió</option></select><span> tantos dulces.</span></li><li><span class="number">16</span><span>Dudo que Marta </span><select class="subj-select" data-answer="viva"><option selected="" value="">vivir</option><option value="vive">vive</option><option value="viva">viva</option><option value="vivió">vivió</option></select><span> cerca de aquí.</span></li><li><span class="number">17</span><span>Es posible que nosotros </span><select class="subj-select" data-answer="vayamos"><option selected="" value="">ir</option><option value="vamos">vamos</option><option value="vayamos">vayamos</option><option value="fuimos">fuimos</option></select><span> mañana al museo.</span></li><li><span class="number">18</span><span>Deseo que tu familia </span><select class="subj-select" data-answer="esté"><option selected="" value="">estar</option><option value="está">está</option><option value="esté">esté</option><option value="estuvo">estuvo</option></select><span> bien.</span></li><li><span class="number">19</span><span>Te escribo para que tú </span><select class="subj-select" data-answer="leas"><option selected="" value="">leer</option><option value="lees">lees</option><option value="leas">leas</option><option value="leíste">leíste</option></select><span> el mensaje.</span></li><li><span class="number">20</span><span>Es bueno que los estudiantes </span><select class="subj-select" data-answer="practiquen"><option selected="" value="">practicar</option><option value="practican">practican</option><option value="practiquen">practiquen</option><option value="practicaron">practicaron</option></select><span> todos los días.</span></li>
+</ol>
+</article>
+<article class="card">
+<h2><span class="pill">Texto</span> Visita al mercado</h2>
+<div class="text-box">
+          Mañana mi clase prepara una visita al mercado del barrio. La profesora quiere que todos <select class="subj-select" data-answer="lleguen"><option selected="" value="">llegar</option><option value="llegan">llegan</option><option value="lleguen">lleguen</option><option value="llegaron">llegaron</option></select> a las nueve y espera que cada estudiante <select class="subj-select" data-answer="traiga"><option selected="" value="">traer</option><option value="trae">trae</option><option value="traiga">traiga</option><option value="trajo">trajo</option></select> una bolsa pequeña. También nos pide que <select class="subj-select" data-answer="hablemos"><option selected="" value="">hablar</option><option value="hablamos">hablamos</option><option value="hablemos">hablemos</option><option value="hablamos">hablamos</option></select> con tres vendedores y que <select class="subj-select" data-answer="preguntemos"><option selected="" value="">preguntar</option><option value="preguntamos">preguntamos</option><option value="preguntemos">preguntemos</option><option value="preguntamos">preguntamos</option></select> el precio de frutas, pan y queso. Es importante que nadie <select class="subj-select" data-answer="use"><option selected="" value="">usar</option><option value="usa">usa</option><option value="use">use</option><option value="usó">usó</option></select> el teléfono durante las entrevistas. Después, la profesora desea que nosotros <select class="subj-select" data-answer="escribamos"><option selected="" value="">escribir</option><option value="escribimos">escribimos</option><option value="escribamos">escribamos</option><option value="escribimos">escribimos</option></select> cinco frases nuevas y que <select class="subj-select" data-answer="compartamos"><option selected="" value="">compartir</option><option value="compartimos">compartimos</option><option value="compartamos">compartamos</option><option value="compartimos">compartimos</option></select> una opinión con el grupo. Ojalá el clima <select class="subj-select" data-answer="esté"><option selected="" value="">estar</option><option value="está">está</option><option value="esté">esté</option><option value="estuvo">estuvo</option></select> tranquilo y el mercado <select class="subj-select" data-answer="tenga"><option selected="" value="">tener</option><option value="tiene">tiene</option><option value="tenga">tenga</option><option value="tuvo">tuvo</option></select> muchas personas amables. Cuando la actividad <select class="subj-select" data-answer="termine"><option selected="" value="">terminar</option><option value="termina">termina</option><option value="termine">termine</option><option value="terminó">terminó</option></select>, vamos a una cafetería cercana para comentar la experiencia. La profesora no quiere que el ejercicio <select class="subj-select" data-answer="sea"><option selected="" value="">ser</option><option value="es">es</option><option value="sea">sea</option><option value="fue">fue</option></select> difícil, sino útil y natural.
+        </div>
+</article>
+</section></div>
+<div class="section-actions"><button class="action check-selects">Проверить</button><button class="action secondary reset-selects">Сбросить</button><span class="score"></span></div>
+</section>
+</main>
+<script>
+(function(){
+  let dragged = null;
+  let selectedToken = null;
+
+  function normalize(s){return (s||'').trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');}
+
+  function setupDrag(){
+    document.querySelectorAll('.token').forEach(tok=>{
+      tok.addEventListener('dragstart', e=>{dragged=tok; e.dataTransfer.setData('text/plain', tok.dataset.value);});
+      tok.addEventListener('dragend', ()=>{dragged=null;});
+      tok.addEventListener('click', ()=>{
+        document.querySelectorAll('.token').forEach(t=>t.classList.remove('selected'));
+        selectedToken = tok; tok.classList.add('selected');
+      });
+    });
+    document.querySelectorAll('.dropzone').forEach(zone=>{
+      zone.addEventListener('dragover', e=>{e.preventDefault(); zone.classList.add('over');});
+      zone.addEventListener('dragleave', ()=>zone.classList.remove('over'));
+      zone.addEventListener('drop', e=>{
+        e.preventDefault(); zone.classList.remove('over');
+        if(dragged) placeToken(zone, dragged);
+      });
+      zone.addEventListener('click', ()=>{ if(selectedToken){ placeToken(zone, selectedToken); selectedToken=null; } });
+    });
+  }
+  function placeToken(zone, token){
+    const existing = zone.querySelector('.token');
+    const bank = document.querySelector('.bank .tokens');
+    if(existing) bank.appendChild(existing);
+    zone.textContent = '';
+    zone.appendChild(token);
+    token.classList.remove('selected');
+    zone.classList.remove('correct','incorrect');
+  }
+  document.querySelectorAll('.check-drag').forEach(btn=>btn.addEventListener('click',()=>{
+    const section = btn.closest('.interactive-section');
+    let ok=0,total=0;
+    section.querySelectorAll('.dropzone').forEach(zone=>{
+      total++; zone.classList.remove('correct','incorrect');
+      const token = zone.querySelector('.token');
+      const val = token ? token.dataset.value : '';
+      if(normalize(val)===normalize(zone.dataset.answer)){ ok++; zone.classList.add('correct'); }
+      else { zone.classList.add('incorrect'); }
+    });
+    section.querySelector('.score').textContent = ok + ' / ' + total;
+  }));
+  document.querySelectorAll('.reset-drag').forEach(btn=>btn.addEventListener('click',()=>{
+    const section = btn.closest('.interactive-section');
+    const bank = section.querySelector('.tokens');
+    section.querySelectorAll('.dropzone').forEach(zone=>{
+      const token = zone.querySelector('.token');
+      if(token) bank.appendChild(token);
+      zone.textContent = zone.dataset.placeholder;
+      zone.classList.remove('correct','incorrect','over');
+    });
+    section.querySelectorAll('.token').forEach(t=>t.classList.remove('selected'));
+    section.querySelector('.score').textContent = '';
+  }));
+
+  document.querySelectorAll('.check-selects').forEach(btn=>btn.addEventListener('click',()=>{
+    const section = btn.closest('.select-section');
+    let ok=0,total=0;
+    section.querySelectorAll('.feedback').forEach(f=>f.remove());
+    section.querySelectorAll('select[data-answer]').forEach(sel=>{
+      total++; sel.classList.remove('correct','incorrect');
+      const expected = sel.dataset.answer;
+      const span = document.createElement('span');
+      span.className = 'feedback';
+      if(normalize(sel.value)===normalize(expected)){ ok++; sel.classList.add('correct'); span.classList.add('ok'); span.textContent='✓'; }
+      else { sel.classList.add('incorrect'); span.classList.add('bad'); span.textContent='→ ' + expected; }
+      sel.insertAdjacentElement('afterend', span);
+    });
+    section.querySelector('.score').textContent = ok + ' / ' + total;
+  }));
+  document.querySelectorAll('.reset-selects').forEach(btn=>btn.addEventListener('click',()=>{
+    const section = btn.closest('.select-section');
+    section.querySelectorAll('select[data-answer]').forEach(sel=>{ sel.selectedIndex = 0; sel.classList.remove('correct','incorrect'); });
+    section.querySelectorAll('.feedback').forEach(f=>f.remove());
+    section.querySelector('.score').textContent='';
+  }));
+
+  setupDrag();
+})();
+</script>
+<script id="combined-imported-script">
+const DATA = {"verbs": [{"trigger": "aconsejar", "ru": "советовать", "icon": "🩺", "pattern": "aconsejar que + Subjuntivo", "example": "El médico aconseja que descanses.", "ex_ru": "Врач советует, чтобы ты отдохнул(а).", "focus": "aconseja que descanses", "prompt": "El profesor aconseja que tú ___ antes del examen.", "inf": "repasar", "forms": ["repase", "repases", "repase", "repasemos", "repaséis", "repasen"], "answer": "repases", "ru_task": "Врач советует, чтобы пациенты отдыхали больше.", "translation": "El médico aconseja que los pacientes descansen más."}, {"trigger": "alegrarse", "ru": "радоваться", "icon": "😊", "pattern": "alegrarse de que + Subjuntivo", "example": "Ella se alegra de que vengas.", "ex_ru": "Она радуется, что ты приходишь.", "focus": "se alegra de que vengas", "prompt": "Me alegro de que vosotros ___ a la clase.", "inf": "venir", "forms": ["venga", "vengas", "venga", "vengamos", "vengáis", "vengan"], "answer": "vengáis", "ru_task": "Мы рады, что ты приходишь сегодня.", "translation": "Nos alegramos de que vengas hoy."}, {"trigger": "anhelar", "ru": "страстно желать", "icon": "🌠", "pattern": "anhelar que + Subjuntivo", "example": "Ellos anhelan que el proyecto empiece pronto.", "ex_ru": "Они страстно желают, чтобы проект скоро начался.", "focus": "anhelan que el proyecto empiece", "prompt": "Ellos anhelan que el viaje ___ pronto.", "inf": "empezar", "forms": ["empiece", "empieces", "empiece", "empecemos", "empecéis", "empiecen"], "answer": "empiece", "ru_task": "Они страстно желают, чтобы проект начался скоро.", "translation": "Ellos anhelan que el proyecto empiece pronto."}, {"trigger": "asustar", "ru": "пугать", "icon": "🌘", "pattern": "asustar que + Subjuntivo", "example": "A los niños les asusta que oscurezca tan rápido.", "ex_ru": "Детей пугает, что так быстро темнеет.", "focus": "les asusta que oscurezca", "prompt": "Me asusta que la calle ___ vacía.", "inf": "estar", "forms": ["esté", "estés", "esté", "estemos", "estéis", "estén"], "answer": "esté", "ru_task": "Детей пугает, что так быстро темнеет.", "translation": "A los niños les asusta que oscurezca tan rápido."}, {"trigger": "autorizar", "ru": "разрешать", "icon": "✅", "pattern": "autorizar que + Subjuntivo", "example": "La ley autoriza que se use ese material.", "ex_ru": "Закон разрешает использовать этот материал.", "focus": "autoriza que se use", "prompt": "El director autoriza que vosotros ___ la sala.", "inf": "usar", "forms": ["use", "uses", "use", "usemos", "uséis", "usen"], "answer": "uséis", "ru_task": "Закон разрешает использовать этот материал.", "translation": "La ley autoriza que se use ese material."}, {"trigger": "buscar", "ru": "искать", "icon": "🔎", "pattern": "buscar a alguien que + Subjuntivo", "example": "Buscan a alguien que sepa francés.", "ex_ru": "Они ищут кого-нибудь, кто знает французский.", "focus": "alguien que sepa", "prompt": "Busco a una persona que ___ del ruso.", "inf": "traducir", "forms": ["traduzca", "traduzcas", "traduzca", "traduzcamos", "traduzcáis", "traduzcan"], "answer": "traduzca", "ru_task": "Они ищут кого-нибудь, кто знает французский.", "translation": "Buscan a alguien que sepa francés."}, {"trigger": "conseguir", "ru": "добиваться", "icon": "🏆", "pattern": "conseguir que + Subjuntivo", "example": "El equipo consigue que todos participen.", "ex_ru": "Команда добивается того, чтобы все участвовали.", "focus": "consigue que todos participen", "prompt": "La guía consigue que nosotros ___ la regla.", "inf": "entender", "forms": ["entienda", "entiendas", "entienda", "entendamos", "entendáis", "entiendan"], "answer": "entendamos", "ru_task": "Команда добивается того, чтобы все участвовали.", "translation": "El equipo consigue que todos participen."}, {"trigger": "desear", "ru": "желать, хотеть", "icon": "🎂", "pattern": "desear que + Subjuntivo", "example": "Te deseamos que pases un feliz cumpleaños.", "ex_ru": "Желаем тебе, чтобы ты хорошо провёл(а) день рождения.", "focus": "deseamos que pases", "prompt": "Te deseo que tú ___ una buena semana.", "inf": "pasar", "forms": ["pase", "pases", "pase", "pasemos", "paséis", "pasen"], "answer": "pases", "ru_task": "Желаем тебе, чтобы ты хорошо провёл день рождения.", "translation": "Te deseamos que pases un feliz cumpleaños."}, {"trigger": "enojar", "ru": "злить", "icon": "😠", "pattern": "enojar que + Subjuntivo", "example": "A Juan le enoja que no lo escuchen.", "ex_ru": "Хуана злит, что его не слушают.", "focus": "le enoja que no lo escuchen", "prompt": "A Ana le enoja que ustedes no ___ la explicación.", "inf": "escuchar", "forms": ["escuche", "escuches", "escuche", "escuchemos", "escuchéis", "escuchen"], "answer": "escuchen", "ru_task": "Хуана злит, что его не слушают.", "translation": "A Juan le enoja que no lo escuchen."}, {"trigger": "exigir", "ru": "требовать", "icon": "📢", "pattern": "exigir que + Subjuntivo", "example": "Los padres exigen que sus hijos sean responsables.", "ex_ru": "Родители требуют, чтобы их дети были ответственными.", "focus": "exigen que sus hijos sean", "prompt": "El jefe exige que vosotros ___ puntuales.", "inf": "ser", "forms": ["sea", "seas", "sea", "seamos", "seáis", "sean"], "answer": "seáis", "ru_task": "Родители требуют, чтобы их дети были ответственными.", "translation": "Los padres exigen que sus hijos sean responsables."}, {"trigger": "evitar", "ru": "избегать, предотвращать", "icon": "🛑", "pattern": "evitar que + Subjuntivo", "example": "La empresa evita que se repitan los errores.", "ex_ru": "Компания предотвращает повторение ошибок.", "focus": "evita que se repitan", "prompt": "La señal evita que los alumnos ___ tarde.", "inf": "entrar", "forms": ["entre", "entres", "entre", "entremos", "entréis", "entren"], "answer": "entren", "ru_task": "Компания предотвращает повторение ошибок.", "translation": "La empresa evita que se repitan los errores."}, {"trigger": "hacer", "ru": "заставлять, делать так, чтобы", "icon": "⚙️", "pattern": "hacer que + Subjuntivo", "example": "El jefe hace que todos lleguen a tiempo.", "ex_ru": "Начальник заставляет всех приходить вовремя.", "focus": "hace que todos lleguen", "prompt": "La profesora hace que nosotros ___ más.", "inf": "leer", "forms": ["lea", "leas", "lea", "leamos", "leáis", "lean"], "answer": "leamos", "ru_task": "Начальник добивается того, чтобы все приходили вовремя.", "translation": "El jefe hace que todos lleguen a tiempo."}, {"trigger": "impedir", "ru": "препятствовать", "icon": "🚧", "pattern": "impedir que + Subjuntivo", "example": "Las lluvias impiden que el avión despegue.", "ex_ru": "Дожди препятствуют тому, чтобы самолёт взлетел.", "focus": "impiden que el avión despegue", "prompt": "El ruido impide que yo ___ bien.", "inf": "dormir", "forms": ["duerma", "duermas", "duerma", "durmamos", "durmáis", "duerman"], "answer": "duerma", "ru_task": "Дожди мешают самолёту взлететь.", "translation": "Las lluvias impiden que el avión despegue."}, {"trigger": "implorar", "ru": "вымаливать", "icon": "🙏", "pattern": "implorar que + Subjuntivo", "example": "Imploran que la ayuda llegue pronto.", "ex_ru": "Они умоляют, чтобы помощь пришла скоро.", "focus": "imploran que la ayuda llegue", "prompt": "Ellos imploran que la ayuda ___ hoy.", "inf": "llegar", "forms": ["llegue", "llegues", "llegue", "lleguemos", "lleguéis", "lleguen"], "answer": "llegue", "ru_task": "Они умоляют, чтобы помощь пришла скоро.", "translation": "Imploran que la ayuda llegue pronto."}, {"trigger": "indignar", "ru": "возмущать", "icon": "⚡", "pattern": "indignar que + Subjuntivo", "example": "Nos indigna que no cumplan las promesas.", "ex_ru": "Нас возмущает, что они не выполняют обещания.", "focus": "indigna que no cumplan", "prompt": "Nos indigna que ellos no ___ las reglas.", "inf": "cumplir", "forms": ["cumpla", "cumplas", "cumpla", "cumplamos", "cumpláis", "cumplan"], "answer": "cumplan", "ru_task": "Нас возмущает, что они не выполняют обещания.", "translation": "Nos indigna que no cumplan las promesas."}, {"trigger": "insistir", "ru": "настаивать", "icon": "☝️", "pattern": "insistir en que + Subjuntivo", "example": "El maestro insiste en que practiquen más.", "ex_ru": "Учитель настаивает на том, чтобы они больше практиковались.", "focus": "insiste en que practiquen", "prompt": "Insisto en que tú ___ cada día.", "inf": "practicar", "forms": ["practique", "practiques", "practique", "practiquemos", "practiquéis", "practiquen"], "answer": "practiques", "ru_task": "Учитель настаивает на том, чтобы они больше практиковались.", "translation": "El maestro insiste en que practiquen más."}, {"trigger": "intentar", "ru": "пытаться", "icon": "🎯", "pattern": "intentar que + Subjuntivo", "example": "Intentan que la reunión termine temprano.", "ex_ru": "Они стараются, чтобы собрание закончилось рано.", "focus": "intentan que la reunión termine", "prompt": "Intentamos que la reunión ___ a las seis.", "inf": "terminar", "forms": ["termine", "termines", "termine", "terminemos", "terminéis", "terminen"], "answer": "termine", "ru_task": "Они стараются, чтобы собрание закончилось рано.", "translation": "Intentan que la reunión termine temprano."}, {"trigger": "irritar", "ru": "раздражать", "icon": "💢", "pattern": "irritar que + Subjuntivo", "example": "A Marta le irrita que hablen sin permiso.", "ex_ru": "Марту раздражает, что говорят без разрешения.", "focus": "le irrita que hablen", "prompt": "A Marta le irrita que vosotros ___ sin permiso.", "inf": "hablar", "forms": ["hable", "hables", "hable", "hablemos", "habléis", "hablen"], "answer": "habléis", "ru_task": "Марту раздражает, что говорят без разрешения.", "translation": "A Marta le irrita que hablen sin permiso."}, {"trigger": "lamentar", "ru": "сожалеть", "icon": "😔", "pattern": "lamentar que + Subjuntivo", "example": "Lamentan que no haya solución inmediata.", "ex_ru": "Они сожалеют, что нет немедленного решения.", "focus": "lamentan que no haya", "prompt": "Lamento que no ___ tiempo.", "inf": "haber", "forms": ["haya", "hayas", "haya", "hayamos", "hayáis", "hayan"], "answer": "haya", "ru_task": "Они сожалеют, что нет немедленного решения.", "translation": "Lamentan que no haya solución inmediata."}, {"trigger": "lograr", "ru": "добиваться", "icon": "🤝", "pattern": "lograr que + Subjuntivo", "example": "La directora logra que todos colaboren.", "ex_ru": "Директор добивается того, чтобы все сотрудничали.", "focus": "logra que todos colaboren", "prompt": "El entrenador logra que nosotros ___ mejor.", "inf": "colaborar", "forms": ["colabore", "colabores", "colabore", "colaboremos", "colaboréis", "colaboren"], "answer": "colaboremos", "ru_task": "Директор добивается того, чтобы все сотрудничали.", "translation": "La directora logra que todos colaboren."}, {"trigger": "mandar", "ru": "приказывать", "icon": "🧢", "pattern": "mandar que + Subjuntivo", "example": "El entrenador manda que corran más rápido.", "ex_ru": "Тренер приказывает, чтобы они бежали быстрее.", "focus": "manda que corran", "prompt": "El capitán manda que los soldados ___ ahora.", "inf": "salir", "forms": ["salga", "salgas", "salga", "salgamos", "salgáis", "salgan"], "answer": "salgan", "ru_task": "Тренер приказывает, чтобы они бежали быстрее.", "translation": "El entrenador manda que corran más rápido."}, {"trigger": "molestar", "ru": "раздражать, мешать", "icon": "🔊", "pattern": "molestar que + Subjuntivo", "example": "Les molesta que el ruido no pare.", "ex_ru": "Их раздражает, что шум не прекращается.", "focus": "molesta que el ruido no pare", "prompt": "Me molesta que la música no ___.", "inf": "parar", "forms": ["pare", "pares", "pare", "paremos", "paréis", "paren"], "answer": "pare", "ru_task": "Их раздражает, что шум не прекращается.", "translation": "Les molesta que el ruido no pare."}, {"trigger": "necesitar", "ru": "нуждаться, требовать", "icon": "🧩", "pattern": "necesitar que + Subjuntivo", "example": "Necesitamos que lleguen a tiempo.", "ex_ru": "Нам нужно, чтобы они пришли вовремя.", "focus": "necesitamos que lleguen", "prompt": "Necesito que tú me ___.", "inf": "ayudar", "forms": ["ayude", "ayudes", "ayude", "ayudemos", "ayudéis", "ayuden"], "answer": "ayudes", "ru_task": "Нам нужно, чтобы они пришли вовремя.", "translation": "Necesitamos que lleguen a tiempo."}, {"trigger": "negar", "ru": "отрицать", "icon": "🚫", "pattern": "negar que + Subjuntivo", "example": "Ellos niegan que eso sea verdad.", "ex_ru": "Они отрицают, что это правда.", "focus": "niegan que eso sea", "prompt": "Ellos niegan que eso ___ verdad.", "inf": "ser", "forms": ["sea", "seas", "sea", "seamos", "seáis", "sean"], "answer": "sea", "ru_task": "Они отрицают, что это правда.", "translation": "Ellos niegan que eso sea verdad."}, {"trigger": "ordenar", "ru": "приказывать", "icon": "🪖", "pattern": "ordenar que + Subjuntivo", "example": "El comandante ordena que avancen.", "ex_ru": "Командир приказывает, чтобы они продвигались вперёд.", "focus": "ordena que avancen", "prompt": "El comandante ordena que vosotros ___.", "inf": "avanzar", "forms": ["avance", "avances", "avance", "avancemos", "avancéis", "avancen"], "answer": "avancéis", "ru_task": "Командир приказывает, чтобы они продвигались вперёд.", "translation": "El comandante ordena que avancen."}, {"trigger": "pedir", "ru": "просить", "icon": "✉️", "pattern": "pedir que + Subjuntivo", "example": "Piden que los escuchen.", "ex_ru": "Они просят, чтобы их выслушали.", "focus": "piden que los escuchen", "prompt": "Pedimos que ustedes nos ___.", "inf": "escuchar", "forms": ["escuche", "escuches", "escuche", "escuchemos", "escuchéis", "escuchen"], "answer": "escuchen", "ru_task": "Они просят, чтобы их выслушали.", "translation": "Piden que los escuchen."}, {"trigger": "permitir", "ru": "разрешать", "icon": "🟢", "pattern": "permitir que + Subjuntivo", "example": "Permiten que los niños jueguen afuera.", "ex_ru": "Они разрешают детям играть на улице.", "focus": "permiten que los niños jueguen", "prompt": "El colegio permite que los niños ___ afuera.", "inf": "jugar", "forms": ["juegue", "juegues", "juegue", "juguemos", "juguéis", "jueguen"], "answer": "jueguen", "ru_task": "Они разрешают детям играть на улице.", "translation": "Permiten que los niños jueguen afuera."}, {"trigger": "preferir", "ru": "предпочитать", "icon": "🍽️", "pattern": "preferir que + Subjuntivo", "example": "Prefieren que cenemos en casa.", "ex_ru": "Они предпочитают, чтобы мы ужинали дома.", "focus": "prefieren que cenemos", "prompt": "Prefiero que nosotros ___ en casa.", "inf": "cenar", "forms": ["cene", "cenes", "cene", "cenemos", "cenéis", "cenen"], "answer": "cenemos", "ru_task": "Они предпочитают, чтобы мы ужинали дома.", "translation": "Prefieren que cenemos en casa."}, {"trigger": "preocuparse", "ru": "беспокоиться", "icon": "🍞", "pattern": "preocuparse de que + Subjuntivo", "example": "Se preocupan de que no haya comida suficiente.", "ex_ru": "Они беспокоятся, что еды недостаточно.", "focus": "se preocupan de que no haya", "prompt": "Me preocupo de que no ___ comida suficiente.", "inf": "haber", "forms": ["haya", "hayas", "haya", "hayamos", "hayáis", "hayan"], "answer": "haya", "ru_task": "Они беспокоятся, что еды недостаточно.", "translation": "Se preocupan de que no haya comida suficiente."}, {"trigger": "prohibir", "ru": "запрещать", "icon": "📵", "pattern": "prohibir que + Subjuntivo", "example": "Prohíben que se use el teléfono.", "ex_ru": "Запрещают пользоваться телефоном.", "focus": "prohíben que se use", "prompt": "Prohíben que se ___ el teléfono.", "inf": "usar", "forms": ["use", "uses", "use", "usemos", "uséis", "usen"], "answer": "use", "ru_task": "Запрещают пользоваться телефоном.", "translation": "Prohíben que se use el teléfono."}, {"trigger": "proponer", "ru": "предлагать", "icon": "💡", "pattern": "proponer que + Subjuntivo", "example": "Proponen que cambiemos de estrategia.", "ex_ru": "Они предлагают, чтобы мы изменили стратегию.", "focus": "proponen que cambiemos", "prompt": "Propongo que vosotros ___ de estrategia.", "inf": "cambiar", "forms": ["cambie", "cambies", "cambie", "cambiemos", "cambiéis", "cambien"], "answer": "cambiéis", "ru_task": "Они предлагают, чтобы мы изменили стратегию.", "translation": "Proponen que cambiemos de estrategia."}, {"trigger": "querer", "ru": "хотеть", "icon": "⭐", "pattern": "querer que + Subjuntivo", "example": "Queremos que vengas temprano.", "ex_ru": "Мы хотим, чтобы ты пришёл рано.", "focus": "queremos que vengas", "prompt": "Quiero que tú ___ temprano.", "inf": "venir", "forms": ["venga", "vengas", "venga", "vengamos", "vengáis", "vengan"], "answer": "vengas", "ru_task": "Мы хотим, чтобы ты пришёл рано.", "translation": "Queremos que vengas temprano."}, {"trigger": "recomendar", "ru": "рекомендовать", "icon": "📌", "pattern": "recomendar que + Subjuntivo", "example": "Recomiendan que descanses más.", "ex_ru": "Они рекомендуют, чтобы ты больше отдыхал(а).", "focus": "recomiendan que descanses", "prompt": "Recomiendan que usted ___ más.", "inf": "descansar", "forms": ["descanse", "descanses", "descanse", "descansemos", "descanséis", "descansen"], "answer": "descanse", "ru_task": "Они рекомендуют, чтобы ты больше отдыхал.", "translation": "Recomiendan que descanses más."}, {"trigger": "rogar", "ru": "умолять", "icon": "🕊️", "pattern": "rogar que + Subjuntivo", "example": "Ruegan que no haya más conflictos.", "ex_ru": "Они умоляют, чтобы больше не было конфликтов.", "focus": "ruegan que no haya", "prompt": "Ruegan que no ___ más conflictos.", "inf": "haber", "forms": ["haya", "hayas", "haya", "hayamos", "hayáis", "hayan"], "answer": "haya", "ru_task": "Они умоляют, чтобы больше не было конфликтов.", "translation": "Ruegan que no haya más conflictos."}, {"trigger": "sentir", "ru": "сожалеть", "icon": "💧", "pattern": "sentir que + Subjuntivo", "example": "Sienten que no puedas asistir.", "ex_ru": "Они сожалеют, что ты не можешь присутствовать.", "focus": "sienten que no puedas", "prompt": "Siento que tú no ___ asistir.", "inf": "poder", "forms": ["pueda", "puedas", "pueda", "podamos", "podáis", "puedan"], "answer": "puedas", "ru_task": "Они сожалеют, что ты не можешь присутствовать.", "translation": "Sienten que no puedas asistir."}, {"trigger": "sugerir", "ru": "предлагать", "icon": "🧭", "pattern": "sugerir que + Subjuntivo", "example": "Sugieren que tomemos otro camino.", "ex_ru": "Они предлагают, чтобы мы выбрали другой путь.", "focus": "sugieren que tomemos", "prompt": "Sugiero que nosotros ___ otro camino.", "inf": "tomar", "forms": ["tome", "tomes", "tome", "tomemos", "toméis", "tomen"], "answer": "tomemos", "ru_task": "Они предлагают, чтобы мы выбрали другой путь.", "translation": "Sugieren que tomemos otro camino."}, {"trigger": "suplicar", "ru": "молить", "icon": "🙇", "pattern": "suplicar que + Subjuntivo", "example": "Suplican que los escuchen.", "ex_ru": "Они молят, чтобы их выслушали.", "focus": "suplican que los escuchen", "prompt": "Suplico que ustedes me ___.", "inf": "escuchar", "forms": ["escuche", "escuches", "escuche", "escuchemos", "escuchéis", "escuchen"], "answer": "escuchen", "ru_task": "Они молят, чтобы их выслушали.", "translation": "Suplican que los escuchen."}, {"trigger": "temer", "ru": "бояться", "icon": "⛈️", "pattern": "temer que + Subjuntivo", "example": "Temen que el clima empeore.", "ex_ru": "Они боятся, что погода ухудшится.", "focus": "temen que el clima empeore", "prompt": "Temen que el clima ___.", "inf": "empeorar", "forms": ["empeore", "empeores", "empeore", "empeoremos", "empeoréis", "empeoren"], "answer": "empeore", "ru_task": "Они боятся, что погода ухудшится.", "translation": "Temen que el clima empeore."}, {"trigger": "dudar", "ru": "сомневаться", "icon": "❓", "pattern": "dudar que + Subjuntivo", "note": "В отрицательной форме no dudar que обычно требует Indicativo.", "example": "Los profesores dudan que él estudie.", "ex_ru": "Преподаватели сомневаются, что он учится.", "focus": "dudan que él estudie", "prompt": "Dudo que él ___ lo suficiente.", "inf": "estudiar", "forms": ["estudie", "estudies", "estudie", "estudiemos", "estudiéis", "estudien"], "answer": "estudie", "ru_task": "Преподаватели сомневаются, что он учится.", "translation": "Los profesores dudan que él estudie."}, {"trigger": "no creer", "ru": "не верить", "icon": "🧠", "pattern": "no creer que + Subjuntivo", "note": "В утвердительной форме creer que обычно требует Indicativo.", "example": "No creen que el plan funcione.", "ex_ru": "Они не верят, что план сработает.", "focus": "no creen que funcione", "prompt": "No creo que el plan ___.", "inf": "funcionar", "forms": ["funcione", "funciones", "funcione", "funcionemos", "funcionéis", "funcionen"], "answer": "funcione", "ru_task": "Они не верят, что план сработает.", "translation": "No creen que el plan funcione."}, {"trigger": "no conocer", "ru": "не знать", "icon": "🗺️", "pattern": "no conocer a nadie que + Subjuntivo", "note": "Subjuntivo появляется, когда речь идёт о неизвестном или несуществующем лице.", "example": "No conocemos a nadie que viva allí.", "ex_ru": "Мы не знаем никого, кто живёт там.", "focus": "nadie que viva", "prompt": "No conozco a nadie que ___ aquí.", "inf": "vivir", "forms": ["viva", "vivas", "viva", "vivamos", "viváis", "vivan"], "answer": "viva", "ru_task": "Мы не знаем никого, кто живёт там.", "translation": "No conocemos a nadie que viva allí."}, {"trigger": "no encontrar", "ru": "не находить", "icon": "🧭", "pattern": "no encontrar a alguien que + Subjuntivo", "note": "Subjuntivo указывает на неопределённого человека: такого пока не нашли.", "example": "No encuentran a alguien que los ayude.", "ex_ru": "Они не находят никого, кто им поможет.", "focus": "alguien que los ayude", "prompt": "No encuentran a alguien que los ___.", "inf": "ayudar", "forms": ["ayude", "ayudes", "ayude", "ayudemos", "ayudéis", "ayuden"], "answer": "ayude", "ru_task": "Они не находят никого, кто им поможет.", "translation": "No encuentran a alguien que los ayude."}, {"trigger": "no existir", "ru": "не существовать", "icon": "🌫️", "pattern": "no existir + nombre + que + Subjuntivo", "note": "Subjuntivo используется, когда предмет отрицается как существующий.", "example": "No existe solución que sirva para todos.", "ex_ru": "Не существует решения, которое подошло бы всем.", "focus": "solución que sirva", "prompt": "No existe una solución que ___ para todos.", "inf": "servir", "forms": ["sirva", "sirvas", "sirva", "sirvamos", "sirváis", "sirvan"], "answer": "sirva", "ru_task": "Не существует решения, которое подошло бы всем.", "translation": "No existe solución que sirva para todos."}, {"trigger": "no parecer", "ru": "не казаться", "icon": "👁️", "pattern": "no parecer que + Subjuntivo", "note": "Отрицание видимости или уверенности часто вводит Subjuntivo.", "example": "No parece que haya terminado.", "ex_ru": "Не похоже, что это закончилось.", "focus": "no parece que haya", "prompt": "No parece que la clase ___ terminado.", "inf": "haber", "forms": ["haya", "hayas", "haya", "hayamos", "hayáis", "hayan"], "answer": "haya", "ru_task": "Не похоже, что это закончилось.", "translation": "No parece que haya terminado."}, {"trigger": "no pensar", "ru": "не думать", "icon": "💭", "pattern": "no pensar que + Subjuntivo", "note": "В утвердительной форме pensar que обычно требует Indicativo.", "example": "No piensan que sea peligroso.", "ex_ru": "Они не думают, что это опасно.", "focus": "no piensan que sea", "prompt": "No pensamos que eso ___ peligroso.", "inf": "ser", "forms": ["sea", "seas", "sea", "seamos", "seáis", "sean"], "answer": "sea", "ru_task": "Они не думают, что это опасно.", "translation": "No piensan que sea peligroso."}, {"trigger": "no estar seguro", "ru": "не быть уверенным", "icon": "🪫", "pattern": "no estar seguro de que + Subjuntivo", "note": "Неуверенность вводит Subjuntivo после de que.", "example": "No estamos seguros de que venga.", "ex_ru": "Мы не уверены, что он/она придёт.", "focus": "no estamos seguros de que venga", "prompt": "No estoy seguro de que ella ___.", "inf": "venir", "forms": ["venga", "vengas", "venga", "vengamos", "vengáis", "vengan"], "answer": "venga", "ru_task": "Мы не уверены, что она придёт.", "translation": "No estamos seguros de que ella venga."}, {"trigger": "no suponer", "ru": "не предполагать", "icon": "🧪", "pattern": "no suponer que + Subjuntivo", "note": "В утвердительной форме suponer que обычно требует Indicativo.", "example": "No suponen que eso ocurra.", "ex_ru": "Они не предполагают, что это произойдёт.", "focus": "no suponen que eso ocurra", "prompt": "No suponemos que eso ___.", "inf": "ocurrir", "forms": ["ocurra", "ocurras", "ocurra", "ocurramos", "ocurráis", "ocurran"], "answer": "ocurra", "ru_task": "Они не предполагают, что это произойдёт.", "translation": "No suponen que eso ocurra."}], "warmups": [{"prompt": "Quiero que tú ___ este ejercicio.", "inf": "mirar", "forms": ["mire", "mires", "mire", "miremos", "miréis", "miren"], "answer": "mires"}, {"prompt": "Es mejor que usted ___ un taxi.", "inf": "tomar", "forms": ["tome", "tomes", "tome", "tomemos", "toméis", "tomen"], "answer": "tome"}, {"prompt": "No creemos que ellos ___ hoy.", "inf": "venir", "forms": ["venga", "vengas", "venga", "vengamos", "vengáis", "vengan"], "answer": "vengan"}, {"prompt": "Te llamo cuando tú ___ la clase.", "inf": "terminar", "forms": ["termine", "termines", "termine", "terminemos", "terminéis", "terminen"], "answer": "termines"}, {"prompt": "Salimos antes de que ___ .", "inf": "anochecer", "forms": ["anochezca", "anochezcas", "anochezca", "anochezcamos", "anochezcáis", "anochezcan"], "answer": "anochezca"}, {"prompt": "Es necesario que María ___ temprano.", "inf": "llegar", "forms": ["llegue", "llegues", "llegue", "lleguemos", "lleguéis", "lleguen"], "answer": "llegue"}, {"prompt": "Prefiero que ustedes ___ aquí.", "inf": "comer", "forms": ["coma", "comas", "coma", "comamos", "comáis", "coman"], "answer": "coman"}, {"prompt": "Es una buena idea que nosotros ___ el texto.", "inf": "leer", "forms": ["lea", "leas", "lea", "leamos", "leáis", "lean"], "answer": "leamos"}, {"prompt": "No ___ la puerta, por favor.", "inf": "abrir / usted", "forms": ["abra", "abras", "abra", "abramos", "abráis", "abran"], "answer": "abra"}, {"prompt": "Llevo efectivo para que el conductor ___ el pago.", "inf": "aceptar", "forms": ["acepte", "aceptes", "acepte", "aceptemos", "aceptéis", "acepten"], "answer": "acepte"}]};
+
+function makeSelect(id, forms) {
+  return `<select id="${id}"><option value="">— выбрать —</option>${forms.map(f => `<option value="${f}">${f}</option>`).join('')}</select>`;
+}
+function makeWarmupSelect(id, forms, answer) {
+  return `<select class="subj-select" id="${id}" data-answer="${answer}"><option value="">— выбрать —</option>${forms.map(f => `<option value="${f}">${f}</option>`).join('')}</select>`;
+}
+function escapeHtml(str) { return String(str).replace(/[&<>"]/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[s])); }
+function tip(text, tipText) { return `<span class="tip" tabindex="0">${escapeHtml(text)}<span class="tiptext">${escapeHtml(tipText)}</span></span>`; }
+
+function renderWarmups() {
+  const el = document.getElementById('warmupList');
+  if (!el) return;
+  el.innerHTML = DATA.warmups.map((w,i) => {
+    const n = String(i+1).padStart(2,'0');
+    return `<div class="item warm-item">
+      <span class="num">${n}.</span> ${escapeHtml(w.prompt).replace('___', makeWarmupSelect('warm_'+i, w.forms, w.answer))}
+      <span class="inf">(${escapeHtml(w.inf)})</span>
+    </div>`;
+  }).join('');
+}
+function checkWarmups() {
+  let ok=0;
+  DATA.warmups.forEach((w,i)=>{
+    const s=document.getElementById('warm_'+i); const fb=document.getElementById('warmfb_'+i);
+    if(s.value===w.answer){ ok++; fb.innerHTML='✓ Правильно'; fb.className='feedback ok'; }
+    else { fb.innerHTML=`✗ Правильный ответ: <strong>${w.answer}</strong>`; fb.className='feedback no'; }
+  });
+  const result = document.getElementById('warmupResult'); if (result) result.textContent = `Разминка: ${ok} / ${DATA.warmups.length}.`;
+}
+function resetWarmups() {
+  DATA.warmups.forEach((w,i)=>{ document.getElementById('warm_'+i).value=''; document.getElementById('warmfb_'+i).textContent=''; });
+  const result = document.getElementById('warmupResult'); if (result) result.textContent='Результат появится здесь.';
+}
+
+function cardHTML(v, i) {
+  const lowerText = `${v.trigger} ${v.ru} ${v.pattern} ${v.example} ${v.prompt} ${v.ru_task}`.toLowerCase();
+  return `<article class="verb-card" data-search="${escapeHtml(lowerText)}">
+    <div class="verb-head">
+      <div class="icon">${v.icon}</div>
+      <div>
+        <div class="verb-title"><strong>${escapeHtml(v.trigger)}</strong><span class="ru">${escapeHtml(v.ru)}</span></div>
+        <span class="pattern">${escapeHtml(v.pattern)}</span>
+      </div>
+    </div>
+    <div class="verb-body">
+      <p><strong>Правило:</strong> после <strong>${escapeHtml(v.trigger)}</strong> в данной конструкции употребляется <strong>Presente de Subjuntivo</strong>.</p>
+      ${v.note ? `<div class="small-note">NB: ${escapeHtml(v.note)}</div>` : ''}
+      <div class="exercise-box"><span class="label">① ejemplo</span><br>${tip(v.example, v.ex_ru)}</div>
+      <div class="exercise-box"><span class="label">② elegir forma</span><br>
+        ${escapeHtml(v.prompt).replace('___', makeSelect('sel_'+i, v.forms))} <span class="inf">(${escapeHtml(v.inf)})</span>
+        <div id="fb_${i}" class="feedback"></div>
+      </div>
+      <div class="exercise-box"><span class="label">③ traducir al español</span><br>
+        <span>${escapeHtml(v.ru_task)}</span><br>
+        <span style="color:#64748b; font-size:14px;">Ответ: наведите курсор → </span>${tip('ver respuesta', v.translation)}
+      </div>
+    </div>
+  </article>`;
+}
+
+function renderCards() {
+  const q = document.getElementById('search').value.trim().toLowerCase();
+  const cards = DATA.verbs.map((v,i)=>cardHTML(v,i)).join('');
+  const container=document.getElementById('cards');
+  container.innerHTML = cards;
+  let visible=0;
+  [...container.children].forEach(card=>{
+    const show = !q || card.dataset.search.includes(q);
+    card.style.display = show ? '' : 'none';
+    if(show) visible++;
+  });
+  document.getElementById('counter').textContent = `${visible} / ${DATA.verbs.length} карточек`;
+}
+
+function checkAll() {
+  let ok=0, attempted=0;
+  DATA.verbs.forEach((v,i)=>{
+    const sel=document.getElementById('sel_'+i); const fb=document.getElementById('fb_'+i);
+    if(!sel) return;
+    if(sel.value) attempted++;
+    if(sel.value===v.answer){ ok++; fb.innerHTML='✓ Правильно'; fb.className='feedback ok'; }
+    else { fb.innerHTML=`✗ Правильный ответ: <strong>${v.answer}</strong>`; fb.className='feedback no'; }
+  });
+  document.getElementById('globalResult').textContent = `Карточки: ${ok} / ${DATA.verbs.length}. Заполнено: ${attempted}.`;
+}
+function showAnswers() {
+  DATA.verbs.forEach((v,i)=>{ const sel=document.getElementById('sel_'+i); if(sel) sel.value=v.answer; });
+  checkAll();
+}
+function resetAll() {
+  DATA.verbs.forEach((v,i)=>{
+    const sel=document.getElementById('sel_'+i); const fb=document.getElementById('fb_'+i);
+    if(sel) sel.value=''; if(fb) fb.textContent='';
+  });
+  document.getElementById('globalResult').textContent='Выберите формы в карточках и нажмите «Проверить все карточки».';
+}
+
+renderWarmups();
+renderCards();
+</script></body>
+</html>

@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Viaje por los tiempos — Repaso oral ELE A1–A2</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+<style>
+:root{
+  --ink:#243247;
+  --paper:#fffdf8;
+  --cream:#fff6de;
+  --mint:#e7f7ef;
+  --sky:#eaf4ff;
+  --peach:#ffe9dc;
+  --lav:#f0ebff;
+  --rose:#ffeaf1;
+  --accent:#6b63d9;
+  --accent2:#ef7d63;
+  --green:#2e8b67;
+  --line:#dcd9d2;
+  --shadow:0 12px 30px rgba(36,50,71,.12);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Inter, ui-rounded, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(circle at 10% 0%, #fff1c9 0 14%, transparent 15%),
+    radial-gradient(circle at 90% 5%, #e7f1ff 0 12%, transparent 13%),
+    var(--paper);
+  line-height:1.5;
+}
+header{
+  padding:28px 18px 12px;
+  max-width:1180px;
+  margin:auto;
+}
+.hero{
+  border:1px solid #ece8df;
+  border-radius:28px;
+  background:rgba(255,255,255,.9);
+  box-shadow:var(--shadow);
+  padding:24px;
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  gap:24px;
+  align-items:center;
+  overflow:hidden;
+  position:relative;
+}
+.hero h1{
+  margin:0 0 10px;
+  font-size:clamp(2rem,4vw,4.1rem);
+  line-height:1.02;
+  letter-spacing:-.04em;
+}
+.hero p{
+  font-size:1.05rem;
+  max-width:720px;
+  margin:0;
+}
+.badges{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:16px;
+}
+.badge{
+  padding:7px 11px;
+  border-radius:999px;
+  font-weight:700;
+  font-size:.9rem;
+  border:1px solid rgba(36,50,71,.08);
+}
+.b1{background:var(--mint)}
+.b2{background:var(--sky)}
+.b3{background:var(--peach)}
+.b4{background:var(--lav)}
+nav{
+  max-width:1180px;
+  margin:14px auto 0;
+  padding:0 18px;
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  position:sticky;
+  top:6px;
+  z-index:5;
+}
+nav a{
+  text-decoration:none;
+  color:var(--ink);
+  background:white;
+  border:1px solid #e5e0d8;
+  border-radius:999px;
+  padding:8px 12px;
+  box-shadow:0 4px 14px rgba(36,50,71,.07);
+  font-weight:700;
+  font-size:.9rem;
+}
+main{
+  max-width:1180px;
+  margin:18px auto 70px;
+  padding:0 18px;
+}
+.section{
+  margin-top:22px;
+  border-radius:26px;
+  border:1px solid #e7e3dc;
+  box-shadow:var(--shadow);
+  overflow:hidden;
+  background:#fff;
+}
+.section-head{
+  padding:20px 22px;
+  display:flex;
+  align-items:flex-start;
+  gap:16px;
+}
+.num{
+  width:48px;height:48px;
+  min-width:48px;
+  border-radius:16px;
+  display:grid;
+  place-items:center;
+  font-weight:900;
+  font-size:1.15rem;
+  background:var(--ink);
+  color:white;
+}
+.section h2{margin:0 0 4px;font-size:1.55rem}
+.section .lead{margin:0;color:#5d6878}
+.content{padding:0 22px 22px}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+}
+.card{
+  border:1px solid #e5e0d8;
+  border-radius:20px;
+  padding:16px;
+  background:#fffdfa;
+}
+.card h3{margin:0 0 8px}
+.card p{margin:.4rem 0}
+.prompt{
+  min-height:118px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:18px;
+  border-radius:18px;
+  font-weight:800;
+  font-size:1.15rem;
+  border:2px dashed rgba(36,50,71,.18);
+  background:white;
+}
+.controls{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+button{
+  border:0;
+  border-radius:14px;
+  padding:10px 14px;
+  font:inherit;
+  font-weight:800;
+  cursor:pointer;
+  background:var(--ink);
+  color:#fff;
+  box-shadow:0 5px 0 rgba(36,50,71,.18);
+}
+button:hover{transform:translateY(-1px)}
+button:active{transform:translateY(2px);box-shadow:none}
+button.alt{background:var(--accent)}
+button.warm{background:var(--accent2)}
+.chips{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:10px;
+}
+.chip{
+  background:#f6f3ee;
+  border:1px solid #e4dfd7;
+  padding:7px 10px;
+  border-radius:999px;
+  font-size:.92rem;
+}
+.tip{
+  margin-top:12px;
+  padding:12px 14px;
+  border-left:5px solid var(--accent);
+  background:#f8f7ff;
+  border-radius:12px;
+}
+.examples{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:10px;
+  margin-top:12px;
+}
+.ex{
+  padding:12px;
+  border-radius:15px;
+  border:1px solid #e4e0d9;
+  font-size:.92rem;
+}
+.ex strong{display:block;margin-bottom:4px}
+.timeline{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
+  margin-top:14px;
+}
+.time{
+  text-align:center;
+  padding:10px 8px;
+  border-radius:14px;
+  font-weight:800;
+  border:1px solid #e4e0d9;
+}
+.t-pres{background:var(--mint)}
+.t-perf{background:var(--sky)}
+.t-ind{background:var(--peach)}
+.t-imp{background:var(--lav)}
+.scene{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:12px;
+}
+.scene-card{
+  min-height:190px;
+  border-radius:20px;
+  padding:16px;
+  border:1px solid #e6e0d9;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+.emoji{
+  font-size:3rem;
+  line-height:1;
+}
+.scene-card h3{margin:.4rem 0}
+.scene-card small{color:#617084}
+.score{
+  display:inline-flex;
+  gap:8px;
+  align-items:center;
+  padding:8px 10px;
+  background:#f6f3ee;
+  border-radius:12px;
+  font-weight:700;
+}
+.hidden{display:none}
+details{
+  margin-top:12px;
+  border:1px solid #e4e0d9;
+  border-radius:14px;
+  padding:10px 12px;
+  background:#fff;
+}
+summary{cursor:pointer;font-weight:800}
+footer{
+  max-width:1180px;
+  margin:0 auto 40px;
+  padding:0 18px;
+  color:#657185;
+  text-align:center;
+}
+.kicker{
+  font-size:.78rem;
+  font-weight:900;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--accent);
+}
+svg{max-width:100%;height:auto}
+@media(max-width:850px){
+  .hero{grid-template-columns:1fr}
+  .grid,.examples,.scene{grid-template-columns:1fr}
+  .timeline{grid-template-columns:1fr 1fr}
+  nav{position:static}
+}
+@media print{
+  nav,button{display:none!important}
+  .section,.hero{box-shadow:none;break-inside:avoid}
+  body{background:white}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="hero">
+    <div>
+      <div class="kicker">ELE · A1–A2 · Expresión oral</div>
+      <h1>Viaje por los tiempos</h1>
+      <p>Un recorrido de conversación para recordar el presente, hablar de experiencias, contar hechos del pasado y describir cómo eran las cosas.</p>
+      <div class="badges">
+        <span class="badge b1">Presente</span>
+        <span class="badge b2">Pretérito perfecto</span>
+        <span class="badge b3">Pretérito indefinido</span>
+        <span class="badge b4">Pretérito imperfecto</span>
+      </div>
+    </div>
+    <div aria-hidden="true">
+      <svg viewBox="0 0 420 300" role="img">
+        <rect x="18" y="28" width="384" height="238" rx="30" fill="#fff6de"/>
+        <circle cx="92" cy="102" r="48" fill="#e7f7ef"/>
+        <circle cx="327" cy="85" r="38" fill="#eaf4ff"/>
+        <path d="M80 174c36-42 82-56 130-38 48 18 65 74 114 83" fill="none" stroke="#6b63d9" stroke-width="11" stroke-linecap="round" stroke-dasharray="2 24"/>
+        <g transform="translate(54 67)">
+          <rect width="78" height="64" rx="16" fill="#fff"/>
+          <path d="M21 64l10-13h22l9 13" fill="#fff"/>
+          <circle cx="25" cy="29" r="5" fill="#243247"/>
+          <circle cx="42" cy="29" r="5" fill="#243247"/>
+          <circle cx="59" cy="29" r="5" fill="#243247"/>
+        </g>
+        <g transform="translate(257 52)">
+          <rect width="105" height="70" rx="18" fill="#fff"/>
+          <path d="M70 70l12 17 2-17" fill="#fff"/>
+          <text x="52" y="44" text-anchor="middle" font-size="28" font-family="sans-serif">¡Hola!</text>
+        </g>
+        <g transform="translate(157 128)">
+          <circle cx="53" cy="53" r="49" fill="#ffe9dc"/>
+          <circle cx="53" cy="53" r="34" fill="#fff"/>
+          <path d="M53 53V29M53 53l21 11" stroke="#243247" stroke-width="6" stroke-linecap="round"/>
+          <circle cx="53" cy="53" r="5" fill="#243247"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <a href="#mapa">Mapa rápido</a>
+  <a href="#actividad1">1. Radar personal</a>
+  <a href="#actividad2">2. Pasaporte</a>
+  <a href="#actividad3">3. Foto misteriosa</a>
+  <a href="#actividad4">4. Antes y ahora</a>
+  <a href="#actividad5">5. Noticia imposible</a>
+  <a href="#actividad6">6. Entrevista final</a>
+</nav>
+
+<main>
+<section class="section" id="mapa">
+  <div class="section-head">
+    <div class="num">★</div>
+    <div>
+      <h2>Mapa rápido de los cuatro tiempos</h2>
+      <p class="lead">Úsalo como apoyo antes de empezar a hablar.</p>
+    </div>
+  </div>
+  <div class="content">
+    <div class="timeline">
+      <div class="time t-pres">AHORA<br><small>Presente</small></div>
+      <div class="time t-perf">PASADO + HOY<br><small>Pretérito perfecto</small></div>
+      <div class="time t-ind">PASADO CERRADO<br><small>Indefinido</small></div>
+      <div class="time t-imp">DESCRIPCIÓN / HÁBITO<br><small>Imperfecto</small></div>
+    </div>
+    <div class="examples">
+      <div class="ex t-pres"><strong>Presente</strong>Vivo cerca del centro. Trabajo por la mañana.</div>
+      <div class="ex t-perf"><strong>Perfecto</strong>Esta semana he visto una película española.</div>
+      <div class="ex t-ind"><strong>Indefinido</strong>Ayer fui al mercado y compré fruta.</div>
+      <div class="ex t-imp"><strong>Imperfecto</strong>De niño vivía en un pueblo y jugaba en la calle.</div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="actividad1" style="background:linear-gradient(180deg,#f7fff9,#fff)">
+  <div class="section-head">
+    <div class="num">1</div>
+    <div>
+      <h2>Radar personal</h2>
+      <p class="lead">Habla de tu vida actual y descubre coincidencias.</p>
+    </div>
+  </div>
+  <div class="content grid">
+    <div class="card">
+      <h3>Tu misión</h3>
+      <p>Lee una tarjeta. Responde con dos o tres frases. Después, formula una pregunta relacionada a otra persona.</p>
+      <div class="tip"><strong>Objetivo:</strong> usar el presente para hábitos, gustos, rutinas y opiniones simples.</div>
+      <div class="chips">
+        <span class="chip">normalmente</span><span class="chip">todos los días</span><span class="chip">a veces</span><span class="chip">nunca</span><span class="chip">me gusta</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Tarjeta</h3>
+      <div class="prompt" id="presentPrompt">¿Qué haces normalmente después de cenar?</div>
+      <div class="controls">
+        <button onclick="newPresent()">Nueva tarjeta</button>
+        <button class="alt" onclick="showFollow('presentFollow')">Pregunta extra</button>
+      </div>
+      <p id="presentFollow" class="tip hidden"></p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="actividad2" style="background:linear-gradient(180deg,#f5faff,#fff)">
+  <div class="section-head">
+    <div class="num">2</div>
+    <div>
+      <h2>Pasaporte de experiencias</h2>
+      <p class="lead">Busca experiencias compartidas y pide detalles.</p>
+    </div>
+  </div>
+  <div class="content">
+    <div class="grid">
+      <div class="card">
+        <h3>Cómo se juega</h3>
+        <p>Elige una experiencia. Pregunta: <strong>«¿Alguna vez has…?»</strong>. Si la respuesta es sí, pide un detalle. Si la respuesta es no, cambia de experiencia.</p>
+        <div class="tip">Para ampliar: <strong>¿Cuándo?</strong> · <strong>¿Dónde?</strong> · <strong>¿Con quién?</strong> · <strong>¿Te gustó?</strong></div>
+      </div>
+      <div class="card">
+        <h3>Experiencia al azar</h3>
+        <div class="prompt" id="perfectPrompt">¿Alguna vez has cocinado un plato de otro país?</div>
+        <div class="controls">
+          <button onclick="newPerfect()">Otra experiencia</button>
+          <button class="alt" onclick="document.getElementById('perfectHelp').classList.toggle('hidden')">Ayuda</button>
+        </div>
+        <div id="perfectHelp" class="tip hidden">Empieza con <strong>he / has / ha / hemos / han + participio</strong>. Ejemplo: «Sí, he probado comida peruana».</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="actividad3" style="background:linear-gradient(180deg,#fff8f2,#fff)">
+  <div class="section-head">
+    <div class="num">3</div>
+    <div>
+      <h2>La foto misteriosa</h2>
+      <p class="lead">Inventa lo que pasó antes, durante y después de una escena.</p>
+    </div>
+  </div>
+  <div class="content">
+    <div class="scene">
+      <div class="scene-card" style="background:#fff3de">
+        <div class="emoji" id="sceneEmoji">🚌</div>
+        <div>
+          <h3 id="scenePlace">Una parada de autobús</h3>
+          <small>¿Dónde estaban? ¿Cómo era el lugar?</small>
+        </div>
+      </div>
+      <div class="scene-card" style="background:#eef7ff">
+        <div class="emoji" id="scenePerson">🧳</div>
+        <div>
+          <h3 id="sceneCharacter">Una persona con una maleta</h3>
+          <small>¿Qué hacía? ¿Cómo se sentía?</small>
+        </div>
+      </div>
+      <div class="scene-card" style="background:#f5efff">
+        <div class="emoji" id="sceneEvent">📱</div>
+        <div>
+          <h3 id="sceneAction">Sonó un teléfono</h3>
+          <small>¿Qué ocurrió después?</small>
+        </div>
+      </div>
+    </div>
+    <div class="controls">
+      <button class="warm" onclick="newScene()">Nueva escena</button>
+    </div>
+    <div class="tip"><strong>Reto:</strong> describe el fondo con imperfecto y cuenta la acción principal con indefinido. Ejemplo: «Llovía y había mucha gente. De repente, llegó un taxi».</div>
+  </div>
+</section>
+
+<section class="section" id="actividad4" style="background:linear-gradient(180deg,#faf7ff,#fff)">
+  <div class="section-head">
+    <div class="num">4</div>
+    <div>
+      <h2>Antes y ahora</h2>
+      <p class="lead">Compara costumbres del pasado con la vida actual.</p>
+    </div>
+  </div>
+  <div class="content grid">
+    <div class="card">
+      <h3>Tema</h3>
+      <div class="prompt" id="beforePrompt">La forma de escuchar música</div>
+      <div class="controls">
+        <button onclick="newBefore()">Cambiar tema</button>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Habla con contraste</h3>
+      <p><strong>Antes:</strong> «Cuando era pequeño/a…», «Antes la gente…», «En mi familia…»</p>
+      <p><strong>Ahora:</strong> «Ahora…», «Hoy…», «En cambio…»</p>
+      <div class="tip">Incluye al menos una costumbre en imperfecto y una frase en presente.</div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="actividad5" style="background:linear-gradient(180deg,#fff6f8,#fff)">
+  <div class="section-head">
+    <div class="num">5</div>
+    <div>
+      <h2>Noticia imposible</h2>
+      <p class="lead">Crea una mini noticia oral con tres piezas al azar.</p>
+    </div>
+  </div>
+  <div class="content grid">
+    <div class="card">
+      <h3>Titular</h3>
+      <div class="prompt" id="newsPrompt">Un turista encontró un pingüino en una biblioteca.</div>
+      <div class="controls">
+        <button class="warm" onclick="newNews()">Nuevo titular</button>
+      </div>
+    </div>
+    <div class="card">
+      <h3>La noticia debe responder</h3>
+      <p>¿Dónde ocurrió? ¿Qué hacía la gente? ¿Qué pasó exactamente? ¿Cómo terminó?</p>
+      <div class="tip"><strong>Clave:</strong> imperfecto para la escena; indefinido para los hechos principales.</div>
+      <details>
+        <summary>Modelo breve</summary>
+        <p>«Era una tarde tranquila y varias personas estudiaban. De repente, un turista abrió una puerta y encontró un pingüino. Todos llamaron a la policía y el animal volvió al zoológico».</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="actividad6" style="background:linear-gradient(180deg,#f5fff9,#fff)">
+  <div class="section-head">
+    <div class="num">6</div>
+    <div>
+      <h2>Entrevista: cuatro tiempos, una persona</h2>
+      <p class="lead">Cierra el recorrido con preguntas que mezclan todos los tiempos.</p>
+    </div>
+  </div>
+  <div class="content">
+    <div class="grid">
+      <div class="card">
+        <h3>Pregunta</h3>
+        <div class="prompt" id="mixedPrompt">¿Qué haces los fines de semana?</div>
+        <div class="controls">
+          <button onclick="newMixed()">Otra pregunta</button>
+          <button class="alt" onclick="addMixed()">Añadir una segunda</button>
+        </div>
+        <p id="mixedExtra" class="tip hidden"></p>
+      </div>
+      <div class="card">
+        <h3>Escucha activa</h3>
+        <p>Después de cada respuesta, formula una pregunta breve para obtener más información.</p>
+        <div class="chips">
+          <span class="chip">¿Por qué?</span>
+          <span class="chip">¿Con quién?</span>
+          <span class="chip">¿Y después?</span>
+          <span class="chip">¿Cómo era?</span>
+          <span class="chip">¿Cuándo fue?</span>
+          <span class="chip">¿Te ha pasado otra vez?</span>
+        </div>
+        <div class="tip">La conversación vale más que la respuesta perfecta. Corrige solo lo necesario para que el mensaje quede claro.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:linear-gradient(180deg,#fffaf0,#fff)">
+  <div class="section-head">
+    <div class="num">✓</div>
+    <div>
+      <h2>Salida rápida</h2>
+      <p class="lead">Elige una frase y complétala oralmente.</p>
+    </div>
+  </div>
+  <div class="content">
+    <div class="examples">
+      <div class="ex t-pres"><strong>Hoy...</strong>Ahora normalmente yo...</div>
+      <div class="ex t-perf"><strong>Últimamente...</strong>Esta semana he...</div>
+      <div class="ex t-ind"><strong>Un día...</strong>Ayer / el año pasado...</div>
+      <div class="ex t-imp"><strong>Antes...</strong>Cuando era pequeño/a...</div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <strong>Viaje por los tiempos</strong> · Repaso oral ELE A1–A2
+</footer>
+
+<script>
+const pick = arr => arr[Math.floor(Math.random()*arr.length)];
+
+const present = [
+  "¿Qué haces normalmente después de cenar?",
+  "¿Qué comida preparas bien?",
+  "¿Cómo vas normalmente a clase o al trabajo?",
+  "¿Qué haces cuando tienes un día libre?",
+  "¿Qué música escuchas con frecuencia?",
+  "¿Qué aplicación usas más y para qué?",
+  "¿Qué haces para descansar?",
+  "¿Qué compras normalmente en el supermercado?",
+  "¿Qué lugar de tu ciudad visitas con frecuencia?",
+  "¿Qué no haces nunca por la mañana?"
+];
+const presentFollow = [
+  "Pregunta extra: ¿Por qué?",
+  "Pregunta extra: ¿Con quién lo haces normalmente?",
+  "Pregunta extra: ¿Dónde?",
+  "Pregunta extra: ¿Qué prefieres: hacerlo solo/a o acompañado/a?",
+  "Pregunta extra: ¿Qué día de la semana lo haces más?"
+];
+function newPresent(){
+  document.getElementById("presentPrompt").textContent = pick(present);
+  document.getElementById("presentFollow").classList.add("hidden");
+}
+function showFollow(id){
+  const el=document.getElementById(id);
+  el.textContent=pick(presentFollow);
+  el.classList.remove("hidden");
+}
+
+const perfect = [
+  "¿Alguna vez has cocinado un plato de otro país?",
+  "¿Alguna vez has perdido algo importante?",
+  "¿Alguna vez has hablado con una persona famosa?",
+  "¿Alguna vez has viajado solo/a?",
+  "¿Alguna vez has probado una comida muy extraña?",
+  "¿Alguna vez has olvidado un cumpleaños?",
+  "¿Alguna vez has visto una película española?",
+  "¿Alguna vez has cantado delante de otras personas?",
+  "¿Alguna vez has aprendido algo por internet?",
+  "¿Alguna vez has dormido en un lugar poco habitual?"
+];
+function newPerfect(){document.getElementById("perfectPrompt").textContent=pick(perfect);}
+
+const places=[
+  ["🚌","Una parada de autobús"],
+  ["🏖️","Una playa casi vacía"],
+  ["☕","Una cafetería pequeña"],
+  ["🏨","La recepción de un hotel"],
+  ["🌳","Un parque al final de la tarde"],
+  ["🚉","Una estación de tren"]
+];
+const people=[
+  ["🧳","Una persona con una maleta"],
+  ["👵","Una señora con un paraguas"],
+  ["🧑‍🍳","Un cocinero fuera de su restaurante"],
+  ["🎸","Un músico con una guitarra"],
+  ["🕵️","Una persona con gafas oscuras"],
+  ["👧","Una niña con un mapa"]
+];
+const events=[
+  ["📱","Sonó un teléfono"],
+  ["🐕","Apareció un perro"],
+  ["💡","Se apagaron las luces"],
+  ["🎁","Alguien dejó una caja"],
+  ["🚕","Llegó un taxi muy rápido"],
+  ["📣","Una persona gritó un nombre"]
+];
+function newScene(){
+  const a=pick(places),b=pick(people),c=pick(events);
+  document.getElementById("sceneEmoji").textContent=a[0];
+  document.getElementById("scenePlace").textContent=a[1];
+  document.getElementById("scenePerson").textContent=b[0];
+  document.getElementById("sceneCharacter").textContent=b[1];
+  document.getElementById("sceneEvent").textContent=c[0];
+  document.getElementById("sceneAction").textContent=c[1];
+}
+
+const before = [
+  "La forma de escuchar música",
+  "Los juegos de la infancia",
+  "La forma de ver películas",
+  "Las vacaciones familiares",
+  "La comunicación con los amigos",
+  "La escuela",
+  "Las compras",
+  "Los teléfonos",
+  "La comida en casa",
+  "El tiempo libre"
+];
+function newBefore(){document.getElementById("beforePrompt").textContent=pick(before);}
+
+const subj=["Un turista","Una abuela","Un estudiante","Un camarero","Una cantante","Un taxista","Un profesor","Una médica"];
+const verbs=["encontró","perdió","compró","descubrió","recibió","vio","llevó","olvidó"];
+const obj=[
+  "un pingüino en una biblioteca",
+  "una maleta llena de naranjas",
+  "un mapa dentro de un pastel",
+  "un perro con gafas de sol",
+  "una carta escrita hace cien años",
+  "una bicicleta en un ascensor",
+  "un sombrero que costaba un euro",
+  "un mensaje secreto en un menú"
+];
+function newNews(){
+  document.getElementById("newsPrompt").textContent=`${pick(subj)} ${pick(verbs)} ${pick(obj)}.`;
+}
+
+const mixed = [
+  "¿Qué haces los fines de semana?",
+  "¿Qué has hecho esta semana que te ha gustado?",
+  "¿Qué hiciste el último fin de semana?",
+  "¿Cómo era tu escuela cuando eras pequeño/a?",
+  "¿Qué comida comes con frecuencia?",
+  "¿Has visitado alguna ciudad que te ha sorprendido?",
+  "¿Qué hiciste ayer por la tarde?",
+  "¿Qué juegos te gustaban cuando eras niño/a?",
+  "¿Qué actividad haces para relajarte?",
+  "¿Has aprendido algo nuevo este mes?",
+  "¿Cuál fue un día especial del año pasado?",
+  "¿Cómo era tu barrio hace algunos años?"
+];
+function newMixed(){
+  document.getElementById("mixedPrompt").textContent=pick(mixed);
+  document.getElementById("mixedExtra").classList.add("hidden");
+}
+function addMixed(){
+  const el=document.getElementById("mixedExtra");
+  el.textContent="Segunda pregunta: "+pick(mixed);
+  el.classList.remove("hidden");
+}
+</script>
+</body>
+</html>
