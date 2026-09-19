@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unidad 11 · ¿Quieres ser millonario? · Interrogativos</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+<style>
+  :root{
+    --navy:#0e1b3a;
+    --navy-2:#13234a;
+    --panel:#ffffff;
+    --panel-soft:#f4f1e9;
+    --ink:#1c2333;
+    --ink-soft:#55607a;
+    --gold:#e0a93c;
+    --gold-deep:#b9831f;
+    --line:#d8d2c4;
+    --ok:#2e8b62;
+    --ok-bg:#e3f3ea;
+    --no:#c0504a;
+    --no-bg:#f8e7e5;
+    --chip:#fbf7ee;
+    --shadow:0 10px 30px rgba(8,18,42,.18);
+    --radius:14px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family:"Iowan Old Style",Georgia,"Times New Roman",serif;
+    color:var(--ink);
+    background:
+      radial-gradient(1200px 600px at 50% -10%, #1c3060 0%, var(--navy) 60%) fixed;
+    line-height:1.55;
+    padding:0 0 80px;
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:0 18px}
+
+  /* ---------- Cabecera ---------- */
+  header.hero{
+    text-align:center;
+    color:#fff;
+    padding:46px 18px 30px;
+  }
+  .hero .unit{
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    letter-spacing:.32em;
+    font-size:.72rem;
+    text-transform:uppercase;
+    color:var(--gold);
+    font-weight:700;
+  }
+  .hero h1{
+    margin:.25em 0 .15em;
+    font-size:clamp(1.9rem,5vw,3rem);
+    font-weight:700;
+    letter-spacing:.01em;
+  }
+  .hero h1 .glow{color:var(--gold);text-shadow:0 0 22px rgba(224,169,60,.45)}
+  .hero p{
+    margin:.4em auto 0;max-width:560px;color:#c7d0e6;
+    font-family:"Helvetica Neue",Arial,sans-serif;font-size:.95rem;
+  }
+
+  /* ---------- Marcador ---------- */
+  .scoreboard{
+    position:sticky;top:0;z-index:30;
+    background:rgba(14,27,58,.86);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid rgba(224,169,60,.35);
+    color:#fff;
+    font-family:"Helvetica Neue",Arial,sans-serif;
+  }
+  .scoreboard .row{
+    max-width:880px;margin:0 auto;padding:10px 18px;
+    display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  }
+  .scoreboard .label{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:#c7d0e6}
+  .scoreboard .value{font-size:1.15rem;font-weight:700}
+  .scoreboard .value .gold{color:var(--gold)}
+  .bar{flex:1;min-width:160px;height:9px;background:rgba(255,255,255,.14);border-radius:99px;overflow:hidden}
+  .bar > span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold-deep),var(--gold));transition:width .5s ease}
+
+  /* ---------- Tarjetas de ejercicio ---------- */
+  section.card{
+    background:var(--panel);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    margin:22px 0;
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,.4);
+  }
+  .card > h2{
+    margin:0;
+    display:flex;align-items:center;gap:14px;
+    padding:18px 22px;
+    background:linear-gradient(100deg,var(--navy),var(--navy-2));
+    color:#fff;font-size:1.12rem;
+  }
+  .card > h2 .num{
+    flex:none;width:38px;height:38px;border-radius:10px;
+    display:grid;place-items:center;
+    background:var(--gold);color:var(--navy);font-weight:800;
+    font-family:"Helvetica Neue",Arial,sans-serif;
+  }
+  .card > h2 small{
+    display:block;font-size:.74rem;font-weight:400;color:#c7d0e6;
+    font-family:"Helvetica Neue",Arial,sans-serif;letter-spacing:.02em;margin-top:2px;
+  }
+  .card .body{padding:20px 22px 24px}
+
+  /* ---------- Ejercicio 1: arrastrar ---------- */
+  .hint{
+    font-family:"Helvetica Neue",Arial,sans-serif;font-size:.86rem;
+    color:var(--ink-soft);background:var(--panel-soft);
+    border-left:3px solid var(--gold);border-radius:8px;
+    padding:10px 14px;margin:0 0 16px;
+  }
+  .bank{
+    display:flex;flex-wrap:wrap;gap:10px;
+    padding:14px;margin:0 0 20px;
+    background:var(--panel-soft);
+    border:1px dashed var(--line);border-radius:12px;
+    min-height:64px;
+  }
+  .bank:empty::after{
+    content:"Todas las preguntas colocadas";
+    color:var(--ink-soft);font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:.85rem;font-style:italic;
+  }
+  .chip{
+    cursor:grab;user-select:none;
+    background:var(--chip);
+    border:1px solid var(--line);
+    border-radius:99px;
+    padding:8px 15px;
+    font-size:.95rem;
+    box-shadow:0 2px 5px rgba(8,18,42,.08);
+    transition:transform .12s ease, box-shadow .12s ease, border-color .12s;
+    touch-action:manipulation;
+  }
+  .chip:hover{transform:translateY(-1px);box-shadow:0 5px 12px rgba(8,18,42,.16)}
+  .chip:active{cursor:grabbing}
+  .chip.selected{border-color:var(--gold);box-shadow:0 0 0 3px rgba(224,169,60,.35);transform:translateY(-1px)}
+  .chip.dragging{opacity:.45}
+
+  .qrow{
+    display:flex;align-items:center;gap:12px;
+    padding:11px 0;border-bottom:1px solid #eee;
+  }
+  .qrow:last-child{border-bottom:none}
+  .qrow .n{
+    flex:none;width:26px;height:26px;border-radius:50%;
+    background:var(--navy);color:#fff;font-size:.8rem;font-weight:700;
+    display:grid;place-items:center;font-family:"Helvetica Neue",Arial,sans-serif;
+  }
+  .slot{
+    flex:none;width:min(46%,330px);min-height:42px;
+    border:2px dashed var(--line);border-radius:10px;
+    display:flex;align-items:center;gap:6px;
+    padding:5px;background:#fafafa;
+    transition:border-color .15s, background .15s;
+  }
+  .slot.over{border-color:var(--gold);background:var(--panel-soft)}
+  .slot .chip{margin:0;cursor:grab}
+  .slot.ph::before{
+    content:"Suelta aquí la pregunta";
+    color:#b7b0a0;font-family:"Helvetica Neue",Arial,sans-serif;font-size:.82rem;
+    padding:0 8px;font-style:italic;
+  }
+  .slot.ok{border-style:solid;border-color:var(--ok);background:var(--ok-bg)}
+  .slot.no{border-style:solid;border-color:var(--no);background:var(--no-bg)}
+  .answer{flex:1;font-style:italic;color:var(--ink-soft)}
+  .answer u{text-decoration-color:var(--gold);text-decoration-thickness:2px}
+
+  .qrow.example{background:var(--ok-bg);border-radius:10px;padding:11px 10px;border-bottom:none}
+  .qrow.example .slot{border-style:solid;border-color:var(--ok);background:#fff}
+  .tag-ej{
+    font-family:"Helvetica Neue",Arial,sans-serif;font-size:.64rem;font-weight:700;
+    text-transform:uppercase;letter-spacing:.1em;color:var(--ok);
+  }
+
+  /* ---------- Ejercicios 2-4: frases con desplegable ---------- */
+  ol.items{list-style:none;counter-reset:it;margin:0;padding:0}
+  ol.items > li{
+    counter-increment:it;
+    display:flex;gap:12px;align-items:baseline;
+    padding:10px 0;border-bottom:1px solid #f0eee8;
+    font-size:1.04rem;
+  }
+  ol.items > li:last-child{border-bottom:none}
+  ol.items > li::before{
+    content:counter(it);
+    flex:none;width:26px;height:26px;border-radius:50%;
+    background:var(--panel-soft);color:var(--navy);
+    font-size:.8rem;font-weight:700;
+    display:grid;place-items:center;font-family:"Helvetica Neue",Arial,sans-serif;
+    border:1px solid var(--line);
+  }
+  ol.items > li .q{flex:1}
+  select{
+    font-family:inherit;font-size:1rem;
+    padding:5px 30px 5px 11px;
+    border:2px solid var(--gold-deep);border-radius:8px;
+    background:#fffdf7 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' fill='none' stroke='%23b9831f' stroke-width='2' stroke-linecap='round'/></svg>") no-repeat right 9px center;
+    appearance:none;-webkit-appearance:none;
+    color:var(--ink);font-weight:600;cursor:pointer;
+    margin:0 3px;vertical-align:baseline;
+  }
+  select:focus{outline:none;box-shadow:0 0 0 3px rgba(224,169,60,.35)}
+  select.ok{border-color:var(--ok);background-color:var(--ok-bg)}
+  select.no{border-color:var(--no);background-color:var(--no-bg)}
+  li.solved .q{font-style:italic}
+  .ex-given{color:var(--ok);font-weight:700}
+
+  /* ---------- Botones / pie de tarjeta ---------- */
+  .actions{
+    display:flex;gap:10px;flex-wrap:wrap;align-items:center;
+    margin-top:20px;
+  }
+  button.btn{
+    font-family:"Helvetica Neue",Arial,sans-serif;font-weight:700;font-size:.92rem;
+    border:none;border-radius:10px;padding:11px 20px;cursor:pointer;
+    transition:transform .1s ease, filter .15s ease;
+  }
+  button.btn:active{transform:translateY(1px)}
+  .btn.check{background:linear-gradient(100deg,var(--gold-deep),var(--gold));color:var(--navy)}
+  .btn.check:hover{filter:brightness(1.05)}
+  .btn.ghost{background:transparent;color:var(--navy);border:2px solid var(--line)}
+  .btn.ghost:hover{border-color:var(--navy)}
+  .feedback{
+    font-family:"Helvetica Neue",Arial,sans-serif;font-size:.92rem;font-weight:600;
+    margin-left:auto;
+  }
+  .feedback.ok{color:var(--ok)}
+  .feedback.partial{color:var(--gold-deep)}
+
+  /* ---------- Ejercicio 5: tarjetas para voltear ---------- */
+  .deck{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
+    gap:14px;margin-top:4px;
+  }
+  .flip-card{
+    perspective:1100px;height:212px;cursor:pointer;
+    border:none;background:none;padding:0;
+  }
+  .flip-card:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:16px}
+  .flip-inner{
+    position:relative;width:100%;height:100%;
+    transition:transform .55s cubic-bezier(.4,.1,.2,1);
+    transform-style:preserve-3d;
+  }
+  .flip-card.flipped .flip-inner{transform:rotateY(180deg)}
+  .flip-face{
+    position:absolute;inset:0;
+    -webkit-backface-visibility:hidden;backface-visibility:hidden;
+    border-radius:16px;overflow:hidden;
+    display:flex;flex-direction:column;
+  }
+  /* dorso */
+  .flip-face.cover{
+    background:
+      radial-gradient(120% 90% at 50% 0%, #21366a 0%, var(--navy) 70%);
+    border:2px solid var(--gold-deep);
+    align-items:center;justify-content:center;text-align:center;color:#fff;
+    box-shadow:var(--shadow);
+  }
+  .cover-num{
+    position:absolute;top:10px;left:12px;
+    font-family:"Helvetica Neue",Arial,sans-serif;font-weight:800;
+    color:var(--gold);font-size:.95rem;letter-spacing:.05em;
+  }
+  .cover-q{font-size:3.6rem;color:var(--gold);text-shadow:0 0 22px rgba(224,169,60,.5);line-height:1}
+  .cover-label{
+    position:absolute;bottom:12px;left:0;right:0;
+    font-family:"Helvetica Neue",Arial,sans-serif;font-size:.72rem;
+    letter-spacing:.12em;text-transform:uppercase;color:#9fb0d6;
+  }
+  /* cara con preguntas */
+  .flip-face.content{
+    transform:rotateY(180deg);
+    background:var(--panel);
+    border:2px solid var(--gold);
+    padding:14px 14px 12px;text-align:left;
+    box-shadow:var(--shadow);
+  }
+  .flip-face.content .ic{font-size:1.6rem;line-height:1}
+  .flip-face.content h3{
+    margin:4px 0 8px;font-size:1rem;color:var(--navy);
+    border-bottom:2px solid var(--gold);padding-bottom:6px;
+  }
+  .flip-face.content ul{
+    margin:0;padding-left:18px;
+    font-size:.84rem;line-height:1.32;color:var(--ink);
+  }
+  .flip-face.content li{margin-bottom:6px}
+  .flip-face.content li::marker{color:var(--gold-deep)}
+
+  footer.foot{text-align:center;color:#9fb0d6;font-family:"Helvetica Neue",Arial,sans-serif;font-size:.8rem;margin-top:24px}
+
+  @media (max-width:620px){
+    .qrow{flex-wrap:wrap}
+    .slot{width:100%}
+    .answer{flex-basis:100%;padding-left:38px}
+    ol.items > li{font-size:1rem}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none!important;scroll-behavior:auto!important}
+  }
+</style>
+</head>
+<body>
+
+<div class="scoreboard">
+  <div class="row">
+    <div>
+      <div class="label">Tu premio</div>
+      <div class="value"><span class="gold" id="score">0</span> / <span id="total">0</span> aciertos</div>
+    </div>
+    <div class="bar"><span id="bar"></span></div>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="unit">Unidad 11 · Nivel A2</div>
+    <h1>¿Quieres ser <span class="glow">millonario?</span></h1>
+    <p>Los interrogativos en español. Arrastra, selecciona y comprueba. Cada acierto suma a tu marcador.</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ============ EJERCICIO 1 ============ -->
+  <section class="card" id="card1">
+    <h2><span class="num">1</span>
+      <span>Forma las preguntas para obtener la información subrayada
+        <small>Arrastra cada pregunta hasta la respuesta que le corresponde (o toca la pregunta y luego el hueco).</small>
+      </span>
+    </h2>
+    <div class="body">
+      <div class="hint">Existe más de una forma correcta de preguntar. Este ejercicio usa una pregunta modelo para cada respuesta.</div>
+
+      <div class="bank" id="bank" aria-label="Banco de preguntas"></div>
+
+      <div id="ex1rows"></div>
+
+      <div class="actions">
+        <button class="btn check" data-check="1">Comprobar</button>
+        <button class="btn ghost" data-reset="1">Reiniciar</button>
+        <span class="feedback" id="fb1"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ EJERCICIO 2 ============ -->
+  <section class="card" id="card2">
+    <h2><span class="num">2</span>
+      <span>Completa las preguntas con <em>cuánto, cuánta, cuántos, cuántas</em>
+        <small>Concuerda en género y número con el sustantivo; ante un verbo, usa la forma invariable.</small>
+      </span>
+    </h2>
+    <div class="body">
+      <ol class="items" id="ex2"></ol>
+      <div class="actions">
+        <button class="btn check" data-check="2">Comprobar</button>
+        <button class="btn ghost" data-reset="2">Reiniciar</button>
+        <span class="feedback" id="fb2"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ EJERCICIO 3 ============ -->
+  <section class="card" id="card3">
+    <h2><span class="num">3</span>
+      <span>Elige la forma adecuada: <em>qué</em> o <em>cuál</em>
+        <small>Ante un sustantivo, <em>qué</em>. Ante un verbo y con selección entre opciones definidas, <em>cuál</em>.</small>
+      </span>
+    </h2>
+    <div class="body">
+      <ol class="items" id="ex3"></ol>
+      <div class="actions">
+        <button class="btn check" data-check="3">Comprobar</button>
+        <button class="btn ghost" data-reset="3">Reiniciar</button>
+        <span class="feedback" id="fb3"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ EJERCICIO 4 ============ -->
+  <section class="card" id="card4">
+    <h2><span class="num">4</span>
+      <span>Elige la palabra correcta
+        <small>Selecciona el interrogativo que completa cada pregunta.</small>
+      </span>
+    </h2>
+    <div class="body">
+      <ol class="items" id="ex4"></ol>
+      <div class="actions">
+        <button class="btn check" data-check="4">Comprobar</button>
+        <button class="btn ghost" data-reset="4">Reiniciar</button>
+        <span class="feedback" id="fb4"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ EJERCICIO 5 ============ -->
+  <section class="card" id="card5">
+    <h2><span class="num">5</span>
+      <span>Tarjetas: habla de fechas y cantidades
+        <small>Elige una tarjeta y púlsala para girarla. Responde en voz alta a las preguntas, todas relacionadas entre sí.</small>
+      </span>
+    </h2>
+    <div class="body">
+      <div class="hint">Di los años y los números completos en español (por ejemplo: <em>mil novecientos noventa y ocho</em>). Pulsa de nuevo la tarjeta para volver a girarla.</div>
+      <div class="deck" id="deck"></div>
+      <div class="actions">
+        <button class="btn ghost" id="deck-reset">Barajar las tarjetas</button>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">Material de Español como Lengua Extranjera · Unidad 11 · A2</footer>
+</main>
+
+<script>
+/* =================== DATOS =================== */
+
+// Ejercicio 1: respuesta + pregunta modelo
+const EX1 = [
+  {id:"q2",  answer:"Fui al <u>Museo de Ciencias</u>.",                                  q:"¿Adónde fuiste?"},
+  {id:"q3",  answer:"<u>Ángel</u> arregló el reloj.",                                     q:"¿Quién arregló el reloj?"},
+  {id:"q4",  answer:"Hicieron <u>pescado</u> para cenar.",                                q:"¿Qué hicieron para cenar?"},
+  {id:"q5",  answer:"Nos vamos de vacaciones a <u>Nueva York</u>.",                       q:"¿Adónde os vais de vacaciones?"},
+  {id:"q6",  answer:"<u>Rosa y Pablo</u> fueron al zoo.",                                  q:"¿Quiénes fueron al zoo?"},
+  {id:"q7",  answer:"Susana sabe tocar <u>el piano</u>.",                                  q:"¿Qué sabe tocar Susana?"},
+  {id:"q8",  answer:"Lorena viene <u>la semana próxima</u>.",                              q:"¿Cuándo viene Lorena?"},
+  {id:"q9",  answer:"El helado está <u>en el congelador</u>.",                             q:"¿Dónde está el helado?"},
+  {id:"q10", answer:"El partido es <u>a las once de la mañana</u>.",                       q:"¿A qué hora es el partido?"},
+  {id:"q11", answer:"Me gusta <u>la música clásica</u>.",                                  q:"¿Qué música te gusta?"},
+  {id:"q12", answer:"Normalmente ceno <u>a las diez de la noche</u>.",                     q:"¿A qué hora cenas?"},
+  {id:"q13", answer:"Vinieron a verme <u>mis amigos de Jaén</u>.",                         q:"¿Quiénes vinieron a verte?"}
+];
+const EX1_EXAMPLE = {answer:"Pedro está comprando <u>una bicicleta nueva</u>.", q:"¿Qué está comprando Pedro?"};
+
+// Ejercicio 2: cuánto/a/os/as
+const EX2_OPTS = ["Cuánto","Cuánta","Cuántos","Cuántas"];
+const EX2 = [
+  {pre:"", post:"alumnos hay en tu clase", answer:"Cuántos", given:true},
+  {pre:"", post:"agua bebes al día", answer:"Cuánta"},
+  {pre:"", post:"películas viste el mes pasado", answer:"Cuántas"},
+  {pre:"", post:"cuesta un televisor de plasma", answer:"Cuánto"},
+  {pre:"", post:"plátanos hay en la nevera", answer:"Cuántos"},
+  {pre:"", post:"personas había en el estadio", answer:"Cuántas"},
+  {pre:"", post:"partidos de baloncesto ganó España en las Olimpiadas", answer:"Cuántos"},
+  {pre:"", post:"fruta comes al día", answer:"Cuánta"},
+  {pre:"", post:"kilómetros andas a la semana", answer:"Cuántos"},
+  {pre:"", post:"correos electrónicos envías cada semana", answer:"Cuántos"},
+  {pre:"", post:"tiempo dura un partido de tenis", answer:"Cuánto"}
+];
+
+// Ejercicio 3: qué / cuál
+const EX3_OPTS = ["Qué","Cuál"];
+const EX3 = [
+  {post:"chaqueta te gusta más: la verde o la azul", answer:"Qué", given:true},
+  {post:"deporte te gusta más: el fútbol o el baloncesto", answer:"Qué"},
+  {post:"ciudad prefieres: Córdoba o Sevilla", answer:"Qué"},
+  {post:"quieres para cenar: pescado o carne", answer:"Qué"},
+  {post:"libro tienes que leer", answer:"Qué"},
+  {post:"prefieres: éste o aquél", answer:"Cuál"},
+  {post:"es el número de teléfono de Ricardo", answer:"Cuál"},
+  {post:"quieres para tu cumpleaños: un libro o un CD", answer:"Qué"}
+];
+
+// Ejercicio 4: opción correcta
+const EX4 = [
+  {post:"naranjas compraste", opts:["Qué","Cuántas","Cuál"], answer:"Cuántas", given:true},
+  {post:"tipo de música prefieres", opts:["Cómo","Cuál","Qué"], answer:"Qué"},
+  {post:"vive tu prima", opts:["Dónde","Cuándo","Cuál"], answer:"Dónde"},
+  {post:"llegaste a Chile", opts:["Qué","Dónde","Cuándo"], answer:"Cuándo"},
+  {post:"periódico lees habitualmente", opts:["Cómo","Qué","Cuál"], answer:"Qué"},
+  {post:"te gusta más: éste o aquél", opts:["Cuál","Qué","Cómo"], answer:"Cuál"}
+];
+
+/* =================== UTILES =================== */
+const $ = (s,el=document)=>el.querySelector(s);
+const $$ = (s,el=document)=>[...el.querySelectorAll(s)];
+function shuffle(a){const r=a.slice();for(let i=r.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[r[i],r[j]]=[r[j],r[i]];}return r;}
+
+/* =================== EJERCICIO 1 (arrastrar) =================== */
+const bank = $("#bank");
+const rowsWrap = $("#ex1rows");
+
+// fila de ejemplo
+rowsWrap.insertAdjacentHTML("beforeend", `
+  <div class="qrow example">
+    <span class="n">✓</span>
+    <div class="slot ok"><span class="chip" style="cursor:default">${EX1_EXAMPLE.q}</span></div>
+    <div class="answer">${EX1_EXAMPLE.answer} <span class="tag-ej">ejemplo</span></div>
+  </div>`);
+
+// filas reales (numeradas 2..13 como en el original)
+EX1.forEach((it,i)=>{
+  rowsWrap.insertAdjacentHTML("beforeend", `
+    <div class="qrow">
+      <span class="n">${i+2}</span>
+      <div class="slot ph" data-target="${it.id}"></div>
+      <div class="answer">${it.answer}</div>
+    </div>`);
+});
+
+// fichas en el banco (mezcladas)
+function buildChips(){
+  bank.innerHTML="";
+  shuffle(EX1).forEach(it=>{
+    const c=document.createElement("div");
+    c.className="chip"; c.draggable=true; c.dataset.id=it.id; c.textContent=it.q;
+    bank.appendChild(c);
+  });
+}
+buildChips();
+
+let selected=null;
+function clearSel(){if(selected){selected.classList.remove("selected");selected=null;}}
+
+function placeChip(chip,slot){
+  // si el hueco ya tiene ficha, esa vuelve al banco
+  const existing=slot.querySelector(".chip");
+  if(existing&&existing!==chip) bank.appendChild(existing);
+  slot.appendChild(chip);
+  refreshSlots();
+}
+function refreshSlots(){
+  $$(".slot[data-target]").forEach(s=>{
+    s.classList.remove("ok","no","over");
+    s.classList.toggle("ph", !s.querySelector(".chip"));
+  });
+}
+
+// --- arrastrar (escritorio) ---
+document.addEventListener("dragstart",e=>{
+  const c=e.target.closest(".chip");
+  if(!c||!c.draggable){e.preventDefault();return;}
+  if(c.closest(".example")){e.preventDefault();return;}
+  c.classList.add("dragging");
+  e.dataTransfer.setData("text/plain",c.dataset.id);
+  e.dataTransfer.effectAllowed="move";
+});
+document.addEventListener("dragend",e=>{
+  const c=e.target.closest(".chip"); if(c)c.classList.remove("dragging");
+});
+function allowDrop(zone){
+  zone.addEventListener("dragover",e=>{e.preventDefault();zone.classList.add("over");});
+  zone.addEventListener("dragleave",()=>zone.classList.remove("over"));
+  zone.addEventListener("drop",e=>{
+    e.preventDefault();zone.classList.remove("over");
+    const id=e.dataTransfer.getData("text/plain");
+    const chip=$(`.chip[data-id="${id}"]`);
+    if(!chip)return;
+    if(zone===bank){bank.appendChild(chip);refreshSlots();}
+    else placeChip(chip,zone);
+  });
+}
+$$(".slot[data-target]").forEach(allowDrop);
+allowDrop(bank);
+
+// --- tocar (móvil / accesible) ---
+document.addEventListener("click",e=>{
+  const chip=e.target.closest(".chip");
+  const slot=e.target.closest(".slot[data-target]");
+  const inBank=e.target.closest("#bank");
+
+  if(chip&&!chip.closest(".example")){
+    if(chip.parentElement.matches(".slot")){ // sacar del hueco
+      bank.appendChild(chip); refreshSlots(); clearSel(); return;
+    }
+    if(selected===chip){clearSel();return;}
+    clearSel(); selected=chip; chip.classList.add("selected"); return;
+  }
+  if(slot&&selected){ placeChip(selected,slot); clearSel(); return; }
+  if(inBank&&selected&&!chip){ bank.appendChild(selected); refreshSlots(); clearSel(); }
+});
+
+/* =================== EJERCICIOS 2-4 (desplegables) =================== */
+function buildSelectList(containerId, data, opts){
+  const ol=$("#"+containerId);
+  data.forEach((item)=>{
+    const li=document.createElement("li");
+    const optionList = item.opts || opts;
+    if(item.given){
+      li.classList.add("solved");
+      li.innerHTML = `<span class="q">¿<span class="ex-given">${item.answer}</span> ${item.post}? <span class="tag-ej">ejemplo</span></span>`;
+    }else{
+      const sel=document.createElement("select");
+      sel.dataset.answer=item.answer;
+      sel.innerHTML = `<option value="">—</option>` +
+        shuffle(optionList).map(o=>`<option value="${o}">${o}</option>`).join("");
+      const q=document.createElement("span");
+      q.className="q";
+      q.append("¿", sel, " "+item.post+"?");
+      li.appendChild(q);
+    }
+    ol.appendChild(li);
+  });
+}
+buildSelectList("ex2", EX2, EX2_OPTS);
+buildSelectList("ex3", EX3, EX3_OPTS);
+buildSelectList("ex4", EX4, null);
+
+/* =================== COMPROBAR / REINICIAR =================== */
+function checkSelects(containerId){
+  let correct=0,total=0;
+  $$("#"+containerId+" select").forEach(sel=>{
+    total++;
+    sel.classList.remove("ok","no");
+    if(sel.value===sel.dataset.answer){sel.classList.add("ok");correct++;}
+    else if(sel.value!=="") sel.classList.add("no");
+    else sel.classList.add("no");
+  });
+  return {correct,total};
+}
+function checkEx1(){
+  let correct=0;const total=EX1.length;
+  $$(".slot[data-target]").forEach(s=>{
+    s.classList.remove("ok","no");
+    const chip=s.querySelector(".chip");
+    if(chip&&chip.dataset.id===s.dataset.target){s.classList.add("ok");correct++;}
+    else s.classList.add("no");
+  });
+  return {correct,total};
+}
+function setFeedback(id,r){
+  const fb=$("#"+id);fb.classList.remove("ok","partial");
+  if(r.correct===r.total){fb.textContent=`¡Perfecto! ${r.correct}/${r.total}`;fb.classList.add("ok");}
+  else{fb.textContent=`${r.correct}/${r.total} correctas`;fb.classList.add("partial");}
+}
+
+const results={1:0,2:0,3:0,4:0};
+const totals ={1:EX1.length, 2:EX2.filter(x=>!x.given).length, 3:EX3.filter(x=>!x.given).length, 4:EX4.filter(x=>!x.given).length};
+function updateScore(){
+  const got=Object.values(results).reduce((a,b)=>a+b,0);
+  const tot=Object.values(totals).reduce((a,b)=>a+b,0);
+  $("#score").textContent=got; $("#total").textContent=tot;
+  $("#bar").style.width=(tot?got/tot*100:0)+"%";
+}
+$("#total").textContent=Object.values(totals).reduce((a,b)=>a+b,0);
+
+document.addEventListener("click",e=>{
+  const cb=e.target.closest("[data-check]");
+  const rb=e.target.closest("[data-reset]");
+  if(cb){
+    const n=cb.dataset.check;
+    const r = n==="1" ? checkEx1() : checkSelects("ex"+n);
+    results[n]=r.correct; setFeedback("fb"+n,r); updateScore();
+  }
+  if(rb){
+    const n=rb.dataset.reset;
+    if(n==="1"){buildChips();refreshSlots();clearSel();}
+    else $$("#ex"+n+" select").forEach(s=>{s.value="";s.classList.remove("ok","no");});
+    results[n]=0; $("#fb"+n).textContent=""; updateScore();
+  }
+});
+
+refreshSlots();
+updateScore();
+
+/* =================== EJERCICIO 5 (tarjetas para voltear) =================== */
+const CARDS = [
+  {theme:"Tu nacimiento", icon:"🎂", qs:[
+    "¿En qué año naciste?",
+    "¿En qué año nació tu madre?",
+    "¿En qué año nació tu padre?"]},
+  {theme:"Llegada al país", icon:"✈️", qs:[
+    "¿En qué año llegaste a España (o a Argentina)?",
+    "¿En qué año llegó tu familia?",
+    "¿Cuántos años hace que vives aquí?"]},
+  {theme:"El colegio", icon:"🎒", qs:[
+    "¿En qué año empezaste el colegio?",
+    "¿En qué año terminaste los estudios?",
+    "¿En qué año aprendiste a leer?"]},
+  {theme:"El español", icon:"📚", qs:[
+    "¿En qué año empezaste a estudiar español?",
+    "¿Cuántos años hace que lo estudias?"]},
+  {theme:"Tus hermanos", icon:"👧", qs:[
+    "¿En qué año nació tu hermano o hermana mayor?",
+    "¿En qué año nació el menor de la familia?"]},
+  {theme:"Tu casa", icon:"🏠", qs:[
+    "¿En qué año te mudaste a tu casa actual?",
+    "¿En qué año cambiaste de ciudad por última vez?"]},
+  {theme:"La tecnología", icon:"📱", qs:[
+    "¿En qué año tuviste tu primer móvil?",
+    "¿En qué año compraste tu primer ordenador?"]},
+  {theme:"Los viajes", icon:"🌍", qs:[
+    "¿En qué año hiciste tu primer viaje al extranjero?",
+    "¿En qué año volviste a tu país por última vez?"]},
+  {theme:"El trabajo", icon:"💼", qs:[
+    "¿En qué año empezaste a trabajar?",
+    "¿En qué año conseguiste tu primer empleo?"]},
+  {theme:"Un año especial", icon:"⭐", qs:[
+    "¿Cuál fue un año importante para ti?",
+    "¿Qué pasó ese año?",
+    "¿En qué año esperas un acontecimiento importante?"]}
+];
+
+const DECK = $("#deck");
+function buildDeck(){
+  DECK.innerHTML="";
+  shuffle(CARDS).forEach((c,i)=>{
+    const el=document.createElement("button");
+    el.className="flip-card";
+    el.type="button";
+    el.setAttribute("aria-label","Tarjeta "+(i+1)+": "+c.theme);
+    el.innerHTML=`
+      <div class="flip-inner">
+        <div class="flip-face cover">
+          <span class="cover-num">${i+1}</span>
+          <span class="cover-q">?</span>
+          <span class="cover-label">Pulsa para girar</span>
+        </div>
+        <div class="flip-face content">
+          <span class="ic">${c.icon}</span>
+          <h3>${c.theme}</h3>
+          <ul>${c.qs.map(q=>`<li>${q}</li>`).join("")}</ul>
+        </div>
+      </div>`;
+    DECK.appendChild(el);
+  });
+}
+buildDeck();
+DECK.addEventListener("click",e=>{
+  const card=e.target.closest(".flip-card");
+  if(card) card.classList.toggle("flipped");
+});
+$("#deck-reset").addEventListener("click",buildDeck);
+</script>
+</body>
+</html>

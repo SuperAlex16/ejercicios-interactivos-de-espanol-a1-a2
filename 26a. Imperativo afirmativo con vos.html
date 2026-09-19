@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Imperativo afirmativo: reglas y ejercicios interactivos</title>
+  <style>
+    :root {
+      --bg: #f7f4ee;
+      --card: #ffffff;
+      --ink: #2b2926;
+      --muted: #68635d;
+      --line: #dfd6ca;
+      --accent: #5b4636;
+      --accent-soft: #efe6dc;
+      --ok: #1d7a45;
+      --bad: #b13a2e;
+      --warn: #9b6b00;
+      --shadow: 0 12px 30px rgba(35, 27, 19, 0.08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      background: linear-gradient(180deg, var(--bg), #fffaf4);
+      color: var(--ink);
+      line-height: 1.55;
+    }
+    header {
+      padding: 44px 22px 26px;
+      text-align: center;
+      background: #f0e8dd;
+      border-bottom: 1px solid var(--line);
+    }
+    header h1 {
+      margin: 0 auto 12px;
+      max-width: 920px;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      letter-spacing: -0.02em;
+      line-height: 1.08;
+    }
+    header p {
+      margin: 0 auto;
+      max-width: 880px;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+    main {
+      width: min(1120px, calc(100% - 32px));
+      margin: 28px auto 64px;
+    }
+    .toc {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .toc a {
+      display: block;
+      padding: 14px 16px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      color: var(--accent);
+      text-decoration: none;
+      box-shadow: var(--shadow);
+      font-weight: 700;
+    }
+    section {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      padding: 26px;
+      margin: 22px 0;
+    }
+    h2 {
+      margin: 0 0 14px;
+      font-size: 1.75rem;
+      color: var(--accent);
+    }
+    h3 {
+      margin: 24px 0 10px;
+      color: var(--accent);
+      font-size: 1.25rem;
+    }
+    .rule-grid, .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(235px, 1fr));
+      gap: 14px;
+    }
+    .rule {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 16px;
+      background: #fffdf9;
+    }
+    .rule strong {
+      color: var(--accent);
+    }
+    .note {
+      background: var(--accent-soft);
+      border-left: 5px solid var(--accent);
+      border-radius: 14px;
+      padding: 14px 16px;
+      margin: 16px 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0;
+      overflow: hidden;
+      border-radius: 14px;
+    }
+    th, td {
+      border: 1px solid var(--line);
+      padding: 10px 12px;
+      vertical-align: top;
+    }
+    th {
+      background: #efe6dc;
+      color: var(--accent);
+      text-align: left;
+    }
+    tbody tr:nth-child(even) { background: #fffaf4; }
+    .small { font-size: 0.94rem; color: var(--muted); }
+    .exercise-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      justify-content: space-between;
+      margin: 6px 0 18px;
+    }
+    .progress {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .pill {
+      border: 1px solid var(--line);
+      background: #fffaf4;
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    button {
+      border: 0;
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-family: inherit;
+      font-weight: 700;
+      cursor: pointer;
+      background: var(--accent);
+      color: white;
+      box-shadow: 0 6px 14px rgba(91, 70, 54, 0.18);
+    }
+    button.secondary {
+      background: #fffaf4;
+      color: var(--accent);
+      border: 1px solid var(--line);
+      box-shadow: none;
+    }
+    button:hover { filter: brightness(0.98); }
+    .items {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    .item {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 14px;
+      background: #fffdf9;
+    }
+    .item-row {
+      display: grid;
+      grid-template-columns: minmax(220px, 1fr) minmax(180px, 310px);
+      gap: 12px;
+      align-items: center;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px 12px;
+      font-family: inherit;
+      font-size: 1rem;
+      border: 1px solid #cdbfad;
+      border-radius: 12px;
+      background: #fff;
+      color: var(--ink);
+    }
+    input:focus, select:focus {
+      outline: 3px solid #e8d9c8;
+      border-color: var(--accent);
+    }
+    .feedback {
+      margin-top: 8px;
+      min-height: 1.35em;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+    .ok { color: var(--ok); }
+    .bad { color: var(--bad); }
+    .warn { color: var(--warn); }
+    .hidden { display: none; }
+    .answer {
+      display: inline-block;
+      margin-left: 6px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .grid-ex {
+      overflow-x: auto;
+    }
+    .grid-ex input {
+      min-width: 120px;
+    }
+    details {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 14px 16px;
+      background: #fffdf9;
+      margin: 12px 0;
+    }
+    summary {
+      cursor: pointer;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    footer {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto 40px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    @media (max-width: 720px) {
+      section { padding: 18px; }
+      .item-row { grid-template-columns: 1fr; }
+      header { text-align: left; }
+    }
+    @media print {
+      button, input, select, .toc, .exercise-head { display: none !important; }
+      body { background: white; }
+      section { box-shadow: none; page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Imperativo afirmativo: reglas y ejercicios interactivos</h1>
+    <p>Material de práctica para las formas de <strong>vos</strong>, <strong>tú</strong>, <strong>usted</strong>, <strong>ustedes</strong>, <strong>vosotros</strong> y la forma exhortativa de <strong>nosotros</strong>.</p>
+  </header>
+
+  <main>
+    <nav class="toc" aria-label="Índice">
+      <a href="#reglas">1. Правила</a>
+      <a href="#tablas">2. Tablas de referencia</a>
+      <a href="#conjugar">3. Conjugación guiada</a>
+      <a href="#oraciones">4. Oraciones</a>
+    </nav>
+
+    <section id="reglas">
+      <h2>1. Правила образования</h2>
+      <div class="rule-grid">
+        <div class="rule">
+          <strong>Vos</strong>
+          <p>В утвердительном повелительном наклонении форма <em>vos</em> обычно имеет ударение на последнем слоге: <em>cortá</em>, <em>comé</em>, <em>abrí</em>. С присоединёнными местоимениями форма обычно пишется без графического ударения, если ударение падает на предпоследний слог: <em>lavate</em>, <em>levantate</em>, <em>dormite</em>.</p>
+        </div>
+        <div class="rule">
+          <strong>Tú</strong>
+          <p>У правильных глаголов форма <em>tú</em> совпадает с третьим лицом единственного числа настоящего времени изъявительного наклонения: <em>corta</em>, <em>come</em>, <em>abre</em>. У некоторых глаголов есть особые формы: <em>di</em>, <em>haz</em>, <em>pon</em>, <em>ten</em>, <em>sal</em>, <em>ven</em>, <em>sé</em>.</p>
+        </div>
+        <div class="rule">
+          <strong>Usted</strong>
+          <p>Форма <em>usted</em> образуется от настоящего времени сослагательного наклонения: <em>corte</em>, <em>coma</em>, <em>abra</em>, <em>vuelva</em>, <em>pida</em>. У возвратных глаголов местоимение присоединяется к концу глагольной формы: <em>lávese</em>, <em>levántese</em>.</p>
+        </div>
+        <div class="rule">
+          <strong>Ustedes</strong>
+          <p>Форма <em>ustedes</em> также строится на основе настоящего времени сослагательного наклонения, но во множественном числе: <em>corten</em>, <em>coman</em>, <em>abran</em>, <em>vuelvan</em>, <em>pidan</em>. У возвратных глаголов: <em>lávense</em>, <em>levántense</em>.</p>
+        </div>
+        <div class="rule">
+          <strong>Vosotros</strong>
+          <p>Форма <em>vosotros</em> характерна главным образом для Испании. В утвердительном повелительном наклонении она обычно образуется заменой конечного <em>-r</em> инфинитива на <em>-d</em>: <em>cortad</em>, <em>comed</em>, <em>abrid</em>. У возвратных глаголов перед местоимением <em>-os</em> конечная <em>-d</em> обычно исчезает: <em>lavaos</em>, <em>levantaos</em>, <em>dormíos</em>.</p>
+        </div>
+      </div>
+      <div class="note">
+        <strong>Nosotros.</strong> В этих материалах для формы <em>nosotros</em> отрабатывается перифрастическая конструкция <em>vamos a + infinitivo</em>: <em>Vamos a hacer</em>, <em>Vamos a comer</em>, <em>Vamos a empezar la clase</em>.
+      </div>
+      <details>
+        <summary>Примечание об ударениях</summary>
+        <p>Упражнение принимает точный ответ и предупреждает, если глагольная форма написана правильно, но пропущен знак ударения. В испанском языке графическое ударение является частью нормативного письма, поэтому следует писать <em>lávate</em>, <em>duérmete</em>, <em>cepíllese</em> и подобные формы.</p><p>Для <em>irse</em> в форме <em>vosotros</em> в учебной норме используется <em>idos</em>; форма <em>iros</em> широко употребляется и также признаётся академической нормой.</p>
+      </details>
+    </section>
+
+    <section id="tablas">
+      <h2>2. Tablas de referencia</h2>
+
+      <h3>Verbos de conjugación regular o con cambio vocálico</h3>
+      <div class="grid-ex">
+        <table>
+          <thead>
+            <tr>
+              <th>Verbo</th>
+              <th>Vos</th>
+              <th>Tú</th>
+              <th>Usted</th>
+              <th>Ustedes</th>
+              <th>Vosotros</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Cortar</td><td>cortá</td><td>corta</td><td>corte</td><td>corten</td><td>cortad</td></tr>
+            <tr><td>Comer</td><td>comé</td><td>come</td><td>coma</td><td>coman</td><td>comed</td></tr>
+            <tr><td>Abrir</td><td>abrí</td><td>abre</td><td>abra</td><td>abran</td><td>abrid</td></tr>
+            <tr><td>Empezar</td><td>empezá</td><td>empieza</td><td>empiece</td><td>empiecen</td><td>empezad</td></tr>
+            <tr><td>Volver</td><td>volvé</td><td>vuelve</td><td>vuelva</td><td>vuelvan</td><td>volved</td></tr>
+            <tr><td>Pedir</td><td>pedí</td><td>pide</td><td>pida</td><td>pidan</td><td>pedid</td></tr>
+            <tr><td>Lavarse</td><td>lavate</td><td>lávate</td><td>lávese</td><td>lávense</td><td>lavaos</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Verbos de conjugación individual</h3>
+      <div class="grid-ex">
+        <table>
+          <thead>
+            <tr>
+              <th>Verbo</th>
+              <th>Vos</th>
+              <th>Tú</th>
+              <th>Usted</th>
+              <th>Ustedes</th>
+              <th>Vosotros</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Irse</td><td>vete</td><td>vete</td><td>váyase</td><td>váyanse</td><td>idos</td></tr>
+            <tr><td>Ser</td><td>sé</td><td>sé</td><td>sea</td><td>sean</td><td>sed</td></tr>
+            <tr><td>Decir</td><td>decí</td><td>di</td><td>diga</td><td>digan</td><td>decid</td></tr>
+            <tr><td>Hacer</td><td>hace</td><td>haz</td><td>haga</td><td>hagan</td><td>haced</td></tr>
+            <tr><td>Poner</td><td>poné</td><td>pon</td><td>ponga</td><td>pongan</td><td>poned</td></tr>
+            <tr><td>Tener</td><td>tené</td><td>ten</td><td>tenga</td><td>tengan</td><td>tened</td></tr>
+            <tr><td>Salir</td><td>salí</td><td>sal</td><td>salga</td><td>salgan</td><td>salid</td></tr>
+            <tr><td>Venir</td><td>vení</td><td>ven</td><td>venga</td><td>vengan</td><td>venid</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="conjugar">
+      <h2>3. Conjugación guiada</h2>
+      <p>Complete las formas de imperativo afirmativo. En <em>nosotros</em>, use <em>Vamos a + infinitivo</em> cuando aparezca en los ejercicios.</p>
+      <div class="exercise-head">
+        <div class="progress">
+          <span class="pill">Aciertos: <span id="gridScore">0</span></span>
+          <span class="pill">Total: <span id="gridTotal">0</span></span>
+        </div>
+        <div>
+          <button type="button" onclick="checkGrid()">Corregir conjugación</button>
+          <button type="button" class="secondary" onclick="showGridAnswers()">Mostrar respuestas</button>
+          <button type="button" class="secondary" onclick="resetSection('grid')">Reiniciar</button>
+        </div>
+      </div>
+      <div class="grid-ex">
+        <table id="gridTable">
+          <thead>
+            <tr>
+              <th>Verbo</th>
+              <th>Vos</th>
+              <th>Tú</th>
+              <th>Usted</th>
+              <th>Ustedes</th>
+              <th>Vosotros</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="oraciones">
+      <h2>4. Oraciones</h2>
+      <p>Escriba la forma adecuada según el sujeto indicado entre paréntesis.</p>
+      <div class="exercise-head">
+        <div class="progress">
+          <span class="pill">Aciertos: <span id="sentScore">0</span></span>
+          <span class="pill">Total: <span id="sentTotal">0</span></span>
+        </div>
+        <div>
+          <button type="button" onclick="checkSentences()">Corregir oraciones</button>
+          <button type="button" class="secondary" onclick="showSentenceAnswers()">Mostrar respuestas</button>
+          <button type="button" class="secondary" onclick="resetSection('sentences')">Reiniciar</button>
+        </div>
+      </div>
+      <div class="items" id="sentenceItems"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Material interactivo elaborado a partir de los apuntes proporcionados sobre el imperativo afirmativo.</p>
+  </footer>
+
+<script>
+
+const gridData = [
+  {verb:"Dormir", answers:["dormí","duerme","duerma","duerman","dormid"]},
+  {verb:"Dormirse", answers:["dormite","duérmete","duérmase","duérmanse","dormíos"]},
+  {verb:"Pasear", answers:["paseá","pasea","pasee","paseen","pasead"]},
+  {verb:"Cepillarse", answers:["cepillate","cepíllate","cepíllese","cepíllense","cepillaos"]},
+  {verb:"Estudiar", answers:["estudiá","estudia","estudie","estudien","estudiad"]},
+  {verb:"Saber", answers:["sabé","sabe","sepa","sepan","sabed"]},
+  {verb:"Trabajar", answers:["trabajá","trabaja","trabaje","trabajen","trabajad"]},
+  {verb:"Llamar", answers:["llamá","llama","llame","llamen","llamad"]},
+  {verb:"Poder", answers:["podé","puede","pueda","puedan","poded"]},
+  {verb:"Hablar", answers:["hablá","habla","hable","hablen","hablad"]},
+  {verb:"Levantarse", answers:["levantate","levántate","levántese","levántense","levantaos"]},
+  {verb:"Querer", answers:["queré","quiere","quiera","quieran","quered"]},
+  {verb:"Vivir", answers:["viví","vive","viva","vivan","vivid"]},
+  {verb:"Cantar", answers:["cantá","canta","cante","canten","cantad"]}
+];
+
+const sentences = [
+  {prompt:"1. (Tú, cortar) ___ las verduras en trozos pequeños.", answers:["corta"]},
+  {prompt:"2. (Usted, abrir) ___ la puerta con cuidado, por favor.", answers:["abra"]},
+  {prompt:"3. (Vos, comer) ___ más frutas y verduras.", answers:["comé"]},
+  {prompt:"4. (Ustedes, empezar) ___ la actividad en grupo ahora.", answers:["empiecen"]},
+  {prompt:"5. (Nosotros, volver) ___ al tema principal de la clase.", answers:["Vamos a volver","vamos a volver"]},
+  {prompt:"6. (Tú, pedir) ___ una bebida en la cafetería.", answers:["pide"]},
+  {prompt:"7. (Usted, lavarse) ___ las manos antes de entrar.", answers:["lávese"]},
+  {prompt:"8. (Vos, dormirse) ___ temprano esta noche.", answers:["dormite"]},
+  {prompt:"9. (Ustedes, pasear) ___ por el centro histórico.", answers:["paseen"]},
+  {prompt:"10. (Nosotros, cepillarnos) ___ los dientes después de comer.", answers:["Vamos a cepillarnos","vamos a cepillarnos"]},
+  {prompt:"11. (Tú, estudiar) ___ para el examen de gramática.", answers:["estudia"]},
+  {prompt:"12. (Usted, saber) ___ que puede contar con nosotros.", answers:["sepa"]},
+  {prompt:"13. (Vos, trabajar) ___ con concentración.", answers:["trabajá"]},
+  {prompt:"14. (Ustedes, llamar) ___ al profesor si tienen dudas.", answers:["llamen"]},
+  {prompt:"15. (Nosotros, poder) ___ resolver esto juntos.", answers:["Vamos a poder","vamos a poder"]},
+  {prompt:"16. (Tú, hablar) ___ con claridad y sin miedo.", answers:["habla"]},
+  {prompt:"17. (Vos, levantarte) ___ ya, que se hace tarde.", answers:["levantate"]},
+  {prompt:"18. (Ustedes, querer) ___ aprender más cada día.", answers:["quieran"]},
+  {prompt:"19. (Usted, vivir) ___ esta experiencia al máximo.", answers:["viva"]},
+  {prompt:"20. (Nosotros, cantar) ___ la canción todos juntos.", answers:["Vamos a cantar","vamos a cantar"]},
+  {prompt:"21. (Vosotros, cortar) ___ el papel con cuidado.", answers:["cortad"]},
+  {prompt:"22. (Vosotros, hacer) ___ la tarea antes de salir.", answers:["haced"]},
+  {prompt:"23. (Vosotros, decir) ___ la verdad con respeto.", answers:["decid"]},
+  {prompt:"24. (Vosotros, levantarse) ___ temprano mañana.", answers:["levantaos"]},
+  {prompt:"25. (Vosotros, venir) ___ a la clase a tiempo.", answers:["venid"]}
+];
+
+function stripAccents(s) {
+  return s.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+function clean(s) {
+  return s.trim().replace(/\s+/g, " ");
+}
+function isExact(user, answers) {
+  const c = clean(user);
+  return answers.some(a => clean(a) === c);
+}
+function isAccentNear(user, answers) {
+  const c = stripAccents(clean(user)).toLowerCase();
+  return answers.some(a => stripAccents(clean(a)).toLowerCase() === c);
+}
+function feedback(el, value, answers) {
+  if (!clean(value)) {
+    el.innerHTML = "Escriba una respuesta.";
+    el.className = "feedback warn";
+    return false;
+  }
+  if (isExact(value, answers)) {
+    el.innerHTML = "Correcto.";
+    el.className = "feedback ok";
+    return true;
+  }
+  if (isAccentNear(value, answers)) {
+    el.innerHTML = "La forma es cercana, pero revise la tilde. Respuesta: <span class='answer'>" + answers[0] + "</span>";
+    el.className = "feedback warn";
+    return false;
+  }
+  el.innerHTML = "Revise la forma. Respuesta: <span class='answer'>" + answers[0] + "</span>";
+  el.className = "feedback bad";
+  return false;
+}
+
+
+function renderGrid() {
+  const tbody = document.querySelector("#gridTable tbody");
+  tbody.innerHTML = "";
+  const headers = ["Vos","Tú","Usted","Ustedes","Vosotros"];
+  gridData.forEach((row, r) => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<th scope="row">${row.verb}</th>` + row.answers.map((a, c) => `
+      <td>
+        <label class="small" for="g-${r}-${c}">${headers[c]}</label>
+        <input id="g-${r}-${c}" data-answer="${a}" autocomplete="off" />
+        <div class="feedback" id="g-fb-${r}-${c}"></div>
+      </td>`).join("");
+    tbody.appendChild(tr);
+  });
+  document.getElementById("gridTotal").textContent = gridData.length * 5;
+}
+
+function checkGrid() {
+  let ok = 0;
+  gridData.forEach((row, r) => {
+    row.answers.forEach((ans, c) => {
+      const input = document.getElementById(`g-${r}-${c}`);
+      const fb = document.getElementById(`g-fb-${r}-${c}`);
+      if (feedback(fb, input.value, [ans])) ok++;
+    });
+  });
+  document.getElementById("gridScore").textContent = ok;
+  announce(`Conjugación: ${ok} de ${gridData.length * 5} respuestas correctas.`);
+}
+
+function showGridAnswers() {
+  gridData.forEach((row, r) => {
+    row.answers.forEach((ans, c) => {
+      const input = document.getElementById(`g-${r}-${c}`);
+      const fb = document.getElementById(`g-fb-${r}-${c}`);
+      input.value = ans;
+      fb.textContent = "Respuesta mostrada.";
+      fb.className = "feedback ok";
+    });
+  });
+  document.getElementById("gridScore").textContent = gridData.length * 5;
+}
+
+function renderSentences() {
+  const wrap = document.getElementById("sentenceItems");
+  wrap.innerHTML = "";
+  sentences.forEach((item, i) => {
+    const div = document.createElement("div");
+    div.className = "item";
+    div.innerHTML = `
+      <div class="item-row">
+        <label for="s-${i}"><strong>${item.prompt}</strong></label>
+        <input id="s-${i}" autocomplete="off" />
+      </div>
+      <div class="feedback" id="s-fb-${i}"></div>`;
+    wrap.appendChild(div);
+  });
+  document.getElementById("sentTotal").textContent = sentences.length;
+}
+
+function checkSentences() {
+  let ok = 0;
+  sentences.forEach((item, i) => {
+    const input = document.getElementById(`s-${i}`);
+    const fb = document.getElementById(`s-fb-${i}`);
+    if (feedback(fb, input.value, item.answers)) ok++;
+  });
+  document.getElementById("sentScore").textContent = ok;
+  announce(`Oraciones: ${ok} de ${sentences.length} respuestas correctas.`);
+}
+
+function showSentenceAnswers() {
+  sentences.forEach((item, i) => {
+    const input = document.getElementById(`s-${i}`);
+    const fb = document.getElementById(`s-fb-${i}`);
+    input.value = item.answers[0];
+    fb.textContent = "Respuesta mostrada.";
+    fb.className = "feedback ok";
+  });
+  document.getElementById("sentScore").textContent = sentences.length;
+}
+
+function resetSection(which) {
+  if (which === "quiz") {
+    quiz.forEach((_, i) => {
+      document.getElementById(`quiz-${i}`).value = "";
+      document.getElementById(`quiz-fb-${i}`).textContent = "";
+      document.getElementById(`quiz-fb-${i}`).className = "feedback";
+    });
+  }
+  if (which === "grid") {
+    gridData.forEach((row, r) => {
+      row.answers.forEach((_, c) => {
+        document.getElementById(`g-${r}-${c}`).value = "";
+        document.getElementById(`g-fb-${r}-${c}`).textContent = "";
+        document.getElementById(`g-fb-${r}-${c}`).className = "feedback";
+      });
+    });
+    document.getElementById("gridScore").textContent = 0;
+  }
+  if (which === "sentences") {
+    sentences.forEach((_, i) => {
+      document.getElementById(`s-${i}`).value = "";
+      document.getElementById(`s-fb-${i}`).textContent = "";
+      document.getElementById(`s-fb-${i}`).className = "feedback";
+    });
+    document.getElementById("sentScore").textContent = 0;
+  }
+}
+
+function announce(text) {
+  let live = document.getElementById("liveRegion");
+  if (!live) {
+    live = document.createElement("div");
+    live.id = "liveRegion";
+    live.setAttribute("aria-live", "polite");
+    live.className = "hidden";
+    document.body.appendChild(live);
+  }
+  live.textContent = text;
+}
+
+renderGrid();
+renderSentences();
+</script>
+</body>
+</html>

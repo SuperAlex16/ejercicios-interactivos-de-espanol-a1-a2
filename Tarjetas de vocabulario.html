@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Карточки — первые слова</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+<style>
+  :root {
+    --bg1: #0d1f3c;
+    --bg2: #1a3a6e;
+    --panel: rgba(255,255,255,.10);
+    --panel-hover: rgba(255,255,255,.18);
+    --border: rgba(255,255,255,.18);
+    --text: #ffffff;
+    --muted: #c8d8f0;
+    --gold: #ffd166;
+    --blue: #7dd3fc;
+    --green: #86efac;
+    --pink: #ff6b9a;
+    --violet: #c084fc;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    min-height: 100vh;
+    font-family: Inter, Arial, Helvetica, sans-serif;
+    color: var(--text);
+    background:
+      radial-gradient(circle at 8% 12%, rgba(255,209,102,.22) 0%, transparent 28%),
+      radial-gradient(circle at 90% 8%, rgba(125,211,252,.20) 0%, transparent 28%),
+      radial-gradient(circle at 50% 100%, rgba(255,107,154,.18) 0%, transparent 30%),
+      linear-gradient(150deg, var(--bg1) 0%, var(--bg2) 100%);
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: radial-gradient(rgba(255,255,255,.06) 1px, transparent 1px);
+    background-size: 28px 28px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 32px 20px 80px;
+  }
+
+  .backlink {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: .85rem;
+    font-weight: 600;
+    padding: 8px 14px;
+    border-radius: 99px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    transition: background .18s, color .18s;
+    margin-bottom: 10px;
+    margin-right: 8px;
+  }
+  .backlink:hover { background: var(--panel-hover); color: #fff; }
+  .backlinks { margin-bottom: 24px; }
+
+  header { text-align: center; margin-bottom: 28px; }
+
+  header h1 {
+    font-size: clamp(1.8rem, 5vw, 2.6rem);
+    font-weight: 800;
+    letter-spacing: -.02em;
+    margin-bottom: 10px;
+    background: linear-gradient(135deg, #fff 30%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  header p {
+    color: var(--muted);
+    font-size: .95rem;
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* Bot call-to-action banner (Notilingo look from banner.png) */
+  .bot-cta {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    padding: 22px 26px;
+    border-radius: 18px;
+    border: 1px solid rgba(34,106,79,.18);
+    background-color: #eef3ec;
+    background-image: url("bot-banner-bg.webp");
+    background-size: cover;
+    background-position: center 82%;
+    background-repeat: no-repeat;
+    box-shadow: 0 10px 30px rgba(0,0,0,.28);
+  }
+  /* soft light veil so text stays readable over the artwork */
+  .bot-cta::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(248,249,247,.92) 0%, rgba(248,249,247,.78) 52%, rgba(248,249,247,.35) 100%);
+    pointer-events: none;
+  }
+  .bot-cta > * { position: relative; z-index: 1; }
+  .bot-cta-logo {
+    flex-shrink: 0;
+    height: 46px;
+    width: auto;
+    display: block;
+  }
+  .bot-cta-body { flex: 1; min-width: 0; }
+  .bot-cta-title {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #1c5a41;
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+  .bot-cta-sub {
+    font-size: .9rem;
+    color: #2f6b52;
+    line-height: 1.5;
+  }
+  .bot-cta-btn {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: .92rem;
+    color: #ffffff;
+    background: linear-gradient(135deg, #2f9e63, #3fae6f);
+    padding: 12px 22px;
+    border-radius: 99px;
+    box-shadow: 0 6px 18px rgba(47,158,99,.35);
+    transition: transform .18s, box-shadow .18s, filter .18s;
+    white-space: nowrap;
+  }
+  .bot-cta-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(47,158,99,.45); filter: brightness(1.05); }
+  @media (max-width: 620px) {
+    .bot-cta { flex-direction: column; text-align: center; gap: 14px; padding: 22px 20px; }
+    .bot-cta::before { background: linear-gradient(180deg, rgba(248,249,247,.92) 0%, rgba(248,249,247,.80) 100%); }
+    .bot-cta-body { text-align: center; }
+    .bot-cta-btn { width: 100%; justify-content: center; }
+  }
+  .bot-cta { max-width: 760px; margin: 0 auto 32px; }
+
+  /* Viewer */
+  .viewer {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    padding: 22px;
+    max-width: 420px;
+    margin: 0 auto 36px;
+    text-align: center;
+    backdrop-filter: blur(4px);
+  }
+  .viewer-stage {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 16px;
+    overflow: hidden;
+    background: rgba(0,0,0,.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
+  }
+  .viewer-stage img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    image-rendering: -webkit-optimize-contrast;
+  }
+  .viewer-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+  }
+  .viewer-controls button {
+    all: unset;
+    cursor: pointer;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--panel-hover);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    transition: background .15s, transform .15s;
+  }
+  .viewer-controls button:hover { background: rgba(255,255,255,.28); transform: scale(1.06); }
+  .viewer-counter {
+    font-size: .85rem;
+    color: var(--muted);
+    min-width: 76px;
+    font-variant-numeric: tabular-nums;
+  }
+  .viewer-actions {
+    margin-top: 12px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+  }
+  .viewer-actions button {
+    font-family: inherit;
+    font-size: .76rem;
+    font-weight: 600;
+    color: var(--text);
+    background: rgba(255,255,255,.08);
+    border: 1px solid var(--border);
+    border-radius: 99px;
+    padding: 6px 14px;
+    cursor: pointer;
+    transition: background .15s;
+  }
+  .viewer-actions button:hover { background: var(--panel-hover); }
+  .viewer-actions button.active { background: rgba(255,209,102,.28); border-color: rgba(255,209,102,.5); color: var(--gold); }
+
+  /* Thumbnail grid */
+  .grid-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .grid-title .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--pink); flex-shrink: 0; }
+
+  .tj-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+    gap: 8px;
+  }
+  .tj-thumb {
+    all: unset;
+    box-sizing: border-box;
+    cursor: pointer;
+    aspect-ratio: 1 / 1;
+    border-radius: 10px;
+    overflow: hidden;
+    background: rgba(0,0,0,.28);
+    border: 2px solid transparent;
+    transition: border-color .15s, transform .15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .tj-thumb:hover { transform: translateY(-2px); }
+  .tj-thumb.active { border-color: var(--gold); }
+  .tj-thumb img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+    pointer-events: none;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+  /* Press-and-hold zoom */
+  .tj-thumb.zoomed {
+    transform: scale(2.6);
+    z-index: 50;
+    border-color: var(--gold);
+    box-shadow: 0 12px 40px rgba(0,0,0,.55);
+    background: #0d1f3c;
+    overflow: visible;
+  }
+
+  footer {
+    margin-top: 56px;
+    padding-bottom: 24px;
+    color: var(--muted);
+    font-size: .8rem;
+    opacity: .6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+  }
+  .footer-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  a.footer-staffilo-name {
+    color: #4a9e3f !important;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .footer-staffilo-logo { height: 28px; width: auto; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="backlinks">
+    <a class="backlink" href="index.html">← На главную</a>
+    <a class="backlink" href="Vocabulario.html">← К вокабуляру</a>
+  </div>
+
+  <header>
+    <h1>Карточки — первые слова</h1>
+    <p>143 карточки «слово + картинка» — самые первые слова, которые стоит выучить. Листайте стрелками, а миниатюру внизу можно увеличить, зажав её. Порядок можно перемешать для тренировки.</p>
+  </header>
+
+  <div class="bot-cta">
+    <img class="bot-cta-logo" src="notilingo-logo.webp" alt="Notilingo">
+    <div class="bot-cta-body">
+      <div class="bot-cta-title">Увидел слово, которое хочешь запомнить?</div>
+      <div class="bot-cta-sub">Отправь его Notilingo — бот сделает карточку и напомнит повторить.</div>
+    </div>
+    <a class="bot-cta-btn" href="https://telegram.me/notilingobot" target="_blank" rel="noopener noreferrer">Открыть в Telegram →</a>
+  </div>
+
+  <div class="viewer">
+    <div class="viewer-stage">
+      <img id="stageImg" src="" alt="Карточка">
+    </div>
+    <div class="viewer-controls">
+      <button type="button" id="prevBtn" aria-label="Назад">‹</button>
+      <span class="viewer-counter" id="counter">1 / 143</span>
+      <button type="button" id="nextBtn" aria-label="Вперёд">›</button>
+    </div>
+    <div class="viewer-actions">
+      <button type="button" id="shuffleBtn">🔀 Перемешать</button>
+      <button type="button" id="orderBtn" class="active">🔢 По порядку</button>
+    </div>
+  </div>
+
+  <div class="grid-title"><span class="dot"></span>Все карточки</div>
+  <div class="tj-grid" id="tjGrid">
+    <button type="button" class="tj-thumb" data-idx="0" aria-label="Карточка 1"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.48.43.jpeg" alt="Карточка 1" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="1" aria-label="Карточка 2"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.48.47.jpeg" alt="Карточка 2" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="2" aria-label="Карточка 3"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.48.49.jpeg" alt="Карточка 3" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="3" aria-label="Карточка 4"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.48.51.jpeg" alt="Карточка 4" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="4" aria-label="Карточка 5"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.48.53.jpeg" alt="Карточка 5" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="5" aria-label="Карточка 6"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.48.55.jpeg" alt="Карточка 6" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="6" aria-label="Карточка 7"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.48.57.jpeg" alt="Карточка 7" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="7" aria-label="Карточка 8"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.48.59.jpeg" alt="Карточка 8" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="8" aria-label="Карточка 9"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.49.01.jpeg" alt="Карточка 9" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="9" aria-label="Карточка 10"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.49.03.jpeg" alt="Карточка 10" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="10" aria-label="Карточка 11"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.49.04.jpeg" alt="Карточка 11" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="11" aria-label="Карточка 12"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.49.06.jpeg" alt="Карточка 12" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="12" aria-label="Карточка 13"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.49.11.jpeg" alt="Карточка 13" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="13" aria-label="Карточка 14"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.49.14.jpeg" alt="Карточка 14" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="14" aria-label="Карточка 15"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.49.16.jpeg" alt="Карточка 15" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="15" aria-label="Карточка 16"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.49.18.jpeg" alt="Карточка 16" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="16" aria-label="Карточка 17"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.49.20.jpeg" alt="Карточка 17" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="17" aria-label="Карточка 18"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.49.25.jpeg" alt="Карточка 18" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="18" aria-label="Карточка 19"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.49.27.jpeg" alt="Карточка 19" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="19" aria-label="Карточка 20"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.49.29.jpeg" alt="Карточка 20" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="20" aria-label="Карточка 21"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.49.31.jpeg" alt="Карточка 21" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="21" aria-label="Карточка 22"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.49.33.jpeg" alt="Карточка 22" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="22" aria-label="Карточка 23"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.49.35.jpeg" alt="Карточка 23" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="23" aria-label="Карточка 24"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.49.37.jpeg" alt="Карточка 24" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="24" aria-label="Карточка 25"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.49.39.jpeg" alt="Карточка 25" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="25" aria-label="Карточка 26"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.49.41.jpeg" alt="Карточка 26" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="26" aria-label="Карточка 27"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.49.43.jpeg" alt="Карточка 27" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="27" aria-label="Карточка 28"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.49.45.jpeg" alt="Карточка 28" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="28" aria-label="Карточка 29"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.49.48.jpeg" alt="Карточка 29" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="29" aria-label="Карточка 30"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.49.50.jpeg" alt="Карточка 30" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="30" aria-label="Карточка 31"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.49.52.jpeg" alt="Карточка 31" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="31" aria-label="Карточка 32"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.49.54.jpeg" alt="Карточка 32" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="32" aria-label="Карточка 33"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.49.56.jpeg" alt="Карточка 33" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="33" aria-label="Карточка 34"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.49.58.jpeg" alt="Карточка 34" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="34" aria-label="Карточка 35"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.50.00.jpeg" alt="Карточка 35" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="35" aria-label="Карточка 36"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.50.02.jpeg" alt="Карточка 36" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="36" aria-label="Карточка 37"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.50.04.jpeg" alt="Карточка 37" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="37" aria-label="Карточка 38"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.50.08.jpeg" alt="Карточка 38" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="38" aria-label="Карточка 39"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.50.10.jpeg" alt="Карточка 39" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="39" aria-label="Карточка 40"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.50.11.jpeg" alt="Карточка 40" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="40" aria-label="Карточка 41"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.50.13.jpeg" alt="Карточка 41" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="41" aria-label="Карточка 42"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.50.17.jpeg" alt="Карточка 42" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="42" aria-label="Карточка 43"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.50.19.jpeg" alt="Карточка 43" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="43" aria-label="Карточка 44"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.50.20.jpeg" alt="Карточка 44" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="44" aria-label="Карточка 45"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.50.22.jpeg" alt="Карточка 45" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="45" aria-label="Карточка 46"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.50.24.jpeg" alt="Карточка 46" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="46" aria-label="Карточка 47"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.50.27.jpeg" alt="Карточка 47" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="47" aria-label="Карточка 48"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.50.29.jpeg" alt="Карточка 48" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="48" aria-label="Карточка 49"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.50.31.jpeg" alt="Карточка 49" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="49" aria-label="Карточка 50"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.50.33.jpeg" alt="Карточка 50" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="50" aria-label="Карточка 51"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.50.38.jpeg" alt="Карточка 51" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="51" aria-label="Карточка 52"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.50.40.jpeg" alt="Карточка 52" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="52" aria-label="Карточка 53"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.50.42.jpeg" alt="Карточка 53" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="53" aria-label="Карточка 54"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.50.44.jpeg" alt="Карточка 54" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="54" aria-label="Карточка 55"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.50.46.jpeg" alt="Карточка 55" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="55" aria-label="Карточка 56"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.50.48.jpeg" alt="Карточка 56" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="56" aria-label="Карточка 57"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.50.50.jpeg" alt="Карточка 57" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="57" aria-label="Карточка 58"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.50.52.jpeg" alt="Карточка 58" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="58" aria-label="Карточка 59"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.50.54.jpeg" alt="Карточка 59" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="59" aria-label="Карточка 60"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.50.56.jpeg" alt="Карточка 60" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="60" aria-label="Карточка 61"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.50.59.jpeg" alt="Карточка 61" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="61" aria-label="Карточка 62"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.51.01.jpeg" alt="Карточка 62" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="62" aria-label="Карточка 63"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.51.03.jpeg" alt="Карточка 63" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="63" aria-label="Карточка 64"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.51.05.jpeg" alt="Карточка 64" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="64" aria-label="Карточка 65"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.51.07.jpeg" alt="Карточка 65" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="65" aria-label="Карточка 66"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.51.09.jpeg" alt="Карточка 66" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="66" aria-label="Карточка 67"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.51.13.jpeg" alt="Карточка 67" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="67" aria-label="Карточка 68"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.51.15.jpeg" alt="Карточка 68" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="68" aria-label="Карточка 69"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.51.18.jpeg" alt="Карточка 69" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="69" aria-label="Карточка 70"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.51.20.jpeg" alt="Карточка 70" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="70" aria-label="Карточка 71"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.51.22.jpeg" alt="Карточка 71" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="71" aria-label="Карточка 72"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.51.24.jpeg" alt="Карточка 72" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="72" aria-label="Карточка 73"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.51.26.jpeg" alt="Карточка 73" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="73" aria-label="Карточка 74"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.51.29.jpeg" alt="Карточка 74" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="74" aria-label="Карточка 75"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.51.31.jpeg" alt="Карточка 75" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="75" aria-label="Карточка 76"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.51.33.jpeg" alt="Карточка 76" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="76" aria-label="Карточка 77"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.51.35.jpeg" alt="Карточка 77" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="77" aria-label="Карточка 78"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.51.38.jpeg" alt="Карточка 78" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="78" aria-label="Карточка 79"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.51.40.jpeg" alt="Карточка 79" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="79" aria-label="Карточка 80"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.51.42.jpeg" alt="Карточка 80" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="80" aria-label="Карточка 81"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.51.44.jpeg" alt="Карточка 81" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="81" aria-label="Карточка 82"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.51.46.jpeg" alt="Карточка 82" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="82" aria-label="Карточка 83"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.51.49.jpeg" alt="Карточка 83" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="83" aria-label="Карточка 84"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.51.51.jpeg" alt="Карточка 84" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="84" aria-label="Карточка 85"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.51.53.jpeg" alt="Карточка 85" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="85" aria-label="Карточка 86"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.51.56.jpeg" alt="Карточка 86" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="86" aria-label="Карточка 87"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.51.58.jpeg" alt="Карточка 87" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="87" aria-label="Карточка 88"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.52.00.jpeg" alt="Карточка 88" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="88" aria-label="Карточка 89"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.52.02.jpeg" alt="Карточка 89" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="89" aria-label="Карточка 90"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.52.05.jpeg" alt="Карточка 90" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="90" aria-label="Карточка 91"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.52.08.jpeg" alt="Карточка 91" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="91" aria-label="Карточка 92"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.52.10.jpeg" alt="Карточка 92" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="92" aria-label="Карточка 93"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.52.13.jpeg" alt="Карточка 93" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="93" aria-label="Карточка 94"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.52.16.jpeg" alt="Карточка 94" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="94" aria-label="Карточка 95"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.52.18.jpeg" alt="Карточка 95" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="95" aria-label="Карточка 96"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.52.20.jpeg" alt="Карточка 96" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="96" aria-label="Карточка 97"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.52.22.jpeg" alt="Карточка 97" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="97" aria-label="Карточка 98"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.52.25.jpeg" alt="Карточка 98" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="98" aria-label="Карточка 99"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.52.27.jpeg" alt="Карточка 99" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="99" aria-label="Карточка 100"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.52.30.jpeg" alt="Карточка 100" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="100" aria-label="Карточка 101"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.52.32.jpeg" alt="Карточка 101" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="101" aria-label="Карточка 102"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.52.34.jpeg" alt="Карточка 102" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="102" aria-label="Карточка 103"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.52.36.jpeg" alt="Карточка 103" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="103" aria-label="Карточка 104"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.52.39.jpeg" alt="Карточка 104" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="104" aria-label="Карточка 105"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.52.40.jpeg" alt="Карточка 105" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="105" aria-label="Карточка 106"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.52.42.jpeg" alt="Карточка 106" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="106" aria-label="Карточка 107"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.52.45.jpeg" alt="Карточка 107" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="107" aria-label="Карточка 108"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.52.47.jpeg" alt="Карточка 108" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="108" aria-label="Карточка 109"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.52.49.jpeg" alt="Карточка 109" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="109" aria-label="Карточка 110"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.52.51.jpeg" alt="Карточка 110" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="110" aria-label="Карточка 111"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.52.54.jpeg" alt="Карточка 111" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="111" aria-label="Карточка 112"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.52.56.jpeg" alt="Карточка 112" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="112" aria-label="Карточка 113"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.52.58.jpeg" alt="Карточка 113" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="113" aria-label="Карточка 114"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.53.00.jpeg" alt="Карточка 114" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="114" aria-label="Карточка 115"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.53.03.jpeg" alt="Карточка 115" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="115" aria-label="Карточка 116"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.53.05.jpeg" alt="Карточка 116" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="116" aria-label="Карточка 117"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.53.08.jpeg" alt="Карточка 117" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="117" aria-label="Карточка 118"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.53.10.jpeg" alt="Карточка 118" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="118" aria-label="Карточка 119"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.53.13.jpeg" alt="Карточка 119" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="119" aria-label="Карточка 120"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.53.15.jpeg" alt="Карточка 120" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="120" aria-label="Карточка 121"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.53.17.jpeg" alt="Карточка 121" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="121" aria-label="Карточка 122"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.53.19.jpeg" alt="Карточка 122" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="122" aria-label="Карточка 123"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.53.22.jpeg" alt="Карточка 123" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="123" aria-label="Карточка 124"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.53.24.jpeg" alt="Карточка 124" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="124" aria-label="Карточка 125"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.53.27.jpeg" alt="Карточка 125" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="125" aria-label="Карточка 126"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.53.29.jpeg" alt="Карточка 126" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="126" aria-label="Карточка 127"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.53.32.jpeg" alt="Карточка 127" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="127" aria-label="Карточка 128"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.53.35.jpeg" alt="Карточка 128" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="128" aria-label="Карточка 129"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.53.37.jpeg" alt="Карточка 129" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="129" aria-label="Карточка 130"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.53.40.jpeg" alt="Карточка 130" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="130" aria-label="Карточка 131"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.53.42.jpeg" alt="Карточка 131" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="131" aria-label="Карточка 132"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.53.44.jpeg" alt="Карточка 132" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="132" aria-label="Карточка 133"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.53.47.jpeg" alt="Карточка 133" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="133" aria-label="Карточка 134"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.53.49.jpeg" alt="Карточка 134" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="134" aria-label="Карточка 135"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.53.52.jpeg" alt="Карточка 135" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="135" aria-label="Карточка 136"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.53.54.jpeg" alt="Карточка 136" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="136" aria-label="Карточка 137"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.53.56.jpeg" alt="Карточка 137" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="137" aria-label="Карточка 138"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.53.59.jpeg" alt="Карточка 138" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="138" aria-label="Карточка 139"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.54.01.jpeg" alt="Карточка 139" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="139" aria-label="Карточка 140"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.54.04.jpeg" alt="Карточка 140" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="140" aria-label="Карточка 141"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.54.06.jpeg" alt="Карточка 141" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="141" aria-label="Карточка 142"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.54.08.jpeg" alt="Карточка 142" loading="lazy"></button><button type="button" class="tj-thumb" data-idx="142" aria-label="Карточка 143"><img src="Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.54.30.jpeg" alt="Карточка 143" loading="lazy"></button>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-right">
+    Purely coded, naturally spread by Alex Gorlov@<a class="footer-staffilo-name" href="https://staffilocode.com/" target="_blank" rel="noopener noreferrer">StaffiloCode</a>
+    <a href="https://staffilocode.com/" target="_blank" rel="noopener noreferrer">
+      <img class="footer-staffilo-logo" src="Staffilocode_logo_transparent.webp" alt="StaffiloCode">
+    </a>
+  </div>
+</footer>
+
+<script>
+  var FILES = ["Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.48.43.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.48.47.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.48.49.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.48.51.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.48.53.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.48.55.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.48.57.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.48.59.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.49.01.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.49.03.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.49.04.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.49.06.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.49.11.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.49.14.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.49.16.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.49.18.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.49.20.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.49.25.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.49.27.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.49.29.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.49.31.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.49.33.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.49.35.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.49.37.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.49.39.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.49.41.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.49.43.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.49.45.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.49.48.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.49.50.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.49.52.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.49.54.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.49.56.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.49.58.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.50.00.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.50.02.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.50.04.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.50.08.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.50.10.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.50.11.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.50.13.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.50.17.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.50.19.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.50.20.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.50.22.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.50.24.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.50.27.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.50.29.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.50.31.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.50.33.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.50.38.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.50.40.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.50.42.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.50.44.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.50.46.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.50.48.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.50.50.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.50.52.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.50.54.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.50.56.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.50.59.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.51.01.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.51.03.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.51.05.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.51.07.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.51.09.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.51.13.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.51.15.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.51.18.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.51.20.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.51.22.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.51.24.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.51.26.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.51.29.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.51.31.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.51.33.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.51.35.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.51.38.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.51.40.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.51.42.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.51.44.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.51.46.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.51.49.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.51.51.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.51.53.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.51.56.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.51.58.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.52.00.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.52.02.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.52.05.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.52.08.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.52.10.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.52.13.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.52.16.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.52.18.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.52.20.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.52.22.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.52.25.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.52.27.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.52.30.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.52.32.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.52.34.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.52.36.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.52.39.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.52.40.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.52.42.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.52.45.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.52.47.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.52.49.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.52.51.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.52.54.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.52.56.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.52.58.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.53.00.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.53.03.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.53.05.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.53.08.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.53.10.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.53.13.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.53.15.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.53.17.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.53.19.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.53.22.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.53.24.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.53.27.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.53.29.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.53.32.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.53.35.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.53.37.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.53.40.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.53.42.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.53.44.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.53.47.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.53.49.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.53.52.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.53.54.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.53.56.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.53.59.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.54.01.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.54.04.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.54.06.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.54.08.jpeg", "Vocabulario/Tarjetas con las primeras palabras/photo_2026-06-01 16.54.30.jpeg"];
+  var order = FILES.map(function(_, i) { return i; });
+  var pos = 0;
+
+  var stageImg = document.getElementById('stageImg');
+  var counter = document.getElementById('counter');
+  var thumbs = Array.prototype.slice.call(document.querySelectorAll('.tj-thumb'));
+
+  function render() {
+    var idx = order[pos];
+    stageImg.src = FILES[idx];
+    counter.textContent = (pos + 1) + ' / ' + FILES.length;
+    thumbs.forEach(function(t) { t.classList.remove('active'); });
+    var activeThumb = thumbs[idx];
+    if (activeThumb) {
+      activeThumb.classList.add('active');
+    }
+  }
+
+  document.getElementById('prevBtn').addEventListener('click', function() {
+    pos = (pos - 1 + order.length) % order.length;
+    render();
+  });
+  document.getElementById('nextBtn').addEventListener('click', function() {
+    pos = (pos + 1) % order.length;
+    render();
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowLeft') document.getElementById('prevBtn').click();
+    if (e.key === 'ArrowRight') document.getElementById('nextBtn').click();
+  });
+
+  // Press-and-hold to zoom a thumbnail (mouse button held / finger held down)
+  var zoomedThumb = null;
+  function zoomIn(t) {
+    if (zoomedThumb && zoomedThumb !== t) zoomedThumb.classList.remove('zoomed');
+    zoomedThumb = t;
+    t.classList.add('zoomed');
+  }
+  function zoomOut() {
+    if (zoomedThumb) {
+      zoomedThumb.classList.remove('zoomed');
+      zoomedThumb = null;
+    }
+  }
+  thumbs.forEach(function(t) {
+    // Mouse
+    t.addEventListener('mousedown', function(e) { e.preventDefault(); zoomIn(t); });
+    // Touch
+    t.addEventListener('touchstart', function(e) { e.preventDefault(); zoomIn(t); }, { passive: false });
+    t.addEventListener('touchend', zoomOut);
+    t.addEventListener('touchcancel', zoomOut);
+    // Prevent the native context menu on long-press (mobile) / right click
+    t.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+  });
+  // Release anywhere ends the zoom
+  document.addEventListener('mouseup', zoomOut);
+  document.addEventListener('mouseleave', zoomOut);
+
+  function shuffle(arr) {
+    var a = arr.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+    }
+    return a;
+  }
+
+  document.getElementById('shuffleBtn').addEventListener('click', function() {
+    var currentIdx = order[pos];
+    order = shuffle(FILES.map(function(_, i) { return i; }));
+    pos = order.indexOf(currentIdx);
+    document.getElementById('shuffleBtn').classList.add('active');
+    document.getElementById('orderBtn').classList.remove('active');
+    render();
+  });
+  document.getElementById('orderBtn').addEventListener('click', function() {
+    var currentIdx = order[pos];
+    order = FILES.map(function(_, i) { return i; });
+    pos = currentIdx;
+    document.getElementById('orderBtn').classList.add('active');
+    document.getElementById('shuffleBtn').classList.remove('active');
+    render();
+  });
+
+  render();
+</script>
+
+</body>
+</html>

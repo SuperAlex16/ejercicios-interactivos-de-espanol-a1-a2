@@ -1,0 +1,983 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Интерактивная практика: банк</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --card: #ffffff;
+      --ink: #162033;
+      --muted: #647084;
+      --line: #d8e0ec;
+      --accent: #195b8d;
+      --accent-2: #eaf3fb;
+      --good: #157347;
+      --shadow: 0 18px 45px rgba(20, 35, 60, .12);
+      --radius: 22px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      background: radial-gradient(circle at 20% 0%, #e4f0fa 0, transparent 34%), var(--bg);
+      color: var(--ink);
+      line-height: 1.55;
+    }
+    header {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 36px 22px 18px;
+    }
+    .hero {
+      background: linear-gradient(135deg, #ffffff 0%, #eef6fc 100%);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 30px;
+      box-shadow: var(--shadow);
+    }
+    h1 { margin: 0 0 12px; font-size: clamp(2rem, 4vw, 4rem); line-height: 1.05; letter-spacing: -.04em; }
+    .instructions { margin: 0; color: var(--muted); font-size: 1.04rem; max-width: 920px; }
+    .toolbar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+    .toolbar button, .audio-btn, .select-answer {
+      border: 0;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #fff;
+      padding: 10px 16px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 8px 18px rgba(25,91,141,.18);
+    }
+    .toolbar button.secondary { background: #ffffff; color: var(--accent); border: 1px solid var(--line); }
+    main { max-width: 1180px; margin: 0 auto; padding: 12px 22px 48px; }
+    .topic { margin-top: 30px; }
+    h2 {
+      display: inline-block;
+      margin: 18px 0 16px;
+      padding: 10px 14px;
+      background: var(--accent-2);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      color: #103c60;
+      font-size: clamp(1.15rem, 2vw, 1.55rem);
+    }
+    .card {
+      display: grid;
+      grid-template-columns: minmax(270px, 38%) 1fr;
+      gap: 0;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: visible;
+      box-shadow: var(--shadow);
+      margin: 18px 0;
+    }
+    .photo-wrap { margin: 0; position: relative; min-height: 100%; overflow: hidden; border-radius: var(--radius) 0 0 var(--radius); }
+    .photo { width: 100%; height: 100%; min-height: 320px; object-fit: cover; display: block; filter: saturate(1.03) contrast(1.02); }
+    figcaption {
+      position: absolute;
+      left: 14px;
+      top: 14px;
+      background: rgba(0,0,0,.62);
+      color: #fff;
+      border-radius: 999px;
+      padding: 7px 12px;
+      font-size: .86rem;
+      font-weight: 700;
+    }
+    .content { padding: 24px; }
+    .client-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+    .badge, .answers-head {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      border-radius: 999px;
+      background: #eff4f9;
+      color: #33546e;
+      padding: 7px 11px;
+      font-size: .82rem;
+      font-weight: 800;
+      letter-spacing: .02em;
+      text-transform: uppercase;
+    }
+    .audio-btn { padding: 7px 12px; font-size: .9rem; }
+    .client-phrase {
+      font-size: clamp(1.15rem, 2.2vw, 1.6rem);
+      line-height: 1.35;
+      margin: 8px 0 18px;
+      font-weight: 760;
+    }
+    .answers-head { margin: 4px 0 10px; }
+    .answers {
+      margin: 0;
+      padding-left: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+    .answer-item {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: start;
+      gap: 10px;
+      padding: 13px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fbfdff;
+      transition: transform .16s ease, border-color .16s ease, background .16s ease;
+    }
+    .answer-item:hover { transform: translateY(-1px); border-color: #a9c1d6; background: #f4f9fd; }
+    .answer-item.selected { border-color: var(--good); background: #edf9f2; }
+    .select-answer {
+      width: 34px;
+      height: 34px;
+      padding: 0;
+      display: inline-grid;
+      place-items: center;
+      background: #e9eef5;
+      color: #5b6b7f;
+      box-shadow: none;
+    }
+    .answer-item.selected .select-answer { background: var(--good); color: #fff; }
+    .answer-text { font-size: 1.04rem; }
+    .phrase {
+      position: relative;
+      display: inline;
+      border-bottom: 2px dotted rgba(25,91,141,.55);
+      cursor: help;
+      overflow: visible;
+    }
+    .phrase::after {
+      content: attr(data-ru);
+      position: absolute;
+      left: 0;
+      bottom: calc(100% + 9px);
+      z-index: 50;
+      min-width: 220px;
+      max-width: min(520px, 80vw);
+      width: max-content;
+      white-space: normal;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity .12s ease, transform .12s ease;
+      background: #0f1724;
+      color: #fff;
+      border-radius: 12px;
+      padding: 10px 12px;
+      font-size: .95rem;
+      line-height: 1.35;
+      font-weight: 650;
+      box-shadow: 0 12px 28px rgba(0,0,0,.24);
+    }
+    .phrase::before {
+      content: "";
+      position: absolute;
+      left: 18px;
+      bottom: calc(100% + 2px);
+      z-index: 51;
+      opacity: 0;
+      border: 7px solid transparent;
+      border-top-color: #0f1724;
+      pointer-events: none;
+      transition: opacity .12s ease;
+    }
+    .phrase:hover::after, .phrase:focus::after, .phrase.active::after,
+    .phrase:hover::before, .phrase:focus::before, .phrase.active::before { opacity: 1; transform: translateY(0); }
+    footer { max-width: 1180px; margin: 0 auto; padding: 0 22px 36px; color: var(--muted); font-size: .92rem; }
+    @media (max-width: 780px) {
+      .card { grid-template-columns: 1fr; }
+      .photo-wrap { border-radius: var(--radius) var(--radius) 0 0; }
+      .photo { min-height: 230px; }
+      .content { padding: 18px; }
+      .phrase::after { left: 50%; transform: translate(-50%, 6px); }
+      .phrase:hover::after, .phrase:focus::after, .phrase.active::after { transform: translate(-50%, 0); }
+    }
+    @media print {
+      body { background: #fff; }
+      .toolbar, .audio-btn, .select-answer { display: none !important; }
+      .card { break-inside: avoid; box-shadow: none; }
+      .phrase { border-bottom: none; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="hero">
+      <h1>Интерактивная практика: банк</h1>
+      <p class="instructions">Наводите курсор на испанские фразы, чтобы увидеть русский перевод. Нажимайте кнопку Audio рядом с фразой клиента, чтобы прослушать её на испанском. Ответы не скрыты: все возможные ответы отображаются сразу, как в исходном материале. Кнопка ✓ нужна только для отметки выбранного ответа во время практики.</p>
+      <div class="toolbar">
+        <button type="button" id="expandAll">Показать все переводы</button>
+        <button type="button" id="collapseAll" class="secondary">Скрыть переводы</button>
+        <button type="button" id="resetChoices" class="secondary">Сбросить отметки</button>
+      </div>
+    </div>
+  </header>
+  <main>
+<section class="topic" id="topic-0">
+<h2><span class="section-title phrase" tabindex="0" title="БАНКОВСКИЕ ТЕМЫ" data-ru="БАНКОВСКИЕ ТЕМЫ">ASUNTOS BANCARIOS</span></h2>
+<article class="card situation" data-situation="1">
+          <figure class="photo-wrap">
+            <img class="photo" src="https://loremflickr.com/1000/640/bank,account,customer?lock=1501" alt="Реалистичная фотография банковской ситуации 1" loading="lazy" onerror="this.onerror=null;this.src='https://picsum.photos/seed/banco-1/1000/640';" />
+            <figcaption>Ситуация 1</figcaption>
+          </figure>
+          <div class="content">
+            <div class="client-row">
+              <span class="badge">Клиент</span>
+              <button class="audio-btn" type="button" data-speak="-Quisiera abrir una cuenta." aria-label="Прослушать фразу клиента">▶ Audio</button>
+            </div>
+            <p class="client-phrase"><span class="phrase client" tabindex="0" title="Я хотел(а) бы открыть счёт." data-ru="Я хотел(а) бы открыть счёт.">-Quisiera abrir una cuenta.</span></p>
+            <div class="answers-head">Возможные ответы</div>
+            <ol class="answers visible-answers"><li class="answer-item" data-answer="1">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 1">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Конечно. Сберегательный счёт или текущий?" data-ru="Конечно. Сберегательный счёт или текущий?">-Claro. ¿Cuenta de ahorros o cuenta corriente?</span></div>
+            </li>
+<li class="answer-item" data-answer="2">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 2">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Нужны удостоверение личности и подтверждение адреса." data-ru="Нужны удостоверение личности и подтверждение адреса.">-Necesitamos su documento de identidad y un comprobante de domicilio.</span></div>
+            </li>
+<li class="answer-item" data-answer="3">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 3">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="В какой валюте: песо или евро?" data-ru="В какой валюте: песо или евро?">-¿Para qué moneda: pesos o euros?</span></div>
+            </li></ol>
+          </div>
+        </article>
+<article class="card situation" data-situation="2">
+          <figure class="photo-wrap">
+            <img class="photo" src="https://loremflickr.com/1000/640/bank,savings,desk?lock=1502" alt="Реалистичная фотография банковской ситуации 2" loading="lazy" onerror="this.onerror=null;this.src='https://picsum.photos/seed/banco-2/1000/640';" />
+            <figcaption>Ситуация 2</figcaption>
+          </figure>
+          <div class="content">
+            <div class="client-row">
+              <span class="badge">Клиент</span>
+              <button class="audio-btn" type="button" data-speak="-Quisiera abrir una cuenta de ahorros en euros." aria-label="Прослушать фразу клиента">▶ Audio</button>
+            </div>
+            <p class="client-phrase"><span class="phrase client" tabindex="0" title="Я хотел(а) бы открыть сберегательный счёт в евро." data-ru="Я хотел(а) бы открыть сберегательный счёт в евро.">-Quisiera abrir una cuenta de ahorros en euros.</span></p>
+            <div class="answers-head">Возможные ответы</div>
+            <ol class="answers visible-answers"><li class="answer-item" data-answer="1">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 1">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Отлично. Какова сумма первоначального взноса?" data-ru="Отлично. Какова сумма первоначального взноса?">-Perfecto. ¿Cuál es el monto inicial de depósito?</span></div>
+            </li>
+<li class="answer-item" data-answer="2">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 2">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Минимум ___ евро." data-ru="Минимум ___ евро.">-El mínimo es de ___ euros.</span></div>
+            </li>
+<li class="answer-item" data-answer="3">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 3">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Счёт будет активен сегодня / через 24 часа." data-ru="Счёт будет активен сегодня / через 24 часа.">-La cuenta estará activa hoy / en 24 horas.</span></div>
+            </li></ol>
+          </div>
+        </article>
+<article class="card situation" data-situation="3">
+          <figure class="photo-wrap">
+            <img class="photo" src="https://loremflickr.com/1000/640/bank,documents,customer?lock=1503" alt="Реалистичная фотография банковской ситуации 3" loading="lazy" onerror="this.onerror=null;this.src='https://picsum.photos/seed/banco-3/1000/640';" />
+            <figcaption>Ситуация 3</figcaption>
+          </figure>
+          <div class="content">
+            <div class="client-row">
+              <span class="badge">Клиент</span>
+              <button class="audio-btn" type="button" data-speak="-¿Qué documentos necesito para abrir la cuenta?" aria-label="Прослушать фразу клиента">▶ Audio</button>
+            </div>
+            <p class="client-phrase"><span class="phrase client" tabindex="0" title="Какие документы нужны, чтобы открыть счёт?" data-ru="Какие документы нужны, чтобы открыть счёт?">-¿Qué documentos necesito para abrir la cuenta?</span></p>
+            <div class="answers-head">Возможные ответы</div>
+            <ol class="answers visible-answers"><li class="answer-item" data-answer="1">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 1">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Удостоверение личности, подтверждение адреса и иногда подтверждение дохода." data-ru="Удостоверение личности, подтверждение адреса и иногда подтверждение дохода.">-Documento de identidad, comprobante de domicilio y, en algunos casos, comprobante de ingresos.</span></div>
+            </li>
+<li class="answer-item" data-answer="2">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 2">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Если вы иностранец/иностранка, нужен также вид на жительство." data-ru="Если вы иностранец/иностранка, нужен также вид на жительство.">-Si es extranjero(a), también necesitamos su permiso de residencia.</span></div>
+            </li></ol>
+          </div>
+        </article>
+</section>
+<section class="topic" id="topic-1">
+<h2><span class="section-title phrase" tabindex="0" title="ВНЕСЕНИЕ И СНЯТИЕ НАЛИЧНЫХ" data-ru="ВНЕСЕНИЕ И СНЯТИЕ НАЛИЧНЫХ">DEPÓSITOS Y RETIROS (SACAR DINERO)</span></h2>
+<article class="card situation" data-situation="4">
+          <figure class="photo-wrap">
+            <img class="photo" src="https://loremflickr.com/1000/640/atm,cash,bank?lock=1504" alt="Реалистичная фотография банковской ситуации 4" loading="lazy" onerror="this.onerror=null;this.src='https://picsum.photos/seed/banco-4/1000/640';" />
+            <figcaption>Ситуация 4</figcaption>
+          </figure>
+          <div class="content">
+            <div class="client-row">
+              <span class="badge">Клиент</span>
+              <button class="audio-btn" type="button" data-speak="-Quisiera sacar dinero." aria-label="Прослушать фразу клиента">▶ Audio</button>
+            </div>
+            <p class="client-phrase"><span class="phrase client" tabindex="0" title="Я хотел(а) бы снять наличные." data-ru="Я хотел(а) бы снять наличные.">-Quisiera sacar dinero.</span></p>
+            <div class="answers-head">Возможные ответы</div>
+            <ol class="answers visible-answers"><li class="answer-item" data-answer="1">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 1">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Сколько хотите снять, в песо или в евро?" data-ru="Сколько хотите снять, в песо или в евро?">-¿Cuánto desea retirar, en pesos o en euros?</span></div>
+            </li>
+<li class="answer-item" data-answer="2">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 2">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="С какого счёта: песо или евро?" data-ru="С какого счёта: песо или евро?">-¿De qué cuenta: pesos o euros?</span></div>
+            </li>
+<li class="answer-item" data-answer="3">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 3">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Пожалуйста, вставьте карту и введите ПИН-код." data-ru="Пожалуйста, вставьте карту и введите ПИН-код.">-Por favor, inserte su tarjeta e ingrese su PIN.</span></div>
+            </li></ol>
+          </div>
+        </article>
+<article class="card situation" data-situation="5">
+          <figure class="photo-wrap">
+            <img class="photo" src="https://loremflickr.com/1000/640/cash,bank,withdrawal?lock=1505" alt="Реалистичная фотография банковской ситуации 5" loading="lazy" onerror="this.onerror=null;this.src='https://picsum.photos/seed/banco-5/1000/640';" />
+            <figcaption>Ситуация 5</figcaption>
+          </figure>
+          <div class="content">
+            <div class="client-row">
+              <span class="badge">Клиент</span>
+              <button class="audio-btn" type="button" data-speak="-Quisiera retirar 200 euros." aria-label="Прослушать фразу клиента">▶ Audio</button>
+            </div>
+            <p class="client-phrase"><span class="phrase client" tabindex="0" title="Я хотел(а) бы снять 200 евро." data-ru="Я хотел(а) бы снять 200 евро.">-Quisiera retirar 200 euros.</span></p>
+            <div class="answers-head">Возможные ответы</div>
+            <ol class="answers visible-answers"><li class="answer-item" data-answer="1">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 1">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Хорошо. Крупными или мелкими купюрами?" data-ru="Хорошо. Крупными или мелкими купюрами?">-Perfecto. ¿En billetes grandes o pequeños?</span></div>
+            </li>
+<li class="answer-item" data-answer="2">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 2">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Средств достаточно." data-ru="Средств достаточно.">-Su saldo es suficiente.</span></div>
+            </li>
+<li class="answer-item" data-answer="3">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 3">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Извините, это превышает дневной лимит." data-ru="Извините, это превышает дневной лимит.">-Lo siento, supera su límite diario.</span></div>
+            </li></ol>
+          </div>
+        </article>
+<article class="card situation" data-situation="6">
+          <figure class="photo-wrap">
+            <img class="photo" src="https://loremflickr.com/1000/640/atm,fee,bank?lock=1506" alt="Реалистичная фотография банковской ситуации 6" loading="lazy" onerror="this.onerror=null;this.src='https://picsum.photos/seed/banco-6/1000/640';" />
+            <figcaption>Ситуация 6</figcaption>
+          </figure>
+          <div class="content">
+            <div class="client-row">
+              <span class="badge">Клиент</span>
+              <button class="audio-btn" type="button" data-speak="-¿Hay comisión por retirar efectivo?" aria-label="Прослушать фразу клиента">▶ Audio</button>
+            </div>
+            <p class="client-phrase"><span class="phrase client" tabindex="0" title="Есть комиссия за снятие наличных?" data-ru="Есть комиссия за снятие наличных?">-¿Hay comisión por retirar efectivo?</span></p>
+            <div class="answers-head">Возможные ответы</div>
+            <ol class="answers visible-answers"><li class="answer-item" data-answer="1">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 1">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="В этом банке нет, но в других банкоматах — да." data-ru="В этом банке нет, но в других банкоматах — да.">-En este banco no, pero en otros cajeros sí.</span></div>
+            </li>
+<li class="answer-item" data-answer="2">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 2">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Комиссия ___ песо / ___ евро." data-ru="Комиссия ___ песо / ___ евро.">-La comisión es de ___ pesos / ___ euros.</span></div>
+            </li></ol>
+          </div>
+        </article>
+<article class="card situation" data-situation="7">
+          <figure class="photo-wrap">
+            <img class="photo" src="https://loremflickr.com/1000/640/atm,receipt,bank?lock=1507" alt="Реалистичная фотография банковской ситуации 7" loading="lazy" onerror="this.onerror=null;this.src='https://picsum.photos/seed/banco-7/1000/640';" />
+            <figcaption>Ситуация 7</figcaption>
+          </figure>
+          <div class="content">
+            <div class="client-row">
+              <span class="badge">Клиент</span>
+              <button class="audio-btn" type="button" data-speak="-El cajero no me dio el dinero, pero lo descontó." aria-label="Прослушать фразу клиента">▶ Audio</button>
+            </div>
+            <p class="client-phrase"><span class="phrase client" tabindex="0" title="Банкомат не выдал деньги, но списал." data-ru="Банкомат не выдал деньги, но списал.">-El cajero no me dio el dinero, pero lo descontó.</span></p>
+            <div class="answers-head">Возможные ответы</div>
+            <ol class="answers visible-answers"><li class="answer-item" data-answer="1">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 1">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Оформим обращение. У вас есть чек?" data-ru="Оформим обращение. У вас есть чек?">-Vamos a levantar un reporte. ¿Tiene el comprobante?</span></div>
+            </li>
+<li class="answer-item" data-answer="2">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 2">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Корректировка может занять 3–10 рабочих дня." data-ru="Корректировка может занять 3–10 рабочих дня.">-El ajuste puede tardar de 3 a 10 días hábiles.</span></div>
+            </li>
+<li class="answer-item" data-answer="3">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 3">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="В какой день и во сколько это произошло?" data-ru="В какой день и во сколько это произошло?">-¿En qué fecha y a qué hora ocurrió?</span></div>
+            </li></ol>
+          </div>
+        </article>
+</section>
+<section class="topic" id="topic-2">
+<h2><span class="section-title phrase" tabindex="0" title="ПЕРЕВОДЫ" data-ru="ПЕРЕВОДЫ">TRANSFERENCIAS</span></h2>
+<article class="card situation" data-situation="8">
+          <figure class="photo-wrap">
+            <img class="photo" src="https://loremflickr.com/1000/640/bank,transfer,computer?lock=1508" alt="Реалистичная фотография банковской ситуации 8" loading="lazy" onerror="this.onerror=null;this.src='https://picsum.photos/seed/banco-8/1000/640';" />
+            <figcaption>Ситуация 8</figcaption>
+          </figure>
+          <div class="content">
+            <div class="client-row">
+              <span class="badge">Клиент</span>
+              <button class="audio-btn" type="button" data-speak="-Quisiera hacer una transferencia." aria-label="Прослушать фразу клиента">▶ Audio</button>
+            </div>
+            <p class="client-phrase"><span class="phrase client" tabindex="0" title="Я хотел(а) бы сделать перевод." data-ru="Я хотел(а) бы сделать перевод.">-Quisiera hacer una transferencia.</span></p>
+            <div class="answers-head">Возможные ответы</div>
+            <ol class="answers visible-answers"><li class="answer-item" data-answer="1">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 1">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="По стране или международный?" data-ru="По стране или международный?">-¿Es nacional o internacional?</span></div>
+            </li>
+<li class="answer-item" data-answer="2">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 2">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="В песо или в евро?" data-ru="В песо или в евро?">-¿En pesos o en euros?</span></div>
+            </li>
+<li class="answer-item" data-answer="3">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 3">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="У вас есть данные получателя?" data-ru="У вас есть данные получателя?">-¿Tiene los datos del destinatario?</span></div>
+            </li></ol>
+          </div>
+        </article>
+<article class="card situation" data-situation="9">
+          <figure class="photo-wrap">
+            <img class="photo" src="https://loremflickr.com/1000/640/international,bank,transfer?lock=1509" alt="Реалистичная фотография банковской ситуации 9" loading="lazy" onerror="this.onerror=null;this.src='https://picsum.photos/seed/banco-9/1000/640';" />
+            <figcaption>Ситуация 9</figcaption>
+          </figure>
+          <div class="content">
+            <div class="client-row">
+              <span class="badge">Клиент</span>
+              <button class="audio-btn" type="button" data-speak="-Quisiera hacer una transferencia internacional en euros." aria-label="Прослушать фразу клиента">▶ Audio</button>
+            </div>
+            <p class="client-phrase"><span class="phrase client" tabindex="0" title="Я хотел(а) бы сделать международный перевод в евро." data-ru="Я хотел(а) бы сделать международный перевод в евро.">-Quisiera hacer una transferencia internacional en euros.</span></p>
+            <div class="answers-head">Возможные ответы</div>
+            <ol class="answers visible-answers"><li class="answer-item" data-answer="1">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 1">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Нужны имя получателя, счёт/IBAN и SWIFT/BIC." data-ru="Нужны имя получателя, счёт/IBAN и SWIFT/BIC.">-Necesitamos nombre del beneficiario, número de cuenta/IBAN y código SWIFT/BIC.</span></div>
+            </li>
+<li class="answer-item" data-answer="2">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 2">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Комиссия ___ евро, срок 1–3 рабочих дня." data-ru="Комиссия ___ евро, срок 1–3 рабочих дня.">-La comisión es de ___ euros y tarda de 1 a 3 días hábiles.</span></div>
+            </li>
+<li class="answer-item" data-answer="3">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 3">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Каково назначение платежа?" data-ru="Каково назначение платежа?">-¿Cuál es el motivo del pago?</span></div>
+            </li></ol>
+          </div>
+        </article>
+<article class="card situation" data-situation="10">
+          <figure class="photo-wrap">
+            <img class="photo" src="https://loremflickr.com/1000/640/bank,account,details?lock=1510" alt="Реалистичная фотография банковской ситуации 10" loading="lazy" onerror="this.onerror=null;this.src='https://picsum.photos/seed/banco-10/1000/640';" />
+            <figcaption>Ситуация 10</figcaption>
+          </figure>
+          <div class="content">
+            <div class="client-row">
+              <span class="badge">Клиент</span>
+              <button class="audio-btn" type="button" data-speak="-¿Podría verificar los datos del destinatario?" aria-label="Прослушать фразу клиента">▶ Audio</button>
+            </div>
+            <p class="client-phrase"><span class="phrase client" tabindex="0" title="Вы можете проверить данные получателя?" data-ru="Вы можете проверить данные получателя?">-¿Podría verificar los datos del destinatario?</span></p>
+            <div class="answers-head">Возможные ответы</div>
+            <ol class="answers visible-answers"><li class="answer-item" data-answer="1">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 1">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Да. Продиктуйте, пожалуйста." data-ru="Да. Продиктуйте, пожалуйста.">-Sí. Dictémelos, por favor.</span></div>
+            </li>
+<li class="answer-item" data-answer="2">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 2">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Не хватает кода SWIFT/BIC." data-ru="Не хватает кода SWIFT/BIC.">-Falta el código SWIFT/BIC.</span></div>
+            </li>
+<li class="answer-item" data-answer="3">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 3">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Ошибка в номере счёта." data-ru="Ошибка в номере счёта.">-Hay un error en el número de cuenta.</span></div>
+            </li></ol>
+          </div>
+        </article>
+<article class="card situation" data-situation="11">
+          <figure class="photo-wrap">
+            <img class="photo" src="https://loremflickr.com/1000/640/bank,claim,transfer?lock=1511" alt="Реалистичная фотография банковской ситуации 11" loading="lazy" onerror="this.onerror=null;this.src='https://picsum.photos/seed/banco-11/1000/640';" />
+            <figcaption>Ситуация 11</figcaption>
+          </figure>
+          <div class="content">
+            <div class="client-row">
+              <span class="badge">Клиент</span>
+              <button class="audio-btn" type="button" data-speak="-Me equivoqué en la transferencia." aria-label="Прослушать фразу клиента">▶ Audio</button>
+            </div>
+            <p class="client-phrase"><span class="phrase client" tabindex="0" title="Я ошибся(лась) в переводе." data-ru="Я ошибся(лась) в переводе.">-Me equivoqué en la transferencia.</span></p>
+            <div class="answers-head">Возможные ответы</div>
+            <ol class="answers visible-answers"><li class="answer-item" data-answer="1">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 1">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Это было сегодня? Можно попробовать отменить, если ещё в обработке." data-ru="Это было сегодня? Можно попробовать отменить, если ещё в обработке.">-¿Se realizó hoy? Podemos intentar cancelarla si aún está pendiente.</span></div>
+            </li>
+<li class="answer-item" data-answer="2">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 2">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Если уже обработано, нужно оформить претензию." data-ru="Если уже обработано, нужно оформить претензию.">-Si ya fue procesada, debemos iniciar una reclamación.</span></div>
+            </li>
+<li class="answer-item" data-answer="3">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 3">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="У вас есть чек или номер операции?" data-ru="У вас есть чек или номер операции?">-¿Tiene el comprobante o el número de operación?</span></div>
+            </li></ol>
+          </div>
+        </article>
+</section>
+<section class="topic" id="topic-3">
+<h2><span class="section-title phrase" tabindex="0" title="КАРТЫ (ОФОРМЛЕНИЕ, БЛОКИРОВКА, ПИН)" data-ru="КАРТЫ (ОФОРМЛЕНИЕ, БЛОКИРОВКА, ПИН)">TARJETAS (SOLICITAR, BLOQUEAR, PIN)</span></h2>
+<article class="card situation" data-situation="12">
+          <figure class="photo-wrap">
+            <img class="photo" src="https://loremflickr.com/1000/640/bank,card,customer?lock=1512" alt="Реалистичная фотография банковской ситуации 12" loading="lazy" onerror="this.onerror=null;this.src='https://picsum.photos/seed/banco-12/1000/640';" />
+            <figcaption>Ситуация 12</figcaption>
+          </figure>
+          <div class="content">
+            <div class="client-row">
+              <span class="badge">Клиент</span>
+              <button class="audio-btn" type="button" data-speak="-Quisiera solicitar una tarjeta." aria-label="Прослушать фразу клиента">▶ Audio</button>
+            </div>
+            <p class="client-phrase"><span class="phrase client" tabindex="0" title="Я хотел(а) бы оформить карту." data-ru="Я хотел(а) бы оформить карту.">-Quisiera solicitar una tarjeta.</span></p>
+            <div class="answers-head">Возможные ответы</div>
+            <ol class="answers visible-answers"><li class="answer-item" data-answer="1">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 1">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Дебетовая или кредитная?" data-ru="Дебетовая или кредитная?">-¿De débito o de crédito?</span></div>
+            </li>
+<li class="answer-item" data-answer="2">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 2">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Доставка 5–7 рабочих дней." data-ru="Доставка 5–7 рабочих дней.">-La entrega tarda de 5 a 7 días hábiles.</span></div>
+            </li>
+<li class="answer-item" data-answer="3">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 3">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Привязать к счёту в песо или в евро?" data-ru="Привязать к счёту в песо или в евро?">-¿La quiere vinculada a su cuenta en pesos o en euros?</span></div>
+            </li></ol>
+          </div>
+        </article>
+<article class="card situation" data-situation="13">
+          <figure class="photo-wrap">
+            <img class="photo" src="https://loremflickr.com/1000/640/lost,credit,card,bank?lock=1513" alt="Реалистичная фотография банковской ситуации 13" loading="lazy" onerror="this.onerror=null;this.src='https://picsum.photos/seed/banco-13/1000/640';" />
+            <figcaption>Ситуация 13</figcaption>
+          </figure>
+          <div class="content">
+            <div class="client-row">
+              <span class="badge">Клиент</span>
+              <button class="audio-btn" type="button" data-speak="-He perdido mi tarjeta. Por favor, bloquéela." aria-label="Прослушать фразу клиента">▶ Audio</button>
+            </div>
+            <p class="client-phrase"><span class="phrase client" tabindex="0" title="Я потерял(а) карту. Пожалуйста, заблокируйте." data-ru="Я потерял(а) карту. Пожалуйста, заблокируйте.">-He perdido mi tarjeta. Por favor, bloquéela.</span></p>
+            <div class="answers-head">Возможные ответы</div>
+            <ol class="answers visible-answers"><li class="answer-item" data-answer="1">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 1">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Хорошо. Сейчас заблокирую." data-ru="Хорошо. Сейчас заблокирую.">-De acuerdo. Voy a bloquearla ahora.</span></div>
+            </li>
+<li class="answer-item" data-answer="2">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 2">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Хотите перевыпустить?" data-ru="Хотите перевыпустить?">-¿Desea emitir una reposición?</span></div>
+            </li>
+<li class="answer-item" data-answer="3">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 3">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Перевыпуск стоит ___ песо / ___ евро." data-ru="Перевыпуск стоит ___ песо / ___ евро.">-La reposición cuesta ___ pesos / ___ euros.</span></div>
+            </li></ol>
+          </div>
+        </article>
+<article class="card situation" data-situation="14">
+          <figure class="photo-wrap">
+            <img class="photo" src="https://loremflickr.com/1000/640/pin,atm,card?lock=1514" alt="Реалистичная фотография банковской ситуации 14" loading="lazy" onerror="this.onerror=null;this.src='https://picsum.photos/seed/banco-14/1000/640';" />
+            <figcaption>Ситуация 14</figcaption>
+          </figure>
+          <div class="content">
+            <div class="client-row">
+              <span class="badge">Клиент</span>
+              <button class="audio-btn" type="button" data-speak="-Quisiera cambiar el PIN." aria-label="Прослушать фразу клиента">▶ Audio</button>
+            </div>
+            <p class="client-phrase"><span class="phrase client" tabindex="0" title="Я хотел(а) бы сменить ПИН-код." data-ru="Я хотел(а) бы сменить ПИН-код.">-Quisiera cambiar el PIN.</span></p>
+            <div class="answers-head">Возможные ответы</div>
+            <ol class="answers visible-answers"><li class="answer-item" data-answer="1">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 1">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Можно сделать в банкомате или в приложении." data-ru="Можно сделать в банкомате или в приложении.">-Puede hacerlo en el cajero o desde la app.</span></div>
+            </li>
+<li class="answer-item" data-answer="2">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 2">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Нужно подтвердить личность." data-ru="Нужно подтвердить личность.">-Necesitamos validar su identidad.</span></div>
+            </li>
+<li class="answer-item" data-answer="3">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 3">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Готово: ПИН обновлён." data-ru="Готово: ПИН обновлён.">-Listo: su PIN ha sido actualizado.</span></div>
+            </li></ol>
+          </div>
+        </article>
+</section>
+<section class="topic" id="topic-4">
+<h2><span class="section-title phrase" tabindex="0" title="БАНКОВСКОЕ ПРИЛОЖЕНИЕ (УСТАНОВКА, ВХОД, СБОИ)" data-ru="БАНКОВСКОЕ ПРИЛОЖЕНИЕ (УСТАНОВКА, ВХОД, СБОИ)">APLICACIÓN BANCARIA (INSTALAR, ACCESO, FALLAS)</span></h2>
+<article class="card situation" data-situation="15">
+          <figure class="photo-wrap">
+            <img class="photo" src="https://loremflickr.com/1000/640/mobile,banking,app?lock=1515" alt="Реалистичная фотография банковской ситуации 15" loading="lazy" onerror="this.onerror=null;this.src='https://picsum.photos/seed/banco-15/1000/640';" />
+            <figcaption>Ситуация 15</figcaption>
+          </figure>
+          <div class="content">
+            <div class="client-row">
+              <span class="badge">Клиент</span>
+              <button class="audio-btn" type="button" data-speak="-Quisiera instalar la aplicación del banco." aria-label="Прослушать фразу клиента">▶ Audio</button>
+            </div>
+            <p class="client-phrase"><span class="phrase client" tabindex="0" title="Я хотел(а) бы установить приложение банка." data-ru="Я хотел(а) бы установить приложение банка.">-Quisiera instalar la aplicación del banco.</span></p>
+            <div class="answers-head">Возможные ответы</div>
+            <ol class="answers visible-answers"><li class="answer-item" data-answer="1">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 1">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Можно скачать в App Store / Google Play." data-ru="Можно скачать в App Store / Google Play.">-Puede descargarla desde App Store / Google Play.</span></div>
+            </li>
+<li class="answer-item" data-answer="2">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 2">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="У вас iPhone или Android?" data-ru="У вас iPhone или Android?">-¿Su teléfono es iPhone o Android?</span></div>
+            </li>
+<li class="answer-item" data-answer="3">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 3">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Для активации нужен номер клиента и СМС-код." data-ru="Для активации нужен номер клиента и СМС-код.">-Para activarla, necesita su número de cliente y un código por SMS.</span></div>
+            </li></ol>
+          </div>
+        </article>
+<article class="card situation" data-situation="16">
+          <figure class="photo-wrap">
+            <img class="photo" src="https://loremflickr.com/1000/640/sms,phone,bank?lock=1516" alt="Реалистичная фотография банковской ситуации 16" loading="lazy" onerror="this.onerror=null;this.src='https://picsum.photos/seed/banco-16/1000/640';" />
+            <figcaption>Ситуация 16</figcaption>
+          </figure>
+          <div class="content">
+            <div class="client-row">
+              <span class="badge">Клиент</span>
+              <button class="audio-btn" type="button" data-speak="-No me llega el código por SMS (ese eme ese)." aria-label="Прослушать фразу клиента">▶ Audio</button>
+            </div>
+            <p class="client-phrase"><span class="phrase client" tabindex="0" title="Мне не приходит СМС-код." data-ru="Мне не приходит СМС-код.">-No me llega el código por SMS (ese eme ese).</span></p>
+            <div class="answers-head">Возможные ответы</div>
+            <ol class="answers visible-answers"><li class="answer-item" data-answer="1">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 1">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Проверим номер телефона в системе." data-ru="Проверим номер телефона в системе.">-Verifiquemos su número de teléfono registrado.</span></div>
+            </li>
+<li class="answer-item" data-answer="2">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 2">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Иногда занимает пару минут; давайте отправим снова." data-ru="Иногда занимает пару минут; давайте отправим снова.">-Puede tardar unos minutos; intentemos reenviar.</span></div>
+            </li>
+<li class="answer-item" data-answer="3">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 3">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Если не приходит, можно активировать по звонку или в отделении." data-ru="Если не приходит, можно активировать по звонку или в отделении.">-Si sigue sin llegar, podemos activar por llamada o en sucursal.</span></div>
+            </li></ol>
+          </div>
+        </article>
+<article class="card situation" data-situation="17">
+          <figure class="photo-wrap">
+            <img class="photo" src="https://loremflickr.com/1000/640/banking,app,error?lock=1517" alt="Реалистичная фотография банковской ситуации 17" loading="lazy" onerror="this.onerror=null;this.src='https://picsum.photos/seed/banco-17/1000/640';" />
+            <figcaption>Ситуация 17</figcaption>
+          </figure>
+          <div class="content">
+            <div class="client-row">
+              <span class="badge">Клиент</span>
+              <button class="audio-btn" type="button" data-speak="-La aplicación no funciona." aria-label="Прослушать фразу клиента">▶ Audio</button>
+            </div>
+            <p class="client-phrase"><span class="phrase client" tabindex="0" title="Приложение не работает." data-ru="Приложение не работает.">-La aplicación no funciona.</span></p>
+            <div class="answers-head">Возможные ответы</div>
+            <ol class="answers visible-answers"><li class="answer-item" data-answer="1">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 1">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Какая ошибка появляется?" data-ru="Какая ошибка появляется?">-¿Qué error aparece exactamente?</span></div>
+            </li>
+<li class="answer-item" data-answer="2">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 2">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Вы обновили приложение до последней версии?" data-ru="Вы обновили приложение до последней версии?">-¿Ya actualizó la aplicación a la última versión?</span></div>
+            </li>
+<li class="answer-item" data-answer="3">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 3">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Попробуйте очистить кэш / перезагрузить телефон / переустановить приложение." data-ru="Попробуйте очистить кэш / перезагрузить телефон / переустановить приложение.">-Intente borrar caché / reiniciar el teléfono / reinstalar la app.</span></div>
+            </li>
+<li class="answer-item" data-answer="4">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 4">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Сейчас ведутся технические работы." data-ru="Сейчас ведутся технические работы.">-En este momento hay mantenimiento del sistema.</span></div>
+            </li></ol>
+          </div>
+        </article>
+<article class="card situation" data-situation="18">
+          <figure class="photo-wrap">
+            <img class="photo" src="https://loremflickr.com/1000/640/login,phone,security?lock=1518" alt="Реалистичная фотография банковской ситуации 18" loading="lazy" onerror="this.onerror=null;this.src='https://picsum.photos/seed/banco-18/1000/640';" />
+            <figcaption>Ситуация 18</figcaption>
+          </figure>
+          <div class="content">
+            <div class="client-row">
+              <span class="badge">Клиент</span>
+              <button class="audio-btn" type="button" data-speak="-No puedo iniciar sesión." aria-label="Прослушать фразу клиента">▶ Audio</button>
+            </div>
+            <p class="client-phrase"><span class="phrase client" tabindex="0" title="Я не могу войти." data-ru="Я не могу войти.">-No puedo iniciar sesión.</span></p>
+            <div class="answers-head">Возможные ответы</div>
+            <ol class="answers visible-answers"><li class="answer-item" data-answer="1">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 1">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Забыли пароль? Можно восстановить." data-ru="Забыли пароль? Можно восстановить.">-¿Olvidó la contraseña? Puede restablecerla.</span></div>
+            </li>
+<li class="answer-item" data-answer="2">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 2">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Учётная запись заблокирована из-за попыток; нужно разблокировать." data-ru="Учётная запись заблокирована из-за попыток; нужно разблокировать.">-Su cuenta está bloqueada por intentos fallidos; debemos desbloquearla.</span></div>
+            </li>
+<li class="answer-item" data-answer="3">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 3">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Отправим ссылку/код для восстановления доступа." data-ru="Отправим ссылку/код для восстановления доступа.">-Le enviaremos un enlace/código para recuperar acceso.</span></div>
+            </li></ol>
+          </div>
+        </article>
+</section>
+<section class="topic" id="topic-5">
+<h2><span class="section-title phrase" tabindex="0" title="GOOGLE PAY" data-ru="GOOGLE PAY">APPLE PAY</span></h2>
+<article class="card situation" data-situation="19">
+          <figure class="photo-wrap">
+            <img class="photo" src="https://loremflickr.com/1000/640/apple,pay,phone?lock=1519" alt="Реалистичная фотография банковской ситуации 19" loading="lazy" onerror="this.onerror=null;this.src='https://picsum.photos/seed/banco-19/1000/640';" />
+            <figcaption>Ситуация 19</figcaption>
+          </figure>
+          <div class="content">
+            <div class="client-row">
+              <span class="badge">Клиент</span>
+              <button class="audio-btn" type="button" data-speak="-Quisiera registrar mi tarjeta en Apple Pay." aria-label="Прослушать фразу клиента">▶ Audio</button>
+            </div>
+            <p class="client-phrase"><span class="phrase client" tabindex="0" title="Я хотел(а) бы добавить карту в Apple Pay." data-ru="Я хотел(а) бы добавить карту в Apple Pay.">-Quisiera registrar mi tarjeta en Apple Pay.</span></p>
+            <div class="answers-head">Возможные ответы</div>
+            <ol class="answers visible-answers"><li class="answer-item" data-answer="1">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 1">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Откройте Wallet, нажмите «+» и отсканируйте карту." data-ru="Откройте Wallet, нажмите «+» и отсканируйте карту.">-Abra Wallet, toque “+” y escanee la tarjeta.</span></div>
+            </li>
+<li class="answer-item" data-answer="2">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 2">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Придёт код подтверждения по СМС или в приложении." data-ru="Придёт код подтверждения по СМС или в приложении.">-Recibirá un código de verificación por SMS o en la app.</span></div>
+            </li>
+<li class="answer-item" data-answer="3">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 3">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Карта добавлена." data-ru="Карта добавлена.">-Su tarjeta ya está añadida.</span></div>
+            </li></ol>
+          </div>
+        </article>
+<article class="card situation" data-situation="20">
+          <figure class="photo-wrap">
+            <img class="photo" src="https://loremflickr.com/1000/640/google,pay,phone?lock=1520" alt="Реалистичная фотография банковской ситуации 20" loading="lazy" onerror="this.onerror=null;this.src='https://picsum.photos/seed/banco-20/1000/640';" />
+            <figcaption>Ситуация 20</figcaption>
+          </figure>
+          <div class="content">
+            <div class="client-row">
+              <span class="badge">Клиент</span>
+              <button class="audio-btn" type="button" data-speak="-Quisiera registrar mi tarjeta en Google Pay." aria-label="Прослушать фразу клиента">▶ Audio</button>
+            </div>
+            <p class="client-phrase"><span class="phrase client" tabindex="0" title="Я хотел(а) бы добавить карту в Google Pay." data-ru="Я хотел(а) бы добавить карту в Google Pay.">-Quisiera registrar mi tarjeta en Google Pay.</span></p>
+            <div class="answers-head">Возможные ответы</div>
+            <ol class="answers visible-answers"><li class="answer-item" data-answer="1">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 1">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Откройте Google Wallet/Pay, нажмите «Добавить карту» и следуйте шагам." data-ru="Откройте Google Wallet/Pay, нажмите «Добавить карту» и следуйте шагам.">-Abra Google Wallet/Pay, toque “Agregar tarjeta” y siga los pasos.</span></div>
+            </li>
+<li class="answer-item" data-answer="2">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 2">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Нужно подтвердить кодом." data-ru="Нужно подтвердить кодом.">-Necesitamos validar con un código.</span></div>
+            </li>
+<li class="answer-item" data-answer="3">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 3">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Готово, можно платить бесконтактно." data-ru="Готово, можно платить бесконтактно.">-Listo, ya puede pagar sin contacto.</span></div>
+            </li></ol>
+          </div>
+        </article>
+<article class="card situation" data-situation="21">
+          <figure class="photo-wrap">
+            <img class="photo" src="https://loremflickr.com/1000/640/contactless,payment,card?lock=1521" alt="Реалистичная фотография банковской ситуации 21" loading="lazy" onerror="this.onerror=null;this.src='https://picsum.photos/seed/banco-21/1000/640';" />
+            <figcaption>Ситуация 21</figcaption>
+          </figure>
+          <div class="content">
+            <div class="client-row">
+              <span class="badge">Клиент</span>
+              <button class="audio-btn" type="button" data-speak="-No puedo añadir la tarjeta a Apple Pay / Google Pay." aria-label="Прослушать фразу клиента">▶ Audio</button>
+            </div>
+            <p class="client-phrase"><span class="phrase client" tabindex="0" title="Я не могу добавить карту в Apple Pay / Google Pay." data-ru="Я не могу добавить карту в Apple Pay / Google Pay.">-No puedo añadir la tarjeta a Apple Pay / Google Pay.</span></p>
+            <div class="answers-head">Возможные ответы</div>
+            <ol class="answers visible-answers"><li class="answer-item" data-answer="1">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 1">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Сначала проверим, поддерживается ли карта." data-ru="Сначала проверим, поддерживается ли карта.">-Primero verifiquemos si su tarjeta es compatible.</span></div>
+            </li>
+<li class="answer-item" data-answer="2">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 2">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Нужно включить онлайн-покупки / бесконтактные платежи." data-ru="Нужно включить онлайн-покупки / бесконтактные платежи.">-Debe habilitar compras en línea / pagos sin contacto.</span></div>
+            </li>
+<li class="answer-item" data-answer="3">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 3">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Попробуйте позже: иногда это временный сбой." data-ru="Попробуйте позже: иногда это временный сбой.">-Intente de nuevo más tarde; a veces es un problema temporal.</span></div>
+            </li></ol>
+          </div>
+        </article>
+<article class="card situation" data-situation="22">
+          <figure class="photo-wrap">
+            <img class="photo" src="https://loremflickr.com/1000/640/verification,code,phone?lock=1522" alt="Реалистичная фотография банковской ситуации 22" loading="lazy" onerror="this.onerror=null;this.src='https://picsum.photos/seed/banco-22/1000/640';" />
+            <figcaption>Ситуация 22</figcaption>
+          </figure>
+          <div class="content">
+            <div class="client-row">
+              <span class="badge">Клиент</span>
+              <button class="audio-btn" type="button" data-speak="-No llega el código de verificación para Apple Pay / Google Pay." aria-label="Прослушать фразу клиента">▶ Audio</button>
+            </div>
+            <p class="client-phrase"><span class="phrase client" tabindex="0" title="Не приходит код подтверждения для Apple Pay / Google Pay." data-ru="Не приходит код подтверждения для Apple Pay / Google Pay.">-No llega el código de verificación para Apple Pay / Google Pay.</span></p>
+            <div class="answers-head">Возможные ответы</div>
+            <ol class="answers visible-answers"><li class="answer-item" data-answer="1">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 1">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Проверим номер и отправим код снова." data-ru="Проверим номер и отправим код снова.">-Verifiquemos el número registrado y reenviemos el código.</span></div>
+            </li>
+<li class="answer-item" data-answer="2">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 2">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Можно подтвердить в приложении банка." data-ru="Можно подтвердить в приложении банка.">-También puede aprobar la verificación desde la app del banco.</span></div>
+            </li>
+<li class="answer-item" data-answer="3">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 3">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Если не получится, активируем в отделении." data-ru="Если не получится, активируем в отделении.">-Si no funciona, lo activamos desde sucursal.</span></div>
+            </li></ol>
+          </div>
+        </article>
+</section>
+<section class="topic" id="topic-6">
+<h2><span class="section-title phrase" tabindex="0" title="КОМИССИИ, ЛИМИТЫ И ВЫПИСКА" data-ru="КОМИССИИ, ЛИМИТЫ И ВЫПИСКА">COMISIONES, LÍMITES Y ESTADO DE CUENTA</span></h2>
+<article class="card situation" data-situation="23">
+          <figure class="photo-wrap">
+            <img class="photo" src="https://loremflickr.com/1000/640/bank,limits,statement?lock=1523" alt="Реалистичная фотография банковской ситуации 23" loading="lazy" onerror="this.onerror=null;this.src='https://picsum.photos/seed/banco-23/1000/640';" />
+            <figcaption>Ситуация 23</figcaption>
+          </figure>
+          <div class="content">
+            <div class="client-row">
+              <span class="badge">Клиент</span>
+              <button class="audio-btn" type="button" data-speak="-¿Cuáles son los límites de retiro y transferencia?" aria-label="Прослушать фразу клиента">▶ Audio</button>
+            </div>
+            <p class="client-phrase"><span class="phrase client" tabindex="0" title="Какие лимиты на снятие и переводы?" data-ru="Какие лимиты на снятие и переводы?">-¿Cuáles son los límites de retiro y transferencia?</span></p>
+            <div class="answers-head">Возможные ответы</div>
+            <ol class="answers visible-answers"><li class="answer-item" data-answer="1">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 1">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Ваш дневной лимит ___ песо / ___ евро." data-ru="Ваш дневной лимит ___ песо / ___ евро.">-Su límite diario es ___ pesos / ___ euros.</span></div>
+            </li>
+<li class="answer-item" data-answer="2">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 2">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Можно увеличить через приложение или в отделении." data-ru="Можно увеличить через приложение или в отделении.">-Puede aumentarlo solicitándolo desde la app o en sucursal.</span></div>
+            </li>
+<li class="answer-item" data-answer="3">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 3">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Увеличение занимает до 24 часов." data-ru="Увеличение занимает до 24 часов.">-El aumento tarda hasta 24 horas.</span></div>
+            </li></ol>
+          </div>
+        </article>
+<article class="card situation" data-situation="24">
+          <figure class="photo-wrap">
+            <img class="photo" src="https://loremflickr.com/1000/640/bank,monthly,fees?lock=1524" alt="Реалистичная фотография банковской ситуации 24" loading="lazy" onerror="this.onerror=null;this.src='https://picsum.photos/seed/banco-24/1000/640';" />
+            <figcaption>Ситуация 24</figcaption>
+          </figure>
+          <div class="content">
+            <div class="client-row">
+              <span class="badge">Клиент</span>
+              <button class="audio-btn" type="button" data-speak="-¿Cuánto cuesta el mantenimiento mensual?" aria-label="Прослушать фразу клиента">▶ Audio</button>
+            </div>
+            <p class="client-phrase"><span class="phrase client" tabindex="0" title="Сколько стоит ежемесячное обслуживание?" data-ru="Сколько стоит ежемесячное обслуживание?">-¿Cuánto cuesta el mantenimiento mensual?</span></p>
+            <div class="answers-head">Возможные ответы</div>
+            <ol class="answers visible-answers"><li class="answer-item" data-answer="1">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 1">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Обслуживание ___ песо / ___ евро в месяц." data-ru="Обслуживание ___ песо / ___ евро в месяц.">-El mantenimiento es de ___ pesos / ___ euros al mes.</span></div>
+            </li>
+<li class="answer-item" data-answer="2">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 2">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Если сохраняете минимальный остаток, комиссия не взимается." data-ru="Если сохраняете минимальный остаток, комиссия не взимается.">-Si mantiene un saldo mínimo, no se cobra comisión.</span></div>
+            </li></ol>
+          </div>
+        </article>
+<article class="card situation" data-situation="25">
+          <figure class="photo-wrap">
+            <img class="photo" src="https://loremflickr.com/1000/640/bank,statement,print?lock=1525" alt="Реалистичная фотография банковской ситуации 25" loading="lazy" onerror="this.onerror=null;this.src='https://picsum.photos/seed/banco-25/1000/640';" />
+            <figcaption>Ситуация 25</figcaption>
+          </figure>
+          <div class="content">
+            <div class="client-row">
+              <span class="badge">Клиент</span>
+              <button class="audio-btn" type="button" data-speak="-¿Puede imprimir el estado de cuenta?" aria-label="Прослушать фразу клиента">▶ Audio</button>
+            </div>
+            <p class="client-phrase"><span class="phrase client" tabindex="0" title="Вы можете распечатать выписку?" data-ru="Вы можете распечатать выписку?">-¿Puede imprimir el estado de cuenta?</span></p>
+            <div class="answers-head">Возможные ответы</div>
+            <ol class="answers visible-answers"><li class="answer-item" data-answer="1">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 1">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Да. За какой период: этот месяц или конкретный диапазон?" data-ru="Да. За какой период: этот месяц или конкретный диапазон?">-Sí. ¿De qué periodo: este mes o un rango específico?</span></div>
+            </li>
+<li class="answer-item" data-answer="2">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 2">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Стоимость ___ песо / ___ евро." data-ru="Стоимость ___ песо / ___ евро.">-Tiene costo de ___ pesos / ___ euros.</span></div>
+            </li>
+<li class="answer-item" data-answer="3">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 3">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Можно также скачать в приложении." data-ru="Можно также скачать в приложении.">-También puede descargarlo desde la app.</span></div>
+            </li></ol>
+          </div>
+        </article>
+</section>
+<section class="topic" id="topic-7">
+<h2><span class="section-title phrase" tabindex="0" title="ПРЕТЕНЗИИ И НЕСАНКЦИОНИРОВАННЫЕ ОПЕРАЦИИ" data-ru="ПРЕТЕНЗИИ И НЕСАНКЦИОНИРОВАННЫЕ ОПЕРАЦИИ">RECLAMACIONES Y CARGOS NO RECONOCIDOS</span></h2>
+<article class="card situation" data-situation="26">
+          <figure class="photo-wrap">
+            <img class="photo" src="https://loremflickr.com/1000/640/fraud,transaction,card?lock=1526" alt="Реалистичная фотография банковской ситуации 26" loading="lazy" onerror="this.onerror=null;this.src='https://picsum.photos/seed/banco-26/1000/640';" />
+            <figcaption>Ситуация 26</figcaption>
+          </figure>
+          <div class="content">
+            <div class="client-row">
+              <span class="badge">Клиент</span>
+              <button class="audio-btn" type="button" data-speak="-Veo una transacción que no reconozco." aria-label="Прослушать фразу клиента">▶ Audio</button>
+            </div>
+            <p class="client-phrase"><span class="phrase client" tabindex="0" title="Я вижу операцию, которую не узнаю." data-ru="Я вижу операцию, которую не узнаю.">-Veo una transacción que no reconozco.</span></p>
+            <div class="answers-head">Возможные ответы</div>
+            <ol class="answers visible-answers"><li class="answer-item" data-answer="1">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 1">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Заблокируем карту для безопасности и откроем спор." data-ru="Заблокируем карту для безопасности и откроем спор.">-Vamos a bloquear la tarjeta por seguridad y abrir un reclamo.</span></div>
+            </li>
+<li class="answer-item" data-answer="2">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 2">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="В песо или евро и какая дата?" data-ru="В песо или евро и какая дата?">-¿Fue en pesos o en euros y en qué fecha?</span></div>
+            </li>
+<li class="answer-item" data-answer="3">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 3">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Проверка занимает 10–45 дней." data-ru="Проверка занимает 10–45 дней.">-La investigación tarda de 10 a 45 días.</span></div>
+            </li></ol>
+          </div>
+        </article>
+<article class="card situation" data-situation="27">
+          <figure class="photo-wrap">
+            <img class="photo" src="https://loremflickr.com/1000/640/bank,complaint,customer?lock=1527" alt="Реалистичная фотография банковской ситуации 27" loading="lazy" onerror="this.onerror=null;this.src='https://picsum.photos/seed/banco-27/1000/640';" />
+            <figcaption>Ситуация 27</figcaption>
+          </figure>
+          <div class="content">
+            <div class="client-row">
+              <span class="badge">Клиент</span>
+              <button class="audio-btn" type="button" data-speak="-Quisiera presentar una reclamación." aria-label="Прослушать фразу клиента">▶ Audio</button>
+            </div>
+            <p class="client-phrase"><span class="phrase client" tabindex="0" title="Я хотел(а) бы подать претензию/жалобу." data-ru="Я хотел(а) бы подать претензию/жалобу.">-Quisiera presentar una reclamación.</span></p>
+            <div class="answers-head">Возможные ответы</div>
+            <ol class="answers visible-answers"><li class="answer-item" data-answer="1">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 1">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Конечно. По какой операции или услуге?" data-ru="Конечно. По какой операции или услуге?">-Claro. ¿Sobre qué operación o servicio?</span></div>
+            </li>
+<li class="answer-item" data-answer="2">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 2">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Нужен ваш номер клиента и подтверждение операции." data-ru="Нужен ваш номер клиента и подтверждение операции.">-Necesito su número de cliente y el comprobante.</span></div>
+            </li>
+<li class="answer-item" data-answer="3">
+              <button class="select-answer" type="button" aria-label="Выбрать ответ 3">✓</button>
+              <div class="answer-text"><span class="phrase" tabindex="0" title="Мы дадим номер обращения." data-ru="Мы дадим номер обращения.">-Le daremos un número de folio.</span></div>
+            </li></ol>
+          </div>
+        </article>
+</section>
+  </main>
+  <footer>Источник: файл DOCX с материалом «Apuntes del español 28. En el banco». Валюта заменена по требованию: euros / евро.</footer>
+  <script>
+    const speakButtons = document.querySelectorAll('.audio-btn');
+    const synth = window.speechSynthesis;
+    function speakSpanish(text) {
+      if (!('speechSynthesis' in window)) {
+        alert('Ваш браузер не поддерживает синтез речи.');
+        return;
+      }
+      synth.cancel();
+      const utterance = new SpeechSynthesisUtterance(text.replace(/^[-–]\s*/, ''));
+      utterance.lang = 'es-ES';
+      utterance.rate = 0.86;
+      utterance.pitch = 1;
+      synth.speak(utterance);
+    }
+    speakButtons.forEach(btn => btn.addEventListener('click', () => speakSpanish(btn.dataset.speak || '')));
+
+    document.querySelectorAll('.select-answer').forEach(btn => {
+      btn.addEventListener('click', () => {
+        btn.closest('.answer-item').classList.toggle('selected');
+      });
+    });
+    document.getElementById('resetChoices').addEventListener('click', () => {
+      document.querySelectorAll('.answer-item.selected').forEach(el => el.classList.remove('selected'));
+    });
+    document.getElementById('expandAll').addEventListener('click', () => {
+      document.querySelectorAll('.phrase').forEach(el => el.classList.add('active'));
+    });
+    document.getElementById('collapseAll').addEventListener('click', () => {
+      document.querySelectorAll('.phrase.active').forEach(el => el.classList.remove('active'));
+    });
+    document.querySelectorAll('.phrase').forEach(el => {
+      el.addEventListener('click', () => el.classList.toggle('active'));
+    });
+  </script>
+</body>
+</html>

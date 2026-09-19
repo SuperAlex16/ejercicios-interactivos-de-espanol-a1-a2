@@ -1,0 +1,1232 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Repaso de los tiempos verbales</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <style>
+    :root {
+      --bg-a: #f7eadf;
+      --bg-b: #e8f4ff;
+      --ink: #1f2937;
+      --muted: #667085;
+      --card: rgba(255,255,255,.88);
+      --border: rgba(31,41,55,.12);
+      --accent: #7c3aed;
+      --accent-2: #0891b2;
+      --accent-3: #f59e0b;
+      --ok: #15803d;
+      --bad: #b91c1c;
+      --ok-bg: #dcfce7;
+      --bad-bg: #fee2e2;
+      --shadow: 0 22px 65px rgba(31,41,55,.14);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% 8%, rgba(124,58,237,.24), transparent 28%),
+        radial-gradient(circle at 86% 4%, rgba(8,145,178,.22), transparent 30%),
+        radial-gradient(circle at 72% 88%, rgba(245,158,11,.18), transparent 26%),
+        linear-gradient(135deg, var(--bg-a), var(--bg-b));
+      padding: 34px 16px 110px;
+    }
+    .wrap { max-width: 1120px; margin: 0 auto; }
+    header {
+      border-radius: 34px;
+      padding: clamp(28px, 5vw, 52px);
+      color: white;
+      background: linear-gradient(135deg, rgba(124,58,237,.96), rgba(8,145,178,.92));
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 28px;
+    }
+    header::before, header::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      background: rgba(255,255,255,.16);
+      pointer-events: none;
+    }
+    header::before { width: 260px; height: 260px; right: -75px; top: -90px; }
+    header::after { width: 150px; height: 150px; left: 42px; bottom: -80px; }
+    .badge {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.18);
+      border: 1px solid rgba(255,255,255,.28);
+      font-weight: 800;
+      font-size: .82rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+    h1 {
+      margin: 0;
+      max-width: 870px;
+      font-size: clamp(2rem, 5vw, 4.3rem);
+      line-height: .98;
+      letter-spacing: -.055em;
+      position: relative;
+      z-index: 1;
+    }
+    .lead {
+      margin: 18px 0 0;
+      max-width: 780px;
+      font-size: clamp(1rem, 2vw, 1.18rem);
+      opacity: .92;
+      line-height: 1.6;
+      position: relative;
+      z-index: 1;
+    }
+    .navchips {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 18px 0 0;
+      position: relative;
+      z-index: 1;
+    }
+    .chip {
+      text-decoration: none;
+      color: white;
+      background: rgba(255,255,255,.16);
+      border: 1px solid rgba(255,255,255,.28);
+      padding: 9px 13px;
+      border-radius: 999px;
+      font-weight: 750;
+      font-size: .92rem;
+    }
+    .grid { display: grid; gap: 24px; }
+    .panel {
+      background: var(--card);
+      backdrop-filter: blur(14px);
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      padding: clamp(20px, 4vw, 34px);
+      box-shadow: 0 18px 50px rgba(31,41,55,.10);
+    }
+    .section-title {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin: 0 0 20px;
+      font-size: clamp(1.25rem, 3vw, 1.7rem);
+      line-height: 1.2;
+      letter-spacing: -.02em;
+    }
+    .pill {
+      flex: 0 0 auto;
+      min-width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: inline-grid;
+      place-items: center;
+      color: white;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      font-weight: 950;
+      box-shadow: 0 10px 24px rgba(124,58,237,.25);
+    }
+    .note { color: var(--muted); margin: -8px 0 22px; line-height: 1.55; }
+
+    ol {
+      list-style: none;
+      counter-reset: item;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 12px;
+    }
+    li {
+      counter-increment: item;
+      position: relative;
+      padding: 15px 18px 15px 56px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: rgba(255,255,255,.66);
+      box-shadow: 0 8px 24px rgba(31,41,55,.06);
+      line-height: 2.3;
+      font-size: 1.02rem;
+    }
+    li::before {
+      content: counter(item);
+      position: absolute;
+      left: 16px;
+      top: 15px;
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      color: white;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      font-size: .78rem;
+      font-weight: 900;
+    }
+    .story {
+      font-size: 1.045rem;
+      line-height: 2.45;
+    }
+    .story p {
+      margin: 0 0 16px;
+      padding: 18px 20px;
+      border-radius: 22px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.62);
+      box-shadow: 0 8px 24px rgba(31,41,55,.06);
+    }
+
+    .verb-select {
+      appearance: none;
+      -webkit-appearance: none;
+      min-width: 172px;
+      max-width: 100%;
+      margin: 0 5px;
+      padding: 9px 42px 9px 14px;
+      border-radius: 999px;
+      border: 2px solid rgba(124,58,237,.25);
+      background:
+        linear-gradient(45deg, transparent 50%, var(--accent) 50%) calc(100% - 18px) calc(50% - 3px) / 7px 7px no-repeat,
+        linear-gradient(135deg, #fff, #f8fbff);
+      color: var(--ink);
+      font-weight: 800;
+      font-size: .96rem;
+      cursor: pointer;
+      box-shadow: 0 10px 22px rgba(31,41,55,.08);
+      transition: transform .16s ease, border-color .16s ease, box-shadow .16s ease;
+    }
+    .verb-select:hover { transform: translateY(-1px); border-color: rgba(124,58,237,.55); box-shadow: 0 14px 28px rgba(31,41,55,.12); }
+    .verb-select:focus { outline: 4px solid rgba(124,58,237,.18); border-color: var(--accent); }
+    .verb-select.correct {
+      border-color: var(--ok);
+      background:
+        linear-gradient(45deg, transparent 50%, var(--ok) 50%) calc(100% - 18px) calc(50% - 3px) / 7px 7px no-repeat,
+        var(--ok-bg);
+    }
+    .verb-select.incorrect {
+      border-color: var(--bad);
+      background:
+        linear-gradient(45deg, transparent 50%, var(--bad) 50%) calc(100% - 18px) calc(50% - 3px) / 7px 7px no-repeat,
+        var(--bad-bg);
+    }
+
+    .actions {
+      position: sticky;
+      bottom: 14px;
+      z-index: 10;
+      margin: 28px auto 0;
+      max-width: 760px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding: 14px;
+      border-radius: 26px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.82);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 20px 56px rgba(31,41,55,.16);
+    }
+    button {
+      border: 0;
+      border-radius: 999px;
+      padding: 13px 24px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 900;
+      transition: transform .16s ease, box-shadow .16s ease;
+    }
+    button:hover { transform: translateY(-2px); }
+    #checkBtn { color: white; background: linear-gradient(135deg, var(--accent), var(--accent-2)); box-shadow: 0 14px 30px rgba(124,58,237,.26); }
+    #resetBtn { color: var(--ink); background: white; border: 1px solid var(--border); }
+    #score {
+      min-width: 235px;
+      text-align: center;
+      color: var(--muted);
+      font-weight: 900;
+    }
+    .progress {
+      width: min(100%, 360px);
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(31,41,55,.12);
+      overflow: hidden;
+    }
+    .bar { height: 100%; width: 0%; border-radius: 999px; background: linear-gradient(90deg, var(--accent), var(--accent-3)); transition: width .5s ease; }
+
+    @media (max-width: 720px) {
+      body { padding: 18px 10px 42px; }
+      header, .panel { border-radius: 24px; }
+      li { padding: 14px 14px 14px 48px; line-height: 1.9; }
+      .story, .story p { line-height: 1.9; }
+      .verb-select { width: 100%; margin: 7px 0; }
+      .actions { position: static; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header>
+      <div class="badge">Repaso gramatical</div>
+      <h1>Repaso de los tiempos verbales del Indicativo, Presente de Subjuntivo e Imperativo</h1>
+      <p class="lead">Elige la forma verbal adecuada. En cada desplegable aparece primero el infinitivo del verbo.</p>
+      <div class="navchips">
+        <a class="chip" href="#oraciones">Oraciones</a>
+        <a class="chip" href="#texto">Texto</a>
+      </div>
+    </header>
+
+    <section class="grid">
+      <article class="panel" id="oraciones">
+        <h2 class="section-title"><span class="pill">1</span> Oraciones de repaso</h2>
+        <p class="note">Selecciona la forma correcta según el contexto. Total: 30 oraciones.</p>
+        <ol>
+<li>Yo siempre <select class="verb-select" data-answer="he trabajado" data-infinitive="trabajar"><option disabled="" hidden="" selected="" value="">trabajar</option>
+<option value="trabajo">trabajo</option>
+<option value="trabajé">trabajé</option>
+<option value="he trabajado">he trabajado</option>
+<option value="trabaje">trabaje</option>
+<option value="había trabajado">había trabajado</option>
+</select> en esta empresa.</li>
+<li>Cuando empezó la película, nosotros <select class="verb-select" data-answer="habíamos visto" data-infinitive="ver"><option disabled="" hidden="" selected="" value="">ver</option>
+<option value="hemos visto">hemos visto</option>
+<option value="vimos">vimos</option>
+<option value="habíamos visto">habíamos visto</option>
+<option value="vemos">vemos</option>
+<option value="veamos">veamos</option>
+</select> el tráiler.</li>
+<li>Ayer yo <select class="verb-select" data-answer="fui" data-infinitive="ir"><option disabled="" hidden="" selected="" value="">ir</option>
+<option value="he ido">he ido</option>
+<option value="vaya">vaya</option>
+<option value="voy">voy</option>
+<option value="había ido">había ido</option>
+<option value="fui">fui</option>
+</select> al mercado.</li>
+<li>Es importante que ella <select class="verb-select" data-answer="llegue" data-infinitive="llegar"><option disabled="" hidden="" selected="" value="">llegar</option>
+<option value="llegó">llegó</option>
+<option value="llega">llega</option>
+<option value="había llegado">había llegado</option>
+<option value="llegue">llegue</option>
+<option value="ha llegado">ha llegado</option>
+</select> temprano.</li>
+<li>Hoy yo <select class="verb-select" data-answer="como" data-infinitive="comer"><option disabled="" hidden="" selected="" value="">comer</option>
+<option value="coma">coma</option>
+<option value="había comido">había comido</option>
+<option value="comí">comí</option>
+<option value="como">como</option>
+<option value="he comido">he comido</option>
+</select> arroz con pollo.</li>
+<li>Ella nunca <select class="verb-select" data-answer="ha comido" data-infinitive="comer"><option disabled="" hidden="" selected="" value="">comer</option>
+<option value="come">come</option>
+<option value="ha comido">ha comido</option>
+<option value="coma">coma</option>
+<option value="comió">comió</option>
+<option value="había comido">había comido</option>
+</select> sushi.</li>
+<li>La semana pasada tú <select class="verb-select" data-answer="compraste" data-infinitive="comprar"><option disabled="" hidden="" selected="" value="">comprar</option>
+<option value="compras">compras</option>
+<option value="has comprado">has comprado</option>
+<option value="habías comprado">habías comprado</option>
+<option value="compraste">compraste</option>
+<option value="compres">compres</option>
+</select> una camisa.</li>
+<li>Prefiero que ustedes <select class="verb-select" data-answer="estén" data-infinitive="estar"><option disabled="" hidden="" selected="" value="">estar</option>
+<option value="estuvieron">estuvieron</option>
+<option value="han estado">han estado</option>
+<option value="estén">estén</option>
+<option value="habían estado">habían estado</option>
+<option value="están">están</option>
+</select> en silencio.</li>
+<li>Antes de la clase, tú <select class="verb-select" data-answer="habías estudiado" data-infinitive="estudiar"><option disabled="" hidden="" selected="" value="">estudiar</option>
+<option value="has estudiado">has estudiado</option>
+<option value="estudias">estudias</option>
+<option value="habías estudiado">habías estudiado</option>
+<option value="estudiaste">estudiaste</option>
+<option value="estudies">estudies</option>
+</select> el vocabulario.</li>
+<li>Ahora tú <select class="verb-select" data-answer="estudias" data-infinitive="estudiar"><option disabled="" hidden="" selected="" value="">estudiar</option>
+<option value="has estudiado">has estudiado</option>
+<option value="estudies">estudies</option>
+<option value="habías estudiado">habías estudiado</option>
+<option value="estudié">estudié</option>
+<option value="estudias">estudias</option>
+</select> español en la biblioteca.</li>
+<li>Cuando llegué, yo ya <select class="verb-select" data-answer="había comido" data-infinitive="comer"><option disabled="" hidden="" selected="" value="">comer</option>
+<option value="he comido">he comido</option>
+<option value="había comido">había comido</option>
+<option value="comí">comí</option>
+<option value="coma">coma</option>
+<option value="como">como</option>
+</select>.</li>
+<li>Ustedes <select class="verb-select" data-answer="van" data-infinitive="ir"><option disabled="" hidden="" selected="" value="">ir</option>
+<option value="vayan">vayan</option>
+<option value="han ido">han ido</option>
+<option value="van">van</option>
+<option value="fueron">fueron</option>
+<option value="habían ido">habían ido</option>
+</select> al trabajo en bus.</li>
+<li>Nosotros siempre <select class="verb-select" data-answer="hemos dicho" data-infinitive="decir"><option disabled="" hidden="" selected="" value="">decir</option>
+<option value="decimos">decimos</option>
+<option value="dijimos">dijimos</option>
+<option value="habíamos dicho">habíamos dicho</option>
+<option value="digamos">digamos</option>
+<option value="hemos dicho">hemos dicho</option>
+</select> la verdad.</li>
+<li>El sábado ella <select class="verb-select" data-answer="cocinó" data-infinitive="cocinar"><option disabled="" hidden="" selected="" value="">cocinar</option>
+<option value="cocina">cocina</option>
+<option value="cocine">cocine</option>
+<option value="ha cocinado">ha cocinado</option>
+<option value="había cocinado">había cocinado</option>
+<option value="cocinó">cocinó</option>
+</select> pasta.</li>
+<li>Necesito que nosotros <select class="verb-select" data-answer="comamos" data-infinitive="comer"><option disabled="" hidden="" selected="" value="">comer</option>
+<option value="hemos comido">hemos comido</option>
+<option value="comimos">comimos</option>
+<option value="comemos">comemos</option>
+<option value="habíamos comido">habíamos comido</option>
+<option value="comamos">comamos</option>
+</select> en casa hoy.</li>
+<li>En 2022 ustedes <select class="verb-select" data-answer="vivieron" data-infinitive="vivir"><option disabled="" hidden="" selected="" value="">vivir</option>
+<option value="viven">viven</option>
+<option value="habían vivido">habían vivido</option>
+<option value="han vivido">han vivido</option>
+<option value="vivan">vivan</option>
+<option value="vivieron">vivieron</option>
+</select> en la capital.</li>
+<li>Ojalá que tú <select class="verb-select" data-answer="estés" data-infinitive="estar"><option disabled="" hidden="" selected="" value="">estar</option>
+<option value="estuviste">estuviste</option>
+<option value="has estado">has estado</option>
+<option value="habías estado">habías estado</option>
+<option value="estás">estás</option>
+<option value="estés">estés</option>
+</select> bien.</li>
+<li>Mi hermano <select class="verb-select" data-answer="vive" data-infinitive="vivir"><option disabled="" hidden="" selected="" value="">vivir</option>
+<option value="viva">viva</option>
+<option value="había vivido">había vivido</option>
+<option value="vive">vive</option>
+<option value="ha vivido">ha vivido</option>
+<option value="vivió">vivió</option>
+</select> en Antigua.</li>
+<li>Cuando me llamaste, yo <select class="verb-select" data-answer="había hecho" data-infinitive="hacer"><option disabled="" hidden="" selected="" value="">hacer</option>
+<option value="hago">hago</option>
+<option value="he hecho">he hecho</option>
+<option value="había hecho">había hecho</option>
+<option value="hice">hice</option>
+<option value="haga">haga</option>
+</select> la cena.</li>
+<li>Tú siempre <select class="verb-select" data-answer="has ordenado" data-infinitive="ordenar"><option disabled="" hidden="" selected="" value="">ordenar</option>
+<option value="has ordenado">has ordenado</option>
+<option value="ordenaste">ordenaste</option>
+<option value="ordenas">ordenas</option>
+<option value="ordenes">ordenes</option>
+<option value="habías ordenado">habías ordenado</option>
+</select> tu cuarto.</li>
+<li>Hace dos horas yo <select class="verb-select" data-answer="tuve" data-infinitive="tener"><option disabled="" hidden="" selected="" value="">tener</option>
+<option value="he tenido">he tenido</option>
+<option value="tengo">tengo</option>
+<option value="había tenido">había tenido</option>
+<option value="tenga">tenga</option>
+<option value="tuve">tuve</option>
+</select> una reunión.</li>
+<li>Para que yo <select class="verb-select" data-answer="aprenda" data-infinitive="aprender"><option disabled="" hidden="" selected="" value="">aprender</option>
+<option value="aprendí">aprendí</option>
+<option value="aprenda">aprenda</option>
+<option value="aprendo">aprendo</option>
+<option value="he aprendido">he aprendido</option>
+<option value="había aprendido">había aprendido</option>
+</select> más, estudio cada noche.</li>
+<li>Anoche nosotros <select class="verb-select" data-answer="estuvimos" data-infinitive="estar"><option disabled="" hidden="" selected="" value="">estar</option>
+<option value="hemos estado">hemos estado</option>
+<option value="estemos">estemos</option>
+<option value="estamos">estamos</option>
+<option value="habíamos estado">habíamos estado</option>
+<option value="estuvimos">estuvimos</option>
+</select> en casa.</li>
+<li>Yo nunca <select class="verb-select" data-answer="he volado" data-infinitive="volar"><option disabled="" hidden="" selected="" value="">volar</option>
+<option value="volé">volé</option>
+<option value="había volado">había volado</option>
+<option value="vuelo">vuelo</option>
+<option value="he volado">he volado</option>
+<option value="vuele">vuele</option>
+</select> en avión.</li>
+<li>A las ocho, ella ya <select class="verb-select" data-answer="había llegado" data-infinitive="llegar"><option disabled="" hidden="" selected="" value="">llegar</option>
+<option value="llegue">llegue</option>
+<option value="ha llegado">ha llegado</option>
+<option value="había llegado">había llegado</option>
+<option value="llega">llega</option>
+<option value="llegó">llegó</option>
+</select> a la oficina.</li>
+<li>Quiero que tú <select class="verb-select" data-answer="hables" data-infinitive="hablar"><option disabled="" hidden="" selected="" value="">hablar</option>
+<option value="has hablado">has hablado</option>
+<option value="hablaste">hablaste</option>
+<option value="habías hablado">habías hablado</option>
+<option value="hables">hables</option>
+<option value="hablas">hablas</option>
+</select> más despacio.</li>
+<li>Mi mamá <select class="verb-select" data-answer="toma" data-infinitive="tomar"><option disabled="" hidden="" selected="" value="">tomar</option>
+<option value="ha tomado">ha tomado</option>
+<option value="tomó">tomó</option>
+<option value="tome">tome</option>
+<option value="había tomado">había tomado</option>
+<option value="toma">toma</option>
+</select> café por la mañana.</li>
+<li>Ustedes nunca <select class="verb-select" data-answer="han viajado" data-infinitive="viajar"><option disabled="" hidden="" selected="" value="">viajar</option>
+<option value="viajen">viajen</option>
+<option value="viajan">viajan</option>
+<option value="habían viajado">habían viajado</option>
+<option value="han viajado">han viajado</option>
+<option value="viajaron">viajaron</option>
+</select> a México.</li>
+<li>Cuando entramos, el profesor ya <select class="verb-select" data-answer="había cerrado" data-infinitive="cerrar"><option disabled="" hidden="" selected="" value="">cerrar</option>
+<option value="ha cerrado">ha cerrado</option>
+<option value="cerró">cerró</option>
+<option value="cierra">cierra</option>
+<option value="había cerrado">había cerrado</option>
+<option value="cierre">cierre</option>
+</select> la puerta.</li>
+<li>Nosotros <select class="verb-select" data-answer="hacemos" data-infinitive="hacer"><option disabled="" hidden="" selected="" value="">hacer</option>
+<option value="hicimos">hicimos</option>
+<option value="habíamos hecho">habíamos hecho</option>
+<option value="hemos hecho">hemos hecho</option>
+<option value="hagamos">hagamos</option>
+<option value="hacemos">hacemos</option>
+</select> la tarea en clase.</li>
+</ol>
+      </article>
+
+      <article class="panel" id="texto">
+        <h2 class="section-title"><span class="pill">2</span> Historia: Ana y Luis</h2>
+        <p class="note">Completa el texto con las formas verbales adecuadas. Total: 91 huecos.</p>
+        <div class="story">
+          <p>
+El lunes pasado por la mañana Ana <select class="verb-select" data-answer="se levantó" data-infinitive="levantarse"><option disabled="" hidden="" selected="" value="">levantarse</option>
+
+<option value="se levante">se levante</option>
+<option value="se levanta">se levanta</option>
+<option value="se levantó">se levantó</option>
+<option value="se había levantado">se había levantado</option>
+<option value="se ha levantado">se ha levantado</option>
+</select> muy temprano. Primero <select class="verb-select" data-answer="tomó" data-infinitive="tomar"><option disabled="" hidden="" selected="" value="">tomar</option>
+
+<option value="toma">toma</option>
+<option value="ha tomado">ha tomado</option>
+<option value="tomó">tomó</option>
+<option value="había tomado">había tomado</option>
+<option value="tome">tome</option>
+</select> un café y después <select class="verb-select" data-answer="fue" data-infinitive="ser"><option disabled="" hidden="" selected="" value="">ser</option>
+
+<option value="había ido">había ido</option>
+<option value="fue">fue</option>
+<option value="ha ido">ha ido</option>
+<option value="vaya">vaya</option>
+<option value="va">va</option>
+</select> a la escuela de español, en un edificio blanco, cerca del parque. En la entrada <select class="verb-select" data-answer="vio" data-infinitive="ver"><option disabled="" hidden="" selected="" value="">ver</option>
+
+<option value="vea">vea</option>
+<option value="ha visto">ha visto</option>
+<option value="había visto">había visto</option>
+<option value="vio">vio</option>
+<option value="ve">ve</option>
+</select> a Luis y lo <select class="verb-select" data-answer="saludó" data-infinitive="saludar"><option disabled="" hidden="" selected="" value="">saludar</option>
+
+<option value="había saludado">había saludado</option>
+<option value="saludó">saludó</option>
+<option value="saluda">saluda</option>
+<option value="salude">salude</option>
+<option value="ha saludado">ha saludado</option>
+</select>. Ana le <select class="verb-select" data-answer="dijo" data-infinitive="decir"><option disabled="" hidden="" selected="" value="">decir</option>
+
+<option value="ha dicho">ha dicho</option>
+<option value="diga">diga</option>
+<option value="dice">dice</option>
+<option value="había dicho">había dicho</option>
+<option value="dijo">dijo</option>
+</select>: “Hoy <select class="verb-select" data-answer="estoy" data-infinitive="estar"><option disabled="" hidden="" selected="" value="">estar</option>
+
+<option value="esté">esté</option>
+<option value="había estado">había estado</option>
+<option value="estuve">estuve</option>
+<option value="estoy">estoy</option>
+<option value="he estado">he estado</option>
+</select> un poco nerviosa; esta mañana <select class="verb-select" data-answer="he dormido" data-infinitive="dormir"><option disabled="" hidden="" selected="" value="">dormir</option>
+
+<option value="duerma">duerma</option>
+<option value="duermo">duermo</option>
+<option value="había dormido">había dormido</option>
+<option value="he dormido">he dormido</option>
+<option value="dormí">dormí</option>
+</select> poco”. Luis <select class="verb-select" data-answer="respondió" data-infinitive="responder"><option disabled="" hidden="" selected="" value="">responder</option>
+
+<option value="responde">responde</option>
+<option value="responda">responda</option>
+<option value="respondió">respondió</option>
+<option value="había respondido">había respondido</option>
+<option value="ha respondido">ha respondido</option>
+</select>: “No pasa nada. ¿<select class="verb-select" data-answer="estás" data-infinitive="estar"><option disabled="" hidden="" selected="" value="">estar</option>
+
+<option value="estuviste">estuviste</option>
+<option value="has estado">has estado</option>
+<option value="estás">estás</option>
+<option value="estés">estés</option>
+<option value="habías estado">habías estado</option>
+</select> bien ahora?”. Ana <select class="verb-select" data-answer="respondió" data-infinitive="responder"><option disabled="" hidden="" selected="" value="">responder</option>
+
+<option value="responda">responda</option>
+<option value="responde">responde</option>
+<option value="ha respondido">ha respondido</option>
+<option value="respondió">respondió</option>
+<option value="había respondido">había respondido</option>
+</select>: “Sí, ya <select class="verb-select" data-answer="estoy" data-infinitive="estar"><option disabled="" hidden="" selected="" value="">estar</option>
+
+<option value="había estado">había estado</option>
+<option value="estuve">estuve</option>
+<option value="esté">esté</option>
+<option value="estoy">estoy</option>
+<option value="he estado">he estado</option>
+</select> mejor”. En el pasillo <select class="verb-select" data-answer="esperaron" data-infinitive="esperar"><option disabled="" hidden="" selected="" value="">esperar</option>
+
+<option value="esperan">esperan</option>
+<option value="habían esperado">habían esperado</option>
+<option value="han esperado">han esperado</option>
+<option value="esperen">esperen</option>
+<option value="esperaron">esperaron</option>
+</select> un momento, con calma, sin prisa, con una mochila ligera y un cuaderno nuevo. Luego ellos <select class="verb-select" data-answer="entraron" data-infinitive="entrar"><option disabled="" hidden="" selected="" value="">entrar</option>
+
+<option value="han entrado">han entrado</option>
+<option value="entran">entran</option>
+<option value="entraron">entraron</option>
+<option value="entren">entren</option>
+<option value="habían entrado">habían entrado</option>
+</select> al aula y la profesora <select class="verb-select" data-answer="preguntó" data-infinitive="preguntar"><option disabled="" hidden="" selected="" value="">preguntar</option>
+
+<option value="había preguntado">había preguntado</option>
+<option value="preguntó">preguntó</option>
+<option value="pregunta">pregunta</option>
+<option value="pregunte">pregunte</option>
+<option value="ha preguntado">ha preguntado</option>
+</select>: “¿Alguien <select class="verb-select" data-answer="tiene" data-infinitive="tener"><option disabled="" hidden="" selected="" value="">tener</option>
+
+<option value="ha tenido">ha tenido</option>
+<option value="tenga">tenga</option>
+<option value="tiene">tiene</option>
+<option value="había tenido">había tenido</option>
+<option value="tuvo">tuvo</option>
+</select> una duda?”.
+</p>
+<p>
+La profesora <select class="verb-select" data-answer="explicó" data-infinitive="explicar"><option disabled="" hidden="" selected="" value="">explicar</option>
+
+<option value="ha explicado">ha explicado</option>
+<option value="explicó">explicó</option>
+<option value="había explicado">había explicado</option>
+<option value="explique">explique</option>
+<option value="explica">explica</option>
+</select> la actividad y todos <select class="verb-select" data-answer="escucharon" data-infinitive="escuchar"><option disabled="" hidden="" selected="" value="">escuchar</option>
+
+<option value="habían escuchado">habían escuchado</option>
+<option value="escuchen">escuchen</option>
+<option value="escuchan">escuchan</option>
+<option value="han escuchado">han escuchado</option>
+<option value="escucharon">escucharon</option>
+</select> en silencio, con atención, con respeto. Ana <select class="verb-select" data-answer="escribió" data-infinitive="escribir"><option disabled="" hidden="" selected="" value="">escribir</option>
+
+<option value="escribe">escribe</option>
+<option value="escriba">escriba</option>
+<option value="escribió">escribió</option>
+<option value="había escrito">había escrito</option>
+<option value="ha escrito">ha escrito</option>
+</select> todo en su cuaderno y luego <select class="verb-select" data-answer="miró" data-infinitive="mirar"><option disabled="" hidden="" selected="" value="">mirar</option>
+
+<option value="mira">mira</option>
+<option value="miró">miró</option>
+<option value="ha mirado">ha mirado</option>
+<option value="mire">mire</option>
+<option value="había mirado">había mirado</option>
+</select> a su compañero. La profesora <select class="verb-select" data-answer="dijo" data-infinitive="decir"><option disabled="" hidden="" selected="" value="">decir</option>
+
+<option value="había dicho">había dicho</option>
+<option value="dijo">dijo</option>
+<option value="ha dicho">ha dicho</option>
+<option value="dice">dice</option>
+<option value="diga">diga</option>
+</select>: “<select class="verb-select" data-answer="es" data-infinitive="ser"><option disabled="" hidden="" selected="" value="">ser</option>
+
+<option value="fue">fue</option>
+<option value="sea">sea</option>
+<option value="es">es</option>
+<option value="había sido">había sido</option>
+<option value="ha sido">ha sido</option>
+</select> importante que <select class="verb-select" data-answer="hablen" data-infinitive="hablar"><option disabled="" hidden="" selected="" value="">hablar</option>
+
+<option value="hablaron">hablaron</option>
+<option value="hablan">hablan</option>
+<option value="han hablado">han hablado</option>
+<option value="habían hablado">habían hablado</option>
+<option value="hablen">hablen</option>
+</select> despacio, con buena pronunciación, con frases cortas”. Después <select class="verb-select" data-answer="miró" data-infinitive="mirar"><option disabled="" hidden="" selected="" value="">mirar</option>
+
+<option value="ha mirado">ha mirado</option>
+<option value="miró">miró</option>
+<option value="mira">mira</option>
+<option value="había mirado">había mirado</option>
+<option value="mire">mire</option>
+</select> a Ana: “Quiero que <select class="verb-select" data-answer="respondas" data-infinitive="responder"><option disabled="" hidden="" selected="" value="">responder</option>
+
+<option value="respondiste">respondiste</option>
+<option value="has respondido">has respondido</option>
+<option value="respondas">respondas</option>
+<option value="respondes">respondes</option>
+<option value="habías respondido">habías respondido</option>
+</select> la respuesta con calma”. Ana <select class="verb-select" data-answer="respiró" data-infinitive="infinitivo"><option disabled="" hidden="" selected="" value="">infinitivo</option>
+
+<option value="ha respirado">ha respirado</option>
+<option value="respire">respire</option>
+<option value="respiró">respiró</option>
+<option value="había respirado">había respirado</option>
+<option value="respira">respira</option>
+</select>, <select class="verb-select" data-answer="pensó" data-infinitive="pensar"><option disabled="" hidden="" selected="" value="">pensar</option>
+
+<option value="había pensado">había pensado</option>
+<option value="ha pensado">ha pensado</option>
+<option value="piense">piense</option>
+<option value="pensó">pensó</option>
+<option value="piensa">piensa</option>
+</select> y <select class="verb-select" data-answer="respondió" data-infinitive="responder"><option disabled="" hidden="" selected="" value="">responder</option>
+
+<option value="ha respondido">ha respondido</option>
+<option value="respondió">respondió</option>
+<option value="responda">responda</option>
+<option value="responde">responde</option>
+<option value="había respondido">había respondido</option>
+</select>. La profesora <select class="verb-select" data-answer="dijo" data-infinitive="decir"><option disabled="" hidden="" selected="" value="">decir</option>
+
+<option value="dice">dice</option>
+<option value="había dicho">había dicho</option>
+<option value="diga">diga</option>
+<option value="ha dicho">ha dicho</option>
+<option value="dijo">dijo</option>
+</select>: “Muy bien. También <select class="verb-select" data-answer="es" data-infinitive="ser"><option disabled="" hidden="" selected="" value="">ser</option>
+
+<option value="sea">sea</option>
+<option value="ha sido">ha sido</option>
+<option value="es">es</option>
+<option value="fue">fue</option>
+<option value="había sido">había sido</option>
+</select> mejor que <select class="verb-select" data-answer="bebas" data-infinitive="beber"><option disabled="" hidden="" selected="" value="">beber</option>
+
+<option value="habías bebido">habías bebido</option>
+<option value="bebiste">bebiste</option>
+<option value="bebas">bebas</option>
+<option value="bebes">bebes</option>
+<option value="has bebido">has bebido</option>
+</select> más agua hoy”. Luis <select class="verb-select" data-answer="dijo" data-infinitive="decir"><option disabled="" hidden="" selected="" value="">decir</option>
+
+<option value="ha dicho">ha dicho</option>
+<option value="dice">dice</option>
+<option value="había dicho">había dicho</option>
+<option value="dijo">dijo</option>
+<option value="diga">diga</option>
+</select>: “Perfecto, <select class="verb-select" data-answer="traigo" data-infinitive="traer"><option disabled="" hidden="" selected="" value="">traer</option>
+
+<option value="he traído">he traído</option>
+<option value="traigo">traigo</option>
+<option value="había traído">había traído</option>
+<option value="traiga">traiga</option>
+<option value="traje">traje</option>
+</select> una botella”. Ana <select class="verb-select" data-answer="dijo" data-infinitive="decir"><option disabled="" hidden="" selected="" value="">decir</option>
+
+<option value="ha dicho">ha dicho</option>
+<option value="dice">dice</option>
+<option value="diga">diga</option>
+<option value="dijo">dijo</option>
+<option value="había dicho">había dicho</option>
+</select>: “Gracias; hoy <select class="verb-select" data-answer="me siento" data-infinitive="sentirse"><option disabled="" hidden="" selected="" value="">sentirse</option>
+
+<option value="me había sentido">me había sentido</option>
+<option value="me he sentido">me he sentido</option>
+<option value="me sienta">me sienta</option>
+<option value="me siento">me siento</option>
+<option value="me sentí">me sentí</option>
+</select> más tranquila”.
+</p>
+<p>
+Después de la clase Ana y Luis <select class="verb-select" data-answer="fueron" data-infinitive="ir"><option disabled="" hidden="" selected="" value="">ir</option>
+
+<option value="vayan">vayan</option>
+<option value="han ido">han ido</option>
+<option value="habían ido">habían ido</option>
+<option value="van">van</option>
+<option value="fueron">fueron</option>
+</select> al mercado, con mucha gente, con frutas de colores. Ayer Luis <select class="verb-select" data-answer="compró" data-infinitive="comprar"><option disabled="" hidden="" selected="" value="">comprar</option>
+
+<option value="ha comprado">ha comprado</option>
+<option value="compre">compre</option>
+<option value="compró">compró</option>
+<option value="compra">compra</option>
+<option value="había comprado">había comprado</option>
+</select> un diccionario pequeño y hoy lo <select class="verb-select" data-answer="llevó" data-infinitive="llevar"><option disabled="" hidden="" selected="" value="">llevar</option>
+
+<option value="lleva">lleva</option>
+<option value="lleve">lleve</option>
+<option value="ha llevado">ha llevado</option>
+<option value="había llevado">había llevado</option>
+<option value="llevó">llevó</option>
+</select> en su mochila. En el mercado Ana <select class="verb-select" data-answer="eligió" data-infinitive="elegir"><option disabled="" hidden="" selected="" value="">elegir</option>
+
+<option value="elija">elija</option>
+<option value="había elegido">había elegido</option>
+<option value="eligió">eligió</option>
+<option value="elige">elige</option>
+<option value="ha elegido">ha elegido</option>
+</select> verduras y fruta; Luis <select class="verb-select" data-answer="compró" data-infinitive="comprar"><option disabled="" hidden="" selected="" value="">comprar</option>
+
+<option value="ha comprado">ha comprado</option>
+<option value="había comprado">había comprado</option>
+<option value="compró">compró</option>
+<option value="compra">compra</option>
+<option value="compre">compre</option>
+</select> pan. Ana <select class="verb-select" data-answer="dijo" data-infinitive="decir"><option disabled="" hidden="" selected="" value="">decir</option>
+
+<option value="dice">dice</option>
+<option value="ha dicho">ha dicho</option>
+<option value="dijo">dijo</option>
+<option value="había dicho">había dicho</option>
+<option value="diga">diga</option>
+</select>: “Esta semana siempre <select class="verb-select" data-answer="he estudiado" data-infinitive="estudiar"><option disabled="" hidden="" selected="" value="">estudiar</option>
+
+<option value="estudié">estudié</option>
+<option value="estudio">estudio</option>
+<option value="estudie">estudie</option>
+<option value="he estudiado">he estudiado</option>
+<option value="había estudiado">había estudiado</option>
+</select> por la noche y nunca <select class="verb-select" data-answer="he llegado" data-infinitive="llegar"><option disabled="" hidden="" selected="" value="">llegar</option>
+
+<option value="llegué">llegué</option>
+<option value="he llegado">he llegado</option>
+<option value="había llegado">había llegado</option>
+<option value="llego">llego</option>
+<option value="llegue">llegue</option>
+</select> tarde a clase. Hoy también <select class="verb-select" data-answer="he practicado" data-infinitive="practicar"><option disabled="" hidden="" selected="" value="">practicar</option>
+
+<option value="había practicado">había practicado</option>
+<option value="practique">practique</option>
+<option value="practico">practico</option>
+<option value="he practicado">he practicado</option>
+<option value="practiqué">practiqué</option>
+</select> mucho en clase”. Luis <select class="verb-select" data-answer="respondió" data-infinitive="responder"><option disabled="" hidden="" selected="" value="">responder</option>
+
+<option value="ha respondido">ha respondido</option>
+<option value="respondió">respondió</option>
+<option value="había respondido">había respondido</option>
+<option value="responde">responde</option>
+<option value="responda">responda</option>
+</select>: “Excelente. Espero que <select class="verb-select" data-answer="aprendas" data-infinitive="aprender"><option disabled="" hidden="" selected="" value="">aprender</option>
+
+<option value="aprendiste">aprendiste</option>
+<option value="has aprendido">has aprendido</option>
+<option value="aprendes">aprendes</option>
+<option value="aprendas">aprendas</option>
+<option value="habías aprendido">habías aprendido</option>
+</select> más palabras”. Ana <select class="verb-select" data-answer="dijo" data-infinitive="decir"><option disabled="" hidden="" selected="" value="">decir</option>
+
+<option value="ha dicho">ha dicho</option>
+<option value="dijo">dijo</option>
+<option value="había dicho">había dicho</option>
+<option value="dice">dice</option>
+<option value="diga">diga</option>
+</select>: “Sí, y quiero que mañana <select class="verb-select" data-answer="practiques" data-infinitive="practicar"><option disabled="" hidden="" selected="" value="">practicar</option>
+
+<option value="practicas">practicas</option>
+<option value="practicaste">practicaste</option>
+<option value="practiques">practiques</option>
+<option value="habías practicado">habías practicado</option>
+<option value="has practicado">has practicado</option>
+</select> otra vez. Además, nunca <select class="verb-select" data-answer="he viajado" data-infinitive="viajar"><option disabled="" hidden="" selected="" value="">viajar</option>
+
+<option value="había viajado">había viajado</option>
+<option value="he viajado">he viajado</option>
+<option value="viajo">viajo</option>
+<option value="viajé">viajé</option>
+<option value="viaje">viaje</option>
+</select> a un país muy frío, por eso <select class="verb-select" data-answer="he comprado" data-infinitive="comprar"><option disabled="" hidden="" selected="" value="">comprar</option>
+
+<option value="compre">compre</option>
+<option value="he comprado">he comprado</option>
+<option value="compré">compré</option>
+<option value="compro">compro</option>
+<option value="había comprado">había comprado</option>
+</select> un abrigo nuevo”.
+</p>
+<p>
+Antes de salir de casa, Ana ya <select class="verb-select" data-answer="había escrito" data-infinitive="escribir"><option disabled="" hidden="" selected="" value="">escribir</option>
+
+<option value="escribe">escribe</option>
+<option value="escriba">escriba</option>
+<option value="escribió">escribió</option>
+<option value="ha escrito">ha escrito</option>
+<option value="había escrito">había escrito</option>
+</select> una lista y por eso ellos <select class="verb-select" data-answer="compraron" data-infinitive="comprar"><option disabled="" hidden="" selected="" value="">comprar</option>
+
+<option value="compran">compran</option>
+<option value="compraron">compraron</option>
+<option value="habían comprado">habían comprado</option>
+<option value="compren">compren</option>
+<option value="han comprado">han comprado</option>
+</select> rápido, sin olvidar nada. Por la tarde <select class="verb-select" data-answer="volvieron" data-infinitive="volver"><option disabled="" hidden="" selected="" value="">volver</option>
+
+<option value="habían vuelto">habían vuelto</option>
+<option value="volvieron">volvieron</option>
+<option value="vuelvan">vuelvan</option>
+<option value="vuelven">vuelven</option>
+<option value="han vuelto">han vuelto</option>
+</select> a casa y <select class="verb-select" data-answer="prepararon" data-infinitive="preparar"><option disabled="" hidden="" selected="" value="">preparar</option>
+
+<option value="habían preparado">habían preparado</option>
+<option value="prepararon">prepararon</option>
+<option value="han preparado">han preparado</option>
+<option value="preparen">preparen</option>
+<option value="preparan">preparan</option>
+</select> la cena. Ana <select class="verb-select" data-answer="cocinó" data-infinitive="cocinar"><option disabled="" hidden="" selected="" value="">cocinar</option>
+
+<option value="había cocinado">había cocinado</option>
+<option value="cocine">cocine</option>
+<option value="cocina">cocina</option>
+<option value="ha cocinado">ha cocinado</option>
+<option value="cocinó">cocinó</option>
+</select> arroz con verduras y Luis <select class="verb-select" data-answer="puso" data-infinitive="poner"><option disabled="" hidden="" selected="" value="">poner</option>
+
+<option value="había puesto">había puesto</option>
+<option value="puso">puso</option>
+<option value="pone">pone</option>
+<option value="ha puesto">ha puesto</option>
+<option value="ponga">ponga</option>
+</select> la mesa. Ana <select class="verb-select" data-answer="dijo" data-infinitive="decir"><option disabled="" hidden="" selected="" value="">decir</option>
+
+<option value="había dicho">había dicho</option>
+<option value="dijo">dijo</option>
+<option value="diga">diga</option>
+<option value="ha dicho">ha dicho</option>
+<option value="dice">dice</option>
+</select>: “Quiero que <select class="verb-select" data-answer="pongas" data-infinitive="poner"><option disabled="" hidden="" selected="" value="">poner</option>
+
+<option value="has puesto">has puesto</option>
+<option value="pones">pones</option>
+<option value="pongas">pongas</option>
+<option value="habías puesto">habías puesto</option>
+<option value="pusiste">pusiste</option>
+</select> los platos aquí, por favor”. Luis lo hizo y luego <select class="verb-select" data-answer="limpió" data-infinitive="limpiar"><option disabled="" hidden="" selected="" value="">limpiar</option>
+
+<option value="ha limpiado">ha limpiado</option>
+<option value="limpia">limpia</option>
+<option value="había limpiado">había limpiado</option>
+<option value="limpió">limpió</option>
+<option value="limpie">limpie</option>
+</select> la cocina. Cuando <select class="verb-select" data-answer="llegó" data-infinitive="llegar"><option disabled="" hidden="" selected="" value="">llegar</option>
+
+<option value="llega">llega</option>
+<option value="llegue">llegue</option>
+<option value="ha llegado">ha llegado</option>
+<option value="llegó">llegó</option>
+<option value="había llegado">había llegado</option>
+</select> la hora de comer, Ana <select class="verb-select" data-answer="dijo" data-infinitive="decir"><option disabled="" hidden="" selected="" value="">decir</option>
+
+<option value="había dicho">había dicho</option>
+<option value="dijo">dijo</option>
+<option value="dice">dice</option>
+<option value="diga">diga</option>
+<option value="ha dicho">ha dicho</option>
+</select>: “Hoy <select class="verb-select" data-answer="tengo" data-infinitive="tener"><option disabled="" hidden="" selected="" value="">tener</option>
+
+<option value="tenga">tenga</option>
+<option value="he tenido">he tenido</option>
+<option value="había tenido">había tenido</option>
+<option value="tengo">tengo</option>
+<option value="tuve">tuve</option>
+</select> hambre, porque al empezar yo ya <select class="verb-select" data-answer="había comido" data-infinitive="comer"><option disabled="" hidden="" selected="" value="">comer</option>
+
+<option value="como">como</option>
+<option value="había comido">había comido</option>
+<option value="he comido">he comido</option>
+<option value="comí">comí</option>
+<option value="coma">coma</option>
+</select> un sándwich”. Luis <select class="verb-select" data-answer="respondió" data-infinitive="responder"><option disabled="" hidden="" selected="" value="">responder</option>
+
+<option value="responde">responde</option>
+<option value="había respondido">había respondido</option>
+<option value="ha respondido">ha respondido</option>
+<option value="respondió">respondió</option>
+<option value="responda">responda</option>
+</select>: “Entonces comemos ya, sin ruido, con música suave”.
+</p>
+<p>
+Al final de la noche Ana <select class="verb-select" data-answer="dijo" data-infinitive="decir"><option disabled="" hidden="" selected="" value="">decir</option>
+
+<option value="había dicho">había dicho</option>
+<option value="dijo">dijo</option>
+<option value="ha dicho">ha dicho</option>
+<option value="dice">dice</option>
+<option value="diga">diga</option>
+</select>: “Mañana <select class="verb-select" data-answer="voy" data-infinitive="ir"><option disabled="" hidden="" selected="" value="">ir</option>
+
+<option value="había ido">había ido</option>
+<option value="he ido">he ido</option>
+<option value="voy">voy</option>
+<option value="vaya">vaya</option>
+<option value="fui">fui</option>
+</select> a visitar a mi hermana”. Luis <select class="verb-select" data-answer="contestó" data-infinitive="contestar"><option disabled="" hidden="" selected="" value="">contestar</option>
+
+<option value="ha contestado">ha contestado</option>
+<option value="había contestado">había contestado</option>
+<option value="contestó">contestó</option>
+<option value="conteste">conteste</option>
+<option value="contesta">contesta</option>
+</select>: “<select class="verb-select" data-answer="es" data-infinitive="ser"><option disabled="" hidden="" selected="" value="">ser</option>
+
+<option value="ha sido">ha sido</option>
+<option value="sea">sea</option>
+<option value="había sido">había sido</option>
+<option value="es">es</option>
+<option value="fue">fue</option>
+</select> mejor que <select class="verb-select" data-answer="lleves" data-infinitive="llevar"><option disabled="" hidden="" selected="" value="">llevar</option>
+
+<option value="habías llevado">habías llevado</option>
+<option value="llevaste">llevaste</option>
+<option value="has llevado">has llevado</option>
+<option value="lleves">lleves</option>
+<option value="llevas">llevas</option>
+</select> un abrigo, porque hace frío”. Ana <select class="verb-select" data-answer="respondió" data-infinitive="responder"><option disabled="" hidden="" selected="" value="">responder</option>
+
+<option value="había respondido">había respondido</option>
+<option value="responde">responde</option>
+<option value="ha respondido">ha respondido</option>
+<option value="responda">responda</option>
+<option value="respondió">respondió</option>
+</select>: “De acuerdo. Esta semana siempre <select class="verb-select" data-answer="he preparado" data-infinitive="preparar"><option disabled="" hidden="" selected="" value="">preparar</option>
+
+<option value="había preparado">había preparado</option>
+<option value="preparo">preparo</option>
+<option value="preparé">preparé</option>
+<option value="prepare">prepare</option>
+<option value="he preparado">he preparado</option>
+</select> mis cosas antes de salir”. Antes de dormir, Ana <select class="verb-select" data-answer="pensó" data-infinitive="pensar"><option disabled="" hidden="" selected="" value="">pensar</option>
+
+<option value="ha pensado">ha pensado</option>
+<option value="piense">piense</option>
+<option value="pensó">pensó</option>
+<option value="piensa">piensa</option>
+<option value="había pensado">había pensado</option>
+</select> en el día: ayer <select class="verb-select" data-answer="estuve" data-infinitive="estar"><option disabled="" hidden="" selected="" value="">estar</option>
+
+<option value="estoy">estoy</option>
+<option value="esté">esté</option>
+<option value="he estado">he estado</option>
+<option value="estuve">estuve</option>
+<option value="había estado">había estado</option>
+</select> cansada, pero hoy <select class="verb-select" data-answer="he aprendido" data-infinitive="aprender"><option disabled="" hidden="" selected="" value="">aprender</option>
+
+<option value="aprendí">aprendí</option>
+<option value="había aprendido">había aprendido</option>
+<option value="he aprendido">he aprendido</option>
+<option value="aprendo">aprendo</option>
+<option value="aprenda">aprenda</option>
+</select> mucho y <select class="verb-select" data-answer="me sentí" data-infinitive="sentirse"><option disabled="" hidden="" selected="" value="">sentirse</option>
+
+<option value="me he sentido">me he sentido</option>
+<option value="me había sentido">me había sentido</option>
+<option value="me sentí">me sentí</option>
+<option value="me siento">me siento</option>
+<option value="me sienta">me sienta</option>
+</select> tranquila porque, cuando empezó el problema, ya <select class="verb-select" data-answer="había ido" data-infinitive="ir"><option disabled="" hidden="" selected="" value="">ir</option>
+
+<option value="he ido">he ido</option>
+<option value="voy">voy</option>
+<option value="había ido">había ido</option>
+<option value="fui">fui</option>
+<option value="vaya">vaya</option>
+</select> al médico.
+</p>
+<p>
+El martes por la mañana Ana <select class="verb-select" data-answer="se levantó" data-infinitive="levantarse"><option disabled="" hidden="" selected="" value="">levantarse</option>
+
+<option value="se levanta">se levanta</option>
+<option value="se levantó">se levantó</option>
+<option value="se había levantado">se había levantado</option>
+<option value="se levante">se levante</option>
+<option value="se ha levantado">se ha levantado</option>
+</select> y <select class="verb-select" data-answer="envió" data-infinitive="enviar"><option disabled="" hidden="" selected="" value="">enviar</option>
+
+<option value="ha enviado">ha enviado</option>
+<option value="envió">envió</option>
+<option value="envíe">envíe</option>
+<option value="envía">envía</option>
+<option value="había enviado">había enviado</option>
+</select> un mensaje a Luis: “Hoy <select class="verb-select" data-answer="estoy" data-infinitive="estar"><option disabled="" hidden="" selected="" value="">estar</option>
+
+<option value="estuve">estuve</option>
+<option value="estoy">estoy</option>
+<option value="he estado">he estado</option>
+<option value="había estado">había estado</option>
+<option value="esté">esté</option>
+</select> lista; siempre <select class="verb-select" data-answer="he repasado" data-infinitive="repasar"><option disabled="" hidden="" selected="" value="">repasar</option>
+
+<option value="repasé">repasé</option>
+<option value="había repasado">había repasado</option>
+<option value="he repasado">he repasado</option>
+<option value="repase">repase</option>
+<option value="repaso">repaso</option>
+</select> antes de clase”. Luis <select class="verb-select" data-answer="respondió" data-infinitive="responder"><option disabled="" hidden="" selected="" value="">responder</option>
+
+<option value="responde">responde</option>
+<option value="había respondido">había respondido</option>
+<option value="responda">responda</option>
+<option value="ha respondido">ha respondido</option>
+<option value="respondió">respondió</option>
+</select>: “Genial. Es importante que <select class="verb-select" data-answer="llegues" data-infinitive="llegar"><option disabled="" hidden="" selected="" value="">llegar</option>
+
+<option value="has llegado">has llegado</option>
+<option value="llegues">llegues</option>
+<option value="llegas">llegas</option>
+<option value="llegaste">llegaste</option>
+<option value="habías llegado">habías llegado</option>
+</select> a tiempo”. En la escuela, la profesora <select class="verb-select" data-answer="dijo" data-infinitive="decir"><option disabled="" hidden="" selected="" value="">decir</option>
+
+<option value="dice">dice</option>
+<option value="dijo">dijo</option>
+<option value="diga">diga</option>
+<option value="ha dicho">ha dicho</option>
+<option value="había dicho">había dicho</option>
+</select>: “Hoy <select class="verb-select" data-answer="tenemos" data-infinitive="tener"><option disabled="" hidden="" selected="" value="">tener</option>
+
+<option value="habíamos tenido">habíamos tenido</option>
+<option value="tuvimos">tuvimos</option>
+<option value="hemos tenido">hemos tenido</option>
+<option value="tengamos">tengamos</option>
+<option value="tenemos">tenemos</option>
+</select> una pequeña revisión; quiero que <select class="verb-select" data-answer="escribas" data-infinitive="escribir"><option disabled="" hidden="" selected="" value="">escribir</option>
+
+<option value="habías escrito">habías escrito</option>
+<option value="has escrito">has escrito</option>
+<option value="escribas">escribas</option>
+<option value="escribes">escribes</option>
+<option value="escribiste">escribiste</option>
+</select> frases cortas”. Ana <select class="verb-select" data-answer="respondió" data-infinitive="responder"><option disabled="" hidden="" selected="" value="">responder</option>
+
+<option value="ha respondido">ha respondido</option>
+<option value="responda">responda</option>
+<option value="había respondido">había respondido</option>
+<option value="responde">responde</option>
+<option value="respondió">respondió</option>
+</select>: “Sí, hoy <select class="verb-select" data-answer="tengo" data-infinitive="tener"><option disabled="" hidden="" selected="" value="">tener</option>
+
+<option value="tenga">tenga</option>
+<option value="tengo">tengo</option>
+<option value="he tenido">he tenido</option>
+<option value="había tenido">había tenido</option>
+<option value="tuve">tuve</option>
+</select> más confianza”. Al final, Ana <select class="verb-select" data-answer="dijo" data-infinitive="decir"><option disabled="" hidden="" selected="" value="">decir</option>
+
+<option value="diga">diga</option>
+<option value="dijo">dijo</option>
+<option value="había dicho">había dicho</option>
+<option value="ha dicho">ha dicho</option>
+<option value="dice">dice</option>
+</select>: “Nunca <select class="verb-select" data-answer="he hablado" data-infinitive="hablar"><option disabled="" hidden="" selected="" value="">hablar</option>
+
+<option value="hablé">hablé</option>
+<option value="hablo">hablo</option>
+<option value="había hablado">había hablado</option>
+<option value="he hablado">he hablado</option>
+<option value="hable">hable</option>
+</select> tanto español en una semana”, y la profesora <select class="verb-select" data-answer="respondió" data-infinitive="responder"><option disabled="" hidden="" selected="" value="">responder</option>
+
+<option value="responda">responda</option>
+<option value="había respondido">había respondido</option>
+<option value="responde">responde</option>
+<option value="ha respondido">ha respondido</option>
+<option value="respondió">respondió</option>
+</select>: “Muy bien; espero que <select class="verb-select" data-answer="sigas" data-infinitive="seguir"><option disabled="" hidden="" selected="" value="">seguir</option>
+
+<option value="seguiste">seguiste</option>
+<option value="sigas">sigas</option>
+<option value="has seguido">has seguido</option>
+<option value="habías seguido">habías seguido</option>
+<option value="sigues">sigues</option>
+</select> así”.
+</p>
+        </div>
+      </article>
+    </section>
+
+    <div class="actions">
+      <button id="checkBtn" type="button">✓ Revisar</button>
+      <button id="resetBtn" type="button">↺ Reiniciar</button>
+      <span id="score" aria-live="polite"></span>
+      <div class="progress" aria-hidden="true"><div class="bar" id="bar"></div></div>
+    </div>
+  </main>
+
+  <script>
+    const selects = Array.from(document.querySelectorAll('select[data-answer]'));
+    const score = document.getElementById('score');
+    const bar = document.getElementById('bar');
+    const checkBtn = document.getElementById('checkBtn');
+    const resetBtn = document.getElementById('resetBtn');
+
+    function clearMarks(select) {
+      select.classList.remove('correct', 'incorrect');
+    }
+
+    selects.forEach(select => {
+      select.addEventListener('change', () => {
+        clearMarks(select);
+        score.textContent = '';
+        bar.style.width = '0%';
+      });
+    });
+
+    function revisar() {
+      let correct = 0;
+      selects.forEach(select => {
+        clearMarks(select);
+        const answers = select.dataset.answers ? select.dataset.answers.split('|') : [select.dataset.answer];
+        if (answers.includes(select.value)) {
+          select.classList.add('correct');
+          correct++;
+        } else {
+          select.classList.add('incorrect');
+        }
+      });
+      const total = selects.length;
+      const pct = Math.round((correct / total) * 100);
+      score.textContent = `${correct} / ${total} · ${pct}%`;
+      bar.style.width = `${pct}%`;
+    }
+
+    function reiniciar() {
+      selects.forEach(select => {
+        select.selectedIndex = 0;
+        clearMarks(select);
+      });
+      score.textContent = '';
+      bar.style.width = '0%';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    checkBtn.addEventListener('click', revisar);
+    resetBtn.addEventListener('click', reiniciar);
+  </script>
+</body>
+</html>

@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Alquiler De Una Vivienda | Una voz para frases del inquilino</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+<style>
+:root {
+  --bg:#f5f7fb; --paper:#ffffff; --ink:#172033; --muted:#667085; --line:#dbe4f0;
+  --shadow:0 16px 44px rgba(23,32,51,.12); --radius:24px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:linear-gradient(180deg,#e9f2ff 0%,#f8fafc 42%,#fff 100%);color:var(--ink)}
+.hero{background:linear-gradient(135deg,#0b3573,#1766c2 62%,#f2a947);color:#fff;padding:28px 14px 22px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;right:-150px;bottom:-210px;width:520px;height:520px;border-radius:50%;background:rgba(255,255,255,.13)}
+.hero-inner{max-width:920px;margin:auto;display:grid;grid-template-columns:68px 1fr;gap:16px;align-items:center;position:relative;z-index:1}
+.logo{width:68px;height:68px;border-radius:22px;background:rgba(255,255,255,.95);display:grid;place-items:center;box-shadow:0 12px 28px rgba(0,0,0,.2)}
+.logo svg{width:43px;height:43px;fill:#1766c2}
+h1{margin:0 0 8px;font-size:clamp(30px,7.8vw,58px);line-height:.95;letter-spacing:-.05em;font-weight:950;text-transform:uppercase}
+.subtitle{margin:0;font-size:clamp(18px,4vw,28px);font-weight:850;line-height:1.15}
+.help{margin:10px 0 0;font-size:clamp(15px,3.3vw,18px);opacity:.95;line-height:1.35}
+.toolbar{position:sticky;top:0;z-index:5;background:rgba(248,250,252,.93);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:12px}
+.toolbar-inner{max-width:920px;margin:auto;display:grid;grid-template-columns:1fr auto minmax(210px,280px);gap:10px}
+.search{width:100%;border:1px solid var(--line);border-radius:999px;background:#fff;padding:13px 16px;font-size:16px;box-shadow:0 8px 22px rgba(23,32,51,.06)}
+.toggle{border:1px solid var(--line);border-radius:999px;background:#fff;color:#1766c2;font-weight:900;padding:12px 15px;white-space:nowrap;box-shadow:0 8px 22px rgba(23,32,51,.06);cursor:pointer}
+.voice-select{width:100%;border:1px solid var(--line);border-radius:999px;background:#fff;color:#263247;font-weight:800;padding:12px 14px;box-shadow:0 8px 22px rgba(23,32,51,.06);cursor:pointer;min-height:46px}
+.voice-select:disabled{color:#94a3b8;cursor:not-allowed;background:#f8fafc}
+.nav{max-width:920px;margin:12px auto 0;display:flex;gap:8px;overflow:auto;padding-bottom:2px}
+.nav a{flex:0 0 auto;text-decoration:none;color:#263247;background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 12px;font-size:13px;font-weight:850;box-shadow:0 6px 16px rgba(23,32,51,.05)}
+.nav span{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:#eef5ff;color:#1766c2;margin-right:7px}
+main{max-width:920px;margin:18px auto 56px;padding:0 12px}
+.intro{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:17px 18px;margin-bottom:16px;line-height:1.45;color:#334155}
+.intro strong{color:#1766c2}
+.section{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;margin:18px 0 24px}
+.section-head{display:grid;grid-template-columns:54px 1fr;gap:13px;align-items:center;padding:17px 16px;background:linear-gradient(90deg,var(--accent-soft),#fff);border-bottom:1px solid var(--line)}
+.num{width:54px;height:54px;border-radius:18px;background:var(--accent);display:grid;place-items:center;color:#fff;font-size:27px;font-weight:950;box-shadow:0 12px 24px color-mix(in srgb,var(--accent),transparent 72%)}
+h2{margin:0;font-size:clamp(20px,4.7vw,32px);line-height:1.04;color:var(--accent);font-weight:950;letter-spacing:-.025em;text-transform:uppercase}
+.section-head p{margin:4px 0 0;font-size:clamp(16px,3.5vw,22px);line-height:1.1;color:var(--accent);font-weight:850}
+.photo{margin:14px 14px 6px;border-radius:20px;overflow:hidden;border:1px solid var(--line);background:#eef2f7;box-shadow:0 10px 26px rgba(23,32,51,.10)}
+.photo img{width:100%;display:block;aspect-ratio:2.14/1;object-fit:cover}
+.cards{display:grid;gap:12px;padding:12px 12px 16px}
+.qa-card{border:1px solid #e1e8f2;border-radius:20px;background:linear-gradient(180deg,#fff,#fcfdff);overflow:hidden}
+.qa-card h3{margin:0;padding:13px 14px;border-bottom:1px solid #e8eef6;color:var(--accent);font-size:18px;line-height:1.18;font-weight:950}
+.qa-grid{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.qa-col{padding:12px;display:grid;gap:8px;align-content:start}
+.qcol{border-right:1px solid #e8eef6;background:linear-gradient(180deg,var(--accent-soft),#fff 70%)}
+.acol{background:#fff}
+.qa-label{display:inline-flex;align-items:center;gap:7px;width:max-content;border-radius:999px;background:var(--accent);color:#fff;font-size:12px;font-weight:950;letter-spacing:.03em;text-transform:uppercase;padding:6px 10px;margin-bottom:2px}
+.line{display:grid;grid-template-columns:1fr;gap:9px;align-items:start;border:1px solid #e4ebf5;border-radius:16px;background:rgba(255,255,255,.92);padding:9px;transition:box-shadow .18s ease,transform .18s ease,border-color .18s ease;cursor:pointer}
+.line:hover,.line:focus-within,.line.open{transform:translateY(-1px);box-shadow:0 12px 22px rgba(23,32,51,.10);border-color:color-mix(in srgb,var(--accent),#fff 60%)}
+.speak{border:0;border-radius:12px;width:32px;height:32px;background:var(--accent);color:#fff;font-weight:950;display:grid;place-items:center;cursor:pointer;box-shadow:0 8px 18px color-mix(in srgb,var(--accent),transparent 74%)}
+.role{font-size:11px;text-transform:uppercase;letter-spacing:.06em;font-weight:950;color:var(--accent);margin-bottom:3px}
+.es{font-size:clamp(16px,3.6vw,19px);line-height:1.28;font-weight:880;color:#182236}
+.ru{font-size:clamp(15px,3.3vw,18px);line-height:1.35;color:#273244;background:#f5f8ff;border-left:4px solid var(--accent);border-radius:12px;padding:0 10px;max-height:0;opacity:0;overflow:hidden;margin-top:0;transition:max-height .22s ease,opacity .18s ease,padding .22s ease,margin .22s ease}
+.line:hover .ru,.line.open .ru,.show-ru .ru{max-height:180px;opacity:1;padding:9px 10px;margin-top:8px}
+.empty{display:none;text-align:center;padding:34px 18px;background:#fff;border:1px dashed var(--line);border-radius:var(--radius);color:var(--muted);font-weight:850}
+@media (max-width:720px){
+  .hero{padding:22px 12px 18px} .hero-inner{grid-template-columns:54px 1fr;gap:12px} .logo{width:54px;height:54px;border-radius:18px} .logo svg{width:35px;height:35px}
+  .toolbar-inner{grid-template-columns:1fr} .toggle,.voice-select{width:100%}
+  main{padding:0 10px;margin-top:14px}
+  .section{border-radius:22px;margin:15px 0 20px}
+  .section-head{grid-template-columns:44px 1fr;padding:14px 12px} .num{width:44px;height:44px;border-radius:15px;font-size:23px}
+  .photo{margin:10px 10px 4px;border-radius:17px}
+  .cards{padding:9px;gap:10px}
+  .qa-card{border-radius:18px}
+  .qa-card h3{font-size:17px;padding:12px}
+  .qa-grid{grid-template-columns:1fr}
+  .qcol{border-right:0;border-bottom:1px solid #e8eef6}
+  .qa-col{padding:10px;gap:8px}
+  .line{grid-template-columns:1fr;padding:9px;gap:8px}
+  .speak{width:31px;height:31px;border-radius:11px}
+}
+@media print{.toolbar,.nav,.speak{display:none} body{background:#fff} .section,.intro{box-shadow:none;break-inside:avoid} .ru{max-height:180px;opacity:1;padding:9px 10px;margin-top:8px}}
+
+
+.line.no-audio{grid-template-columns:1fr;cursor:pointer}
+.line.no-audio .line-body{grid-column:1}
+.tenant-line{border-color:#f0b55a;background:linear-gradient(180deg,#fff8eb,#fff)}
+.tenant-line .role{color:#a85d00}
+.photo figcaption{font-size:13px;line-height:1.35;color:#475569;background:#fff;padding:9px 12px;border-top:1px solid var(--line);font-weight:750}
+.credits{max-width:920px;margin:10px auto 42px;padding:14px 16px;border:1px solid var(--line);border-radius:20px;background:#fff;color:#475569;box-shadow:0 10px 26px rgba(23,32,51,.07);font-size:13px;line-height:1.45}
+.credits-title{margin:0 0 6px;font-size:15px;font-weight:950;color:#1766c2;text-transform:uppercase;letter-spacing:.02em}
+.credits p{margin:0}.credits a{color:#1766c2;font-weight:800;text-decoration:none}.credits a:hover{text-decoration:underline}
+@media print{.photo figcaption,.credits{font-size:11px;box-shadow:none}}
+
+.line[data-speaker="tenant"]{border-color:color-mix(in srgb,var(--accent),#fff 55%);background:linear-gradient(180deg,#fff,var(--accent-soft));}
+
+/* Browser speech controls: natural Spanish voice selector */
+.speak.voice-play{font-size:15px;line-height:1;transition:transform .18s ease,box-shadow .18s ease,filter .18s ease}
+.speak.voice-play:hover{transform:translateY(-1px);filter:brightness(1.04)}
+.speak.voice-play.playing{background:#0f5132;box-shadow:0 8px 18px rgba(15,81,50,.28)}
+
+.speak.voice-play.audio-error{background:#8a1f1f;cursor:not-allowed;box-shadow:none}
+.speak.voice-play:disabled{opacity:.65;cursor:not-allowed}
+</style>
+</head>
+<body>
+<header class="hero">
+<div class="hero-inner">
+<div aria-hidden="true" class="logo"><svg viewbox="0 0 24 24"><path d="M3 11.2 12 4l9 7.2v8.2A1.6 1.6 0 0 1 19.4 21H15v-6.2H9V21H4.6A1.6 1.6 0 0 1 3 19.4v-8.2Zm2.7.6V19H7v-6.2h10V19h1.3v-7.2L12 6.7l-6.3 5.1Z"></path></svg></div>
+<div>
+<h1>ALQUILER DE UNA VIVIENDA</h1>
+<p class="subtitle">АРЕНДА ЖИЛЬЯ</p>
+<p class="help">Формат: вопросы и ответы. Наведите курсор или коснитесь фразы, чтобы увидеть перевод на русский. Аудио есть только во фразах арендатора; звук встроен в файл и не зависит от голосов браузера.</p>
+</div>
+</div>
+</header>
+<div class="toolbar">
+<div class="toolbar-inner">
+<input aria-label="Поиск фраз" class="search" id="search" placeholder="Поиск по испанскому или русскому" type="search"/>
+<button class="toggle" id="toggleRu" type="button">Показать русский</button>
+<select aria-label="Elegir voz española" class="voice-select" id="voiceSelect"><option>Cargando voces españolas…</option></select>
+</div>
+<nav aria-label="Secciones" class="nav"><a href="#sec1"><span>1</span>Búsqueda Y Disponibilidad</a><a href="#sec2"><span>2</span>Visita Y Características</a><a href="#sec3"><span>3</span>Precio, Depósito Y Condiciones</a><a href="#sec4"><span>4</span>Servicios: Luz, Agua, Internet</a><a href="#sec5"><span>5</span>Documentos Y Requisitos</a><a href="#sec6"><span>6</span>Reglas, Uso Y Mantenimiento</a><a href="#sec7"><span>7</span>Pagos, Recibos Y Mora</a><a href="#sec8"><span>8</span>Salida, Entrega Y Renovación</a></nav>
+</div>
+<main id="app">
+<section class="intro"><strong>Интерактивное пособие испанский–русский.</strong> Каждая ситуация расположена как обмен вопросами и ответами. Русский перевод появляется при наведении курсора или касании фразы. Аудио включено только для фраз арендатора; звуковые дорожки встроены в файл.</section>
+<section class="section" data-section="búsqueda y disponibilidad поиск и наличие" id="sec1" style="--accent:#1766c2; --accent-soft:#1766c218">
+<header class="section-head">
+<div class="num">1</div>
+<div>
+<h2>BÚSQUEDA Y DISPONIBILIDAD</h2>
+<p>ПОИСК И НАЛИЧИЕ</p>
+</div>
+</header>
+<figure class="photo">
+<img alt="Llaves de vivienda y casa en miniatura para representar búsqueda y disponibilidad de alquiler." decoding="async" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Renting_a_House_-_Leasing_a_Property.jpg?width=1600"/>
+<figcaption>Búsqueda y disponibilidad de una vivienda en alquiler.</figcaption></figure>
+<div class="cards"><article class="qa-card">
+<h3>1. Solicitud inicial</h3>
+<div class="qa-grid">
+<div class="qa-col qcol"><div class="qa-label">Pregunta</div><div class="line tenant-line" data-es="estoy buscando un piso para alquilar." data-ru="я ищу квартиру в аренду." data-speaker="tenant" tabindex="0">
+<button aria-label="Escuchar en español: Estoy buscando un piso para alquilar." class="speak voice-play" title="Escuchar audio en español" type="button">▶</button><div class="line-body">
+<div class="role">Inquilino / Арендатор</div>
+<div class="es">Estoy buscando un piso para alquilar.</div>
+<div class="ru">Я ищу квартиру в аренду.</div>
+</div>
+</div></div>
+<div class="qa-col acol"><div class="qa-label">Respuesta</div><div class="line no-audio" data-es="perfecto. ¿en qué barrio le interesa?" data-ru="отлично. в каком районе вам интересно?" tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">Perfecto. ¿En qué barrio le interesa?</div>
+<div class="ru">Отлично. В каком районе вам интересно?</div>
+</div>
+</div><div class="line no-audio" data-es="¿para cuántas personas sería?" data-ru="на сколько человек?" tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">¿Para cuántas personas sería?</div>
+<div class="ru">На сколько человек?</div>
+</div>
+</div><div class="line no-audio" data-es="¿cuál es su presupuesto mensual?" data-ru="какой у вас месячный бюджет?" tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">¿Cuál es su presupuesto mensual?</div>
+<div class="ru">Какой у вас месячный бюджет?</div>
+</div>
+</div></div>
+</div>
+</article><article class="qa-card">
+<h3>2. Disponibilidad</h3>
+<div class="qa-grid">
+<div class="qa-col qcol"><div class="qa-label">Pregunta</div><div class="line tenant-line" data-es="¿tiene algún piso disponible?" data-ru="у вас есть доступная квартира?" data-speaker="tenant" tabindex="0">
+<button aria-label="Escuchar en español: ¿Tiene algún piso disponible?" class="speak voice-play" title="Escuchar audio en español" type="button">▶</button><div class="line-body">
+<div class="role">Inquilino / Арендатор</div>
+<div class="es">¿Tiene algún piso disponible?</div>
+<div class="ru">У вас есть доступная квартира?</div>
+</div>
+</div></div>
+<div class="qa-col acol"><div class="qa-label">Respuesta</div><div class="line no-audio" data-es="sí, hay uno disponible desde el ___ ." data-ru="да, есть свободная с ___ ." tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">Sí, hay uno disponible desde el ___ .</div>
+<div class="ru">Да, есть свободная с ___ .</div>
+</div>
+</div><div class="line no-audio" data-es="por el momento no, pero puedo avisarle si se libera uno." data-ru="пока нет, но могу сообщить, если освободится." tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">Por el momento no, pero puedo avisarle si se libera uno.</div>
+<div class="ru">Пока нет, но могу сообщить, если освободится.</div>
+</div>
+</div></div>
+</div>
+</article><article class="qa-card">
+<h3>3. Mobiliario y aparcamiento</h3>
+<div class="qa-grid">
+<div class="qa-col qcol"><div class="qa-label">Pregunta</div><div class="line no-audio" data-es="¿busca amueblado o sin muebles?" data-ru="ищете с мебелью или без?" tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">¿Busca amueblado o sin muebles?</div>
+<div class="ru">Ищете с мебелью или без?</div>
+</div>
+</div><div class="line tenant-line" data-es="¿está incluido el aparcamiento?" data-ru="парковка включена?" data-speaker="tenant" tabindex="0">
+<button aria-label="Escuchar en español: ¿Está incluido el aparcamiento?" class="speak voice-play" title="Escuchar audio en español" type="button">▶</button><div class="line-body">
+<div class="role">Inquilino / Арендатор</div>
+<div class="es">¿Está incluido el aparcamiento?</div>
+<div class="ru">Парковка включена?</div>
+</div>
+</div></div>
+<div class="qa-col acol"><div class="qa-label">Respuesta</div><div class="line no-audio" data-es="sí, incluye un espacio de aparcamiento." data-ru="да, включает одно место." tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">Sí, incluye un espacio de aparcamiento.</div>
+<div class="ru">Да, включает одно место.</div>
+</div>
+</div><div class="line no-audio" data-es="no está incluido; tiene un costo adicional de ___." data-ru="не включено; доплата ___." tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">No está incluido; tiene un costo adicional de ___.</div>
+<div class="ru">Не включено; доплата ___.</div>
+</div>
+</div><div class="line no-audio" data-es="depende del edificio. ¿necesita aparcamiento siempre?" data-ru="зависит от здания. вам нужно постоянно?" tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">Depende del edificio. ¿Necesita aparcamiento siempre?</div>
+<div class="ru">Зависит от здания. Вам нужно постоянно?</div>
+</div>
+</div></div>
+</div>
+</article></div>
+</section><section class="section" data-section="visita y características просмотр и характеристики" id="sec2" style="--accent:#138454; --accent-soft:#13845418">
+<header class="section-head">
+<div class="num">2</div>
+<div>
+<h2>VISITA Y CARACTERÍSTICAS</h2>
+<p>ПРОСМОТР И ХАРАКТЕРИСТИКИ</p>
+</div>
+</header>
+<figure class="photo">
+<img alt="Sala real de apartamento amueblado para visita y descripción de características." decoding="async" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Artchapiz1_artchapiz.es_apartment_rental_granada_01.jpg?width=1600"/>
+<figcaption>Visita de un apartamento y revisión de sus características.</figcaption></figure>
+<div class="cards"><article class="qa-card">
+<h3>1. Agendar visita</h3>
+<div class="qa-grid">
+<div class="qa-col qcol"><div class="qa-label">Pregunta</div><div class="line tenant-line" data-es="quisiera agendar una visita." data-ru="я хотел(а) бы назначить просмотр." data-speaker="tenant" tabindex="0">
+<button aria-label="Escuchar en español: Quisiera agendar una visita." class="speak voice-play" title="Escuchar audio en español" type="button">▶</button><div class="line-body">
+<div class="role">Inquilino / Арендатор</div>
+<div class="es">Quisiera agendar una visita.</div>
+<div class="ru">Я хотел(а) бы назначить просмотр.</div>
+</div>
+</div></div>
+<div class="qa-col acol"><div class="qa-label">Respuesta</div><div class="line no-audio" data-es="claro. ¿qué día y a qué hora puede?" data-ru="конечно. в какой день и во сколько вам удобно?" tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">Claro. ¿Qué día y a qué hora puede?</div>
+<div class="ru">Конечно. В какой день и во сколько вам удобно?</div>
+</div>
+</div><div class="line no-audio" data-es="¿prefiere en la mañana o en la tarde?" data-ru="утром или после обеда?" tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">¿Prefiere en la mañana o en la tarde?</div>
+<div class="ru">Утром или после обеда?</div>
+</div>
+</div><div class="line no-audio" data-es="le envío la dirección y el punto de encuentro." data-ru="отправлю адрес и место встречи." tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">Le envío la dirección y el punto de encuentro.</div>
+<div class="ru">Отправлю адрес и место встречи.</div>
+</div>
+</div></div>
+</div>
+</article><article class="qa-card">
+<h3>2. Distribución de la vivienda</h3>
+<div class="qa-grid">
+<div class="qa-col qcol"><div class="qa-label">Pregunta</div><div class="line tenant-line" data-es="¿cuántos cuartos tiene?" data-ru="сколько спален?" data-speaker="tenant" tabindex="0">
+<button aria-label="Escuchar en español: ¿Cuántos cuartos tiene?" class="speak voice-play" title="Escuchar audio en español" type="button">▶</button><div class="line-body">
+<div class="role">Inquilino / Арендатор</div>
+<div class="es">¿Cuántos cuartos tiene?</div>
+<div class="ru">Сколько спален?</div>
+</div>
+</div></div>
+<div class="qa-col acol"><div class="qa-label">Respuesta</div><div class="line no-audio" data-es="tiene ___ cuartos y ___ baños." data-ru="___ спален и ___ ванных." tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">Tiene ___ cuartos y ___ baños.</div>
+<div class="ru">___ спален и ___ ванных.</div>
+</div>
+</div><div class="line no-audio" data-es="la sala y el comedor están integrados." data-ru="гостиная и столовая объединены." tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">La sala y el comedor están integrados.</div>
+<div class="ru">Гостиная и столовая объединены.</div>
+</div>
+</div><div class="line no-audio" data-es="la cocina es abierta / cerrada." data-ru="кухня открытая / закрытая." tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">La cocina es abierta / cerrada.</div>
+<div class="ru">Кухня открытая / закрытая.</div>
+</div>
+</div></div>
+</div>
+</article><article class="qa-card">
+<h3>3. Mascotas</h3>
+<div class="qa-grid">
+<div class="qa-col qcol"><div class="qa-label">Pregunta</div><div class="line tenant-line" data-es="¿aceptan mascotas?" data-ru="можно с домашними животными?" data-speaker="tenant" tabindex="0">
+<button aria-label="Escuchar en español: ¿Aceptan mascotas?" class="speak voice-play" title="Escuchar audio en español" type="button">▶</button><div class="line-body">
+<div class="role">Inquilino / Арендатор</div>
+<div class="es">¿Aceptan mascotas?</div>
+<div class="ru">Можно с домашними животными?</div>
+</div>
+</div></div>
+<div class="qa-col acol"><div class="qa-label">Respuesta</div><div class="line no-audio" data-es="sí, se aceptan mascotas pequeñas." data-ru="да, маленькие животные разрешены." tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">Sí, se aceptan mascotas pequeñas.</div>
+<div class="ru">Да, маленькие животные разрешены.</div>
+</div>
+</div><div class="line no-audio" data-es="no se aceptan mascotas en este edificio." data-ru="в этом здании нельзя." tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">No se aceptan mascotas en este edificio.</div>
+<div class="ru">В этом здании нельзя.</div>
+</div>
+</div><div class="line no-audio" data-es="se acepta con depósito adicional de ___." data-ru="можно, но с дополнительным депозитом ___." tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">Se acepta con depósito adicional de ___.</div>
+<div class="ru">Можно, но с дополнительным депозитом ___.</div>
+</div>
+</div></div>
+</div>
+</article><article class="qa-card">
+<h3>4. Ascensor, seguridad y acceso</h3>
+<div class="qa-grid">
+<div class="qa-col qcol"><div class="qa-label">Pregunta</div><div class="line tenant-line" data-es="¿hay ascensor y seguridad?" data-ru="есть ли лифт и охрана?" data-speaker="tenant" tabindex="0">
+<button aria-label="Escuchar en español: ¿Hay ascensor y seguridad?" class="speak voice-play" title="Escuchar audio en español" type="button">▶</button><div class="line-body">
+<div class="role">Inquilino / Арендатор</div>
+<div class="es">¿Hay ascensor y seguridad?</div>
+<div class="ru">Есть ли лифт и охрана?</div>
+</div>
+</div></div>
+<div class="qa-col acol"><div class="qa-label">Respuesta</div><div class="line no-audio" data-es="sí, hay ascensor y seguridad 24/7." data-ru="да, есть лифт и охрана 24/7." tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">Sí, hay ascensor y seguridad 24/7.</div>
+<div class="ru">Да, есть лифт и охрана 24/7.</div>
+</div>
+</div><div class="line no-audio" data-es="hay conserje en horario diurno." data-ru="есть консьерж днем." tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">Hay conserje en horario diurno.</div>
+<div class="ru">Есть консьерж днем.</div>
+</div>
+</div><div class="line no-audio" data-es="el acceso es con tarjeta o código." data-ru="доступ по карте или коду." tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">El acceso es con tarjeta o código.</div>
+<div class="ru">Доступ по карте или коду.</div>
+</div>
+</div></div>
+</div>
+</article></div>
+</section><section class="section" data-section="precio, depósito y condiciones цена, депозит и условия" id="sec3" style="--accent:#e86f12; --accent-soft:#e86f1218">
+<header class="section-head">
+<div class="num">3</div>
+<div>
+<h2>PRECIO, DEPÓSITO Y CONDICIONES</h2>
+<p>ЦЕНА, ДЕПОЗИТ И УСЛОВИЯ</p>
+</div>
+</header>
+<figure class="photo">
+<img alt="Juego de llaves de vivienda sobre una mesa para representar renta, depósito y condiciones." decoding="async" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Landlord%27s_keys_%28427383102%29.jpg?width=1600"/>
+<figcaption>Precio, depósito y condiciones del alquiler.</figcaption></figure>
+<div class="cards"><article class="qa-card">
+<h3>1. Renta mensual</h3>
+<div class="qa-grid">
+<div class="qa-col qcol"><div class="qa-label">Pregunta</div><div class="line tenant-line" data-es="¿cuánto es la renta mensual?" data-ru="сколько стоит аренда в месяц?" data-speaker="tenant" tabindex="0">
+<button aria-label="Escuchar en español: ¿Cuánto es la renta mensual?" class="speak voice-play" title="Escuchar audio en español" type="button">▶</button><div class="line-body">
+<div class="role">Inquilino / Арендатор</div>
+<div class="es">¿Cuánto es la renta mensual?</div>
+<div class="ru">Сколько стоит аренда в месяц?</div>
+</div>
+</div></div>
+<div class="qa-col acol"><div class="qa-label">Respuesta</div><div class="line no-audio" data-es="la renta es de ___ al mes." data-ru="аренда ___ в месяц." tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">La renta es de ___ al mes.</div>
+<div class="ru">Аренда ___ в месяц.</div>
+</div>
+</div><div class="line no-audio" data-es="incluye mantenimiento, pero no incluye servicios." data-ru="включает обслуживание, но не услуги." tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">Incluye mantenimiento, pero no incluye servicios.</div>
+<div class="ru">Включает обслуживание, но не услуги.</div>
+</div>
+</div><div class="line no-audio" data-es="el pago es por transferencia o efectivo." data-ru="оплата переводом или наличными." tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">El pago es por transferencia o efectivo.</div>
+<div class="ru">Оплата переводом или наличными.</div>
+</div>
+</div></div>
+</div>
+</article><article class="qa-card">
+<h3>2. Depósito</h3>
+<div class="qa-grid">
+<div class="qa-col qcol"><div class="qa-label">Pregunta</div><div class="line tenant-line" data-es="¿cuánto es el depósito?" data-ru="сколько депозит?" data-speaker="tenant" tabindex="0">
+<button aria-label="Escuchar en español: ¿Cuánto es el depósito?" class="speak voice-play" title="Escuchar audio en español" type="button">▶</button><div class="line-body">
+<div class="role">Inquilino / Арендатор</div>
+<div class="es">¿Cuánto es el depósito?</div>
+<div class="ru">Сколько депозит?</div>
+</div>
+</div></div>
+<div class="qa-col acol"><div class="qa-label">Respuesta</div><div class="line no-audio" data-es="el depósito es equivalente a un mes de renta." data-ru="депозит равен одному месяцу аренды." tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">El depósito es equivalente a un mes de renta.</div>
+<div class="ru">Депозит равен одному месяцу аренды.</div>
+</div>
+</div><div class="line no-audio" data-es="se devuelve al finalizar el contrato si no hay daños." data-ru="возвращается при выезде, если нет ущерба." tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">Se devuelve al finalizar el contrato si no hay daños.</div>
+<div class="ru">Возвращается при выезде, если нет ущерба.</div>
+</div>
+</div><div class="line no-audio" data-es="se retiene parcialmente si hay reparaciones pendientes." data-ru="может удерживаться частично при ремонте." tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">Se retiene parcialmente si hay reparaciones pendientes.</div>
+<div class="ru">Может удерживаться частично при ремонте.</div>
+</div>
+</div></div>
+</div>
+</article><article class="qa-card">
+<h3>3. Mantenimiento</h3>
+<div class="qa-grid">
+<div class="qa-col qcol"><div class="qa-label">Pregunta</div><div class="line tenant-line" data-es="¿hay gasto de mantenimiento?" data-ru="есть плата за обслуживание?" data-speaker="tenant" tabindex="0">
+<button aria-label="Escuchar en español: ¿Hay gasto de mantenimiento?" class="speak voice-play" title="Escuchar audio en español" type="button">▶</button><div class="line-body">
+<div class="role">Inquilino / Арендатор</div>
+<div class="es">¿Hay gasto de mantenimiento?</div>
+<div class="ru">Есть плата за обслуживание?</div>
+</div>
+</div></div>
+<div class="qa-col acol"><div class="qa-label">Respuesta</div><div class="line no-audio" data-es="sí, el mantenimiento es de ___ al mes." data-ru="да, обслуживание ___ в месяц." tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">Sí, el mantenimiento es de ___ al mes.</div>
+<div class="ru">Да, обслуживание ___ в месяц.</div>
+</div>
+</div><div class="line no-audio" data-es="incluye limpieza de áreas comunes y seguridad." data-ru="включает уборку общих зон и охрану." tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">Incluye limpieza de áreas comunes y seguridad.</div>
+<div class="ru">Включает уборку общих зон и охрану.</div>
+</div>
+</div><div class="line no-audio" data-es="no incluye consumo de agua/luz." data-ru="не включает расход воды/электричества." tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">No incluye consumo de agua/luz.</div>
+<div class="ru">Не включает расход воды/электричества.</div>
+</div>
+</div></div>
+</div>
+</article><article class="qa-card">
+<h3>4. Plazo del contrato</h3>
+<div class="qa-grid">
+<div class="qa-col qcol"><div class="qa-label">Pregunta</div><div class="line tenant-line" data-es="¿cuál es el plazo del contrato?" data-ru="какой срок договора?" data-speaker="tenant" tabindex="0">
+<button aria-label="Escuchar en español: ¿Cuál es el plazo del contrato?" class="speak voice-play" title="Escuchar audio en español" type="button">▶</button><div class="line-body">
+<div class="role">Inquilino / Арендатор</div>
+<div class="es">¿Cuál es el plazo del contrato?</div>
+<div class="ru">Какой срок договора?</div>
+</div>
+</div></div>
+<div class="qa-col acol"><div class="qa-label">Respuesta</div><div class="line no-audio" data-es="el contrato es por 12 meses." data-ru="договор на 12 месяцев." tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">El contrato es por 12 meses.</div>
+<div class="ru">Договор на 12 месяцев.</div>
+</div>
+</div><div class="line no-audio" data-es="puede ser por 6 meses con ajuste de renta." data-ru="можно на 6 месяцев с корректировкой цены." tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">Puede ser por 6 meses con ajuste de renta.</div>
+<div class="ru">Можно на 6 месяцев с корректировкой цены.</div>
+</div>
+</div><div class="line no-audio" data-es="se renueva con aviso previo de ___ días." data-ru="продление с уведомлением за ___ дней." tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">Se renueva con aviso previo de ___ días.</div>
+<div class="ru">Продление с уведомлением за ___ дней.</div>
+</div>
+</div></div>
+</div>
+</article></div>
+</section><section class="section" data-section="servicios: luz, agua, internet коммунальные услуги" id="sec4" style="--accent:#6f42c1; --accent-soft:#6f42c118">
+<header class="section-head">
+<div class="num">4</div>
+<div>
+<h2>SERVICIOS: LUZ, AGUA, INTERNET</h2>
+<p>КОММУНАЛЬНЫЕ УСЛУГИ</p>
+</div>
+</header>
+<figure class="photo">
+<img alt="Medidor eléctrico residencial para servicios de luz, agua e internet." decoding="async" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Electric_meter.jpg?width=1600"/>
+<figcaption>Servicios de la vivienda: luz, agua e internet.</figcaption></figure>
+<div class="cards"><article class="qa-card">
+<h3>1. Servicios incluidos</h3>
+<div class="qa-grid">
+<div class="qa-col qcol"><div class="qa-label">Pregunta</div><div class="line tenant-line" data-es="¿qué servicios están incluidos?" data-ru="какие услуги включены?" data-speaker="tenant" tabindex="0">
+<button aria-label="Escuchar en español: ¿Qué servicios están incluidos?" class="speak voice-play" title="Escuchar audio en español" type="button">▶</button><div class="line-body">
+<div class="role">Inquilino / Арендатор</div>
+<div class="es">¿Qué servicios están incluidos?</div>
+<div class="ru">Какие услуги включены?</div>
+</div>
+</div></div>
+<div class="qa-col acol"><div class="qa-label">Respuesta</div><div class="line no-audio" data-es="está incluido el agua / el internet." data-ru="включена вода / интернет." tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">Está incluido el agua / el internet.</div>
+<div class="ru">Включена вода / интернет.</div>
+</div>
+</div><div class="line no-audio" data-es="no están incluidos; se pagan aparte." data-ru="не включены; оплачиваются отдельно." tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">No están incluidos; se pagan aparte.</div>
+<div class="ru">Не включены; оплачиваются отдельно.</div>
+</div>
+</div><div class="line no-audio" data-es="depende del consumo; se factura mensualmente." data-ru="зависит от потребления; счет ежемесячно." tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">Depende del consumo; se factura mensualmente.</div>
+<div class="ru">Зависит от потребления; счет ежемесячно.</div>
+</div>
+</div></div>
+</div>
+</article><article class="qa-card">
+<h3>2. Forma de pago</h3>
+<div class="qa-grid">
+<div class="qa-col qcol"><div class="qa-label">Pregunta</div><div class="line tenant-line" data-es="¿cómo se pagan los servicios?" data-ru="как оплачиваются услуги?" data-speaker="tenant" tabindex="0">
+<button aria-label="Escuchar en español: ¿Cómo se pagan los servicios?" class="speak voice-play" title="Escuchar audio en español" type="button">▶</button><div class="line-body">
+<div class="role">Inquilino / Арендатор</div>
+<div class="es">¿Cómo se pagan los servicios?</div>
+<div class="ru">Как оплачиваются услуги?</div>
+</div>
+</div></div>
+<div class="qa-col acol"><div class="qa-label">Respuesta</div><div class="line no-audio" data-es="se pagan directamente a la empresa proveedora." data-ru="оплачиваются напрямую поставщику." tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">Se pagan directamente a la empresa proveedora.</div>
+<div class="ru">Оплачиваются напрямую поставщику.</div>
+</div>
+</div><div class="line no-audio" data-es="se cargan junto con la renta." data-ru="добавляются к арендной плате." tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">Se cargan junto con la renta.</div>
+<div class="ru">Добавляются к арендной плате.</div>
+</div>
+</div><div class="line no-audio" data-es="le entrego los recibos y fechas de pago." data-ru="дам квитанции и сроки оплаты." tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">Le entrego los recibos y fechas de pago.</div>
+<div class="ru">Дам квитанции и сроки оплаты.</div>
+</div>
+</div></div>
+</div>
+</article></div>
+</section><section class="section" data-section="documentos y requisitos документы и требования" id="sec5" style="--accent:#0b8994; --accent-soft:#0b899418">
+<header class="section-head">
+<div class="num">5</div>
+<div>
+<h2>DOCUMENTOS Y REQUISITOS</h2>
+<p>ДОКУМЕНТЫ И ТРЕБОВАНИЯ</p>
+</div>
+</header>
+<figure class="photo">
+<img alt="Documento de arrendamiento y firma para representar requisitos y contrato." decoding="async" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Lease.jpg?width=1600"/>
+<figcaption>Documentos y requisitos para alquilar.</figcaption></figure>
+<div class="cards"><article class="qa-card">
+<h3>1. Documentación para alquilar</h3>
+<div class="qa-grid">
+<div class="qa-col qcol"><div class="qa-label">Pregunta</div><div class="line tenant-line" data-es="¿qué documentos se necesitan para alquilar?" data-ru="какие документы нужны для аренды?" data-speaker="tenant" tabindex="0">
+<button aria-label="Escuchar en español: ¿Qué documentos se necesitan para alquilar?" class="speak voice-play" title="Escuchar audio en español" type="button">▶</button><div class="line-body">
+<div class="role">Inquilino / Арендатор</div>
+<div class="es">¿Qué documentos se necesitan para alquilar?</div>
+<div class="ru">Какие документы нужны для аренды?</div>
+</div>
+</div></div>
+<div class="qa-col acol"><div class="qa-label">Respuesta</div><div class="line no-audio" data-es="documento de identidad y comprobante de ingresos." data-ru="удостоверение личности и подтверждение дохода." tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">Documento de identidad y comprobante de ingresos.</div>
+<div class="ru">Удостоверение личности и подтверждение дохода.</div>
+</div>
+</div><div class="line no-audio" data-es="se requiere fiador o referencia laboral." data-ru="нужен поручитель или рабочая рекомендация." tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">Se requiere fiador o referencia laboral.</div>
+<div class="ru">Нужен поручитель или рабочая рекомендация.</div>
+</div>
+</div><div class="line no-audio" data-es="también pedimos un comprobante de domicilio." data-ru="также нужен документ о месте жительства." tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">También pedimos un comprobante de domicilio.</div>
+<div class="ru">Также нужен документ о месте жительства.</div>
+</div>
+</div></div>
+</div>
+</article><article class="qa-card">
+<h3>2. Extranjeros y contratos con empresa</h3>
+<div class="qa-grid">
+<div class="qa-col qcol"><div class="qa-label">Pregunta</div><div class="line tenant-line" data-es="¿puedo alquilar si soy extranjero(a)?" data-ru="можно арендовать, если я иностран(ка)?" data-speaker="tenant" tabindex="0">
+<button aria-label="Escuchar en español: ¿Puedo alquilar si soy extranjero(a)?" class="speak voice-play" title="Escuchar audio en español" type="button">▶</button><div class="line-body">
+<div class="role">Inquilino / Арендатор</div>
+<div class="es">¿Puedo alquilar si soy extranjero(a)?</div>
+<div class="ru">Можно арендовать, если я иностран(ка)?</div>
+</div>
+</div></div>
+<div class="qa-col acol"><div class="qa-label">Respuesta</div><div class="line no-audio" data-es="sí, con pasaporte y, si aplica, permiso de residencia." data-ru="да, с паспортом и, при необходимости, внж." tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">Sí, con pasaporte y, si aplica, permiso de residencia.</div>
+<div class="ru">Да, с паспортом и, при необходимости, ВНЖ.</div>
+</div>
+</div><div class="line no-audio" data-es="podemos revisar su situación caso por caso." data-ru="рассматриваем индивидуально." tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">Podemos revisar su situación caso por caso.</div>
+<div class="ru">Рассматриваем индивидуально.</div>
+</div>
+</div><div class="line no-audio" data-es="también se aceptan contratos con empresa." data-ru="возможен договор через компанию." tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">También se aceptan contratos con empresa.</div>
+<div class="ru">Возможен договор через компанию.</div>
+</div>
+</div></div>
+</div>
+</article></div>
+</section><section class="section" data-section="reglas, uso y mantenimiento правила и обслуживание" id="sec6" style="--accent:#c93a52; --accent-soft:#c93a5218">
+<header class="section-head">
+<div class="num">6</div>
+<div>
+<h2>REGLAS, USO Y MANTENIMIENTO</h2>
+<p>ПРАВИЛА И ОБСЛУЖИВАНИЕ</p>
+</div>
+</header>
+<figure class="photo">
+<img alt="Trabajos reales de reparación de vivienda para reglas de uso y mantenimiento." decoding="async" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/FEMA_-_42428_-_Home_Repair_after_Flood.jpg?width=1600"/>
+<figcaption>Reglas de uso, reparaciones y mantenimiento.</figcaption></figure>
+<div class="cards"><article class="qa-card">
+<h3>1. Reglamento del edificio</h3>
+<div class="qa-grid">
+<div class="qa-col qcol"><div class="qa-label">Pregunta</div><div class="line tenant-line" data-es="¿hay reglas del edificio?" data-ru="есть правила в здании?" data-speaker="tenant" tabindex="0">
+<button aria-label="Escuchar en español: ¿Hay reglas del edificio?" class="speak voice-play" title="Escuchar audio en español" type="button">▶</button><div class="line-body">
+<div class="role">Inquilino / Арендатор</div>
+<div class="es">¿Hay reglas del edificio?</div>
+<div class="ru">Есть правила в здании?</div>
+</div>
+</div></div>
+<div class="qa-col acol"><div class="qa-label">Respuesta</div><div class="line no-audio" data-es="sí, hay reglamento de convivencia." data-ru="да, есть правила проживания." tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">Sí, hay reglamento de convivencia.</div>
+<div class="ru">Да, есть правила проживания.</div>
+</div>
+</div><div class="line no-audio" data-es="hay horarios para ruido y uso de áreas comunes." data-ru="есть часы тишины и правила общих зон." tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">Hay horarios para ruido y uso de áreas comunes.</div>
+<div class="ru">Есть часы тишины и правила общих зон.</div>
+</div>
+</div><div class="line no-audio" data-es="le comparto el reglamento antes de firmar." data-ru="отправлю правила до подписания." tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">Le comparto el reglamento antes de firmar.</div>
+<div class="ru">Отправлю правила до подписания.</div>
+</div>
+</div></div>
+</div>
+</article><article class="qa-card">
+<h3>2. Pintura y remodelación</h3>
+<div class="qa-grid">
+<div class="qa-col qcol"><div class="qa-label">Pregunta</div><div class="line tenant-line" data-es="¿puedo pintar o hacer remodelación?" data-ru="можно красить или сделать ремонт?" data-speaker="tenant" tabindex="0">
+<button aria-label="Escuchar en español: ¿Puedo pintar o hacer remodelación?" class="speak voice-play" title="Escuchar audio en español" type="button">▶</button><div class="line-body">
+<div class="role">Inquilino / Арендатор</div>
+<div class="es">¿Puedo pintar o hacer remodelación?</div>
+<div class="ru">Можно красить или сделать ремонт?</div>
+</div>
+</div></div>
+<div class="qa-col acol"><div class="qa-label">Respuesta</div><div class="line no-audio" data-es="se permite con autorización por escrito." data-ru="можно с письменным разрешением." tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">Se permite con autorización por escrito.</div>
+<div class="ru">Можно с письменным разрешением.</div>
+</div>
+</div><div class="line no-audio" data-es="al salir debe dejarlo como estaba originalmente." data-ru="при выезде нужно вернуть исходный вид." tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">Al salir debe dejarlo como estaba originalmente.</div>
+<div class="ru">При выезде нужно вернуть исходный вид.</div>
+</div>
+</div><div class="line no-audio" data-es="las mejoras deben ser acordadas por ambas partes." data-ru="улучшения согласуются сторонами." tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">Las mejoras deben ser acordadas por ambas partes.</div>
+<div class="ru">Улучшения согласуются сторонами.</div>
+</div>
+</div></div>
+</div>
+</article><article class="qa-card">
+<h3>3. Averías y urgencias</h3>
+<div class="qa-grid">
+<div class="qa-col qcol"><div class="qa-label">Pregunta</div><div class="line tenant-line" data-es="hay una fuga / un problema eléctrico." data-ru="есть протечка / проблема с электричеством." data-speaker="tenant" tabindex="0">
+<button aria-label="Escuchar en español: Hay una fuga / un problema eléctrico." class="speak voice-play" title="Escuchar audio en español" type="button">▶</button><div class="line-body">
+<div class="role">Inquilino / Арендатор</div>
+<div class="es">Hay una fuga / un problema eléctrico.</div>
+<div class="ru">Есть протечка / проблема с электричеством.</div>
+</div>
+</div></div>
+<div class="qa-col acol"><div class="qa-label">Respuesta</div><div class="line no-audio" data-es="vamos a enviar a mantenimiento." data-ru="отправим техслужбу." tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">Vamos a enviar a mantenimiento.</div>
+<div class="ru">Отправим техслужбу.</div>
+</div>
+</div><div class="line no-audio" data-es="¿desde cuándo ocurre y en qué área?" data-ru="с каких пор и где именно?" tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">¿Desde cuándo ocurre y en qué área?</div>
+<div class="ru">С каких пор и где именно?</div>
+</div>
+</div><div class="line no-audio" data-es="si es urgente, puede llamar al número de emergencias del edificio." data-ru="если срочно, звоните по номеру аварийной службы." tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">Si es urgente, puede llamar al número de emergencias del edificio.</div>
+<div class="ru">Если срочно, звоните по номеру аварийной службы.</div>
+</div>
+</div></div>
+</div>
+</article></div>
+</section><section class="section" data-section="pagos, recibos y mora оплата и просрочка" id="sec7" style="--accent:#3159b8; --accent-soft:#3159b818">
+<header class="section-head">
+<div class="num">7</div>
+<div>
+<h2>PAGOS, RECIBOS Y MORA</h2>
+<p>ОПЛАТА И ПРОСРОЧКА</p>
+</div>
+</header>
+<figure class="photo">
+<img alt="Recibo de pago para representar pagos, comprobantes y mora." decoding="async" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Taiwan_Mobile_Ruifang_Zhanqian_payment_receipt_20150415.jpg?width=1600"/>
+<figcaption>Pagos, recibos y mora.</figcaption></figure>
+<div class="cards"><article class="qa-card">
+<h3>1. Fecha de pago y recibo</h3>
+<div class="qa-grid">
+<div class="qa-col qcol"><div class="qa-label">Pregunta</div><div class="line tenant-line" data-es="¿en qué fecha se paga la renta?" data-ru="когда оплачивается аренда?" data-speaker="tenant" tabindex="0">
+<button aria-label="Escuchar en español: ¿En qué fecha se paga la renta?" class="speak voice-play" title="Escuchar audio en español" type="button">▶</button><div class="line-body">
+<div class="role">Inquilino / Арендатор</div>
+<div class="es">¿En qué fecha se paga la renta?</div>
+<div class="ru">Когда оплачивается аренда?</div>
+</div>
+</div></div>
+<div class="qa-col acol"><div class="qa-label">Respuesta</div><div class="line no-audio" data-es="se paga el día ___ de cada mes." data-ru="оплата ___ числа каждого месяца." tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">Se paga el día ___ de cada mes.</div>
+<div class="ru">Оплата ___ числа каждого месяца.</div>
+</div>
+</div><div class="line no-audio" data-es="hay ___ días de gracia; luego aplica recargo." data-ru="есть ___ льготных дней; затем штраф." tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">Hay ___ días de gracia; luego aplica recargo.</div>
+<div class="ru">Есть ___ льготных дней; затем штраф.</div>
+</div>
+</div><div class="line no-audio" data-es="le envío el recibo después del pago." data-ru="отправлю квитанцию после оплаты." tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">Le envío el recibo después del pago.</div>
+<div class="ru">Отправлю квитанцию после оплаты.</div>
+</div>
+</div></div>
+</div>
+</article><article class="qa-card">
+<h3>2. Atraso en el pago</h3>
+<div class="qa-grid">
+<div class="qa-col qcol"><div class="qa-label">Pregunta</div><div class="line tenant-line" data-es="me atrasé con el pago." data-ru="я задержал(а) оплату." data-speaker="tenant" tabindex="0">
+<button aria-label="Escuchar en español: Me atrasé con el pago." class="speak voice-play" title="Escuchar audio en español" type="button">▶</button><div class="line-body">
+<div class="role">Inquilino / Арендатор</div>
+<div class="es">Me atrasé con el pago.</div>
+<div class="ru">Я задержал(а) оплату.</div>
+</div>
+</div></div>
+<div class="qa-col acol"><div class="qa-label">Respuesta</div><div class="line no-audio" data-es="¿cuándo puede ponerse al día?" data-ru="когда сможете заплатить?" tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">¿Cuándo puede ponerse al día?</div>
+<div class="ru">Когда сможете заплатить?</div>
+</div>
+</div><div class="line no-audio" data-es="hay un recargo de ___ por día." data-ru="штраф ___ в день." tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">Hay un recargo de ___ por día.</div>
+<div class="ru">Штраф ___ в день.</div>
+</div>
+</div><div class="line no-audio" data-es="podemos acordar un plan de pago si es necesario." data-ru="можно согласовать график платежей." tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">Podemos acordar un plan de pago si es necesario.</div>
+<div class="ru">Можно согласовать график платежей.</div>
+</div>
+</div></div>
+</div>
+</article></div>
+</section><section class="section" data-section="salida, entrega y renovación выезд и продление" id="sec8" style="--accent:#c26c0a; --accent-soft:#c26c0a18">
+<header class="section-head">
+<div class="num">8</div>
+<div>
+<h2>SALIDA, ENTREGA Y RENOVACIÓN</h2>
+<p>ВЫЕЗД И ПРОДЛЕНИЕ</p>
+</div>
+</header>
+<figure class="photo">
+<img alt="Llave de vivienda para representar entrega, salida y renovación del contrato." decoding="async" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/A_House_Key_MOD_45158193.jpg?width=1600"/>
+<figcaption>Salida, entrega de llaves y renovación.</figcaption></figure>
+<div class="cards"><article class="qa-card">
+<h3>1. Terminación anticipada</h3>
+<div class="qa-grid">
+<div class="qa-col qcol"><div class="qa-label">Pregunta</div><div class="line tenant-line" data-es="quisiera terminar el contrato antes." data-ru="я хочу расторгнуть договор раньше." data-speaker="tenant" tabindex="0">
+<button aria-label="Escuchar en español: Quisiera terminar el contrato antes." class="speak voice-play" title="Escuchar audio en español" type="button">▶</button><div class="line-body">
+<div class="role">Inquilino / Арендатор</div>
+<div class="es">Quisiera terminar el contrato antes.</div>
+<div class="ru">Я хочу расторгнуть договор раньше.</div>
+</div>
+</div></div>
+<div class="qa-col acol"><div class="qa-label">Respuesta</div><div class="line no-audio" data-es="debe avisar con ___ días de anticipación." data-ru="нужно предупредить за ___ дней." tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">Debe avisar con ___ días de anticipación.</div>
+<div class="ru">Нужно предупредить за ___ дней.</div>
+</div>
+</div><div class="line no-audio" data-es="se aplica una penalidad de ___ según el contrato." data-ru="штраф ___ согласно договору." tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">Se aplica una penalidad de ___ según el contrato.</div>
+<div class="ru">Штраф ___ согласно договору.</div>
+</div>
+</div><div class="line no-audio" data-es="coordinamos la inspección y la entrega de llaves." data-ru="согласуем осмотр и передачу ключей." tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">Coordinamos la inspección y la entrega de llaves.</div>
+<div class="ru">Согласуем осмотр и передачу ключей.</div>
+</div>
+</div></div>
+</div>
+</article><article class="qa-card">
+<h3>2. Entrega del piso</h3>
+<div class="qa-grid">
+<div class="qa-col qcol"><div class="qa-label">Pregunta</div><div class="line tenant-line" data-es="¿cómo es la entrega del piso?" data-ru="как проходит сдача квартиры?" data-speaker="tenant" tabindex="0">
+<button aria-label="Escuchar en español: ¿Cómo es la entrega del piso?" class="speak voice-play" title="Escuchar audio en español" type="button">▶</button><div class="line-body">
+<div class="role">Inquilino / Арендатор</div>
+<div class="es">¿Cómo es la entrega del piso?</div>
+<div class="ru">Как проходит сдача квартиры?</div>
+</div>
+</div></div>
+<div class="qa-col acol"><div class="qa-label">Respuesta</div><div class="line no-audio" data-es="se realiza una inspección y se firma un acta de entrega." data-ru="проводится осмотр и подписывается акт." tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">Se realiza una inspección y se firma un acta de entrega.</div>
+<div class="ru">Проводится осмотр и подписывается акт.</div>
+</div>
+</div><div class="line no-audio" data-es="se revisan paredes, muebles y medidores." data-ru="проверяются стены, мебель и счетчики." tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">Se revisan paredes, muebles y medidores.</div>
+<div class="ru">Проверяются стены, мебель и счетчики.</div>
+</div>
+</div><div class="line no-audio" data-es="el depósito se devuelve en un plazo de ___ días." data-ru="депозит возвращается в течение ___ дней." tabindex="0">
+<div class="line-body">
+<div class="role">Arrendador / agente</div>
+<div class="es">El depósito se devuelve en un plazo de ___ días.</div>
+<div class="ru">Депозит возвращается в течение ___ дней.</div>
+</div>
+</div></div>
+</div>
+</article></div>
+</section>
+<div class="empty" id="empty">Нет фраз, совпадающих с поиском.</div>
+<section aria-label="Fuentes de las fotografías" class="credits"><div class="credits-title">Fuentes de las fotografías</div><p><a href="https://commons.wikimedia.org/wiki/File:Renting_a_House_-_Leasing_a_Property.jpg" rel="noopener" target="_blank">advokatsmart.no, CC BY 2.0, Wikimedia Commons</a>; <a href="https://commons.wikimedia.org/wiki/File:Artchapiz1_artchapiz.es_apartment_rental_granada_01.jpg" rel="noopener" target="_blank">Artchapiz, CC0 1.0, Wikimedia Commons</a>; <a href="https://commons.wikimedia.org/wiki/File:Landlord%27s_keys_(427383102).jpg" rel="noopener" target="_blank">Mack Male, CC BY-SA 2.0, Wikimedia Commons</a>; <a href="https://commons.wikimedia.org/wiki/File:Electric_meter.jpg" rel="noopener" target="_blank">NellieBly, CC BY-SA 3.0, Wikimedia Commons</a>; <a href="https://commons.wikimedia.org/wiki/File:Lease.jpg" rel="noopener" target="_blank">Harshithapa436, CC BY-SA 4.0, Wikimedia Commons</a>; <a href="https://commons.wikimedia.org/wiki/File:FEMA_-_42428_-_Home_Repair_after_Flood.jpg" rel="noopener" target="_blank">FEMA, dominio público, Wikimedia Commons</a>; <a href="https://commons.wikimedia.org/wiki/File:Taiwan_Mobile_Ruifang_Zhanqian_payment_receipt_20150415.jpg" rel="noopener" target="_blank">LNDDYL, CC BY-SA 4.0, Wikimedia Commons</a>; <a href="https://commons.wikimedia.org/wiki/File:A_House_Key_MOD_45158193.jpg" rel="noopener" target="_blank">MOD / Crown copyright, Open Government Licence, Wikimedia Commons</a>.</p></section></main>
+<script>
+const body = document.body;
+const toggle = document.getElementById('toggleRu');
+const search = document.getElementById('search');
+const empty = document.getElementById('empty');
+const voiceSelect = document.getElementById('voiceSelect');
+let showRu = false;
+let activeButton = null;
+let activeUtterance = null;
+let spanishVoices = [];
+let selectedVoice = null;
+const savedVoiceKey = 'alquilerViviendaSpanishVoiceURI';
+
+if (toggle) {
+  toggle.addEventListener('click', () => {
+    showRu = !showRu;
+    body.classList.toggle('show-ru', showRu);
+    toggle.textContent = showRu ? 'Скрыть русский' : 'Показать русский';
+  });
+}
+
+document.querySelectorAll('.line').forEach(line => {
+  line.addEventListener('click', e => {
+    if (e.target.closest('button, audio, input, select')) return;
+    line.classList.toggle('open');
+  });
+  line.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      line.classList.toggle('open');
+    }
+  });
+});
+
+function resetButton(btn) {
+  if (!btn) return;
+  btn.classList.remove('playing');
+  btn.textContent = '▶';
+  const line = btn.closest('.line');
+  const text = (line?.querySelector('.es')?.textContent || '').trim();
+  btn.setAttribute('aria-label', text ? `Escuchar en español: ${text}` : 'Escuchar audio en español');
+}
+
+function stopCurrent() {
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.cancel();
+  }
+  activeUtterance = null;
+  resetButton(activeButton);
+  activeButton = null;
+}
+
+function markPlaying(btn) {
+  activeButton = btn;
+  btn.classList.remove('audio-error');
+  btn.classList.add('playing');
+  btn.textContent = '■';
+  btn.setAttribute('aria-label', 'Detener audio');
+}
+
+function isSpanishVoice(voice) {
+  const lang = (voice.lang || '').toLowerCase();
+  const name = (voice.name || '').toLowerCase();
+  return lang.startsWith('es') || /spanish|español|espanol|castellano/.test(name);
+}
+
+function naturalVoiceScore(voice) {
+  const lang = (voice.lang || '').toLowerCase();
+  const name = (voice.name || '').toLowerCase();
+  let score = 0;
+
+  if (lang.startsWith('es')) score += 120;
+  if (lang === 'es-es') score += 35;
+  if (['es-mx', 'es-us', 'es-419', 'es-co', 'es-ar', 'es-cl', 'es-pe'].includes(lang)) score += 28;
+
+  if (/natural|neural|online|premium|enhanced|siri/.test(name)) score += 85;
+  if (/google|microsoft|apple/.test(name)) score += 55;
+  if (/spanish|español|espanol|castellano/.test(name)) score += 25;
+  if (/monica|mónica|paulina|luc[ií]a|elvira|paloma|laura|helena|jorge|alvaro|álvaro|dalia|sabino/.test(name)) score += 18;
+
+  if (/compact|eloquence|basic|festival|espeak|mbrola|pico/.test(name)) score -= 120;
+  if (voice.localService === false) score += 12;
+  return score;
+}
+
+function labelVoice(voice) {
+  const naturalHint = /natural|neural|online|premium|enhanced|google|microsoft|apple|siri/i.test(voice.name || '') ? ' — recomendada' : '';
+  return `${voice.name} (${voice.lang || 'es'})${naturalHint}`;
+}
+
+function populateVoiceSelect() {
+  if (!('speechSynthesis' in window)) {
+    if (voiceSelect) {
+      voiceSelect.innerHTML = '<option>Audio no disponible en este navegador</option>';
+      voiceSelect.disabled = true;
+    }
+    return;
+  }
+
+  const voices = window.speechSynthesis.getVoices();
+  spanishVoices = voices.filter(isSpanishVoice).sort((a, b) => naturalVoiceScore(b) - naturalVoiceScore(a));
+
+  if (!voiceSelect) return;
+
+  voiceSelect.innerHTML = '';
+  if (!spanishVoices.length) {
+    const option = document.createElement('option');
+    option.textContent = 'Voz española del navegador';
+    option.value = '';
+    voiceSelect.appendChild(option);
+    voiceSelect.disabled = false;
+    selectedVoice = null;
+    return;
+  }
+
+  const savedURI = localStorage.getItem(savedVoiceKey);
+  const preferred = spanishVoices.find(v => v.voiceURI === savedURI) || spanishVoices[0];
+  selectedVoice = preferred;
+
+  spanishVoices.forEach((voice, index) => {
+    const option = document.createElement('option');
+    option.value = voice.voiceURI || voice.name || String(index);
+    option.textContent = labelVoice(voice);
+    if (voice === preferred) option.selected = true;
+    voiceSelect.appendChild(option);
+  });
+}
+
+if (voiceSelect) {
+  voiceSelect.addEventListener('change', () => {
+    selectedVoice = spanishVoices.find(v => (v.voiceURI || v.name) === voiceSelect.value) || null;
+    if (selectedVoice) localStorage.setItem(savedVoiceKey, selectedVoice.voiceURI || selectedVoice.name);
+    stopCurrent();
+  });
+}
+
+if ('speechSynthesis' in window) {
+  populateVoiceSelect();
+  window.speechSynthesis.onvoiceschanged = populateVoiceSelect;
+  setTimeout(populateVoiceSelect, 250);
+  setTimeout(populateVoiceSelect, 1000);
+}
+
+function speakTenantLine(line, btn) {
+  const text = (line.querySelector('.es')?.textContent || line.dataset.es || '').trim();
+  if (!text) return;
+
+  if (activeButton === btn && btn.classList.contains('playing')) {
+    stopCurrent();
+    return;
+  }
+
+  stopCurrent();
+
+  if (!('speechSynthesis' in window)) {
+    btn.classList.add('audio-error');
+    btn.title = 'No se pudo reproducir audio en este navegador.';
+    return;
+  }
+
+  markPlaying(btn);
+
+  const utterance = new SpeechSynthesisUtterance(text);
+  if (selectedVoice) {
+    utterance.voice = selectedVoice;
+    utterance.lang = selectedVoice.lang || 'es-ES';
+  } else {
+    utterance.lang = 'es-ES';
+  }
+  utterance.rate = 0.86;
+  utterance.pitch = 1.02;
+  utterance.volume = 1;
+
+  utterance.onend = () => stopCurrent();
+  utterance.onerror = () => {
+    btn.classList.add('audio-error');
+    btn.title = 'No se pudo reproducir audio con esta voz. Pruebe otra voz en el selector.';
+    stopCurrent();
+  };
+
+  activeUtterance = utterance;
+  setTimeout(() => window.speechSynthesis.speak(utterance), 40);
+}
+
+document.querySelectorAll('.voice-play').forEach(btn => {
+  btn.addEventListener('click', e => {
+    e.preventDefault();
+    e.stopPropagation();
+    const line = btn.closest('.line');
+    if (line) speakTenantLine(line, btn);
+  });
+});
+
+if (search) {
+  search.addEventListener('input', () => {
+    const q = search.value.trim().toLowerCase();
+    let sectionCount = 0;
+    document.querySelectorAll('.section').forEach(section => {
+      let cardCount = 0;
+      section.querySelectorAll('.qa-card').forEach(card => {
+        const hay = (card.textContent + ' ' + section.dataset.section).toLowerCase();
+        const ok = !q || hay.includes(q);
+        card.style.display = ok ? 'block' : 'none';
+        if (ok) cardCount++;
+      });
+      section.style.display = cardCount ? 'block' : 'none';
+      if (cardCount) sectionCount++;
+    });
+    if (empty) empty.style.display = sectionCount ? 'none' : 'block';
+  });
+}
+</script>
+</body>
+</html>

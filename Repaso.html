@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ejercicios de repaso ELE A1 · Muerte en Valencia</title>
+<style>
+:root{
+  --bg:#f3f6fb;--paper:#ffffff;--ink:#172033;--muted:#65738a;--line:#d9e1ec;
+  --accent:#6d28d9;--accent2:#0f766e;--soft:#f5f3ff;--soft2:#ecfdf5;
+  --ok:#137653;--bad:#b42335;--shadow:0 14px 36px rgba(30,41,59,.09)
+}
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0;background:linear-gradient(145deg,#eef2ff,#f8fafc 48%,#ecfeff);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.5}
+header{max-width:1160px;margin:0 auto;padding:30px 18px 10px}
+.hero{background:linear-gradient(125deg,#31105f,#6d28d9 58%,#0f766e);color:#fff;border-radius:25px;padding:27px 29px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;width:240px;height:240px;border-radius:50%;background:rgba(255,255,255,.10);right:-70px;top:-85px}
+h1{margin:0 0 7px;font-size:clamp(1.75rem,4vw,2.75rem);letter-spacing:-.025em}.hero p{margin:0;color:#ede9fe;max-width:840px;position:relative;z-index:1}
+main{max-width:1160px;margin:auto;padding:4px 18px 50px}
+.section{background:var(--paper);border:1px solid var(--line);border-radius:22px;margin:20px 0;overflow:hidden;box-shadow:var(--shadow)}
+.section-head{padding:20px 22px 15px;background:linear-gradient(90deg,#fff,#faf8ff);border-bottom:1px solid var(--line)}
+.section-head h2{margin:0;font-size:1.35rem}.section-head p{margin:5px 0 0;color:var(--muted)}
+.theme{display:inline-block;margin-top:9px;border-radius:999px;padding:5px 10px;background:#ede9fe;color:#5b21b6;font-size:.79rem;font-weight:800}
+.section-body{padding:20px 22px}.items{display:grid;gap:11px}
+.item{border:1px solid var(--line);border-radius:14px;padding:12px 14px;background:#fbfcff;display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.num{min-width:29px;height:29px;border-radius:50%;display:grid;place-items:center;background:#ede9fe;color:#5b21b6;font-weight:850;font-size:.82rem}
+select{border:1px solid #c7d1df;border-radius:9px;padding:7px 9px;background:#fff;color:var(--ink);font:inherit;min-width:128px}
+select:focus{outline:3px solid rgba(109,40,217,.15);border-color:var(--accent)}
+.verb-tag{border:0;border-radius:999px;padding:5px 10px;background:#dff8f3;color:#0f766e;font-weight:850;cursor:default}
+.actions{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-top:17px;padding-top:15px;border-top:1px dashed var(--line)}
+.btn{border:0;border-radius:11px;padding:9px 13px;font:inherit;font-weight:800;cursor:pointer;transition:.18s transform,.18s box-shadow}
+.btn:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(0,0,0,.12)}
+.btn-check{background:var(--accent);color:#fff}.btn-answer{background:#dff8f3;color:#0b665e}.btn-reset{background:#fff0f2;color:#9f1239}
+.score{font-weight:850;color:#424d63}.correct{border-color:#70c5a3!important;background:#effcf6!important}.incorrect{border-color:#ee9ca8!important;background:#fff3f5!important}
+.feedback{font-size:.85rem;font-weight:800}.feedback.ok{color:var(--ok)}.feedback.bad{color:var(--bad)}
+.bank{display:flex;gap:8px;flex-wrap:wrap;padding:13px;background:#f7f5ff;border:1px dashed #b9acf1;border-radius:14px;margin-bottom:14px;min-height:58px}
+.chip{background:#fff;border:1px solid #cfc8ea;border-radius:999px;padding:7px 11px;cursor:grab;font-weight:780;box-shadow:0 3px 8px rgba(31,41,55,.06);user-select:none}.chip.selected{outline:3px solid rgba(109,40,217,.23);background:#f2edff}
+.drop-list{display:grid;grid-template-columns:1fr 1fr;gap:10px}.drop-row{border:1px solid var(--line);border-radius:13px;padding:11px;background:#fbfcff;display:grid;grid-template-columns:1fr minmax(140px,.72fr);align-items:center;gap:10px}
+.dropzone{min-height:42px;border:2px dashed #b8c2d2;border-radius:10px;background:#fff;display:flex;align-items:center;justify-content:center;padding:5px;color:#8490a4;font-size:.86rem;cursor:pointer}.dropzone .chip{cursor:pointer}
+.row-feedback{min-height:1.15em;font-size:.8rem;font-weight:800}.row-feedback.ok{color:var(--ok)}.row-feedback.bad{color:var(--bad)}
+.mcq{display:grid;gap:9px}.mcq-item{border:1px solid var(--line);border-radius:15px;padding:14px;background:#fbfcff}.mcq-question{font-weight:800;margin-bottom:9px}.options{display:grid;gap:7px}.option{display:flex;gap:8px;align-items:flex-start;padding:8px 10px;border-radius:10px;border:1px solid #e0e6ef;background:#fff;cursor:pointer}.option:hover{background:#f8f7ff}.option input{margin-top:4px}.mcq-feedback{margin-top:8px;min-height:1.2em;font-size:.85rem;font-weight:800}
+.oral-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:11px}.oral-card{border:1px solid var(--line);border-radius:15px;padding:14px;background:linear-gradient(135deg,#fbfcff,#effcf9);min-height:100px}.oral-card b{display:block;color:#5b21b6;margin-bottom:7px}
+.note{font-size:.85rem;color:var(--muted);margin-top:10px}
+@media(max-width:820px){.drop-list,.oral-grid{grid-template-columns:1fr}.drop-row{grid-template-columns:1fr}.hero{padding:23px 21px}.section-body,.section-head{padding-left:16px;padding-right:16px}}
+@media print{body{background:#fff}.hero{box-shadow:none}.actions{display:none}.section{box-shadow:none;break-inside:avoid}.item,.mcq-item{break-inside:avoid}}
+</style>
+</head>
+<body>
+<header>
+  <div class="hero">
+    <h1>Ejercicios de repaso ELE A1</h1>
+    <p>Vocabulario y gramática a partir de los personajes, los lugares y los temas de <em>Muerte en Valencia</em>.</p>
+  </div>
+</header>
+<main>
+
+<section class="section" id="e1">
+  <div class="section-head">
+    <h2>1. Vocabulario: personajes y lugares</h2>
+    <p>Arrastra cada palabra hasta la descripción correspondiente. También puedes pulsar una palabra y después una casilla.</p>
+    <span class="theme">Tema: Pepe, Belén y el viaje a Valencia</span>
+  </div>
+  <div class="section-body">
+    <div class="bank" id="wordBank"></div>
+    <div class="drop-list" id="dropList"></div>
+    <div class="actions">
+      <button class="btn btn-check" onclick="checkDrag()">Comprobar</button>
+      <button class="btn btn-answer" onclick="showDragAnswers()">Respuestas correctas</button>
+      <button class="btn btn-reset" onclick="renderDrag()">Restablecer</button>
+      <span class="score" id="score-e1">0/12</span>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="e2">
+  <div class="section-head">
+    <h2>2. Artículos: un, una, el, la, los, las y ø</h2>
+    <p>Elige el artículo adecuado. <strong>ø</strong> representa el artículo cero.</p>
+    <span class="theme">Tema: profesiones, hotel, comida y ciudad</span>
+  </div>
+  <div class="section-body">
+    <div class="items" id="articlesItems"></div>
+    <div class="actions">
+      <button class="btn btn-check" onclick="checkSelectSection('e2','articlesItems')">Comprobar</button>
+      <button class="btn btn-answer" onclick="showSelectAnswers('e2','articlesItems')">Respuestas correctas</button>
+      <button class="btn btn-reset" onclick="resetSelectSection('e2','articlesItems')">Restablecer</button>
+      <span class="score" id="score-e2">0/12</span>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="e3">
+  <div class="section-head">
+    <h2>3. Presente de Indicativo</h2>
+    <p>Elige la forma adecuada. Cada desplegable contiene las seis formas del verbo; el botón muestra el infinitivo.</p>
+    <span class="theme">Tema: la vida de Pepe en Madrid y Valencia</span>
+  </div>
+  <div class="section-body">
+    <div class="items" id="presentItems"></div>
+    <div class="actions">
+      <button class="btn btn-check" onclick="checkSelectSection('e3','presentItems')">Comprobar</button>
+      <button class="btn btn-answer" onclick="showSelectAnswers('e3','presentItems')">Respuestas correctas</button>
+      <button class="btn btn-reset" onclick="resetSelectSection('e3','presentItems')">Restablecer</button>
+      <span class="score" id="score-e3">0/12</span>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="e4">
+  <div class="section-head">
+    <h2>4. Verbos ser y estar</h2>
+    <p>Selecciona la forma adecuada según la identidad, la descripción, el estado o la localización.</p>
+    <span class="theme">Tema: descripción de los personajes y localización</span>
+  </div>
+  <div class="section-body">
+    <div class="items" id="serEstarItems"></div>
+    <div class="actions">
+      <button class="btn btn-check" onclick="checkSelectSection('e4','serEstarItems')">Comprobar</button>
+      <button class="btn btn-answer" onclick="showSelectAnswers('e4','serEstarItems')">Respuestas correctas</button>
+      <button class="btn btn-reset" onclick="resetSelectSection('e4','serEstarItems')">Restablecer</button>
+      <span class="score" id="score-e4">0/12</span>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="e5">
+  <div class="section-head">
+    <h2>5. Tener, estar y hay</h2>
+    <p>Elige una de las tres formas que aparecen en cada oración.</p>
+    <span class="theme">Tema: el hotel, las Fallas y la investigación</span>
+  </div>
+  <div class="section-body">
+    <div class="items" id="tehItems"></div>
+    <div class="actions">
+      <button class="btn btn-check" onclick="checkSelectSection('e5','tehItems')">Comprobar</button>
+      <button class="btn btn-answer" onclick="showSelectAnswers('e5','tehItems')">Respuestas correctas</button>
+      <button class="btn btn-reset" onclick="resetSelectSection('e5','tehItems')">Restablecer</button>
+      <span class="score" id="score-e5">0/12</span>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="e6">
+  <div class="section-head">
+    <h2>6. Verbos reflexivos en Presente de Indicativo</h2>
+    <p>Elige la forma adecuada. Cada desplegable contiene las seis personas del verbo reflexivo.</p>
+    <span class="theme">Tema: rutinas, encuentros y relaciones</span>
+  </div>
+  <div class="section-body">
+    <div class="items" id="reflexiveItems"></div>
+    <div class="actions">
+      <button class="btn btn-check" onclick="checkSelectSection('e6','reflexiveItems')">Comprobar</button>
+      <button class="btn btn-answer" onclick="showSelectAnswers('e6','reflexiveItems')">Respuestas correctas</button>
+      <button class="btn btn-reset" onclick="resetSelectSection('e6','reflexiveItems')">Restablecer</button>
+      <span class="score" id="score-e6">0/12</span>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="e7">
+  <div class="section-head">
+    <h2>7. Perífrasis verbales</h2>
+    <p>Completa con empezar a, terminar de, acabar de, tener que o hay que en la forma adecuada.</p>
+    <span class="theme">Tema: acciones, obligaciones y momentos de la novela</span>
+  </div>
+  <div class="section-body">
+    <div class="items" id="periphrasisItems"></div>
+    <div class="actions">
+      <button class="btn btn-check" onclick="checkSelectSection('e7','periphrasisItems')">Comprobar</button>
+      <button class="btn btn-answer" onclick="showSelectAnswers('e7','periphrasisItems')">Respuestas correctas</button>
+      <button class="btn btn-reset" onclick="resetSelectSection('e7','periphrasisItems')">Restablecer</button>
+      <span class="score" id="score-e7">0/12</span>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="e8">
+  <div class="section-head">
+    <h2>8. Comprensión de la novela</h2>
+    <p>Elige una respuesta en cada pregunta.</p>
+    <span class="theme">Tema: personajes, lugares, crimen y desenlace</span>
+  </div>
+  <div class="section-body">
+    <div class="mcq" id="novelQuiz"></div>
+    <div class="actions">
+      <button class="btn btn-check" onclick="checkQuiz()">Comprobar</button>
+      <button class="btn btn-answer" onclick="showQuizAnswers()">Respuestas correctas</button>
+      <button class="btn btn-reset" onclick="renderQuiz()">Restablecer</button>
+      <span class="score" id="score-e8">0/10</span>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="conversation">
+  <div class="section-head">
+    <h2>Conversación final sobre <em>Muerte en Valencia</em></h2>
+    <p>Hablad por parejas. No es necesario escribir. Justificad las respuestas con información de la novela.</p>
+    <span class="theme">Tema: opinión, interpretación y conversación</span>
+  </div>
+  <div class="section-body">
+    <div class="oral-grid" id="oralGrid"></div>
+  </div>
+</section>
+
+</main>
+<script>
+const shuffle = array => [...array].sort(() => Math.random() - 0.5);
+const normalize = value => (value || '').toString().trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ');
+const esc = value => value.toString().replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[char]));
+
+function selectHTML(options, answer){
+  return `<select data-answer="${esc(answer)}"><option value="">Elige…</option>${shuffle(options).map(option => `<option value="${esc(option)}">${esc(option)}</option>`).join('')}</select>`;
+}
+function removeFeedback(container){
+  container.querySelectorAll('.feedback').forEach(el => el.remove());
+  container.querySelectorAll('select').forEach(el => el.classList.remove('correct','incorrect'));
+}
+function decorateSelect(select, correct, answer){
+  select.classList.remove('correct','incorrect');
+  select.classList.add(correct ? 'correct' : 'incorrect');
+  let feedback = select.parentElement.querySelector('.feedback');
+  if(!feedback){feedback=document.createElement('span');feedback.className='feedback';select.parentElement.appendChild(feedback)}
+  feedback.className=`feedback ${correct?'ok':'bad'}`;
+  feedback.textContent=correct?'✓ Correcto':`✗ Respuesta correcta: ${answer}`;
+}
+function setScore(id, value, total=12){document.getElementById(`score-${id}`).textContent=`${value}/${total}`}
+function checkSelectSection(id, containerId){
+  const container=document.getElementById(containerId);let score=0;
+  container.querySelectorAll('select').forEach(select=>{const ok=normalize(select.value)===normalize(select.dataset.answer);decorateSelect(select,ok,select.dataset.answer);if(ok)score++});
+  setScore(id,score,container.querySelectorAll('select').length);
+}
+function showSelectAnswers(id, containerId){
+  const container=document.getElementById(containerId);
+  container.querySelectorAll('select').forEach(select=>{select.value=select.dataset.answer;decorateSelect(select,true,select.dataset.answer)});
+  setScore(id,container.querySelectorAll('select').length,container.querySelectorAll('select').length);
+}
+function resetSelectSection(id, containerId){
+  const container=document.getElementById(containerId);container.querySelectorAll('select').forEach(select=>select.value='');removeFeedback(container);setScore(id,0,container.querySelectorAll('select').length);
+}
+
+const dragData=[
+  ['actor','Alberto Vicent trabaja en una compañía de teatro.'],
+  ['profesora','Belén enseña filosofía en un instituto.'],
+  ['productor','Eduardo trabaja en el mundo de la música.'],
+  ['hotel','Pepe duerme en el Inglés cuando llega a Valencia.'],
+  ['ascensor','Vicente y Pepe lo usan para subir al tercer piso.'],
+  ['coche','Belén lo utiliza para ir a Carlet.'],
+  ['playa','La Malvarrosa es un lugar junto al mar.'],
+  ['paella','Pepe y Belén comen este plato en La Pepica.'],
+  ['cine','Pepe ve allí una película antes de conocer a Belén.'],
+  ['café','Pepe y Belén conversan allí y toman gin-tónics.'],
+  ['barrio','El Carmen es una zona antigua de Valencia.'],
+  ['tarjeta','Pepe le da una con sus teléfonos a Belén.']
+];
+let selectedChip=null;
+function makeChip(word){
+  const chip=document.createElement('span');chip.className='chip';chip.textContent=word;chip.dataset.word=word;chip.draggable=true;
+  chip.addEventListener('dragstart',event=>event.dataTransfer.setData('text/plain',word));
+  chip.addEventListener('click',()=>{document.querySelectorAll('#e1 .chip').forEach(c=>c.classList.remove('selected'));selectedChip=chip;chip.classList.add('selected')});
+  return chip;
+}
+function renderDrag(){
+  const bank=document.getElementById('wordBank'),list=document.getElementById('dropList');bank.innerHTML='';list.innerHTML='';selectedChip=null;
+  shuffle(dragData).forEach(([word])=>bank.appendChild(makeChip(word)));
+  dragData.forEach(([word,definition],index)=>{
+    const row=document.createElement('div');row.className='drop-row';
+    row.innerHTML=`<div><span class="num">${index+1}</span> ${esc(definition)}</div><div><div class="dropzone" data-answer="${esc(word)}">Suelta aquí</div><div class="row-feedback"></div></div>`;
+    list.appendChild(row);
+  });
+  bindDropzones();setScore('e1',0);
+}
+function bindDropzones(){
+  document.querySelectorAll('#e1 .dropzone').forEach(zone=>{
+    zone.addEventListener('dragover',event=>event.preventDefault());
+    zone.addEventListener('drop',event=>{event.preventDefault();placeWord(zone,event.dataTransfer.getData('text/plain'))});
+    zone.addEventListener('click',()=>{if(selectedChip)placeWord(zone,selectedChip.dataset.word)});
+  });
+}
+function placeWord(zone,word){
+  const occupied=zone.querySelector('.chip');if(occupied)document.getElementById('wordBank').appendChild(occupied);
+  const chip=[...document.querySelectorAll('#e1 .chip')].find(c=>c.dataset.word===word);
+  if(!chip)return;
+  zone.textContent='';zone.appendChild(chip);chip.classList.remove('selected');selectedChip=null;zone.classList.remove('correct','incorrect');
+  const feedback=zone.parentElement.querySelector('.row-feedback');feedback.textContent='';feedback.className='row-feedback';
+}
+function checkDrag(){
+  let score=0;document.querySelectorAll('#e1 .dropzone').forEach(zone=>{
+    const chip=zone.querySelector('.chip');const ok=chip&&normalize(chip.dataset.word)===normalize(zone.dataset.answer);
+    zone.classList.remove('correct','incorrect');zone.classList.add(ok?'correct':'incorrect');
+    const feedback=zone.parentElement.querySelector('.row-feedback');feedback.className=`row-feedback ${ok?'ok':'bad'}`;feedback.textContent=ok?'✓ Correcto':`✗ Respuesta correcta: ${zone.dataset.answer}`;
+    if(ok)score++;
+  });setScore('e1',score);
+}
+function showDragAnswers(){
+  document.querySelectorAll('#e1 .dropzone').forEach(zone=>{
+    const word=zone.dataset.answer;placeWord(zone,word);zone.classList.add('correct');
+    const feedback=zone.parentElement.querySelector('.row-feedback');feedback.className='row-feedback ok';feedback.textContent='✓ Correcto';
+  });setScore('e1',12);
+}
+
+const articles=[
+  {s:'Pepe es ___ abogado y detective privado.',a:'ø',o:['un','el','ø']},
+  {s:'Belén es ___ profesora de filosofía.',a:'ø',o:['una','la','ø']},
+  {s:'Pepe reserva ___ habitación en el Hotel Inglés.',a:'una',o:['la','ø','una']},
+  {s:'En el hotel, ___ habitación 321 está en el tercer piso.',a:'la',o:['una','la','ø']},
+  {s:'En la recepción hay ___ ascensor.',a:'un',o:['el','ø','un']},
+  {s:'Pepe usa ___ ascensor para subir al tercer piso.',a:'el',o:['ø','un','el']},
+  {s:'Belén y Pepe comen ___ paella en la Malvarrosa.',a:'una',o:['la','una','ø']},
+  {s:'Para Pepe, ___ paella de La Pepica está muy buena.',a:'la',o:['una','ø','la']},
+  {s:'En Valencia hay ___ calles llenas de gente.',a:'ø',o:['las','la','ø']},
+  {s:'Durante las Fallas, ___ calles del centro están llenas.',a:'las',o:['la','ø','las']},
+  {s:'Javier y Gloria son ___ músicos.',a:'ø',o:['los','el','ø']},
+  {s:'En la compañía, ___ músicos ensayan para la obra de Belén.',a:'los',o:['ø','los','el']}
+];
+function renderArticles(){document.getElementById('articlesItems').innerHTML=articles.map((item,index)=>`<div class="item"><span class="num">${index+1}</span><span>${item.s.replace('___',selectHTML(item.o,item.a))}</span></div>`).join('')}
+
+const present=[
+  {s:'Yo ___ un décimo de lotería en Doña Manolita.',v:'comprar',a:'compro',o:['compro','compras','compra','compramos','compráis','compran']},
+  {s:'Tú ___ El País en la oficina de Pepe.',v:'leer',a:'lees',o:['leo','lees','lee','leemos','leéis','leen']},
+  {s:'Belén ___ en Valencia.',v:'vivir',a:'vive',o:['vivo','vives','vive','vivimos','vivís','viven']},
+  {s:'Nosotros ___ por el Barrio del Carmen.',v:'caminar',a:'caminamos',o:['camino','caminas','camina','caminamos','camináis','caminan']},
+  {s:'Vosotros ___ las ventanas del despacho.',v:'cerrar',a:'cerráis',o:['cierro','cierras','cierra','cerramos','cerráis','cierran']},
+  {s:'Pepe y Susi ___ juntos desde hace muchos años.',v:'trabajar',a:'trabajan',o:['trabajo','trabajas','trabaja','trabajamos','trabajáis','trabajan']},
+  {s:'Yo ___ las Fallas en la Plaza del País Valenciano.',v:'ver',a:'veo',o:['veo','ves','ve','vemos','veis','ven']},
+  {s:'Tú ___ a Morales desde el hotel.',v:'llamar',a:'llamas',o:['llamo','llamas','llama','llamamos','llamáis','llaman']},
+  {s:'El inspector Morales ___ a Romerales.',v:'conocer',a:'conoce',o:['conozco','conoces','conoce','conocemos','conocéis','conocen']},
+  {s:'Nosotros ___ de Carlet a Valencia por la noche.',v:'volver',a:'volvemos',o:['vuelvo','vuelves','vuelve','volvemos','volvéis','vuelven']},
+  {s:'Vosotras ___ un gin-tónic en el café.',v:'preferir',a:'preferís',o:['prefiero','prefieres','prefiere','preferimos','preferís','prefieren']},
+  {s:'Belén y Pepe ___ la dirección de Ana.',v:'buscar',a:'buscan',o:['busco','buscas','busca','buscamos','buscáis','buscan']}
+];
+function renderPresent(){document.getElementById('presentItems').innerHTML=present.map((item,index)=>`<div class="item"><span class="num">${index+1}</span><button class="verb-tag" type="button">${item.v}</button><span>${item.s.replace('___',selectHTML(item.o,item.a))}</span></div>`).join('')}
+
+const serEstarOptions=['soy','eres','es','somos','sois','son','estoy','estás','está','estamos','estáis','están'];
+const serEstar=[
+  ['Pepe Rey ___ detective privado.','es'],['Pepe ___ triste cuando no ve a sus hijos.','está'],['Belén ___ profesora de filosofía.','es'],['Belén ___ en Valencia.','está'],
+  ['Susi ___ simpática y observadora.','es'],['Susi y Pepe ___ en el despacho el lunes.','están'],['El Hotel Inglés ___ antiguo y romántico.','es'],['El Hotel Inglés ___ cerca del centro de Valencia.','está'],
+  ['Javier y Gloria ___ músicos.','son'],['Javier y Gloria ___ en casa de Belén.','están'],['Las Fallas ___ famosas.','son'],['Pepe y Belén ___ nerviosos después del crimen.','están']
+];
+function renderSerEstar(){document.getElementById('serEstarItems').innerHTML=serEstar.map(([sentence,answer],index)=>`<div class="item"><span class="num">${index+1}</span><span>${sentence.replace('___',selectHTML(serEstarOptions,answer))}</span></div>`).join('')}
+
+const teh=[
+  {s:'En el Hotel Inglés ___ una habitación reservada para Pepe.',a:'hay',o:['hay','está','tiene']},
+  {s:'La habitación 321 ___ en el tercer piso.',a:'está',o:['tiene','hay','está']},
+  {s:'Pepe ___ cuarenta y cinco años.',a:'tiene',o:['está','tiene','hay']},
+  {s:'En Valencia ___ mucha gente durante las Fallas.',a:'hay',o:['está','hay','tiene']},
+  {s:'Belén ___ un coche.',a:'tiene',o:['hay','está','tiene']},
+  {s:'Javier y Gloria ___ en casa de Belén.',a:'están',o:['tienen','hay','están']},
+  {s:'En la plaza ___ fuegos artificiales.',a:'hay',o:['tienen','hay','están']},
+  {s:'Pepe y Belén ___ en la playa de la Malvarrosa.',a:'están',o:['hay','tienen','están']},
+  {s:'Manuel Torres ___ un Mercedes azul marino.',a:'tiene',o:['está','hay','tiene']},
+  {s:'En Carlet ___ muchos naranjos.',a:'hay',o:['hay','están','tienen']},
+  {s:'Morales ___ en la comisaría.',a:'está',o:['hay','tiene','está']},
+  {s:'Susi ___ el teléfono de Romerales.',a:'tiene',o:['tiene','hay','está']}
+];
+function renderTEH(){document.getElementById('tehItems').innerHTML=teh.map((item,index)=>`<div class="item"><span class="num">${index+1}</span><span>${item.s.replace('___',selectHTML(item.o,item.a))}</span></div>`).join('')}
+
+const reflexive=[
+  {s:'Yo ___ temprano para ir al mercado de San Miguel.',v:'levantarse',a:'me levanto',o:['me levanto','te levantas','se levanta','nos levantamos','os levantáis','se levantan']},
+  {s:'Tú ___ antes de salir del hotel.',v:'ducharse',a:'te duchas',o:['me ducho','te duchas','se ducha','nos duchamos','os ducháis','se duchan']},
+  {s:'La profesora ___ Belén.',v:'llamarse',a:'se llama',o:['me llamo','te llamas','se llama','nos llamamos','os llamáis','se llaman']},
+  {s:'Nosotros ___ con Gloria y Javier en Valencia.',v:'encontrarse',a:'nos encontramos',o:['me encuentro','te encuentras','se encuentra','nos encontramos','os encontráis','se encuentran']},
+  {s:'Vosotros ___ tarde después de la Nit del Foc.',v:'acostarse',a:'os acostáis',o:['me acuesto','te acuestas','se acuesta','nos acostamos','os acostáis','se acuestan']},
+  {s:'Pepe y Susi ___ por teléfono desde Madrid y Valencia.',v:'comunicarse',a:'se comunican',o:['me comunico','te comunicas','se comunica','nos comunicamos','os comunicáis','se comunican']},
+  {s:'Yo ___ el abrigo porque hace fresco.',v:'ponerse',a:'me pongo',o:['me pongo','te pones','se pone','nos ponemos','os ponéis','se ponen']},
+  {s:'Tú ___ cansado después de caminar por el centro.',v:'encontrarse',a:'te encuentras',o:['me encuentro','te encuentras','se encuentra','nos encontramos','os encontráis','se encuentran']},
+  {s:'Alberto ___ con los actores de la compañía.',v:'reunirse',a:'se reúne',o:['me reúno','te reúnes','se reúne','nos reunimos','os reunís','se reúnen']},
+  {s:'Nosotros ___ otra vez al día siguiente.',v:'verse',a:'nos vemos',o:['me veo','te ves','se ve','nos vemos','os veis','se ven']},
+  {s:'Vosotras ___ a una casa cerca del centro.',v:'mudarse',a:'os mudáis',o:['me mudo','te mudas','se muda','nos mudamos','os mudáis','se mudan']},
+  {s:'Gloria y Javier ___ en el mar cuando van a la playa.',v:'bañarse',a:'se bañan',o:['me baño','te bañas','se baña','nos bañamos','os bañáis','se bañan']}
+];
+function renderReflexive(){document.getElementById('reflexiveItems').innerHTML=reflexive.map((item,index)=>`<div class="item"><span class="num">${index+1}</span><button class="verb-tag" type="button">${item.v}</button><span>${item.s.replace('___',selectHTML(item.o,item.a))}</span></div>`).join('')}
+
+const periphrases=[
+  {s:'Pepe ___ llegar al Hotel Inglés; todavía lleva la maleta.',a:'acaba de',o:['acaba de','tiene que','empieza a']},
+  {s:'Antes de salir del despacho, Pepe ___ cerrar las ventanas.',a:'tiene que',o:['termina de','tiene que','empieza a']},
+  {s:'En una investigación ___ hablar con los testigos.',a:'hay que',o:['hay que','acaba de','empieza a']},
+  {s:'A las doce, Javier y Gloria ___ ensayar y ahora descansan.',a:'terminan de',o:['tienen que','terminan de','empiezan a']},
+  {s:'Cuando llega la noche, los fuegos ___ iluminar el cielo.',a:'empiezan a',o:['acaban de','empiezan a','tienen que']},
+  {s:'Susi ___ buscar el teléfono de Romerales para Pepe.',a:'tiene que',o:['termina de','empieza a','tiene que']},
+  {s:'Belén ___ llamar a Morales; la policía ya viene al chalé.',a:'acaba de',o:['acaba de','tiene que','empieza a']},
+  {s:'Para ir a Carlet, Pepe y Belén ___ coger el coche.',a:'tienen que',o:['empiezan a','tienen que','terminan de']},
+  {s:'En el hotel ___ dejar el carné de identidad en recepción.',a:'hay que',o:['hay que','acaba de','termina de']},
+  {s:'Pepe y Belén ___ comer la paella; ahora pasean por la playa.',a:'terminan de',o:['empiezan a','terminan de','tienen que']},
+  {s:'Pepe ___ investigar el crimen cuando habla con Morales.',a:'empieza a',o:['empieza a','acaba de','tiene que']},
+  {s:'Antes de entrar en la comisaría, todos ___ dar su dirección.',a:'tienen que',o:['terminan de','tienen que','empiezan a']}
+];
+function renderPeriphrases(){document.getElementById('periphrasisItems').innerHTML=periphrases.map((item,index)=>`<div class="item"><span class="num">${index+1}</span><span>${item.s.replace('___',selectHTML(item.o,item.a))}</span></div>`).join('')}
+
+const quiz=[
+  {q:'¿Cuál es la profesión de Pepe Rey?',a:'Es detective privado.',o:['Es médico.','Es detective privado.','Es productor musical.']},
+  {q:'¿Dónde vive Belén?',a:'En Valencia.',o:['En Madrid.','En Carlet.','En Valencia.']},
+  {q:'¿Dónde conoce Pepe a Belén?',a:'En un café después del cine.',o:['En un café después del cine.','En la oficina de Susi.','En la playa de la Malvarrosa.']},
+  {q:'¿En qué hotel se aloja Pepe en Valencia?',a:'En el Hotel Inglés.',o:['En el Hotel Inglés.','En el Hotel Comercial.','En el Hotel Malvarrosa.']},
+  {q:'¿Qué comen Pepe y Belén en La Pepica?',a:'Una paella.',o:['Una paella.','Un bocadillo.','Una ensalada.']},
+  {q:'¿Quién es la víctima del crimen?',a:'Alberto Vicent.',o:['Eduardo.','Alberto Vicent.','Javier.']},
+  {q:'¿Dónde aparece el cuerpo de Alberto?',a:'En una plaza durante los fuegos artificiales.',o:['En una playa.','En el Hotel Inglés.','En una plaza durante los fuegos artificiales.']},
+  {q:'¿Qué inspector trabaja en el caso?',a:'Morales.',o:['Morales.','Romerales.','Vicente.']},
+  {q:'¿Quién mata a Alberto Vicent?',a:'Manuel Torres.',o:['Sebastián.','Manuel Torres.','Eduardo.']},
+  {q:'¿Cómo ayuda Belén a detener al culpable?',a:'Llama al inspector Morales.',o:['Llama al inspector Morales.','Esconde el Mercedes.','Viaja a Madrid.']}
+];
+function renderQuiz(){
+  const container=document.getElementById('novelQuiz');container.innerHTML='';
+  quiz.forEach((item,index)=>{
+    const block=document.createElement('div');block.className='mcq-item';block.dataset.answer=item.a;
+    block.innerHTML=`<div class="mcq-question"><span class="num">${index+1}</span> ${esc(item.q)}</div><div class="options">${shuffle(item.o).map(option=>`<label class="option"><input type="radio" name="quiz-${index}" value="${esc(option)}"><span>${esc(option)}</span></label>`).join('')}</div><div class="mcq-feedback"></div>`;
+    container.appendChild(block);
+  });setScore('e8',0,10);
+}
+function checkQuiz(){
+  let score=0;document.querySelectorAll('#novelQuiz .mcq-item').forEach(block=>{
+    const selected=block.querySelector('input:checked');const ok=selected&&normalize(selected.value)===normalize(block.dataset.answer);
+    block.classList.remove('correct','incorrect');block.classList.add(ok?'correct':'incorrect');
+    const feedback=block.querySelector('.mcq-feedback');feedback.className=`mcq-feedback ${ok?'feedback ok':'feedback bad'}`;feedback.textContent=ok?'✓ Correcto':`✗ Respuesta correcta: ${block.dataset.answer}`;
+    if(ok)score++;
+  });setScore('e8',score,10);
+}
+function showQuizAnswers(){
+  document.querySelectorAll('#novelQuiz .mcq-item').forEach(block=>{
+    const radio=[...block.querySelectorAll('input')].find(input=>normalize(input.value)===normalize(block.dataset.answer));if(radio)radio.checked=true;
+    block.classList.remove('incorrect');block.classList.add('correct');const feedback=block.querySelector('.mcq-feedback');feedback.className='mcq-feedback feedback ok';feedback.textContent='✓ Correcto';
+  });setScore('e8',10,10);
+}
+
+const oralQuestions=[
+  '¿Cómo es Pepe Rey? Describe su aspecto y su carácter.',
+  '¿Qué relación tienen Pepe y Susi?',
+  '¿Por qué Pepe decide viajar a Valencia?',
+  '¿Qué lugares de Valencia visitan Pepe y Belén?',
+  '¿Qué personajes trabajan en el teatro o en la música?',
+  '¿Qué ocurre durante la Nit del Foc?',
+  '¿Qué pistas encuentra Pepe en Carlet?',
+  '¿Por qué Manuel Torres mata a Alberto?',
+  '¿Cómo demuestra Belén que también sabe investigar?',
+  '¿Qué escena de la novela te parece más interesante? ¿Por qué?'
+];
+function renderOral(){document.getElementById('oralGrid').innerHTML=oralQuestions.map((question,index)=>`<div class="oral-card"><b>Pregunta ${index+1}</b>${esc(question)}</div>`).join('')}
+
+renderDrag();renderArticles();renderPresent();renderSerEstar();renderTEH();renderReflexive();renderPeriphrases();renderQuiz();renderOral();
+</script>
+</body>
+</html>

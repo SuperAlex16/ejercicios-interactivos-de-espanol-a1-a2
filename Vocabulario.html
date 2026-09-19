@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Вокабуляр — 34 дня</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+<style>
+  :root {
+    --bg1: #0d1f3c;
+    --bg2: #1a3a6e;
+    --panel: rgba(255,255,255,.10);
+    --panel-hover: rgba(255,255,255,.18);
+    --border: rgba(255,255,255,.18);
+    --text: #ffffff;
+    --muted: #c8d8f0;
+    --gold: #ffd166;
+    --blue: #7dd3fc;
+    --green: #86efac;
+    --pink: #ff6b9a;
+    --violet: #c084fc;
+    --orange: #fb923c;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    min-height: 100vh;
+    font-family: Inter, Arial, Helvetica, sans-serif;
+    color: var(--text);
+    background:
+      radial-gradient(circle at 8% 12%, rgba(255,209,102,.22) 0%, transparent 28%),
+      radial-gradient(circle at 90% 8%, rgba(125,211,252,.20) 0%, transparent 28%),
+      radial-gradient(circle at 50% 100%, rgba(255,107,154,.18) 0%, transparent 30%),
+      linear-gradient(150deg, var(--bg1) 0%, var(--bg2) 100%);
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: radial-gradient(rgba(255,255,255,.06) 1px, transparent 1px);
+    background-size: 28px 28px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 32px 20px 80px;
+  }
+
+  .backlink {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: .85rem;
+    font-weight: 600;
+    padding: 8px 14px;
+    border-radius: 99px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    transition: background .18s, color .18s;
+    margin-bottom: 28px;
+  }
+  .backlink:hover { background: var(--panel-hover); color: #fff; }
+
+  header {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  header h1 {
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    font-weight: 800;
+    letter-spacing: -.02em;
+    line-height: 1.15;
+    margin-bottom: 14px;
+    background: linear-gradient(135deg, #fff 30%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .intro {
+    color: var(--muted);
+    font-size: .98rem;
+    line-height: 1.7;
+    max-width: 680px;
+    margin: 0 auto;
+    text-align: left;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px 24px;
+    backdrop-filter: blur(4px);
+  }
+  .intro p + p { margin-top: 10px; }
+  .intro strong { color: var(--gold); }
+
+  .stats-row {
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    flex-wrap: wrap;
+    margin: 24px 0 8px;
+  }
+  .stat {
+    text-align: center;
+  }
+  .stat-num {
+    font-size: 1.7rem;
+    font-weight: 800;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: .72rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    margin-top: 4px;
+  }
+
+  .section { margin-top: 44px; }
+
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-title .dot {
+    width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+  }
+  .dot-blue { background: var(--blue); }
+  .dot-gold { background: var(--gold); }
+  .dot-green { background: var(--green); }
+  .dot-violet { background: var(--violet); }
+
+  .badge {
+    display: inline-block;
+    font-size: .62rem;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 99px;
+    margin-left: 6px;
+    vertical-align: middle;
+    opacity: .85;
+  }
+  .badge-audio { background: rgba(134,239,172,.22); color: var(--green); }
+
+  /* Days grid */
+  .days-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 10px;
+    align-items: start;
+  }
+
+  .vw-day {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: background .18s;
+  }
+  .vw-day:hover { background: var(--panel-hover); }
+
+  .vw-day-toggle {
+    all: unset;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 12px 14px;
+    cursor: pointer;
+  }
+
+  .vw-day-num {
+    flex-shrink: 0;
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, rgba(255,209,102,.25), rgba(125,211,252,.2));
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: .85rem;
+    color: var(--gold);
+  }
+
+  .vw-day-info { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+  .vw-day-title { font-size: .9rem; font-weight: 700; }
+  .vw-day-sub { font-size: .74rem; color: var(--muted); margin-top: 1px; }
+
+  .vw-day-arrow {
+    flex-shrink: 0;
+    color: var(--muted);
+    transition: transform .2s;
+    font-size: .8rem;
+  }
+  .vw-day.open .vw-day-arrow { transform: rotate(180deg); }
+
+  .vw-day-panel {
+    display: none;
+    padding: 4px 16px 18px;
+    border-top: 1px solid var(--border);
+  }
+  .vw-day.open .vw-day-panel { display: block; }
+
+  .vw-audio {
+    width: 100%;
+    height: 34px;
+    margin: 12px 0 6px;
+  }
+
+  .vw-entries { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
+  .vw-entry {
+    background: rgba(0,0,0,.16);
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-size: .84rem;
+    line-height: 1.55;
+  }
+  .vw-lrow + .vw-lrow { margin-top: 3px; opacity: .88; font-size: .93em; }
+  .vw-head { font-weight: 700; color: var(--gold); }
+  .vw-rest { color: var(--text); }
+  .vw-line { color: var(--muted); }
+
+
+  /* Toolbar */
+  .vw-toolbar {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+  .vw-toolbar button {
+    font-family: inherit;
+    font-size: .78rem;
+    font-weight: 600;
+    color: var(--text);
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 99px;
+    padding: 7px 16px;
+    cursor: pointer;
+    transition: background .18s;
+  }
+  .vw-toolbar button:hover { background: var(--panel-hover); }
+
+  .flashcards-cta {
+    margin-top: 18px;
+    display: block;
+    text-align: center;
+    padding: 18px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(255,107,154,.18), rgba(192,132,252,.18));
+    border: 1px solid var(--border);
+    text-decoration: none;
+    color: var(--text);
+    transition: transform .18s, box-shadow .18s;
+  }
+  .flashcards-cta:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,.3); }
+  .flashcards-cta .fc-title { font-size: 1.05rem; font-weight: 800; margin-bottom: 4px; }
+  .flashcards-cta .fc-sub { font-size: .82rem; color: var(--muted); }
+
+  /* Bot call-to-action banner (Notilingo look from banner.png) */
+  .bot-cta {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    padding: 22px 26px;
+    border-radius: 18px;
+    border: 1px solid rgba(34,106,79,.18);
+    background-color: #eef3ec;
+    background-image: url("bot-banner-bg.webp");
+    background-size: cover;
+    background-position: center 82%;
+    background-repeat: no-repeat;
+    box-shadow: 0 10px 30px rgba(0,0,0,.28);
+  }
+  /* soft light veil so text stays readable over the artwork */
+  .bot-cta::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(248,249,247,.92) 0%, rgba(248,249,247,.78) 52%, rgba(248,249,247,.35) 100%);
+    pointer-events: none;
+  }
+  .bot-cta > * { position: relative; z-index: 1; }
+  .bot-cta-logo {
+    flex-shrink: 0;
+    height: 46px;
+    width: auto;
+    display: block;
+  }
+  .bot-cta-body { flex: 1; min-width: 0; }
+  .bot-cta-title {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #1c5a41;
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+  .bot-cta-sub {
+    font-size: .9rem;
+    color: #2f6b52;
+    line-height: 1.5;
+  }
+  .bot-cta-btn {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: .92rem;
+    color: #ffffff;
+    background: linear-gradient(135deg, #2f9e63, #3fae6f);
+    padding: 12px 22px;
+    border-radius: 99px;
+    box-shadow: 0 6px 18px rgba(47,158,99,.35);
+    transition: transform .18s, box-shadow .18s, filter .18s;
+    white-space: nowrap;
+  }
+  .bot-cta-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(47,158,99,.45); filter: brightness(1.05); }
+  @media (max-width: 620px) {
+    .bot-cta { flex-direction: column; text-align: center; gap: 14px; padding: 22px 20px; }
+    .bot-cta::before { background: linear-gradient(180deg, rgba(248,249,247,.92) 0%, rgba(248,249,247,.80) 100%); }
+    .bot-cta-body { text-align: center; }
+    .bot-cta-btn { width: 100%; justify-content: center; }
+  }
+
+  footer {
+    margin-top: 64px;
+    padding-bottom: 24px;
+    color: var(--muted);
+    font-size: .8rem;
+    opacity: .6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+  }
+  .footer-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  a.footer-staffilo-name {
+    color: #4a9e3f !important;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .footer-staffilo-logo { height: 28px; width: auto; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="backlink" href="index.html">← На главную</a>
+
+  <header>
+    <h1>Вокабуляр — 34 дня</h1>
+    <div class="intro">
+      <p>Идея простая: <strong>каждый день — новая порция слов</strong>. Не 200 карточек разом, а 8–15 слов в день, с примерами и, где нужно, таблицей спряжения — ровно столько, чтобы выучить и не забыть до завтра.</p>
+      <p>34 дня — это не жёсткий график, а структура: можно идти день за днём, можно возвращаться и повторять. К части дней (16–32) есть <strong>аудиозапись</strong> — послушайте произношение, пока читаете слова.</p>
+      <p>Ниже — сами дни. Разговорные аргентинские и пиренейские словечки, устойчивые выражения с <em>hacer</em> и <em>poner</em>, а также словари для скачивания — на главной странице, в разделе «Вокабуляр».</p>
+    </div>
+    <div class="stats-row">
+      <div class="stat"><div class="stat-num">34</div><div class="stat-label">дня</div></div>
+      <div class="stat"><div class="stat-num">403</div><div class="stat-label">слов и выражений</div></div>
+      <div class="stat"><div class="stat-num">15</div><div class="stat-label">аудио</div></div>
+      <div class="stat"><div class="stat-num">143</div><div class="stat-label">карточки-картинки</div></div>
+    </div>
+  </header>
+
+  <div class="bot-cta">
+    <img class="bot-cta-logo" src="notilingo-logo.webp" alt="Notilingo">
+    <div class="bot-cta-body">
+      <div class="bot-cta-title">Увидел слово, которое хочешь запомнить?</div>
+      <div class="bot-cta-sub">Отправь его Notilingo — бот сделает карточку и напомнит повторить.</div>
+    </div>
+    <a class="bot-cta-btn" href="https://telegram.me/notilingobot" target="_blank" rel="noopener noreferrer">Открыть в Telegram →</a>
+  </div>
+
+  <a class="flashcards-cta" href="Tarjetas de vocabulario.html">
+    <div class="fc-title">🖼️ Карточки «слово + картинка»</div>
+    <div class="fc-sub">143 первых слова с иллюстрациями — листайте как флеш-карточки</div>
+  </a>
+
+  <div class="section">
+    <div class="section-title">
+      <span class="dot dot-gold"></span>
+      Дни 1 – 34
+    </div>
+    <div class="vw-toolbar">
+      <button type="button" id="expandAll">Развернуть все</button>
+      <button type="button" id="collapseAll">Свернуть все</button>
+    </div>
+    <div class="days-grid" id="daysGrid">
+      
+      <div class="vw-day" data-day="1">
+        <button class="vw-day-toggle" type="button" aria-expanded="false">
+          <span class="vw-day-num">1</span>
+          <span class="vw-day-info">
+            <span class="vw-day-title">День 1</span>
+            <span class="vw-day-sub">10 слов</span>
+          </span>
+          <span class="vw-day-arrow">▾</span>
+        </button>
+        <div class="vw-day-panel">
+          
+          <div class="vw-entries"><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Reunirse (con)</span><span class="vw-rest"> - собираться (c). Nos reunimos los domingos a la hora del desayuno.</span></div><div class="vw-lrow"><span class="vw-line">Правильный глагол III спряжения:</span></div><div class="vw-lrow"><span class="vw-line">(Yo) Me reúno</span></div><div class="vw-lrow"><span class="vw-line">(Tú) te reúnes</span></div><div class="vw-lrow"><span class="vw-line">(Él, ella, Usted) Se reúne</span></div><div class="vw-lrow"><span class="vw-line">(Nosotros) Nos reunimos</span></div><div class="vw-lrow"><span class="vw-line">(Vosotros) Os reunís</span></div><div class="vw-lrow"><span class="vw-line">(Ellos, ellas, Ustedes) Se reúnen</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Cumpleaños</span><span class="vw-rest"> - день рождения: el cumpleaños, mi cumpleaños / los cumpleaños, nuestros cumpleaños. Mi cumpleaños es el 3 de enero.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Celebración</span><span class="vw-rest"> - празднование: celebración del cumpleaños.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Casarse (con)</span><span class="vw-rest"> - жениться (на) / выходить замуж (за). María se casa con José el próximo fin de semana</span></div><div class="vw-lrow"><span class="vw-line">Правильный глагол I спряжения:</span></div><div class="vw-lrow"><span class="vw-line">Me caso</span></div><div class="vw-lrow"><span class="vw-line">Te casas</span></div><div class="vw-lrow"><span class="vw-line">Se casan</span></div><div class="vw-lrow"><span class="vw-line">Nos casamos</span></div><div class="vw-lrow"><span class="vw-line">Os casáis</span></div><div class="vw-lrow"><span class="vw-line">Se casan</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Distancia (de / desde…a / hasta; entre)</span><span class="vw-rest"> - расстояние (от…до; между). La distancia de Madrid a Valencia es de 400 kilómetros. La distancia entre Madrid y Barcelona es de 600 km.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Abrir</span><span class="vw-rest"> - открыть, открывать, открываться. Правильный глагол III спряжения:</span></div><div class="vw-lrow"><span class="vw-line">Abro</span></div><div class="vw-lrow"><span class="vw-line">Abres</span></div><div class="vw-lrow"><span class="vw-line">Abre</span></div><div class="vw-lrow"><span class="vw-line">Abrimos</span></div><div class="vw-lrow"><span class="vw-line">Abrís</span></div><div class="vw-lrow"><span class="vw-line">Abren</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Cerrar</span><span class="vw-rest"> - закрыть, закрывать, закрываться. Отклоняющийся (по типу empezar) глагол I спряжения:</span></div><div class="vw-lrow"><span class="vw-line">Cierro</span></div><div class="vw-lrow"><span class="vw-line">Cierras</span></div><div class="vw-lrow"><span class="vw-line">Cierra</span></div><div class="vw-lrow"><span class="vw-line">Cerramos</span></div><div class="vw-lrow"><span class="vw-line">Cerráis</span></div><div class="vw-lrow"><span class="vw-line">Cierran</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Gente</span><span class="vw-rest"> - народ, люди. Употребляется только в единственном числе: La gente está en la calle. Mucha gente va a la playa en verano.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Mil</span><span class="vw-rest"> - тысяча. En la Universidad estudian mil estudiantes. En el pueblo viven 5 mil personas.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Un millón</span><span class="vw-rest"> - миллион. En América trabajan dos millones de españoles.</span></div></div></div>
+        </div>
+      </div>
+      <div class="vw-day" data-day="2">
+        <button class="vw-day-toggle" type="button" aria-expanded="false">
+          <span class="vw-day-num">2</span>
+          <span class="vw-day-info">
+            <span class="vw-day-title">День 2</span>
+            <span class="vw-day-sub">10 слов</span>
+          </span>
+          <span class="vw-day-arrow">▾</span>
+        </button>
+        <div class="vw-day-panel">
+          
+          <div class="vw-entries"><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">ducharse</span><span class="vw-rest"> - принимать душ. Me ducho a las 8 de la mañana</span></div><div class="vw-lrow"><span class="vw-line">Правильный глагол I спряжения:</span></div><div class="vw-lrow"><span class="vw-line">Me ducho</span></div><div class="vw-lrow"><span class="vw-line">Te duchas</span></div><div class="vw-lrow"><span class="vw-line">Se ducha</span></div><div class="vw-lrow"><span class="vw-line">Nos duchamos</span></div><div class="vw-lrow"><span class="vw-line">Os ducháis</span></div><div class="vw-lrow"><span class="vw-line">Se duchan</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">bañarse</span><span class="vw-rest"> - мыться. ¿Se bañan con agua fría o caliente?</span></div><div class="vw-lrow"><span class="vw-line">Правильный глагол I спряжения:</span></div><div class="vw-lrow"><span class="vw-line">Me baño</span></div><div class="vw-lrow"><span class="vw-line">Te bañas</span></div><div class="vw-lrow"><span class="vw-line">Se baña</span></div><div class="vw-lrow"><span class="vw-line">Nos bañamos</span></div><div class="vw-lrow"><span class="vw-line">Os bañáis</span></div><div class="vw-lrow"><span class="vw-line">Se bañan</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">levantarse</span><span class="vw-rest"> - вставать, подниматься. Sus hijos se levantan, se bañana, desayunan y van al instituto.</span></div><div class="vw-lrow"><span class="vw-line">Правильный глагол I спряжения:</span></div><div class="vw-lrow"><span class="vw-line">Me levanto</span></div><div class="vw-lrow"><span class="vw-line">Te levantas</span></div><div class="vw-lrow"><span class="vw-line">Se levanta</span></div><div class="vw-lrow"><span class="vw-line">Nos levantamos</span></div><div class="vw-lrow"><span class="vw-line">Os levantáis</span></div><div class="vw-lrow"><span class="vw-line">Se levantan</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">acostarse</span><span class="vw-rest"> - ложиться. ¿A qué hora te acuestas?</span></div><div class="vw-lrow"><span class="vw-line">Отклоняющийся глагол I спряжения:</span></div><div class="vw-lrow"><span class="vw-line">Me acuesto</span></div><div class="vw-lrow"><span class="vw-line">Te acuestas</span></div><div class="vw-lrow"><span class="vw-line">Se acuesta</span></div><div class="vw-lrow"><span class="vw-line">Nos acostamos</span></div><div class="vw-lrow"><span class="vw-line">Os acostáis</span></div><div class="vw-lrow"><span class="vw-line">Se acuestan</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">la mayoría</span><span class="vw-rest"> - большинство. La mayoría de los españoles no hablan inglés.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">mismo</span><span class="vw-rest"> - тот же самый. Empezamos a la misma hora. En el mismo año terminamos el curso.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">alguno</span><span class="vw-rest"> - некоторый. Algunas universidades son bonitas.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">volver</span><span class="vw-rest"> - возвращаться. Volvemos de la playa mañana.</span></div><div class="vw-lrow"><span class="vw-line">Отклоняющийся глагол II спряжения:</span></div><div class="vw-lrow"><span class="vw-line">Vuelvo</span></div><div class="vw-lrow"><span class="vw-line">Vuelves</span></div><div class="vw-lrow"><span class="vw-line">Vuelve</span></div><div class="vw-lrow"><span class="vw-line">Volvemos</span></div><div class="vw-lrow"><span class="vw-line">Volveis</span></div><div class="vw-lrow"><span class="vw-line">Vuelven</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">salir</span><span class="vw-rest"> - выходить. Salgo a la calle. Salimos por la mañana.</span></div><div class="vw-lrow"><span class="vw-line">Глагол индивидуального спряжения III спряжения:</span></div><div class="vw-lrow"><span class="vw-line">Salgo</span></div><div class="vw-lrow"><span class="vw-line">Sales</span></div><div class="vw-lrow"><span class="vw-line">Sale</span></div><div class="vw-lrow"><span class="vw-line">Salimos</span></div><div class="vw-lrow"><span class="vw-line">Salís</span></div><div class="vw-lrow"><span class="vw-line">Salen</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">otro</span><span class="vw-rest"> - другой. Otro día. Otros trabajos. Otra mujer.</span></div></div></div>
+        </div>
+      </div>
+      <div class="vw-day" data-day="3">
+        <button class="vw-day-toggle" type="button" aria-expanded="false">
+          <span class="vw-day-num">3</span>
+          <span class="vw-day-info">
+            <span class="vw-day-title">День 3</span>
+            <span class="vw-day-sub">11 слов</span>
+          </span>
+          <span class="vw-day-arrow">▾</span>
+        </button>
+        <div class="vw-day-panel">
+          
+          <div class="vw-entries"><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">cocinar</span><span class="vw-rest"> - готовить (кухня). Cocinamos la comida italiana.</span></div><div class="vw-lrow"><span class="vw-line">Правильный глагол I спряжения:</span></div><div class="vw-lrow"><span class="vw-line">Cocino</span></div><div class="vw-lrow"><span class="vw-line">Cocinas</span></div><div class="vw-lrow"><span class="vw-line">Cocina</span></div><div class="vw-lrow"><span class="vw-line">Cocinamos</span></div><div class="vw-lrow"><span class="vw-line">Cocináis</span></div><div class="vw-lrow"><span class="vw-line">Cocinan</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">cobrar</span><span class="vw-rest"> - получать, брать деньги. José cobra 10 euros por la hora.</span></div><div class="vw-lrow"><span class="vw-line">Правильный глагол I спряжения:</span></div><div class="vw-lrow"><span class="vw-line">Cobro</span></div><div class="vw-lrow"><span class="vw-line">Cobras</span></div><div class="vw-lrow"><span class="vw-line">Cobra</span></div><div class="vw-lrow"><span class="vw-line">Cobramos</span></div><div class="vw-lrow"><span class="vw-line">Cobráis</span></div><div class="vw-lrow"><span class="vw-line">Cobramos</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Lavar</span><span class="vw-rest"> - мыть. Después de la cena, la madre lava los platos.</span></div><div class="vw-lrow"><span class="vw-line">Правильный глагол I спряжения:</span></div><div class="vw-lrow"><span class="vw-line">Lavo</span></div><div class="vw-lrow"><span class="vw-line">Lavas</span></div><div class="vw-lrow"><span class="vw-line">Lava</span></div><div class="vw-lrow"><span class="vw-line">Lavamos</span></div><div class="vw-lrow"><span class="vw-line">Laváis</span></div><div class="vw-lrow"><span class="vw-line">Lavan</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Atender</span><span class="vw-rest"> - принимать; обслуживать (клиентов). ¿A qué hora atiende la oficia de migración?</span></div><div class="vw-lrow"><span class="vw-line">Отклоняющийся глагол II спряжения:</span></div><div class="vw-lrow"><span class="vw-line">Atiendo</span></div><div class="vw-lrow"><span class="vw-line">Atiendes</span></div><div class="vw-lrow"><span class="vw-line">Atiende</span></div><div class="vw-lrow"><span class="vw-line">Atendemos</span></div><div class="vw-lrow"><span class="vw-line">Atendéis</span></div><div class="vw-lrow"><span class="vw-line">Atienden</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">perfecto</span><span class="vw-rest"> - прекрасный. Es una ciudad perfecta.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">perfectamente</span><span class="vw-rest"> - прекрасно. El trabajo sale perefectamente.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">duro</span><span class="vw-rest"> - тяжёлый.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">laboral</span><span class="vw-rest"> - рабочий. Hoy tenemos un día laboral muy duro.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">turno</span><span class="vw-rest"> - смена. Está en su segundo turno de trabajo.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">tocar el turno</span><span class="vw-rest"> - подходить очередь. Cuando me toca mi turno, respondo a las preguntas</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">tele</span><span class="vw-rest"> - телевизор; телевидение. Por las noches toda la familia ve la tele.</span></div></div></div>
+        </div>
+      </div>
+      <div class="vw-day" data-day="4">
+        <button class="vw-day-toggle" type="button" aria-expanded="false">
+          <span class="vw-day-num">4</span>
+          <span class="vw-day-info">
+            <span class="vw-day-title">День 4</span>
+            <span class="vw-day-sub">10 слов</span>
+          </span>
+          <span class="vw-day-arrow">▾</span>
+        </button>
+        <div class="vw-day-panel">
+          
+          <div class="vw-entries"><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">soler + infinitivo</span><span class="vw-rest"> - Обычно что-то делать. Solemos trabajar el fin de semana (Мы обычно работаем по выходным).</span></div><div class="vw-lrow"><span class="vw-line">Отклоняющийся глагол II спряжения:</span></div><div class="vw-lrow"><span class="vw-line">Suelo</span></div><div class="vw-lrow"><span class="vw-line">Sueles</span></div><div class="vw-lrow"><span class="vw-line">Suele</span></div><div class="vw-lrow"><span class="vw-line">Solemos</span></div><div class="vw-lrow"><span class="vw-line">Soléis</span></div><div class="vw-lrow"><span class="vw-line">Suelen</span></div><div class="vw-lrow"><span class="vw-line">NB: Этот глагол никогда не употребляется самостоятельно, только вместе с неопределённой формой другого глагола</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">necesitar</span><span class="vw-rest"> - нуждаться в ч-л. Necesito un coche (carro) para ir al trabajo. Necesitas estudiar.</span></div><div class="vw-lrow"><span class="vw-line">Правильный глагол I спряжения:</span></div><div class="vw-lrow"><span class="vw-line">Necesito</span></div><div class="vw-lrow"><span class="vw-line">Necesitas</span></div><div class="vw-lrow"><span class="vw-line">Necesita</span></div><div class="vw-lrow"><span class="vw-line">Necesitamos</span></div><div class="vw-lrow"><span class="vw-line">Necesitáis</span></div><div class="vw-lrow"><span class="vw-line">Necesitan</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">estar enfermo</span><span class="vw-rest"> - болеть. Estoy enfermo de gripe.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">enfermedad</span><span class="vw-rest"> - болезнь</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">creer</span><span class="vw-rest"> - верить, думать. Creo que debes descansar.</span></div><div class="vw-lrow"><span class="vw-line">Правильный глагол II спряжения:</span></div><div class="vw-lrow"><span class="vw-line">Creo</span></div><div class="vw-lrow"><span class="vw-line">Crees</span></div><div class="vw-lrow"><span class="vw-line">Cree</span></div><div class="vw-lrow"><span class="vw-line">Creemos</span></div><div class="vw-lrow"><span class="vw-line">Creéis</span></div><div class="vw-lrow"><span class="vw-line">Creen</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">fácil</span><span class="vw-rest"> - лёгкий.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">parada</span><span class="vw-rest"> - остановка. ¿Dónde está la parada de autobús?</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">compra</span><span class="vw-rest"> - покупка.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">cosa</span><span class="vw-rest"> - дело, вещь, штука. Абстрактное существительное, применяемое в любых ситуациях</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">olvidar</span><span class="vw-rest"> - забыть, забывать к-л или ч-л. Olvidamos las llaves. Suelo olvidar a mis enemigos.</span></div><div class="vw-lrow"><span class="vw-line">Правильный глагол I спряжения:</span></div><div class="vw-lrow"><span class="vw-line">Olvido</span></div><div class="vw-lrow"><span class="vw-line">Olvidas</span></div><div class="vw-lrow"><span class="vw-line">Olvida</span></div><div class="vw-lrow"><span class="vw-line">Olvidamos</span></div><div class="vw-lrow"><span class="vw-line">Olvidáis</span></div><div class="vw-lrow"><span class="vw-line">Olvidan</span></div></div></div>
+        </div>
+      </div>
+      <div class="vw-day" data-day="5">
+        <button class="vw-day-toggle" type="button" aria-expanded="false">
+          <span class="vw-day-num">5</span>
+          <span class="vw-day-info">
+            <span class="vw-day-title">День 5</span>
+            <span class="vw-day-sub">10 слов</span>
+          </span>
+          <span class="vw-day-arrow">▾</span>
+        </button>
+        <div class="vw-day-panel">
+          
+          <div class="vw-entries"><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">la sartén</span><span class="vw-rest"> - сковорода</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">la olla, la cacerola</span><span class="vw-rest"> - кастрюля</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">el tenedor</span><span class="vw-rest"> - вилка</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">el cuchillo</span><span class="vw-rest"> - нож</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">la cuchara</span><span class="vw-rest"> - ложка, la cucharita - чайная ложечка</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">la taza</span><span class="vw-rest"> - чашка</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">la copa</span><span class="vw-rest"> - бокал</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">la sal</span><span class="vw-rest"> - соль</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">la pimienta</span><span class="vw-rest"> - перец</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">la cafetera</span><span class="vw-rest"> - кофеварка</span></div></div></div>
+        </div>
+      </div>
+      <div class="vw-day" data-day="6">
+        <button class="vw-day-toggle" type="button" aria-expanded="false">
+          <span class="vw-day-num">6</span>
+          <span class="vw-day-info">
+            <span class="vw-day-title">День 6</span>
+            <span class="vw-day-sub">1 слово</span>
+          </span>
+          <span class="vw-day-arrow">▾</span>
+        </button>
+        <div class="vw-day-panel">
+          
+          <div class="vw-entries"><div class="vw-entry"><div class="vw-lrow"><span class="vw-line">10 нужных отклоняющихся глаголов, спрягающихся в настоящем времени по типу soler (в которых корневая -о под ударением превращается в -ue):</span></div><div class="vw-lrow"><span class="vw-line">Poder (мочь) → puedo, puedes, puede, podemos, podéis, pueden No podemos trabajar dos turnos este fin de semana</span></div><div class="vw-lrow"><span class="vw-line">Volver (возвращаться) → vuelvo, vuelves, vuelve, volvemos, volvéis, vuelven Vuleve a casa temprano por la mañana</span></div><div class="vw-lrow"><span class="vw-line">Mover (двигать) → muevo, mueves, mueve, movemos, movéis, mueven Los vecinos mueven los muebles todo el día.</span></div><div class="vw-lrow"><span class="vw-line">Llover (идти о дожде, безличный глагол с единственной формой) → llueve En invierno llueve.</span></div><div class="vw-lrow"><span class="vw-line">Almorzar (обедать) → almuerzo, almuerzas, almuerza, almorzamos, almorzáis, almuerzan Los domingos almuerzo con mis amigos.</span></div><div class="vw-lrow"><span class="vw-line">Contar (считать) → cuento, cuentas, cuenta, contamos, contáis, cuentan Cuento contigo (я рассчитываю на тебя). Debemos aprender a contar hasta mil.</span></div><div class="vw-lrow"><span class="vw-line">Costar (стоить) → cuesto, cuestas, cuesta, costamos, costáis, cuestan ¿Cuántos cuesta el billete a Las Canarias?</span></div><div class="vw-lrow"><span class="vw-line">Encontrar (находить) → encuentro, encuentras, encuentra, encontramos, encontráis, encuentran No encuenro el pasaporte.</span></div><div class="vw-lrow"><span class="vw-line">Также используется как возвратный глагол encontrars (находиться) → me encuentro, te encuentras, se encuentra, nos encontramos, os encontráis, se encuentran Nos encontramos en una situación difícil.</span></div><div class="vw-lrow"><span class="vw-line">Sonar (звучать) → sueno, suenas, suena, sonamos, sonáis, suenan La música suena fuerte. Suenas enfermo</span></div></div></div>
+        </div>
+      </div>
+      <div class="vw-day" data-day="7">
+        <button class="vw-day-toggle" type="button" aria-expanded="false">
+          <span class="vw-day-num">7</span>
+          <span class="vw-day-info">
+            <span class="vw-day-title">День 7</span>
+            <span class="vw-day-sub">9 слов</span>
+          </span>
+          <span class="vw-day-arrow">▾</span>
+        </button>
+        <div class="vw-day-panel">
+          
+          <div class="vw-entries"><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">la muerte</span><span class="vw-rest"> - смерть</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">el cigarro, el cigarrillo</span><span class="vw-rest"> - сигарета</span></div><div class="vw-lrow"><span class="vw-line">buscar ч-л, к-л – искать ч-л или к-л (c одушевленными существительными требует использовать предлог a): Buscamos una estación de tren. Busco a una chica</span></div><div class="vw-lrow"><span class="vw-line">Правильный глагол I спряжение:</span></div><div class="vw-lrow"><span class="vw-line">Busco</span></div><div class="vw-lrow"><span class="vw-line">Buscas / vos buscás</span></div><div class="vw-lrow"><span class="vw-line">Busca</span></div><div class="vw-lrow"><span class="vw-line">Buscamos</span></div><div class="vw-lrow"><span class="vw-line">Buscáis</span></div><div class="vw-lrow"><span class="vw-line">Buscan</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">el cine</span><span class="vw-rest"> – кино (театр) и кино (фильм)</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">hacer foto / sacar foto</span><span class="vw-rest"> – фотографировать</span></div><div class="vw-lrow"><span class="vw-line">Hago / saco foto</span></div><div class="vw-lrow"><span class="vw-line">Haces, vos hacés / sacas, vos sacás foto</span></div><div class="vw-lrow"><span class="vw-line">Hace / saca foto</span></div><div class="vw-lrow"><span class="vw-line">Hacemos / sacamos foto</span></div><div class="vw-lrow"><span class="vw-line">Hacéis / sacáis foto</span></div><div class="vw-lrow"><span class="vw-line">Hacen / sacan foto</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">más o menos</span><span class="vw-rest"> – более или менее</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">hace falta / no hace falta</span><span class="vw-rest"> – нужно, необходимо / не нужно</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">de acuerdo</span><span class="vw-rest"> – согласен, согласна</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">lejos (de)</span><span class="vw-rest"> – далеко (от)</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">cerca (de)</span><span class="vw-rest"> – рядом (с), близко (от)</span></div></div></div>
+        </div>
+      </div>
+      <div class="vw-day" data-day="8">
+        <button class="vw-day-toggle" type="button" aria-expanded="false">
+          <span class="vw-day-num">8</span>
+          <span class="vw-day-info">
+            <span class="vw-day-title">День 8</span>
+            <span class="vw-day-sub">10 слов</span>
+          </span>
+          <span class="vw-day-arrow">▾</span>
+        </button>
+        <div class="vw-day-panel">
+          
+          <div class="vw-entries"><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Estoy cansado / a</span><span class="vw-rest"> – я устал / а</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Estoy enfermo / a</span><span class="vw-rest"> – я болею</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Me duele…</span><span class="vw-rest"> – у меня болит…</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">la espalda</span><span class="vw-rest"> – спина</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">la cabeza</span><span class="vw-rest"> – голова</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">la muela</span><span class="vw-rest"> – зуб</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">la pierna derecha / izquierda</span><span class="vw-rest"> – правая / левая нога</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">el pie derecho / izquierdo</span><span class="vw-rest"> – правая / левая ступня</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">el estómago</span><span class="vw-rest"> – живот (желудок)</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">la garganta</span><span class="vw-rest"> – горло</span></div></div></div>
+        </div>
+      </div>
+      <div class="vw-day" data-day="9">
+        <button class="vw-day-toggle" type="button" aria-expanded="false">
+          <span class="vw-day-num">9</span>
+          <span class="vw-day-info">
+            <span class="vw-day-title">День 9</span>
+            <span class="vw-day-sub">16 слов</span>
+          </span>
+          <span class="vw-day-arrow">▾</span>
+        </button>
+        <div class="vw-day-panel">
+          
+          <div class="vw-entries"><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Gordo, gorda</span><span class="vw-rest"> – толстый, толстая (человек, книга и т.д.)</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Caer gordo, caer gorda </span><span class="vw-rest"> - быть отвратительным или отвратительной</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Este señor me cae gordo</span><span class="vw-rest"> - Этот мужчина мне отвратителен.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Llenito, llenita</span><span class="vw-rest"> – полный, полная (о человеке)</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Saber</span><span class="vw-rest"> – знать что-то, уметь что-то делать</span></div><div class="vw-lrow"><span class="vw-line">Глагол индивидуального спряжения:</span></div><div class="vw-lrow"><span class="vw-line">(yo) sé</span></div><div class="vw-lrow"><span class="vw-line">(tú) sabes</span></div><div class="vw-lrow"><span class="vw-line">(él, ella, usted) sabe</span></div><div class="vw-lrow"><span class="vw-line">(nosotros) sabemos</span></div><div class="vw-lrow"><span class="vw-line">(vosotros) sabéis</span></div><div class="vw-lrow"><span class="vw-line">(ellos, ellas, ustedes) saben</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Lo sé</span><span class="vw-rest"> – Я знаю.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">No lo sé</span><span class="vw-rest"> – Я не знаю.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">¡Yo qué sé!</span><span class="vw-rest"> – Мне откуда знать!</span></div><div class="vw-lrow"><span class="vw-line">No sé сocinar - Я не умею готовить.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Conocer</span><span class="vw-rest"> – знать кого-то, знать какое-то место (побывать в каком-то месте)</span></div><div class="vw-lrow"><span class="vw-line">Глагол индивидуального спряжения:</span></div><div class="vw-lrow"><span class="vw-line">(yo) conozco</span></div><div class="vw-lrow"><span class="vw-line">(tú) conoces</span></div><div class="vw-lrow"><span class="vw-line">(él, ella, usted) conoce</span></div><div class="vw-lrow"><span class="vw-line">(nosotros) conocemos</span></div><div class="vw-lrow"><span class="vw-line">(vosotros) conocéis</span></div><div class="vw-lrow"><span class="vw-line">(ellos, ellas, ustedes) conocen</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Conozco bien a María</span><span class="vw-rest"> – Я хорошо знаком(а) с Марией.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">¿Conocéis Barcelona?</span><span class="vw-rest"> – Вы бывали в Барселоне?</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Más vale tarde que nunca</span><span class="vw-rest"> – Лучше поздно, чем никогда.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Entre broma y broma la verdad se asoma</span><span class="vw-rest"> – В каждой шутке есть доля правды.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">De cabo a rabo</span><span class="vw-rest"> – От начала до конца.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Del dicho al hecho hay mucho trecho</span><span class="vw-rest"> – Между словом и делом большая разница.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">El que ríe último, ríe mejor</span><span class="vw-rest"> – Хорошо смеется тот, кто смеется последним.</span></div></div></div>
+        </div>
+      </div>
+      <div class="vw-day" data-day="10">
+        <button class="vw-day-toggle" type="button" aria-expanded="false">
+          <span class="vw-day-num">10</span>
+          <span class="vw-day-info">
+            <span class="vw-day-title">День 10</span>
+            <span class="vw-day-sub">10 слов</span>
+          </span>
+          <span class="vw-day-arrow">▾</span>
+        </button>
+        <div class="vw-day-panel">
+          
+          <div class="vw-entries"><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Cuenta</span><span class="vw-rest"> – счет</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Situación</span><span class="vw-rest"> – ситуация, положение</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Nadie</span><span class="vw-rest"> – никто</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Ninguno</span><span class="vw-rest"> – ничто</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Importante</span><span class="vw-rest"> – важный, важная</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Sociedad</span><span class="vw-rest"> – общество</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Relación, relaciones</span><span class="vw-rest"> – отношение, отношения</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Incluso, inclusive</span><span class="vw-rest"> – включая, в том числе</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Información</span><span class="vw-rest"> – информация</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Derecho</span><span class="vw-rest"> – право (Tengo derecho de… - Я имею право на…)</span></div></div></div>
+        </div>
+      </div>
+      <div class="vw-day" data-day="11">
+        <button class="vw-day-toggle" type="button" aria-expanded="false">
+          <span class="vw-day-num">11</span>
+          <span class="vw-day-info">
+            <span class="vw-day-title">День 11</span>
+            <span class="vw-day-sub">27 слов</span>
+          </span>
+          <span class="vw-day-arrow">▾</span>
+        </button>
+        <div class="vw-day-panel">
+          
+          <div class="vw-entries"><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Poner</span><span class="vw-rest"> – класть, положить Poner la mesa – накрывать на стол</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Ponerse la ropa</span><span class="vw-rest"> – надевать оджеду</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Ponerse a + infinitivo</span><span class="vw-rest"> – внезапное действие</span></div><div class="vw-lrow"><span class="vw-line">Индивидуальный глагол II спряжения</span></div><div class="vw-lrow"><span class="vw-line">(Me) pongo</span></div><div class="vw-lrow"><span class="vw-line">(Te) pones</span></div><div class="vw-lrow"><span class="vw-line">(Se) pone</span></div><div class="vw-lrow"><span class="vw-line">(Nos) ponemos</span></div><div class="vw-lrow"><span class="vw-line">(Os) ponéis</span></div><div class="vw-lrow"><span class="vw-line">(Se) ponen</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Ponemos el coche en el garage</span><span class="vw-rest"> – Мы ставим машину в гараж.</span></div><div class="vw-lrow"><span class="vw-line">Hay no nos ponemos el impermeable porque no va a llover –Мы сегодня надеваем плащ, потому что дождя нет</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Cada mañana me pongo a trabajar como loco</span><span class="vw-rest"> – По утрам я начинаю работать, как сумасшедший.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Preferir</span><span class="vw-rest"> – предпочитать. Правильный глагол III спряжения.</span></div><div class="vw-lrow"><span class="vw-line">Prefiero</span></div><div class="vw-lrow"><span class="vw-line">Prefieres</span></div><div class="vw-lrow"><span class="vw-line">Prefiere</span></div><div class="vw-lrow"><span class="vw-line">Preferimos</span></div><div class="vw-lrow"><span class="vw-line">Preferís</span></div><div class="vw-lrow"><span class="vw-line">Prefieren</span></div><div class="vw-lrow"><span class="vw-line">Por las mañanas prefiero tomar café.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Da igual</span><span class="vw-rest"> – все равно. Me da igual – Мне все равно.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Aburrido, aburrida</span><span class="vw-rest"> – скучный, скучная. Este libro es aburrido.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Dirigir</span><span class="vw-rest"> – управлять, направлять, режиссировать. Правильный глагол III спряжения.</span></div><div class="vw-lrow"><span class="vw-line">Dirijo</span></div><div class="vw-lrow"><span class="vw-line">Diriges</span></div><div class="vw-lrow"><span class="vw-line">Dirige</span></div><div class="vw-lrow"><span class="vw-line">Dirigimos</span></div><div class="vw-lrow"><span class="vw-line">Dirigís</span></div><div class="vw-lrow"><span class="vw-line">Dirigen</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Juan dirige una compañía muy grande</span><span class="vw-rest"> – Хуан руководит большой компанией.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Existir</span><span class="vw-rest"> – существовать. Правильный глагол III спряжения.</span></div><div class="vw-lrow"><span class="vw-line">Existo</span></div><div class="vw-lrow"><span class="vw-line">Existes</span></div><div class="vw-lrow"><span class="vw-line">Existe</span></div><div class="vw-lrow"><span class="vw-line">Existimos</span></div><div class="vw-lrow"><span class="vw-line">Existís</span></div><div class="vw-lrow"><span class="vw-line">Existen</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Pienso luego existo</span><span class="vw-rest"> - Мыслю, следовательно, существую.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Siempre existe la posibilidad de viajar a Europa</span><span class="vw-rest"> - Всегда есть возможность поехать в Европу.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Acompañar</span><span class="vw-rest"> – провожать, сопровождать. Правильный глагол I спряжения.</span></div><div class="vw-lrow"><span class="vw-line">Acompaño</span></div><div class="vw-lrow"><span class="vw-line">Acompañas</span></div><div class="vw-lrow"><span class="vw-line">Acompaña</span></div><div class="vw-lrow"><span class="vw-line">Acompañamos</span></div><div class="vw-lrow"><span class="vw-line">Acompañáis</span></div><div class="vw-lrow"><span class="vw-line">Acompañan</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Acompañamos a nuestros hijos al aeropuerto</span><span class="vw-rest"> – Мы провожаем детей в аэропорт.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Hoy acompaño a mi mamá al hospital</span><span class="vw-rest"> – Сегодня иду вместе с мамой в больницу.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Tarjeta</span><span class="vw-rest"> – карточка.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Tarjeta de crédito / débito</span><span class="vw-rest"> – кредитная / дебетовая карта</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Tarjeta de huésped</span><span class="vw-rest"> – бейджик</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Ver</span><span class="vw-rest"> – видеть Verse – видеться, встречаться</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Ver la tele</span><span class="vw-rest"> – смотреть телевизор</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Ver una peli</span><span class="vw-rest"> – смотреть кино. Индивидуальный глагол II спряжения.</span></div><div class="vw-lrow"><span class="vw-line">(Me) veo</span></div><div class="vw-lrow"><span class="vw-line">(Te) ves</span></div><div class="vw-lrow"><span class="vw-line">(Se) ve</span></div><div class="vw-lrow"><span class="vw-line">(Nos) vemos</span></div><div class="vw-lrow"><span class="vw-line">(Os) veis</span></div><div class="vw-lrow"><span class="vw-line">(Se) ven</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Veo que no trabajas por las mañanas</span><span class="vw-rest"> – Я вижу, что ты не работаешь по утрам.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Solemos ver los monumentos en cada ciudad</span><span class="vw-rest"> – Мы обычно смотрит памятники в каждом городе.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Mi hijo se ve con su novia en el parque</span><span class="vw-rest"> -  Мой сын встречается со своей невестой в парке.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Nos vemos</span><span class="vw-rest"> – Пока! (Увидимся!)</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Auxiliar</span><span class="vw-rest"> – помощник (так же ayudante)</span></div></div></div>
+        </div>
+      </div>
+      <div class="vw-day" data-day="12">
+        <button class="vw-day-toggle" type="button" aria-expanded="false">
+          <span class="vw-day-num">12</span>
+          <span class="vw-day-info">
+            <span class="vw-day-title">День 12</span>
+            <span class="vw-day-sub">9 слов</span>
+          </span>
+          <span class="vw-day-arrow">▾</span>
+        </button>
+        <div class="vw-day-panel">
+          
+          <div class="vw-entries"><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">La galleta</span><span class="vw-rest"> – печенье</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">La tostada</span><span class="vw-rest"> – тост, поджаренный хлеб, хлебец</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">La mantequilla</span><span class="vw-rest"> – сливочное масло</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">La mermelada</span><span class="vw-rest"> – варенье, иногда мармелад. Так же используется la jalea</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">El zumo</span><span class="vw-rest"> – сок. Zumo de naranja (manzana, piña, papaya, etc.) – апельсиновый, яблочный, ананасовый, папаевый сок</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">El aceite</span><span class="vw-rest"> – масло растительное или машинное. Aceite de oliva (girasol) – оливковое (подсолнечное) масло. Aceite de coche – машинное масло.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Los cereales</span><span class="vw-rest"> – зерновые; хлопья (для завтрака)</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">El chocolate</span><span class="vw-rest"> – шоколад</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">La / el azúcar</span><span class="vw-rest"> – сахар. Azúcar blanca / morena (белый / коричневый сахар)</span></div></div></div>
+        </div>
+      </div>
+      <div class="vw-day" data-day="13">
+        <button class="vw-day-toggle" type="button" aria-expanded="false">
+          <span class="vw-day-num">13</span>
+          <span class="vw-day-info">
+            <span class="vw-day-title">День 13</span>
+            <span class="vw-day-sub">12 слов</span>
+          </span>
+          <span class="vw-day-arrow">▾</span>
+        </button>
+        <div class="vw-day-panel">
+          
+          <div class="vw-entries"><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Importante</span><span class="vw-rest"> – важный, ая. Es importante – Это важно.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Aproximadamente</span><span class="vw-rest"> – примерно, приблизительно</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">La tienda</span><span class="vw-rest"> – магазин</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">El negocio</span><span class="vw-rest"> – бизнес. Hombre de negocios - бизнесмен</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Barato, a</span><span class="vw-rest"> – дешевый, ая</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Caro, a</span><span class="vw-rest"> – дорогой, ая (о стоимости / цене)</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Bastante</span><span class="vw-rest"> – достаточный, достаточно (слишком). Tenemos bastante tiempo libre – У нас достаточно свободного времени.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Suficiente</span><span class="vw-rest"> – достаточно (хватит) ¡Suficiente! – Хватит! Довольно! Достаточно!</span></div><div class="vw-lrow"><span class="vw-line">Ir a la compra (Исп.) – Идти за покупками</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Recoger</span><span class="vw-rest"> – забирать, забрать, собрать, собирать Правильный глагол II спряжения.</span></div><div class="vw-lrow"><span class="vw-line">Recojo</span></div><div class="vw-lrow"><span class="vw-line">Recoges</span></div><div class="vw-lrow"><span class="vw-line">Recoge</span></div><div class="vw-lrow"><span class="vw-line">Recogemos</span></div><div class="vw-lrow"><span class="vw-line">Recogéis</span></div><div class="vw-lrow"><span class="vw-line">Recogen</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Recoges a los niños en el colegio</span><span class="vw-rest"> – Ты забираешь  детей из школы.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Recogemos los tomates dos veces al año</span><span class="vw-rest"> – Мы собираем урожай помидоров дважды в год.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">¿Puedes recogerme en el aeropuerto?</span><span class="vw-rest"> – Ты можешь встретить (забрать) меня в аэропорту?</span></div></div></div>
+        </div>
+      </div>
+      <div class="vw-day" data-day="14">
+        <button class="vw-day-toggle" type="button" aria-expanded="false">
+          <span class="vw-day-num">14</span>
+          <span class="vw-day-info">
+            <span class="vw-day-title">День 14</span>
+            <span class="vw-day-sub">19 слов</span>
+          </span>
+          <span class="vw-day-arrow">▾</span>
+        </button>
+        <div class="vw-day-panel">
+          
+          <div class="vw-entries"><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Querer</span><span class="vw-rest"> – хотеть; любить (о людях). Отклоняющийся глагол II спряжения (спрягается как empezar).</span></div><div class="vw-lrow"><span class="vw-line">Quiero</span></div><div class="vw-lrow"><span class="vw-line">Quieres</span></div><div class="vw-lrow"><span class="vw-line">Quiere</span></div><div class="vw-lrow"><span class="vw-line">Queremos</span></div><div class="vw-lrow"><span class="vw-line">Queréis</span></div><div class="vw-lrow"><span class="vw-line">Quieren</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Juana quiere estudiar en la Universidad.</span><span class="vw-rest"> -  Хуана хочет учиться в университете.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Te queremos mucho.</span><span class="vw-rest"> – Мы тебя очень любим.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Quiero vivir en España.</span><span class="vw-rest"> -  Я хочу жить в Испании.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Poder</span><span class="vw-rest"> – мочь. Отклоняющийся глагол II спряжения (спрягается как volver).</span></div><div class="vw-lrow"><span class="vw-line">Puedo</span></div><div class="vw-lrow"><span class="vw-line">Puedes</span></div><div class="vw-lrow"><span class="vw-line">Puede</span></div><div class="vw-lrow"><span class="vw-line">Podemos</span></div><div class="vw-lrow"><span class="vw-line">Podéis</span></div><div class="vw-lrow"><span class="vw-line">Pueden</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">No podemos descansar.</span><span class="vw-rest"> – Мы можем отдохнуть.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Querer es poder.</span><span class="vw-rest"> – Хотеть – значит мочь.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">¿Puedes ayudarme?</span><span class="vw-rest"> – Можешь помочь мне?</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">El cargador</span><span class="vw-rest"> – зарядное устройство</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">El cable</span><span class="vw-rest"> – провод, кабель</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">El interruptor</span><span class="vw-rest"> – выключатель</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">La tecla</span><span class="vw-rest"> – клавиша</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">El botón</span><span class="vw-rest"> – кнопка; пуговица</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">El hilo</span><span class="vw-rest"> – нитка, нить (в прямом и переносном значении)</span></div><div class="vw-lrow"><span class="vw-line">Сoser con hilo rojo. – Пришить красной ниткой.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Pierdes el hilo de la historia.</span><span class="vw-rest"> -  Ты теряешь нить рассказа (Ты отвлекаешься от рассказа).</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">La aguja</span><span class="vw-rest"> - игла</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Coser</span><span class="vw-rest"> – шить (правильный глагол II спряжение)</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Descoser</span><span class="vw-rest"> – рвать ч-л сшитое</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Siempre hay un roto para un descosido</span><span class="vw-rest"> – Два сапога пара</span></div></div></div>
+        </div>
+      </div>
+      <div class="vw-day" data-day="15">
+        <button class="vw-day-toggle" type="button" aria-expanded="false">
+          <span class="vw-day-num">15</span>
+          <span class="vw-day-info">
+            <span class="vw-day-title">День 15</span>
+            <span class="vw-day-sub">14 слов</span>
+          </span>
+          <span class="vw-day-arrow">▾</span>
+        </button>
+        <div class="vw-day-panel">
+          
+          <div class="vw-entries"><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Cortar</span><span class="vw-rest"> – резать на куски, cortarse – порезаться; (разг) – cтесняться. Правильный глагол I спряжения.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Me gusta cortar las manzanas en trozos para comer</span><span class="vw-rest"> - Я люблю разрезать яблоки на кусочки, чтобы есть).</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Acabo de cortar el dedo</span><span class="vw-rest"> – Я только что порезал палец.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Se corta cuando ve a una chica</span><span class="vw-rest"> - Он стесняется при виде девушек.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Pelar</span><span class="vw-rest"> – чистить от кожуры (картофель, фрукты и т.д.). Правильный глагол I спряжения.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Pelamos las patatas para la cena</span><span class="vw-rest"> - Мы чистим картофель на ужин.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Pelado, pelón</span><span class="vw-rest"> – лысый</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">La patata </span><span class="vw-rest"> – картофель</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">La zanahoria</span><span class="vw-rest"> – морковь</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">La manzana</span><span class="vw-rest"> – яблоко</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">La pera</span><span class="vw-rest"> – груша</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">La uva</span><span class="vw-rest"> – виноград</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">La sandía</span><span class="vw-rest"> – арбуз</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">El melón</span><span class="vw-rest"> - дыня</span></div></div></div>
+        </div>
+      </div>
+      <div class="vw-day" data-day="16">
+        <button class="vw-day-toggle" type="button" aria-expanded="false">
+          <span class="vw-day-num">16</span>
+          <span class="vw-day-info">
+            <span class="vw-day-title">День 16<span class="badge badge-audio">аудио</span></span>
+            <span class="vw-day-sub">14 слов</span>
+          </span>
+          <span class="vw-day-arrow">▾</span>
+        </button>
+        <div class="vw-day-panel">
+          <audio controls preload="none" class="vw-audio">
+          <source src="Vocabulario/16 dia vocabulario.mp3" type="audio/mpeg">
+        </audio>
+          <div class="vw-entries"><div class="vw-entry"><div class="vw-lrow"><span class="vw-line">Все глаголы в испанском языке, которые заканчиваются в неопределенной форме на</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">-ducir</span><span class="vw-rest"> – неправильные глаголы. В настоящем времени они отклоняются в 1 лице единственного числа (yo):</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Conducir</span><span class="vw-rest"> – вести, водить что-то (машину, программу на ТВ или радио и т.д.)</span></div><div class="vw-lrow"><span class="vw-line">Отклоняющийся глагол III спряжения (спрягается как все глаголы, которые заканчиваются в неопределенной форме на -ducir).</span></div><div class="vw-lrow"><span class="vw-line">Conduzco</span></div><div class="vw-lrow"><span class="vw-line">Conduces</span></div><div class="vw-lrow"><span class="vw-line">Conduce</span></div><div class="vw-lrow"><span class="vw-line">Conducimos</span></div><div class="vw-lrow"><span class="vw-line">Conducís</span></div><div class="vw-lrow"><span class="vw-line">Conducen</span></div><div class="vw-lrow"><span class="vw-line">Me gusta conducir los carros deportivos (Я люблю водить спортивные машины).</span></div><div class="vw-lrow"><span class="vw-line">José nunca conduce ningún programa de radio, pero siempre los produce (Хосе никогда не ведёт радиопередачи, но всегда их продюсирует).</span></div><div class="vw-lrow"><span class="vw-line">Так же спрягаются следующие глаголы:</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">2. Producir</span><span class="vw-rest"> – производить (Producir tomates)</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">3. Traducir</span><span class="vw-rest"> – переводить (Traducir un texto)</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">4. Reducir</span><span class="vw-rest"> – уменьшать (Reducir el tamaño – Уменьшать размер)</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">5. Introducir</span><span class="vw-rest"> – вводить; представлять что-то новое (Introducir el bitcoin – Ввести биткойн)</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">8. Deducir</span><span class="vw-rest"> – приходить к заключению, решать что-то (Deduzco que no le gusta estudiar – Я понимаю (прихожу к умозаключению), что ему не нравится учиться)</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">9. Reproducir</span><span class="vw-rest"> – воспроизводить (Reproducir fotocopias)</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">10. Seducir</span><span class="vw-rest"> – cоблазнять (как в прямом, так и в переносных значениях) (Me seduce para ir de compras – Она (она) соблазняет меня пойти за покупками)</span></div><div class="vw-lrow"><span class="vw-line">NB: От всех этих и подобных глаголов там, где это возможно, при помощи суффикса -tor образуется существительное для обозначения рода деятельности:</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Conductor</span><span class="vw-rest"> – водитель</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Productor</span><span class="vw-rest"> – производитель; продюсер</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Traductor</span><span class="vw-rest"> – переводчик (как человек, так и программы для перевода): Para traducir suelo utilizar el traductor de Google (Для переводов я обычно использую переводчик гугла)</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Seductor</span><span class="vw-rest"> – соблазнитель: El seductor más famoso de la historia ha sido Casanova (Самый знаменитый соблазнитель в истории – Казанова)</span></div></div></div>
+        </div>
+      </div>
+      <div class="vw-day" data-day="17">
+        <button class="vw-day-toggle" type="button" aria-expanded="false">
+          <span class="vw-day-num">17</span>
+          <span class="vw-day-info">
+            <span class="vw-day-title">День 17<span class="badge badge-audio">аудио</span></span>
+            <span class="vw-day-sub">8 слов</span>
+          </span>
+          <span class="vw-day-arrow">▾</span>
+        </button>
+        <div class="vw-day-panel">
+          <audio controls preload="none" class="vw-audio">
+          <source src="Vocabulario/17 dia vocabulario.mp3" type="audio/mpeg">
+        </audio>
+          <div class="vw-entries"><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">1. El ajo</span><span class="vw-rest"> — чеснок</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">2. La berenjena</span><span class="vw-rest"> — баклажан</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">3. El pepino</span><span class="vw-rest"> — огурец</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">4. La calabaza, el calabacín</span><span class="vw-rest"> — кабачок</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">5. Las bayas</span><span class="vw-rest"> — ягоды</span></div><div class="vw-lrow"><span class="vw-line">6. El chícharo, el guisante— горох</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">7. La coliflor</span><span class="vw-rest"> — цветная капуста</span></div><div class="vw-lrow"><span class="vw-line">8. La judía, la alubia— фасоль</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">9. El garbanzo</span><span class="vw-rest"> — бобы</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">10. La lechuga</span><span class="vw-rest"> — салат (растение)</span></div></div></div>
+        </div>
+      </div>
+      <div class="vw-day" data-day="18">
+        <button class="vw-day-toggle" type="button" aria-expanded="false">
+          <span class="vw-day-num">18</span>
+          <span class="vw-day-info">
+            <span class="vw-day-title">День 18<span class="badge badge-audio">аудио</span></span>
+            <span class="vw-day-sub">11 слов</span>
+          </span>
+          <span class="vw-day-arrow">▾</span>
+        </button>
+        <div class="vw-day-panel">
+          <audio controls preload="none" class="vw-audio">
+          <source src="Vocabulario/18 dia vocabulario.mp3" type="audio/mpeg">
+        </audio>
+          <div class="vw-entries"><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Doler</span><span class="vw-rest"> – болеть (об органе).  Неполный глагол, у него только формы 3 лица:</span></div><div class="vw-lrow"><span class="vw-line">Duele: Me duele la cabeza (У мена болит голова); Le duele la garganta (У него / у нее болит голова)</span></div><div class="vw-lrow"><span class="vw-line">Duelen: Me duelen las muelas (У меня болят зубы); Les duelen los ojos (У них болят глаза)</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Estar enfermo(s) / estar enferma(s)</span><span class="vw-rest"> – болеть (о человеке):</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Estoy enfermo de gripe</span><span class="vw-rest"> – Я болею гриппом</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Estar resfriado(s) / estar resfriada(s)</span><span class="vw-rest"> – простыть (о человеке):</span></div><div class="vw-lrow"><span class="vw-line">Juan y maría están enfermos, están resfriados (Хуан и Мария болеют, они простыли)</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">La cabeza</span><span class="vw-rest"> – голова (во всех значениях)</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">La garganta</span><span class="vw-rest"> – горло</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">La muela</span><span class="vw-rest"> – коренной зуб</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">El diente</span><span class="vw-rest"> - зуб</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">El ojo</span><span class="vw-rest"> – глаз</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">El oído</span><span class="vw-rest"> – ухо</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">El estómago</span><span class="vw-rest"> – желудок</span></div></div></div>
+        </div>
+      </div>
+      <div class="vw-day" data-day="19">
+        <button class="vw-day-toggle" type="button" aria-expanded="false">
+          <span class="vw-day-num">19</span>
+          <span class="vw-day-info">
+            <span class="vw-day-title">День 19<span class="badge badge-audio">аудио</span></span>
+            <span class="vw-day-sub">10 слов</span>
+          </span>
+          <span class="vw-day-arrow">▾</span>
+        </button>
+        <div class="vw-day-panel">
+          <audio controls preload="none" class="vw-audio">
+          <source src="Vocabulario/19 dia vocabulario.mp3" type="audio/mpeg">
+        </audio>
+          <div class="vw-entries"><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">1. La camisa</span><span class="vw-rest"> – рубашка</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">2. El pantalón</span><span class="vw-rest"> – брюки</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">3. El vestido</span><span class="vw-rest"> – платье</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">4. La falda</span><span class="vw-rest"> – юбка</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">5. La chaqueta </span><span class="vw-rest"> – куртка</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">6. Los zapatos</span><span class="vw-rest"> – туфли</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">7. La camiseta, la playera</span><span class="vw-rest"> – футболка</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">8. El abrigo</span><span class="vw-rest"> – пальто</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">9. El suéter</span><span class="vw-rest"> – свитер</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">10. Los calcetines</span><span class="vw-rest"> - носки</span></div></div></div>
+        </div>
+      </div>
+      <div class="vw-day" data-day="20">
+        <button class="vw-day-toggle" type="button" aria-expanded="false">
+          <span class="vw-day-num">20</span>
+          <span class="vw-day-info">
+            <span class="vw-day-title">День 20</span>
+            <span class="vw-day-sub">10 слов</span>
+          </span>
+          <span class="vw-day-arrow">▾</span>
+        </button>
+        <div class="vw-day-panel">
+          
+          <div class="vw-entries"><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Ver</span><span class="vw-rest"> – видеть.</span></div><div class="vw-lrow"><span class="vw-line">Глагол II cпряжения правильного спряжения в настоящем времени: Veo la tele. ¿Ves a Juan?</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Mirar</span><span class="vw-rest"> – смотреть.</span></div><div class="vw-lrow"><span class="vw-line">Глагол I cпряжения правильного спряжения в настоящем времени: Por las tardes miramos al mar.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Oir</span><span class="vw-rest"> – слышать.</span></div><div class="vw-lrow"><span class="vw-line">Глагол III спряжения индивидуального спряжения:</span></div><div class="vw-lrow"><span class="vw-line">Presente de indicativo (настоящее время)</span></div><div class="vw-lrow"><span class="vw-line">Oigo</span></div><div class="vw-lrow"><span class="vw-line">Oyes</span></div><div class="vw-lrow"><span class="vw-line">Oye</span></div><div class="vw-lrow"><span class="vw-line">Oímos</span></div><div class="vw-lrow"><span class="vw-line">Oís</span></div><div class="vw-lrow"><span class="vw-line">Oyen</span></div><div class="vw-lrow"><span class="vw-line">Siempre te oigo hablar en francés.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Escuchar</span><span class="vw-rest"> – слушать.</span></div><div class="vw-lrow"><span class="vw-line">Глагол I cпряжения правильного спряжения в настоящем времени: Escuchamos un ruido fuerte.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">5. El ático</span><span class="vw-rest"> – чердак, мансарда</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">6. La planta, el piso</span><span class="vw-rest"> – этаж</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">7. El ascensor</span><span class="vw-rest"> – лифт</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">8. La alfombra</span><span class="vw-rest"> – ковёр</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">9. El armario</span><span class="vw-rest"> – шкаф</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">10. El refrigerador (el refri), la nevera</span><span class="vw-rest"> - холодильник</span></div></div></div>
+        </div>
+      </div>
+      <div class="vw-day" data-day="21">
+        <button class="vw-day-toggle" type="button" aria-expanded="false">
+          <span class="vw-day-num">21</span>
+          <span class="vw-day-info">
+            <span class="vw-day-title">День 21<span class="badge badge-audio">аудио</span></span>
+            <span class="vw-day-sub">10 слов</span>
+          </span>
+          <span class="vw-day-arrow">▾</span>
+        </button>
+        <div class="vw-day-panel">
+          <audio controls preload="none" class="vw-audio">
+          <source src="Vocabulario/21 dia vocabulario.mp3" type="audio/mpeg">
+        </audio>
+          <div class="vw-entries"><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">1. Las redes sociales</span><span class="vw-rest"> – соцсети (No tengo redes sociales: Instagram, ni Facebook, ni otras)</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">2. El desastre</span><span class="vw-rest"> – катастрофа, кошмар, бедствие (Este trabajador es un desastre – этот работник – кошмар)</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">3. El desorden</span><span class="vw-rest"> – беспорядок (Hay un desorden en mi habitación – в моей комнате беспорядок)</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">4. Desordenado, desordenada</span><span class="vw-rest"> – беспорядочный, ая (relaciones desordenadas – беспорядочные связи)</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">5. El vestido</span><span class="vw-rest"> – платье</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">6. El traje</span><span class="vw-rest"> – костюм</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">7. El regalo</span><span class="vw-rest"> – подарок</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">8. Regalar</span><span class="vw-rest"> – дарить (Правильный глагол I cпряжения)</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">9. Llevar</span><span class="vw-rest"> – носить, нести; возить, везти (Правильный глагол I cпряжения) (En verano siempre llevo bermudas y playera – Летом я всегда ношу шорты и футболку)</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">10. Mudarse</span><span class="vw-rest"> – переехать, переезжать (из одного места в другое) (Правильный возвратный глагол I cпряжения):</span></div><div class="vw-lrow"><span class="vw-line">Presente de indicativo (настоящее время)</span></div><div class="vw-lrow"><span class="vw-line">(yo) me mudo</span></div><div class="vw-lrow"><span class="vw-line">(tú) te mudas</span></div><div class="vw-lrow"><span class="vw-line">(él, ella, Ud.) se muda</span></div><div class="vw-lrow"><span class="vw-line">(nosotros) nos mudamos</span></div><div class="vw-lrow"><span class="vw-line">(vosotros) os mudáis</span></div><div class="vw-lrow"><span class="vw-line">(ellos, ellas, Uds) se mudan</span></div><div class="vw-lrow"><span class="vw-line">Mañana nos tenemos que mudar a otra casa– Завтра нам нужно переезжать в другой дом.</span></div></div></div>
+        </div>
+      </div>
+      <div class="vw-day" data-day="22">
+        <button class="vw-day-toggle" type="button" aria-expanded="false">
+          <span class="vw-day-num">22</span>
+          <span class="vw-day-info">
+            <span class="vw-day-title">День 22</span>
+            <span class="vw-day-sub">10 слов</span>
+          </span>
+          <span class="vw-day-arrow">▾</span>
+        </button>
+        <div class="vw-day-panel">
+          
+          <div class="vw-entries"><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Describir</span><span class="vw-rest"> – описать, описывать</span></div><div class="vw-lrow"><span class="vw-line">Глагол III спряжения; причастие – descrito</span></div><div class="vw-lrow"><span class="vw-line">Presente de indicativo (настоящее время)</span></div><div class="vw-lrow"><span class="vw-line">Pretérito perfecto de indicativo (Препдпрошедшее время)</span></div><div class="vw-lrow"><span class="vw-line">(yo) Describo</span></div><div class="vw-lrow"><span class="vw-line">He descrito</span></div><div class="vw-lrow"><span class="vw-line">(tú) Describes / vos describís</span></div><div class="vw-lrow"><span class="vw-line">Has descrito</span></div><div class="vw-lrow"><span class="vw-line">(él, ella, Ud.) Describe</span></div><div class="vw-lrow"><span class="vw-line">Ha descrito</span></div><div class="vw-lrow"><span class="vw-line">(nosotros) Describimos</span></div><div class="vw-lrow"><span class="vw-line">Hemos descrito</span></div><div class="vw-lrow"><span class="vw-line">(vosotros) Describís</span></div><div class="vw-lrow"><span class="vw-line">Habéis descrito</span></div><div class="vw-lrow"><span class="vw-line">(ellos, ellas, Uds) Describen</span></div><div class="vw-lrow"><span class="vw-line">Han descrito</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Señalar</span><span class="vw-rest"> – указывать. Правильный глагол I cпряжения.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Practicar</span><span class="vw-rest"> – практиковать. Правильный глагол I cпряжения</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">4. Sencillo</span><span class="vw-rest"> – простой (pregunta sencilla – простой вопрос); одноместный (о номере в отеле)</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">5. Luminoso</span><span class="vw-rest"> – светлый (una habitación luminosa – солнечная комната)</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">6. Madera</span><span class="vw-rest"> – дерево (материал) (la casa de mandera; la mesa de madera)</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">7. La bañera</span><span class="vw-rest"> – ванная (ёмкость)</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">8. El lavabo</span><span class="vw-rest"> – умывальник, раковина</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">9. El espejo</span><span class="vw-rest"> – зеркало</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">10. La toalla</span><span class="vw-rest"> - полотенце</span></div></div></div>
+        </div>
+      </div>
+      <div class="vw-day" data-day="23">
+        <button class="vw-day-toggle" type="button" aria-expanded="false">
+          <span class="vw-day-num">23</span>
+          <span class="vw-day-info">
+            <span class="vw-day-title">День 23<span class="badge badge-audio">аудио</span></span>
+            <span class="vw-day-sub">14 слов</span>
+          </span>
+          <span class="vw-day-arrow">▾</span>
+        </button>
+        <div class="vw-day-panel">
+          <audio controls preload="none" class="vw-audio">
+          <source src="Vocabulario/23 dia vocabulario.mp3" type="audio/mpeg">
+        </audio>
+          <div class="vw-entries"><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">1. El gimnasio</span><span class="vw-rest"> – спортзал</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">2. El alquiler</span><span class="vw-rest"> – аренда</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">3. Próximo</span><span class="vw-rest"> – ближайший (próximo fin de semana – ближайшие выходные)</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">4. La maceta</span><span class="vw-rest"> – горшок (любого размера) для цветов, растений (maceta de plantas – горшок с растениями)</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">5. El patio</span><span class="vw-rest"> – двор</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">6. La piedra</span><span class="vw-rest"> – камень (как предмет и как материал) (casa de piedra – каменный дом)</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">7. Frecuente</span><span class="vw-rest"> – частый (cliente frecuente – постоянный клиент; dolores de cabeza frecuentes – частые головные боли)</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">8. Ayudar a hacer algo</span><span class="vw-rest"> – помогать что-л делать (всегда с предлогом a) (Правильный глагол I cпряжения) (Juana siempre me ayuda a limpiar la casa – Хуана всегда мне помогает убираться дома).</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">9. Admitir</span><span class="vw-rest"> – допускать (Правильный глагол III cпряжения) (En este hotel admiten a las mascotas – В этом отеле разрешены домашние животные)</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">10. Encontrarse</span><span class="vw-rest"> – a) встречаться; б) находиться в каком-то месте или состоянии (в этом значении - синоним глагола estar) (Отклоняющийся возвратный глагол I cпряжения):</span></div><div class="vw-lrow"><span class="vw-line">Presente de indicativo (настоящее время)</span></div><div class="vw-lrow"><span class="vw-line">Pretérito perfecto de indicativo (Препдпрошедшее время)</span></div><div class="vw-lrow"><span class="vw-line">(yo) me encuentro</span></div><div class="vw-lrow"><span class="vw-line">Me he encontrado</span></div><div class="vw-lrow"><span class="vw-line">(tú) te encuentras / vos te encontrás</span></div><div class="vw-lrow"><span class="vw-line">Te has encontrado</span></div><div class="vw-lrow"><span class="vw-line">(él, ella, Ud.) se encuentra</span></div><div class="vw-lrow"><span class="vw-line">Se ha encontrado</span></div><div class="vw-lrow"><span class="vw-line">(nosotros) nos encontramos</span></div><div class="vw-lrow"><span class="vw-line">Nos hemos encontrado</span></div><div class="vw-lrow"><span class="vw-line">(ellos, ellas, Uds) se encuentran</span></div><div class="vw-lrow"><span class="vw-line">Se han encontrado</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">¿Te has encontrado con Inés?</span><span class="vw-rest"> – Ты встретился (лась) с Инес?</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Nos encontramos ante una obra maestra de la arquitectura mundial.</span><span class="vw-rest"> – Мы находимся перед мировым произведением архитектурного искусства.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">No me encuentro bien.</span><span class="vw-rest"> – Я себя нехорошо (плохо) чувствую.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">¿Cómo se encuentra usted hoy?</span><span class="vw-rest"> – Как вы себя сегодня чувствуете?</span></div></div></div>
+        </div>
+      </div>
+      <div class="vw-day" data-day="24">
+        <button class="vw-day-toggle" type="button" aria-expanded="false">
+          <span class="vw-day-num">24</span>
+          <span class="vw-day-info">
+            <span class="vw-day-title">День 24<span class="badge badge-audio">аудио</span></span>
+            <span class="vw-day-sub">8 слов</span>
+          </span>
+          <span class="vw-day-arrow">▾</span>
+        </button>
+        <div class="vw-day-panel">
+          <audio controls preload="none" class="vw-audio">
+          <source src="Vocabulario/24 dia vocabulario.mp3" type="audio/mpeg">
+        </audio>
+          <div class="vw-entries"><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">1. La pasta dental</span><span class="vw-rest"> – зубная паста</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">2. El cepillo de dientes</span><span class="vw-rest"> – зубная щетка</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">3. Lavar los dientes</span><span class="vw-rest"> – чистить зубы (Правильный глагол I cпряжения)</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">4. El queso</span><span class="vw-rest"> – сыр</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">5. Tranquilo / a</span><span class="vw-rest"> – спокойный / ая</span></div><div class="vw-lrow"><span class="vw-line">6. Pequeño / a– маленьнкий / ая</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">7. La vivienda</span><span class="vw-rest"> – жильё</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">8. Decorar</span><span class="vw-rest"> – украшать что-л (Правильный глагол I cпряжения): Para la Navidad siempre decoramos la casa – На Рождество мы всегдя украшаем дом.</span></div><div class="vw-lrow"><span class="vw-line">9. Decoraсión – украшения</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">10. Pasar el tiempo (las vacaciones)</span><span class="vw-rest"> – проводить, провести время (например, отпуск) (Правильный глагол I cпряжения): Suelo pasar el fin de semana en casa con mi familia. – Я обычно провожу выходные дома с семьёй</span></div></div></div>
+        </div>
+      </div>
+      <div class="vw-day" data-day="25">
+        <button class="vw-day-toggle" type="button" aria-expanded="false">
+          <span class="vw-day-num">25</span>
+          <span class="vw-day-info">
+            <span class="vw-day-title">День 25<span class="badge badge-audio">аудио</span></span>
+            <span class="vw-day-sub">1 слово</span>
+          </span>
+          <span class="vw-day-arrow">▾</span>
+        </button>
+        <div class="vw-day-panel">
+          <audio controls preload="none" class="vw-audio">
+          <source src="Vocabulario/25 dia vocabulario.mp3" type="audio/mpeg">
+        </audio>
+          <div class="vw-entries"><div class="vw-entry"><div class="vw-lrow"><span class="vw-line">10 стран, их жителей и столицы на испанском:</span></div><div class="vw-lrow"><span class="vw-line">1. Gran Bretaña: británico / a; Londres</span></div><div class="vw-lrow"><span class="vw-line">2. Israel: israelí; Jerusalén</span></div><div class="vw-lrow"><span class="vw-line">3. Brasil: brasileño /a, brasileiro / a; Brasilia</span></div><div class="vw-lrow"><span class="vw-line">4. Kazajistán: kazajo / a; Astaná</span></div><div class="vw-lrow"><span class="vw-line">5. Alemania: alemán / a; Berlín</span></div><div class="vw-lrow"><span class="vw-line">6. Canadá: canadiense; Ottawa</span></div><div class="vw-lrow"><span class="vw-line">8. Turquía: turco / a; Ankará</span></div><div class="vw-lrow"><span class="vw-line">9. Bielorrusia: bielorruso / a; Minsk</span></div><div class="vw-lrow"><span class="vw-line">10. Polonia: polaco / a; Varsovia</span></div><div class="vw-lrow"><span class="vw-line">11. Estados Unidos: estadounidense; gringo / a; americano /a ; Washington</span></div><div class="vw-lrow"><span class="vw-line">ОБРАТИТЕ внимание на ударения</span></div></div></div>
+        </div>
+      </div>
+      <div class="vw-day" data-day="26">
+        <button class="vw-day-toggle" type="button" aria-expanded="false">
+          <span class="vw-day-num">26</span>
+          <span class="vw-day-info">
+            <span class="vw-day-title">День 26<span class="badge badge-audio">аудио</span></span>
+            <span class="vw-day-sub">11 слов</span>
+          </span>
+          <span class="vw-day-arrow">▾</span>
+        </button>
+        <div class="vw-day-panel">
+          <audio controls preload="none" class="vw-audio">
+          <source src="Vocabulario/26 dia vocabulario.mp3" type="audio/mpeg">
+        </audio>
+          <div class="vw-entries"><div class="vw-entry"><div class="vw-lrow"><span class="vw-line">Los colores más comunes:</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">1. Rojo</span><span class="vw-rest"> – Красный</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">2. Naranja</span><span class="vw-rest"> – Оранжевый</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">3. Amarillo</span><span class="vw-rest"> – Жёлтый</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">4. Verde</span><span class="vw-rest"> – Зелёный</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">5. Azul</span><span class="vw-rest"> – Синий</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">6. Violeta</span><span class="vw-rest"> – Фиолетовый</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">7. Rosa</span><span class="vw-rest"> – Розовый</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">8. Marrón</span><span class="vw-rest"> – Коричневый</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">9. Negro</span><span class="vw-rest"> – Чёрный</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">10. Blanco</span><span class="vw-rest"> – Белый</span></div></div></div>
+        </div>
+      </div>
+      <div class="vw-day" data-day="27">
+        <button class="vw-day-toggle" type="button" aria-expanded="false">
+          <span class="vw-day-num">27</span>
+          <span class="vw-day-info">
+            <span class="vw-day-title">День 27<span class="badge badge-audio">аудио</span></span>
+            <span class="vw-day-sub">10 слов</span>
+          </span>
+          <span class="vw-day-arrow">▾</span>
+        </button>
+        <div class="vw-day-panel">
+          <audio controls preload="none" class="vw-audio">
+          <source src="Vocabulario/27 dia vocabulario.mp3" type="audio/mpeg">
+        </audio>
+          <div class="vw-entries"><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">1.El rascacielos</span><span class="vw-rest"> – небоскрёб</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">2. La papelera</span><span class="vw-rest"> – урна</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">3. La vereda (Arg.), la acera (Esp.)</span><span class="vw-rest"> – тротуар</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">4. El cruce</span><span class="vw-rest"> – перекрёсток</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">5. El semáforo</span><span class="vw-rest"> – светофор</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">6. Sacar la basura</span><span class="vw-rest"> – выносить мусор (правильный глагол I спряжения)</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">7. La fuente</span><span class="vw-rest"> – фонтан</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">8. La esquina</span><span class="vw-rest"> – угол</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">9. El tráfico</span><span class="vw-rest"> – движение, пробки на дорогах</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">10. Cruzar la calle</span><span class="vw-rest"> - переходить улицу (правильный глагол I спряжения)</span></div></div></div>
+        </div>
+      </div>
+      <div class="vw-day" data-day="28">
+        <button class="vw-day-toggle" type="button" aria-expanded="false">
+          <span class="vw-day-num">28</span>
+          <span class="vw-day-info">
+            <span class="vw-day-title">День 28<span class="badge badge-audio">аудио</span></span>
+            <span class="vw-day-sub">11 слов</span>
+          </span>
+          <span class="vw-day-arrow">▾</span>
+        </button>
+        <div class="vw-day-panel">
+          <audio controls preload="none" class="vw-audio">
+          <source src="Vocabulario/28 dia vocabulario.mp3" type="audio/mpeg">
+        </audio>
+          <div class="vw-entries"><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">1. ¿En qué parte de?</span><span class="vw-rest"> – в какой части ч-л? (En qué parte de la Argentina vivís?)</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">2. El chalé</span><span class="vw-rest"> – шалет, дача</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">3. El crucero</span><span class="vw-rest"> – круиз (обычно по морю), круизный лайнер</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">4. El horario</span><span class="vw-rest"> – расписание</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">5. La peluquería / la barbería / el salón de belleza</span><span class="vw-rest"> – паркмахерская / парикмахерская для мужчин / салон красоты</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">6. El lavavajillas (Esp.), el lavatrastes (Am.)</span><span class="vw-rest"> – посудомоечная машина</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">7. La lavadora, la lavarropa (Arg.)</span><span class="vw-rest"> – стиральная машина</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">8. La lavandería</span><span class="vw-rest"> - прачечная</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">8. Los bocadillos</span><span class="vw-rest"> – закуски</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">9. Utilizar</span><span class="vw-rest"> – использовать (Правильный глагол I cпряжения) (Tenemos que utilizar más la inteligencia artificial – Нужно чаща использовать искусственный интеллект)</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">10. Por supuesto, desde luego, claro que sí</span><span class="vw-rest"> – разумеется</span></div></div></div>
+        </div>
+      </div>
+      <div class="vw-day" data-day="29">
+        <button class="vw-day-toggle" type="button" aria-expanded="false">
+          <span class="vw-day-num">29</span>
+          <span class="vw-day-info">
+            <span class="vw-day-title">День 29<span class="badge badge-audio">аудио</span></span>
+            <span class="vw-day-sub">13 слов</span>
+          </span>
+          <span class="vw-day-arrow">▾</span>
+        </button>
+        <div class="vw-day-panel">
+          <audio controls preload="none" class="vw-audio">
+          <source src="Vocabulario/29 dia vocabulario.mp3" type="audio/mpeg">
+        </audio>
+          <div class="vw-entries"><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">1. La colonia</span><span class="vw-rest"> – район города (в некоторых странах)</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">2. El ambiente</span><span class="vw-rest"> – обстановка, атмосфера</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">3. Famoso / a</span><span class="vw-rest"> – знаменитый / ая</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">4. Estar situado / a</span><span class="vw-rest"> – быть расположенным / ой (La colonia está situada en el centro de la ciudad. – Этот района расположен в центре города)</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">5. Múltiples</span><span class="vw-rest"> – множественные, разные (чаще всего употребляется во мн. числе)</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">6. Tranquilo / a</span><span class="vw-rest"> – спокойный / ая</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">7. Ruidoso / a</span><span class="vw-rest"> – шумный / ая</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">8. El desarrollo</span><span class="vw-rest"> – развитите</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">9. La localización</span><span class="vw-rest"> – расположение</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">10. Comunicarse</span><span class="vw-rest"> – связываться, общаться (Правильный возвратный глагол I cпряжения):</span></div><div class="vw-lrow"><span class="vw-line">Presente de indicativo (настоящее время)</span></div><div class="vw-lrow"><span class="vw-line">Pretérito perfecto de indicativo (Препдпрошедшее время)</span></div><div class="vw-lrow"><span class="vw-line">(yo) me comunico</span></div><div class="vw-lrow"><span class="vw-line">Me he comunicado</span></div><div class="vw-lrow"><span class="vw-line">(tú) te comunicas / vos te comunicás</span></div><div class="vw-lrow"><span class="vw-line">Te has comunicado</span></div><div class="vw-lrow"><span class="vw-line">(él, ella, Ud.) se comunica</span></div><div class="vw-lrow"><span class="vw-line">Se ha comunicado</span></div><div class="vw-lrow"><span class="vw-line">(nosotros) nos comunicamos</span></div><div class="vw-lrow"><span class="vw-line">Nos hemos comunicado</span></div><div class="vw-lrow"><span class="vw-line">(ellos, ellas, Uds) se comunican</span></div><div class="vw-lrow"><span class="vw-line">Se han comunicado</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Nos comunicamos por teléfono.</span><span class="vw-rest"> – Мы связались (пообщались) по телефону.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">¿Te has podido comunicar con tu hermano?</span><span class="vw-rest"> – Ты смог (ла) связаться с твоим братом?</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">No me he comunicado con mi familia desde hace mucho.</span><span class="vw-rest"> – Я давно не общался со своей семьёй.</span></div></div></div>
+        </div>
+      </div>
+      <div class="vw-day" data-day="30">
+        <button class="vw-day-toggle" type="button" aria-expanded="false">
+          <span class="vw-day-num">30</span>
+          <span class="vw-day-info">
+            <span class="vw-day-title">День 30<span class="badge badge-audio">аудио</span></span>
+            <span class="vw-day-sub">17 слов</span>
+          </span>
+          <span class="vw-day-arrow">▾</span>
+        </button>
+        <div class="vw-day-panel">
+          <audio controls preload="none" class="vw-audio">
+          <source src="Vocabulario/30 dia vocabulario.mp3" type="audio/mpeg">
+        </audio>
+          <div class="vw-entries"><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">1. La cacerola, la olla</span><span class="vw-rest"> – кастрюля</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">2. La tapa</span><span class="vw-rest"> – крышка</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">3. La tabla de cortar</span><span class="vw-rest"> – разделочная доска</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">4. El colador</span><span class="vw-rest"> – дуршлаг</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">5. La batidora</span><span class="vw-rest"> – миксер</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">6. El rallador</span><span class="vw-rest"> – тёрка</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">7. El abrelatas</span><span class="vw-rest"> – открывалка</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">8. El sacacorchos</span><span class="vw-rest"> – штопор</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">9. La espátula</span><span class="vw-rest"> – лопатка</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">10. La bandeja</span><span class="vw-rest"> – поднос</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">11. El fregadero</span><span class="vw-rest"> – раковина</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">12. El grifo</span><span class="vw-rest"> – кран</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">13. El delantal</span><span class="vw-rest"> – фартук</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">14. El trapo de cocina</span><span class="vw-rest"> – кухонная тряпка</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">15. El escurridor</span><span class="vw-rest"> – сушилка</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">16. El salero</span><span class="vw-rest"> – солонка</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">17. El recipiente</span><span class="vw-rest"> – контейнер</span></div></div></div>
+        </div>
+      </div>
+      <div class="vw-day" data-day="31">
+        <button class="vw-day-toggle" type="button" aria-expanded="false">
+          <span class="vw-day-num">31</span>
+          <span class="vw-day-info">
+            <span class="vw-day-title">День 31<span class="badge badge-audio">аудио</span></span>
+            <span class="vw-day-sub">15 слов</span>
+          </span>
+          <span class="vw-day-arrow">▾</span>
+        </button>
+        <div class="vw-day-panel">
+          <audio controls preload="none" class="vw-audio">
+          <source src="Vocabulario/31 dia vocabulario.mp3" type="audio/mpeg">
+        </audio>
+          <div class="vw-entries"><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">1. Nadar</span><span class="vw-rest"> – плавать. Правильный глагол I спряжения</span></div><div class="vw-lrow"><span class="vw-line">Me encanta nadar en el mar.</span></div><div class="vw-lrow"><span class="vw-line">José ha nadado todo el día en el océano.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">2. El riesgo</span><span class="vw-rest"> – риск</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Deportes de riesgo</span><span class="vw-rest"> – опасные виды спорта.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Correr un riesgo</span><span class="vw-rest"> – подвергаться риску.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">3. Habitualmente</span><span class="vw-rest"> – обычно</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">4. Bailar</span><span class="vw-rest"> – танцевать. Правильный глагол I спряжения</span></div><div class="vw-lrow"><span class="vw-line">A Mario y Josefina les gusta bailar flamenco.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">5. El sitio</span><span class="vw-rest"> - место</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">6. El partido</span><span class="vw-rest"> – партия (политическая или партия в играх); матч</span></div><div class="vw-lrow"><span class="vw-line">Vamos a jugar un partido de ajedrez (Сыграем партию в шахматы).</span></div><div class="vw-lrow"><span class="vw-line">El partido de futbol (básquet, vóleibol, etc.).</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">7. La afición</span><span class="vw-rest"> – увлечение, хобби. Aficionado / a – болельщик / ца (в спорте), любитель / ница</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">8. Salir</span><span class="vw-rest"> – выходить. Глагол индивидуального спряжения III спряжения:</span></div><div class="vw-lrow"><span class="vw-line">Настоящее время:</span></div><div class="vw-lrow"><span class="vw-line">(Yo) salgo</span></div><div class="vw-lrow"><span class="vw-line">(Nosotros) salimos</span></div><div class="vw-lrow"><span class="vw-line">(Tú) sales, vos salís</span></div><div class="vw-lrow"><span class="vw-line">(Él, ella, Usted) sale</span></div><div class="vw-lrow"><span class="vw-line">(Ellos, ellas, Ustedes) salen</span></div><div class="vw-lrow"><span class="vw-line">Pretérito perfecto compuesto:</span></div><div class="vw-lrow"><span class="vw-line">(Yo) he salido</span></div><div class="vw-lrow"><span class="vw-line">(Nosotros) hemos salido</span></div><div class="vw-lrow"><span class="vw-line">(Tú, vos) has salido</span></div><div class="vw-lrow"><span class="vw-line">(Él, ella, Usted) ha salido</span></div><div class="vw-lrow"><span class="vw-line">(Ellos, ellas, Ustedes) han salido</span></div><div class="vw-lrow"><span class="vw-line">Los domingos salgo de copas.</span></div><div class="vw-lrow"><span class="vw-line">Esta semana hemos salido de casa muy temprano.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Salir de copas</span><span class="vw-rest"> – cходить в бар.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">9. Cortar</span><span class="vw-rest"> – резать. Правильный глагол I спряжения</span></div><div class="vw-lrow"><span class="vw-line">Cortar el pan.</span></div><div class="vw-lrow"><span class="vw-line">Cortar la leña (рубить дрова).</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">10. La pieza</span><span class="vw-rest"> – комната; предмет, часть чего-то (pieza de fruta)</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Los López ocupan tres piezas en la casa</span><span class="vw-rest"> – Семья Лопесов занимает три комнаты в доме.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Paz ha cortado la sandía en varias piezas</span><span class="vw-rest"> – Пас порезала арбуз на несколько кусков.</span></div></div></div>
+        </div>
+      </div>
+      <div class="vw-day" data-day="32">
+        <button class="vw-day-toggle" type="button" aria-expanded="false">
+          <span class="vw-day-num">32</span>
+          <span class="vw-day-info">
+            <span class="vw-day-title">День 32<span class="badge badge-audio">аудио</span></span>
+            <span class="vw-day-sub">27 слов</span>
+          </span>
+          <span class="vw-day-arrow">▾</span>
+        </button>
+        <div class="vw-day-panel">
+          <audio controls preload="none" class="vw-audio">
+          <source src="Vocabulario/32 dia vocabulario.mp3" type="audio/mpeg">
+        </audio>
+          <div class="vw-entries"><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">1. Mezclar</span><span class="vw-rest"> – мешать, перемешивать. Правильный глагол I спряжения</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">No se debe mezclar peras con manzanas.</span><span class="vw-rest"> – Не нужно мешать груши с яблоками (не стóит смешивать разные вещи)</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Para hacer las crepas, hay que mezclar leche con harina y huevo.</span><span class="vw-rest"> – Чтобы приготовить блины, нужно перемешать молоко с мукой и яйцом.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">2. Pelar</span><span class="vw-rest"> – чистить, очищать фрукты или овощи от кожуры. Правильный глагол I спряжения</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Algunas frutas pueden comerse sin pelar.</span><span class="vw-rest"> – Некоторые фрукты можно есть неочищенными.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">3. El ingrediente</span><span class="vw-rest"> – ингредиент</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">El respeto mutuo es el ingrediente principal de una relación duradera.</span><span class="vw-rest"> – Взаимоуважение – главный ингредиент долгих отношений.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Para hacer un buen pastel hay que mezclar bien todos los ingredientes.</span><span class="vw-rest"> – Чтобы приготовить вкусный торт, нужно хорошо смешать все ингредиенты.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">4. Repartir</span><span class="vw-rest"> – распределять, раздавать. Правильный глагол III спряжения</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">El maestro va a repartir las hojas del examen.</span><span class="vw-rest"> - Учитель раздаст листы с экзаменом.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Hay que repartir el trabajo entre todos los miembros del equipo.</span><span class="vw-rest"> - Нужно распределить работу между всеми членами команды.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">5. Ordenar</span><span class="vw-rest"> – приказывать; приводить в порядок; заказывать. Правильный глагол I спряжения</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Mi mamá me ordena limpiar la habitación.</span><span class="vw-rest"> - Мама приказывает мне убраться в комнтате.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Tienes que ordenar tu escritorio.</span><span class="vw-rest"> - Тебе нужно привести в порядок свой письменный стол.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Queremos ordenar una pizza.</span><span class="vw-rest"> - Мы хотим заказать пиццу.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">6. Consumir</span><span class="vw-rest"> – потреблять (употреблять); расходовать. Правильный глагол III спряжения</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Los niños deberían dejar de consumir tanta azúcar.</span><span class="vw-rest"> – Детям следовало бы перестать употреблять столько сахара.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Los autos consumen demasiada gasolina.</span><span class="vw-rest"> - Машины потребляют слишком много бензина.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">El fuego ha consumido la casa.</span><span class="vw-rest"> - Огонь поглотил дом.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">7. El alimento, los alimentos</span><span class="vw-rest"> – питание, продукты питания</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">8. Precioso, a</span><span class="vw-rest"> – прекрасный, ая; драгоценный, ая</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Piedras preciosas</span><span class="vw-rest"> – драгоценные камни</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Es una mujer preciosa</span><span class="vw-rest"> – Она прекрасная женщина</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">9. El abogado</span><span class="vw-rest"> – адвокат.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">10. Barato, a</span><span class="vw-rest"> – дешевый, ая. Una baratija – дешевка (о предмете, разговорное)</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Los pasajes de avión este año son baratos.</span><span class="vw-rest"> – Билеты на самолет в этом году дешевые.</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">En las tiendas chinas venden puras baratijas.</span><span class="vw-rest"> – В китайских магазинах продаются одни дешевки</span></div></div></div>
+        </div>
+      </div>
+      <div class="vw-day" data-day="33">
+        <button class="vw-day-toggle" type="button" aria-expanded="false">
+          <span class="vw-day-num">33</span>
+          <span class="vw-day-info">
+            <span class="vw-day-title">День 33</span>
+            <span class="vw-day-sub">15 слов</span>
+          </span>
+          <span class="vw-day-arrow">▾</span>
+        </button>
+        <div class="vw-day-panel">
+          
+          <div class="vw-entries"><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">1.Divertirse</span><span class="vw-rest"> – развлекаться. Отклоняющийся глагол III спряжения:</span></div><div class="vw-lrow"><span class="vw-line">(yo) Me divierto</span></div><div class="vw-lrow"><span class="vw-line">(nosotros) nos divertimos</span></div><div class="vw-lrow"><span class="vw-line">(tú) te diviertes / vos te divertís</span></div><div class="vw-lrow"><span class="vw-line">(vosotros) os divertís</span></div><div class="vw-lrow"><span class="vw-line">(él, ella, Usted) se divierte</span></div><div class="vw-lrow"><span class="vw-line">(ellos, ellas, Ustedes) se divierten</span></div><div class="vw-lrow"><span class="vw-line">Participio (причастие): divertido (me he divertido, te has divertido, etc.)</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">2. Sentarse</span><span class="vw-rest"> – садиться. Отклоняющийся глагол I спряжения, спрягается аналогично глаголу divertirse</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">3. Entretenerse</span><span class="vw-rest"> – отвлекаться, развлекаться. Индивидуальный глагол II спряжения. Спрягается так же, как глагол tener:</span></div><div class="vw-lrow"><span class="vw-line">(yo) Me entretengo</span></div><div class="vw-lrow"><span class="vw-line">(nosotros) nos entretenemos</span></div><div class="vw-lrow"><span class="vw-line">(tú) te entretienes / vos te entretenés</span></div><div class="vw-lrow"><span class="vw-line">(vosotros) os entretenéis</span></div><div class="vw-lrow"><span class="vw-line">(él, ella, Usted) se entretiene</span></div><div class="vw-lrow"><span class="vw-line">(ellos, ellas, Ustedes) se entretienen</span></div><div class="vw-lrow"><span class="vw-line">Participio (причастие): entretenido (me he entretenido, te has entretenido, etc.)</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">4. El pájaro</span><span class="vw-rest"> – птица (живая) / el ave (las aves) – птица как род (и живая, и мясо птицы)</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">5. La paloma</span><span class="vw-rest"> – голубь</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">6. El color</span><span class="vw-rest"> – цвет</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">7. El deber</span><span class="vw-rest"> – обязанность; los deberes - домашнее задание (в школе, университете)</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">8. Entretenido</span><span class="vw-rest"> – интересный, занимательный, увлекательный</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">9. Hacer deporte</span><span class="vw-rest"> – заниматься спортом</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">10. Mismo (a)</span><span class="vw-rest"> – самый (ая); сам (а); тот же самый (та же самая):</span></div><div class="vw-lrow"><span class="vw-line">Al mismo tiempo (в то же самое время); los estudiantes han decidido aprender las palabras por sí mismos (студенты решили выучить слова сами); son las mismas palabras (это те же самые слова).</span></div><div class="vw-lrow"><span class="vw-line">A APRENDER / ЗАПОМНИТЕ:</span></div><div class="vw-lrow"><span class="vw-line">Деепричастие настоящего времени (gerundio) от всех без исключения глаголов образуется путём прибавления к корню глаголов I спряжения окончания -ando; к корню глаголов II и III спряжений окончания -iendo (когда корень оканчивается на согласную) / -yendo (если корень оканчивается на гласную):</span></div><div class="vw-lrow"><span class="vw-line">Trabajar (работать) – trabajando (работая)</span></div><div class="vw-lrow"><span class="vw-line">Comer (обедать, есть) – comiendo (обедая)</span></div><div class="vw-lrow"><span class="vw-line">Ver (видеть) – viendo (видя)</span></div><div class="vw-lrow"><span class="vw-line">Vivir (жить) – viviendo (живя)</span></div><div class="vw-lrow"><span class="vw-line">Ir (идти, ехать) – yendo (идя)</span></div><div class="vw-lrow"><span class="vw-line">Atraer (привлекать, привлечь) – atrayendo (привлекая)</span></div><div class="vw-lrow"><span class="vw-line">A APRENDER / ЗАПОМНИТЕ:</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Estar + gerundio</span><span class="vw-rest"> – продолжающееся действие в конкретный момент речи</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Estoy trabajando</span><span class="vw-rest"> – я работаю (в данный момент)</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Carolina está haciendo deporte</span><span class="vw-rest"> – Каролина занимается спортом (сейчас, в данный момент)</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Mañana a esta hora vas a estar volando a España</span><span class="vw-rest"> – Завтра в это время ты будешь лететь в Испанию (продолжающееся действие, которое будет реализовано в конкретный момент)</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Toda la vida hemos estado trabajando para tener una buena pensión</span><span class="vw-rest"> – Всю жизнь мы работали, чтобы у нас была хорошая пенсия (продолжающееся действие, которое было реализовано в конкретный момент)</span></div></div></div>
+        </div>
+      </div>
+      <div class="vw-day" data-day="34">
+        <button class="vw-day-toggle" type="button" aria-expanded="false">
+          <span class="vw-day-num">34</span>
+          <span class="vw-day-info">
+            <span class="vw-day-title">День 34</span>
+            <span class="vw-day-sub">10 слов</span>
+          </span>
+          <span class="vw-day-arrow">▾</span>
+        </button>
+        <div class="vw-day-panel">
+          
+          <div class="vw-entries"><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Hace un rato</span><span class="vw-rest"> — недавно. Hace un rato te he llamado por teléfono (Я позвонил тебе недавно по телефону).</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Castaño (color)</span><span class="vw-rest"> — каштановый. Ella tiene el cabello castaño (У неё каштановые волосы).</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Complicado</span><span class="vw-rest"> — сложный. El examen es complicado (Экзамен сложный).</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Portal</span><span class="vw-rest"> — подъезд, портал. El portal de la casa está cerrado (Подъезд дома закрыт).</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Detenerse</span><span class="vw-rest"> — останавливаться / остановиться. El coche se detiene en la esquina (Машина останавливается на углу).</span></div><div class="vw-lrow"><span class="vw-line">Возвратный глагол индивидуального спряжения, спрягается как глагол tener:</span></div><div class="vw-lrow"><span class="vw-line">Presente de Indicativo</span></div><div class="vw-lrow"><span class="vw-line">Pretérito Perfecto Compuesto de Indicativo</span></div><div class="vw-lrow"><span class="vw-line">me detengo</span></div><div class="vw-lrow"><span class="vw-line">nos detenemos</span></div><div class="vw-lrow"><span class="vw-line">me he detenido</span></div><div class="vw-lrow"><span class="vw-line">nos hemos detenido</span></div><div class="vw-lrow"><span class="vw-line">te detienes / vos te detenés</span></div><div class="vw-lrow"><span class="vw-line">os detenéis</span></div><div class="vw-lrow"><span class="vw-line">te has detenido</span></div><div class="vw-lrow"><span class="vw-line">os habéis detenido</span></div><div class="vw-lrow"><span class="vw-line">se detiene</span></div><div class="vw-lrow"><span class="vw-line">se detienen</span></div><div class="vw-lrow"><span class="vw-line">se ha detenido</span></div><div class="vw-lrow"><span class="vw-line">se han detenido</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Parecer</span><span class="vw-rest"> — казаться / показаться. Me parece que va a llover (Мне кажется, что пойдёт дождь).</span></div><div class="vw-lrow"><span class="vw-line">Глагол индивидуального спряжения:</span></div><div class="vw-lrow"><span class="vw-line">Presente de Indicativo</span></div><div class="vw-lrow"><span class="vw-line">Pretérito Perfecto Compuesto de Indicativo</span></div><div class="vw-lrow"><span class="vw-line">parezco</span></div><div class="vw-lrow"><span class="vw-line">parecemos</span></div><div class="vw-lrow"><span class="vw-line">he parecido</span></div><div class="vw-lrow"><span class="vw-line">hemos parecido</span></div><div class="vw-lrow"><span class="vw-line">pareces / vos parecés</span></div><div class="vw-lrow"><span class="vw-line">parecéis</span></div><div class="vw-lrow"><span class="vw-line">has parecido</span></div><div class="vw-lrow"><span class="vw-line">habéis parecido</span></div><div class="vw-lrow"><span class="vw-line">parece</span></div><div class="vw-lrow"><span class="vw-line">parecen</span></div><div class="vw-lrow"><span class="vw-line">ha parecido</span></div><div class="vw-lrow"><span class="vw-line">han parecido</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Romper aguas</span><span class="vw-rest"> — отходят воды / отошли воды. La mujer ha roto aguas en el hospital (У женщины отошли воды в больнице).</span></div><div class="vw-lrow"><span class="vw-line">Romper (ломать) - глагол индивидуального спряжения:</span></div><div class="vw-lrow"><span class="vw-line">Presente de Indicativo</span></div><div class="vw-lrow"><span class="vw-line">Pretérito Perfecto Compuesto de Indicativo</span></div><div class="vw-lrow"><span class="vw-line">rompo</span></div><div class="vw-lrow"><span class="vw-line">rompemos</span></div><div class="vw-lrow"><span class="vw-line">he roto</span></div><div class="vw-lrow"><span class="vw-line">hemos roto</span></div><div class="vw-lrow"><span class="vw-line">rompes / vos rompés</span></div><div class="vw-lrow"><span class="vw-line">rompéis</span></div><div class="vw-lrow"><span class="vw-line">has roto</span></div><div class="vw-lrow"><span class="vw-line">habéis roto</span></div><div class="vw-lrow"><span class="vw-line">rompe</span></div><div class="vw-lrow"><span class="vw-line">rompen</span></div><div class="vw-lrow"><span class="vw-line">ha roto</span></div><div class="vw-lrow"><span class="vw-line">han roto</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">8. Estar de pie</span><span class="vw-rest"> — стоять. El profesor está de pie frente a la clase (Учитель стоит перед классом).</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Increíble</span><span class="vw-rest"> — невероятный. La vista desde la montaña es increíble (Вид с горы невероятный).</span></div></div><div class="vw-entry"><div class="vw-lrow"><span class="vw-head">Pensar</span><span class="vw-rest"> — думать. Pienso en mis planes para el futuro (Я думаю о своих планах на будущее).</span></div><div class="vw-lrow"><span class="vw-line">Отклоняющийся глагол:</span></div><div class="vw-lrow"><span class="vw-line">Presente de Indicativo</span></div><div class="vw-lrow"><span class="vw-line">Pretérito Perfecto Compuesto de Indicativo</span></div><div class="vw-lrow"><span class="vw-line">pienso</span></div><div class="vw-lrow"><span class="vw-line">pensamos</span></div><div class="vw-lrow"><span class="vw-line">he pensado</span></div><div class="vw-lrow"><span class="vw-line">hemos pensado</span></div><div class="vw-lrow"><span class="vw-line">piensas / vos pensás</span></div><div class="vw-lrow"><span class="vw-line">pensáis</span></div><div class="vw-lrow"><span class="vw-line">has pensado</span></div><div class="vw-lrow"><span class="vw-line">habéis pensado</span></div><div class="vw-lrow"><span class="vw-line">piensa</span></div><div class="vw-lrow"><span class="vw-line">piensan</span></div><div class="vw-lrow"><span class="vw-line">ha pensado</span></div><div class="vw-lrow"><span class="vw-line">han pensado</span></div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-right">
+    Purely coded, naturally spread by Alex Gorlov@<a class="footer-staffilo-name" href="https://staffilocode.com/" target="_blank" rel="noopener noreferrer">StaffiloCode</a>
+    <a href="https://staffilocode.com/" target="_blank" rel="noopener noreferrer">
+      <img class="footer-staffilo-logo" src="Staffilocode_logo_transparent.webp" alt="StaffiloCode">
+    </a>
+  </div>
+</footer>
+
+<script>
+  function bindToggle(container, toggleSel) {
+    container.querySelectorAll(toggleSel).forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var item = btn.closest('.vw-day');
+        var isOpen = item.classList.toggle('open');
+        btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+    });
+  }
+  bindToggle(document, '.vw-day-toggle');
+
+  document.getElementById('expandAll').addEventListener('click', function() {
+    document.querySelectorAll('.vw-day').forEach(function(d) {
+      d.classList.add('open');
+      d.querySelector('.vw-day-toggle').setAttribute('aria-expanded', 'true');
+    });
+  });
+  document.getElementById('collapseAll').addEventListener('click', function() {
+    document.querySelectorAll('.vw-day').forEach(function(d) {
+      d.classList.remove('open');
+      d.querySelector('.vw-day-toggle').setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>
+
+</body>
+</html>

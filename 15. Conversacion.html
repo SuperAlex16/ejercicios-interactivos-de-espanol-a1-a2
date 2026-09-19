@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Интерактивные упражнения: piso, muy/mucho/poco, rutina</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <style>
+    :root{
+      --bg1:#0f172a;
+      --bg2:#1d4ed8;
+      --bg3:#f97316;
+      --card:#ffffff;
+      --ink:#172033;
+      --muted:#5b6578;
+      --blue:#2563eb;
+      --green:#16a34a;
+      --red:#dc2626;
+      --amber:#f59e0b;
+      --soft:#eef6ff;
+      --shadow: 0 22px 60px rgba(15,23,42,.20);
+      --radius: 24px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      color:var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      background:
+        radial-gradient(circle at 18% 10%, rgba(249,115,22,.34), transparent 28%),
+        radial-gradient(circle at 82% 18%, rgba(37,99,235,.36), transparent 30%),
+        linear-gradient(135deg,#f8fbff 0%,#eff6ff 52%,#fff7ed 100%);
+      min-height:100vh;
+      line-height:1.55;
+    }
+    .hero{
+      position:relative;
+      overflow:hidden;
+      color:#fff;
+      padding:44px 24px 38px;
+      background:
+        linear-gradient(135deg,rgba(15,23,42,.96),rgba(37,99,235,.90)),
+        radial-gradient(circle at 85% 10%,rgba(249,115,22,.9),transparent 25%);
+      border-bottom-left-radius:40px;
+      border-bottom-right-radius:40px;
+      box-shadow:var(--shadow);
+    }
+    .hero::before,
+    .hero::after{
+      content:"";
+      position:absolute;
+      border-radius:999px;
+      background:rgba(255,255,255,.10);
+      filter:blur(.2px);
+    }
+    .hero::before{width:220px;height:220px;right:-70px;top:-70px}
+    .hero::after{width:160px;height:160px;left:-45px;bottom:-50px}
+    .hero-inner{max-width:1120px;margin:0 auto;position:relative;z-index:1;display:grid;grid-template-columns:1.5fr .8fr;gap:24px;align-items:center}
+    h1{margin:0 0 12px;font-size:clamp(30px,5vw,56px);line-height:1.02;letter-spacing:-.04em}
+    .subtitle{font-size:clamp(17px,2vw,22px);max-width:720px;margin:0;color:#dbeafe}
+    .hero-badge{
+      display:inline-flex;gap:10px;align-items:center;
+      padding:9px 14px;border-radius:999px;
+      background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);
+      color:#fff;margin-bottom:18px;font-weight:700;backdrop-filter:blur(8px)
+    }
+    .hero-card{
+      background:rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.22);
+      border-radius:28px;
+      padding:22px;
+      backdrop-filter:blur(10px);
+      box-shadow:0 18px 50px rgba(0,0,0,.18)
+    }
+    .hero-card .big-icon{font-size:56px;margin-bottom:8px}
+    .hero-card p{margin:0;color:#e0ecff;font-size:16px}
+    main{max-width:1120px;margin:30px auto 70px;padding:0 20px}
+    .nav{
+      display:flex;gap:12px;flex-wrap:wrap;margin:22px 0 28px;
+      position:sticky;top:0;z-index:10;padding:12px 0;
+      backdrop-filter:blur(14px)
+    }
+    .nav a{
+      text-decoration:none;color:#1e3a8a;background:rgba(255,255,255,.78);
+      border:1px solid rgba(37,99,235,.18);box-shadow:0 8px 24px rgba(37,99,235,.10);
+      padding:10px 14px;border-radius:999px;font-weight:800;font-size:14px
+    }
+    section{
+      background:rgba(255,255,255,.88);
+      border:1px solid rgba(148,163,184,.26);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:26px;
+      margin-bottom:28px;
+      overflow:hidden;
+      position:relative;
+    }
+    section::before{
+      content:"";
+      position:absolute;inset:0 0 auto 0;height:7px;
+      background:linear-gradient(90deg,var(--blue),#22c55e,var(--amber),#ef4444);
+    }
+    .section-head{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;margin-bottom:18px}
+    .section-title{display:flex;align-items:center;gap:13px}
+    .num{
+      min-width:42px;height:42px;border-radius:16px;background:linear-gradient(135deg,var(--blue),#7c3aed);
+      color:#fff;display:grid;place-items:center;font-weight:900;font-size:20px;box-shadow:0 12px 30px rgba(37,99,235,.26)
+    }
+    h2{margin:0;font-size:clamp(23px,3vw,34px);letter-spacing:-.025em}
+    .instruction{
+      background:linear-gradient(135deg,#eff6ff,#fff7ed);
+      border:1px solid rgba(37,99,235,.20);
+      border-radius:18px;
+      padding:14px 16px;
+      color:#1e3a8a;
+      font-weight:750;
+      margin:12px 0 20px;
+    }
+    .small-note{font-size:14px;color:var(--muted);font-weight:650}
+    .grid{display:grid;gap:16px}
+    .grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .speak-card,
+    .prompt-card,
+    .correction-card,
+    .builder-card{
+      background:#fff;
+      border:1px solid rgba(148,163,184,.25);
+      border-radius:22px;
+      padding:18px;
+      box-shadow:0 10px 26px rgba(15,23,42,.08);
+    }
+    .speak-card{position:relative;min-height:155px;display:flex;flex-direction:column;justify-content:space-between}
+    .speak-card .q{font-size:21px;font-weight:900;color:#0f172a;margin:0 0 12px}
+    .chip-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+    .chip{
+      border:1px solid rgba(37,99,235,.20);
+      color:#1d4ed8;background:#eff6ff;border-radius:999px;padding:7px 10px;
+      font-size:13px;font-weight:800;
+    }
+    button{
+      appearance:none;border:0;cursor:pointer;border-radius:14px;
+      padding:10px 14px;font-weight:900;font-size:14px;
+      background:linear-gradient(135deg,var(--blue),#7c3aed);color:#fff;
+      box-shadow:0 10px 24px rgba(37,99,235,.25);
+      transition:transform .15s ease, filter .15s ease;
+    }
+    button:hover{transform:translateY(-1px);filter:saturate(1.08)}
+    button.secondary{background:#0f172a;color:#fff;box-shadow:0 10px 22px rgba(15,23,42,.18)}
+    button.ghost{background:#fff;color:#1d4ed8;border:1px solid rgba(37,99,235,.22);box-shadow:none}
+    .model{
+      display:none;margin-top:12px;padding:12px;border-radius:16px;
+      background:#f8fafc;border:1px dashed rgba(37,99,235,.35);color:#334155;font-weight:650
+    }
+    .model.show{display:block;animation:pop .22s ease-out}
+    @keyframes pop{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+    label{display:block;font-weight:900;color:#1e293b;margin-bottom:7px}
+    select{
+      width:100%;padding:12px 13px;border-radius:15px;border:1.8px solid #cbd5e1;
+      background:#fff;color:#111827;font-size:15px;font-weight:750;outline:none;
+      box-shadow:0 6px 16px rgba(15,23,42,.06)
+    }
+    select:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(37,99,235,.13)}
+    .ad-preview{
+      margin-top:18px;
+      padding:20px;border-radius:24px;
+      background:linear-gradient(135deg,#0f172a,#1d4ed8);
+      color:#fff;box-shadow:0 18px 45px rgba(37,99,235,.24);
+      min-height:142px;
+      display:flex;gap:16px;align-items:flex-start
+    }
+    .ad-preview .icon{font-size:42px;line-height:1}
+    .ad-preview h3{margin:0 0 8px;font-size:23px;color:#fff}
+    .ad-preview p{margin:0;color:#eaf2ff;font-size:18px;font-weight:750}
+    .sentence{font-size:18px;font-weight:800;margin:0 0 12px;color:#111827}
+    .feedback{margin-top:10px;font-weight:900;min-height:24px}
+    .ok{color:var(--green)} .bad{color:var(--red)}
+    .toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;align-items:center}
+    .score-pill{
+      display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:10px 14px;
+      background:#ecfdf5;color:#166534;border:1px solid rgba(22,163,74,.22);font-weight:950
+    }
+    .progress-wrap{margin:18px 0 0;background:#e2e8f0;border-radius:999px;overflow:hidden;height:14px;border:1px solid rgba(148,163,184,.3)}
+    .progress{height:100%;width:0%;background:linear-gradient(90deg,#22c55e,#2563eb);transition:width .35s ease}
+    .prompt-card{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center}
+    .prompt-number{
+      min-width:36px;height:36px;border-radius:14px;background:#fff7ed;color:#c2410c;
+      display:grid;place-items:center;font-weight:950;border:1px solid rgba(249,115,22,.22)
+    }
+    .prompt-card p{margin:0;font-size:18px;font-weight:850;color:#0f172a}
+    .pill-help{font-size:13px;color:#475569;font-weight:800}
+    .mini-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
+    .mini{
+      border-radius:16px;background:#f8fafc;border:1px solid rgba(148,163,184,.25);
+      padding:10px 12px;font-weight:750;color:#334155
+    }
+    .foot{
+      text-align:center;color:#475569;font-weight:750;margin-top:32px
+    }
+    @media (max-width:860px){
+      .hero-inner{grid-template-columns:1fr}
+      .grid.two,.grid.three,.mini-list{grid-template-columns:1fr}
+      .section-head{display:block}
+      .prompt-card{grid-template-columns:1fr}
+    }
+    @media print{
+      .nav,.toolbar,button{display:none!important}
+      body{background:#fff}
+      .hero{border-radius:0;box-shadow:none}
+      section{box-shadow:none;break-inside:avoid;background:#fff}
+      .model{display:block!important}
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-badge">🏠 Español práctico · vivienda · cantidad · rutina</div>
+        <h1>Ejercicios interactivos</h1>
+        <p class="subtitle">Говорение, выбор правильного варианта и устная практика без полей для письменного ответа.</p>
+      </div>
+      <div class="hero-card">
+        <div class="big-icon">🗣️</div>
+        <p>Работайте вслух: отвечайте, выбирайте, проверяйте и повторяйте полными фразами.</p>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <nav class="nav" aria-label="Навигация по упражнениям">
+      <a href="#s1">1. Вопросы о квартире</a>
+      <a href="#s2">2. Объявление</a>
+      <a href="#s3">3. Исправь фразы</a>
+      <a href="#s4">4. Расскажи о себе</a>
+    </nav>
+
+    <section id="s1">
+      <div class="section-head">
+        <div class="section-title"><div class="num">1</div><h2>Ответьте на вопросы устно</h2></div>
+        <div class="small-note">Нажмите «Модель ответа», если нужна подсказка.</div>
+      </div>
+      <div class="instruction">Прочитайте вопрос, ответьте полным предложением на испанском и затем проверьте возможную модель ответа.</div>
+      <div class="grid two">
+        <article class="speak-card">
+          <p class="q">¿Cómo es tu piso?</p>
+          <div class="chip-row"><span class="chip">grande</span><span class="chip">pequeño</span><span class="chip">moderno</span><span class="chip">luminoso</span></div>
+          <button class="ghost" onclick="toggleModel(this)">Модель ответа</button>
+          <div class="model">Mi piso es pequeño, moderno y muy luminoso.</div>
+        </article>
+        <article class="speak-card">
+          <p class="q">¿En qué zona de la ciudad estás?</p>
+          <div class="chip-row"><span class="chip">en el centro</span><span class="chip">en las afueras</span><span class="chip">en una zona tranquila</span></div>
+          <button class="ghost" onclick="toggleModel(this)">Модель ответа</button>
+          <div class="model">Estoy en el centro de la ciudad, cerca del metro.</div>
+        </article>
+        <article class="speak-card">
+          <p class="q">¿Cuántas habitaciones tienes?</p>
+          <div class="chip-row"><span class="chip">una habitación</span><span class="chip">dos habitaciones</span><span class="chip">tres habitaciones</span></div>
+          <button class="ghost" onclick="toggleModel(this)">Модель ответа</button>
+          <div class="model">Tengo dos habitaciones, una cocina, un baño y un salón.</div>
+        </article>
+        <article class="speak-card">
+          <p class="q">Si buscas piso, ¿dónde puedes encontrar los anuncios?</p>
+          <div class="chip-row"><span class="chip">en Internet</span><span class="chip">en una aplicación</span><span class="chip">en una agencia</span></div>
+          <button class="ghost" onclick="toggleModel(this)">Модель ответа</button>
+          <div class="model">Puedo encontrar anuncios en Internet, en aplicaciones y en agencias inmobiliarias.</div>
+        </article>
+        <article class="speak-card">
+          <p class="q">¿Conoces alguna aplicación?</p>
+          <div class="chip-row"><span class="chip">Idealista</span><span class="chip">Fotocasa</span><span class="chip">Habitaclia</span></div>
+          <button class="ghost" onclick="toggleModel(this)">Модель ответа</button>
+          <div class="model">Sí, conozco Idealista y Fotocasa.</div>
+        </article>
+      </div>
+    </section>
+
+    <section id="s2">
+      <div class="section-head">
+        <div class="section-title"><div class="num">2</div><h2>Создайте объявление о квартире</h2></div>
+        <div class="small-note">Выберите варианты и прочитайте готовое объявление вслух.</div>
+      </div>
+      <div class="instruction">Выберите данные о квартире. Объявление появится автоматически. Полей для письменного ответа нет.</div>
+      <div class="grid three">
+        <div class="builder-card">
+          <label for="rooms">Количество комнат</label>
+          <select id="rooms" onchange="buildAd()">
+            <option value="un salón, una cocina, un baño y una habitación">un salón, una cocina, un baño y una habitación</option>
+            <option value="un salón, una cocina, un baño y dos habitaciones">un salón, una cocina, un baño y dos habitaciones</option>
+            <option value="un salón, una cocina, dos baños y tres habitaciones">un salón, una cocina, dos baños y tres habitaciones</option>
+          </select>
+        </div>
+        <div class="builder-card">
+          <label for="zone">Зона</label>
+          <select id="zone" onchange="buildAd()">
+            <option value="en el centro de la ciudad">en el centro de la ciudad</option>
+            <option value="en una zona tranquila">en una zona tranquila</option>
+            <option value="cerca de la universidad">cerca de la universidad</option>
+            <option value="en las afueras">en las afueras</option>
+          </select>
+        </div>
+        <div class="builder-card">
+          <label for="price">Цена аренды</label>
+          <select id="price" onchange="buildAd()">
+            <option value="450 euros al mes">450 euros al mes</option>
+            <option value="600 euros al mes">600 euros al mes</option>
+            <option value="750 euros al mes">750 euros al mes</option>
+            <option value="900 euros al mes">900 euros al mes</option>
+          </select>
+        </div>
+        <div class="builder-card">
+          <label for="desc1">Какой?</label>
+          <select id="desc1" onchange="buildAd()">
+            <option value="luminoso">luminoso</option>
+            <option value="grande">grande</option>
+            <option value="moderno">moderno</option>
+            <option value="tranquilo">tranquilo</option>
+          </select>
+        </div>
+        <div class="builder-card">
+          <label for="desc2">Дополнительная характеристика</label>
+          <select id="desc2" onchange="buildAd()">
+            <option value="cómodo">cómodo</option>
+            <option value="barato">barato</option>
+            <option value="bonito">bonito</option>
+            <option value="bien comunicado">bien comunicado</option>
+          </select>
+        </div>
+        <div class="builder-card">
+          <label for="verb">Начало объявления</label>
+          <select id="verb" onchange="buildAd()">
+            <option value="Se alquila">Se alquila</option>
+            <option value="Alquilo">Alquilo</option>
+            <option value="Busco compañero para">Busco compañero para</option>
+          </select>
+        </div>
+      </div>
+      <div class="ad-preview" aria-live="polite">
+        <div class="icon">📣</div>
+        <div>
+          <h3>Anuncio</h3>
+          <p id="adText"></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="s3">
+      <div class="section-head">
+        <div class="section-title"><div class="num">3</div><h2>Исправьте фразы</h2></div>
+        <div class="small-note">Тема: muy / mucho / muchos / poca / pocos / cuánto.</div>
+      </div>
+      <div class="instruction">Выберите правильный вариант. Затем нажмите «Проверить».</div>
+      <div class="grid two" id="correctionGrid"></div>
+      <div class="toolbar">
+        <button onclick="checkCorrections()">Проверить</button>
+        <button class="secondary" onclick="showAllCorrections()">Показать ответы</button>
+        <button class="ghost" onclick="resetCorrections()">Сбросить</button>
+        <span class="score-pill" id="score">Результат: 0 / 12</span>
+      </div>
+      <div class="progress-wrap" aria-hidden="true"><div class="progress" id="progress"></div></div>
+    </section>
+
+    <section id="s4">
+      <div class="section-head">
+        <div class="section-title"><div class="num">4</div><h2>Дополните фразы устно</h2></div>
+        <div class="small-note">Говорите правдивую информацию о себе.</div>
+      </div>
+      <div class="instruction">Прочитайте начало предложения и закончите его вслух. Ничего писать не нужно. Можно открыть пример.</div>
+      <div class="grid" id="oralPrompts">
+        <article class="prompt-card">
+          <div class="prompt-number">1</div>
+          <p>Los días laborables yo me levanto ______ y desayuno ______.</p>
+          <button class="ghost" onclick="toggleModel(this)">Пример</button>
+          <div class="model">Los días laborables yo me levanto a las siete y desayuno café con pan.</div>
+        </article>
+        <article class="prompt-card">
+          <div class="prompt-number">2</div>
+          <p>Los sábados me levanto ______ y desayuno ______.</p>
+          <button class="ghost" onclick="toggleModel(this)">Пример</button>
+          <div class="model">Los sábados me levanto tarde y desayuno huevos con café.</div>
+        </article>
+        <article class="prompt-card">
+          <div class="prompt-number">3</div>
+          <p>A mediodía como en ______ con ______.</p>
+          <button class="ghost" onclick="toggleModel(this)">Пример</button>
+          <div class="model">A mediodía como en casa con mi familia.</div>
+        </article>
+        <article class="prompt-card">
+          <div class="prompt-number">4</div>
+          <p>Por la tarde ______.</p>
+          <button class="ghost" onclick="toggleModel(this)">Пример</button>
+          <div class="model">Por la tarde trabajo, estudio español y camino por el parque.</div>
+        </article>
+        <article class="prompt-card">
+          <div class="prompt-number">5</div>
+          <p>Ceno a las ______ con ______ y no veo la tele hasta ______.</p>
+          <button class="ghost" onclick="toggleModel(this)">Пример</button>
+          <div class="model">Ceno a las ocho con mis amigos y no veo la tele hasta las diez.</div>
+        </article>
+      </div>
+      <div class="mini-list" aria-label="Подсказки">
+        <div class="mini">⏰ Время: a las siete, a las ocho, tarde, temprano.</div>
+        <div class="mini">🍽️ Еда: café, pan, fruta, huevos, arroz, carne.</div>
+        <div class="mini">👥 Компания: con mi familia, con mis amigos, solo/a.</div>
+        <div class="mini">📍 Место: en casa, en la universidad, en una cafetería.</div>
+      </div>
+    </section>
+
+    <p class="foot">Fin de la actividad · Устная практика + выбор правильного варианта</p>
+  </main>
+
+  <script>
+    const correctionItems = [
+      {
+        original:'1. Mi hija Rosalinda tiene muy compañeros de colegio.',
+        answer:'Mi hija Rosalinda tiene muchos compañeros de colegio.',
+        options:[
+          'Mi hija Rosalinda tiene muchas compañeros de colegio.',
+          'Mi hija Rosalinda tiene muchos compañeros de colegio.',
+          'Mi hija Rosalinda tiene muy compañeros de colegio.'
+        ]
+      },
+      {
+        original:'2. Todos los coches de F1 son mucho caros y muchos rápidos.',
+        answer:'Todos los coches de F1 son muy caros y muy rápidos.',
+        options:[
+          'Todos los coches de F1 son muy caros y muy rápidos.',
+          'Todos los coches de F1 son mucho caros y muy rápidos.',
+          'Todos los coches de F1 son muchos caros y muy rápidos.'
+        ]
+      },
+      {
+        original:'3. Los caracoles y las tortugas no son poco rápidos.',
+        answer:'Los caracoles y las tortugas son poco rápidos.',
+        options:[
+          'Los caracoles y las tortugas son pocos rápidos.',
+          'Los caracoles y las tortugas son poco rápidos.',
+          'Los caracoles y las tortugas son poca rápidos.'
+        ]
+      },
+      {
+        original:'4. Yo tengo poco dineros porque soy mucho generoso.',
+        answer:'Yo tengo poco dinero porque soy muy generoso.',
+        options:[
+          'Yo tengo poco dinero porque soy muy generoso.',
+          'Yo tengo pocos dinero porque soy muy generoso.',
+          'Yo tengo poco dinero porque soy mucho generoso.'
+        ]
+      },
+      {
+        original:'5. ¿Cuántas hermanos tienes?',
+        answer:'¿Cuántos hermanos tienes?',
+        options:[
+          '¿Cuántas hermanos tienes?',
+          '¿Cuánto hermanos tienes?',
+          '¿Cuántos hermanos tienes?'
+        ]
+      },
+      {
+        original:'6. Tengo muy hermanas y poca hermanos.',
+        answer:'Tengo muchas hermanas y pocos hermanos.',
+        options:[
+          'Tengo muchas hermanas y pocos hermanos.',
+          'Tengo muy hermanas y pocos hermanos.',
+          'Tengo muchas hermanas y poca hermanos.'
+        ]
+      },
+      {
+        original:'7. ¿Cuántas agua hay en esa botella?',
+        answer:'¿Cuánta agua hay en esa botella?',
+        options:[
+          '¿Cuánto agua hay en esa botella?',
+          '¿Cuántas agua hay en esa botella?',
+          '¿Cuánta agua hay en esa botella?'
+        ]
+      },
+      {
+        original:'8. Mi papá tiene muchas años y mi mamá es mucha joven.',
+        answer:'Mi papá tiene muchos años y mi mamá es muy joven.',
+        options:[
+          'Mi papá tiene muchos años y mi mamá es mucha joven.',
+          'Mi papá tiene muchos años y mi mamá es muy joven.',
+          'Mi papá tiene muchas años y mi mamá es muy joven.'
+        ]
+      },
+      {
+        original:'9. Me gusta mucha los móviles muchos caros.',
+        answer:'Me gustan mucho los móviles muy caros.',
+        options:[
+          'Me gustan mucho los móviles muy caros.',
+          'Me gusta mucho los móviles muy caros.',
+          'Me gustan mucha los móviles muchos caros.'
+        ]
+      },
+      {
+        original:'10. A mí no me gusta mucho comer muchas comida.',
+        answer:'A mí no me gusta mucho comer mucha comida.',
+        options:[
+          'A mí no me gusta mucha comer mucha comida.',
+          'A mí no me gusta mucho comer muchas comida.',
+          'A mí no me gusta mucho comer mucha comida.'
+        ]
+      },
+      {
+        original:'11. ¿Cuántos vale un café con leche?',
+        answer:'¿Cuánto vale un café con leche?',
+        options:[
+          '¿Cuántos vale un café con leche?',
+          '¿Cuánto vale un café con leche?',
+          '¿Cuánta vale un café con leche?'
+        ]
+      },
+      {
+        original:'12. En España hay pocas bosques.',
+        answer:'En España hay pocos bosques.',
+        options:[
+          'En España hay pocos bosques.',
+          'En España hay pocas bosques.',
+          'En España hay muy bosques.'
+        ]
+      }
+    ];
+
+    function toggleModel(btn){
+      const card = btn.closest('article') || btn.parentElement;
+      const model = card.querySelector('.model');
+      if(model) model.classList.toggle('show');
+    }
+
+    function buildAd(){
+      const verb = document.getElementById('verb').value;
+      const rooms = document.getElementById('rooms').value;
+      const zone = document.getElementById('zone').value;
+      const price = document.getElementById('price').value;
+      const desc1 = document.getElementById('desc1').value;
+      const desc2 = document.getElementById('desc2').value;
+      const text = `${verb} un piso ${desc1} y ${desc2}, ${zone}. Tiene ${rooms}. El alquiler cuesta ${price}.`;
+      document.getElementById('adText').textContent = text;
+    }
+
+    function renderCorrections(){
+      const grid = document.getElementById('correctionGrid');
+      grid.innerHTML = '';
+      correctionItems.forEach((item, idx)=>{
+        const card = document.createElement('article');
+        card.className = 'correction-card';
+        const opts = [`<option value="">Выберите правильный вариант</option>`].concat(
+          item.options.map(opt=>`<option value="${escapeHtml(opt)}">${escapeHtml(opt)}</option>`)
+        ).join('');
+        card.innerHTML = `
+          <p class="sentence">${escapeHtml(item.original)}</p>
+          <select data-answer="${escapeHtml(item.answer)}" aria-label="Исправление ${idx+1}">${opts}</select>
+          <div class="feedback" aria-live="polite"></div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function checkCorrections(){
+      let correct = 0;
+      document.querySelectorAll('#correctionGrid .correction-card').forEach(card=>{
+        const select = card.querySelector('select');
+        const fb = card.querySelector('.feedback');
+        if(select.value === select.dataset.answer){
+          correct++;
+          select.style.borderColor = '#16a34a';
+          select.style.background = '#ecfdf5';
+          fb.className = 'feedback ok';
+          fb.textContent = '✓ Правильно';
+        }else{
+          select.style.borderColor = '#dc2626';
+          select.style.background = '#fff1f2';
+          fb.className = 'feedback bad';
+          fb.textContent = '✗ Проверьте ещё раз';
+        }
+      });
+      updateScore(correct);
+    }
+
+    function updateScore(correct){
+      const total = correctionItems.length;
+      document.getElementById('score').textContent = `Результат: ${correct} / ${total}`;
+      document.getElementById('progress').style.width = `${Math.round((correct/total)*100)}%`;
+    }
+
+    function showAllCorrections(){
+      let correct = 0;
+      document.querySelectorAll('#correctionGrid .correction-card').forEach(card=>{
+        const select = card.querySelector('select');
+        select.value = select.dataset.answer;
+        select.style.borderColor = '#16a34a';
+        select.style.background = '#ecfdf5';
+        const fb = card.querySelector('.feedback');
+        fb.className = 'feedback ok';
+        fb.textContent = '✓ Ответ показан';
+        correct++;
+      });
+      updateScore(correct);
+    }
+
+    function resetCorrections(){
+      document.querySelectorAll('#correctionGrid .correction-card').forEach(card=>{
+        const select = card.querySelector('select');
+        select.value = '';
+        select.removeAttribute('style');
+        const fb = card.querySelector('.feedback');
+        fb.className = 'feedback';
+        fb.textContent = '';
+      });
+      updateScore(0);
+    }
+
+    function escapeHtml(str){
+      return String(str).replace(/[&<>"]/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[s]));
+    }
+
+    renderCorrections();
+    buildAd();
+  </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+# AI training crawlers — blocked (site is CC BY-NC-SA 4.0, non-commercial)
+User-agent: GPTBot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: FacebookBot
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: Amazonbot
+Disallow: /
+
+User-agent: Diffbot
+Disallow: /
+
+User-agent: Meta-ExternalAgent
+Disallow: /
+
+# Everyone else (search engines, AI search/answer bots like ChatGPT-User,
+# OAI-SearchBot, Claude-User, Claude-SearchBot, PerplexityBot) — allowed
+User-agent: *
+Allow: /
+
+Sitemap: https://ejercicios-interactivos.netlify.app/sitemap.xml

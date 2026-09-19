@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pretérito Indefinido de Indicativo — ejercicios interactivos</title>
+  <style>
+    :root{
+      --bg1:#fff7ed; --bg2:#eef2ff; --ink:#1f2937; --muted:#64748b;
+      --card:#ffffff; --accent:#7c3aed; --accent2:#f97316; --accent3:#0f766e;
+      --ok:#15803d; --bad:#b91c1c; --soft:#f8fafc; --line:#e5e7eb;
+      --shadow:0 18px 45px rgba(30, 41, 59, .13);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; color:var(--ink); font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      background:
+        radial-gradient(circle at 10% 10%, rgba(249,115,22,.18), transparent 30%),
+        radial-gradient(circle at 92% 5%, rgba(124,58,237,.20), transparent 28%),
+        linear-gradient(135deg, var(--bg1), var(--bg2));
+      line-height:1.55;
+    }
+    .hero{
+      max-width:1180px; margin:0 auto; padding:52px 22px 26px;
+      display:grid; grid-template-columns:1.5fr .8fr; gap:26px; align-items:center;
+    }
+    .hero-card{
+      background:rgba(255,255,255,.78); backdrop-filter: blur(12px); border:1px solid rgba(255,255,255,.75);
+      border-radius:30px; box-shadow:var(--shadow); padding:34px;
+    }
+    h1{font-size:clamp(2rem,4vw,4rem); line-height:1.03; margin:0 0 12px; letter-spacing:-.04em}
+    .subtitle{font-size:1.12rem; color:#475569; margin:0; max-width:760px}
+    .badge-row{display:flex; flex-wrap:wrap; gap:10px; margin:22px 0 0}
+    .badge{padding:8px 13px; border-radius:999px; background:#fff; border:1px solid #e2e8f0; font-weight:700; color:#4338ca; font-size:.92rem}
+    .illustration{
+      min-height:270px; border-radius:30px; position:relative; overflow:hidden; box-shadow:var(--shadow);
+      background:linear-gradient(145deg,#7c3aed,#f97316);
+      display:flex; align-items:center; justify-content:center; color:white; isolation:isolate;
+    }
+    .illustration:before,.illustration:after{content:""; position:absolute; border-radius:999px; background:rgba(255,255,255,.18)}
+    .illustration:before{width:170px;height:170px;left:-35px;top:-35px}.illustration:after{width:230px;height:230px;right:-80px;bottom:-65px}
+    .clock{font-size:7.5rem; z-index:2; filter:drop-shadow(0 12px 25px rgba(0,0,0,.18))}
+    .container{max-width:1180px; margin:0 auto; padding:0 22px 70px}
+    section{
+      background:rgba(255,255,255,.90); border:1px solid rgba(255,255,255,.85); border-radius:26px;
+      box-shadow:var(--shadow); padding:26px; margin:24px 0; overflow:hidden;
+    }
+    h2{font-size:clamp(1.45rem,2.5vw,2.1rem); margin:0 0 16px; letter-spacing:-.025em; display:flex; align-items:center; gap:10px}
+    h3{margin:20px 0 10px; color:#334155}
+    .note{background:#f8fafc; border-left:6px solid var(--accent); padding:14px 16px; border-radius:16px; color:#475569; margin:14px 0}
+    .grid-3{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px}
+    .rule-card{background:linear-gradient(180deg,#ffffff,#f8fafc); border:1px solid #e2e8f0; border-radius:20px; padding:16px}
+    .rule-card strong{display:block; font-size:1.08rem; color:#7c2d12; margin-bottom:7px}
+    table{width:100%; border-collapse:separate; border-spacing:0; overflow:hidden; border-radius:18px; border:1px solid #e2e8f0; background:#fff; margin:12px 0}
+    th,td{padding:12px 14px; text-align:left; border-bottom:1px solid #e2e8f0}
+    th{background:#f1f5f9; color:#334155}
+    tr:last-child td{border-bottom:none}
+    .mini{font-size:.94rem; color:#64748b}
+    .exercise-header{display:flex; align-items:flex-start; justify-content:space-between; gap:16px; margin-bottom:16px}
+    .instruction{color:#475569; margin:0; max-width:800px}
+    .pill{background:#eef2ff; color:#4338ca; border:1px solid #c7d2fe; padding:8px 12px; border-radius:999px; font-weight:800; white-space:nowrap}
+    .drag-layout{display:grid; grid-template-columns:1.25fr .8fr; gap:18px; align-items:start}
+    .sentences{display:grid; gap:12px}
+    .sentence-card{background:#fff; border:1px solid #e2e8f0; border-radius:18px; padding:14px 15px; box-shadow:0 7px 20px rgba(15,23,42,.05)}
+    .sentence-card.correct{border-color:rgba(21,128,61,.65); background:#f0fdf4}
+    .sentence-card.incorrect{border-color:rgba(185,28,28,.55); background:#fef2f2}
+    .blank{
+      min-width:122px; min-height:42px; display:inline-flex; align-items:center; justify-content:center; vertical-align:middle;
+      border:2px dashed #a78bfa; border-radius:13px; margin:0 6px; background:#faf5ff; padding:4px 7px;
+      transition:.18s ease;
+    }
+    .blank.hover{transform:scale(1.04); background:#ede9fe; border-color:#7c3aed}
+    .bank{position:sticky; top:16px; background:linear-gradient(180deg,#fff,#f8fafc); border:1px solid #e2e8f0; border-radius:22px; padding:15px; min-height:140px}
+    .bank-title{font-weight:900; color:#334155; margin:0 0 10px}
+    .cards{display:flex; flex-wrap:wrap; gap:9px}
+    .drag-card{
+      user-select:none; cursor:grab; background:#ffffff; border:1px solid #cbd5e1; border-radius:999px;
+      padding:9px 13px; font-weight:850; box-shadow:0 7px 16px rgba(15,23,42,.07); transition:.15s ease; color:#1e293b;
+    }
+    .drag-card:active{cursor:grabbing; transform:scale(.98)}
+    .drag-card.selected{outline:3px solid rgba(249,115,22,.38); border-color:#f97316; background:#fff7ed}
+    .translation-grid{display:grid; grid-template-columns:1.05fr .95fr; gap:18px; align-items:start}
+    .translation-row{display:grid; grid-template-columns:1fr; gap:8px}
+    .russian-slot{min-height:58px; border:2px dashed #0f766e; background:#ecfdf5; border-radius:16px; padding:8px; display:flex; align-items:center}
+    .russian-slot.hover{background:#ccfbf1; transform:scale(1.015)}
+    .select-list{display:grid; gap:13px}
+    .select-card{background:#fff; border:1px solid #e2e8f0; border-radius:18px; padding:14px; display:flex; align-items:center; gap:8px; flex-wrap:wrap; box-shadow:0 7px 20px rgba(15,23,42,.05)}
+    select{font:inherit; font-weight:800; color:#1e293b; border:2px solid #cbd5e1; background:#fff; border-radius:12px; padding:8px 12px; cursor:pointer}
+    select.correct{border-color:var(--ok); background:#f0fdf4} select.incorrect{border-color:var(--bad); background:#fef2f2}
+    .buttons{display:flex; flex-wrap:wrap; gap:10px; margin-top:18px; align-items:center}
+    button{border:none; border-radius:14px; padding:11px 18px; font-weight:900; cursor:pointer; font-size:1rem; box-shadow:0 10px 20px rgba(15,23,42,.12); transition:.15s ease}
+    button:hover{transform:translateY(-1px)}
+    .check{background:#7c3aed; color:#fff}.reset{background:#fff; color:#334155; border:1px solid #cbd5e1}
+    .score{font-weight:900; color:#0f766e; margin-left:4px}
+    .legend{display:flex; flex-wrap:wrap; gap:9px; margin-top:12px}.legend span{background:#f8fafc; border:1px solid #e2e8f0; border-radius:999px; padding:7px 10px; color:#475569; font-size:.9rem}
+
+    .irregular-list-block{margin-top:22px; padding:20px; border-radius:24px; background:linear-gradient(135deg,#fff7ed,#eef2ff); border:1px solid #e2e8f0; box-shadow:0 12px 30px rgba(15,23,42,.07)}
+    .irregular-list-block h3{margin-top:0; font-size:1.35rem; color:#1e293b}
+    .verb-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; margin-top:14px}
+    .verb-chip{position:relative; display:flex; flex-direction:column; gap:3px; align-items:flex-start; min-height:76px; padding:13px 14px; border-radius:18px; border:1px solid #dbeafe; background:rgba(255,255,255,.92); box-shadow:0 8px 18px rgba(15,23,42,.06); cursor:help; transition:.16s ease; outline:none}
+    .verb-chip strong{font-size:1.04rem; color:#7c2d12}
+    .verb-chip small{font-size:.84rem; color:#64748b}
+    .verb-chip:hover,.verb-chip:focus{transform:translateY(-2px); border-color:#a78bfa; box-shadow:0 14px 26px rgba(124,58,237,.14)}
+    .verb-tooltip{position:absolute; left:50%; bottom:calc(100% + 10px); width:min(270px,86vw); transform:translateX(-50%) translateY(6px); opacity:0; visibility:hidden; pointer-events:none; z-index:50; display:grid; gap:4px; padding:12px 13px; border-radius:16px; background:#111827; color:#fff; box-shadow:0 18px 38px rgba(15,23,42,.25); font-size:.92rem; line-height:1.35; transition:.16s ease}
+    .verb-tooltip:after{content:""; position:absolute; top:100%; left:50%; transform:translateX(-50%); border-width:8px 8px 0 8px; border-style:solid; border-color:#111827 transparent transparent transparent}
+    .verb-tooltip span{display:block}.verb-tooltip b{color:#fde68a; margin-right:5px}
+    .verb-chip:hover .verb-tooltip,.verb-chip:focus .verb-tooltip{opacity:1; visibility:visible; transform:translateX(-50%) translateY(0)}
+    @media(max-width:900px){.hero{grid-template-columns:1fr}.drag-layout,.translation-grid,.grid-3{grid-template-columns:1fr}.bank{position:static}.hero-card{padding:26px}.clock{font-size:5.8rem}}
+    @media(max-width:520px){.verb-grid{grid-template-columns:1fr 1fr}.verb-tooltip{left:0; transform:translateX(0) translateY(6px)}.verb-chip:hover .verb-tooltip,.verb-chip:focus .verb-tooltip{transform:translateX(0) translateY(0)}}
+    @media print{body{background:#fff}.hero,.container{max-width:100%;padding:0}.illustration,.buttons,.bank{display:none}section,.hero-card{box-shadow:none;border:1px solid #ddd;break-inside:avoid}}
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-card">
+      <h1>Pretérito Indefinido de Indicativo</h1>
+      <p class="subtitle">Formación, verbos regulares e irregulares, traducción y práctica interactiva con formas verbales.</p>
+      <div class="badge-row">
+        <span class="badge">verbos regulares</span><span class="badge">verbos irregulares</span><span class="badge">arrastrar y soltar</span><span class="badge">desplegables</span>
+      </div>
+    </div>
+    <div class="illustration" aria-hidden="true"><div class="clock">⏳</div></div>
+  </header>
+
+  <main class="container">
+    <section>
+      <h2>📘 Reglas de formación: verbos regulares</h2>
+      <p>El <strong>Pretérito Indefinido</strong> presenta acciones terminadas en un momento pasado concreto: <em>ayer</em>, <em>anoche</em>, <em>la semana pasada</em>, <em>en 2020</em>, <em>hace dos días</em>.</p>
+      <div class="grid-3">
+        <div class="rule-card"><strong>-AR: hablar</strong>yo hablé<br>tú hablaste<br>él/ella/usted habló<br>nosotros/as hablamos<br>vosotros/as hablasteis<br>ellos/ellas/ustedes hablaron</div>
+        <div class="rule-card"><strong>-ER: comer</strong>yo comí<br>tú comiste<br>él/ella/usted comió<br>nosotros/as comimos<br>vosotros/as comisteis<br>ellos/ellas/ustedes comieron</div>
+        <div class="rule-card"><strong>-IR: vivir</strong>yo viví<br>tú viviste<br>él/ella/usted vivió<br>nosotros/as vivimos<br>vosotros/as vivisteis<br>ellos/ellas/ustedes vivieron</div>
+      </div>
+      <div class="note">En los verbos regulares, las formas de <strong>-ER</strong> e <strong>-IR</strong> tienen las mismas terminaciones. Las tildes aparecen en <strong>yo</strong> y en <strong>él/ella/usted</strong>: <em>hablé, habló, comí, comió, viví, vivió</em>.</div>
+    </section>
+
+    <section id="regular-section">
+      <div class="exercise-header">
+        <div><h2>🧩 Ejercicio 1. Verbos regulares</h2><p class="instruction">Arrastra cada forma verbal y suéltala en el espacio correcto.</p></div>
+        <div class="pill">Regular</div>
+      </div>
+      <div class="drag-layout"><div class="sentences" id="regular-sentences"></div><aside class="bank"><p class="bank-title">Formas disponibles</p><div class="cards" id="regular-bank"></div></aside></div>
+      <div class="buttons"><button class="check" data-check="regular">Revisar</button><button class="reset" data-reset="regular">Reiniciar</button><span class="score" id="regular-score"></span></div>
+    </section>
+
+    <section>
+      <h2>📙 Reglas de formación: verbos irregulares</h2>
+      <p>Muchos verbos frecuentes cambian la raíz o tienen formas propias. En muchos de ellos se usan terminaciones especiales: <strong>-e, -iste, -o, -imos, -isteis, -ieron</strong>. En los verbos con raíz en <strong>j</strong>, la tercera persona plural termina en <strong>-eron</strong>: <em>dijeron, trajeron, condujeron</em>.</p>
+      <table>
+        <thead><tr><th>Grupo</th><th>Ejemplos</th><th>Observación</th></tr></thead>
+        <tbody>
+          <tr><td>ser / ir</td><td>fui, fuiste, fue, fuimos, fuisteis, fueron</td><td>Las dos conjugaciones son iguales; el contexto indica el verbo.</td></tr>
+          <tr><td>estar, andar, tener</td><td>estuve, anduve, tuve</td><td>Raíces: estuv-, anduv-, tuv-.</td></tr>
+          <tr><td>hacer, poner, poder, querer, venir, saber</td><td>hice, puse, pude, quise, vine, supe</td><td>En tercera persona: <em>hizo</em>.</td></tr>
+          <tr><td>decir, traer, conducir</td><td>dije, traje, conduje</td><td>Tercera plural: <em>dijeron, trajeron, condujeron</em>.</td></tr>
+          <tr><td>dar / ver</td><td>di, diste, dio; vi, viste, vio</td><td>No llevan tilde en <em>dio</em> ni en <em>vio</em>.</td></tr>
+          <tr><td>verbos -IR con cambio vocálico</td><td>dormir → durmió/durmieron; pedir → pidió/pidieron</td><td>El cambio aparece en tercera persona singular y plural.</td></tr>
+          <tr><td>-car, -gar, -zar</td><td>busqué, llegué, empecé</td><td>Cambio ortográfico solo en la forma <strong>yo</strong>.</td></tr>
+          <tr><td>leer, oír, creer, caer</td><td>leyó/leyeron, oyó/oyeron, creyó/creyeron, cayó/cayeron</td><td>En tercera persona aparece <strong>y</strong>.</td></tr>
+        </tbody>
+      </table>
+      <div class="legend"><span>estar → estuve</span><span>andar → anduve</span><span>hacer → hice / hizo</span><span>poner → puse</span><span>ser / ir → fui</span><span>decir → dije</span></div>
+      <div class="irregular-list-block">
+        <h3>Listado de consulta</h3>
+        <p class="mini">Pasa el cursor por cada verbo para ver sus formas en Pretérito Indefinido.</p>
+        <div class="verb-grid">
+          <article class="verb-chip" tabindex="0" aria-label="advertir: formas en Pretérito Indefinido">
+            <strong>advertir</strong>
+            <small>предупреждать</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> advertí</span><span><b>tú</b> advertiste</span><span><b>él/ella/usted</b> advirtió</span><span><b>nosotros/as</b> advertimos</span><span><b>vosotros/as</b> advertisteis</span><span><b>ellos/ellas/ustedes</b> advirtieron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="andar: formas en Pretérito Indefinido">
+            <strong>andar</strong>
+            <small>ходить</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> anduve</span><span><b>tú</b> anduviste</span><span><b>él/ella/usted</b> anduvo</span><span><b>nosotros/as</b> anduvimos</span><span><b>vosotros/as</b> anduvisteis</span><span><b>ellos/ellas/ustedes</b> anduvieron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="atraer: formas en Pretérito Indefinido">
+            <strong>atraer</strong>
+            <small>привлекать</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> atraje</span><span><b>tú</b> atrajiste</span><span><b>él/ella/usted</b> atrajo</span><span><b>nosotros/as</b> atrajimos</span><span><b>vosotros/as</b> atrajisteis</span><span><b>ellos/ellas/ustedes</b> atrajeron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="averiguar: formas en Pretérito Indefinido">
+            <strong>averiguar</strong>
+            <small>выяснять</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> averigüé</span><span><b>tú</b> averiguaste</span><span><b>él/ella/usted</b> averiguó</span><span><b>nosotros/as</b> averiguamos</span><span><b>vosotros/as</b> averiguasteis</span><span><b>ellos/ellas/ustedes</b> averiguaron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="buscar: formas en Pretérito Indefinido">
+            <strong>buscar</strong>
+            <small>искать</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> busqué</span><span><b>tú</b> buscaste</span><span><b>él/ella/usted</b> buscó</span><span><b>nosotros/as</b> buscamos</span><span><b>vosotros/as</b> buscasteis</span><span><b>ellos/ellas/ustedes</b> buscaron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="caber: formas en Pretérito Indefinido">
+            <strong>caber</strong>
+            <small>помещаться</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> cupe</span><span><b>tú</b> cupiste</span><span><b>él/ella/usted</b> cupo</span><span><b>nosotros/as</b> cupimos</span><span><b>vosotros/as</b> cupisteis</span><span><b>ellos/ellas/ustedes</b> cupieron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="caer: formas en Pretérito Indefinido">
+            <strong>caer</strong>
+            <small>падать</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> caí</span><span><b>tú</b> caíste</span><span><b>él/ella/usted</b> cayó</span><span><b>nosotros/as</b> caímos</span><span><b>vosotros/as</b> caísteis</span><span><b>ellos/ellas/ustedes</b> cayeron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="conducir: formas en Pretérito Indefinido">
+            <strong>conducir</strong>
+            <small>водить</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> conduje</span><span><b>tú</b> condujiste</span><span><b>él/ella/usted</b> condujo</span><span><b>nosotros/as</b> condujimos</span><span><b>vosotros/as</b> condujisteis</span><span><b>ellos/ellas/ustedes</b> condujeron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="construir: formas en Pretérito Indefinido">
+            <strong>construir</strong>
+            <small>строить</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> construí</span><span><b>tú</b> construiste</span><span><b>él/ella/usted</b> construyó</span><span><b>nosotros/as</b> construimos</span><span><b>vosotros/as</b> construisteis</span><span><b>ellos/ellas/ustedes</b> construyeron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="contribuir: formas en Pretérito Indefinido">
+            <strong>contribuir</strong>
+            <small>способствовать</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> contribuí</span><span><b>tú</b> contribuiste</span><span><b>él/ella/usted</b> contribuyó</span><span><b>nosotros/as</b> contribuimos</span><span><b>vosotros/as</b> contribuisteis</span><span><b>ellos/ellas/ustedes</b> contribuyeron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="convertir: formas en Pretérito Indefinido">
+            <strong>convertir</strong>
+            <small>превращать</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> convertí</span><span><b>tú</b> convertiste</span><span><b>él/ella/usted</b> convirtió</span><span><b>nosotros/as</b> convertimos</span><span><b>vosotros/as</b> convertisteis</span><span><b>ellos/ellas/ustedes</b> convirtieron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="creer: formas en Pretérito Indefinido">
+            <strong>creer</strong>
+            <small>верить</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> creí</span><span><b>tú</b> creíste</span><span><b>él/ella/usted</b> creyó</span><span><b>nosotros/as</b> creímos</span><span><b>vosotros/as</b> creísteis</span><span><b>ellos/ellas/ustedes</b> creyeron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="dar: formas en Pretérito Indefinido">
+            <strong>dar</strong>
+            <small>давать</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> di</span><span><b>tú</b> diste</span><span><b>él/ella/usted</b> dio</span><span><b>nosotros/as</b> dimos</span><span><b>vosotros/as</b> disteis</span><span><b>ellos/ellas/ustedes</b> dieron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="decir: formas en Pretérito Indefinido">
+            <strong>decir</strong>
+            <small>говорить</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> dije</span><span><b>tú</b> dijiste</span><span><b>él/ella/usted</b> dijo</span><span><b>nosotros/as</b> dijimos</span><span><b>vosotros/as</b> dijisteis</span><span><b>ellos/ellas/ustedes</b> dijeron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="deducir: formas en Pretérito Indefinido">
+            <strong>deducir</strong>
+            <small>делать вывод</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> deduje</span><span><b>tú</b> dedujiste</span><span><b>él/ella/usted</b> dedujo</span><span><b>nosotros/as</b> dedujimos</span><span><b>vosotros/as</b> dedujisteis</span><span><b>ellos/ellas/ustedes</b> dedujeron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="destruir: formas en Pretérito Indefinido">
+            <strong>destruir</strong>
+            <small>разрушать</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> destruí</span><span><b>tú</b> destruiste</span><span><b>él/ella/usted</b> destruyó</span><span><b>nosotros/as</b> destruimos</span><span><b>vosotros/as</b> destruisteis</span><span><b>ellos/ellas/ustedes</b> destruyeron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="dormir: formas en Pretérito Indefinido">
+            <strong>dormir</strong>
+            <small>спать</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> dormí</span><span><b>tú</b> dormiste</span><span><b>él/ella/usted</b> durmió</span><span><b>nosotros/as</b> dormimos</span><span><b>vosotros/as</b> dormisteis</span><span><b>ellos/ellas/ustedes</b> durmieron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="elegir: formas en Pretérito Indefinido">
+            <strong>elegir</strong>
+            <small>выбирать</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> elegí</span><span><b>tú</b> elegiste</span><span><b>él/ella/usted</b> eligió</span><span><b>nosotros/as</b> elegimos</span><span><b>vosotros/as</b> elegisteis</span><span><b>ellos/ellas/ustedes</b> eligieron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="empezar: formas en Pretérito Indefinido">
+            <strong>empezar</strong>
+            <small>начинать</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> empecé</span><span><b>tú</b> empezaste</span><span><b>él/ella/usted</b> empezó</span><span><b>nosotros/as</b> empezamos</span><span><b>vosotros/as</b> empezasteis</span><span><b>ellos/ellas/ustedes</b> empezaron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="estar: formas en Pretérito Indefinido">
+            <strong>estar</strong>
+            <small>быть</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> estuve</span><span><b>tú</b> estuviste</span><span><b>él/ella/usted</b> estuvo</span><span><b>nosotros/as</b> estuvimos</span><span><b>vosotros/as</b> estuvisteis</span><span><b>ellos/ellas/ustedes</b> estuvieron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="freír: formas en Pretérito Indefinido">
+            <strong>freír</strong>
+            <small>жарить</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> freí</span><span><b>tú</b> freíste</span><span><b>él/ella/usted</b> frió</span><span><b>nosotros/as</b> freímos</span><span><b>vosotros/as</b> freísteis</span><span><b>ellos/ellas/ustedes</b> frieron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="haber: formas en Pretérito Indefinido">
+            <strong>haber</strong>
+            <small>иметься</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> hube</span><span><b>tú</b> hubiste</span><span><b>él/ella/usted</b> hubo</span><span><b>nosotros/as</b> hubimos</span><span><b>vosotros/as</b> hubisteis</span><span><b>ellos/ellas/ustedes</b> hubieron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="hacer: formas en Pretérito Indefinido">
+            <strong>hacer</strong>
+            <small>делать</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> hice</span><span><b>tú</b> hiciste</span><span><b>él/ella/usted</b> hizo</span><span><b>nosotros/as</b> hicimos</span><span><b>vosotros/as</b> hicisteis</span><span><b>ellos/ellas/ustedes</b> hicieron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="huir: formas en Pretérito Indefinido">
+            <strong>huir</strong>
+            <small>убегать</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> huí</span><span><b>tú</b> huiste</span><span><b>él/ella/usted</b> huyó</span><span><b>nosotros/as</b> huimos</span><span><b>vosotros/as</b> huisteis</span><span><b>ellos/ellas/ustedes</b> huyeron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="impedir: formas en Pretérito Indefinido">
+            <strong>impedir</strong>
+            <small>мешать</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> impedí</span><span><b>tú</b> impediste</span><span><b>él/ella/usted</b> impidió</span><span><b>nosotros/as</b> impedimos</span><span><b>vosotros/as</b> impedisteis</span><span><b>ellos/ellas/ustedes</b> impidieron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="incluir: formas en Pretérito Indefinido">
+            <strong>incluir</strong>
+            <small>включать</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> incluí</span><span><b>tú</b> incluiste</span><span><b>él/ella/usted</b> incluyó</span><span><b>nosotros/as</b> incluimos</span><span><b>vosotros/as</b> incluisteis</span><span><b>ellos/ellas/ustedes</b> incluyeron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="inducir: formas en Pretérito Indefinido">
+            <strong>inducir</strong>
+            <small>побуждать</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> induje</span><span><b>tú</b> indujiste</span><span><b>él/ella/usted</b> indujo</span><span><b>nosotros/as</b> indujimos</span><span><b>vosotros/as</b> indujisteis</span><span><b>ellos/ellas/ustedes</b> indujeron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="influir: formas en Pretérito Indefinido">
+            <strong>influir</strong>
+            <small>влиять</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> influí</span><span><b>tú</b> influiste</span><span><b>él/ella/usted</b> influyó</span><span><b>nosotros/as</b> influimos</span><span><b>vosotros/as</b> influisteis</span><span><b>ellos/ellas/ustedes</b> influyeron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="introducir: formas en Pretérito Indefinido">
+            <strong>introducir</strong>
+            <small>вводить</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> introduje</span><span><b>tú</b> introdujiste</span><span><b>él/ella/usted</b> introdujo</span><span><b>nosotros/as</b> introdujimos</span><span><b>vosotros/as</b> introdujisteis</span><span><b>ellos/ellas/ustedes</b> introdujeron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="invertir: formas en Pretérito Indefinido">
+            <strong>invertir</strong>
+            <small>инвестировать</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> invertí</span><span><b>tú</b> invertiste</span><span><b>él/ella/usted</b> invirtió</span><span><b>nosotros/as</b> invertimos</span><span><b>vosotros/as</b> invertisteis</span><span><b>ellos/ellas/ustedes</b> invirtieron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="ir: formas en Pretérito Indefinido">
+            <strong>ir</strong>
+            <small>идти</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> fui</span><span><b>tú</b> fuiste</span><span><b>él/ella/usted</b> fue</span><span><b>nosotros/as</b> fuimos</span><span><b>vosotros/as</b> fuisteis</span><span><b>ellos/ellas/ustedes</b> fueron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="llegar: formas en Pretérito Indefinido">
+            <strong>llegar</strong>
+            <small>прибывать</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> llegué</span><span><b>tú</b> llegaste</span><span><b>él/ella/usted</b> llegó</span><span><b>nosotros/as</b> llegamos</span><span><b>vosotros/as</b> llegasteis</span><span><b>ellos/ellas/ustedes</b> llegaron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="leer: formas en Pretérito Indefinido">
+            <strong>leer</strong>
+            <small>читать</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> leí</span><span><b>tú</b> leíste</span><span><b>él/ella/usted</b> leyó</span><span><b>nosotros/as</b> leímos</span><span><b>vosotros/as</b> leísteis</span><span><b>ellos/ellas/ustedes</b> leyeron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="medir: formas en Pretérito Indefinido">
+            <strong>medir</strong>
+            <small>измерять</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> medí</span><span><b>tú</b> mediste</span><span><b>él/ella/usted</b> midió</span><span><b>nosotros/as</b> medimos</span><span><b>vosotros/as</b> medisteis</span><span><b>ellos/ellas/ustedes</b> midieron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="mentir: formas en Pretérito Indefinido">
+            <strong>mentir</strong>
+            <small>лгать</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> mentí</span><span><b>tú</b> mentiste</span><span><b>él/ella/usted</b> mintió</span><span><b>nosotros/as</b> mentimos</span><span><b>vosotros/as</b> mentisteis</span><span><b>ellos/ellas/ustedes</b> mintieron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="morir: formas en Pretérito Indefinido">
+            <strong>morir</strong>
+            <small>умирать</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> morí</span><span><b>tú</b> moriste</span><span><b>él/ella/usted</b> murió</span><span><b>nosotros/as</b> morimos</span><span><b>vosotros/as</b> moristeis</span><span><b>ellos/ellas/ustedes</b> murieron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="oír: formas en Pretérito Indefinido">
+            <strong>oír</strong>
+            <small>слышать</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> oí</span><span><b>tú</b> oíste</span><span><b>él/ella/usted</b> oyó</span><span><b>nosotros/as</b> oímos</span><span><b>vosotros/as</b> oísteis</span><span><b>ellos/ellas/ustedes</b> oyeron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="pagar: formas en Pretérito Indefinido">
+            <strong>pagar</strong>
+            <small>платить</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> pagué</span><span><b>tú</b> pagaste</span><span><b>él/ella/usted</b> pagó</span><span><b>nosotros/as</b> pagamos</span><span><b>vosotros/as</b> pagasteis</span><span><b>ellos/ellas/ustedes</b> pagaron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="pedir: formas en Pretérito Indefinido">
+            <strong>pedir</strong>
+            <small>просить</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> pedí</span><span><b>tú</b> pediste</span><span><b>él/ella/usted</b> pidió</span><span><b>nosotros/as</b> pedimos</span><span><b>vosotros/as</b> pedisteis</span><span><b>ellos/ellas/ustedes</b> pidieron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="poner: formas en Pretérito Indefinido">
+            <strong>poner</strong>
+            <small>класть</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> puse</span><span><b>tú</b> pusiste</span><span><b>él/ella/usted</b> puso</span><span><b>nosotros/as</b> pusimos</span><span><b>vosotros/as</b> pusisteis</span><span><b>ellos/ellas/ustedes</b> pusieron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="poder: formas en Pretérito Indefinido">
+            <strong>poder</strong>
+            <small>мочь</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> pude</span><span><b>tú</b> pudiste</span><span><b>él/ella/usted</b> pudo</span><span><b>nosotros/as</b> pudimos</span><span><b>vosotros/as</b> pudisteis</span><span><b>ellos/ellas/ustedes</b> pudieron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="preferir: formas en Pretérito Indefinido">
+            <strong>preferir</strong>
+            <small>предпочитать</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> preferí</span><span><b>tú</b> preferiste</span><span><b>él/ella/usted</b> prefirió</span><span><b>nosotros/as</b> preferimos</span><span><b>vosotros/as</b> preferisteis</span><span><b>ellos/ellas/ustedes</b> prefirieron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="predecir: formas en Pretérito Indefinido">
+            <strong>predecir</strong>
+            <small>предсказывать</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> predije</span><span><b>tú</b> predijiste</span><span><b>él/ella/usted</b> predijo</span><span><b>nosotros/as</b> predijimos</span><span><b>vosotros/as</b> predijisteis</span><span><b>ellos/ellas/ustedes</b> predijeron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="producir: formas en Pretérito Indefinido">
+            <strong>producir</strong>
+            <small>производить</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> produje</span><span><b>tú</b> produjiste</span><span><b>él/ella/usted</b> produjo</span><span><b>nosotros/as</b> produjimos</span><span><b>vosotros/as</b> produjisteis</span><span><b>ellos/ellas/ustedes</b> produjeron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="querer: formas en Pretérito Indefinido">
+            <strong>querer</strong>
+            <small>хотеть</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> quise</span><span><b>tú</b> quisiste</span><span><b>él/ella/usted</b> quiso</span><span><b>nosotros/as</b> quisimos</span><span><b>vosotros/as</b> quisisteis</span><span><b>ellos/ellas/ustedes</b> quisieron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="reír: formas en Pretérito Indefinido">
+            <strong>reír</strong>
+            <small>смеяться</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> reí</span><span><b>tú</b> reíste</span><span><b>él/ella/usted</b> rió</span><span><b>nosotros/as</b> reímos</span><span><b>vosotros/as</b> reísteis</span><span><b>ellos/ellas/ustedes</b> rieron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="repetir: formas en Pretérito Indefinido">
+            <strong>repetir</strong>
+            <small>повторять</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> repetí</span><span><b>tú</b> repetiste</span><span><b>él/ella/usted</b> repitió</span><span><b>nosotros/as</b> repetimos</span><span><b>vosotros/as</b> repetisteis</span><span><b>ellos/ellas/ustedes</b> repitieron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="saber: formas en Pretérito Indefinido">
+            <strong>saber</strong>
+            <small>знать</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> supe</span><span><b>tú</b> supiste</span><span><b>él/ella/usted</b> supo</span><span><b>nosotros/as</b> supimos</span><span><b>vosotros/as</b> supisteis</span><span><b>ellos/ellas/ustedes</b> supieron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="sacar: formas en Pretérito Indefinido">
+            <strong>sacar</strong>
+            <small>вынимать</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> saqué</span><span><b>tú</b> sacaste</span><span><b>él/ella/usted</b> sacó</span><span><b>nosotros/as</b> sacamos</span><span><b>vosotros/as</b> sacasteis</span><span><b>ellos/ellas/ustedes</b> sacaron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="seguir: formas en Pretérito Indefinido">
+            <strong>seguir</strong>
+            <small>следовать</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> seguí</span><span><b>tú</b> seguiste</span><span><b>él/ella/usted</b> siguió</span><span><b>nosotros/as</b> seguimos</span><span><b>vosotros/as</b> seguisteis</span><span><b>ellos/ellas/ustedes</b> siguieron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="sentir: formas en Pretérito Indefinido">
+            <strong>sentir</strong>
+            <small>чувствовать</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> sentí</span><span><b>tú</b> sentiste</span><span><b>él/ella/usted</b> sintió</span><span><b>nosotros/as</b> sentimos</span><span><b>vosotros/as</b> sentisteis</span><span><b>ellos/ellas/ustedes</b> sintieron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="ser: formas en Pretérito Indefinido">
+            <strong>ser</strong>
+            <small>быть</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> fui</span><span><b>tú</b> fuiste</span><span><b>él/ella/usted</b> fue</span><span><b>nosotros/as</b> fuimos</span><span><b>vosotros/as</b> fuisteis</span><span><b>ellos/ellas/ustedes</b> fueron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="servir: formas en Pretérito Indefinido">
+            <strong>servir</strong>
+            <small>служить</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> serví</span><span><b>tú</b> serviste</span><span><b>él/ella/usted</b> sirvió</span><span><b>nosotros/as</b> servimos</span><span><b>vosotros/as</b> servisteis</span><span><b>ellos/ellas/ustedes</b> sirvieron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="sonreír: formas en Pretérito Indefinido">
+            <strong>sonreír</strong>
+            <small>улыбаться</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> sonreí</span><span><b>tú</b> sonreíste</span><span><b>él/ella/usted</b> sonrió</span><span><b>nosotros/as</b> sonreímos</span><span><b>vosotros/as</b> sonreísteis</span><span><b>ellos/ellas/ustedes</b> sonrieron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="tener: formas en Pretérito Indefinido">
+            <strong>tener</strong>
+            <small>иметь</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> tuve</span><span><b>tú</b> tuviste</span><span><b>él/ella/usted</b> tuvo</span><span><b>nosotros/as</b> tuvimos</span><span><b>vosotros/as</b> tuvisteis</span><span><b>ellos/ellas/ustedes</b> tuvieron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="tocar: formas en Pretérito Indefinido">
+            <strong>tocar</strong>
+            <small>трогать</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> toqué</span><span><b>tú</b> tocaste</span><span><b>él/ella/usted</b> tocó</span><span><b>nosotros/as</b> tocamos</span><span><b>vosotros/as</b> tocasteis</span><span><b>ellos/ellas/ustedes</b> tocaron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="traer: formas en Pretérito Indefinido">
+            <strong>traer</strong>
+            <small>приносить</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> traje</span><span><b>tú</b> trajiste</span><span><b>él/ella/usted</b> trajo</span><span><b>nosotros/as</b> trajimos</span><span><b>vosotros/as</b> trajisteis</span><span><b>ellos/ellas/ustedes</b> trajeron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="traducir: formas en Pretérito Indefinido">
+            <strong>traducir</strong>
+            <small>переводить</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> traduje</span><span><b>tú</b> tradujiste</span><span><b>él/ella/usted</b> tradujo</span><span><b>nosotros/as</b> tradujimos</span><span><b>vosotros/as</b> tradujisteis</span><span><b>ellos/ellas/ustedes</b> tradujeron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="venir: formas en Pretérito Indefinido">
+            <strong>venir</strong>
+            <small>приходить</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> vine</span><span><b>tú</b> viniste</span><span><b>él/ella/usted</b> vino</span><span><b>nosotros/as</b> vinimos</span><span><b>vosotros/as</b> vinisteis</span><span><b>ellos/ellas/ustedes</b> vinieron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="ver: formas en Pretérito Indefinido">
+            <strong>ver</strong>
+            <small>видеть</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> vi</span><span><b>tú</b> viste</span><span><b>él/ella/usted</b> vio</span><span><b>nosotros/as</b> vimos</span><span><b>vosotros/as</b> visteis</span><span><b>ellos/ellas/ustedes</b> vieron</span></div>
+          </article>
+          <article class="verb-chip" tabindex="0" aria-label="vestir: formas en Pretérito Indefinido">
+            <strong>vestir</strong>
+            <small>одевать</small>
+            <div class="verb-tooltip" role="tooltip"><span><b>yo</b> vestí</span><span><b>tú</b> vestiste</span><span><b>él/ella/usted</b> vistió</span><span><b>nosotros/as</b> vestimos</span><span><b>vosotros/as</b> vestisteis</span><span><b>ellos/ellas/ustedes</b> vistieron</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="irregular-section">
+      <div class="exercise-header">
+        <div><h2>🧩 Ejercicio 2. Verbos irregulares</h2><p class="instruction">Arrastra cada forma verbal y suéltala en el espacio correcto.</p></div>
+        <div class="pill">Irregular</div>
+      </div>
+      <div class="drag-layout"><div class="sentences" id="irregular-sentences"></div><aside class="bank"><p class="bank-title">Formas disponibles</p><div class="cards" id="irregular-bank"></div></aside></div>
+      <div class="buttons"><button class="check" data-check="irregular">Revisar</button><button class="reset" data-reset="irregular">Reiniciar</button><span class="score" id="irregular-score"></span></div>
+    </section>
+
+    <section id="translation-section">
+      <div class="exercise-header">
+        <div><h2>🌍 Ejercicio 3. Traducción español → ruso</h2><p class="instruction">Lee cada frase en español. Busca su traducción rusa y arrástrala al recuadro correspondiente.</p></div>
+        <div class="pill">Traducción</div>
+      </div>
+      <div class="translation-grid"><div class="sentences" id="translation-sentences"></div><aside class="bank"><p class="bank-title">Traducciones rusas</p><div class="cards" id="translation-bank"></div></aside></div>
+      <div class="buttons"><button class="check" data-check="translation">Revisar</button><button class="reset" data-reset="translation">Reiniciar</button><span class="score" id="translation-score"></span></div>
+    </section>
+
+    <section id="select-section">
+      <div class="exercise-header">
+        <div><h2>🎯 Ejercicio 4. Elige la forma correcta</h2><p class="instruction">Abre el desplegable del infinitivo y elige la forma correcta del Pretérito Indefinido.</p></div>
+        <div class="pill">25 oraciones</div>
+      </div>
+      <div class="select-list" id="select-list"></div>
+      <div class="buttons"><button class="check" id="check-selects">Revisar</button><button class="reset" id="reset-selects">Reiniciar</button><span class="score" id="select-score"></span></div>
+    </section>
+  </main>
+
+  <script>
+    const exercises = {
+      regular: [
+        {s:'Ayer yo ___ con Marta. <span class="mini">(hablar)</span>', a:'hablé'},
+        {s:'Tú ___ muy tarde. <span class="mini">(comer)</span>', a:'comiste'},
+        {s:'Ana ___ en Sevilla en 2020. <span class="mini">(vivir)</span>', a:'vivió'},
+        {s:'Nosotros ___ para el examen. <span class="mini">(estudiar)</span>', a:'estudiamos'},
+        {s:'Ellos ___ fruta en el mercado. <span class="mini">(comprar)</span>', a:'compraron'},
+        {s:'Usted ___ agua después de correr. <span class="mini">(beber)</span>', a:'bebió'},
+        {s:'Vosotros ___ las ventanas. <span class="mini">(abrir)</span>', a:'abristeis'},
+        {s:'Yo ___ un correo importante. <span class="mini">(recibir)</span>', a:'recibí'},
+        {s:'María y yo ___ a Toledo. <span class="mini">(viajar)</span>', a:'viajamos'},
+        {s:'Laura ___ la tarea. <span class="mini">(terminar)</span>', a:'terminó'},
+        {s:'Mis padres ___ ruso durante dos años. <span class="mini">(aprender)</span>', a:'aprendieron'},
+        {s:'Tú ___ una carta breve. <span class="mini">(escribir)</span>', a:'escribiste'}
+      ],
+      irregular: [
+        {s:'Ayer yo ___ en casa todo el día. <span class="mini">(estar)</span>', a:'estuve'},
+        {s:'Ellos ___ al cine el viernes. <span class="mini">(ir)</span>', a:'fueron'},
+        {s:'Nosotros ___ la cena. <span class="mini">(hacer)</span>', a:'hicimos'},
+        {s:'Marta ___ la mesa. <span class="mini">(poner)</span>', a:'puso'},
+        {s:'Tú ___ una idea excelente. <span class="mini">(tener)</span>', a:'tuviste'},
+        {s:'Ustedes ___ tarde a la reunión. <span class="mini">(venir)</span>', a:'vinieron'},
+        {s:'Yo ___ el libro a Ana. <span class="mini">(dar)</span>', a:'di'},
+        {s:'Carlos ___ la verdad. <span class="mini">(saber)</span>', a:'supo'},
+        {s:'Nosotros ___ la respuesta correcta. <span class="mini">(decir)</span>', a:'dijimos'},
+        {s:'El profesor ___ varios mapas. <span class="mini">(traer)</span>', a:'trajo'},
+        {s:'Yo ___ por el parque una hora. <span class="mini">(andar)</span>', a:'anduve'},
+        {s:'Ellas ___ entrar sin problema. <span class="mini">(poder)</span>', a:'pudieron'}
+      ]
+    };
+
+    const translations = [
+      {es:'Ayer hablé con mi profesor.', ru:'Вчера я поговорил с моим преподавателем.'},
+      {es:'El año pasado viajamos a México.', ru:'В прошлом году мы ездили в Мексику.'},
+      {es:'¿Cuándo hiciste la tarea?', ru:'Когда ты сделал домашнее задание?'},
+      {es:'Marta no pudo venir.', ru:'Марта не смогла прийти.'},
+      {es:'Mis amigos fueron al museo.', ru:'Мои друзья пошли в музей.'},
+      {es:'Compré pan y queso.', ru:'Я купил хлеб и сыр.'},
+      {es:'El camarero nos trajo la cuenta.', ru:'Официант принёс нам счёт.'},
+      {es:'Ellos estuvieron en Buenos Aires.', ru:'Они были в Буэнос-Айресе.'},
+      {es:'Leímos un texto interesante.', ru:'Мы прочитали интересный текст.'},
+      {es:'La clase empezó a las ocho.', ru:'Занятие началось в восемь.'}
+    ];
+
+    const selectItems = [
+      {text:'Ayer yo ___ español en clase.', inf:'hablar', forms:['hablé','hablaste','habló','hablamos','hablasteis','hablaron'], a:'hablé'},
+      {text:'Tú ___ en casa anoche.', inf:'comer', forms:['comí','comiste','comió','comimos','comisteis','comieron'], a:'comiste'},
+      {text:'Ella ___ en Granada en 2021.', inf:'vivir', forms:['viví','viviste','vivió','vivimos','vivisteis','vivieron'], a:'vivió'},
+      {text:'Nosotros ___ mucho para el examen.', inf:'estudiar', forms:['estudié','estudiaste','estudió','estudiamos','estudiasteis','estudiaron'], a:'estudiamos'},
+      {text:'Ellos ___ la puerta de la sala.', inf:'abrir', forms:['abrí','abriste','abrió','abrimos','abristeis','abrieron'], a:'abrieron'},
+      {text:'¿Vosotros ___ café por la mañana?', inf:'beber', forms:['bebí','bebiste','bebió','bebimos','bebisteis','bebieron'], a:'bebisteis'},
+      {text:'Yo ___ enfermo la semana pasada.', inf:'estar', forms:['estuve','estuviste','estuvo','estuvimos','estuvisteis','estuvieron'], a:'estuve'},
+      {text:'Mis padres ___ al mercado el sábado.', inf:'ir', forms:['fui','fuiste','fue','fuimos','fuisteis','fueron'], a:'fueron'},
+      {text:'Carlos ___ mi vecino en 2010.', inf:'ser', forms:['fui','fuiste','fue','fuimos','fuisteis','fueron'], a:'fue'},
+      {text:'Nosotros ___ un viaje por Andalucía.', inf:'hacer', forms:['hice','hiciste','hizo','hicimos','hicisteis','hicieron'], a:'hicimos'},
+      {text:'Tú ___ los libros en la mesa.', inf:'poner', forms:['puse','pusiste','puso','pusimos','pusisteis','pusieron'], a:'pusiste'},
+      {text:'Laura ___ fiebre durante dos días.', inf:'tener', forms:['tuve','tuviste','tuvo','tuvimos','tuvisteis','tuvieron'], a:'tuvo'},
+      {text:'Ustedes ___ a tiempo a la estación.', inf:'venir', forms:['vine','viniste','vino','vinimos','vinisteis','vinieron'], a:'vinieron'},
+      {text:'Yo ___ las gracias al camarero.', inf:'dar', forms:['di','diste','dio','dimos','disteis','dieron'], a:'di'},
+      {text:'Ana ___ la película ayer.', inf:'ver', forms:['vi','viste','vio','vimos','visteis','vieron'], a:'vio'},
+      {text:'Nosotros ___ el periódico por la mañana.', inf:'leer', forms:['leí','leíste','leyó','leímos','leísteis','leyeron'], a:'leímos'},
+      {text:'Ellas ___ ocho horas.', inf:'dormir', forms:['dormí','dormiste','durmió','dormimos','dormisteis','durmieron'], a:'durmieron'},
+      {text:'Yo ___ mi pasaporte en la mochila.', inf:'buscar', forms:['busqué','buscaste','buscó','buscamos','buscasteis','buscaron'], a:'busqué'},
+      {text:'Yo ___ tarde a la clase.', inf:'llegar', forms:['llegué','llegaste','llegó','llegamos','llegasteis','llegaron'], a:'llegué'},
+      {text:'El curso ___ ayer.', inf:'empezar', forms:['empecé','empezaste','empezó','empezamos','empezasteis','empezaron'], a:'empezó'},
+      {text:'Ellos ___ la verdad al final.', inf:'decir', forms:['dije','dijiste','dijo','dijimos','dijisteis','dijeron'], a:'dijeron'},
+      {text:'Yo ___ flores para la profesora.', inf:'traer', forms:['traje','trajiste','trajo','trajimos','trajisteis','trajeron'], a:'traje'},
+      {text:'Usted ___ hablar conmigo después de clase.', inf:'querer', forms:['quise','quisiste','quiso','quisimos','quisisteis','quisieron'], a:'quiso'},
+      {text:'Nosotros ___ terminar el proyecto.', inf:'poder', forms:['pude','pudiste','pudo','pudimos','pudisteis','pudieron'], a:'pudimos'},
+      {text:'Tú ___ un café con leche.', inf:'pedir', forms:['pedí','pediste','pidió','pedimos','pedisteis','pidieron'], a:'pediste'}
+    ];
+
+    function shuffle(array){ return [...array].sort(()=>Math.random()-0.5); }
+
+    let selectedCard = null;
+
+    function makeCard(id, label, group){
+      const card = document.createElement('span');
+      card.className = 'drag-card'; card.draggable = true; card.textContent = label;
+      card.dataset.id = id; card.dataset.group = group;
+      card.addEventListener('dragstart', e => { e.dataTransfer.setData('text/plain', JSON.stringify({id, group})); card.classList.add('selected'); });
+      card.addEventListener('dragend', () => card.classList.remove('selected'));
+      card.addEventListener('click', () => {
+        document.querySelectorAll('.drag-card.selected').forEach(c=>c.classList.remove('selected'));
+        selectedCard = card; card.classList.add('selected');
+      });
+      return card;
+    }
+
+    function returnOldCard(slot, bank){
+      const old = slot.querySelector('.drag-card');
+      if(old) bank.appendChild(old);
+    }
+
+    function activateSlot(slot, group){
+      const bank = document.getElementById(group + '-bank');
+      slot.addEventListener('dragover', e => { e.preventDefault(); slot.classList.add('hover'); });
+      slot.addEventListener('dragleave', () => slot.classList.remove('hover'));
+      slot.addEventListener('drop', e => {
+        e.preventDefault(); slot.classList.remove('hover');
+        const data = JSON.parse(e.dataTransfer.getData('text/plain') || '{}');
+        if(data.group !== group) return;
+        const card = document.querySelector(`.drag-card[data-group="${group}"][data-id="${CSS.escape(data.id)}"]`);
+        if(card){ returnOldCard(slot, bank); slot.appendChild(card); }
+      });
+      slot.addEventListener('click', () => {
+        if(selectedCard && selectedCard.dataset.group === group){
+          returnOldCard(slot, bank); slot.appendChild(selectedCard); selectedCard.classList.remove('selected'); selectedCard = null;
+        }
+      });
+    }
+
+    function renderDragExercise(group, items){
+      const sentBox = document.getElementById(group + '-sentences');
+      const bank = document.getElementById(group + '-bank');
+      sentBox.innerHTML = ''; bank.innerHTML = '';
+      items.forEach((item, i) => {
+        item.id = group + '-' + i;
+        const div = document.createElement('div'); div.className = 'sentence-card';
+        div.innerHTML = `<strong>${i+1}.</strong> ${item.s.replace('___', `<span class="blank" data-answer="${item.id}"></span>`)}`;
+        sentBox.appendChild(div);
+        activateSlot(div.querySelector('.blank'), group);
+      });
+      shuffle(items).forEach(item => bank.appendChild(makeCard(item.id, item.a, group)));
+    }
+
+    function renderTranslation(){
+      const sentBox = document.getElementById('translation-sentences');
+      const bank = document.getElementById('translation-bank');
+      sentBox.innerHTML = ''; bank.innerHTML = '';
+      translations.forEach((item, i) => {
+        item.id = 'translation-' + i;
+        const div = document.createElement('div'); div.className = 'sentence-card translation-row';
+        div.innerHTML = `<strong>${i+1}. ${item.es}</strong><div class="russian-slot" data-answer="${item.id}"></div>`;
+        sentBox.appendChild(div);
+        activateSlot(div.querySelector('.russian-slot'), 'translation');
+      });
+      shuffle(translations).forEach(item => bank.appendChild(makeCard(item.id, item.ru, 'translation')));
+    }
+
+    function checkDrag(group){
+      const container = group === 'translation' ? document.getElementById('translation-sentences') : document.getElementById(group + '-sentences');
+      const cards = [...container.querySelectorAll('.sentence-card')];
+      let ok = 0;
+      cards.forEach(card => {
+        const slot = card.querySelector('.blank, .russian-slot');
+        const placed = slot.querySelector('.drag-card');
+        const isOk = placed && placed.dataset.id === slot.dataset.answer;
+        card.classList.remove('correct','incorrect');
+        card.classList.add(isOk ? 'correct' : 'incorrect');
+        if(isOk) ok++;
+      });
+      document.getElementById(group + '-score').textContent = `${ok} / ${cards.length}`;
+    }
+
+    function resetDrag(group){
+      if(group === 'translation') renderTranslation(); else renderDragExercise(group, exercises[group]);
+      document.getElementById(group + '-score').textContent = '';
+      selectedCard = null;
+    }
+
+    function renderSelects(){
+      const list = document.getElementById('select-list'); list.innerHTML = '';
+      selectItems.forEach((item, i) => {
+        const card = document.createElement('div'); card.className = 'select-card';
+        const select = `<select data-answer="${item.a}"><option value="" selected>${item.inf}</option>${item.forms.map(f=>`<option>${f}</option>`).join('')}</select>`;
+        card.innerHTML = `<strong>${i+1}.</strong> ${item.text.replace('___', select)}`;
+        list.appendChild(card);
+      });
+    }
+
+    function checkSelects(){
+      let ok = 0; const selects = [...document.querySelectorAll('#select-list select')];
+      selects.forEach(sel => { const good = sel.value === sel.dataset.answer; sel.classList.remove('correct','incorrect'); sel.classList.add(good?'correct':'incorrect'); if(good) ok++; });
+      document.getElementById('select-score').textContent = `${ok} / ${selects.length}`;
+    }
+    function resetSelects(){ renderSelects(); document.getElementById('select-score').textContent=''; }
+
+    renderDragExercise('regular', exercises.regular);
+    renderDragExercise('irregular', exercises.irregular);
+    renderTranslation();
+    renderSelects();
+
+    document.querySelectorAll('[data-check]').forEach(btn => btn.addEventListener('click', () => checkDrag(btn.dataset.check)));
+    document.querySelectorAll('[data-reset]').forEach(btn => btn.addEventListener('click', () => resetDrag(btn.dataset.reset)));
+    document.getElementById('check-selects').addEventListener('click', checkSelects);
+    document.getElementById('reset-selects').addEventListener('click', resetSelects);
+  </script>
+</body>
+</html>

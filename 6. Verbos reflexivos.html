@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Verbos reflexivos: presente de indicativo</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <style>
+    :root {
+      --bg: #f3f0ea;
+      --paper: #fffdf8;
+      --card: #ffffff;
+      --ink: #24211e;
+      --muted: #70695f;
+      --line: #ded4c7;
+      --accent: #4b3b2e;
+      --accent-2: #7f5e46;
+      --soft: #efe4d7;
+      --soft-2: #f8f1e8;
+      --ok: #1d7a45;
+      --bad: #b13a2e;
+      --warn: #9a6a00;
+      --shadow: 0 14px 36px rgba(41, 32, 24, 0.09);
+      --radius: 22px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(127,94,70,0.13), transparent 33%),
+        linear-gradient(180deg, var(--bg), #fffaf3);
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.55;
+    }
+    header {
+      padding: 46px 22px 32px;
+      background: linear-gradient(135deg, #eadfce, #fbf6ed);
+      border-bottom: 1px solid var(--line);
+    }
+    .hero {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 22px;
+      align-items: center;
+    }
+    h1 {
+      margin: 0 0 14px;
+      font-size: clamp(2.1rem, 4.4vw, 4rem);
+      line-height: 1.03;
+      letter-spacing: -0.03em;
+      color: var(--accent);
+    }
+    header p {
+      margin: 0;
+      max-width: 820px;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+    .mini-card {
+      background: rgba(255,255,255,0.78);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+    .mini-card strong {
+      display: block;
+      color: var(--accent);
+      margin-bottom: 8px;
+      font-size: 1.1rem;
+    }
+    main {
+      width: min(1120px, calc(100% - 32px));
+      margin: 28px auto 64px;
+    }
+    nav {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    nav a {
+      display: block;
+      padding: 14px 16px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      color: var(--accent);
+      text-decoration: none;
+      box-shadow: var(--shadow);
+      font-weight: 700;
+    }
+    section {
+      background: rgba(255, 253, 248, 0.96);
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      box-shadow: var(--shadow);
+      padding: 26px;
+      margin: 22px 0;
+    }
+    h2 {
+      margin: 0 0 14px;
+      color: var(--accent);
+      font-size: 1.72rem;
+      letter-spacing: -0.01em;
+    }
+    h3 {
+      margin: 24px 0 10px;
+      color: var(--accent);
+      font-size: 1.24rem;
+    }
+    .rule-grid, .verb-grid, .question-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+    }
+    .rule, .verb-card, .question-card, .exercise-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 16px;
+    }
+    .rule strong, .verb-card strong {
+      color: var(--accent);
+    }
+    .formula {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      padding: 14px;
+      border: 1px dashed #bda992;
+      border-radius: 18px;
+      background: var(--soft-2);
+      margin: 14px 0;
+    }
+    .token {
+      display: inline-block;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: var(--soft);
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .arrow {
+      color: var(--muted);
+      font-weight: 700;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0;
+      overflow: hidden;
+      border-radius: 14px;
+    }
+    th, td {
+      border: 1px solid var(--line);
+      padding: 10px 11px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: var(--soft);
+      color: var(--accent);
+    }
+    tbody tr:nth-child(even) { background: #fff8ef; }
+    .small {
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+    .exercise-head {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid var(--line);
+      background: var(--soft-2);
+      border-radius: 999px;
+      padding: 8px 12px;
+      color: var(--accent);
+      font-weight: 700;
+    }
+    button {
+      appearance: none;
+      border: 0;
+      border-radius: 999px;
+      padding: 10px 15px;
+      font-family: inherit;
+      font-size: 0.98rem;
+      font-weight: 700;
+      cursor: pointer;
+      background: var(--accent);
+      color: white;
+      box-shadow: 0 7px 16px rgba(75, 59, 46, 0.18);
+    }
+    button.secondary {
+      background: #fffaf3;
+      color: var(--accent);
+      border: 1px solid var(--line);
+      box-shadow: none;
+    }
+    button.verb-button {
+      background: var(--soft);
+      color: var(--accent);
+      border: 1px solid #c8b39e;
+      box-shadow: none;
+      padding: 8px 12px;
+    }
+    button:hover, .drag:hover { filter: brightness(0.985); }
+    .drag-area {
+      display: grid;
+      grid-template-columns: minmax(230px, 0.9fr) minmax(280px, 1.1fr);
+      gap: 16px;
+      align-items: start;
+    }
+    .bank, .targets {
+      display: grid;
+      gap: 10px;
+    }
+    .drag {
+      padding: 12px 14px;
+      border: 1px solid #c9b9a7;
+      border-radius: 16px;
+      background: var(--card);
+      cursor: grab;
+      box-shadow: 0 5px 14px rgba(41, 32, 24, 0.06);
+      user-select: none;
+    }
+    .drag.selected {
+      outline: 3px solid #d9c2aa;
+      background: var(--soft-2);
+    }
+    .drag.used {
+      opacity: 0.45;
+      cursor: default;
+    }
+    .target {
+      border: 2px dashed #c7b49d;
+      border-radius: 18px;
+      background: #fffbf5;
+      min-height: 82px;
+      padding: 12px;
+    }
+    .target.over {
+      background: var(--soft);
+      border-color: var(--accent-2);
+    }
+    .target-title {
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .dropped {
+      display: inline-block;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 8px 10px;
+      width: 100%;
+    }
+    .items {
+      display: grid;
+      gap: 12px;
+    }
+    .choice-row {
+      display: grid;
+      grid-template-columns: minmax(180px, 0.9fr) minmax(230px, 1fr);
+      gap: 12px;
+      align-items: center;
+    }
+    select {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid #c9b9a7;
+      background: white;
+      color: var(--ink);
+      font-family: inherit;
+      font-size: 1rem;
+    }
+    select:focus {
+      outline: 3px solid #e8d9c8;
+      border-color: var(--accent);
+    }
+    .feedback {
+      min-height: 1.35em;
+      margin-top: 8px;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+    .ok { color: var(--ok); }
+    .bad { color: var(--bad); }
+    .warn { color: var(--warn); }
+    .answer {
+      display: inline-block;
+      margin-left: 6px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: var(--soft);
+      color: var(--accent);
+    }
+    .radio-option {
+      display: block;
+      margin: 8px 0;
+      padding: 9px 10px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fffbf5;
+      cursor: pointer;
+    }
+    .radio-option input {
+      margin-right: 8px;
+    }
+    details {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 14px 16px;
+      background: #fffbf5;
+      margin: 12px 0;
+    }
+    summary {
+      cursor: pointer;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .table-wrap { overflow-x: auto; }
+    footer {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto 42px;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+
+    .conversation-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+    }
+    .conversation-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 16px;
+      min-height: 170px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .conversation-card .verb-tag {
+      align-self: flex-start;
+      display: inline-block;
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: var(--soft);
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 0.92rem;
+      margin-bottom: 10px;
+    }
+    .conversation-card .question {
+      font-size: 1.08rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .conversation-card .translation {
+      color: var(--muted);
+      font-size: 0.96rem;
+      margin-bottom: 12px;
+    }
+    .model-answer {
+      display: none;
+      margin-top: 10px;
+      padding: 10px 12px;
+      background: #fffbf5;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      color: var(--ink);
+    }
+    .model-answer.visible {
+      display: block;
+    }
+
+    .lexicon-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 14px;
+    }
+    .lexicon-card {
+      position: relative;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 16px;
+      min-height: 118px;
+      cursor: help;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    }
+    .lexicon-card:focus {
+      outline: 3px solid #e8d9c8;
+      border-color: var(--accent);
+    }
+    .lexicon-card:hover,
+    .lexicon-card:focus {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(41, 32, 24, 0.12);
+      z-index: 4;
+    }
+    .lexicon-title {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: baseline;
+      margin-bottom: 6px;
+    }
+    .lexicon-title strong {
+      color: var(--accent);
+      font-size: 1.08rem;
+    }
+    .lexicon-ru {
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+    .hover-panel {
+      display: none;
+      position: absolute;
+      left: 14px;
+      right: 14px;
+      top: calc(100% - 10px);
+      background: #fffdf8;
+      border: 1px solid #c8b39e;
+      border-radius: 18px;
+      padding: 12px;
+      box-shadow: 0 16px 36px rgba(41, 32, 24, 0.18);
+    }
+    .lexicon-card:hover .hover-panel,
+    .lexicon-card:focus .hover-panel {
+      display: block;
+    }
+    .forms-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 6px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      font-size: 0.95rem;
+    }
+    .forms-list li {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      border-bottom: 1px solid #eee3d8;
+      padding-bottom: 4px;
+    }
+    .forms-list li:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+    .forms-list span:first-child {
+      color: var(--muted);
+    }
+    .forms-list span:last-child {
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    @media (max-width: 780px) {
+      .hero, .drag-area, .choice-row { grid-template-columns: 1fr; }
+      header { padding-top: 32px; }
+      section { padding: 18px; }
+    }
+    @media print {
+      nav, button, select, .exercise-head { display: none !important; }
+      body { background: white; }
+      section { box-shadow: none; page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="hero">
+      <div>
+        <h1>Verbos reflexivos</h1>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <nav aria-label="Índice">
+      <a href="#explicacion">1. Объяснение</a>
+      <a href="#verbos">2. Популярные глаголы</a>
+      <a href="#arrastrar">3. Перевод: перетащите фразу</a>
+      <a href="#seleccion">4. Выбор из списка</a>
+      <a href="#preguntas">5. Вопросы для практики</a>
+      <a href="#listado">6. Частотные возвратные глаголы</a>
+    </nav>
+
+    <section id="explicacion">
+      <h2>1. Объяснение: что такое verbos reflexivos</h2>
+      <div class="rule-grid">
+        <div class="rule">
+          <strong>Идея</strong>
+          <p>Испанские возвратные глаголы указывают, что действие возвращается к самому субъекту или тесно связано с его состоянием, привычкой, движением либо личной ситуацией: <em>me levanto</em> — «я встаю», <em>me ducho</em> — «я принимаю душ», <em>me voy</em> — «я ухожу».</p>
+        </div>
+        <div class="rule">
+          <strong>Сходство с русским -ся</strong>
+          <p>Русский постфикс <strong>-ся</strong> часто передаёт похожую идею: <em>bañarse</em> ≈ «купаться», <em>vestirse</em> ≈ «одеваться», <em>reírse</em> ≈ «смеяться». Однако соответствие не всегда буквальное: испанский использует отдельное местоимение перед глаголом.</p>
+        </div>
+        <div class="rule">
+          <strong>Главное различие</strong>
+          <p>В русском языке <strong>-ся</strong> присоединяется к глаголу: <em>умываться</em>, <em>я умываюсь</em>. В испанском в настоящем времени изъявительного наклонения местоимение ставится отдельно перед личной формой глагола: <em>me lavo</em>, <em>te lavas</em>, <em>se lava</em>.</p>
+        </div>
+      </div>
+
+      <h3>Схема спряжения</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Persona</th>
+              <th>Pronombre reflexivo</th>
+              <th>Ejemplo con <em>levantarse</em></th>
+              <th>Traducción aproximada</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>yo</td><td>me</td><td>me levanto</td><td>я встаю</td></tr>
+            <tr><td>tú</td><td>te</td><td>te levantas</td><td>ты встаёшь</td></tr>
+            <tr><td>él / ella / usted</td><td>se</td><td>se levanta</td><td>он / она / Вы встаёт(е)</td></tr>
+            <tr><td>nosotros/as</td><td>nos</td><td>nos levantamos</td><td>мы встаём</td></tr>
+            <tr><td>vosotros/as</td><td>os</td><td>os levantáis</td><td>вы встаёте</td></tr>
+            <tr><td>ellos/as / ustedes</td><td>se</td><td>se levantan</td><td>они / вы встаёте</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <details>
+        <summary>Краткое примечание о значении</summary>
+        <p>Некоторые глаголы меняют оттенок значения в возвратной форме. <em>ir</em> означает «идти / ехать», но <em>irse</em> обычно передаёт значение «уходить / уезжать». <em>llamar</em> означает «звать / звонить», а <em>llamarse</em> — «называться / зваться».</p>
+      </details>
+    </section>
+
+    <section id="verbos">
+      <h2>2. Популярные возвратные глаголы в presente de indicativo</h2>
+      <p class="small">Нажмите на инфинитив, чтобы показать или скрыть краткое спряжение. Все формы даны в presente de indicativo.</p>
+      <div class="verb-grid" id="verbCards"></div>
+    </section>
+
+    <section id="arrastrar">
+      <h2>3. Упражнение на перевод: перетащите фразу</h2>
+      <div class="exercise-head">
+        <p class="small">Перетащите правильную русскую фразу к испанскому предложению. Можно также выбрать карточку и затем нажать на нужное поле.</p>
+        <div class="controls">
+          <span class="pill">Правильные ответы: <span id="dragScore">0</span></span>
+          <button type="button" onclick="checkDrag()">Проверить</button>
+          <button type="button" class="secondary" onclick="resetDrag()">Сбросить</button>
+        </div>
+      </div>
+      <div class="drag-area">
+        <div>
+          <h3>Фразы на русском</h3>
+          <div class="bank" id="dragBank"></div>
+        </div>
+        <div>
+          <h3>Предложения на испанском</h3>
+          <div class="targets" id="dropTargets"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="seleccion">
+      <h2>4. Выбор из списка: дополните предложения</h2>
+      <div class="exercise-head">
+        <p class="small">Выберите правильную форму глагола для каждого предложения. Кнопка показывает инфинитив.</p>
+        <div class="controls">
+          <span class="pill">Правильные ответы: <span id="selectScore">0</span></span>
+          <span class="pill">Всего: <span id="selectTotal">0</span></span>
+          <button type="button" onclick="checkSelect()">Проверить</button>
+          <button type="button" class="secondary" onclick="resetSelect()">Сбросить</button>
+        </div>
+      </div>
+      <div class="items" id="selectItems"></div>
+    </section>
+
+    <section id="preguntas">
+      <h2>5. Вопросы для практики возвратных глаголов</h2>
+      <p class="small">Ответьте устно или используйте вопросы для работы в парах. Пример ответа оставлен только в первом вопросе.</p>
+      <div class="conversation-grid" id="conversationItems"></div>
+    </section>
+
+
+
+    <section id="listado">
+      <h2>6. Частотные возвратные глаголы</h2>
+      <p class="small">Наведите курсор на карточку или перейдите к ней с клавиатуры, чтобы увидеть шесть форм presente de indicativo.</p>
+      <div class="lexicon-grid" id="lexiconGrid"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Автономный учебный материал для практики испанских возвратных глаголов в presente de indicativo.</p>
+  </footer>
+
+<script>
+const verbs = [
+  {
+    infinitive: "levantarse",
+    ru: "вставать",
+    forms: ["me levanto", "te levantas", "se levanta", "nos levantamos", "os levantáis", "se levantan"]
+  },
+  {
+    infinitive: "irse",
+    ru: "уходить / уезжать",
+    forms: ["me voy", "te vas", "se va", "nos vamos", "os vais", "se van"]
+  },
+  {
+    infinitive: "ducharse",
+    ru: "принимать душ",
+    forms: ["me ducho", "te duchas", "se ducha", "nos duchamos", "os ducháis", "se duchan"]
+  },
+  {
+    infinitive: "bañarse",
+    ru: "купаться / принимать ванну",
+    forms: ["me baño", "te bañas", "se baña", "nos bañamos", "os bañáis", "se bañan"]
+  },
+  {
+    infinitive: "reírse",
+    ru: "смеяться",
+    forms: ["me río", "te ríes", "se ríe", "nos reímos", "os reís", "se ríen"]
+  },
+  {
+    infinitive: "lavarse",
+    ru: "мыться / умываться",
+    forms: ["me lavo", "te lavas", "se lava", "nos lavamos", "os laváis", "se lavan"]
+  },
+  {
+    infinitive: "vestirse",
+    ru: "одеваться",
+    forms: ["me visto", "te vistes", "se viste", "nos vestimos", "os vestís", "se visten"]
+  },
+  {
+    infinitive: "acostarse",
+    ru: "ложиться спать",
+    forms: ["me acuesto", "te acuestas", "se acuesta", "nos acostamos", "os acostáis", "se acuestan"]
+  },
+  {
+    infinitive: "despertarse",
+    ru: "просыпаться",
+    forms: ["me despierto", "te despiertas", "se despierta", "nos despertamos", "os despertáis", "se despiertan"]
+  },
+  {
+    infinitive: "ponerse",
+    ru: "надевать на себя",
+    forms: ["me pongo", "te pones", "se pone", "nos ponemos", "os ponéis", "se ponen"]
+  },
+  {
+    infinitive: "sentarse",
+    ru: "садиться",
+    forms: ["me siento", "te sientas", "se sienta", "nos sentamos", "os sentáis", "se sientan"]
+  },
+  {
+    infinitive: "llamarse",
+    ru: "называться / зваться",
+    forms: ["me llamo", "te llamas", "se llama", "nos llamamos", "os llamáis", "se llaman"]
+  }
+];
+
+const pronouns = ["Yo", "Tú", "Él/Ella/Usted", "Nosotros/as", "Vosotros/as", "Ellos/as/Ustedes"];
+
+const dragItems = [
+  {id: "d1", es: "Me levanto a las siete.", ru: "Я встаю в семь."},
+  {id: "d2", es: "Nos duchamos por la mañana.", ru: "Мы принимаем душ утром."},
+  {id: "d3", es: "Ella se ríe mucho.", ru: "Она много смеётся."},
+  {id: "d4", es: "¿Te vas ahora?", ru: "Ты сейчас уходишь?"},
+  {id: "d5", es: "Los niños se bañan en verano.", ru: "Дети купаются летом."},
+  {id: "d6", es: "Os vestís rápido.", ru: "Вы быстро одеваетесь."},
+  {id: "d7", es: "Me pongo la chaqueta.", ru: "Я надеваю куртку."},
+  {id: "d8", es: "Nos sentamos cerca de la ventana.", ru: "Мы садимся возле окна."}
+];
+
+const selectData = [
+  {
+    sentence: "Cada mañana ___ temprano para preparar café antes de estudiar.",
+    verb: "levantarse",
+    answer: "me levanto"
+  },
+  {
+    sentence: "Cuando tienes prisa, ___ en cinco minutos y sales corriendo.",
+    verb: "ducharse",
+    answer: "te duchas"
+  },
+  {
+    sentence: "Después de entrenar, Laura ___ porque está cansada.",
+    verb: "bañarse",
+    answer: "se baña"
+  },
+  {
+    sentence: "Los viernes por la tarde nosotros ___ de la oficina un poco antes.",
+    verb: "irse",
+    answer: "nos vamos"
+  },
+  {
+    sentence: "Vosotros siempre ___ cuando escucháis esa historia.",
+    verb: "reírse",
+    answer: "os reís"
+  },
+  {
+    sentence: "Para la entrevista, ellas ___ con ropa formal.",
+    verb: "vestirse",
+    answer: "se visten"
+  },
+  {
+    sentence: "Cuando hace frío, yo ___ un abrigo grueso.",
+    verb: "ponerse",
+    answer: "me pongo"
+  },
+  {
+    sentence: "Si mañana tienes examen, ___ temprano esta noche.",
+    verb: "acostarse",
+    answer: "te acuestas"
+  },
+  {
+    sentence: "Mi hermano ___ con la alarma, pero no se levanta enseguida.",
+    verb: "despertarse",
+    answer: "se despierta"
+  },
+  {
+    sentence: "En el cine, nosotras ___ siempre en la última fila.",
+    verb: "sentarse",
+    answer: "nos sentamos"
+  },
+  {
+    sentence: "En clase de español, vosotras ___ con nombres hispanos.",
+    verb: "llamarse",
+    answer: "os llamáis"
+  },
+  {
+    sentence: "Después de jugar en el parque, los niños ___ las manos.",
+    verb: "lavarse",
+    answer: "se lavan"
+  }
+];
+
+
+
+const conversationQuestions = [
+  {
+    verb: "levantarse",
+    q: "¿A qué hora te levantas por las mañanas?",
+    ru: "Во сколько ты встаёшь по утрам?",
+    model: "Me levanto a las siete."
+  },
+  {
+    verb: "ducharse",
+    q: "¿Te duchas por la mañana o por la noche?",
+    ru: "Ты принимаешь душ утром или вечером?",
+    model: "Me ducho por la mañana."
+  },
+  {
+    verb: "bañarse",
+    q: "¿Dónde te bañas en verano?",
+    ru: "Где ты купаешься летом?",
+    model: "Me baño en el mar o en la piscina."
+  },
+  {
+    verb: "irse",
+    q: "¿A qué hora te vas de casa?",
+    ru: "Во сколько ты уходишь из дома?",
+    model: "Me voy de casa a las ocho."
+  },
+  {
+    verb: "reírse",
+    q: "¿Con qué tipo de películas te ríes?",
+    ru: "Над какими фильмами ты смеёшься?",
+    model: "Me río con las comedias."
+  },
+  {
+    verb: "vestirse",
+    q: "¿Cómo te vistes para una fiesta?",
+    ru: "Как ты одеваешься на праздник?",
+    model: "Me visto de manera elegante."
+  },
+  {
+    verb: "acostarse",
+    q: "¿A qué hora te acuestas normalmente?",
+    ru: "Во сколько ты обычно ложишься спать?",
+    model: "Me acuesto a las diez y media."
+  },
+  {
+    verb: "despertarse",
+    q: "¿Te despiertas temprano los domingos?",
+    ru: "Ты просыпаешься рано по воскресеньям?",
+    model: "No, los domingos me despierto tarde."
+  },
+  {
+    verb: "sentarse",
+    q: "¿Dónde te sientas en clase?",
+    ru: "Где ты садишься на уроке?",
+    model: "Me siento cerca de la ventana."
+  },
+  {
+    verb: "ponerse",
+    q: "¿Qué te pones cuando hace frío?",
+    ru: "Что ты надеваешь, когда холодно?",
+    model: "Me pongo una chaqueta."
+  },
+  {
+    verb: "llamarse",
+    q: "¿Cómo te llamas?",
+    ru: "Как тебя зовут?",
+    model: "Me llamo Ana."
+  },
+  {
+    verb: "quedarse",
+    q: "¿Te quedas en casa los fines de semana?",
+    ru: "Ты остаёшься дома по выходным?",
+    model: "A veces me quedo en casa."
+  }
+];
+
+const reflexiveLexicon = [
+  {infinitive:"levantarse", ru:"вставать", forms:["me levanto","te levantas","se levanta","nos levantamos","os levantáis","se levantan"]},
+  {infinitive:"acostarse", ru:"ложиться спать", forms:["me acuesto","te acuestas","se acuesta","nos acostamos","os acostáis","se acuestan"]},
+  {infinitive:"despertarse", ru:"просыпаться", forms:["me despierto","te despiertas","se despierta","nos despertamos","os despertáis","se despiertan"]},
+  {infinitive:"ducharse", ru:"принимать душ", forms:["me ducho","te duchas","se ducha","nos duchamos","os ducháis","se duchan"]},
+  {infinitive:"bañarse", ru:"купаться / принимать ванну", forms:["me baño","te bañas","se baña","nos bañamos","os bañáis","se bañan"]},
+  {infinitive:"lavarse", ru:"мыться / умываться", forms:["me lavo","te lavas","se lava","nos lavamos","os laváis","se lavan"]},
+  {infinitive:"peinarse", ru:"причёсываться", forms:["me peino","te peinas","se peina","nos peinamos","os peináis","se peinan"]},
+  {infinitive:"afeitarse", ru:"бриться", forms:["me afeito","te afeitas","se afeita","nos afeitamos","os afeitáis","se afeitan"]},
+  {infinitive:"maquillarse", ru:"краситься / наносить макияж", forms:["me maquillo","te maquillas","se maquilla","nos maquillamos","os maquilláis","se maquillan"]},
+  {infinitive:"vestirse", ru:"одеваться", forms:["me visto","te vistes","se viste","nos vestimos","os vestís","se visten"]},
+  {infinitive:"ponerse", ru:"надевать на себя", forms:["me pongo","te pones","se pone","nos ponemos","os ponéis","se ponen"]},
+  {infinitive:"quitarse", ru:"снимать с себя", forms:["me quito","te quitas","se quita","nos quitamos","os quitáis","se quitan"]},
+  {infinitive:"sentarse", ru:"садиться", forms:["me siento","te sientas","se sienta","nos sentamos","os sentáis","se sientan"]},
+  {infinitive:"irse", ru:"уходить / уезжать", forms:["me voy","te vas","se va","nos vamos","os vais","se van"]},
+  {infinitive:"quedarse", ru:"оставаться", forms:["me quedo","te quedas","se queda","nos quedamos","os quedáis","se quedan"]},
+  {infinitive:"encontrarse", ru:"находиться / встречаться", forms:["me encuentro","te encuentras","se encuentra","nos encontramos","os encontráis","se encuentran"]},
+  {infinitive:"llamarse", ru:"называться / зваться", forms:["me llamo","te llamas","se llama","nos llamamos","os llamáis","se llaman"]},
+  {infinitive:"casarse", ru:"жениться / выходить замуж", forms:["me caso","te casas","se casa","nos casamos","os casáis","se casan"]},
+  {infinitive:"divorciarse", ru:"разводиться", forms:["me divorcio","te divorcias","se divorcia","nos divorciamos","os divorciáis","se divorcian"]},
+  {infinitive:"preocuparse", ru:"беспокоиться", forms:["me preocupo","te preocupas","se preocupa","nos preocupamos","os preocupáis","se preocupan"]},
+  {infinitive:"aburrirse", ru:"скучать", forms:["me aburro","te aburres","se aburre","nos aburrimos","os aburrís","se aburren"]},
+  {infinitive:"divertirse", ru:"развлекаться", forms:["me divierto","te diviertes","se divierte","nos divertimos","os divertís","se divierten"]},
+  {infinitive:"enojarse", ru:"сердиться", forms:["me enojo","te enojas","se enoja","nos enojamos","os enojáis","se enojan"]},
+  {infinitive:"alegrarse", ru:"радоваться", forms:["me alegro","te alegras","se alegra","nos alegramos","os alegráis","se alegran"]},
+  {infinitive:"cansarse", ru:"уставать", forms:["me canso","te cansas","se cansa","nos cansamos","os cansáis","se cansan"]},
+  {infinitive:"dormirse", ru:"засыпать", forms:["me duermo","te duermes","se duerme","nos dormimos","os dormís","se duermen"]},
+  {infinitive:"reírse", ru:"смеяться", forms:["me río","te ríes","se ríe","nos reímos","os reís","se ríen"]},
+  {infinitive:"acordarse", ru:"помнить / вспоминать", forms:["me acuerdo","te acuerdas","se acuerda","nos acordamos","os acordáis","se acuerdan"]},
+  {infinitive:"olvidarse", ru:"забывать", forms:["me olvido","te olvidas","se olvida","nos olvidamos","os olvidáis","se olvidan"]},
+  {infinitive:"quejarse", ru:"жаловаться", forms:["me quejo","te quejas","se queja","nos quejamos","os quejáis","se quejan"]}
+];
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, m => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
+  }[m]));
+}
+
+function shuffle(arr) {
+  const copy = [...arr];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+
+
+function renderLexicon() {
+  const wrap = document.getElementById("lexiconGrid");
+  if (!wrap) return;
+  wrap.innerHTML = "";
+  reflexiveLexicon.forEach(v => {
+    const card = document.createElement("article");
+    card.className = "lexicon-card";
+    card.tabIndex = 0;
+    card.innerHTML = `
+      <div class="lexicon-title">
+        <strong>${escapeHtml(v.infinitive)}</strong>
+        <span class="small">presente</span>
+      </div>
+      <div class="lexicon-ru">${escapeHtml(v.ru)}</div>
+      <div class="hover-panel" aria-label="Шесть форм глагола ${escapeHtml(v.infinitive)}">
+        <ul class="forms-list">
+          ${pronouns.map((p, idx) => `<li><span>${escapeHtml(p)}</span><span>${escapeHtml(v.forms[idx])}</span></li>`).join("")}
+        </ul>
+      </div>
+    `;
+    wrap.appendChild(card);
+  });
+}
+
+function renderVerbCards() {
+  const wrap = document.getElementById("verbCards");
+  wrap.innerHTML = "";
+  verbs.forEach((v, i) => {
+    const div = document.createElement("div");
+    div.className = "verb-card";
+    div.innerHTML = `
+      <button type="button" class="verb-button" onclick="toggleVerb(${i})">${escapeHtml(v.infinitive)}</button>
+      <p class="small"><strong>По-русски:</strong> ${escapeHtml(v.ru)}</p>
+      <div id="verb-detail-${i}" style="display:none;">
+        <p>${v.forms.map((f, idx) => `<span class="token">${pronouns[idx]}: ${escapeHtml(f)}</span>`).join(" ")}</p>
+      </div>
+    `;
+    wrap.appendChild(div);
+  });
+}
+
+function toggleVerb(i) {
+  const el = document.getElementById(`verb-detail-${i}`);
+  el.style.display = el.style.display === "none" ? "block" : "none";
+}
+
+function renderVerbTable() {
+  const tbody = document.getElementById("verbTable");
+  tbody.innerHTML = "";
+  verbs.forEach(v => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <th scope="row">${escapeHtml(v.infinitive)}<br><span class="small">${escapeHtml(v.ru)}</span></th>
+      ${v.forms.map(f => `<td>${escapeHtml(f)}</td>`).join("")}
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+let selectedDragId = null;
+
+function renderDrag() {
+  const bank = document.getElementById("dragBank");
+  const targets = document.getElementById("dropTargets");
+  bank.innerHTML = "";
+  targets.innerHTML = "";
+  const shuffled = shuffle(dragItems);
+  shuffled.forEach(item => {
+    const div = document.createElement("div");
+    div.className = "drag";
+    div.id = `card-${item.id}`;
+    div.draggable = true;
+    div.dataset.id = item.id;
+    div.textContent = item.ru;
+    div.addEventListener("dragstart", ev => ev.dataTransfer.setData("text/plain", item.id));
+    div.addEventListener("click", () => selectDrag(item.id));
+    bank.appendChild(div);
+  });
+
+  dragItems.forEach(item => {
+    const target = document.createElement("div");
+    target.className = "target";
+    target.dataset.answer = item.id;
+    target.id = `target-${item.id}`;
+    target.innerHTML = `<div class="target-title">${escapeHtml(item.es)}</div><div class="drop-content small">Перетащите сюда русский перевод.</div><div class="feedback" id="fb-${item.id}"></div>`;
+    target.addEventListener("dragover", ev => { ev.preventDefault(); target.classList.add("over"); });
+    target.addEventListener("dragleave", () => target.classList.remove("over"));
+    target.addEventListener("drop", ev => {
+      ev.preventDefault();
+      target.classList.remove("over");
+      const id = ev.dataTransfer.getData("text/plain");
+      placeCard(id, item.id);
+    });
+    target.addEventListener("click", () => {
+      if (selectedDragId) placeCard(selectedDragId, item.id);
+    });
+    targets.appendChild(target);
+  });
+  selectedDragId = null;
+  document.getElementById("dragScore").textContent = "0";
+}
+
+function selectDrag(id) {
+  const card = document.getElementById(`card-${id}`);
+  if (!card || card.classList.contains("used")) return;
+  document.querySelectorAll(".drag").forEach(el => el.classList.remove("selected"));
+  selectedDragId = id;
+  card.classList.add("selected");
+}
+
+function placeCard(cardId, targetId) {
+  const card = document.getElementById(`card-${cardId}`);
+  const target = document.getElementById(`target-${targetId}`);
+  if (!card || !target || card.classList.contains("used")) return;
+
+  // Return previous card from this target, if any.
+  const previous = target.dataset.current;
+  if (previous) {
+    const prevCard = document.getElementById(`card-${previous}`);
+    if (prevCard) {
+      prevCard.classList.remove("used");
+      prevCard.style.display = "block";
+    }
+  }
+
+  target.dataset.current = cardId;
+  target.querySelector(".drop-content").innerHTML = `<span class="dropped">${escapeHtml(card.textContent)}</span>`;
+  card.classList.add("used");
+  card.classList.remove("selected");
+  card.style.display = "none";
+  selectedDragId = null;
+  target.querySelector(".feedback").textContent = "";
+  target.querySelector(".feedback").className = "feedback";
+}
+
+function checkDrag() {
+  let ok = 0;
+  dragItems.forEach(item => {
+    const target = document.getElementById(`target-${item.id}`);
+    const fb = document.getElementById(`fb-${item.id}`);
+    if (!target.dataset.current) {
+      fb.textContent = "Не хватает перевода.";
+      fb.className = "feedback warn";
+    } else if (target.dataset.current === item.id) {
+      fb.textContent = "Правильно.";
+      fb.className = "feedback ok";
+      ok++;
+    } else {
+      const correct = dragItems.find(x => x.id === item.id).ru;
+      fb.innerHTML = `Проверьте вариант. Ответ: <span class="answer">${escapeHtml(correct)}</span>`;
+      fb.className = "feedback bad";
+    }
+  });
+  document.getElementById("dragScore").textContent = ok;
+}
+
+function resetDrag() {
+  renderDrag();
+}
+
+function getVerbForms(infinitive) {
+  const v = verbs.find(x => x.infinitive === infinitive);
+  return v ? v.forms : [];
+}
+
+function renderSelect() {
+  const wrap = document.getElementById("selectItems");
+  wrap.innerHTML = "";
+  selectData.forEach((item, i) => {
+    const options = getVerbForms(item.verb);
+    const div = document.createElement("div");
+    div.className = "exercise-card";
+    div.innerHTML = `
+      <div class="choice-row">
+        <div>
+          <button type="button" class="verb-button" aria-label="Инфинитив">${escapeHtml(item.verb)}</button>
+          <p><strong>${escapeHtml(item.sentence)}</strong></p>
+        </div>
+        <select id="sel-${i}">
+          <option value="">Выберите форму</option>
+          ${options.map(o => `<option value="${escapeHtml(o)}">${escapeHtml(o)}</option>`).join("")}
+        </select>
+      </div>
+      <div class="feedback" id="sel-fb-${i}"></div>
+    `;
+    wrap.appendChild(div);
+  });
+  document.getElementById("selectTotal").textContent = selectData.length;
+  document.getElementById("selectScore").textContent = "0";
+}
+
+function checkSelect() {
+  let ok = 0;
+  selectData.forEach((item, i) => {
+    const select = document.getElementById(`sel-${i}`);
+    const fb = document.getElementById(`sel-fb-${i}`);
+    if (!select.value) {
+      fb.textContent = "Выберите форму.";
+      fb.className = "feedback warn";
+    } else if (select.value === item.answer) {
+      fb.textContent = "Правильно.";
+      fb.className = "feedback ok";
+      ok++;
+    } else {
+      fb.innerHTML = `Проверьте согласование. Ответ: <span class="answer">${escapeHtml(item.answer)}</span>`;
+      fb.className = "feedback bad";
+    }
+  });
+  document.getElementById("selectScore").textContent = ok;
+}
+
+function resetSelect() {
+  selectData.forEach((_, i) => {
+    const select = document.getElementById(`sel-${i}`);
+    const fb = document.getElementById(`sel-fb-${i}`);
+    select.value = "";
+    fb.textContent = "";
+    fb.className = "feedback";
+  });
+  document.getElementById("selectScore").textContent = "0";
+}
+
+function renderConversationQuestions() {
+  const wrap = document.getElementById("conversationItems");
+  if (!wrap) return;
+  wrap.innerHTML = "";
+  conversationQuestions.forEach((item, i) => {
+    const div = document.createElement("article");
+    div.className = "conversation-card";
+    const modelBlock = i === 0 ? `
+      <div>
+        <button type="button" class="secondary" onclick="toggleModelAnswer(${i})">Показать пример ответа</button>
+        <div class="model-answer" id="model-answer-${i}">${escapeHtml(item.model)}</div>
+      </div>
+    ` : ``;
+    div.innerHTML = `
+      <div>
+        <span class="verb-tag">${escapeHtml(item.verb)}</span>
+        <div class="question">${escapeHtml(item.q)}</div>
+      </div>
+      ${modelBlock}
+    `;
+    wrap.appendChild(div);
+  });
+}
+
+function toggleModelAnswer(i) {
+  const el = document.getElementById(`model-answer-${i}`);
+  if (!el) return;
+  el.classList.toggle("visible");
+}
+
+
+renderVerbCards();
+renderDrag();
+renderSelect();
+renderConversationQuestions();
+renderLexicon();
+</script>
+</body>
+</html>

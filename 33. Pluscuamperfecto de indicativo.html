@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pretérito Pluscuamperfecto de Indicativo</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <style>
+    :root{
+      --bg1:#f6f1ff;
+      --bg2:#eef8ff;
+      --ink:#182033;
+      --muted:#5f6c80;
+      --card:#ffffff;
+      --line:#d9e2f2;
+      --primary:#6d5dfc;
+      --primary2:#00a6a6;
+      --accent:#ffb703;
+      --ok:#168a4a;
+      --bad:#c2410c;
+      --soft:#f4f7fb;
+      --shadow:0 20px 55px rgba(28,35,65,.13);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(circle at 8% 5%, rgba(255,183,3,.24), transparent 24rem),
+        radial-gradient(circle at 90% 10%, rgba(0,166,166,.18), transparent 28rem),
+        linear-gradient(135deg,var(--bg1),var(--bg2));
+      min-height:100vh;
+      padding:28px 16px 48px;
+    }
+    .shell{max-width:1120px;margin:0 auto;}
+    header.hero{
+      position:relative;
+      overflow:hidden;
+      border-radius:34px;
+      padding:36px;
+      background:linear-gradient(135deg,#241d56 0%,#4b3fd6 54%,#00a6a6 100%);
+      color:#fff;
+      box-shadow:var(--shadow);
+    }
+    .hero:before{
+      content:"";
+      position:absolute;
+      inset:-80px -70px auto auto;
+      width:270px;height:270px;border-radius:50%;
+      background:rgba(255,255,255,.13);
+    }
+    .hero:after{
+      content:"había + participio";
+      position:absolute;
+      right:30px;bottom:24px;
+      font-size:clamp(1.4rem,4vw,3.5rem);
+      font-weight:900;
+      letter-spacing:-.06em;
+      opacity:.12;
+      white-space:nowrap;
+    }
+    .kicker{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:7px 12px;border-radius:999px;
+      background:rgba(255,255,255,.14);
+      border:1px solid rgba(255,255,255,.18);
+      font-weight:700;
+      font-size:.95rem;
+    }
+    h1{margin:16px 0 8px;font-size:clamp(2rem,5vw,4rem);line-height:1.02;letter-spacing:-.055em;}
+    .subtitle{margin:0;max-width:780px;color:rgba(255,255,255,.9);font-size:1.08rem;}
+    .section{
+      margin-top:26px;
+      background:rgba(255,255,255,.86);
+      backdrop-filter: blur(12px);
+      border:1px solid rgba(255,255,255,.75);
+      border-radius:30px;
+      padding:26px;
+      box-shadow:var(--shadow);
+    }
+    .section h2{margin:0 0 14px;font-size:1.65rem;letter-spacing:-.03em;display:flex;gap:10px;align-items:center;}
+    .badge{
+      display:inline-grid;place-items:center;
+      min-width:34px;height:34px;border-radius:12px;
+      background:linear-gradient(135deg,var(--primary),var(--primary2));
+      color:#fff;font-weight:900;font-size:.98rem;
+    }
+    .rule-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;}
+    .rule-card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:18px;
+      box-shadow:0 10px 26px rgba(28,35,65,.07);
+    }
+    .rule-card h3{margin:0 0 8px;font-size:1.08rem;color:#2b3165;}
+    .rule-card p{margin:7px 0;color:#293447;}
+    .formula{
+      display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0 4px;
+      font-weight:900;
+    }
+    .pill{
+      display:inline-flex;align-items:center;justify-content:center;
+      padding:7px 12px;border-radius:999px;
+      background:#edf2ff;border:1px solid #d8e0ff;color:#302c7f;
+      font-weight:800;
+    }
+    .plus{font-weight:900;color:var(--primary)}
+    table{width:100%;border-collapse:separate;border-spacing:0;margin-top:10px;overflow:hidden;border-radius:16px;border:1px solid var(--line);background:white;}
+    th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line);}
+    th{background:#f0f5ff;color:#2d3d63;font-size:.93rem;}
+    tr:last-child td{border-bottom:0;}
+    .note{padding:12px 14px;border-left:5px solid var(--accent);background:#fff8e6;border-radius:14px;margin-top:12px;color:#49360a;}
+    .exercise-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:18px;}
+    .instructions{color:var(--muted);margin:0;}
+    .tokens{display:flex;flex-wrap:wrap;gap:10px;padding:14px;border-radius:20px;background:linear-gradient(135deg,#f7f9ff,#eef9f8);border:1px dashed #b9c8de;margin-bottom:18px;}
+    .token{
+      user-select:none;
+      border:0;
+      padding:10px 14px;
+      border-radius:999px;
+      color:#fff;
+      background:linear-gradient(135deg,var(--primary),#8c5dfc);
+      font-weight:800;
+      box-shadow:0 8px 18px rgba(109,93,252,.25);
+      cursor:grab;
+    }
+    .token.alt{background:linear-gradient(135deg,#00a6a6,#0fbf83);box-shadow:0 8px 18px rgba(0,166,166,.23);}
+    .token:active{cursor:grabbing;transform:scale(.98)}
+    .token.selected{outline:4px solid rgba(255,183,3,.55);}
+    .activity-list{display:grid;gap:12px;}
+    .question{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:20px;
+      padding:15px 16px;
+      box-shadow:0 8px 20px rgba(28,35,65,.055);
+      line-height:1.7;
+    }
+    .num{font-weight:900;color:var(--primary);margin-right:6px;}
+    .drop{
+      display:inline-flex;align-items:center;justify-content:center;
+      min-width:122px;min-height:38px;
+      padding:5px 10px;margin:0 4px;
+      border:2px dashed #aebad2;
+      border-radius:13px;
+      background:#f8fbff;
+      color:#243044;
+      vertical-align:middle;
+      font-weight:800;
+      transition:.15s ease;
+    }
+    .drop.small{min-width:92px;}
+    .drop.long{min-width:220px;}
+    .drop.over{border-color:var(--primary);background:#eef2ff;transform:translateY(-1px)}
+    .drop.correct, select.correct, input.correct{border-color:var(--ok)!important;background:#effdf5!important;}
+    .drop.incorrect, select.incorrect, input.incorrect{border-color:var(--bad)!important;background:#fff4ed!important;}
+    .match-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:18px;align-items:start;}
+    .match-row{display:grid;grid-template-columns:1fr minmax(230px,.75fr);gap:12px;align-items:center;margin-bottom:12px;}
+    .source-sentence{background:white;border:1px solid var(--line);border-radius:18px;padding:14px;}
+    .ru-token{width:100%;border-radius:18px;text-align:left;white-space:normal;line-height:1.35;}
+    .form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;}
+    select, input.answer{
+      font:inherit;
+      padding:9px 12px;
+      border:2px solid #c7d2e6;
+      border-radius:13px;
+      background:white;
+      outline:none;
+      min-width:150px;
+      font-weight:700;
+    }
+    input.answer{width:min(260px,100%);}
+    .btnbar{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px;align-items:center;}
+    button.action{
+      border:0;border-radius:16px;padding:12px 18px;
+      background:linear-gradient(135deg,#241d56,var(--primary));
+      color:white;font-weight:900;font-size:1rem;cursor:pointer;
+      box-shadow:0 10px 22px rgba(36,29,86,.22);
+    }
+    button.secondary{background:#edf2ff;color:#2c3770;box-shadow:none;border:1px solid #d6def7;}
+    .score{font-weight:900;color:#2a3760;}
+    .mini{font-size:.93rem;color:var(--muted);}
+    .feedback{font-size:.92rem;margin-top:6px;font-weight:700;min-height:22px;}
+    .ok{color:var(--ok)} .bad{color:var(--bad)}
+    .conversation{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:12px;}
+    .talk{padding:15px;border-radius:20px;background:linear-gradient(135deg,#fff,#f2f7ff);border:1px solid var(--line);}
+    @media (max-width:820px){
+      header.hero,.section{padding:22px;border-radius:24px;}
+      .rule-grid,.match-grid,.form-grid,.conversation{grid-template-columns:1fr;}
+      .match-row{grid-template-columns:1fr;}
+      .hero:after{display:none;}
+    }
+    @media print{
+      body{background:white;padding:0;}
+      .section,header.hero{box-shadow:none;break-inside:avoid;}
+      .tokens,.btnbar{display:none;}
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="hero">
+      <span class="kicker">⏳ Gramática interactiva</span>
+      <h1>Pretérito Pluscuamperfecto de Indicativo</h1>
+      <p class="subtitle">Acciones anteriores a otra acción pasada: <strong>había trabajado</strong>, <strong>habías visto</strong>, <strong>habíamos dicho</strong>.</p>
+    </header>
+
+    <section class="section" id="reglas">
+      <h2><span class="badge">1</span> Regla y uso</h2>
+      <div class="rule-grid">
+        <article class="rule-card">
+          <h3>Общее значение</h3>
+          <p><strong>Pretérito Pluscuamperfecto</strong> используется, когда одно действие произошло <strong>раньше другого действия в прошлом</strong>.</p>
+          <p><em>Juan me dijo que había hecho el trabajo.</em><br>Хуан сказал мне, что сделал работу.</p>
+          <div class="note">Главная идея: действие уже было завершено к определённому моменту в прошлом.</div>
+        </article>
+        <article class="rule-card">
+          <h3>Формула образования</h3>
+          <div class="formula"><span class="pill">imperfecto de haber</span><span class="plus">+</span><span class="pill">participio pasado</span></div>
+          <p><strong>Participio regular:</strong> trabajar → trabajado; comer → comido; vivir → vivido.</p>
+          <p><strong>Participio irregular:</strong> hacer → hecho; decir → dicho; ver → visto; poner → puesto.</p>
+        </article>
+      </div>
+      <div class="rule-card" style="margin-top:16px">
+        <h3>Formas de haber</h3>
+        <table aria-label="Formas de haber en pluscuamperfecto">
+          <thead><tr><th>Persona</th><th>Haber</th><th>Ejemplo</th></tr></thead>
+          <tbody>
+            <tr><td>yo</td><td>había</td><td>había trabajado</td></tr>
+            <tr><td>tú / vos</td><td>habías</td><td>habías almorzado</td></tr>
+            <tr><td>él / ella / usted</td><td>había</td><td>había hecho</td></tr>
+            <tr><td>nosotros/as</td><td>habíamos</td><td>habíamos dicho</td></tr>
+            <tr><td>vosotros/as</td><td>habíais</td><td>habíais vuelto</td></tr>
+            <tr><td>ellos/as / ustedes</td><td>habían</td><td>habían caminado</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="rule-grid" style="margin-top:16px">
+        <article class="rule-card">
+          <h3>Только в прошедшем плане</h3>
+          <p><em>Ofelia terminó el trabajo que había comenzado temprano.</em><br>Офелия закончила работу, которую начала рано.</p>
+          <p><em>Me contaron que te habían visto.</em><br>Мне рассказали, что тебя видели.</p>
+        </article>
+        <article class="rule-card">
+          <h3>Сравнение</h3>
+          <p><em>Me está contando lo que hizo ayer.</em><br>Она рассказывает мне, что сделала вчера.</p>
+          <p><em>Ayer me estuvo contando lo que había hecho anteayer.</em><br>Вчера она рассказывала мне, что сделала позавчера.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="ej1">
+      <div class="exercise-head">
+        <div>
+          <h2><span class="badge">2</span> Arrastrar: forma de <em>haber</em></h2>
+          <p class="instructions">Arrastra la forma correcta de <strong>haber</strong> a cada espacio. También puedes tocar una ficha y luego tocar el espacio.</p>
+        </div>
+      </div>
+      <div class="tokens" data-token-bank="haber">
+        <button class="token" draggable="true" data-value="había">había</button>
+        <button class="token" draggable="true" data-value="habías">habías</button>
+        <button class="token" draggable="true" data-value="había">había</button>
+        <button class="token" draggable="true" data-value="habíamos">habíamos</button>
+        <button class="token" draggable="true" data-value="habíais">habíais</button>
+        <button class="token" draggable="true" data-value="habían">habían</button>
+      </div>
+      <div class="activity-list">
+        <div class="question"><span class="num">1.</span>Cuando llegué, ellos ya <span class="drop small" data-answer="habían"></span> terminado la cena.</div>
+        <div class="question"><span class="num">2.</span>Tú me dijiste que no <span class="drop small" data-answer="habías"></span> entendido la explicación.</div>
+        <div class="question"><span class="num">3.</span>Nosotros nunca <span class="drop small" data-answer="habíamos"></span> visto una ciudad tan grande.</div>
+        <div class="question"><span class="num">4.</span>Clara <span class="drop small" data-answer="había"></span> llamado antes de venir.</div>
+        <div class="question"><span class="num">5.</span>Vosotros ya <span class="drop small" data-answer="habíais"></span> preparado el informe.</div>
+        <div class="question"><span class="num">6.</span>Yo <span class="drop small" data-answer="había"></span> comprado los billetes el día anterior.</div>
+        <div class="question"><span class="num">7.</span>Usted <span class="drop small" data-answer="había"></span> perdido el documento en la oficina.</div>
+        <div class="question"><span class="num">8.</span>Mis padres <span class="drop small" data-answer="habían"></span> vivido allí muchos años.</div>
+      </div>
+      <div class="btnbar"><button class="action" onclick="checkDrops('ej1')">Comprobar</button><button class="action secondary" onclick="resetSection('ej1')">Reiniciar</button><span class="score" id="score-ej1"></span></div>
+    </section>
+
+    <section class="section" id="ej2">
+      <div class="exercise-head">
+        <div>
+          <h2><span class="badge">3</span> Arrastrar: participio correcto</h2>
+          <p class="instructions">Completa la forma compuesta con el participio adecuado.</p>
+        </div>
+      </div>
+      <div class="tokens">
+        <button class="token alt" draggable="true" data-value="hecho">hecho</button>
+        <button class="token alt" draggable="true" data-value="dicho">dicho</button>
+        <button class="token alt" draggable="true" data-value="visto">visto</button>
+        <button class="token alt" draggable="true" data-value="puesto">puesto</button>
+        <button class="token alt" draggable="true" data-value="escrito">escrito</button>
+        <button class="token alt" draggable="true" data-value="abierto">abierto</button>
+        <button class="token alt" draggable="true" data-value="vuelto">vuelto</button>
+        <button class="token alt" draggable="true" data-value="roto">roto</button>
+        <button class="token alt" draggable="true" data-value="trabajado">trabajado</button>
+        <button class="token alt" draggable="true" data-value="caminado">caminado</button>
+      </div>
+      <div class="activity-list">
+        <div class="question"><span class="num">1.</span>Cuando llegó el profesor, Ana ya había <span class="drop" data-answer="hecho"></span> la tarea. <span class="mini">(hacer)</span></div>
+        <div class="question"><span class="num">2.</span>Nosotros habíamos <span class="drop" data-answer="dicho"></span> la verdad antes de salir. <span class="mini">(decir)</span></div>
+        <div class="question"><span class="num">3.</span>Ellos nunca habían <span class="drop" data-answer="visto"></span> ese documental. <span class="mini">(ver)</span></div>
+        <div class="question"><span class="num">4.</span>Mi hermana había <span class="drop" data-answer="puesto"></span> la mesa temprano. <span class="mini">(poner)</span></div>
+        <div class="question"><span class="num">5.</span>Yo había <span class="drop" data-answer="escrito"></span> el mensaje por la mañana. <span class="mini">(escribir)</span></div>
+        <div class="question"><span class="num">6.</span>La tienda ya había <span class="drop" data-answer="abierto"></span> cuando pasamos. <span class="mini">(abrir)</span></div>
+        <div class="question"><span class="num">7.</span>Ustedes habían <span class="drop" data-answer="vuelto"></span> a casa antes de la lluvia. <span class="mini">(volver)</span></div>
+        <div class="question"><span class="num">8.</span>El vaso se había <span class="drop" data-answer="roto"></span> durante la mudanza. <span class="mini">(romper)</span></div>
+        <div class="question"><span class="num">9.</span>Antes de viajar, habíamos <span class="drop" data-answer="trabajado"></span> mucho. <span class="mini">(trabajar)</span></div>
+        <div class="question"><span class="num">10.</span>Cuando llegamos al hotel, ya habíamos <span class="drop" data-answer="caminado"></span> dos horas. <span class="mini">(caminar)</span></div>
+      </div>
+      <div class="btnbar"><button class="action" onclick="checkDrops('ej2')">Comprobar</button><button class="action secondary" onclick="resetSection('ej2')">Reiniciar</button><span class="score" id="score-ej2"></span></div>
+    </section>
+
+    <section class="section" id="ej3">
+      <h2><span class="badge">4</span> Relacionar: español → ruso</h2>
+      <p class="instructions">Arrastra la traducción rusa a la oración española correspondiente.</p>
+      <div class="match-grid">
+        <div>
+          <div class="match-row"><div class="source-sentence">1. Juan me dijo que había hecho el trabajo.</div><span class="drop long" data-answer="Хуан сказал мне, что сделал работу."></span></div>
+          <div class="match-row"><div class="source-sentence">2. Ofelia terminó el trabajo que había comenzado temprano.</div><span class="drop long" data-answer="Офелия закончила работу, которую начала рано."></span></div>
+          <div class="match-row"><div class="source-sentence">3. Me contaron que te habían visto en el centro.</div><span class="drop long" data-answer="Мне рассказали, что тебя видели в центре."></span></div>
+          <div class="match-row"><div class="source-sentence">4. Cuando llegué, ellos ya habían cenado.</div><span class="drop long" data-answer="Когда я пришёл, они уже поужинали."></span></div>
+          <div class="match-row"><div class="source-sentence">5. Ayer me contó lo que había hecho anteayer.</div><span class="drop long" data-answer="Вчера он рассказал мне, что сделал позавчера."></span></div>
+          <div class="match-row"><div class="source-sentence">6. Nunca habíamos caminado tanto.</div><span class="drop long" data-answer="Мы никогда раньше столько не ходили."></span></div>
+        </div>
+        <div class="tokens" style="margin:0">
+          <button class="token ru-token" draggable="true" data-value="Когда я пришёл, они уже поужинали.">Когда я пришёл, они уже поужинали.</button>
+          <button class="token ru-token" draggable="true" data-value="Мы никогда раньше столько не ходили.">Мы никогда раньше столько не ходили.</button>
+          <button class="token ru-token" draggable="true" data-value="Хуан сказал мне, что сделал работу.">Хуан сказал мне, что сделал работу.</button>
+          <button class="token ru-token" draggable="true" data-value="Мне рассказали, что тебя видели в центре.">Мне рассказали, что тебя видели в центре.</button>
+          <button class="token ru-token" draggable="true" data-value="Вчера он рассказал мне, что сделал позавчера.">Вчера он рассказал мне, что сделал позавчера.</button>
+          <button class="token ru-token" draggable="true" data-value="Офелия закончила работу, которую начала рано.">Офелия закончила работу, которую начала рано.</button>
+        </div>
+      </div>
+      <div class="btnbar"><button class="action" onclick="checkDrops('ej3')">Comprobar</button><button class="action secondary" onclick="resetSection('ej3')">Reiniciar</button><span class="score" id="score-ej3"></span></div>
+    </section>
+
+    <section class="section" id="ej4">
+      <h2><span class="badge">5</span> Escribir la forma correcta</h2>
+      <p class="instructions">Escribe el Pretérito Pluscuamperfecto completo. Usa el infinitivo entre paréntesis.</p>
+      <div class="form-grid" id="writeExercise"></div>
+      <div class="btnbar"><button class="action" onclick="checkInputs()">Comprobar</button><button class="action secondary" onclick="resetInputs()">Reiniciar</button><span class="score" id="score-ej4"></span></div>
+    </section>
+
+    <section class="section" id="ej5">
+      <h2><span class="badge">6</span> Conversación</h2>
+      <p class="instructions">Preguntas para practicar oralmente.</p>
+      <div class="conversation">
+        <div class="talk">1. ¿Qué cosas ya habías aprendido antes de empezar a estudiar español?</div>
+        <div class="talk">2. ¿Habías viajado a otro país antes de cumplir dieciocho años?</div>
+        <div class="talk">3. ¿Qué película ya habías visto más de una vez?</div>
+        <div class="talk">4. ¿Qué decisión importante habías tomado antes de mudarte o cambiar de rutina?</div>
+        <div class="talk">5. ¿Qué actividad nunca habías probado, pero después te gustó?</div>
+        <div class="talk">6. ¿Qué te habían contado de una ciudad antes de visitarla?</div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    let selectedToken = null;
+
+    function normalize(text){
+      return String(text || '')
+        .trim()
+        .toLowerCase()
+        .replace(/[.,;:!?¡¿]/g,'')
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g,'')
+        .replace(/\s+/g,' ');
+    }
+
+    document.querySelectorAll('.token').forEach(token => {
+      token.addEventListener('dragstart', e => {
+        e.dataTransfer.setData('text/plain', token.dataset.value);
+      });
+      token.addEventListener('click', () => {
+        document.querySelectorAll('.token').forEach(t => t.classList.remove('selected'));
+        selectedToken = token.dataset.value;
+        token.classList.add('selected');
+      });
+    });
+
+    document.querySelectorAll('.drop').forEach(zone => {
+      zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('over'); });
+      zone.addEventListener('dragleave', () => zone.classList.remove('over'));
+      zone.addEventListener('drop', e => {
+        e.preventDefault();
+        zone.classList.remove('over');
+        fillDrop(zone, e.dataTransfer.getData('text/plain'));
+      });
+      zone.addEventListener('click', () => {
+        if(selectedToken){ fillDrop(zone, selectedToken); }
+      });
+    });
+
+    function fillDrop(zone, value){
+      zone.textContent = value;
+      zone.dataset.user = value;
+      zone.classList.remove('correct','incorrect');
+    }
+
+    function checkDrops(sectionId){
+      const root = document.getElementById(sectionId);
+      const zones = root.querySelectorAll('.drop');
+      let correct = 0;
+      zones.forEach(zone => {
+        const ok = normalize(zone.dataset.user) === normalize(zone.dataset.answer);
+        zone.classList.toggle('correct', ok);
+        zone.classList.toggle('incorrect', !ok);
+        if(ok) correct++;
+      });
+      document.getElementById('score-' + sectionId).textContent = `${correct} / ${zones.length}`;
+    }
+
+    function resetSection(sectionId){
+      const root = document.getElementById(sectionId);
+      root.querySelectorAll('.drop').forEach(zone => {
+        zone.textContent = '';
+        zone.dataset.user = '';
+        zone.classList.remove('correct','incorrect','over');
+      });
+      const score = document.getElementById('score-' + sectionId);
+      if(score) score.textContent = '';
+    }
+
+    const writeItems = [
+      {s:'Antes de mudarme, yo ________ todos mis muebles.', inf:'vender', a:'había vendido'},
+      {s:'Cuando te llamé, tú ya ________ de casa.', inf:'salir', a:'habías salido'},
+      {s:'Marina no vino porque ________ el autobús.', inf:'perder', a:'había perdido'},
+      {s:'Nosotros ________ la noticia antes de verla en internet.', inf:'escuchar', a:'habíamos escuchado'},
+      {s:'¿Vosotros ya ________ el problema con el profesor?', inf:'hablar', a:'habíais hablado'},
+      {s:'Mis vecinos ________ la casa antes de venderla.', inf:'reformar', a:'habían reformado'},
+      {s:'Yo nunca ________ una carta tan larga.', inf:'escribir', a:'había escrito'},
+      {s:'Ella ________ la ventana antes de salir.', inf:'cerrar', a:'había cerrado'},
+      {s:'Ustedes no ________ la dirección correcta.', inf:'poner', a:'habían puesto'},
+      {s:'Tú ________ la verdad desde el principio.', inf:'decir', a:'habías dicho'},
+      {s:'Cuando empezó la reunión, nosotros ya ________ el informe.', inf:'leer', a:'habíamos leído'},
+      {s:'El director ________ temprano, por eso no lo vimos.', inf:'llegar', a:'había llegado'}
+    ];
+
+    const container = document.getElementById('writeExercise');
+    writeItems.forEach((item, i) => {
+      const card = document.createElement('div');
+      card.className = 'question';
+      card.innerHTML = `<span class="num">${i+1}.</span>${item.s.replace('________', `<input class="answer" id="w${i}" autocomplete="off" />`)} <span class="mini">(${item.inf})</span><div class="feedback" id="wf${i}"></div>`;
+      container.appendChild(card);
+    });
+
+    function checkInputs(){
+      let correct = 0;
+      writeItems.forEach((item, i) => {
+        const input = document.getElementById('w'+i);
+        const fb = document.getElementById('wf'+i);
+        const ok = normalize(input.value) === normalize(item.a);
+        input.classList.toggle('correct', ok);
+        input.classList.toggle('incorrect', !ok);
+        fb.className = 'feedback ' + (ok ? 'ok' : 'bad');
+        fb.textContent = ok ? '✓' : `✗ ${item.a}`;
+        if(ok) correct++;
+      });
+      document.getElementById('score-ej4').textContent = `${correct} / ${writeItems.length}`;
+    }
+
+    function resetInputs(){
+      writeItems.forEach((_, i) => {
+        const input = document.getElementById('w'+i);
+        const fb = document.getElementById('wf'+i);
+        input.value = '';
+        input.classList.remove('correct','incorrect');
+        fb.textContent = '';
+        fb.className = 'feedback';
+      });
+      document.getElementById('score-ej4').textContent = '';
+    }
+  </script>
+</body>
+</html>

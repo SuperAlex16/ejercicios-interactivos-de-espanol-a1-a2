@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Модизмы и разговорные слова — España, Argentina, Hacer y Poner</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+<style>
+  :root {
+    --bg1: #0d1f3c;
+    --bg2: #1a3a6e;
+    --panel: rgba(255,255,255,.10);
+    --panel-hover: rgba(255,255,255,.18);
+    --border: rgba(255,255,255,.18);
+    --text: #ffffff;
+    --muted: #c8d8f0;
+    --gold: #ffd166;
+    --blue: #7dd3fc;
+    --green: #86efac;
+    --pink: #ff6b9a;
+    --violet: #c084fc;
+    --orange: #fb923c;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    min-height: 100vh;
+    font-family: Inter, Arial, Helvetica, sans-serif;
+    color: var(--text);
+    background:
+      radial-gradient(circle at 8% 12%, rgba(255,209,102,.22) 0%, transparent 28%),
+      radial-gradient(circle at 90% 8%, rgba(125,211,252,.20) 0%, transparent 28%),
+      radial-gradient(circle at 50% 100%, rgba(255,107,154,.18) 0%, transparent 30%),
+      linear-gradient(150deg, var(--bg1) 0%, var(--bg2) 100%);
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: radial-gradient(rgba(255,255,255,.06) 1px, transparent 1px);
+    background-size: 28px 28px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 32px 20px 80px;
+  }
+
+  .backlink {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: .85rem;
+    font-weight: 600;
+    padding: 8px 14px;
+    border-radius: 99px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    transition: background .18s, color .18s;
+    margin-bottom: 28px;
+  }
+  .backlink:hover { background: var(--panel-hover); color: #fff; }
+
+  header {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  header h1 {
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    font-weight: 800;
+    letter-spacing: -.02em;
+    line-height: 1.15;
+    margin-bottom: 14px;
+    background: linear-gradient(135deg, #fff 30%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .intro {
+    color: var(--muted);
+    font-size: .98rem;
+    line-height: 1.7;
+    max-width: 680px;
+    margin: 0 auto;
+    text-align: left;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px 24px;
+    backdrop-filter: blur(4px);
+  }
+
+  .section { margin-top: 36px; }
+
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-title .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .dot-violet { background: var(--violet); }
+
+  /* Extras (same accordion styles as Vocabulario.html) */
+  .vw-extra {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+  .vw-extra-toggle {
+    all: unset;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 14px 16px;
+    cursor: pointer;
+  }
+  .vw-extra-icon { font-size: 1.3rem; flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; width: 26px; }
+  .vw-flag {
+    width: 26px;
+    height: 18px;
+    border-radius: 3px;
+    box-shadow: 0 0 0 1px rgba(255,255,255,.25);
+    display: block;
+  }
+  .vw-extra-info { flex: 1; display: flex; flex-direction: column; }
+  .vw-extra-title { font-size: .92rem; font-weight: 700; }
+  .vw-extra-sub { font-size: .76rem; color: var(--muted); margin-top: 1px; }
+  .vw-day-arrow {
+    flex-shrink: 0;
+    color: var(--muted);
+    transition: transform .2s;
+    font-size: .8rem;
+  }
+  .vw-extra.open .vw-day-arrow { transform: rotate(180deg); }
+  .vw-extra-panel {
+    display: none;
+    padding: 4px 18px 18px;
+    border-top: 1px solid var(--border);
+  }
+  .vw-extra.open .vw-extra-panel { display: block; }
+  .vw-extra-item {
+    padding: 9px 0;
+    border-bottom: 1px dashed var(--border);
+    font-size: .84rem;
+    line-height: 1.55;
+    color: var(--text);
+  }
+  .vw-extra-item:last-child { border-bottom: none; }
+  .vw-extra-heading {
+    margin: 14px 0 4px;
+    font-weight: 700;
+    color: var(--blue);
+    font-size: .82rem;
+  }
+  .vw-extra-heading:first-child { margin-top: 10px; }
+
+  footer {
+    margin-top: 64px;
+    padding-bottom: 24px;
+    color: var(--muted);
+    font-size: .8rem;
+    opacity: .6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+  }
+  .footer-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  a.footer-staffilo-name {
+    color: #4a9e3f !important;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .footer-staffilo-logo { height: 28px; width: auto; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="backlink" href="index.html">← На главную</a>
+
+  <header>
+    <h1>Модизмы и разговорные слова</h1>
+    <div class="intro">
+      <p>Разговорные и вульгарные словечки Испании и Аргентины — то, что не встретишь в учебнике, но часто услышишь в жизни. А также устойчивые выражения с глаголами <strong>hacer</strong> и <strong>poner</strong>, которые встречаются почти в любом разговоре.</p>
+    </div>
+  </header>
+
+  <div class="section">
+    <div class="section-title">
+      <span class="dot dot-violet"></span>
+      Дополнительно
+    </div>
+
+    <div class="vw-extra">
+      <button class="vw-extra-toggle" type="button" aria-expanded="false">
+        <span class="vw-extra-icon"><svg class="vw-flag" viewBox="0 0 3 2" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Испания"><rect width="3" height="2" fill="#c60b1e"/><rect width="3" height="1" y="0.5" fill="#ffc400"/></svg></span>
+        <span class="vw-extra-info">
+          <span class="vw-extra-title">Некоторые пиренейские испанские вульгарные слова и выражения</span>
+          <span class="vw-extra-sub">33 выражений</span>
+        </span>
+        <span class="vw-day-arrow">▾</span>
+      </button>
+      <div class="vw-extra-panel"><div class="vw-extra-item">Cabrearse — разозлиться, взбеситься. Правильный возвратный глагол I спряжения: Este gilipollas me ha cabreado – Этот идиот вывел меня из себя.</div><div class="vw-extra-item">Chaval/a — пацан / девчонка, парень / девушка, молодой человек / девушка.</div><div class="vw-extra-item">Chorrada — чепуха, ерунда, фигня.</div><div class="vw-extra-item">Chungo/a — паршивый / ая, стремный / ая, опасный / ая.</div><div class="vw-extra-item">Cojonudo/a — офигенный / ая, охрененный / ая, крутой / ая (вульгарно).</div><div class="vw-extra-item">Coño — чёрт, блин, ё-моё (очень грубо).</div><div class="vw-extra-item">Currar — вкалывать, пахать, работать.</div><div class="vw-extra-item">El (la) colega - дружище</div><div class="vw-extra-item">El / la empollón/a — зубрила, ботан, задрот (грубое)</div><div class="vw-extra-item">El /la cotilla — сплетник, сплетница, трепло.</div><div class="vw-extra-item">El /la pijo/a — мажор, золотая молодёжь.</div><div class="vw-extra-item">El curro – работа</div><div class="vw-extra-item">Estar hecho polvo — быть вымотанным, разбитым, без сил.</div><div class="vw-extra-item">Flipar — офигеть, офонареть, быть в шоке. Правильный глагол I спряжения: Flipo contigo – Я офигеваю от тебя. Я в шоке от тебя (твоей глупости).</div><div class="vw-extra-item">Gilipollas — придурок, идиот, тупица.</div><div class="vw-extra-item">Guay — классно, круто, здорово.</div><div class="vw-extra-item">Hostia — блин, чёрт возьми; Dar de hostia – дать оплеуху, ударить, вмочить (очень грубо).</div><div class="vw-extra-item">Joder — как грубое междометие: блин, чёрт, ё-моё; бл..ть. Как бранный глагол — иметь сексуальные отношения.</div><div class="vw-extra-item">La movida — заваруха, неприятность; движуха, мероприятие.</div><div class="vw-extra-item">La pasta — бабки, деньги.</div><div class="vw-extra-item">La peña — тусовка, компания, народ.</div><div class="vw-extra-item">La putada — блядство, свинство, гадость (вульгарно).</div><div class="vw-extra-item">Lа chapuza - халтура</div><div class="vw-extra-item">Majo/a — милый / ая, приятный / ая, симпатичный / ая.</div><div class="vw-extra-item">Molar — тащиться, нравиться, вставлять (разг.). Правильный глагол I спряжения: Esta cosa mola – Я тащусь от этой вещи.</div><div class="vw-extra-item">Mono / a – красивый / ая, милый / ая: ¡Qué niño más mono! – Какой красивый ребёнок!</div><div class="vw-extra-item">Pillarse — втюриться, влюбиться; заполучить, прикупить. Правильный возвратный глагол I спряжения: Se ha pillado con el (ella) – Втюрился в него (неё)</div><div class="vw-extra-item">Pirarse – сваливать, свалить. Правильный возвратный глагол I спряжения: ¡Pírate! – Отвали! Me piro – Я сваливаю</div><div class="vw-extra-item">Pringado/a — лох, неудачник/ца, простофиля.</div><div class="vw-extra-item">Rajarse — струсить, сдрейфить, передумать. Правильный возвратный глагол I спряжения: Os rajáis como siemre – Вы как обычно сдрейфили</div><div class="vw-extra-item">Tener mala leche — быть злым, с тяжёлым характером.</div><div class="vw-extra-item">Tío/tía — чувак / тётка, парень / девушка, человек (разговорное).</div><div class="vw-extra-item">Un mogollón — куча, море, очень много. Tengo un mogollón de curro – У меня куча работы</div></div>
+    </div>
+    <div class="vw-extra">
+      <button class="vw-extra-toggle" type="button" aria-expanded="false">
+        <span class="vw-extra-icon"><svg class="vw-flag" viewBox="0 0 3 2" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Аргентина"><rect width="3" height="2" fill="#74acdf"/><rect width="3" height="0.6667" y="0.6667" fill="#fff"/><circle cx="1.5" cy="1" r="0.22" fill="#f6b40e" stroke="#85340a" stroke-width="0.02"/></svg></span>
+        <span class="vw-extra-info">
+          <span class="vw-extra-title">Некоторые разговорные и вульгарные аргентинские слова и выражения</span>
+          <span class="vw-extra-sub">27 выражений</span>
+        </span>
+        <span class="vw-day-arrow">▾</span>
+      </button>
+      <div class="vw-extra-panel"><div class="vw-extra-item">Afanar – стащить (украсть) (Правильный глагол I спряжения)</div><div class="vw-extra-item">Birra – пиво</div><div class="vw-extra-item">Boludo, boluda – неделёкий (ая), дура (к)</div><div class="vw-extra-item">Cana, yuta, cobani – вульгарное название полиции (менты)</div><div class="vw-extra-item">Capo – лучший в своём деле (классный)</div><div class="vw-extra-item">Chamuyar – трындеть, трепаться (говорить без толку) (Правильный глагол I спряжения)</div><div class="vw-extra-item">Changa – подработка</div><div class="vw-extra-item">Che – обращение к близкому человеку</div><div class="vw-extra-item">El (la) careta – двуличный человек</div><div class="vw-extra-item">Embole – нудный (вульгарное слово)</div><div class="vw-extra-item">Grasa – фигня, дешёвка</div><div class="vw-extra-item">Guita – бабло (деньги)</div><div class="vw-extra-item">Jeta – рожа, рыло</div><div class="vw-extra-item">Me las tomo – Я ушёл (ушла); Меня нет</div><div class="vw-extra-item">Me pinta… - Я очень хочу ч-т сделать (употребляется в первом лице)</div><div class="vw-extra-item">Morfar – жрать (Правильный глагол I спряжения)</div><div class="vw-extra-item">Naso – шнобель (большой нос)</div><div class="vw-extra-item">Pegar un tubazo – позвонить по телефону кому-л (Правильный глагол I спряжения)</div><div class="vw-extra-item">Pibe – чувак (только к мальчикам, парням, мужчинам)</div><div class="vw-extra-item">Quemado, quemada – поехавший (ая) головой (например, уставший, пьяный, под наркотиками и т.д.)</div><div class="vw-extra-item">Romper las bolas  - надоедать (вульгарное) (Правильный глагол II спряжения, причастие – roto): Me ha roto las bolas – Он (а) достал (а) меня</div><div class="vw-extra-item">Salame – дурачок, дурочка (ласковое обращение)</div><div class="vw-extra-item">Se le saltó la térmica – он (она) просто ох…л (а)</div><div class="vw-extra-item">Tirar los galgos – быть без ума от к-л., быть влюблённым в к-л (Правильный глагол I спряжения): Le tira los galgos – Он (она) без ума от неё (от него)</div><div class="vw-extra-item">Trompa – вульгарное название рта (пасть)</div><div class="vw-extra-item">¡Tomátelas!, ¡Correte! – Иди вон! Иди на …!</div><div class="vw-extra-item">Viejo, vieja – отец, мать</div></div>
+    </div>
+    <div class="vw-extra">
+      <button class="vw-extra-toggle" type="button" aria-expanded="false">
+        <span class="vw-extra-icon">🧩</span>
+        <span class="vw-extra-info">
+          <span class="vw-extra-title">Устойчивые выражения с hacer и poner</span>
+          <span class="vw-extra-sub">59 выражений</span>
+        </span>
+        <span class="vw-day-arrow">▾</span>
+      </button>
+      <div class="vw-extra-panel"><div class="vw-extra-item">hacer una pregunta - задать вопрос (El alumno quiere hacer una pregunta sobre el texto.)</div><div class="vw-extra-item">hacer ruido - шуметь (No debes hacer ruido en la biblioteca.)</div><div class="vw-extra-item">hacer silencio - соблюдать тишину (El profesor pidió hacer silencio durante el examen.)</div><div class="vw-extra-item">hacer cola - стоять в очереди (Tuvimos que hacer cola durante media hora.)</div><div class="vw-extra-item">hacer caso - слушаться, обращать внимание (Debes hacer caso a las instrucciones.)</div><div class="vw-extra-item">hacer caso omiso - не обращать внимания (El conductor hizo caso omiso de la señal.)</div><div class="vw-extra-item">hacer falta - быть нужным, не хватать (Hace falta más tiempo para terminar el trabajo.)</div><div class="vw-extra-item">hacer daño - причинять боль, вредить (Tus palabras pueden hacer daño.)</div><div class="vw-extra-item">hacer frente a algo - противостоять чему-то, справляться с чем-то (La empresa debe hacer frente a nuevos gastos.)</div><div class="vw-extra-item">hacer las paces - помириться (Los hermanos decidieron hacer las paces después de discutir.)</div><div class="vw-extra-item">hacer realidad - воплотить в жизнь, осуществить (Con esfuerzo puedes hacer realidad tus planes.)</div><div class="vw-extra-item">hacer responsable a alguien - возлагать ответственность на кого-то (No es justo hacer responsable a una sola persona.)</div><div class="vw-extra-item">hacer gracia - смешить, казаться забавным (Esa historia no me hace gracia.)</div><div class="vw-extra-item">hacer ilusión - радовать, вызывать приятное ожидание (Me hace ilusión verte otra vez.)</div><div class="vw-extra-item">hacer tiempo - тянуть время, коротать время (Vamos a hacer tiempo hasta que empiece la clase.)</div><div class="vw-extra-item">hacer la vista gorda - закрывать глаза на что-то (El jefe hizo la vista gorda ante el pequeño error.)</div><div class="vw-extra-item">hacer de intérprete - выступать в роли переводчика (Mi hermana tuvo que hacer de intérprete durante la reunión.)</div><div class="vw-extra-item">hacer de las suyas - снова взяться за своё, натворить дел (El niño volvió a hacer de las suyas en clase.)</div><div class="vw-extra-item">hacerse cargo de algo - взять на себя ответственность, заняться чем-то (Ella se hizo cargo de la organización del evento.)</div><div class="vw-extra-item">hacerse el tonto - прикидываться дураком (No te hagas el tonto; sabes perfectamente qué pasó.)</div><div class="vw-extra-item">hacerse mayor - взрослеть, стареть (Los hijos se hacen mayores muy rápido.)</div><div class="vw-extra-item">hacerse de noche - темнеть, наступать ночи (Tenemos que volver antes de que se haga de noche.)</div><div class="vw-extra-item">hacerse realidad - осуществиться, стать реальностью (Su sueño se hizo realidad después de muchos años.)</div><div class="vw-extra-heading">Hacer + infinitivo – заставлять (кого-то) что-то делать:</div><div class="vw-extra-item">(Los padres me hicieron estudiar derecho)</div><div class="vw-extra-item">hacer ver - дать понять, показать (El profesor quiere hacer ver la importancia del tema.)</div><div class="vw-extra-item">hacer saber - сообщить (Le voy a hacer saber mi decisión esta tarde.)</div><div class="vw-extra-item">hacer cambiar de opinión - заставить изменить мнение (Sus argumentos pueden hacer cambiar de opinión a muchos.)</div><div class="vw-extra-item">hacer perder el tiempo - заставлять терять время (No quiero hacerte perder el tiempo.)</div><div class="vw-extra-item">poner atención - обращать внимание (Hay que poner atención cuando el profesor explica la diferencia.)</div><div class="vw-extra-item">poner un ejemplo - привести пример (Voy a poner un ejemplo para que la regla quede más clara.)</div><div class="vw-extra-item">poner en duda - поставить под сомнение (No quiero poner en duda tu explicación, pero necesito revisar los datos.)</div><div class="vw-extra-item">poner en práctica - применить на практике (Los estudiantes deben poner en práctica las formas nuevas en una conversación.)</div><div class="vw-extra-item">poner en marcha - запустить, привести в действие (La institución decidió poner en marcha un nuevo programa.)</div><div class="vw-extra-item">poner en peligro - подвергнуть опасности (Esa decisión puede poner en peligro todo el proyecto.)</div><div class="vw-extra-item">poner orden - навести порядок (El director tuvo que poner orden en la reunión.)</div><div class="vw-extra-item">poner límites - установить границы (Es necesario poner límites desde el principio.)</div><div class="vw-extra-item">poner una excusa - придумать оправдание (Siempre intenta poner una excusa cuando llega tarde.)</div><div class="vw-extra-item">poner una queja - подать жалобу (El cliente decidió poner una queja por el mal servicio.)</div><div class="vw-extra-item">poner una multa - выписать штраф (El policía puede poner una multa si el coche está mal estacionado.)</div><div class="vw-extra-item">poner nervioso a alguien - заставить кого-то нервничать (Ese tipo de preguntas puede poner nervioso a cualquier estudiante.)</div><div class="vw-extra-item">poner triste a alguien - расстроить кого-то (La noticia puso triste a toda la familia.)</div><div class="vw-extra-item">poner contento a alguien - обрадовать кого-то (Tu visita va a poner contenta a tu abuela.)</div><div class="vw-extra-item">poner al corriente - ввести в курс дела (Mañana te voy a poner al corriente de lo ocurrido.)</div><div class="vw-extra-item">poner de acuerdo - привести к согласию (Fue difícil poner de acuerdo a todos los participantes.)</div><div class="vw-extra-item">ponerse de acuerdo - договориться (Tenemos que ponernos de acuerdo sobre la fecha del examen.)</div><div class="vw-extra-item">ponerse en contacto con alguien - связаться с кем-то (Debes ponerte en contacto con la oficina cuanto antes.)</div><div class="vw-extra-item">ponerse en camino - отправиться в путь (Nos pusimos en camino antes del amanecer.)</div><div class="vw-extra-item">ponerse en forma - привести себя в форму (Quiere ponerse en forma antes del verano.)</div><div class="vw-extra-heading">Ponerse a hacer algo - внезапное начало действия:</div><div class="vw-extra-item">ponerse a estudiar - начать учиться (Voy a ponerme a estudiar después de comer.)</div><div class="vw-extra-item">ponerse a trabajar - приступить к работе (Tenemos que ponernos a trabajar ahora mismo.)</div><div class="vw-extra-item">ponerse a llorar - расплакаться (El niño se puso a llorar al perder el juguete.)</div><div class="vw-extra-item">ponerse a reír - рассмеяться (Todos se pusieron a reír con la historia.)</div><div class="vw-extra-heading">Ponerse + прилагательное - внезапный результат действия:</div><div class="vw-extra-item">ponerse enfermo - заболеть (Se puso enfermo después del viaje.)</div><div class="vw-extra-item">ponerse nervioso - начать нервничать (Me pongo nervioso antes de hablar en público.)</div><div class="vw-extra-item">ponerse triste - загрустить (La niña se puso triste cuando su amiga se fue.)</div><div class="vw-extra-item">ponerse contento - обрадоваться (Mi padre se puso contento al recibir la noticia.)</div><div class="vw-extra-item">ponerse serio - стать серьезным (El profesor se puso serio al escuchar la respuesta.)</div><div class="vw-extra-item">ponerse rojo - покраснеть (Ana se puso roja cuando todos la miraron.)</div><div class="vw-extra-item">ponerse pálido - побледнеть (El estudiante se puso pálido al ver la nota.)</div></div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-right">
+    Purely coded, naturally spread by Alex Gorlov@<a class="footer-staffilo-name" href="https://staffilocode.com/" target="_blank" rel="noopener noreferrer">StaffiloCode</a>
+    <a href="https://staffilocode.com/" target="_blank" rel="noopener noreferrer">
+      <img class="footer-staffilo-logo" src="Staffilocode_logo_transparent.webp" alt="StaffiloCode">
+    </a>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.vw-extra-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var item = btn.closest('.vw-extra');
+      var isOpen = item.classList.toggle('open');
+      btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+  });
+</script>
+
+</body>
+</html>

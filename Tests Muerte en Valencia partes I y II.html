@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprensión de Lectura - Muerte en Valencia</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            background-color: #ffffff;
+            max-width: 700px;
+            width: 100%;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #1e3a8a;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #6b7280;
+            margin-bottom: 30px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .question-block {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .question-text {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #1f2937;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            font-size: 15px;
+            border: 2px solid #cbd5e1;
+            border-radius: 6px;
+            background-color: #fff;
+            color: #333;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+        select:focus {
+            border-color: #3b82f6;
+        }
+        .correct-select {
+            border-color: #10b981 !important;
+            background-color: #ecfdf5 !important;
+            color: #065f46 !important;
+            font-weight: bold;
+        }
+        .incorrect-select {
+            border-color: #ef4444 !important;
+            background-color: #fef2f2 !important;
+            color: #991b1b !important;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Muerte en Valencia (Partes I y II)</h1>
+    <div class="subtitle">Nivel DELE A0-A1 &bull; Selecciona la respuesta correcta (Color inmediato)</div>
+
+    <form id="quizForm">
+        <div class="question-block">
+            <div class="question-text">1. ¿Cómo se llama el personaje principal?</div>
+            <select onchange="validarRespuesta(this)" data-correct="Pepe Rey.">
+                <option value="">-- Selecciona una opción --</option>
+                <option value="Juan Morales.">Juan Morales.</option>
+                <option value="Pepe Rey.">Pepe Rey.</option>
+                <option value="Javier Torres.">Javier Torres.</option>
+            </select>
+        </div>
+
+        <div class="question-block">
+            <div class="question-text">2. ¿A qué se dedica? / ¿Cuál es el trabajo de Pepe Rey?</div>
+            <select onchange="validarRespuesta(this)" data-correct="Es detective privado.">
+                <option value="">-- Selecciona una opción --</option>
+                <option value="Es camarero en un café.">Es camarero en un café.</option>
+                <option value="Es secretario en un banco.">Es secretario en un banco.</option>
+                <option value="Es detective privado.">Es detective privado.</option>
+            </select>
+        </div>
+
+        <div class="question-block">
+            <div class="question-text">3. ¿Cómo es físicamente Pepe Rey?</div>
+            <select onchange="validarRespuesta(this)" data-correct="Es cada día más calvo y más gordo.">
+                <option value="">-- Selecciona una opción --</option>
+                <option value="Es cada día más calvo y más gordo.">Es cada día más calvo y más gordo.</option>
+                <option value="Es alto, joven y muy delgado.">Es alto, joven y muy delgado.</option>
+                <option value="Es rubio y tiene el pelo rizado.">Es rubio y tiene el pelo rizado.</option>
+            </select>
+        </div>
+
+        <div class="question-block">
+            <div class="question-text">4. ¿Quién es Susi?</div>
+            <select onchange="validarRespuesta(this)" data-correct="Es la secretaria de Pepe.">
+                <option value="">-- Selecciona una opción --</option>
+                <option value="Es la exmujer de Pepe.">Es la exmujer de Pepe.</option>
+                <option value="Es la hija pequeña de Pepe.">Es la hija pequeña de Pepe.</option>
+                <option value="Es la secretaria de Pepe.">Es la secretaria de Pepe.</option>
+            </select>
+        </div>
+
+        <div class="question-block">
+            <div class="question-text">5. ¿Por qué está triste Pepe el fin de semana?</div>
+            <select onchange="validarRespuesta(this)" data-correct="Porque está solo y no ve a sus hijos.">
+                <option value="">-- Selecciona una opción --</option>
+                <option value="Porque tiene mucho trabajo en la oficina.">Porque tiene mucho trabajo en la oficina.</option>
+                <option value="Porque está solo y no ve a sus hijos.">Porque está solo y no ve a sus hijos.</option>
+                <option value="Porque está enfermo en casa.">Porque está enfermo en casa.</option>
+            </select>
+        </div>
+
+        <div class="question-block">
+            <div class="question-text">6. ¿En qué ciudad vive y trabaja Pepe?</div>
+            <select onchange="validarRespuesta(this)" data-correct="En Madrid.">
+                <option value="">-- Selecciona una opción --</option>
+                <option value="En Barcelona.">En Barcelona.</option>
+                <option value="En Madrid.">En Madrid.</option>
+                <option value="En Valencia.">En Valencia.</option>
+            </select>
+        </div>
+
+        <div class="question-block">
+            <div class="question-text">7. ¿Cómo va Pepe desde su oficina hasta su casa?</div>
+            <select onchange="validarRespuesta(this)" data-correct="Va a pie.">
+                <option value="">-- Selecciona una opción --</option>
+                <option value="Va en metro.">Va en metro.</option>
+                <option value="Va en taxi.">Va en taxi.</option>
+                <option value="Va a pie.">Va a pie.</option>
+            </select>
+        </div>
+
+        <div class="question-block">
+            <div class="question-text">8. ¿Qué compra Pepe en la administración de Doña Manolita?</div>
+            <select onchange="validarRespuesta(this)" data-correct="Un décimo de lotería.">
+                <option value="">-- Selecciona una opción --</option>
+                <option value="Un décimo de lotería.">Un décimo de lotería.</option>
+                <option value="La Guía del Ocio.">La Guía del Ocio.</option>
+                <option value="Un libro de filosofía.">Un libro de filosofía.</option>
+            </select>
+        </div>
+
+        <div class="question-block">
+            <div class="question-text">9. ¿Qué compra Pepe en el supermercado el sábado por la mañana?</div>
+            <select onchange="validarRespuesta(this)" data-correct="Dos botellas de vino Rioja.">
+                <option value="">-- Selecciona una opción --</option>
+                <option value="Café y galletas.">Café y galletas.</option>
+                <option value="Dos botellas de vino Rioja.">Dos botellas de vino Rioja.</option>
+                <option value="Regalos para sus hijos.">Regalos para sus hijos.</option>
+            </select>
+        </div>
+
+        <div class="question-block">
+            <div class="question-text">10. ¿De qué trata la película que Pepe ve en el cine?</div>
+            <select onchange="validarRespuesta(this)" data-correct="Trata de parejas, separaciones y soledad.">
+                <option value="">-- Selecciona una opción --</option>
+                <option value="Trata de policías y ladrones.">Trata de policías y ladrones.</option>
+                <option value="Trata de la historia de España.">Trata de la historia de España.</option>
+                <option value="Trata de parejas, separaciones y soledad.">Trata de parejas, separaciones y soledad.</option>
+            </select>
+        </div>
+
+        <div class="question-block">
+            <div class="question-text">11. ¿Cómo sale Pepe del cine?</div>
+            <select onchange="validarRespuesta(this)" data-correct="Sale de malhumor.">
+                <option value="">-- Selecciona una opción --</option>
+                <option value="Sale de malhumor.">Sale de malhumor.</option>
+                <option value="Sale muy alegre.">Sale muy alegre.</option>
+                <option value="Sale con mucho sueño.">Sale con mucho sueño.</option>
+            </select>
+        </div>
+
+        <div class="question-block">
+            <div class="question-text">12. ¿A qué café va Pepe después del cine para tomar una copa?</div>
+            <select onchange="validarRespuesta(this)" data-correct="Al café Comercial.">
+                <option value="">-- Selecciona una opción --</option>
+                <option value="Al mercado de San Miguel.">Al mercado de San Miguel.</option>
+                <option value="Al café Comercial.">Al café Comercial.</option>
+                <option value="Al despacho de la oficina.">Al despacho de la oficina.</option>
+            </select>
+        </div>
+    </form>
+</div>
+
+<script>
+    function validarRespuesta(element) {
+        const respuestaCorrecta = element.getAttribute('data-correct');
+        const respuestaAlumno = element.value;
+
+        element.classList.remove('correct-select', 'incorrect-select');
+
+        if (respuestaAlumno === "") {
+            return;
+        }
+
+        if (respuestaAlumno === respuestaCorrecta) {
+            element.classList.add('correct-select');
+        } else {
+            element.classList.add('incorrect-select');
+        }
+    }
+</script>
+
+</body>
+</html>

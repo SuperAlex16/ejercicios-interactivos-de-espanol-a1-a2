@@ -1,0 +1,1374 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Repaso de los tiempos verbales del Indicativo</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+<style>
+:root {
+  --bg-a: #fff7ed;
+  --bg-b: #eef2ff;
+  --bg-c: #ecfeff;
+  --ink: #172033;
+  --muted: #657083;
+  --card: rgba(255,255,255,.88);
+  --line: rgba(23,32,51,.14);
+  --primary: #6d28d9;
+  --primary-2: #0891b2;
+  --accent: #f59e0b;
+  --accent-soft: #fffbeb;
+  --ok: #15803d;
+  --bad: #b91c1c;
+  --ok-bg: #dcfce7;
+  --bad-bg: #fee2e2;
+  --violet-soft: #f5f3ff;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 10% 10%, rgba(245,158,11,.22), transparent 28%),
+    radial-gradient(circle at 86% 5%, rgba(109,40,217,.20), transparent 32%),
+    radial-gradient(circle at 75% 90%, rgba(8,145,178,.18), transparent 30%),
+    linear-gradient(135deg, var(--bg-a), var(--bg-b) 52%, var(--bg-c));
+  padding: 34px 18px 90px;
+}
+.wrap { max-width: 1120px; margin: 0 auto; }
+.hero {
+  position: relative;
+  overflow: hidden;
+  border-radius: 34px;
+  padding: 46px 34px;
+  color: white;
+  background: linear-gradient(135deg, #4c1d95, #7c3aed 50%, #0e7490);
+  box-shadow: 0 24px 70px rgba(30,41,59,.25);
+}
+.hero::before, .hero::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255,255,255,.14);
+}
+.hero::before { width: 240px; height: 240px; right: -70px; top: -90px; }
+.hero::after { width: 160px; height: 160px; left: -50px; bottom: -60px; }
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 999px;
+  padding: 8px 14px;
+  background: rgba(255,255,255,.16);
+  border: 1px solid rgba(255,255,255,.30);
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  font-size: .78rem;
+  position: relative;
+  z-index: 1;
+}
+h1 {
+  margin: 18px 0 12px;
+  max-width: 900px;
+  font-size: clamp(2.15rem, 6vw, 4.6rem);
+  line-height: .98;
+  letter-spacing: -.055em;
+  position: relative;
+  z-index: 1;
+}
+.hero p {
+  margin: 0;
+  max-width: 820px;
+  font-size: 1.08rem;
+  opacity: .92;
+  line-height: 1.65;
+  position: relative;
+  z-index: 1;
+}
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 26px;
+  position: relative;
+  z-index: 1;
+}
+.tabs a {
+  color: white;
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,.35);
+  background: rgba(255,255,255,.14);
+  padding: 10px 14px;
+  border-radius: 999px;
+  font-weight: 800;
+  backdrop-filter: blur(10px);
+}
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  margin: 22px 0 28px;
+}
+.tense-chip {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  padding: 16px;
+  box-shadow: 0 14px 40px rgba(30,41,59,.08);
+}
+.tense-chip strong { display: block; color: var(--primary); margin-bottom: 6px; }
+.tense-chip span { color: var(--muted); font-size: .88rem; line-height: 1.35; }
+.section {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 30px;
+  padding: 28px;
+  margin: 24px 0;
+  box-shadow: 0 18px 60px rgba(30,41,59,.12);
+  backdrop-filter: blur(16px);
+}
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+h2 { margin: 0 0 8px; font-size: clamp(1.45rem, 3vw, 2.1rem); letter-spacing: -.035em; }
+.section-head p { margin: 0; color: var(--muted); line-height: 1.55; }
+.counter {
+  white-space: nowrap;
+  padding: 9px 14px;
+  border-radius: 999px;
+  color: #78350f;
+  background: #fef3c7;
+  border: 1px solid #fde68a;
+  font-weight: 900;
+}
+.quiz { display: grid; gap: 12px; }
+.item {
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: rgba(255,255,255,.68);
+  padding: 16px;
+  box-shadow: 0 7px 24px rgba(30,41,59,.06);
+}
+.sentence {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  line-height: 2.05;
+  font-size: 1.03rem;
+}
+.num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 30px;
+  border-radius: 999px;
+  color: white;
+  background: linear-gradient(135deg, var(--primary), var(--primary-2));
+  font-weight: 900;
+  font-size: .78rem;
+  box-shadow: 0 8px 18px rgba(109,40,217,.22);
+}
+.select-wrap { position: relative; display: inline-block; }
+.select-wrap::after {
+  content: "▾";
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--primary);
+  pointer-events: none;
+  font-weight: 900;
+}
+select {
+  appearance: none;
+  min-width: 240px;
+  max-width: 100%;
+  border: 2px solid rgba(109,40,217,.22);
+  background: linear-gradient(135deg, #fff, #f8fafc);
+  color: var(--ink);
+  border-radius: 999px;
+  padding: 10px 38px 10px 14px;
+  font-size: .96rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(30,41,59,.07);
+}
+select:focus { outline: 4px solid rgba(109,40,217,.16); border-color: var(--primary); }
+select.correct { border-color: var(--ok); background: var(--ok-bg); }
+select.incorrect { border-color: var(--bad); background: var(--bad-bg); }
+.feedback { min-height: 24px; margin: 8px 0 0 46px; font-weight: 800; font-size: .92rem; }
+.feedback.ok { color: var(--ok); }
+.feedback.bad { color: var(--bad); }
+.hint { color: var(--muted); font-weight: 700; }
+.translation-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(280px, .95fr);
+  gap: 18px;
+  align-items: start;
+}
+.translation-list, .bank { display: grid; gap: 12px; }
+.translation-card {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 12px;
+  align-items: stretch;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: rgba(255,255,255,.72);
+  padding: 14px;
+}
+.es-text { line-height: 1.55; font-weight: 750; }
+.dropzone {
+  grid-column: 1 / -1;
+  min-height: 58px;
+  display: flex;
+  align-items: center;
+  padding: 9px;
+  border: 2px dashed rgba(109,40,217,.30);
+  border-radius: 16px;
+  background: var(--violet-soft);
+  transition: border-color .15s, background .15s, transform .15s;
+}
+.dropzone::before {
+  content: "Arrastra aquí la traducción";
+  color: rgba(23,32,51,.45);
+  font-weight: 800;
+  font-size: .9rem;
+}
+.dropzone.filled::before { content: ""; }
+.dropzone.dragover { border-color: var(--accent); background: var(--accent-soft); transform: scale(1.01); }
+.dropzone.correct { border-color: var(--ok); background: var(--ok-bg); }
+.dropzone.incorrect { border-color: var(--bad); background: var(--bad-bg); }
+.bank-panel {
+  position: sticky;
+  top: 16px;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  padding: 16px;
+  background: rgba(255,255,255,.78);
+}
+.bank-title { margin: 0 0 12px; color: var(--primary); font-weight: 900; }
+.chip {
+  width: 100%;
+  text-align: left;
+  border: 1px solid rgba(8,145,178,.22);
+  border-radius: 16px;
+  padding: 12px 13px;
+  background: linear-gradient(135deg, #fff, #ecfeff);
+  color: var(--ink);
+  font-weight: 800;
+  line-height: 1.45;
+  cursor: grab;
+  box-shadow: 0 8px 20px rgba(30,41,59,.07);
+}
+.chip:active { cursor: grabbing; }
+.chip.selected { outline: 4px solid rgba(245,158,11,.35); border-color: var(--accent); }
+.tr-feedback { grid-column: 1 / -1; min-height: 22px; font-weight: 850; margin-top: -4px; }
+.tr-feedback.ok { color: var(--ok); }
+.tr-feedback.bad { color: var(--bad); }
+.actions {
+  position: sticky;
+  bottom: 18px;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: auto auto minmax(180px, 1fr);
+  gap: 12px;
+  align-items: center;
+  background: rgba(255,255,255,.76);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  padding: 14px;
+  box-shadow: 0 20px 60px rgba(30,41,59,.18);
+  backdrop-filter: blur(16px);
+}
+button.main-btn {
+  border: 0;
+  border-radius: 999px;
+  padding: 13px 22px;
+  font-size: 1rem;
+  font-weight: 900;
+  cursor: pointer;
+}
+#checkBtn { color: white; background: linear-gradient(135deg, var(--primary), var(--primary-2)); box-shadow: 0 12px 28px rgba(109,40,217,.24); }
+#resetBtn { color: var(--ink); background: white; border: 1px solid var(--line); }
+.score { font-weight: 900; color: var(--muted); text-align: right; }
+.progress { grid-column: 1 / -1; height: 10px; background: rgba(109,40,217,.12); border-radius: 999px; overflow: hidden; }
+.progress span { display: block; height: 100%; width: 0%; background: linear-gradient(90deg, var(--primary), var(--accent)); border-radius: 999px; transition: width .7s ease; }
+@media (max-width: 900px) {
+  .summary-grid { grid-template-columns: repeat(2, 1fr); }
+  .translation-layout { grid-template-columns: 1fr; }
+  .bank-panel { position: static; }
+}
+@media (max-width: 760px) {
+  body { padding: 18px 10px 60px; }
+  .hero, .section { border-radius: 24px; padding: 22px; }
+  .section-head { display: block; }
+  .counter { display: inline-block; margin-top: 12px; }
+  select { width: 100%; min-width: 0; }
+  .select-wrap { width: 100%; }
+  .actions { position: static; grid-template-columns: 1fr; }
+  .score { text-align: center; }
+  .summary-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <header class="hero">
+    <div class="badge">Repaso ELE · Indicativo</div>
+    <h1>Repaso de los tiempos verbales del Indicativo</h1>
+    <p>Elige la forma verbal adecuada según el marcador temporal, el contexto y la relación entre las acciones. Después, relaciona cada oración con su traducción rusa.</p>
+    <nav class="tabs">
+      <a href="#ejercicio1">Ejercicio 1</a>
+      <a href="#ejercicio2">Ejercicio 2</a>
+      <a href="#traduccion">Traducción</a>
+    </nav>
+  </header>
+
+  <section class="summary-grid" aria-label="Tiempos incluidos">
+    <div class="tense-chip"><strong>Presente</strong><span>rutinas y hechos actuales</span></div>
+    <div class="tense-chip"><strong>Pretérito Perfecto</strong><span>pasado vinculado al presente</span></div>
+    <div class="tense-chip"><strong>Pretérito Indefinido</strong><span>pasado cerrado</span></div>
+    <div class="tense-chip"><strong>Imperfecto</strong><span>hábitos y descripciones</span></div>
+    <div class="tense-chip"><strong>Pluscuamperfecto</strong><span>anterioridad en el pasado</span></div>
+  </section>
+
+  <section class="section" id="ejercicio1">
+    <div class="section-head">
+      <div>
+        <h2>Ejercicio 1</h2>
+        <p>Selecciona la forma verbal correcta. En algunos casos hay más de una respuesta válida.</p>
+      </div>
+      <div class="counter">10 oraciones</div>
+    </div>
+    <div class="quiz" id="quiz1"></div>
+  </section>
+
+  <section class="section" id="ejercicio2">
+    <div class="section-head">
+      <div>
+        <h2>Ejercicio 2</h2>
+        <p>Completa cada oración con el tiempo verbal adecuado.</p>
+      </div>
+      <div class="counter">10 oraciones</div>
+    </div>
+    <div class="quiz" id="quiz2"></div>
+  </section>
+
+  <section class="section" id="traduccion">
+    <div class="section-head">
+      <div>
+        <h2>Ejercicio 3 · Traducción</h2>
+        <p>Arrastra cada traducción rusa y colócala debajo de la oración española correspondiente. También puedes tocar una traducción y luego tocar el recuadro de destino.</p>
+      </div>
+      <div class="counter">10 traducciones</div>
+    </div>
+    <div class="translation-layout">
+      <div class="translation-list" id="translationList"></div>
+      <aside class="bank-panel">
+        <p class="bank-title">Traducciones barajadas</p>
+        <div class="bank" id="bank"></div>
+      </aside>
+    </div>
+  </section>
+
+  <div class="actions">
+    <button class="main-btn" id="checkBtn" type="button">✓ Revisar todo</button>
+    <button class="main-btn" id="resetBtn" type="button">↺ Reiniciar</button>
+    <div class="score" id="score">Sin revisar</div>
+    <div class="progress" aria-hidden="true"><span id="bar"></span></div>
+  </div>
+</main>
+
+<script>
+const data = {
+  "ejercicio1": [
+    {
+      "before": "Todos los días, María",
+      "infinitive": "desayunar",
+      "after": "un café con leche antes de ir al trabajo.",
+      "options": [
+        {
+          "key": "desayuna_pres",
+          "label": "desayuna",
+          "tense": "Presente"
+        },
+        {
+          "key": "ha_desayunado_perf",
+          "label": "ha desayunado",
+          "tense": "Pretérito Perfecto"
+        },
+        {
+          "key": "desayuno_ind",
+          "label": "desayunó",
+          "tense": "Pretérito Indefinido"
+        },
+        {
+          "key": "desayunaba_imp",
+          "label": "desayunaba",
+          "tense": "Pretérito Imperfecto"
+        },
+        {
+          "key": "habia_desayunado_plus",
+          "label": "había desayunado",
+          "tense": "Pretérito Pluscuamperfecto"
+        }
+      ],
+      "answers": [
+        "desayuna_pres"
+      ],
+      "hint": "Acción habitual en el presente."
+    },
+    {
+      "before": "Esta semana nosotros",
+      "infinitive": "estudiar",
+      "after": "mucho para el examen de mañana.",
+      "options": [
+        {
+          "key": "estudiamos_pres",
+          "label": "estudiamos",
+          "tense": "Presente"
+        },
+        {
+          "key": "hemos_estudiado_perf",
+          "label": "hemos estudiado",
+          "tense": "Pretérito Perfecto"
+        },
+        {
+          "key": "estudiamos_ind",
+          "label": "estudiamos",
+          "tense": "Pretérito Indefinido"
+        },
+        {
+          "key": "estudiabamos_imp",
+          "label": "estudiábamos",
+          "tense": "Pretérito Imperfecto"
+        },
+        {
+          "key": "habiamos_estudiado_plus",
+          "label": "habíamos estudiado",
+          "tense": "Pretérito Pluscuamperfecto"
+        }
+      ],
+      "answers": [
+        "hemos_estudiado_perf",
+        "estudiamos_ind"
+      ],
+      "hint": "Acción reciente: Pretérito Perfecto en España o Indefinido en muchos contextos latinoamericanos."
+    },
+    {
+      "before": "El verano pasado, Lucía",
+      "infinitive": "viajar",
+      "after": "sola por toda Sudamérica durante tres meses.",
+      "options": [
+        {
+          "key": "viaja_pres",
+          "label": "viaja",
+          "tense": "Presente"
+        },
+        {
+          "key": "ha_viajado_perf",
+          "label": "ha viajado",
+          "tense": "Pretérito Perfecto"
+        },
+        {
+          "key": "viajo_ind",
+          "label": "viajó",
+          "tense": "Pretérito Indefinido"
+        },
+        {
+          "key": "viajaba_imp",
+          "label": "viajaba",
+          "tense": "Pretérito Imperfecto"
+        },
+        {
+          "key": "habia_viajado_plus",
+          "label": "había viajado",
+          "tense": "Pretérito Pluscuamperfecto"
+        }
+      ],
+      "answers": [
+        "viajo_ind"
+      ],
+      "hint": "Acción terminada en un momento pasado concreto."
+    },
+    {
+      "before": "Cuando era niño, mi abuelo me",
+      "infinitive": "contar",
+      "after": "historias de la guerra antes de dormir.",
+      "options": [
+        {
+          "key": "cuenta_pres",
+          "label": "cuenta",
+          "tense": "Presente"
+        },
+        {
+          "key": "ha_contado_perf",
+          "label": "ha contado",
+          "tense": "Pretérito Perfecto"
+        },
+        {
+          "key": "conto_ind",
+          "label": "contó",
+          "tense": "Pretérito Indefinido"
+        },
+        {
+          "key": "contaba_imp",
+          "label": "contaba",
+          "tense": "Pretérito Imperfecto"
+        },
+        {
+          "key": "habia_contado_plus",
+          "label": "había contado",
+          "tense": "Pretérito Pluscuamperfecto"
+        }
+      ],
+      "answers": [
+        "contaba_imp"
+      ],
+      "hint": "Hábito o acción repetida en el pasado."
+    },
+    {
+      "before": "Cuando el médico llegó a urgencias, el paciente ya",
+      "infinitive": "tomar",
+      "after": "la medicina equivocada.",
+      "options": [
+        {
+          "key": "toma_pres",
+          "label": "toma",
+          "tense": "Presente"
+        },
+        {
+          "key": "ha_tomado_perf",
+          "label": "ha tomado",
+          "tense": "Pretérito Perfecto"
+        },
+        {
+          "key": "tomo_ind",
+          "label": "tomó",
+          "tense": "Pretérito Indefinido"
+        },
+        {
+          "key": "tomaba_imp",
+          "label": "tomaba",
+          "tense": "Pretérito Imperfecto"
+        },
+        {
+          "key": "habia_tomado_plus",
+          "label": "había tomado",
+          "tense": "Pretérito Pluscuamperfecto"
+        }
+      ],
+      "answers": [
+        "habia_tomado_plus"
+      ],
+      "hint": "Acción anterior a otro evento pasado."
+    },
+    {
+      "before": "Hoy no",
+      "infinitive": "poder",
+      "after": "dormir bien porque había mucho ruido en la calle.",
+      "options": [
+        {
+          "key": "puedo_pres",
+          "label": "puedo",
+          "tense": "Presente"
+        },
+        {
+          "key": "he_podido_perf",
+          "label": "he podido",
+          "tense": "Pretérito Perfecto"
+        },
+        {
+          "key": "pude_ind",
+          "label": "pude",
+          "tense": "Pretérito Indefinido"
+        },
+        {
+          "key": "podia_imp",
+          "label": "podía",
+          "tense": "Pretérito Imperfecto"
+        },
+        {
+          "key": "habia_podido_plus",
+          "label": "había podido",
+          "tense": "Pretérito Pluscuamperfecto"
+        }
+      ],
+      "answers": [
+        "he_podido_perf",
+        "pude_ind"
+      ],
+      "hint": "Acción de hoy: Pretérito Perfecto en España o Indefinido en muchos contextos latinoamericanos."
+    },
+    {
+      "before": "De pequeños, mis hermanos y yo siempre",
+      "infinitive": "jugar",
+      "after": "en el parque después del colegio.",
+      "options": [
+        {
+          "key": "jugamos_pres",
+          "label": "jugamos",
+          "tense": "Presente"
+        },
+        {
+          "key": "hemos_jugado_perf",
+          "label": "hemos jugado",
+          "tense": "Pretérito Perfecto"
+        },
+        {
+          "key": "jugamos_ind",
+          "label": "jugamos",
+          "tense": "Pretérito Indefinido"
+        },
+        {
+          "key": "jugabamos_imp",
+          "label": "jugábamos",
+          "tense": "Pretérito Imperfecto"
+        },
+        {
+          "key": "habiamos_jugado_plus",
+          "label": "habíamos jugado",
+          "tense": "Pretérito Pluscuamperfecto"
+        }
+      ],
+      "answers": [
+        "jugabamos_imp"
+      ],
+      "hint": "Costumbre habitual del pasado."
+    },
+    {
+      "before": "Ayer por la tarde, ellos",
+      "infinitive": "salir",
+      "after": "del trabajo a las seis y fueron al gimnasio.",
+      "options": [
+        {
+          "key": "salen_pres",
+          "label": "salen",
+          "tense": "Presente"
+        },
+        {
+          "key": "han_salido_perf",
+          "label": "han salido",
+          "tense": "Pretérito Perfecto"
+        },
+        {
+          "key": "salieron_ind",
+          "label": "salieron",
+          "tense": "Pretérito Indefinido"
+        },
+        {
+          "key": "salian_imp",
+          "label": "salían",
+          "tense": "Pretérito Imperfecto"
+        },
+        {
+          "key": "habian_salido_plus",
+          "label": "habían salido",
+          "tense": "Pretérito Pluscuamperfecto"
+        }
+      ],
+      "answers": [
+        "salieron_ind"
+      ],
+      "hint": "Acción completada ayer."
+    },
+    {
+      "before": "Cuando llegué a casa, mi hermana ya",
+      "infinitive": "preparar",
+      "after": "la cena para todos.",
+      "options": [
+        {
+          "key": "prepara_pres",
+          "label": "prepara",
+          "tense": "Presente"
+        },
+        {
+          "key": "ha_preparado_perf",
+          "label": "ha preparado",
+          "tense": "Pretérito Perfecto"
+        },
+        {
+          "key": "preparo_ind",
+          "label": "preparó",
+          "tense": "Pretérito Indefinido"
+        },
+        {
+          "key": "preparaba_imp",
+          "label": "preparaba",
+          "tense": "Pretérito Imperfecto"
+        },
+        {
+          "key": "habia_preparado_plus",
+          "label": "había preparado",
+          "tense": "Pretérito Pluscuamperfecto"
+        }
+      ],
+      "answers": [
+        "habia_preparado_plus"
+      ],
+      "hint": "Acción completada antes de otro momento pasado."
+    },
+    {
+      "before": "Normalmente, ¿a qué hora",
+      "infinitive": "levantarse",
+      "after": "tú los fines de semana?",
+      "options": [
+        {
+          "key": "te_levantas_pres",
+          "label": "te levantas",
+          "tense": "Presente"
+        },
+        {
+          "key": "te_has_levantado_perf",
+          "label": "te has levantado",
+          "tense": "Pretérito Perfecto"
+        },
+        {
+          "key": "te_levantaste_ind",
+          "label": "te levantaste",
+          "tense": "Pretérito Indefinido"
+        },
+        {
+          "key": "te_levantabas_imp",
+          "label": "te levantabas",
+          "tense": "Pretérito Imperfecto"
+        },
+        {
+          "key": "te_habias_levantado_plus",
+          "label": "te habías levantado",
+          "tense": "Pretérito Pluscuamperfecto"
+        }
+      ],
+      "answers": [
+        "te_levantas_pres"
+      ],
+      "hint": "Hábito o rutina actual."
+    }
+  ],
+  "ejercicio2": [
+    {
+      "before": "Hoy nosotros",
+      "infinitive": "estudiar",
+      "after": "en la biblioteca.",
+      "options": [
+        {
+          "key": "estudiamos_pres",
+          "label": "estudiamos",
+          "tense": "Presente"
+        },
+        {
+          "key": "hemos_estudiado_perf",
+          "label": "hemos estudiado",
+          "tense": "Pretérito Perfecto"
+        },
+        {
+          "key": "estudiamos_ind",
+          "label": "estudiamos",
+          "tense": "Pretérito Indefinido"
+        },
+        {
+          "key": "estudiabamos_imp",
+          "label": "estudiábamos",
+          "tense": "Pretérito Imperfecto"
+        },
+        {
+          "key": "habiamos_estudiado_plus",
+          "label": "habíamos estudiado",
+          "tense": "Pretérito Pluscuamperfecto"
+        }
+      ],
+      "answers": [
+        "estudiamos_pres"
+      ],
+      "hint": "Hábito o acción del presente."
+    },
+    {
+      "before": "Esta semana Ana",
+      "infinitive": "visitar",
+      "after": "varias veces a sus abuelos.",
+      "options": [
+        {
+          "key": "visita_pres",
+          "label": "visita",
+          "tense": "Presente"
+        },
+        {
+          "key": "ha_visitado_perf",
+          "label": "ha visitado",
+          "tense": "Pretérito Perfecto"
+        },
+        {
+          "key": "visito_ind",
+          "label": "visitó",
+          "tense": "Pretérito Indefinido"
+        },
+        {
+          "key": "visitaba_imp",
+          "label": "visitaba",
+          "tense": "Pretérito Imperfecto"
+        },
+        {
+          "key": "habia_visitado_plus",
+          "label": "había visitado",
+          "tense": "Pretérito Pluscuamperfecto"
+        }
+      ],
+      "answers": [
+        "ha_visitado_perf"
+      ],
+      "hint": "Marcador temporal vinculado al presente: esta semana."
+    },
+    {
+      "before": "Ayer ellos",
+      "infinitive": "comprar",
+      "after": "pan en el mercado.",
+      "options": [
+        {
+          "key": "compran_pres",
+          "label": "compran",
+          "tense": "Presente"
+        },
+        {
+          "key": "han_comprado_perf",
+          "label": "han comprado",
+          "tense": "Pretérito Perfecto"
+        },
+        {
+          "key": "compraron_ind",
+          "label": "compraron",
+          "tense": "Pretérito Indefinido"
+        },
+        {
+          "key": "compraban_imp",
+          "label": "compraban",
+          "tense": "Pretérito Imperfecto"
+        },
+        {
+          "key": "habian_comprado_plus",
+          "label": "habían comprado",
+          "tense": "Pretérito Pluscuamperfecto"
+        }
+      ],
+      "answers": [
+        "compraron_ind"
+      ],
+      "hint": "Ayer indica un pasado cerrado."
+    },
+    {
+      "before": "Cuando era niño, Carlos",
+      "infinitive": "jugar",
+      "after": "en el parque todos los días.",
+      "options": [
+        {
+          "key": "juega_pres",
+          "label": "juega",
+          "tense": "Presente"
+        },
+        {
+          "key": "ha_jugado_perf",
+          "label": "ha jugado",
+          "tense": "Pretérito Perfecto"
+        },
+        {
+          "key": "jugo_ind",
+          "label": "jugó",
+          "tense": "Pretérito Indefinido"
+        },
+        {
+          "key": "jugaba_imp",
+          "label": "jugaba",
+          "tense": "Pretérito Imperfecto"
+        },
+        {
+          "key": "habia_jugado_plus",
+          "label": "había jugado",
+          "tense": "Pretérito Pluscuamperfecto"
+        }
+      ],
+      "answers": [
+        "jugaba_imp"
+      ],
+      "hint": "Descripción o costumbre en el pasado."
+    },
+    {
+      "before": "Antes de llegar al cine, Marta ya",
+      "infinitive": "comprar",
+      "after": "las entradas.",
+      "options": [
+        {
+          "key": "compra_pres",
+          "label": "compra",
+          "tense": "Presente"
+        },
+        {
+          "key": "ha_comprado_perf",
+          "label": "ha comprado",
+          "tense": "Pretérito Perfecto"
+        },
+        {
+          "key": "compro_ind",
+          "label": "compró",
+          "tense": "Pretérito Indefinido"
+        },
+        {
+          "key": "compraba_imp",
+          "label": "compraba",
+          "tense": "Pretérito Imperfecto"
+        },
+        {
+          "key": "habia_comprado_plus",
+          "label": "había comprado",
+          "tense": "Pretérito Pluscuamperfecto"
+        }
+      ],
+      "answers": [
+        "habia_comprado_plus"
+      ],
+      "hint": "Acción anterior a otra acción pasada."
+    },
+    {
+      "before": "Normalmente yo",
+      "infinitive": "desayunar",
+      "after": "a las siete.",
+      "options": [
+        {
+          "key": "desayuno_pres",
+          "label": "desayuno",
+          "tense": "Presente"
+        },
+        {
+          "key": "he_desayunado_perf",
+          "label": "he desayunado",
+          "tense": "Pretérito Perfecto"
+        },
+        {
+          "key": "desayune_ind",
+          "label": "desayuné",
+          "tense": "Pretérito Indefinido"
+        },
+        {
+          "key": "desayunaba_imp",
+          "label": "desayunaba",
+          "tense": "Pretérito Imperfecto"
+        },
+        {
+          "key": "habia_desayunado_plus",
+          "label": "había desayunado",
+          "tense": "Pretérito Pluscuamperfecto"
+        }
+      ],
+      "answers": [
+        "desayuno_pres"
+      ],
+      "hint": "Normalmente indica rutina actual."
+    },
+    {
+      "before": "Esta mañana tú",
+      "infinitive": "escribir",
+      "after": "un mensaje.",
+      "options": [
+        {
+          "key": "escribes_pres",
+          "label": "escribes",
+          "tense": "Presente"
+        },
+        {
+          "key": "has_escrito_perf",
+          "label": "has escrito",
+          "tense": "Pretérito Perfecto"
+        },
+        {
+          "key": "escribiste_ind",
+          "label": "escribiste",
+          "tense": "Pretérito Indefinido"
+        },
+        {
+          "key": "escribias_imp",
+          "label": "escribías",
+          "tense": "Pretérito Imperfecto"
+        },
+        {
+          "key": "habias_escrito_plus",
+          "label": "habías escrito",
+          "tense": "Pretérito Pluscuamperfecto"
+        }
+      ],
+      "answers": [
+        "has_escrito_perf",
+        "escribiste_ind"
+      ],
+      "hint": "Esta mañana puede admitir Pretérito Perfecto o Indefinido según la variedad y el contexto."
+    },
+    {
+      "before": "El verano pasado mis amigos",
+      "infinitive": "viajar",
+      "after": "a México.",
+      "options": [
+        {
+          "key": "viajan_pres",
+          "label": "viajan",
+          "tense": "Presente"
+        },
+        {
+          "key": "han_viajado_perf",
+          "label": "han viajado",
+          "tense": "Pretérito Perfecto"
+        },
+        {
+          "key": "viajaron_ind",
+          "label": "viajaron",
+          "tense": "Pretérito Indefinido"
+        },
+        {
+          "key": "viajaban_imp",
+          "label": "viajaban",
+          "tense": "Pretérito Imperfecto"
+        },
+        {
+          "key": "habian_viajado_plus",
+          "label": "habían viajado",
+          "tense": "Pretérito Pluscuamperfecto"
+        }
+      ],
+      "answers": [
+        "viajaron_ind"
+      ],
+      "hint": "El verano pasado indica pasado cerrado."
+    },
+    {
+      "before": "Mientras la profesora explicaba, los alumnos",
+      "infinitive": "escuchar",
+      "after": "con atención.",
+      "options": [
+        {
+          "key": "escuchan_pres",
+          "label": "escuchan",
+          "tense": "Presente"
+        },
+        {
+          "key": "han_escuchado_perf",
+          "label": "han escuchado",
+          "tense": "Pretérito Perfecto"
+        },
+        {
+          "key": "escucharon_ind",
+          "label": "escucharon",
+          "tense": "Pretérito Indefinido"
+        },
+        {
+          "key": "escuchaban_imp",
+          "label": "escuchaban",
+          "tense": "Pretérito Imperfecto"
+        },
+        {
+          "key": "habian_escuchado_plus",
+          "label": "habían escuchado",
+          "tense": "Pretérito Pluscuamperfecto"
+        }
+      ],
+      "answers": [
+        "escuchaban_imp"
+      ],
+      "hint": "Acción en desarrollo en el pasado."
+    },
+    {
+      "before": "Cuando llamé a Luis, él ya",
+      "infinitive": "salir",
+      "after": "de casa.",
+      "options": [
+        {
+          "key": "sale_pres",
+          "label": "sale",
+          "tense": "Presente"
+        },
+        {
+          "key": "ha_salido_perf",
+          "label": "ha salido",
+          "tense": "Pretérito Perfecto"
+        },
+        {
+          "key": "salio_ind",
+          "label": "salió",
+          "tense": "Pretérito Indefinido"
+        },
+        {
+          "key": "salia_imp",
+          "label": "salía",
+          "tense": "Pretérito Imperfecto"
+        },
+        {
+          "key": "habia_salido_plus",
+          "label": "había salido",
+          "tense": "Pretérito Pluscuamperfecto"
+        }
+      ],
+      "answers": [
+        "habia_salido_plus"
+      ],
+      "hint": "Ya + acción anterior a otra acción pasada."
+    }
+  ],
+  "traducciones": [
+    {
+      "id": "tr1",
+      "spanish": "Todos los días, María desayuna un café con leche antes de ir al trabajo.",
+      "russian": "Каждый день Мария завтракает кофе с молоком перед тем, как идти на работу."
+    },
+    {
+      "id": "tr2",
+      "spanish": "Esta semana nosotros hemos estudiado mucho para el examen de mañana.",
+      "russian": "На этой неделе мы много занимались к завтрашнему экзамену."
+    },
+    {
+      "id": "tr3",
+      "spanish": "El verano pasado, Lucía viajó sola por toda Sudamérica durante tres meses.",
+      "russian": "Прошлым летом Лусия три месяца одна путешествовала по всей Южной Америке."
+    },
+    {
+      "id": "tr4",
+      "spanish": "Cuando era niño, mi abuelo me contaba historias de la guerra antes de dormir.",
+      "russian": "Когда я был ребёнком, дедушка рассказывал мне истории о войне перед сном."
+    },
+    {
+      "id": "tr5",
+      "spanish": "Cuando el médico llegó a urgencias, el paciente ya había tomado la medicina equivocada.",
+      "russian": "Когда врач приехал в отделение неотложной помощи, пациент уже принял не то лекарство."
+    },
+    {
+      "id": "tr6",
+      "spanish": "Hoy no he podido dormir bien porque había mucho ruido en la calle.",
+      "russian": "Сегодня я не смог хорошо поспать, потому что на улице было много шума."
+    },
+    {
+      "id": "tr7",
+      "spanish": "De pequeños, mis hermanos y yo siempre jugábamos en el parque después del colegio.",
+      "russian": "В детстве мы с братьями всегда играли в парке после школы."
+    },
+    {
+      "id": "tr8",
+      "spanish": "Ayer por la tarde, ellos salieron del trabajo a las seis y fueron al gimnasio.",
+      "russian": "Вчера вечером они вышли с работы в шесть и пошли в спортзал."
+    },
+    {
+      "id": "tr9",
+      "spanish": "Cuando llegué a casa, mi hermana ya había preparado la cena para todos.",
+      "russian": "Когда я пришёл домой, моя сестра уже приготовила ужин для всех."
+    },
+    {
+      "id": "tr10",
+      "spanish": "Normalmente, ¿a qué hora te levantas tú los fines de semana?",
+      "russian": "Обычно во сколько ты встаёшь по выходным?"
+    }
+  ]
+};
+let selectedChip = null;
+
+function shuffle(array) {
+  const a = [...array];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function renderQuiz(containerId, items, prefix) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = '';
+  items.forEach((item, index) => {
+    const article = document.createElement('article');
+    article.className = 'item';
+    const selectId = `${prefix}-${index}`;
+    const options = shuffle(item.options);
+    article.innerHTML = `
+      <div class="sentence">
+        <span class="num">${String(index + 1).padStart(2, '0')}</span>
+        <span>${item.before}</span>
+        <span class="select-wrap">
+          <select id="${selectId}" data-prefix="${prefix}" data-index="${index}" aria-label="${item.infinitive}">
+            <option value="" disabled selected>${item.infinitive}</option>
+            ${options.map(opt => `<option value="${opt.key}">${opt.label} · ${opt.tense}</option>`).join('')}
+          </select>
+        </span>
+        <span>${item.after}</span>
+      </div>
+      <div class="feedback" id="fb-${selectId}"></div>`;
+    container.appendChild(article);
+  });
+}
+
+function renderTranslations() {
+  const list = document.getElementById('translationList');
+  const bank = document.getElementById('bank');
+  list.innerHTML = '';
+  bank.innerHTML = '';
+
+  data.traducciones.forEach((item, index) => {
+    const card = document.createElement('article');
+    card.className = 'translation-card';
+    card.innerHTML = `
+      <span class="num">${String(index + 1).padStart(2, '0')}</span>
+      <div class="es-text">${item.spanish}</div>
+      <div class="dropzone" data-answer="${item.id}" id="drop-${item.id}"></div>
+      <div class="tr-feedback" id="tr-fb-${item.id}"></div>`;
+    list.appendChild(card);
+  });
+
+  shuffle(data.traducciones).forEach(item => {
+    const chip = document.createElement('button');
+    chip.type = 'button';
+    chip.className = 'chip';
+    chip.id = `chip-${item.id}`;
+    chip.draggable = true;
+    chip.dataset.id = item.id;
+    chip.textContent = item.russian;
+    chip.addEventListener('dragstart', e => {
+      e.dataTransfer.setData('text/plain', chip.id);
+      setTimeout(() => chip.classList.add('dragging'), 0);
+    });
+    chip.addEventListener('dragend', () => chip.classList.remove('dragging'));
+    chip.addEventListener('click', () => selectChip(chip));
+    bank.appendChild(chip);
+  });
+
+  document.querySelectorAll('.dropzone').forEach(zone => {
+    zone.addEventListener('dragover', e => {
+      e.preventDefault();
+      zone.classList.add('dragover');
+    });
+    zone.addEventListener('dragleave', () => zone.classList.remove('dragover'));
+    zone.addEventListener('drop', e => {
+      e.preventDefault();
+      zone.classList.remove('dragover');
+      const chipId = e.dataTransfer.getData('text/plain');
+      const chip = document.getElementById(chipId);
+      if (chip) placeChip(chip, zone);
+    });
+    zone.addEventListener('click', () => {
+      if (selectedChip) placeChip(selectedChip, zone);
+    });
+  });
+}
+
+function selectChip(chip) {
+  if (selectedChip === chip) {
+    chip.classList.remove('selected');
+    selectedChip = null;
+    return;
+  }
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+  selectedChip = chip;
+  chip.classList.add('selected');
+}
+
+function placeChip(chip, zone) {
+  const oldChip = zone.querySelector('.chip');
+  if (oldChip && oldChip !== chip) document.getElementById('bank').appendChild(oldChip);
+  zone.appendChild(chip);
+  zone.classList.add('filled');
+  zone.classList.remove('correct', 'incorrect');
+  chip.classList.remove('selected');
+  selectedChip = null;
+  const fb = document.getElementById('tr-fb-' + zone.dataset.answer);
+  if (fb) { fb.className = 'tr-feedback'; fb.textContent = ''; }
+}
+
+function allVerbItems() {
+  return [
+    ...data.ejercicio1.map((item, index) => ({...item, prefix:'e1', index})),
+    ...data.ejercicio2.map((item, index) => ({...item, prefix:'e2', index})),
+  ];
+}
+
+function correctLabels(item) {
+  return item.options
+    .filter(opt => item.answers.includes(opt.key))
+    .map(opt => opt.label)
+    .join(' / ');
+}
+
+function checkAll() {
+  let ok = 0;
+  let total = 0;
+
+  allVerbItems().forEach(item => {
+    total++;
+    const select = document.getElementById(`${item.prefix}-${item.index}`);
+    const fb = document.getElementById(`fb-${item.prefix}-${item.index}`);
+    select.classList.remove('correct', 'incorrect');
+    fb.className = 'feedback';
+    const isCorrect = item.answers.includes(select.value);
+    if (isCorrect) {
+      ok++;
+      select.classList.add('correct');
+      fb.classList.add('ok');
+      fb.textContent = 'Correcto';
+    } else {
+      select.classList.add('incorrect');
+      fb.classList.add('bad');
+      fb.innerHTML = `Incorrecto. <span class="hint">Respuesta: ${correctLabels(item)}. ${item.hint}</span>`;
+    }
+  });
+
+  data.traducciones.forEach(item => {
+    total++;
+    const zone = document.getElementById('drop-' + item.id);
+    const fb = document.getElementById('tr-fb-' + item.id);
+    const chip = zone.querySelector('.chip');
+    zone.classList.remove('correct', 'incorrect');
+    fb.className = 'tr-feedback';
+    if (chip && chip.dataset.id === item.id) {
+      ok++;
+      zone.classList.add('correct');
+      fb.classList.add('ok');
+      fb.textContent = 'Correcto';
+    } else {
+      zone.classList.add('incorrect');
+      fb.classList.add('bad');
+      const expected = data.traducciones.find(x => x.id === item.id).russian;
+      fb.textContent = 'Respuesta: ' + expected;
+    }
+  });
+
+  const percent = Math.round((ok / total) * 100);
+  document.getElementById('score').textContent = `${ok} / ${total} respuestas correctas`;
+  document.getElementById('bar').style.width = `${percent}%`;
+}
+
+function resetAll() {
+  document.querySelectorAll('select').forEach(sel => {
+    sel.selectedIndex = 0;
+    sel.classList.remove('correct', 'incorrect');
+  });
+  document.querySelectorAll('.feedback').forEach(fb => {
+    fb.className = 'feedback';
+    fb.textContent = '';
+  });
+  document.getElementById('score').textContent = 'Sin revisar';
+  document.getElementById('bar').style.width = '0%';
+  selectedChip = null;
+  renderTranslations();
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+renderQuiz('quiz1', data.ejercicio1, 'e1');
+renderQuiz('quiz2', data.ejercicio2, 'e2');
+renderTranslations();
+document.getElementById('checkBtn').addEventListener('click', checkAll);
+document.getElementById('resetBtn').addEventListener('click', resetAll);
+</script>
+</body>
+</html>
