@@ -4,9 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>La familia Díaz López · actividad interactiva</title>
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="alternate icon" href="favicon.ico" type="image/x-icon">
-  <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <style>
     :root {
       --blue:#1557b0; --blue2:#0c3d7d; --sky:#eaf5ff; --yellow:#ffcc3d; --red:#d43131;
@@ -72,17 +69,36 @@
     .speak-card p { margin:8px 0; background:white; border-radius:12px; padding:9px; }
     .micro { margin-top:12px; font-size:14px; color:#6b4d00; background:#fff1bf; border-radius:12px; padding:9px; font-weight:700; }
     .footer-note { text-align:center; color:var(--muted); padding:10px; }
+
+    .drag-exercise { display:grid; gap:14px; }
+    .drag-question { display:grid; grid-template-columns:minmax(0, 1fr) minmax(240px, .8fr); gap:18px; align-items:center; }
+    .question-main { min-width:0; }
+    .option-bank { display:flex; flex-wrap:wrap; gap:9px; justify-content:flex-start; align-items:center; padding:10px; background:#f7faff; border:1px dashed #b9cbea; border-radius:16px; min-height:58px; }
+    .drag-chip { display:inline-flex; align-items:center; justify-content:center; padding:8px 12px; border:1px solid #c8d8ef; border-radius:999px; background:#fff; color:#0c3d7d; font-weight:800; cursor:grab; box-shadow:0 5px 12px rgba(21,87,176,.10); user-select:none; transition:.15s transform,.15s box-shadow,.15s opacity; }
+    .drag-chip:hover { transform:translateY(-1px); box-shadow:0 8px 16px rgba(21,87,176,.16); }
+    .drag-chip:active { cursor:grabbing; }
+    .drag-chip.dragging { opacity:.45; }
+    .drop-zone { display:inline-flex; align-items:center; justify-content:center; min-width:150px; min-height:42px; margin:0 5px; padding:7px 12px; border:2px dashed #9eb9df; border-radius:14px; background:#f8fbff; color:#0c2e60; font-weight:800; vertical-align:middle; transition:.15s; }
+    .drop-zone.empty::before { content:'перетащите сюда'; color:#7b8799; font-weight:600; font-size:14px; }
+    .drop-zone.drag-over { border-color:var(--blue); background:#eaf5ff; box-shadow:0 0 0 4px rgba(21,87,176,.10); }
+    .drop-zone.ok { border-style:solid; border-color:#2f8f55; background:#edf9f0; }
+    .drop-zone.bad { border-style:solid; border-color:#c93333; background:#fff0f0; }
+    .drop-zone .drag-chip { margin:0; box-shadow:none; cursor:grab; }
+    .drop-zone.long { width:100%; max-width:560px; margin:8px 0 0 42px; justify-content:flex-start; }
     @media (max-width: 980px) {
       .hero-inner { grid-template-columns:1fr; }
       .scene-grid { grid-template-columns:1fr; }
       .scene-card { grid-template-columns:1fr; }
       .vocab-grid { grid-template-columns: repeat(3, 1fr); }
       .speak-grid,.steps { grid-template-columns: repeat(2, 1fr); }
+      .drag-question { grid-template-columns:1fr; }
     }
     @media (max-width: 560px) {
       .section { padding:16px; border-radius:22px; }
       .vocab-grid,.speak-grid,.steps { grid-template-columns:1fr; }
       select { width:100%; margin:8px 0; }
+      .drop-zone { width:100%; margin:8px 0; }
+      .drop-zone.long { margin:8px 0 0; max-width:none; }
     }
   </style>
 </head>
@@ -159,8 +175,8 @@
 
     <section class="section">
       <h2>3. Выберите правильное слово</h2>
-      <p class="instruction">Выберите подходящее слово в каждом предложении. После выполнения нажмите «Проверить».</p>
-      <div class="exercise"><div class="question"><span class="qnum">1</span> Juan Díaz <select data-answer="es"><option value="">— выберите —</option><option value="está">está</option><option value="es">es</option><option value="son">son</option></select> piloto.</div><div class="question"><span class="qnum">2</span> Juan <select data-answer="vive"><option value="">— выберите —</option><option value="vive">vive</option><option value="trabaja">trabaja</option><option value="estudia">estudia</option></select> en Madrid.</div><div class="question"><span class="qnum">3</span> Ofelia López <select data-answer="es"><option value="">— выберите —</option><option value="está">está</option><option value="son">son</option><option value="es">es</option></select> la mujer de Juan.</div><div class="question"><span class="qnum">4</span> María <select data-answer="es"><option value="">— выберите —</option><option value="es">es</option><option value="está">está</option><option value="son">son</option></select> la hija de Juan y Ofelia.</div><div class="question"><span class="qnum">5</span> José <select data-answer="es"><option value="">— выберите —</option><option value="son">son</option><option value="es">es</option><option value="está">está</option></select> el hijo de Juan y Ofelia.</div><div class="question"><span class="qnum">6</span> Los niños <select data-answer="van"><option value="">— выберите —</option><option value="son">son</option><option value="van">van</option><option value="están">están</option></select> a la escuela.</div><div class="question"><span class="qnum">7</span> María y José <select data-answer="estudian"><option value="">— выберите —</option><option value="estudia">estudia</option><option value="estudian">estudian</option><option value="trabajan">trabajan</option></select> inglés.</div><div class="question"><span class="qnum">8</span> La familia <select data-answer="se apellida"><option value="">— выберите —</option><option value="vive">vive</option><option value="se apellida">se apellida</option><option value="trabaja">trabaja</option></select> Díaz López.</div></div>
+      <p class="instruction">Перетащите подходящее слово справа в пустое место каждого предложения. После выполнения нажмите «Проверить».</p>
+      <div class="exercise drag-exercise"><div class="question drag-question"><div class="question-main"><span class="qnum">1</span> Juan Díaz <span class="drop-zone empty" data-answer="es" aria-label="задание 3, предложение 1"></span> piloto.</div><div class="option-bank" aria-label="варианты для предложения 1"><span class="drag-chip" draggable="true" data-value="está">está</span><span class="drag-chip" draggable="true" data-value="es">es</span><span class="drag-chip" draggable="true" data-value="son">son</span></div></div><div class="question drag-question"><div class="question-main"><span class="qnum">2</span> Juan <span class="drop-zone empty" data-answer="vive" aria-label="задание 3, предложение 2"></span> en Madrid.</div><div class="option-bank" aria-label="варианты для предложения 2"><span class="drag-chip" draggable="true" data-value="vive">vive</span><span class="drag-chip" draggable="true" data-value="trabaja">trabaja</span><span class="drag-chip" draggable="true" data-value="estudia">estudia</span></div></div><div class="question drag-question"><div class="question-main"><span class="qnum">3</span> Ofelia López <span class="drop-zone empty" data-answer="es" aria-label="задание 3, предложение 3"></span> la mujer de Juan.</div><div class="option-bank" aria-label="варианты для предложения 3"><span class="drag-chip" draggable="true" data-value="está">está</span><span class="drag-chip" draggable="true" data-value="son">son</span><span class="drag-chip" draggable="true" data-value="es">es</span></div></div><div class="question drag-question"><div class="question-main"><span class="qnum">4</span> María <span class="drop-zone empty" data-answer="es" aria-label="задание 3, предложение 4"></span> la hija de Juan y Ofelia.</div><div class="option-bank" aria-label="варианты для предложения 4"><span class="drag-chip" draggable="true" data-value="es">es</span><span class="drag-chip" draggable="true" data-value="está">está</span><span class="drag-chip" draggable="true" data-value="son">son</span></div></div><div class="question drag-question"><div class="question-main"><span class="qnum">5</span> José <span class="drop-zone empty" data-answer="es" aria-label="задание 3, предложение 5"></span> el hijo de Juan y Ofelia.</div><div class="option-bank" aria-label="варианты для предложения 5"><span class="drag-chip" draggable="true" data-value="son">son</span><span class="drag-chip" draggable="true" data-value="es">es</span><span class="drag-chip" draggable="true" data-value="está">está</span></div></div><div class="question drag-question"><div class="question-main"><span class="qnum">6</span> Los niños <span class="drop-zone empty" data-answer="van" aria-label="задание 3, предложение 6"></span> a la escuela.</div><div class="option-bank" aria-label="варианты для предложения 6"><span class="drag-chip" draggable="true" data-value="son">son</span><span class="drag-chip" draggable="true" data-value="van">van</span><span class="drag-chip" draggable="true" data-value="están">están</span></div></div><div class="question drag-question"><div class="question-main"><span class="qnum">7</span> María y José <span class="drop-zone empty" data-answer="estudian" aria-label="задание 3, предложение 7"></span> inglés.</div><div class="option-bank" aria-label="варианты для предложения 7"><span class="drag-chip" draggable="true" data-value="estudia">estudia</span><span class="drag-chip" draggable="true" data-value="estudian">estudian</span><span class="drag-chip" draggable="true" data-value="trabajan">trabajan</span></div></div><div class="question drag-question"><div class="question-main"><span class="qnum">8</span> La familia <span class="drop-zone empty" data-answer="se apellida" aria-label="задание 3, предложение 8"></span> Díaz López.</div><div class="option-bank" aria-label="варианты для предложения 8"><span class="drag-chip" draggable="true" data-value="vive">vive</span><span class="drag-chip" draggable="true" data-value="se apellida">se apellida</span><span class="drag-chip" draggable="true" data-value="trabaja">trabaja</span></div></div></div>
       <div class="toolbar">
         <button class="action" onclick="checkSection(this.closest('.section'))">Проверить</button>
         <button class="action secondary" onclick="resetSection(this.closest('.section'))">Сбросить</button>
@@ -170,8 +186,8 @@
 
     <section class="section">
       <h2>4. Переведите на испанский</h2>
-      <p class="instruction">Прочитайте русское предложение и выберите правильный вариант на испанском.</p>
-      <div class="exercise"><div class="question"><span class="qnum">1</span><span class="ru-line">Это Хуан Диас.</span><select data-answer="Este es Juan Díaz."><option value="">— выберите —</option><option value="Esta es Juan Díaz.">Esta es Juan Díaz.</option><option value="Este es Juan Díaz.">Este es Juan Díaz.</option><option value="Estos son Juan Díaz.">Estos son Juan Díaz.</option></select></div><div class="question"><span class="qnum">2</span><span class="ru-line">Это Офелия Лопес.</span><select data-answer="Esta es Ofelia López."><option value="">— выберите —</option><option value="Este es Ofelia López.">Este es Ofelia López.</option><option value="Esta es Ofelia López.">Esta es Ofelia López.</option><option value="Son Ofelia López.">Son Ofelia López.</option></select></div><div class="question"><span class="qnum">3</span><span class="ru-line">Мария — дочь Хуана и Офелии.</span><select data-answer="María es la hija de Juan y Ofelia."><option value="">— выберите —</option><option value="María es la mujer de Juan y Ofelia.">María es la mujer de Juan y Ofelia.</option><option value="María es la hija de Juan y Ofelia.">María es la hija de Juan y Ofelia.</option><option value="María está la hija de Juan y Ofelia.">María está la hija de Juan y Ofelia.</option></select></div><div class="question"><span class="qnum">4</span><span class="ru-line">Хосе — сын Хуана и Офелии.</span><select data-answer="José es el hijo de Juan y Ofelia."><option value="">— выберите —</option><option value="José es el hijo de Juan y Ofelia.">José es el hijo de Juan y Ofelia.</option><option value="José está el hijo de Juan y Ofelia.">José está el hijo de Juan y Ofelia.</option><option value="José son el hijo de Juan y Ofelia.">José son el hijo de Juan y Ofelia.</option></select></div><div class="question"><span class="qnum">5</span><span class="ru-line">Дети ходят в школу.</span><select data-answer="Los niños van a la escuela."><option value="">— выберите —</option><option value="Los niños son en la escuela.">Los niños son en la escuela.</option><option value="Los niños viven la escuela.">Los niños viven la escuela.</option><option value="Los niños van a la escuela.">Los niños van a la escuela.</option></select></div><div class="question"><span class="qnum">6</span><span class="ru-line">Семья находится на пляже.</span><select data-answer="La familia está en la playa."><option value="">— выберите —</option><option value="La familia está en la playa.">La familia está en la playa.</option><option value="La familia es en la playa.">La familia es en la playa.</option><option value="La familia están en la playa.">La familia están en la playa.</option></select></div></div>
+      <p class="instruction">Прочитайте русское предложение и перетащите справа правильный вариант на испанском в поле ответа.</p>
+      <div class="exercise drag-exercise"><div class="question drag-question"><div class="question-main"><span class="qnum">1</span><span class="ru-line">Это Хуан Диас.</span><span class="drop-zone long empty" data-answer="Este es Juan Díaz." aria-label="задание 4, предложение 1"></span></div><div class="option-bank" aria-label="варианты для предложения 1"><span class="drag-chip" draggable="true" data-value="Esta es Juan Díaz.">Esta es Juan Díaz.</span><span class="drag-chip" draggable="true" data-value="Este es Juan Díaz.">Este es Juan Díaz.</span><span class="drag-chip" draggable="true" data-value="Estos son Juan Díaz.">Estos son Juan Díaz.</span></div></div><div class="question drag-question"><div class="question-main"><span class="qnum">2</span><span class="ru-line">Это Офелия Лопес.</span><span class="drop-zone long empty" data-answer="Esta es Ofelia López." aria-label="задание 4, предложение 2"></span></div><div class="option-bank" aria-label="варианты для предложения 2"><span class="drag-chip" draggable="true" data-value="Este es Ofelia López.">Este es Ofelia López.</span><span class="drag-chip" draggable="true" data-value="Esta es Ofelia López.">Esta es Ofelia López.</span><span class="drag-chip" draggable="true" data-value="Son Ofelia López.">Son Ofelia López.</span></div></div><div class="question drag-question"><div class="question-main"><span class="qnum">3</span><span class="ru-line">Мария — дочь Хуана и Офелии.</span><span class="drop-zone long empty" data-answer="María es la hija de Juan y Ofelia." aria-label="задание 4, предложение 3"></span></div><div class="option-bank" aria-label="варианты для предложения 3"><span class="drag-chip" draggable="true" data-value="María es la mujer de Juan y Ofelia.">María es la mujer de Juan y Ofelia.</span><span class="drag-chip" draggable="true" data-value="María es la hija de Juan y Ofelia.">María es la hija de Juan y Ofelia.</span><span class="drag-chip" draggable="true" data-value="María está la hija de Juan y Ofelia.">María está la hija de Juan y Ofelia.</span></div></div><div class="question drag-question"><div class="question-main"><span class="qnum">4</span><span class="ru-line">Хосе — сын Хуана и Офелии.</span><span class="drop-zone long empty" data-answer="José es el hijo de Juan y Ofelia." aria-label="задание 4, предложение 4"></span></div><div class="option-bank" aria-label="варианты для предложения 4"><span class="drag-chip" draggable="true" data-value="José es el hijo de Juan y Ofelia.">José es el hijo de Juan y Ofelia.</span><span class="drag-chip" draggable="true" data-value="José está el hijo de Juan y Ofelia.">José está el hijo de Juan y Ofelia.</span><span class="drag-chip" draggable="true" data-value="José son el hijo de Juan y Ofelia.">José son el hijo de Juan y Ofelia.</span></div></div><div class="question drag-question"><div class="question-main"><span class="qnum">5</span><span class="ru-line">Дети ходят в школу.</span><span class="drop-zone long empty" data-answer="Los niños van a la escuela." aria-label="задание 4, предложение 5"></span></div><div class="option-bank" aria-label="варианты для предложения 5"><span class="drag-chip" draggable="true" data-value="Los niños son en la escuela.">Los niños son en la escuela.</span><span class="drag-chip" draggable="true" data-value="Los niños viven la escuela.">Los niños viven la escuela.</span><span class="drag-chip" draggable="true" data-value="Los niños van a la escuela.">Los niños van a la escuela.</span></div></div><div class="question drag-question"><div class="question-main"><span class="qnum">6</span><span class="ru-line">Семья находится на пляже.</span><span class="drop-zone long empty" data-answer="La familia está en la playa." aria-label="задание 4, предложение 6"></span></div><div class="option-bank" aria-label="варианты для предложения 6"><span class="drag-chip" draggable="true" data-value="La familia está en la playa.">La familia está en la playa.</span><span class="drag-chip" draggable="true" data-value="La familia es en la playa.">La familia es en la playa.</span><span class="drag-chip" draggable="true" data-value="La familia están en la playa.">La familia están en la playa.</span></div></div></div>
       <div class="toolbar">
         <button class="action" onclick="checkSection(this.closest('.section'))">Проверить</button>
         <button class="action secondary" onclick="resetSection(this.closest('.section'))">Сбросить</button>
@@ -197,10 +213,101 @@
       });
     });
 
+    let draggedChip = null;
+
+    function returnChipToBank(chip) {
+      if (!chip) return;
+      const question = chip.closest('.drag-question');
+      const bank = question ? question.querySelector('.option-bank') : null;
+      if (bank) bank.appendChild(chip);
+    }
+
+    function placeChip(zone, chip) {
+      if (!zone || !chip) return;
+      const question = zone.closest('.drag-question');
+      if (!question || chip.closest('.drag-question') !== question) return;
+      const current = zone.querySelector('.drag-chip');
+      if (current && current !== chip) returnChipToBank(current);
+      zone.appendChild(chip);
+      zone.classList.remove('empty','ok','bad','drag-over');
+      const score = question.closest('.section')?.querySelector('.score');
+      if (score) score.textContent = '';
+    }
+
+    document.querySelectorAll('.drag-chip').forEach(chip => {
+      chip.addEventListener('dragstart', e => {
+        draggedChip = chip;
+        chip.classList.add('dragging');
+        if (e.dataTransfer) {
+          e.dataTransfer.effectAllowed = 'move';
+          e.dataTransfer.setData('text/plain', chip.dataset.value || chip.textContent);
+        }
+      });
+      chip.addEventListener('dragend', () => {
+        chip.classList.remove('dragging');
+        document.querySelectorAll('.drop-zone.drag-over').forEach(z => z.classList.remove('drag-over'));
+        draggedChip = null;
+      });
+      chip.addEventListener('click', () => {
+        const question = chip.closest('.drag-question');
+        if (!question) return;
+        const zone = question.querySelector('.drop-zone');
+        if (chip.parentElement === zone) returnChipToBank(chip);
+        else placeChip(zone, chip);
+        zone.classList.toggle('empty', !zone.querySelector('.drag-chip'));
+      });
+    });
+
+    document.querySelectorAll('.drop-zone').forEach(zone => {
+      zone.addEventListener('dragover', e => {
+        e.preventDefault();
+        if (draggedChip && draggedChip.closest('.drag-question') === zone.closest('.drag-question')) {
+          zone.classList.add('drag-over');
+          if (e.dataTransfer) e.dataTransfer.dropEffect = 'move';
+        }
+      });
+      zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
+      zone.addEventListener('drop', e => {
+        e.preventDefault();
+        zone.classList.remove('drag-over');
+        if (draggedChip) placeChip(zone, draggedChip);
+      });
+    });
+
+    document.querySelectorAll('.option-bank').forEach(bank => {
+      bank.addEventListener('dragover', e => e.preventDefault());
+      bank.addEventListener('drop', e => {
+        e.preventDefault();
+        if (draggedChip && draggedChip.closest('.drag-question') === bank.closest('.drag-question')) {
+          bank.appendChild(draggedChip);
+          const zone = bank.closest('.drag-question').querySelector('.drop-zone');
+          zone.classList.add('empty');
+          zone.classList.remove('ok','bad');
+        }
+      });
+    });
+
     function checkSection(section) {
+      const zones = Array.from(section.querySelectorAll('.drop-zone'));
       const selects = Array.from(section.querySelectorAll('select'));
       let correct = 0;
+      let total = 0;
+
+      zones.forEach(zone => {
+        total++;
+        zone.classList.remove('ok','bad');
+        const chip = zone.querySelector('.drag-chip');
+        const value = chip ? chip.dataset.value : '';
+        if (value === zone.dataset.answer) {
+          zone.classList.add('ok');
+          correct++;
+        } else {
+          zone.classList.add('bad');
+        }
+      });
+
       selects.forEach(sel => {
+        total++;
         sel.classList.remove('ok','bad');
         if (sel.value === sel.dataset.answer) {
           sel.classList.add('ok');
@@ -209,11 +316,18 @@
           sel.classList.add('bad');
         }
       });
+
       const score = section.querySelector('.score');
-      if (score) score.textContent = `Результат: ${correct} / ${selects.length}`;
+      if (score) score.textContent = `Результат: ${correct} / ${total}`;
     }
 
     function resetSection(section) {
+      section.querySelectorAll('.drop-zone').forEach(zone => {
+        const chip = zone.querySelector('.drag-chip');
+        if (chip) returnChipToBank(chip);
+        zone.classList.add('empty');
+        zone.classList.remove('ok','bad','drag-over');
+      });
       section.querySelectorAll('select').forEach(sel => {
         sel.value = '';
         sel.classList.remove('ok','bad');

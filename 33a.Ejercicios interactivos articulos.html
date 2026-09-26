@@ -4,9 +4,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Artículos en español | ELE A1</title>
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="alternate icon" href="favicon.ico" type="image/x-icon">
-  <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <style>
   :root {
     --bg1:#f8fbff; --bg2:#fff7ed; --ink:#1f2937; --muted:#64748b;
@@ -98,7 +95,7 @@
         </li>
         <li class="item">
           <span class="num">4</span>
-          <span></span><select class="blankSelect" data-answer="las" data-options='["el", "la", "los", "las", "Ø"]' aria-label="Respuesta 4"></select><span> estudiantes tienen libros.</span>
+          <span></span><select class="blankSelect" data-answer="los" data-alt-answer="las" data-options='["el", "la", "los", "las", "Ø"]' aria-label="Respuesta 4"></select><span> estudiantes tienen libros.</span>
         </li>
         <li class="item">
           <span class="num">5</span>
@@ -613,7 +610,7 @@ function checkSelectExercise(id) {
   let ok = 0;
   selects.forEach(sel => {
     sel.classList.remove('ok','bad');
-    if (sel.value === sel.dataset.answer) { sel.classList.add('ok'); ok++; }
+    if (sel.value === sel.dataset.answer || sel.value === sel.dataset.altAnswer) { sel.classList.add('ok'); ok++; }
     else { sel.classList.add('bad'); }
   });
   root.querySelector('.feedback').textContent = scoreMessage(ok, selects.length);
