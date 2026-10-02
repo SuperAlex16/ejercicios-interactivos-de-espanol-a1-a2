@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Местоимения в испанском: позиция и обязательные случаи</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F3F5F8; --surface:#FFFFFF; --ink:#18202E; --muted:#5A6477; --line:#D9DEE7;
+  --cd:#2352C4; --cd-soft:#E3EAFB; --ci:#B86A00; --ci-soft:#FBEFD9;
+  --ok:#1E7A46; --ok-soft:#DDF2E5; --bad:#B3261E; --bad-soft:#F9E1DF;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121722; --surface:#1B2230; --ink:#E8ECF3; --muted:#9AA4B6; --line:#2E3747;
+    --cd:#7EA2FF; --cd-soft:#1F2C4D; --ci:#F2B24C; --ci-soft:#3A2C12;
+    --ok:#5CCB8A; --ok-soft:#173726; --bad:#FF8A80; --bad-soft:#3F1E1C;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121722; --surface:#1B2230; --ink:#E8ECF3; --muted:#9AA4B6; --line:#2E3747;
+  --cd:#7EA2FF; --cd-soft:#1F2C4D; --ci:#F2B24C; --ci-soft:#3A2C12;
+  --ok:#5CCB8A; --ok-soft:#173726; --bad:#FF8A80; --bad-soft:#3F1E1C;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 "Golos Text",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:760px;margin:0 auto;padding:40px 20px 80px}
+h1,h2,h3{font-family:"Unbounded","Golos Text",system-ui,sans-serif;line-height:1.2;margin:0}
+h1{font-size:clamp(28px,6vw,44px);font-weight:700;letter-spacing:-.01em}
+h2{font-size:clamp(20px,4vw,26px);font-weight:700;margin:56px 0 14px}
+h3{font-size:17px;font-weight:500;margin:28px 0 8px}
+p{margin:0 0 14px}
+.lead{font-size:19px;color:var(--muted);margin-top:18px;max-width:62ch}
+.cd{color:var(--cd);font-weight:600}
+.ci{color:var(--ci);font-weight:600}
+.tag{display:inline-block;padding:1px 9px;border-radius:999px;font-size:14px;font-weight:600}
+.tag.cd{background:var(--cd-soft)}
+.tag.ci{background:var(--ci-soft)}
+
+.split{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:28px}
+.split > div{background:var(--surface);border:1px solid var(--line);padding:18px;border-radius:14px}
+.split .q{font-family:"Unbounded",system-ui,sans-serif;font-size:22px;font-weight:700;margin:6px 0}
+.split .cdbox{border-top:5px solid var(--cd)}
+.split .cibox{border-top:5px solid var(--ci)}
+.split small{color:var(--muted);font-size:15px}
+
+.tablewrap{overflow-x:auto;margin:10px 0}
+table{border-collapse:collapse;width:100%;min-width:420px;background:var(--surface);border-radius:12px;overflow:hidden}
+th,td{padding:10px 14px;text-align:left;border-bottom:1px solid var(--line)}
+th{font-size:15px;font-weight:600;color:var(--muted)}
+tr:last-child td{border-bottom:none}
+td.cd,td.ci{font-size:18px}
+tr.third td{background:color-mix(in srgb,var(--ci-soft) 35%,transparent)}
+
+.ex{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:10px 0}
+.ex .es{font-weight:600}
+.ex .ru{color:var(--muted);font-size:15px}
+.arrow{color:var(--muted);padding:0 6px}
+
+.note{border-left:4px solid var(--line);padding:4px 0 4px 16px;margin:16px 0;color:var(--ink)}
+
+/* exercises */
+.task{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px 20px;margin:20px 0}
+.task-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.task-head p{color:var(--muted);font-size:15px;margin:6px 0 0;width:100%}
+.score{font-weight:600;font-size:15px;color:var(--muted)}
+.item{border-top:1px solid var(--line);padding:16px 0 6px}
+.item:first-of-type{border-top:none}
+.prompt{margin:0 0 4px}
+.hint{color:var(--muted);font-size:15px;margin:0 0 10px}
+.blank{display:inline-block;min-width:3.2em;border-bottom:2px solid var(--muted);text-align:center;font-weight:700}
+.blank.ok{color:var(--ok);border-color:var(--ok)}
+.blank.bad{color:var(--bad);border-color:var(--bad)}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opts button{font:600 16px "Golos Text",system-ui,sans-serif;padding:8px 16px;min-width:64px;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+.opts button:hover:not(:disabled){border-color:var(--ink)}
+.opts button:focus-visible,.reset:focus-visible{outline:3px solid var(--cd);outline-offset:2px}
+.opts button:disabled{cursor:default}
+.opts button.right{background:var(--ok-soft);border-color:var(--ok);color:var(--ok)}
+.opts button.wrong{background:var(--bad-soft);border-color:var(--bad);color:var(--bad)}
+.explain{font-size:15px;margin:10px 0 0;padding:10px 12px;border-radius:10px;background:var(--bg);display:none}
+.explain.show{display:block}
+
+.total{margin-top:40px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.total strong{font-family:"Unbounded",system-ui,sans-serif;font-size:22px}
+.reset{font:600 16px "Golos Text",system-ui,sans-serif;padding:10px 18px;border-radius:10px;border:none;background:var(--ink);color:var(--bg);cursor:pointer}
+
+@media (max-width:560px){
+  .split{grid-template-columns:1fr}
+  main{padding-top:28px}
+}
+@media (prefers-reduced-motion:no-preference){
+  .explain.show{animation:in .2s ease-out}
+  @keyframes in{from{opacity:0;transform:translateY(-3px)}to{opacity:1;transform:none}}
+}
+</style></head><body>
+<main>
+
+<h1>Где ставить местоимения и когда без них нельзя</h1>
+<p class="lead">Продолжение темы про <span class="cd">винительный</span> и <span class="ci">дательный</span>: позиция местоимения, два местоимения подряд, обязательный повтор и глаголы типа gustar.</p>
+
+<h2>Где стоит местоимение</h2>
+<div class="tablewrap">
+<table>
+  <thead><tr><th>Форма глагола</th><th>Позиция</th><th>Пример</th></tr></thead>
+  <tbody>
+    <tr><td>спрягаемый глагол</td><td>перед ним, отдельно</td><td><span class="cd">Lo</span> compro. <span class="cd">La</span> he visto.</td></tr>
+    <tr><td>инфинитив</td><td>слитно в конце</td><td>Quiero comprar<span class="cd">lo</span>.</td></tr>
+    <tr><td>герундий</td><td>слитно в конце</td><td>Estoy leyéndo<span class="cd">lo</span>.</td></tr>
+    <tr><td>утвердительный императив</td><td>слитно в конце</td><td>¡Cómpra<span class="cd">lo</span>!</td></tr>
+    <tr><td>отрицательный императив</td><td>перед глаголом</td><td>¡No <span class="cd">lo</span> compres!</td></tr>
+  </tbody>
+</table>
+</div>
+<p>В конструкциях «глагол + инфинитив/герундик» возможны оба варианта: <em><span class="cd">Lo</span> quiero comprar</em> = <em>Quiero comprar<span class="cd">lo</span></em>. Нельзя только ставить местоимение между ними: <s>quiero lo comprar</s>. В отрицании <em>no</em> всегда идёт перед местоимением: <em>No <span class="cd">lo</span> sé</em>.</p>
+
+
+
+<p><b>Порядок двух местоимений:</b> <em>se</em> → <span class="ci">me / te / nos / os</span> → <span class="cd">lo / la</span>. А <span class="ci">le / les</span> перед <span class="cd">lo / la</span> превращается в <em>se</em>: <em><span class="ci">Se</span> <span class="cd">lo</span> doy</em>.</p>
+
+<h2>Когда местоимение обязательно</h2>
+<div class="ex"><span class="es"><span class="ci">Le</span> di el libro <span class="ci">a él</span>.</span><br><span class="ru">С формами a mí, a ti, a él местоимение обязательно. Нельзя: «Di el libro a él».</span></div>
+<div class="ex"><span class="es"><span class="ci">Le</span> doy el libro <span class="ci">a María</span>.</span><br><span class="ru">Дательное с существительным почти всегда дублируется.</span></div>
+<div class="ex"><span class="es"><span class="cd">El libro</span> <span class="cd">lo</span> compré ayer.</span><br><span class="ru">Если прямое дополнение вынесено в начало, его повторяют местоимением.</span></div>
+
+<h2>Глаголы типа gustar</h2>
+<p>Тот, кому нравится, стоит в дательном, поэтому без <span class="ci">me / te / le / nos / os / les</span> эти глаголы не употребляются: <em>gustar, encantar, interesar, doler, parecer, faltar, importar, molestar</em>.</p>
+<div class="ex"><span class="es">A mí <span class="ci">me</span> duele la cabeza.</span><br><span class="ru">У меня болит голова (дословно «мне болит голова»).</span></div>
+<p>Глагол согласуется с тем, <b>что</b> нравится, а не с тем, <b>кому</b>:</p>
+<div class="ex"><span class="es"><span class="ci">Me</span> gusta la manzana. <span class="arrow">/</span> <span class="ci">Me</span> gusta<b>n</b> las manzanas.</span><br><span class="ru">Мне нравится яблоко / Мне нравятся яблоки.</span></div>
+
+<h2>Практика</h2>
+<p>Нажмите на вариант, и сразу появится ответ с объяснением.</p>
+
+<div id="tasks"></div>
+
+<div class="total">
+  <div>Итого: <strong id="total">0 / 0</strong></div>
+  <button class="reset" id="reset">Начать заново</button>
+</div>
+
+</main>
+<script>
+const TASKS = [
+  {
+    title: "Упражнение 1. Где стоит местоимение",
+    desc: "Выберите правильное предложение.",
+    items: [
+      {es:"Я хочу его купить (el libro).", ru:"", opts:["Quiero lo comprar.","Lo quiero comprar.","Quiero comprar lo."], a:"Lo quiero comprar.", why:"Перед спрягаемым глаголом или слитно с инфинитивом: Lo quiero comprar = Quiero comprarlo. Между глаголами нельзя."},
+      {es:"Я сейчас её читаю (la novela).", ru:"", opts:["Estoy la leyendo.","La estoy leyendo.","Estoy leyendo la."], a:"La estoy leyendo.", why:"Перед estar или слитно с герундием: La estoy leyendo = Estoy leyéndola."},
+      {es:"Я его уже видел.", ru:"", opts:["Lo he visto ya.","He lo visto ya.","He visto lo ya."], a:"Lo he visto ya.", why:"Haber спрягается, поэтому местоимение стоит перед всей формой: lo he visto."},
+      {es:"Я этого не знаю.", ru:"", opts:["Lo no sé.","No lo sé.","No sé lo."], a:"No lo sé.", why:"No всегда идёт перед местоимением, а местоимение переД спрягаемым глаголом."},
+      {es:"Купи её! (la camisa)", ru:"", opts:["¡La compra!","¡Cómprala!","¡Compra la!"], a:"¡Cómprala!", why:"В утвердительном императиве местоимение пишется слитно в конце. ¡La compra! значит «Он её покупает»."},
+      {es:"Не покупай его!", ru:"", opts:["¡No cómpralo!","¡Lo no compres!","¡No lo compres!"], a:"¡No lo compres!", why:"В отрицательном императиве местоимение стоит перед глаголом, а no перед местоимением."},
+      {es:"Позвони мне!", ru:"", opts:["¡Me llama!","¡Llámame!","¡Llama me!"], a:"¡Llámame!", why:"Утвердительный императив: местоимение слитно в конце. ¡Me llama! значит «Он мне звонит»."},
+      {es:"Мы будем их ждать (a las chicas).", ru:"", opts:["Vamos a esperarlas.","Vamos las a esperar.","Vamos a las esperar."], a:"Vamos a esperarlas.", why:"Слитно с инфинитивом или перед всей конструкцией: Vamos a esperarlas = Las vamos a esperar."}
+    ]
+  },
+  {
+    title: "Упражнение 2. Два местоимения подряд",
+    desc: "Сначала дательное, потом винительное. Le / les перед lo / la превращается в se.",
+    items: [
+      {es:"Doy el libro a Juan. → ___ doy.", ru:"Я даю книгу Хуану.", opts:["le lo","se lo","lo le"], a:"se lo", why:"Le + lo превращается в se lo."},
+      {es:"Mi madre me da las llaves. → Mi madre ___ da.", ru:"Мама даёт мне кльчи.", opts:["me las","las me","se las"], a:"me las", why:"Сначала дательное me, потом винительное las. Me не меняется на se."},
+      {es:"Explico las reglas a los alumnos. → ___ explico.", ru:"Я объясняю правила ученикам.", opts:["les las","se las","se les"], a:"se las", why:"Les + las превращается в se las."},
+      {es:"¿Me prestas tu bici? — Sí, ___ presto.", ru:"Одолжишь мне велосипед? — Да, одолжу.", opts:["te la","la te","se la"], a:"te la", why:"Тебе (te) его (la bici, ж. р.): te la."},
+      {es:"Envío los documentos a la profesora. → ___ envío.", ru:"Я отправляю документы преподавательнице.", opts:["se los","le los","se las"], a:"se los", why:"Le + los превращается в se los. Los, потому что los documentos мужского рода."},
+      {es:"Nos cuentan la historia. → ___ cuentan.", ru:"Нам рассказывают историю.", opts:["nos la","la nos","se la"], a:"nos la", why:"Нам (nos) её (la historia): nos la."}
+    ]
+  },
+  {
+    title: "Упражнение 3. Без местоимения нельзя",
+    desc: "Выберите правильный вариант.",
+    items: [
+      {es:"Я дал книгу ему (а не ей).", ru:"", opts:["Le di el libro a él.","Di el libro a él."], a:"Le di el libro a él.", why:"С ударными формами a él, a mí и т.д. безударное местоимение обязательно."},
+      {es:"Я позвоню тебе, а не ей.", ru:"", opts:["Llamo a ti, no a ella.","Te llamo a ti, no a ella."], a:"Te llamo a ti, no a ella.", why:"A ti только подчёркивает. Te обязательно."},
+      {es:"Книгу я купил вчера.", ru:"", opts:["El libro compré ayer.","El libro lo compré ayer."], a:"El libro lo compré ayer.", why:"Прямое дополнение вынесено в начало, поэтому его повторяют: lo."},
+      {es:"Эти фотографии я сделал в Мадриде.", ru:"", opts:["Estas fotos las hice en Madrid.","Estas fotos hice en Madrid."], a:"Estas fotos las hice en Madrid.", why:"Дополнение в начале фразы повторяется местоимением: las (las fotos, ж. р., мн. ч.)."},
+      {es:"Я сказал Марии правду.", ru:"", opts:["Le dije la verdad a María.","Dije le la verdad a María."], a:"Le dije la verdad a María.", why:"Le стоит перед спрягаемым глаголом и дублирует a María."},
+      {es:"Я написал письмо родителям.", ru:"", opts:["Escribí les una carta a mis padres.","Les escribí una carta a mis padres."], a:"Les escribí una carta a mis padres.", why:"Les дублирует a mis padres и стоит перед спрягаемым глаголом."}
+    ]
+  },
+  {
+    title: "Упражнение 4. Gustar и похожие глаголы",
+    desc: "Выберите местоимение или форму глагола.",
+    items: [
+      {es:"A Ana ___ encantan los perros.", ru:"Ане очень нравятся собаки.", opts:["la","le","les"], a:"le", why:"Ане — дательный, ед. ч.: le. Не la, потому что это не винительный."},
+      {es:"A mis padres ___ gusta viajar.", ru:"Моим родителям нравится путешествовать.", opts:["los","le","les"], a:"les", why:"Родителям — дательный, мн. ч.: les."},
+      {es:"A nosotros ___ interesa la historia.", ru:"Нам интересна история.", opts:["nos","os","les"], a:"nos", why:"Нам — nos."},
+      {es:"¿A ti ___ duele la cabeza?", ru:"У тебя болит голова?", opts:["ti","te","le"], a:"te", why:"A ti — ударная форма, рядом с глаголом нужна безударная: te."},
+      {es:"A mí ___ molesta el ruido.", ru:"Меня раздражает шум.", opts:["mí","me","le"], a:"me", why:"По-русски «меня раздражает», но в испанском molestar работает как gustar: me."},
+      {es:"Me ___ las manzanas.", ru:"Мне нравятся яблоки.", opts:["gusta","gustan"], a:"gustan", why:"Глагол согласуется с тем, что нравится: las manzanas — мн. ч., значит gustan."},
+      {es:"A los niños les ___ el chocolate.", ru:"Детям очень нравится шоколад.", opts:["encanta","encantan"], a:"encanta", why:"Хоть детей много, нравится el chocolate (ед. ч.): encanta."}
+    ]
+  },
+  {
+    title: "Упражнение 5. Всё вместе",
+    desc: "Замените дополнения местоимениями.",
+    items: [
+      {es:"Veo a mis amigas.", ru:"", opts:["Las veo.","Les veo.","Los veo."], a:"Las veo.", why:"Вижу кого? Подруг — винительный, ж. р., мн. ч.: las."},
+      {es:"Regalé un libro a mi hermana.", ru:"", opts:["Le lo regalé.","Se lo regalé.","Lo le regalé."], a:"Se lo regalé.", why:"Le + lo превращается в se lo, и оба стоят перед спрягаемым глаголом."},
+      {es:"Quiero comprar el coche.", ru:"", opts:["Le quiero comprar.","Quiero comprarle.","Lo quiero comprar."], a:"Lo quiero comprar.", why:"Покупаю что? Машину — винительный: lo. Можно и Quiero comprarlo."},
+      {es:"No digas la verdad a Pedro.", ru:"", opts:["No se la digas.","No le la digas.","No dígasela."], a:"No se la digas.", why:"Отрицательный императив: местоимения перед глаголом. Le + la превращается в se la."},
+      {es:"Estoy escribiendo un correo a mis amigos.", ru:"", opts:["Les lo estoy escribiendo.","Se lo estoy escribiendo.","Se los estoy escribiendo."], a:"Se lo estoy escribiendo.", why:"Se не показывает число, а lo относится к un correo (ед. ч.). В Латинской Америке в разговоре можно услышать se los, но норма — se lo."},
+      {es:"Da las llaves a tu padre.", ru:"", opts:["Se las da.","Dáselas.","Dalesla."], a:"Dáselas.", why:"Утвердительный императив: местоимения слитно в конце, les + las превращается в se las. Se las da значит «Он ему их даёт»."}
+    ]
+  }
+];
+
+const state = TASKS.map(t => t.items.map(() => null));
+const root = document.getElementById("tasks");
+function esc(s){return s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+
+function render(){
+  root.innerHTML = "";
+  TASKS.forEach((t, ti) => {
+    const sec = document.createElement("section");
+    sec.className = "task";
+    sec.innerHTML = `<div class="task-head"><h3 style="margin:0">${esc(t.title)}</h3><span class="score" id="score-${ti}"></span><p>${esc(t.desc)}</p></div>`;
+    t.items.forEach((it, ii) => {
+      const div = document.createElement("div");
+      div.className = "item";
+      const hasBlank = it.es.includes("___");
+      const parts = it.es.split("___");
+      const prompt = hasBlank
+        ? `${esc(parts[0])}<span class="blank" id="b-${ti}-${ii}">&nbsp;</span>${esc(parts[1]||"")}`
+        : `<b>${esc(it.es)}</b>`;
+      div.innerHTML = `
+        <p class="prompt">${prompt}</p>
+        ${it.ru ? `<p class="hint">${esc(it.ru)}</p>` : `<div style="height:8px"></div>`}
+        <div class="opts" role="group" aria-label="Варианты ответа"></div>
+        <p class="explain" id="e-${ti}-${ii}" aria-live="polite"></p>`;
+      const opts = div.querySelector(".opts");
+      it.opts.forEach(o => {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.textContent = o;
+        b.addEventListener("click", () => answer(ti, ii, o, opts));
+        opts.appendChild(b);
+      });
+      sec.appendChild(div);
+    });
+    root.appendChild(sec);
+  });
+  updateScores();
+}
+
+function answer(ti, ii, choice, opts){
+  if (state[ti][ii] !== null) return;
+  const it = TASKS[ti].items[ii];
+  const ok = choice === it.a;
+  state[ti][ii] = ok;
+  [...opts.children].forEach(b => {
+    b.disabled = true;
+    if (b.textContent === it.a) b.classList.add("right");
+    else if (b.textContent === choice) b.classList.add("wrong");
+  });
+  const blank = document.getElementById(`b-${ti}-${ii}`);
+  if (blank){ blank.textContent = it.a; blank.classList.add(ok ? "ok" : "bad"); }
+  const ex = document.getElementById(`e-${ti}-${ii}`);
+  ex.innerHTML = (ok ? "<b>Верно.</b> " : "<b>Не совсем.</b> ") + esc(it.why);
+  ex.classList.add("show");
+  updateScores();
+}
+
+function updateScores(){
+  let all = 0, right = 0;
+  state.forEach((arr, ti) => {
+    const r = arr.filter(v => v === true).length;
+    const done = arr.filter(v => v !== null).length;
+    all += arr.length; right += r;
+    document.getElementById(`score-${ti}`).textContent = done ? `${r} из ${arr.length}` : `${arr.length} заданию`;
+  });
+  document.getElementById("total").textContent = `${right} / ${all}`;
+}
+
+document.getElementById("reset").addEventListener("click", () => {
+  state.forEach(arr => arr.fill(null));
+  render();
+  root.scrollIntoView({behavior:"smooth"});
+});
+render();
+</script>
+</body></html>

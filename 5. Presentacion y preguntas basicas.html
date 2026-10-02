@@ -104,6 +104,11 @@
     .listening-card{display:grid;grid-template-columns:.9fr 1.1fr;gap:1rem;align-items:start}.audio-box{background:#fff;border:1px solid var(--line);border-radius:22px;padding:1rem;box-shadow:0 8px 28px rgba(42,28,18,.07)}.audio-box audio{width:100%;margin:.7rem 0}.listening-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.85rem}.audio-answer{background:#fff;border:1px solid var(--line);border-radius:18px;padding:.9rem}.audio-answer label{display:block;font-weight:850;margin-bottom:.45rem;color:var(--primary)}.audio-answer textarea{width:100%;min-height:74px;border:1px solid #d9c7b3;border-radius:14px;padding:.75rem .82rem;font:inherit;background:#fffdf8;color:var(--ink);resize:vertical}@media(max-width:900px){.listening-card,.listening-grid{grid-template-columns:1fr}}
     @media(max-width:900px){.hero{grid-template-columns:1fr;padding-top:2rem}.hero::after{width:100%;opacity:.22}.hero-card{justify-self:stretch;max-width:none}.two,.three,.pattern-grid,.drag-area,.match-row,.input-grid,.builder,.roleplay,.roulette{grid-template-columns:1fr}.nav .score-pill{margin-left:0}.section-head{grid-template-columns:1fr}.question-bank{grid-template-columns:1fr}}
     @media print{.hero,.nav,button,.hero-actions{display:none!important}body{background:#fff}.section{box-shadow:none;break-inside:avoid}.section{margin-bottom:1rem}.content{padding:1rem}}
+    .ru-hover{position:relative;cursor:help}
+    .ru-hover::after{content:attr(data-ru);position:absolute;left:50%;bottom:calc(100% + 9px);z-index:9999;width:max-content;max-width:min(24rem,78vw);padding:.62rem .82rem;border-radius:12px;background:#22303c;color:#fff;font-size:.94rem;font-weight:700;line-height:1.38;text-align:left;white-space:normal;box-shadow:0 8px 24px rgba(0,0,0,.28);opacity:0;visibility:hidden;pointer-events:none;transform:translate(-50%,5px);transition:opacity .12s ease,transform .12s ease}
+    .ru-hover:hover{z-index:100}
+    .ru-hover:hover::after,.ru-hover:focus-visible::after{opacity:1;visibility:visible;transform:translate(-50%,0)}
+    .ru-hover:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
   </style>
 </head>
 <body>
@@ -157,14 +162,14 @@
 </div>
 <div class="content">
 <div class="pattern-grid">
-<div class="pattern"><small>Identidad</small><b>¿Cómo te llamas?</b></div>
-<div class="pattern"><small>Origen</small><b>¿De dónde eres?</b></div>
-<div class="pattern"><small>Residencia</small><b>¿Dónde vives?</b></div>
-<div class="pattern"><small>Edad</small><b>¿Cuántos años tienes?</b></div>
-<div class="pattern"><small>Trabajo</small><b>¿En qué trabajas?</b></div>
-<div class="pattern"><small>Estudio</small><b>¿Qué estudias?</b></div>
-<div class="pattern"><small>Gustos</small><b>¿Qué te gusta hacer?</b></div>
-<div class="pattern"><small>Preferencia</small><b>¿Prefieres té o café?</b></div>
+<div class="pattern"><small>Identidad</small><b class="ru-hover" data-ru="Как тебя зовут?" title="Как тебя зовут?" tabindex="0">¿Cómo te llamas?</b></div>
+<div class="pattern"><small>Origen</small><b class="ru-hover" data-ru="Откуда ты?" title="Откуда ты?" tabindex="0">¿De dónde eres?</b></div>
+<div class="pattern"><small>Residencia</small><b class="ru-hover" data-ru="Где ты живёшь?" title="Где ты живёшь?" tabindex="0">¿Dónde vives?</b></div>
+<div class="pattern"><small>Edad</small><b class="ru-hover" data-ru="Сколько тебе лет?" title="Сколько тебе лет?" tabindex="0">¿Cuántos años tienes?</b></div>
+<div class="pattern"><small>Trabajo</small><b class="ru-hover" data-ru="Кем ты работаешь?" title="Кем ты работаешь?" tabindex="0">¿En qué trabajas?</b></div>
+<div class="pattern"><small>Estudio</small><b class="ru-hover" data-ru="Что ты изучаешь?" title="Что ты изучаешь?" tabindex="0">¿Qué estudias?</b></div>
+<div class="pattern"><small>Gustos</small><b class="ru-hover" data-ru="Что тебе нравится делать?" title="Что тебе нравится делать?" tabindex="0">¿Qué te gusta hacer?</b></div>
+<div class="pattern"><small>Preferencia</small><b class="ru-hover" data-ru="Ты предпочитаешь чай или кофе?" title="Ты предпочитаешь чай или кофе?" tabindex="0">¿Prefieres té o café?</b></div>
 </div>
 <p class="note"><strong>Совет для занятия:</strong> учащиеся могут использовать вымышленные данные, если вопрос касается личной информации: адреса, телефона, электронной почты или даты рождения.</p>
 </div>
@@ -181,23 +186,23 @@
 <div class="card">
 <h3>Datos personales</h3>
 <div class="question-bank">
-<div class="q-item">¿Cuál es tu apellido?</div>
-<div class="q-item">¿Cuál es tu nacionalidad?</div>
-<div class="q-item">¿Cuál es tu dirección?</div>
-<div class="q-item">¿Cuál es tu número de teléfono?</div>
-<div class="q-item">¿Tienes correo electrónico?</div>
-<div class="q-item">¿Cuál es tu fecha de nacimiento?</div>
+<div class="q-item ru-hover" data-ru="Какая у тебя фамилия?" title="Какая у тебя фамилия?" tabindex="0">¿Cuál es tu apellido?</div>
+<div class="q-item ru-hover" data-ru="Какое у тебя гражданство?" title="Какое у тебя гражданство?" tabindex="0">¿Cuál es tu nacionalidad?</div>
+<div class="q-item ru-hover" data-ru="Какой у тебя адрес?" title="Какой у тебя адрес?" tabindex="0">¿Cuál es tu dirección?</div>
+<div class="q-item ru-hover" data-ru="Какой у тебя номер телефона?" title="Какой у тебя номер телефона?" tabindex="0">¿Cuál es tu número de teléfono?</div>
+<div class="q-item ru-hover" data-ru="У тебя есть электронная почта?" title="У тебя есть электронная почта?" tabindex="0">¿Tienes correo electrónico?</div>
+<div class="q-item ru-hover" data-ru="Какая у тебя дата рождения?" title="Какая у тебя дата рождения?" tabindex="0">¿Cuál es tu fecha de nacimiento?</div>
 </div>
 </div>
 <div class="card" style="background-image:linear-gradient(0deg,rgba(255,255,255,.92),rgba(255,255,255,.84)),url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&amp;fit=crop&amp;w=1000&amp;q=82');background-size:cover;background-position:center;">
 <h3>Clase, trabajo y vida cotidiana</h3>
 <div class="question-bank">
-<div class="q-item">¿Dónde trabajas?</div>
-<div class="q-item">¿Cuál es tu horario de estudio?</div>
-<div class="q-item">¿Con quién vives?</div>
-<div class="q-item">¿Qué idiomas hablas?</div>
-<div class="q-item">¿Desde cuándo estudias español?</div>
-<div class="q-item">¿Cómo te sientes hoy?</div>
+<div class="q-item ru-hover" data-ru="Где ты работаешь?" title="Где ты работаешь?" tabindex="0">¿Dónde trabajas?</div>
+<div class="q-item ru-hover" data-ru="Какое у тебя расписание занятий?" title="Какое у тебя расписание занятий?" tabindex="0">¿Cuál es tu horario de estudio?</div>
+<div class="q-item ru-hover" data-ru="С кем ты живёшь?" title="С кем ты живёшь?" tabindex="0">¿Con quién vives?</div>
+<div class="q-item ru-hover" data-ru="На каких языках ты говоришь?" title="На каких языках ты говоришь?" tabindex="0">¿Qué idiomas hablas?</div>
+<div class="q-item ru-hover" data-ru="Как давно ты изучаешь испанский?" title="Как давно ты изучаешь испанский?" tabindex="0">¿Desde cuándo estudias español?</div>
+<div class="q-item ru-hover" data-ru="Как ты себя сегодня чувствуешь?" title="Как ты себя сегодня чувствуешь?" tabindex="0">¿Cómo te sientes hoy?</div>
 </div>
 </div>
 </div>
@@ -228,7 +233,14 @@
 <button onclick="checkQuiz()">Проверить</button>
 </div>
 <div class="content">
-<div class="quiz" id="quiz"></div>
+<div class="quiz" id="quiz">
+<div class="quiz-item" data-answer="¿Cómo te llamas?"><div class="prompt ru-hover" data-ru="Чтобы спросить имя:" title="Чтобы спросить имя:" tabindex="0">1. Para preguntar el nombre:</div><div class="quiz-options"><button class="option" onclick="selectOption(this)">¿Cómo te llamas?</button><button class="option" onclick="selectOption(this)">¿Cómo te llama?</button><button class="option" onclick="selectOption(this)">¿Cómo llamas tú?</button></div></div>
+<div class="quiz-item" data-answer="¿Dónde vives?"><div class="prompt ru-hover" data-ru="Чтобы спросить, в каком городе живёт человек:" title="Чтобы спросить, в каком городе живёт человек:" tabindex="0">2. Para preguntar la ciudad de residencia:</div><div class="quiz-options"><button class="option" onclick="selectOption(this)">¿Dónde vives?</button><button class="option" onclick="selectOption(this)">¿Dónde vive tú?</button><button class="option" onclick="selectOption(this)">¿Dónde vivir tú?</button></div></div>
+<div class="quiz-item" data-answer="¿Tienes correo electrónico?"><div class="prompt ru-hover" data-ru="Чтобы спросить об электронной почте:" title="Чтобы спросить об электронной почте:" tabindex="0">3. Para preguntar por email:</div><div class="quiz-options"><button class="option" onclick="selectOption(this)">¿Tienes correo electrónico?</button><button class="option" onclick="selectOption(this)">¿Tiene tú correo electrónico?</button><button class="option" onclick="selectOption(this)">¿Tener correo electrónico?</button></div></div>
+<div class="quiz-item" data-answer="¿Eres estudiante?"><div class="prompt ru-hover" data-ru="Чтобы спросить, учится ли человек:" title="Чтобы спросить, учится ли человек:" tabindex="0">4. Para preguntar si una persona estudia:</div><div class="quiz-options"><button class="option" onclick="selectOption(this)">¿Eres estudiante?</button><button class="option" onclick="selectOption(this)">¿Estás estudiante?</button><button class="option" onclick="selectOption(this)">¿Tú es estudiante?</button></div></div>
+<div class="quiz-item" data-answer="¿Haces deporte?"><div class="prompt ru-hover" data-ru="Чтобы спросить о занятиях спортом:" title="Чтобы спросить о занятиях спортом:" tabindex="0">5. Para preguntar por deporte:</div><div class="quiz-options"><button class="option" onclick="selectOption(this)">¿Haces deporte?</button><button class="option" onclick="selectOption(this)">¿Hace tú deporte?</button><button class="option" onclick="selectOption(this)">¿Hacer deporte tú?</button></div></div>
+<div class="quiz-item" data-answer="¿Prefieres té o café?"><div class="prompt ru-hover" data-ru="Чтобы спросить о предпочтении:" title="Чтобы спросить о предпочтении:" tabindex="0">6. Para preguntar preferencia:</div><div class="quiz-options"><button class="option" onclick="selectOption(this)">¿Prefieres té o café?</button><button class="option" onclick="selectOption(this)">¿Prefiere tú té o café?</button><button class="option" onclick="selectOption(this)">¿Tú prefieren té o café?</button></div></div>
+</div>
 <div class="feedback" id="quizFeedback"></div>
 </div>
 </section>
@@ -523,6 +535,48 @@
       if(correct === pairs.length) addScore(10);
     }
 
+    const ruTranslations = {
+      '¿Cómo te llamas?':'Как тебя зовут?',
+      '¿De dónde eres?':'Откуда ты?',
+      '¿Dónde vives?':'Где ты живёшь?',
+      '¿Cuántos años tienes?':'Сколько тебе лет?',
+      '¿En qué trabajas?':'Кем ты работаешь?',
+      '¿Qué estudias?':'Что ты изучаешь?',
+      '¿Qué te gusta hacer?':'Что тебе нравится делать?',
+      '¿Prefieres té o café?':'Ты предпочитаешь чай или кофе?',
+      '¿Cuál es tu apellido?':'Какая у тебя фамилия?',
+      '¿Cuál es tu nacionalidad?':'Какое у тебя гражданство?',
+      '¿Cuál es tu dirección?':'Какой у тебя адрес?',
+      '¿Cuál es tu número de teléfono?':'Какой у тебя номер телефона?',
+      '¿Tienes correo electrónico?':'У тебя есть электронная почта?',
+      '¿Cuál es tu fecha de nacimiento?':'Когда ты родился / родилась?',
+      '¿Dónde trabajas?':'Где ты работаешь?',
+      '¿Cuál es tu horario de estudio?':'Какое у тебя расписание занятий?',
+      '¿Con quién vives?':'С кем ты живёшь?',
+      '¿Qué idiomas hablas?':'На каких языках ты говоришь?',
+      '¿Desde cuándo estudias español?':'Как давно ты изучаешь испанский?',
+      '¿Cómo te sientes hoy?':'Как ты себя сегодня чувствуешь?',
+      'Para preguntar el nombre:':'Чтобы спросить имя:',
+      'Para preguntar la ciudad de residencia:':'Чтобы спросить, в каком городе человек живёт:',
+      'Para preguntar por email:':'Чтобы спросить об электронной почте:',
+      'Para preguntar si una persona estudia:':'Чтобы спросить, учится ли человек:',
+      'Para preguntar por deporte:':'Чтобы спросить о занятиях спортом:',
+      'Para preguntar preferencia:':'Чтобы спросить о предпочтениях:',
+      '¿Cómo te llama?':'Как он / она тебя зовёт? (неверный вариант)',
+      '¿Cómo llamas tú?':'Как ты зовёшь? (неверный вариант)',
+      '¿Dónde vive tú?':'Где ты живёт? (неверный вариант)',
+      '¿Dónde vivir tú?':'Где жить ты? (неверный вариант)',
+      '¿Tiene tú correo electrónico?':'У тебя есть электронная почта? (неверный вариант)',
+      '¿Tener correo electrónico?':'Иметь электронную почту? (неверный вариант)',
+      '¿Eres estudiante?':'Ты студент / студентка?',
+      '¿Estás estudiante?':'Ты есть студент? (неверный вариант)',
+      '¿Tú es estudiante?':'Ты студент? (неверный вариант)',
+      '¿Haces deporte?':'Ты занимаешься спортом?',
+      '¿Hace tú deporte?':'Ты занимается спортом? (неверный вариант)',
+      '¿Hacer deporte tú?':'Заниматься спортом ты? (неверный вариант)',
+      '¿Prefiere tú té o café?':'Ты предпочитает чай или кофе? (неверный вариант)',
+      '¿Tú prefieren té o café?':'Ты предпочитают чай или кофе? (неверный вариант)'
+    };
     const quizData = [
       {prompt:'Para preguntar el nombre:', options:['¿Cómo te llamas?','¿Cómo te llama?','¿Cómo llamas tú?'], answer:'¿Cómo te llamas?'},
       {prompt:'Para preguntar la ciudad de residencia:', options:['¿Dónde vives?','¿Dónde vive tú?','¿Dónde vivir tú?'], answer:'¿Dónde vives?'},
@@ -533,7 +587,7 @@
     ];
     function renderQuiz(){
       const q = document.getElementById('quiz');
-      q.innerHTML = quizData.map((item,idx)=>`<div class="quiz-item" data-answer="${item.answer}"><div class="prompt">${idx+1}. ${item.prompt}</div><div class="quiz-options">${item.options.map(o=>`<button class="option" onclick="selectOption(this)">${o}</button>`).join('')}</div></div>`).join('');
+      q.innerHTML = quizData.map((item,idx)=>`<div class="quiz-item" data-answer="${item.answer}"><div class="prompt ru-hover" data-ru="${ruTranslations[item.prompt] || ''}" title="${ruTranslations[item.prompt] || ''}" tabindex="0">${idx+1}. ${item.prompt}</div><div class="quiz-options">${item.options.map(o=>`<button class="option" onclick="selectOption(this)">${o}</button>`).join('')}</div></div>`).join('');
     }
     function selectOption(btn){ btn.parentElement.querySelectorAll('.option').forEach(b=>b.classList.remove('selected')); btn.classList.add('selected'); }
     function checkQuiz(){
