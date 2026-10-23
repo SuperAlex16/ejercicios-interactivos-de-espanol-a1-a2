@@ -90,7 +90,7 @@
     main{padding:2rem clamp(1rem,4vw,5rem) 5rem}.section{max-width:1180px;margin:0 auto 2rem;background:rgba(255,250,242,.72);border:1px solid rgba(231,215,196,.9);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}.section-head{padding:1.4rem 1.5rem;border-bottom:1px solid var(--line);display:grid;grid-template-columns:1fr auto;gap:1rem;align-items:center}.section h2{margin:0;font-size:clamp(1.45rem,2vw,2.1rem);letter-spacing:-.025em}.section p{margin:.45rem 0 0;color:var(--muted)}
     .content{padding:1.35rem}.two{display:grid;grid-template-columns:1fr 1fr;gap:1rem}.three{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}.card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:1rem;box-shadow:0 8px 28px rgba(42,28,18,.07)}.card h3{margin:.1rem 0 .5rem;font-size:1.08rem}.note{background:#fbf2df;border-left:5px solid var(--accent-2);padding:1rem;border-radius:18px;color:#554130}
     .pattern-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.9rem}.pattern{background:#fff;border:1px solid var(--line);border-radius:20px;padding:1rem;min-height:130px;display:flex;flex-direction:column;justify-content:space-between}.pattern small{color:var(--accent);font-weight:900;text-transform:uppercase;letter-spacing:.07em}.pattern b{font-size:1.1rem}.pattern em{font-style:normal;color:var(--muted)}
-    .question-bank{display:grid;grid-template-columns:repeat(2,1fr);gap:.65rem}.q-item{padding:.75rem .85rem;border-radius:16px;background:#fbf4e8;border:1px solid #ead8c2;font-weight:750}.q-item span{display:block;color:#7a6858;font-size:.85rem;font-weight:600;margin-top:.15rem}
+    .question-bank{display:grid;grid-template-columns:repeat(2,1fr);gap:.65rem}.q-item{padding:.75rem .85rem;border-radius:16px;background:#fbf4e8;border:1px solid #ead8c2;font-weight:750}.q-item span:not(.ru-word){display:block;color:#7a6858;font-size:.85rem;font-weight:600;margin-top:.15rem}
     .drag-area{display:grid;grid-template-columns:1fr 1fr;gap:1rem}.drag-list{display:flex;flex-direction:column;gap:.55rem}.drag{background:#fff;border:1px solid var(--line);padding:.72rem .85rem;border-radius:16px;cursor:grab;box-shadow:0 5px 16px rgba(42,28,18,.07);font-weight:750}.drag:active{cursor:grabbing}.drop{min-height:58px;border:2px dashed #d9b791;border-radius:17px;background:#fff8ee;padding:.55rem;display:flex;align-items:center}.drop.correct{border-color:rgba(46,125,88,.78);background:rgba(46,125,88,.08)}.drop.wrong{border-color:rgba(183,66,66,.78);background:rgba(183,66,66,.07)}
     .match-row{display:grid;grid-template-columns:1.05fr .95fr;gap:.75rem;align-items:center;margin-bottom:.65rem}.match-q{font-weight:850;background:#fff;border:1px solid var(--line);border-radius:17px;padding:.75rem}.feedback{font-weight:800;margin-top:.8rem}.ok{color:var(--success)}.bad{color:var(--danger)}
     .quiz{display:grid;gap:.8rem}.quiz-item{background:#fff;border:1px solid var(--line);border-radius:20px;padding:1rem}.quiz-options{display:flex;flex-wrap:wrap;gap:.55rem;margin-top:.65rem}.option{background:#f8eee0;color:#60452e;border:1px solid #ead1b3;box-shadow:none}.option.selected{background:var(--accent);color:#fff;border-color:var(--accent)}.option.correct{background:var(--success);color:#fff}.option.wrong{background:var(--danger);color:#fff}.prompt{font-weight:850;font-size:1.04rem}
@@ -109,6 +109,33 @@
     .ru-hover:hover{z-index:100}
     .ru-hover:hover::after,.ru-hover:focus-visible::after{opacity:1;visibility:visible;transform:translate(-50%,0)}
     .ru-hover:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+
+/* Перевод упражнений 1–5: кнопка, перевод целой фразы и подсказки для каждого слова. */
+.translation-toggle{white-space:nowrap;background:#eaf4f1!important;color:#205a57!important;border:1px solid #9ac7bc!important}
+.translation-toggle[aria-pressed="true"]{background:#205a57!important;color:#fff!important}
+.translated-text{cursor:help}
+.translated-text .ru-word{border-bottom:1px dotted rgba(47,111,115,.5);cursor:help}
+.exercise-translated .translated-text::after{
+   content:attr(data-ru-phrase);display:block;margin-top:.27rem;font-size:.84em;
+   font-weight:600;line-height:1.4;color:#236b67;letter-spacing:normal;
+   text-transform:none;font-style:normal;overflow-wrap:anywhere;white-space:normal;
+}
+.exercise-translated .translated-text.pattern-title::after{font-size:.82rem}
+.exercise-translated .pattern .translated-text::after{font-size:.80rem}
+.exercise-translated .option.translated-text::after{text-align:left;color:inherit;max-width:17rem;font-size:.84rem;opacity:.9}
+.exercise-translated .drag.translated-text::after{font-size:.79rem}
+.exercise-translated .q-item.translated-text::after{font-size:.80rem}
+/* Evita que las ayudas palabra por palabra desarmen las preguntas del ejercicio 2. */
+#modelos .q-item .ru-word{display:inline;color:inherit;font-size:inherit;font-weight:inherit;margin:0;border-bottom:0}
+.exercise-translated .field label.translated-text::after{font-size:.82rem}
+.exercise-translated .match-q.translated-text::after{font-size:.85rem}
+.ru-cursor-tooltip{position:fixed;display:none;z-index:20000;max-width:min(340px,88vw);
+   padding:.65rem .85rem;background:#20323b;color:#fff;border-radius:12px;
+   box-shadow:0 12px 36px #0004;pointer-events:none;font-size:.91rem;line-height:1.4;
+   font-weight:650;white-space:normal;overflow-wrap:anywhere;text-align:left}
+.ru-cursor-tooltip.visible{display:block}
+@media (hover:none){.translated-text .ru-word{border-bottom-style:solid}}
+@media print{.ru-cursor-tooltip{display:none!important}.translation-toggle{display:none!important}}
   </style>
 </head>
 <body>
@@ -158,7 +185,7 @@
 <h2>1. Guía rápida: preguntas personales</h2>
 <p>Изучите основные вопросы. Ответы учащиеся формулируют самостоятельно во время практики.</p>
 </div>
-<span class="tag">Подготовка</span>
+<div class="topline"><button class="secondary translation-toggle" type="button" onclick="toggleExerciseTranslation('guia', this)" aria-pressed="false">показать перевод</button><span class="tag">Подготовка</span></div>
 </div>
 <div class="content">
 <div class="pattern-grid">
@@ -180,7 +207,7 @@
 <h2>2. Banco visual de preguntas útiles</h2>
 <p>Прочитайте вопросы. Затем задайте их партнёру и ответьте самостоятельно.</p>
 </div>
-<span class="tag">Чтение с опорой</span>
+<div class="topline"><button class="secondary translation-toggle" type="button" onclick="toggleExerciseTranslation('modelos', this)" aria-pressed="false">показать перевод</button><span class="tag">Чтение с опорой</span></div>
 </div>
 <div class="content two">
 <div class="card">
@@ -213,7 +240,7 @@
 <h2>3. Arrastra la respuesta correcta</h2>
 <p>Соедините каждый вопрос с подходящим ответом. Затем нажмите «Проверить».</p>
 </div>
-<div class="topline"><button onclick="checkMatch()">Проверить</button><button class="secondary" onclick="shuffleAnswers()">Перемешать</button></div>
+<div class="topline"><button onclick="checkMatch()">Проверить</button><button class="secondary" onclick="shuffleAnswers()">Перемешать</button><button class="secondary translation-toggle" type="button" onclick="toggleExerciseTranslation('arrastrar', this)" aria-pressed="false">показать перевод</button></div>
 </div>
 <div class="content drag-area">
 <div id="matchQuestions"></div>
@@ -230,7 +257,7 @@
 <h2>4. Elige la forma adecuada</h2>
 <p>Выберите правильный вариант вопроса для неформального общения на tú.</p>
 </div>
-<button onclick="checkQuiz()">Проверить</button>
+<div class="topline"><button onclick="checkQuiz()">Проверить</button><button class="secondary translation-toggle" type="button" onclick="toggleExerciseTranslation('opciones', this)" aria-pressed="false">показать перевод</button></div>
 </div>
 <div class="content">
 <div class="quiz" id="quiz">
@@ -250,7 +277,7 @@
 <h2>5. Completa tu ficha de entrevista</h2>
 <p>Напишите короткие ответы. Цель — подготовиться к разговору с другим человеком.</p>
 </div>
-<button onclick="makeStudentCard()">Создать мою карточку</button>
+<div class="topline"><button onclick="makeStudentCard()">Создать мою карточку</button><button class="secondary translation-toggle" type="button" onclick="toggleExerciseTranslation('completar', this)" aria-pressed="false">показать перевод</button></div>
 </div>
 <div class="content">
 <div class="input-grid">
@@ -673,5 +700,116 @@
 
     renderMatch(); renderQuiz(); initDnD(); shuffleBuilderChips();
   </script>
+
+<script>
+  // Las traducciones funcionan también después de mezclar, comprobar o reiniciar.
+  (() => {
+    const extraPhrases = {"Guía rápida: preguntas personales": "Краткий справочник: личные вопросы", "Identidad": "Личные данные", "Origen": "Происхождение", "Residencia": "Место проживания", "Edad": "Возраст", "Trabajo": "Работа", "Estudio": "Учёба", "Gustos": "Интересы", "Preferencia": "Предпочтение", "Banco visual de preguntas útiles": "Наглядная подборка полезных вопросов", "Datos personales": "Личные данные", "Clase, trabajo y vida cotidiana": "Занятия, работа и повседневная жизнь", "Arrastra la respuesta correcta": "Перетащи правильный ответ", "Elige la forma adecuada": "Выбери подходящую форму", "Completa tu ficha de entrevista": "Заполни свою анкету для интервью", "¿Qué te gusta hacer en tu tiempo libre?": "Что тебе нравится делать в свободное время?", "¿Cuál es tu comida favorita?": "Какая твоя любимая еда?", "Me llamo Julia.": "Меня зовут Хулия.", "Soy de Honduras.": "Я из Гондураса.", "Vivo en la capital.": "Я живу в столице.", "Tengo diecinueve años.": "Мне девятнадцать лет.", "Trabajo en una cafetería.": "Я работаю в кафе.", "Me gusta bailar.": "Мне нравится танцевать.", "Nombre": "Имя", "Ciudad": "Город", "Tiempo libre": "Свободное время", "Comida favorita": "Любимая еда", "Escribe tu respuesta...": "Напиши свой ответ..."};
+    const wordGlossary = {"guía": "руководство, справочник", "rápida": "краткая, быстрая", "preguntas": "вопросы", "personales": "личные", "identidad": "личность, идентичность", "origen": "происхождение", "residencia": "место жительства", "edad": "возраст", "trabajo": "работа", "estudio": "учёба, занятие", "gustos": "вкусы, интересы", "preferencia": "предпочтение", "banco": "сборник, подборка", "visual": "наглядный, визуальный", "de": "из, о, принадлежность", "útiles": "полезные", "datos": "данные", "clase": "занятие, урок", "y": "и", "vida": "жизнь", "cotidiana": "повседневная", "arrastra": "перетащи", "la": "артикль ж. р.; её", "respuesta": "ответ", "correcta": "правильная", "elige": "выбери", "forma": "форма", "adecuada": "подходящая", "completa": "заполни", "tu": "твой, твоя, твоё", "ficha": "анкета, карточка", "entrevista": "интервью, беседа", "para": "для, чтобы", "preguntar": "спрашивать", "el": "артикль м. р.", "nombre": "имя", "ciudad": "город", "por": "о, по поводу", "email": "электронная почта", "si": "если; ли", "una": "одна; неопределённый артикль", "persona": "человек", "estudia": "учится, изучает", "deporte": "спорт", "cómo": "как", "te": "тебя, тебе (возвратная форма)", "llamas": "тебя зовут", "cuál": "какой, какая", "es": "есть, является", "apellido": "фамилия", "nacionalidad": "гражданство, национальность", "dirección": "адрес", "número": "номер, число", "teléfono": "телефон", "tienes": "у тебя есть", "correo": "почта", "electrónico": "электронный", "fecha": "дата", "nacimiento": "рождение", "dónde": "где, куда", "trabajas": "ты работаешь", "horario": "расписание", "con": "с", "quién": "кто, кем", "vives": "ты живёшь", "qué": "что, какой", "idiomas": "языки", "hablas": "ты говоришь", "desde": "с, начиная с", "cuándo": "когда", "estudias": "ты учишься, изучаешь", "español": "испанский язык", "sientes": "ты чувствуешь себя", "hoy": "сегодня", "eres": "ты являешься, ты есть", "estudiante": "студент, студентка", "estás": "ты находишься (состояние)", "tú": "ты", "haces": "ты делаешь, занимаешься", "hace": "он/она делает", "hacer": "делать", "prefieres": "ты предпочитаешь", "prefiere": "он/она предпочитает", "prefieren": "они предпочитают", "té": "чай", "o": "или", "café": "кофе", "llama": "он/она зовёт", "llamo": "я зовусь, меня зовут", "vivir": "жить", "vive": "он/она живёт", "tener": "иметь", "tiene": "он/она имеет, у него/неё есть", "cuántos": "сколько", "años": "лет, годы", "en": "в, на", "me": "мне, меня (возвратная форма)", "gusta": "нравится", "bailar": "танцевать", "soy": "я (есть), я родом", "honduras": "Гондурас", "vivo": "я живу", "capital": "столица", "tengo": "у меня есть", "diecinueve": "девятнадцать", "cafetería": "кафе", "julia": "Хулия (имя)", "libre": "свободный", "comida": "еда", "favorita": "любимая", "tiempo": "время", "escribe": "напиши", "estudios": "учёба", "sí": "да"};
+    const translatedSelectors = {
+      guia: 'h2, .pattern small, .pattern b',
+      modelos: 'h2, .card h3, .q-item',
+      arrastrar: 'h2, .match-q, .drag',
+      opciones: 'h2, .quiz-item .prompt, .quiz-item .option',
+      completar: 'h2, .field label, #studentCard dt'
+    };
+    const translationalSections = Object.keys(translatedSelectors);
+    const rxWord = /^[A-Za-zÁÉÍÓÚÜÑáéíóúüñ]+$/u;
+    const rxTokens = /[A-Za-zÁÉÍÓÚÜÑáéíóúüñ]+|[^A-Za-zÁÉÍÓÚÜÑáéíóúüñ]+/gu;
+
+    function enhanceTranslation(el){
+      if(el.dataset.ruReady) return;
+      const original = el.textContent.trim();
+      const key = original.replace(/^\d+\.\s*/, '').trim();
+      const ru = extraPhrases[key] || ruTranslations[key];
+      if(!ru) { console.warn('Перевод не найден:', original); return; }
+      const fragment = document.createDocumentFragment();
+      const tokens = original.match(rxTokens) || [];
+      for(const token of tokens){
+        if(rxWord.test(token)){
+          const span = document.createElement('span');
+          span.className = 'ru-word';
+          span.textContent = token;
+          const translation = wordGlossary[token.toLocaleLowerCase('es')];
+          span.dataset.ruWord = translation || '—';
+          span.title = token + ' — ' + (translation || 'перевод не добавлен');
+          fragment.appendChild(span);
+        }else{
+          fragment.appendChild(document.createTextNode(token));
+        }
+      }
+      // No cambiamos textContent: la validación de respuestas y el arrastre siguen intactos.
+      el.replaceChildren(fragment);
+      el.dataset.ruPhrase = ru;
+      el.dataset.ruReady = '1';
+      el.classList.remove('ru-hover');
+      el.classList.add('translated-text');
+      if(el.tagName === 'H2') el.classList.add('pattern-title');
+      el.title = ru;
+    }
+    function refreshTranslations(){
+      for(const id of translationalSections){
+        const sec = document.getElementById(id);
+        if(!sec) continue;
+        sec.querySelectorAll(translatedSelectors[id]).forEach(enhanceTranslation);
+      }
+      document.querySelectorAll('#completar input[placeholder]').forEach(input => {
+        input.title = 'Escribe tu respuesta... — Напиши свой ответ по-испански.';
+      });
+    }
+    window.toggleExerciseTranslation = function(id, button){
+      const sec = document.getElementById(id);
+      if(!sec) return;
+      refreshTranslations();
+      const on = sec.classList.toggle('exercise-translated');
+      button.textContent = on ? 'скрыть перевод' : 'показать перевод';
+      button.setAttribute('aria-pressed', String(on));
+    };
+
+    const tooltip = document.createElement('div');
+    tooltip.className = 'ru-cursor-tooltip';
+    tooltip.setAttribute('role','tooltip');
+    document.body.appendChild(tooltip);
+    function placeTooltip(e){
+      // Traducción de una palabra si se apunta a ella; de la frase en cualquier otro punto.
+      const el = e.target instanceof Element ? e.target : null;
+      const word = el?.closest('.ru-word');
+      const phrase = el?.closest('.translated-text');
+      const sec = phrase?.closest('section');
+      if(!sec || !translationalSections.includes(sec.id)){
+        tooltip.classList.remove('visible');return;
+      }
+      tooltip.textContent = word ? word.textContent + ' — ' + word.dataset.ruWord : phrase.dataset.ruPhrase;
+      tooltip.classList.add('visible');
+      const distance=16;
+      const rect = tooltip.getBoundingClientRect();
+      const px = e.clientX == null ? phrase.getBoundingClientRect().left : e.clientX;
+      const py = e.clientY == null ? phrase.getBoundingClientRect().top : e.clientY;
+      tooltip.style.left = Math.max(8,Math.min(px + distance, window.innerWidth - rect.width - 8)) + 'px';
+      tooltip.style.top = (py + rect.height + distance > window.innerHeight
+        ? Math.max(8,py - rect.height - 10) : py + distance) + 'px';
+    }
+    document.addEventListener('pointermove', placeTooltip);
+    document.addEventListener('pointerleave',()=>tooltip.classList.remove('visible'),true);
+    document.addEventListener('focusin',e=>{
+      if(!(e.target instanceof Element) || !e.target.closest('.translated-text')) return;
+      placeTooltip({target:e.target,clientX:e.target.getBoundingClientRect().left,clientY:e.target.getBoundingClientRect().top});
+    });
+    document.addEventListener('focusout',()=>tooltip.classList.remove('visible'));
+    document.addEventListener('scroll',()=>tooltip.classList.remove('visible'),true);
+    document.addEventListener('pointerdown',e=>{
+      if(e.pointerType==='touch' && e.target.closest('.ru-word, .translated-text')) placeTooltip(e);
+    });
+    // El observador mantiene las traducciones en los elementos creados por JavaScript.
+    const observer = new MutationObserver(records=>{
+      if(records.some(record=>record.type==='childList')) refreshTranslations();
+    });
+    for(const id of translationalSections){
+      const sec = document.getElementById(id);
+      if(sec) observer.observe(sec,{childList:true,subtree:true});
+    }
+    refreshTranslations();
+  })();
+</script>
 </body>
 </html>
