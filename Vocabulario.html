@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="es">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Вокабуляр — 34 дня</title>
+<title>Vocabulario — 34 días</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="alternate icon" href="favicon.ico" type="image/x-icon">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -380,50 +380,139 @@
     text-underline-offset: 2px;
   }
   .footer-staffilo-logo { height: 28px; width: auto; }
+
+  /* ── i18n: disclaimer bar + language switcher ── */
+  .disclaimer-bar {
+    display: none;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
+    background: linear-gradient(135deg, #b3261e, #d23b2f);
+    color: #fff;
+    font-size: .82rem;
+    line-height: 1.45;
+    padding: 11px 18px;
+    border-radius: 12px;
+    margin-bottom: 18px;
+    box-shadow: 0 6px 20px rgba(179,38,30,.35);
+  }
+  .disclaimer-bar.show { display: flex; }
+  .disclaimer-bar .disclaimer-icon { font-size: 1.1rem; flex-shrink: 0; }
+  .disclaimer-bar .disclaimer-text { flex: 1; min-width: 200px; }
+
+  .lang-switch {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  .lang-switch-label {
+    font-size: .72rem;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--muted);
+  }
+  .lang-switch-group { display: inline-flex; gap: 4px; }
+  .lang-btn {
+    font-family: inherit;
+    font-size: .8rem;
+    font-weight: 600;
+    color: var(--muted);
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 99px;
+    padding: 5px 13px;
+    cursor: pointer;
+    transition: background .15s, color .15s, border-color .15s;
+  }
+  .lang-btn:hover { background: var(--panel-hover); color: #fff; }
+  .lang-btn.is-active {
+    background: var(--gold);
+    color: #1a2a44;
+    border-color: var(--gold);
+  }
+
+  /* Day title / word-count: Spanish primary + translated secondary */
+  .vwd-secondary { color: var(--muted); font-weight: 400; }
+  .vwd-secondary:not(:empty)::before { content: " · "; opacity: .55; }
+  .vw-day-sub .vwd-secondary { font-size: 1em; }
+
+  /* Section title secondary */
+  .section-title .sec-secondary {
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 600;
+    opacity: .72;
+  }
+  .section-title .sec-secondary:not(:empty)::before {
+    content: "·";
+    margin: 0 8px;
+    opacity: .5;
+  }
+
 </style>
 </head>
 <body>
 <div class="wrap">
 
-  <a class="backlink" href="index.html">← На главную</a>
+  <div class="disclaimer-bar" id="disclaimerBar">
+    <span class="disclaimer-icon">⚠️</span>
+    <span class="disclaimer-text" id="disclaimerText"></span>
+  </div>
+
+  <div class="lang-switch" id="langSwitch">
+    <span class="lang-switch-label" id="langLabel"></span>
+    <span class="lang-switch-group">
+      <button type="button" class="lang-btn" data-lang="es">Español</button>
+      <button type="button" class="lang-btn" data-lang="en">English</button>
+      <button type="button" class="lang-btn" data-lang="ru">Русский</button>
+      <button type="button" class="lang-btn" data-lang="uk">Українська</button>
+    </span>
+  </div>
+
+
+  <a class="backlink" href="index.html"><span id="backText">← Al inicio</span></a>
 
   <header>
-    <h1>Вокабуляр — 34 дня</h1>
+    <h1 id="vTitle">Vocabulario — 34 días</h1>
     <div class="intro">
-      <p>Идея простая: <strong>каждый день — новая порция слов</strong>. Не 200 карточек разом, а 8–15 слов в день, с примерами и, где нужно, таблицей спряжения — ровно столько, чтобы выучить и не забыть до завтра.</p>
-      <p>34 дня — это не жёсткий график, а структура: можно идти день за днём, можно возвращаться и повторять. К части дней (16–32) есть <strong>аудиозапись</strong> — послушайте произношение, пока читаете слова.</p>
-      <p>Ниже — сами дни. Разговорные аргентинские и пиренейские словечки, устойчивые выражения с <em>hacer</em> и <em>poner</em>, а также словари для скачивания — на главной странице, в разделе «Вокабуляр».</p>
+      <p id="vIntro1">La idea es simple: <strong>cada día, una nueva ración de palabras</strong>. No 200 tarjetas de golpe, sino 8–15 palabras al día, con ejemplos y, cuando hace falta, una tabla de conjugación — justo lo necesario para aprenderlas y no olvidarlas hasta mañana.</p>
+      <p id="vIntro2">34 días no es un horario estricto, sino una estructura: puedes ir día a día, o volver y repasar. Algunos días (16–32) tienen <strong>grabación de audio</strong> — escucha la pronunciación mientras lees las palabras.</p>
+      <p id="vIntro3">Abajo están los días. Las palabras coloquiales argentinas y peninsulares, las expresiones con <em>hacer</em> y <em>poner</em>, y los glosarios descargables están en la página principal, en la sección «Vocabulario».</p>
     </div>
     <div class="stats-row">
-      <div class="stat"><div class="stat-num">34</div><div class="stat-label">дня</div></div>
-      <div class="stat"><div class="stat-num">403</div><div class="stat-label">слов и выражений</div></div>
-      <div class="stat"><div class="stat-num">15</div><div class="stat-label">аудио</div></div>
-      <div class="stat"><div class="stat-num">143</div><div class="stat-label">карточки-картинки</div></div>
+      <div class="stat"><div class="stat-num">34</div><div class="stat-label" data-vk="stat_days">días</div></div>
+      <div class="stat"><div class="stat-num">403</div><div class="stat-label" data-vk="stat_words">palabras y expresiones</div></div>
+      <div class="stat"><div class="stat-num">15</div><div class="stat-label" data-vk="stat_audio">audios</div></div>
+      <div class="stat"><div class="stat-num">143</div><div class="stat-label" data-vk="stat_cards">tarjetas con imágenes</div></div>
     </div>
   </header>
 
   <div class="bot-cta">
     <img class="bot-cta-logo" src="notilingo-logo.webp" alt="Notilingo">
     <div class="bot-cta-body">
-      <div class="bot-cta-title">Увидел слово, которое хочешь запомнить?</div>
-      <div class="bot-cta-sub">Отправь его Notilingo — бот сделает карточку и напомнит повторить.</div>
+      <div class="bot-cta-title" data-vk="bot_title">¿Viste una palabra que quieres recordar?</div>
+      <div class="bot-cta-sub" data-vk="bot_sub">Envíasela a Notilingo — el bot creará una tarjeta y te recordará repasarla.</div>
     </div>
-    <a class="bot-cta-btn" href="https://telegram.me/notilingobot" target="_blank" rel="noopener noreferrer">Открыть в Telegram →</a>
+    <a class="bot-cta-btn" href="https://telegram.me/notilingobot" target="_blank" rel="noopener noreferrer" data-vk="bot_btn">Abrir en Telegram →</a>
   </div>
 
   <a class="flashcards-cta" href="Tarjetas de vocabulario.html">
-    <div class="fc-title">🖼️ Карточки «слово + картинка»</div>
-    <div class="fc-sub">143 первых слова с иллюстрациями — листайте как флеш-карточки</div>
+    <div class="fc-title" data-vk="fc_title">🖼️ Tarjetas «palabra + imagen»</div>
+    <div class="fc-sub" data-vk="fc_sub">Las 143 primeras palabras con ilustraciones — pásalas como flashcards</div>
   </a>
 
   <div class="section">
     <div class="section-title">
       <span class="dot dot-gold"></span>
-      Дни 1 – 34
+      <span class="sec-primary">Días 1 – 34</span><span class="sec-secondary i18n-secv" data-vk-sec="sec_days"></span>
     </div>
     <div class="vw-toolbar">
-      <button type="button" id="expandAll">Развернуть все</button>
-      <button type="button" id="collapseAll">Свернуть все</button>
+      <button type="button" id="expandAll" data-vk="expand">Expandir todo</button>
+      <button type="button" id="collapseAll" data-vk="collapse">Contraer todo</button>
     </div>
     <div class="days-grid" id="daysGrid">
       
@@ -431,8 +520,8 @@
         <button class="vw-day-toggle" type="button" aria-expanded="false">
           <span class="vw-day-num">1</span>
           <span class="vw-day-info">
-            <span class="vw-day-title">День 1</span>
-            <span class="vw-day-sub">10 слов</span>
+            <span class="vw-day-title"><span class="vwd-primary">Día 1</span><span class="vwd-secondary i18n-dayt" data-day-n="1"></span></span>
+            <span class="vw-day-sub"><span class="vwd-primary">10 palabras</span><span class="vwd-secondary i18n-words" data-words-n="10"></span></span>
           </span>
           <span class="vw-day-arrow">▾</span>
         </button>
@@ -445,8 +534,8 @@
         <button class="vw-day-toggle" type="button" aria-expanded="false">
           <span class="vw-day-num">2</span>
           <span class="vw-day-info">
-            <span class="vw-day-title">День 2</span>
-            <span class="vw-day-sub">10 слов</span>
+            <span class="vw-day-title"><span class="vwd-primary">Día 2</span><span class="vwd-secondary i18n-dayt" data-day-n="2"></span></span>
+            <span class="vw-day-sub"><span class="vwd-primary">10 palabras</span><span class="vwd-secondary i18n-words" data-words-n="10"></span></span>
           </span>
           <span class="vw-day-arrow">▾</span>
         </button>
@@ -459,8 +548,8 @@
         <button class="vw-day-toggle" type="button" aria-expanded="false">
           <span class="vw-day-num">3</span>
           <span class="vw-day-info">
-            <span class="vw-day-title">День 3</span>
-            <span class="vw-day-sub">11 слов</span>
+            <span class="vw-day-title"><span class="vwd-primary">Día 3</span><span class="vwd-secondary i18n-dayt" data-day-n="3"></span></span>
+            <span class="vw-day-sub"><span class="vwd-primary">11 palabras</span><span class="vwd-secondary i18n-words" data-words-n="11"></span></span>
           </span>
           <span class="vw-day-arrow">▾</span>
         </button>
@@ -473,8 +562,8 @@
         <button class="vw-day-toggle" type="button" aria-expanded="false">
           <span class="vw-day-num">4</span>
           <span class="vw-day-info">
-            <span class="vw-day-title">День 4</span>
-            <span class="vw-day-sub">10 слов</span>
+            <span class="vw-day-title"><span class="vwd-primary">Día 4</span><span class="vwd-secondary i18n-dayt" data-day-n="4"></span></span>
+            <span class="vw-day-sub"><span class="vwd-primary">10 palabras</span><span class="vwd-secondary i18n-words" data-words-n="10"></span></span>
           </span>
           <span class="vw-day-arrow">▾</span>
         </button>
@@ -487,8 +576,8 @@
         <button class="vw-day-toggle" type="button" aria-expanded="false">
           <span class="vw-day-num">5</span>
           <span class="vw-day-info">
-            <span class="vw-day-title">День 5</span>
-            <span class="vw-day-sub">10 слов</span>
+            <span class="vw-day-title"><span class="vwd-primary">Día 5</span><span class="vwd-secondary i18n-dayt" data-day-n="5"></span></span>
+            <span class="vw-day-sub"><span class="vwd-primary">10 palabras</span><span class="vwd-secondary i18n-words" data-words-n="10"></span></span>
           </span>
           <span class="vw-day-arrow">▾</span>
         </button>
@@ -501,8 +590,8 @@
         <button class="vw-day-toggle" type="button" aria-expanded="false">
           <span class="vw-day-num">6</span>
           <span class="vw-day-info">
-            <span class="vw-day-title">День 6</span>
-            <span class="vw-day-sub">1 слово</span>
+            <span class="vw-day-title"><span class="vwd-primary">Día 6</span><span class="vwd-secondary i18n-dayt" data-day-n="6"></span></span>
+            <span class="vw-day-sub"><span class="vwd-primary">1 palabra</span><span class="vwd-secondary i18n-words" data-words-n="1"></span></span>
           </span>
           <span class="vw-day-arrow">▾</span>
         </button>
@@ -515,8 +604,8 @@
         <button class="vw-day-toggle" type="button" aria-expanded="false">
           <span class="vw-day-num">7</span>
           <span class="vw-day-info">
-            <span class="vw-day-title">День 7</span>
-            <span class="vw-day-sub">9 слов</span>
+            <span class="vw-day-title"><span class="vwd-primary">Día 7</span><span class="vwd-secondary i18n-dayt" data-day-n="7"></span></span>
+            <span class="vw-day-sub"><span class="vwd-primary">9 palabras</span><span class="vwd-secondary i18n-words" data-words-n="9"></span></span>
           </span>
           <span class="vw-day-arrow">▾</span>
         </button>
@@ -529,8 +618,8 @@
         <button class="vw-day-toggle" type="button" aria-expanded="false">
           <span class="vw-day-num">8</span>
           <span class="vw-day-info">
-            <span class="vw-day-title">День 8</span>
-            <span class="vw-day-sub">10 слов</span>
+            <span class="vw-day-title"><span class="vwd-primary">Día 8</span><span class="vwd-secondary i18n-dayt" data-day-n="8"></span></span>
+            <span class="vw-day-sub"><span class="vwd-primary">10 palabras</span><span class="vwd-secondary i18n-words" data-words-n="10"></span></span>
           </span>
           <span class="vw-day-arrow">▾</span>
         </button>
@@ -543,8 +632,8 @@
         <button class="vw-day-toggle" type="button" aria-expanded="false">
           <span class="vw-day-num">9</span>
           <span class="vw-day-info">
-            <span class="vw-day-title">День 9</span>
-            <span class="vw-day-sub">16 слов</span>
+            <span class="vw-day-title"><span class="vwd-primary">Día 9</span><span class="vwd-secondary i18n-dayt" data-day-n="9"></span></span>
+            <span class="vw-day-sub"><span class="vwd-primary">16 palabras</span><span class="vwd-secondary i18n-words" data-words-n="16"></span></span>
           </span>
           <span class="vw-day-arrow">▾</span>
         </button>
@@ -557,8 +646,8 @@
         <button class="vw-day-toggle" type="button" aria-expanded="false">
           <span class="vw-day-num">10</span>
           <span class="vw-day-info">
-            <span class="vw-day-title">День 10</span>
-            <span class="vw-day-sub">10 слов</span>
+            <span class="vw-day-title"><span class="vwd-primary">Día 10</span><span class="vwd-secondary i18n-dayt" data-day-n="10"></span></span>
+            <span class="vw-day-sub"><span class="vwd-primary">10 palabras</span><span class="vwd-secondary i18n-words" data-words-n="10"></span></span>
           </span>
           <span class="vw-day-arrow">▾</span>
         </button>
@@ -571,8 +660,8 @@
         <button class="vw-day-toggle" type="button" aria-expanded="false">
           <span class="vw-day-num">11</span>
           <span class="vw-day-info">
-            <span class="vw-day-title">День 11</span>
-            <span class="vw-day-sub">27 слов</span>
+            <span class="vw-day-title"><span class="vwd-primary">Día 11</span><span class="vwd-secondary i18n-dayt" data-day-n="11"></span></span>
+            <span class="vw-day-sub"><span class="vwd-primary">27 palabras</span><span class="vwd-secondary i18n-words" data-words-n="27"></span></span>
           </span>
           <span class="vw-day-arrow">▾</span>
         </button>
@@ -585,8 +674,8 @@
         <button class="vw-day-toggle" type="button" aria-expanded="false">
           <span class="vw-day-num">12</span>
           <span class="vw-day-info">
-            <span class="vw-day-title">День 12</span>
-            <span class="vw-day-sub">9 слов</span>
+            <span class="vw-day-title"><span class="vwd-primary">Día 12</span><span class="vwd-secondary i18n-dayt" data-day-n="12"></span></span>
+            <span class="vw-day-sub"><span class="vwd-primary">9 palabras</span><span class="vwd-secondary i18n-words" data-words-n="9"></span></span>
           </span>
           <span class="vw-day-arrow">▾</span>
         </button>
@@ -599,8 +688,8 @@
         <button class="vw-day-toggle" type="button" aria-expanded="false">
           <span class="vw-day-num">13</span>
           <span class="vw-day-info">
-            <span class="vw-day-title">День 13</span>
-            <span class="vw-day-sub">12 слов</span>
+            <span class="vw-day-title"><span class="vwd-primary">Día 13</span><span class="vwd-secondary i18n-dayt" data-day-n="13"></span></span>
+            <span class="vw-day-sub"><span class="vwd-primary">12 palabras</span><span class="vwd-secondary i18n-words" data-words-n="12"></span></span>
           </span>
           <span class="vw-day-arrow">▾</span>
         </button>
@@ -613,8 +702,8 @@
         <button class="vw-day-toggle" type="button" aria-expanded="false">
           <span class="vw-day-num">14</span>
           <span class="vw-day-info">
-            <span class="vw-day-title">День 14</span>
-            <span class="vw-day-sub">19 слов</span>
+            <span class="vw-day-title"><span class="vwd-primary">Día 14</span><span class="vwd-secondary i18n-dayt" data-day-n="14"></span></span>
+            <span class="vw-day-sub"><span class="vwd-primary">19 palabras</span><span class="vwd-secondary i18n-words" data-words-n="19"></span></span>
           </span>
           <span class="vw-day-arrow">▾</span>
         </button>
@@ -627,8 +716,8 @@
         <button class="vw-day-toggle" type="button" aria-expanded="false">
           <span class="vw-day-num">15</span>
           <span class="vw-day-info">
-            <span class="vw-day-title">День 15</span>
-            <span class="vw-day-sub">14 слов</span>
+            <span class="vw-day-title"><span class="vwd-primary">Día 15</span><span class="vwd-secondary i18n-dayt" data-day-n="15"></span></span>
+            <span class="vw-day-sub"><span class="vwd-primary">14 palabras</span><span class="vwd-secondary i18n-words" data-words-n="14"></span></span>
           </span>
           <span class="vw-day-arrow">▾</span>
         </button>
@@ -641,8 +730,8 @@
         <button class="vw-day-toggle" type="button" aria-expanded="false">
           <span class="vw-day-num">16</span>
           <span class="vw-day-info">
-            <span class="vw-day-title">День 16<span class="badge badge-audio">аудио</span></span>
-            <span class="vw-day-sub">14 слов</span>
+            <span class="vw-day-title"><span class="vwd-primary">Día 16</span><span class="vwd-secondary i18n-dayt" data-day-n="16"></span><span class="badge badge-audio i18n-audio">audio</span></span>
+            <span class="vw-day-sub"><span class="vwd-primary">14 palabras</span><span class="vwd-secondary i18n-words" data-words-n="14"></span></span>
           </span>
           <span class="vw-day-arrow">▾</span>
         </button>
@@ -657,8 +746,8 @@
         <button class="vw-day-toggle" type="button" aria-expanded="false">
           <span class="vw-day-num">17</span>
           <span class="vw-day-info">
-            <span class="vw-day-title">День 17<span class="badge badge-audio">аудио</span></span>
-            <span class="vw-day-sub">8 слов</span>
+            <span class="vw-day-title"><span class="vwd-primary">Día 17</span><span class="vwd-secondary i18n-dayt" data-day-n="17"></span><span class="badge badge-audio i18n-audio">audio</span></span>
+            <span class="vw-day-sub"><span class="vwd-primary">8 palabras</span><span class="vwd-secondary i18n-words" data-words-n="8"></span></span>
           </span>
           <span class="vw-day-arrow">▾</span>
         </button>
@@ -673,8 +762,8 @@
         <button class="vw-day-toggle" type="button" aria-expanded="false">
           <span class="vw-day-num">18</span>
           <span class="vw-day-info">
-            <span class="vw-day-title">День 18<span class="badge badge-audio">аудио</span></span>
-            <span class="vw-day-sub">11 слов</span>
+            <span class="vw-day-title"><span class="vwd-primary">Día 18</span><span class="vwd-secondary i18n-dayt" data-day-n="18"></span><span class="badge badge-audio i18n-audio">audio</span></span>
+            <span class="vw-day-sub"><span class="vwd-primary">11 palabras</span><span class="vwd-secondary i18n-words" data-words-n="11"></span></span>
           </span>
           <span class="vw-day-arrow">▾</span>
         </button>
@@ -689,8 +778,8 @@
         <button class="vw-day-toggle" type="button" aria-expanded="false">
           <span class="vw-day-num">19</span>
           <span class="vw-day-info">
-            <span class="vw-day-title">День 19<span class="badge badge-audio">аудио</span></span>
-            <span class="vw-day-sub">10 слов</span>
+            <span class="vw-day-title"><span class="vwd-primary">Día 19</span><span class="vwd-secondary i18n-dayt" data-day-n="19"></span><span class="badge badge-audio i18n-audio">audio</span></span>
+            <span class="vw-day-sub"><span class="vwd-primary">10 palabras</span><span class="vwd-secondary i18n-words" data-words-n="10"></span></span>
           </span>
           <span class="vw-day-arrow">▾</span>
         </button>
@@ -705,8 +794,8 @@
         <button class="vw-day-toggle" type="button" aria-expanded="false">
           <span class="vw-day-num">20</span>
           <span class="vw-day-info">
-            <span class="vw-day-title">День 20</span>
-            <span class="vw-day-sub">10 слов</span>
+            <span class="vw-day-title"><span class="vwd-primary">Día 20</span><span class="vwd-secondary i18n-dayt" data-day-n="20"></span></span>
+            <span class="vw-day-sub"><span class="vwd-primary">10 palabras</span><span class="vwd-secondary i18n-words" data-words-n="10"></span></span>
           </span>
           <span class="vw-day-arrow">▾</span>
         </button>
@@ -719,8 +808,8 @@
         <button class="vw-day-toggle" type="button" aria-expanded="false">
           <span class="vw-day-num">21</span>
           <span class="vw-day-info">
-            <span class="vw-day-title">День 21<span class="badge badge-audio">аудио</span></span>
-            <span class="vw-day-sub">10 слов</span>
+            <span class="vw-day-title"><span class="vwd-primary">Día 21</span><span class="vwd-secondary i18n-dayt" data-day-n="21"></span><span class="badge badge-audio i18n-audio">audio</span></span>
+            <span class="vw-day-sub"><span class="vwd-primary">10 palabras</span><span class="vwd-secondary i18n-words" data-words-n="10"></span></span>
           </span>
           <span class="vw-day-arrow">▾</span>
         </button>
@@ -735,8 +824,8 @@
         <button class="vw-day-toggle" type="button" aria-expanded="false">
           <span class="vw-day-num">22</span>
           <span class="vw-day-info">
-            <span class="vw-day-title">День 22</span>
-            <span class="vw-day-sub">10 слов</span>
+            <span class="vw-day-title"><span class="vwd-primary">Día 22</span><span class="vwd-secondary i18n-dayt" data-day-n="22"></span></span>
+            <span class="vw-day-sub"><span class="vwd-primary">10 palabras</span><span class="vwd-secondary i18n-words" data-words-n="10"></span></span>
           </span>
           <span class="vw-day-arrow">▾</span>
         </button>
@@ -749,8 +838,8 @@
         <button class="vw-day-toggle" type="button" aria-expanded="false">
           <span class="vw-day-num">23</span>
           <span class="vw-day-info">
-            <span class="vw-day-title">День 23<span class="badge badge-audio">аудио</span></span>
-            <span class="vw-day-sub">14 слов</span>
+            <span class="vw-day-title"><span class="vwd-primary">Día 23</span><span class="vwd-secondary i18n-dayt" data-day-n="23"></span><span class="badge badge-audio i18n-audio">audio</span></span>
+            <span class="vw-day-sub"><span class="vwd-primary">14 palabras</span><span class="vwd-secondary i18n-words" data-words-n="14"></span></span>
           </span>
           <span class="vw-day-arrow">▾</span>
         </button>
@@ -765,8 +854,8 @@
         <button class="vw-day-toggle" type="button" aria-expanded="false">
           <span class="vw-day-num">24</span>
           <span class="vw-day-info">
-            <span class="vw-day-title">День 24<span class="badge badge-audio">аудио</span></span>
-            <span class="vw-day-sub">8 слов</span>
+            <span class="vw-day-title"><span class="vwd-primary">Día 24</span><span class="vwd-secondary i18n-dayt" data-day-n="24"></span><span class="badge badge-audio i18n-audio">audio</span></span>
+            <span class="vw-day-sub"><span class="vwd-primary">8 palabras</span><span class="vwd-secondary i18n-words" data-words-n="8"></span></span>
           </span>
           <span class="vw-day-arrow">▾</span>
         </button>
@@ -781,8 +870,8 @@
         <button class="vw-day-toggle" type="button" aria-expanded="false">
           <span class="vw-day-num">25</span>
           <span class="vw-day-info">
-            <span class="vw-day-title">День 25<span class="badge badge-audio">аудио</span></span>
-            <span class="vw-day-sub">1 слово</span>
+            <span class="vw-day-title"><span class="vwd-primary">Día 25</span><span class="vwd-secondary i18n-dayt" data-day-n="25"></span><span class="badge badge-audio i18n-audio">audio</span></span>
+            <span class="vw-day-sub"><span class="vwd-primary">1 palabra</span><span class="vwd-secondary i18n-words" data-words-n="1"></span></span>
           </span>
           <span class="vw-day-arrow">▾</span>
         </button>
@@ -797,8 +886,8 @@
         <button class="vw-day-toggle" type="button" aria-expanded="false">
           <span class="vw-day-num">26</span>
           <span class="vw-day-info">
-            <span class="vw-day-title">День 26<span class="badge badge-audio">аудио</span></span>
-            <span class="vw-day-sub">11 слов</span>
+            <span class="vw-day-title"><span class="vwd-primary">Día 26</span><span class="vwd-secondary i18n-dayt" data-day-n="26"></span><span class="badge badge-audio i18n-audio">audio</span></span>
+            <span class="vw-day-sub"><span class="vwd-primary">11 palabras</span><span class="vwd-secondary i18n-words" data-words-n="11"></span></span>
           </span>
           <span class="vw-day-arrow">▾</span>
         </button>
@@ -813,8 +902,8 @@
         <button class="vw-day-toggle" type="button" aria-expanded="false">
           <span class="vw-day-num">27</span>
           <span class="vw-day-info">
-            <span class="vw-day-title">День 27<span class="badge badge-audio">аудио</span></span>
-            <span class="vw-day-sub">10 слов</span>
+            <span class="vw-day-title"><span class="vwd-primary">Día 27</span><span class="vwd-secondary i18n-dayt" data-day-n="27"></span><span class="badge badge-audio i18n-audio">audio</span></span>
+            <span class="vw-day-sub"><span class="vwd-primary">10 palabras</span><span class="vwd-secondary i18n-words" data-words-n="10"></span></span>
           </span>
           <span class="vw-day-arrow">▾</span>
         </button>
@@ -829,8 +918,8 @@
         <button class="vw-day-toggle" type="button" aria-expanded="false">
           <span class="vw-day-num">28</span>
           <span class="vw-day-info">
-            <span class="vw-day-title">День 28<span class="badge badge-audio">аудио</span></span>
-            <span class="vw-day-sub">11 слов</span>
+            <span class="vw-day-title"><span class="vwd-primary">Día 28</span><span class="vwd-secondary i18n-dayt" data-day-n="28"></span><span class="badge badge-audio i18n-audio">audio</span></span>
+            <span class="vw-day-sub"><span class="vwd-primary">11 palabras</span><span class="vwd-secondary i18n-words" data-words-n="11"></span></span>
           </span>
           <span class="vw-day-arrow">▾</span>
         </button>
@@ -845,8 +934,8 @@
         <button class="vw-day-toggle" type="button" aria-expanded="false">
           <span class="vw-day-num">29</span>
           <span class="vw-day-info">
-            <span class="vw-day-title">День 29<span class="badge badge-audio">аудио</span></span>
-            <span class="vw-day-sub">13 слов</span>
+            <span class="vw-day-title"><span class="vwd-primary">Día 29</span><span class="vwd-secondary i18n-dayt" data-day-n="29"></span><span class="badge badge-audio i18n-audio">audio</span></span>
+            <span class="vw-day-sub"><span class="vwd-primary">13 palabras</span><span class="vwd-secondary i18n-words" data-words-n="13"></span></span>
           </span>
           <span class="vw-day-arrow">▾</span>
         </button>
@@ -861,8 +950,8 @@
         <button class="vw-day-toggle" type="button" aria-expanded="false">
           <span class="vw-day-num">30</span>
           <span class="vw-day-info">
-            <span class="vw-day-title">День 30<span class="badge badge-audio">аудио</span></span>
-            <span class="vw-day-sub">17 слов</span>
+            <span class="vw-day-title"><span class="vwd-primary">Día 30</span><span class="vwd-secondary i18n-dayt" data-day-n="30"></span><span class="badge badge-audio i18n-audio">audio</span></span>
+            <span class="vw-day-sub"><span class="vwd-primary">17 palabras</span><span class="vwd-secondary i18n-words" data-words-n="17"></span></span>
           </span>
           <span class="vw-day-arrow">▾</span>
         </button>
@@ -877,8 +966,8 @@
         <button class="vw-day-toggle" type="button" aria-expanded="false">
           <span class="vw-day-num">31</span>
           <span class="vw-day-info">
-            <span class="vw-day-title">День 31<span class="badge badge-audio">аудио</span></span>
-            <span class="vw-day-sub">15 слов</span>
+            <span class="vw-day-title"><span class="vwd-primary">Día 31</span><span class="vwd-secondary i18n-dayt" data-day-n="31"></span><span class="badge badge-audio i18n-audio">audio</span></span>
+            <span class="vw-day-sub"><span class="vwd-primary">15 palabras</span><span class="vwd-secondary i18n-words" data-words-n="15"></span></span>
           </span>
           <span class="vw-day-arrow">▾</span>
         </button>
@@ -893,8 +982,8 @@
         <button class="vw-day-toggle" type="button" aria-expanded="false">
           <span class="vw-day-num">32</span>
           <span class="vw-day-info">
-            <span class="vw-day-title">День 32<span class="badge badge-audio">аудио</span></span>
-            <span class="vw-day-sub">27 слов</span>
+            <span class="vw-day-title"><span class="vwd-primary">Día 32</span><span class="vwd-secondary i18n-dayt" data-day-n="32"></span><span class="badge badge-audio i18n-audio">audio</span></span>
+            <span class="vw-day-sub"><span class="vwd-primary">27 palabras</span><span class="vwd-secondary i18n-words" data-words-n="27"></span></span>
           </span>
           <span class="vw-day-arrow">▾</span>
         </button>
@@ -909,8 +998,8 @@
         <button class="vw-day-toggle" type="button" aria-expanded="false">
           <span class="vw-day-num">33</span>
           <span class="vw-day-info">
-            <span class="vw-day-title">День 33</span>
-            <span class="vw-day-sub">15 слов</span>
+            <span class="vw-day-title"><span class="vwd-primary">Día 33</span><span class="vwd-secondary i18n-dayt" data-day-n="33"></span></span>
+            <span class="vw-day-sub"><span class="vwd-primary">15 palabras</span><span class="vwd-secondary i18n-words" data-words-n="15"></span></span>
           </span>
           <span class="vw-day-arrow">▾</span>
         </button>
@@ -923,8 +1012,8 @@
         <button class="vw-day-toggle" type="button" aria-expanded="false">
           <span class="vw-day-num">34</span>
           <span class="vw-day-info">
-            <span class="vw-day-title">День 34</span>
-            <span class="vw-day-sub">10 слов</span>
+            <span class="vw-day-title"><span class="vwd-primary">Día 34</span><span class="vwd-secondary i18n-dayt" data-day-n="34"></span></span>
+            <span class="vw-day-sub"><span class="vwd-primary">10 palabras</span><span class="vwd-secondary i18n-words" data-words-n="10"></span></span>
           </span>
           <span class="vw-day-arrow">▾</span>
         </button>
@@ -971,6 +1060,117 @@
       d.querySelector('.vw-day-toggle').setAttribute('aria-expanded', 'false');
     });
   });
+</script>
+
+<script>
+window.__I18N_DATA__ = {"ui": {"es": {"lang_name": "Español", "page_desc": "Ejercicios interactivos para estudiantes de español — del alfabeto al subjuntivo", "search_ph": "Buscar ejercicios…", "search_clear": "Borrar", "search_found": "Encontrados:", "no_results": "No se ha encontrado nada. Prueba con otra búsqueda.", "lang_label": "Idioma de la página", "disclaimer": "Estos materiales se crearon originalmente para estudiantes de habla rusa. La interfaz está en español, pero muchos ejercicios, explicaciones y traducciones dentro de ellos siguen en ruso. Puedes cambiar el idioma de la página más abajo ↓", "back": "← Al inicio"}, "en": {"lang_name": "English", "page_desc": "Interactive exercises for learners of Spanish — from the alphabet to the subjunctive", "search_ph": "Search exercises…", "search_clear": "Clear", "search_found": "Found:", "no_results": "Nothing found. Try a different search.", "lang_label": "Page language", "disclaimer": "These materials were originally created for Russian-speaking learners. The interface switches language, but many exercises, explanations and translations inside them stay in Russian. You can change the page language below ↓", "back": "← Home"}, "ru": {"lang_name": "Русский", "page_desc": "Интерактивные упражнения для изучающих испанский язык — от алфавита до сослагательного наклонения", "search_ph": "Поиск по упражнениям…", "search_clear": "Очистить", "search_found": "Найдено:", "no_results": "Ничего не найдено. Попробуйте другой запрос.", "lang_label": "Язык страницы", "disclaimer": "", "back": "← На главную"}, "uk": {"lang_name": "Українська", "page_desc": "Інтерактивні вправи для тих, хто вивчає іспанську — від абетки до умовного способу", "search_ph": "Пошук за вправами…", "search_clear": "Очистити", "search_found": "Знайдено:", "no_results": "Нічого не знайдено. Спробуйте інший запит.", "lang_label": "Мова сторінки", "disclaimer": "Ці матеріали спочатку створювалися для російськомовних користувачів. Інтерфейс перемикає мову, але багато вправ, пояснень і перекладів усередині них залишаються російською. Мову сторінки можна змінити нижче ↓", "back": "← На головну"}}, "vocab": {"es": {"title": "Vocabulario — 34 días", "intro1": "La idea es simple: <strong>cada día, una nueva ración de palabras</strong>. No 200 tarjetas de golpe, sino 8–15 palabras al día, con ejemplos y, cuando hace falta, una tabla de conjugación — justo lo necesario para aprenderlas y no olvidarlas hasta mañana.", "intro2": "34 días no es un horario estricto, sino una estructura: puedes ir día a día, o volver y repasar. Algunos días (16–32) tienen <strong>grabación de audio</strong> — escucha la pronunciación mientras lees las palabras.", "intro3": "Abajo están los días. Las palabras coloquiales argentinas y peninsulares, las expresiones con <em>hacer</em> y <em>poner</em>, y los glosarios descargables están en la página principal, en la sección «Vocabulario».", "stat_days": "días", "stat_words": "palabras y expresiones", "stat_audio": "audios", "stat_cards": "tarjetas con imágenes", "bot_title": "¿Viste una palabra que quieres recordar?", "bot_sub": "Envíasela a Notilingo — el bot creará una tarjeta y te recordará repasarla.", "bot_btn": "Abrir en Telegram →", "fc_title": "🖼️ Tarjetas «palabra + imagen»", "fc_sub": "Las 143 primeras palabras con ilustraciones — pásalas como flashcards", "sec_days": "Días 1 – 34", "expand": "Expandir todo", "collapse": "Contraer todo", "day": "Día", "words_one": "palabra", "words_many": "palabras", "audio_badge": "audio"}, "en": {"title": "Vocabulary — 34 days", "intro1": "The idea is simple: <strong>each day, a new batch of words</strong>. Not 200 cards at once, but 8–15 words a day, with examples and, where needed, a conjugation table — just enough to learn them and not forget by tomorrow.", "intro2": "34 days is not a strict schedule but a structure: you can go day by day, or come back and review. Some days (16–32) have an <strong>audio recording</strong> — listen to the pronunciation while you read the words.", "intro3": "The days are below. The colloquial Argentine and Peninsular words, the set phrases with <em>hacer</em> and <em>poner</em>, and the downloadable glossaries are on the main page, in the «Vocabulary» section.", "stat_days": "days", "stat_words": "words and expressions", "stat_audio": "audios", "stat_cards": "picture cards", "bot_title": "Saw a word you want to remember?", "bot_sub": "Send it to Notilingo — the bot will make a card and remind you to review it.", "bot_btn": "Open in Telegram →", "fc_title": "🖼️ «Word + picture» cards", "fc_sub": "The first 143 words with illustrations — flip through them like flashcards", "sec_days": "Days 1 – 34", "expand": "Expand all", "collapse": "Collapse all", "day": "Day", "words_one": "word", "words_many": "words", "audio_badge": "audio"}, "ru": {"title": "Вокабуляр — 34 дня", "intro1": "Идея простая: <strong>каждый день — новая порция слов</strong>. Не 200 карточек разом, а 8–15 слов в день, с примерами и, где нужно, таблицей спряжения — ровно столько, чтобы выучить и не забыть до завтра.", "intro2": "34 дня — это не жёсткий график, а структура: можно идти день за днём, можно возвращаться и повторять. К части дней (16–32) есть <strong>аудиозапись</strong> — послушайте произношение, пока читаете слова.", "intro3": "Ниже — сами дни. Разговорные аргентинские и пиренейские словечки, устойчивые выражения с <em>hacer</em> и <em>poner</em>, а также словари для скачивания — на главной странице, в разделе «Вокабуляр».", "stat_days": "дня", "stat_words": "слов и выражений", "stat_audio": "аудио", "stat_cards": "карточки-картинки", "bot_title": "Увидел слово, которое хочешь запомнить?", "bot_sub": "Отправь его Notilingo — бот сделает карточку и напомнит повторить.", "bot_btn": "Открыть в Telegram →", "fc_title": "🖼️ Карточки «слово + картинка»", "fc_sub": "143 первых слова с иллюстрациями — листайте как флеш-карточки", "sec_days": "Дни 1 – 34", "expand": "Развернуть все", "collapse": "Свернуть все", "day": "День", "words_one": "слово", "words_many": "слов", "audio_badge": "аудио"}, "uk": {"title": "Вокабуляр — 34 дні", "intro1": "Ідея проста: <strong>щодня — нова порція слів</strong>. Не 200 карток одразу, а 8–15 слів на день, з прикладами і, де потрібно, таблицею відмінювання — рівно стільки, щоб вивчити й не забути до завтра.", "intro2": "34 дні — це не жорсткий графік, а структура: можна йти день за днем, можна повертатися й повторювати. До частини днів (16–32) є <strong>аудіозапис</strong> — послухайте вимову, поки читаєте слова.", "intro3": "Нижче — самі дні. Розмовні аргентинські та піренейські слівця, усталені вирази з <em>hacer</em> та <em>poner</em>, а також словники для завантаження — на головній сторінці, у розділі «Вокабуляр».", "stat_days": "дні", "stat_words": "слів і виразів", "stat_audio": "аудіо", "stat_cards": "картки-зображення", "bot_title": "Побачив слово, яке хочеш запам'ятати?", "bot_sub": "Надішли його Notilingo — бот зробить картку й нагадає повторити.", "bot_btn": "Відкрити в Telegram →", "fc_title": "🖼️ Картки «слово + зображення»", "fc_sub": "143 перших слова з ілюстраціями — гортайте як флеш-картки", "sec_days": "Дні 1 – 34", "expand": "Розгорнути все", "collapse": "Згорнути все", "day": "День", "words_one": "слово", "words_many": "слів", "audio_badge": "аудіо"}}};
+</script>
+<script>
+/* ── Spanish-first i18n for Vocabulario: chrome switches language; word entries stay Russian ── */
+(function () {
+  var DATA = window.__I18N_DATA__;
+  var LANGS = ['es', 'en', 'ru', 'uk'];
+  var DEFAULT = 'es';
+  var STORE_KEY = 'pageLang';
+  var AUDIO_LABEL = { es: 'audio', en: 'audio', ru: 'аудио', uk: 'аудіо' };
+
+  function getLang() {
+    var saved = null;
+    try { saved = localStorage.getItem(STORE_KEY); } catch (e) {}
+    return LANGS.indexOf(saved) !== -1 ? saved : DEFAULT;
+  }
+  function setLang(lang) { try { localStorage.setItem(STORE_KEY, lang); } catch (e) {} }
+
+  // Plural rules for the word-count secondary line
+  function wordsLabel(lang, n) {
+    var v = DATA.vocab[lang];
+    if (lang === 'ru' || lang === 'uk') {
+      var n10 = n % 10, n100 = n % 100;
+      if (n10 === 1 && n100 !== 11) return (lang === 'ru' ? 'слово' : 'слово');
+      // ru: 2-4 -> слова; uk: 2-4 -> слова
+      if (n10 >= 2 && n10 <= 4 && (n100 < 10 || n100 >= 20)) return 'слова';
+      return (lang === 'ru' ? 'слов' : 'слів');
+    }
+    // es / en
+    return n === 1 ? v.words_one : v.words_many;
+  }
+
+  var disclaimerBar = document.getElementById('disclaimerBar');
+  var disclaimerText = document.getElementById('disclaimerText');
+  var langLabel = document.getElementById('langLabel');
+  var langButtons = Array.prototype.slice.call(document.querySelectorAll('.lang-btn'));
+
+  function apply(lang) {
+    var ui = DATA.ui[lang];
+    var v = DATA.vocab[lang];
+    document.documentElement.setAttribute('lang', lang);
+
+    // Simple id-based primary texts
+    var byId = {
+      vTitle: v.title,
+      backText: v.back || ui.back,
+      vIntro1: v.intro1, vIntro2: v.intro2, vIntro3: v.intro3
+    };
+    Object.keys(byId).forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) el.innerHTML = byId[id];
+    });
+    // doc title
+    document.title = v.title;
+
+    // data-vk elements (stats, bot, flashcards, toolbar) — primary text in current lang
+    document.querySelectorAll('[data-vk]').forEach(function (el) {
+      var key = el.getAttribute('data-vk');
+      if (v[key] != null) el.innerHTML = v[key];
+    });
+
+    // Section "Días 1–34" secondary
+    document.querySelectorAll('.i18n-secv').forEach(function (el) {
+      var key = el.getAttribute('data-vk-sec');
+      el.textContent = (lang === 'es') ? '' : (v[key] || '');
+    });
+
+    // Day titles secondary ("Day N")
+    document.querySelectorAll('.i18n-dayt').forEach(function (el) {
+      var n = el.getAttribute('data-day-n');
+      el.textContent = (lang === 'es') ? '' : (v.day + ' ' + n);
+    });
+
+    // Word counts secondary ("N words")
+    document.querySelectorAll('.i18n-words').forEach(function (el) {
+      var n = parseInt(el.getAttribute('data-words-n'), 10);
+      el.textContent = (lang === 'es') ? '' : (n + ' ' + wordsLabel(lang, n));
+    });
+
+    // Audio badges
+    var al = AUDIO_LABEL[lang] || 'audio';
+    document.querySelectorAll('.i18n-audio').forEach(function (el) { el.textContent = al; });
+
+    // Chrome
+    if (langLabel) langLabel.textContent = ui.lang_label;
+
+    // Disclaimer (en / uk only)
+    if (ui.disclaimer) {
+      disclaimerText.textContent = ui.disclaimer;
+      disclaimerBar.classList.add('show');
+    } else {
+      disclaimerBar.classList.remove('show');
+    }
+
+    langButtons.forEach(function (b) {
+      b.classList.toggle('is-active', b.getAttribute('data-lang') === lang);
+    });
+  }
+
+  langButtons.forEach(function (b) {
+    b.addEventListener('click', function () {
+      var lang = b.getAttribute('data-lang');
+      setLang(lang); apply(lang);
+    });
+  });
+
+  apply(getLang());
+})();
 </script>
 
 </body>

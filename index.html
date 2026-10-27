@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="es">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -459,18 +459,106 @@
     text-underline-offset: 2px;
   }
   .footer-staffilo-logo { height: 28px; width: auto; }
+
+  /* ── i18n: disclaimer bar + language switcher ── */
+  .disclaimer-bar {
+    display: none;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
+    background: linear-gradient(135deg, #b3261e, #d23b2f);
+    color: #fff;
+    font-size: .82rem;
+    line-height: 1.45;
+    padding: 11px 18px;
+    border-radius: 12px;
+    margin-bottom: 22px;
+    box-shadow: 0 6px 20px rgba(179,38,30,.35);
+  }
+  .disclaimer-bar.show { display: flex; }
+  .disclaimer-bar .disclaimer-icon { font-size: 1.1rem; flex-shrink: 0; }
+  .disclaimer-bar .disclaimer-text { flex: 1; min-width: 200px; }
+
+  .lang-switch {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 22px;
+  }
+  .lang-switch-label {
+    font-size: .72rem;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--muted);
+  }
+  .lang-switch-group { display: inline-flex; gap: 4px; }
+  .lang-btn {
+    font-family: inherit;
+    font-size: .8rem;
+    font-weight: 600;
+    color: var(--muted);
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 99px;
+    padding: 5px 13px;
+    cursor: pointer;
+    transition: background .15s, color .15s, border-color .15s;
+  }
+  .lang-btn:hover { background: var(--panel-hover); color: #fff; }
+  .lang-btn.is-active {
+    background: var(--gold);
+    color: #1a2a44;
+    border-color: var(--gold);
+  }
+
+  /* Secondary (duplicating-language) line under card title */
+  .card-sub.i18n-sub { color: var(--muted); }
+  .card-sub.i18n-sub:empty { display: none; }
+
+  /* Section title: Spanish primary + translated secondary */
+  .section-title .sec-secondary {
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 600;
+    opacity: .72;
+  }
+  .section-title .sec-secondary:not(:empty)::before {
+    content: "·";
+    margin: 0 8px;
+    opacity: .5;
+  }
+
 </style>
 </head>
 <body>
 <div class="wrap">
 
+  <div class="disclaimer-bar" id="disclaimerBar">
+    <span class="disclaimer-icon">⚠️</span>
+    <span class="disclaimer-text" id="disclaimerText"></span>
+  </div>
+
+  <div class="lang-switch" id="langSwitch">
+    <span class="lang-switch-label" id="langLabel"></span>
+    <span class="lang-switch-group">
+      <button type="button" class="lang-btn" data-lang="es">Español</button>
+      <button type="button" class="lang-btn" data-lang="en">English</button>
+      <button type="button" class="lang-btn" data-lang="ru">Русский</button>
+      <button type="button" class="lang-btn" data-lang="uk">Українська</button>
+    </span>
+  </div>
+
+
   <header>
     <h1>Ejercicios de español</h1>
-    <p>Интерактивные упражнения для изучающих испанский язык — от алфавита до сослагательного наклонения</p>
+    <p id="pageDesc"></p>
     <div class="search-wrap">
       <span class="search-icon">🔍</span>
-      <input type="text" class="search-input" id="siteSearch" placeholder="Поиск по упражнениям…" autocomplete="off">
-      <button type="button" class="search-clear" id="searchClear" aria-label="Очистить">✕</button>
+      <input type="text" class="search-input" id="siteSearch" placeholder="" autocomplete="off">
+      <button type="button" class="search-clear" id="searchClear" aria-label="">✕</button>
     </div>
     <div class="search-count" id="searchCount"></div>
   </header>
@@ -499,31 +587,28 @@
   <div class="section">
     <div class="section-title">
       <span class="dot dot-blue"></span>
-      Фонетика и алфавит
+      <span class="sec-primary">Fonética y alfabeto</span><span class="sec-secondary i18n-sec" data-i18n-sec="0"></span>
     </div>
     <div class="grid">
       <a class="card" href="0. Alfabeto.html">
         <span class="card-icon">🔤</span>
         <div class="card-body">
-          <div class="card-title">0. Алфавит<span class="badge badge-audio">аудио</span></div>
-          <div class="card-es">El alfabeto</div>
-          <div class="card-sub">Буквы и их названия</div>
+          <div class="card-title">0. El alfabeto<span class="badge badge-audio i18n-audio">audio</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="0"></div>
         </div>
       </a>
       <a class="card" href="1. Pronunciacion con audio.html">
         <span class="card-icon">🔊</span>
         <div class="card-body">
-          <div class="card-title">1. Произношение<span class="badge badge-audio">аудио</span></div>
-          <div class="card-es">La pronunciación</div>
-          <div class="card-sub">Звуки и фонетические правила</div>
+          <div class="card-title">1. La pronunciación<span class="badge badge-audio i18n-audio">audio</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="1"></div>
         </div>
       </a>
       <a class="card" href="1a. Trabalenguas.html">
         <span class="card-icon">👅</span>
         <div class="card-body">
-          <div class="card-title">1a. Скороговорки<span class="badge badge-audio">аудио</span></div>
-          <div class="card-es">Trabalenguas</div>
-          <div class="card-sub">Trabalenguas — упражнения на произношение</div>
+          <div class="card-title">1a. Trabalenguas<span class="badge badge-audio i18n-audio">audio</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="2"></div>
         </div>
       </a>
     </div>
@@ -533,150 +618,133 @@
   <div class="section">
     <div class="section-title">
       <span class="dot dot-gold"></span>
-      Начальный уровень A0 – A1
+      <span class="sec-primary">Nivel inicial A0 – A1</span><span class="sec-secondary i18n-sec" data-i18n-sec="1"></span>
     </div>
     <div class="grid">
       <a class="card" href="2. Presentacion. Ser y estar.html">
         <span class="card-icon">👋</span>
         <div class="card-body">
-          <div class="card-title">2. Ser y estar. Презентация<span class="badge badge-audio">аудио</span></div>
-          <div class="card-es">Presentación: ser y estar</div>
-          <div class="card-sub">Глаголы «быть» — основы</div>
+          <div class="card-title">2. Presentación: ser y estar<span class="badge badge-audio i18n-audio">audio</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="3"></div>
         </div>
       </a>
       <a class="card" href="2a. El primer texto.html">
         <span class="card-icon">📄</span>
         <div class="card-body">
-          <div class="card-title">2a. Первый текст</div>
-          <div class="card-es">El primer texto</div>
-          <div class="card-sub">ELE A0 · первый связный текст на испанском</div>
+          <div class="card-title">2a. El primer texto</div>
+          <div class="card-sub i18n-sub" data-i18n-idx="4"></div>
         </div>
       </a>
       <a class="card" href="6. Articulos.html">
         <span class="card-icon">🅰️</span>
         <div class="card-body">
-          <div class="card-title">6. Артикли</div>
-          <div class="card-es">Artículos</div>
-          <div class="card-sub">Определённые и неопределённые артикли — теория и упражнения</div>
+          <div class="card-title">6. Artículos</div>
+          <div class="card-sub i18n-sub" data-i18n-idx="5"></div>
         </div>
       </a>
       <a class="card" href="5. Presentacion y preguntas basicas.html">
         <span class="card-icon">❓</span>
         <div class="card-body">
-          <div class="card-title">5. Презентация и базовые вопросы<span class="badge badge-audio">аудио</span></div>
-          <div class="card-es">Presentación y preguntas básicas</div>
-          <div class="card-sub">Знакомство и простые фразы</div>
+          <div class="card-title">5. Presentación y preguntas básicas<span class="badge badge-audio i18n-audio">audio</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="6"></div>
         </div>
       </a>
       <a class="card" href="3. Los Diaz Lopez.html">
         <span class="card-icon">👨‍👩‍👧</span>
         <div class="card-body">
-          <div class="card-title">3. Семья Диас Лопес<span class="badge badge-audio">аудио</span></div>
-          <div class="card-es">Los Díaz López</div>
-          <div class="card-sub">Семья, описание людей (интерактив drag-and-drop)</div>
+          <div class="card-title">3. Los Díaz López<span class="badge badge-audio i18n-audio">audio</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="7"></div>
         </div>
       </a>
       <a class="card" href="4. Presente de Indicativo.html">
         <span class="card-icon">📝</span>
         <div class="card-body">
-          <div class="card-title">4. Presente de Indicativo<span class="badge badge-audio">аудио</span></div>
-          <div class="card-es">Presente de Indicativo</div>
-          <div class="card-sub">Настоящее время — спряжение</div>
+          <div class="card-title">4. Presente de Indicativo<span class="badge badge-audio i18n-audio">audio</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="8"></div>
         </div>
       </a>
       <a class="card" href="7. Verbos reflexivos.html">
         <span class="card-icon">🔁</span>
         <div class="card-body">
           <div class="card-title">7. Verbos reflexivos</div>
-          <div class="card-es">Verbos reflexivos</div>
-          <div class="card-sub">Возвратные глаголы</div>
+          <div class="card-sub i18n-sub" data-i18n-idx="9"></div>
         </div>
       </a>
       <a class="card" href="7a. Verbos reflexivos. Comidas.html">
         <span class="card-icon">🍽️</span>
         <div class="card-body">
-          <div class="card-title">7a. Verbos reflexivos. Еда и распорядок</div>
-          <div class="card-es">Verbos reflexivos. Comidas</div>
-          <div class="card-sub">Возвратные глаголы — еда, приёмы пищи, режим дня</div>
+          <div class="card-title">7a. Verbos reflexivos. Comidas</div>
+          <div class="card-sub i18n-sub" data-i18n-idx="10"></div>
         </div>
       </a>
       <a class="card" href="8. La familia con audio.html">
         <span class="card-icon">👪</span>
         <div class="card-body">
-          <div class="card-title">8. La familia<span class="badge badge-audio">аудио</span></div>
-          <div class="card-es">La familia</div>
-          <div class="card-sub">Словарь — члены семьи</div>
+          <div class="card-title">8. La familia<span class="badge badge-audio i18n-audio">audio</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="11"></div>
         </div>
       </a>
       <a class="card" href="8. Mi dia con audio.html">
         <span class="card-icon">📅</span>
         <div class="card-body">
-          <div class="card-title">8. Мой день<span class="badge badge-audio">аудио</span></div>
-          <div class="card-es">Mi día</div>
-          <div class="card-sub">Распорядок дня — текст</div>
+          <div class="card-title">8. Mi día<span class="badge badge-audio i18n-audio">audio</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="12"></div>
         </div>
       </a>
       <a class="card" href="9. Por la manaña con audio.html">
         <span class="card-icon">🌅</span>
         <div class="card-body">
-          <div class="card-title">9. По утрам<span class="badge badge-audio">аудио</span></div>
-          <div class="card-es">Por la mañana</div>
-          <div class="card-sub">Распорядок дня</div>
+          <div class="card-title">9. Por la mañana<span class="badge badge-audio i18n-audio">audio</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="13"></div>
         </div>
       </a>
       <a class="card" href="10. Numerales 1-100.mp3">
         <span class="card-icon">🎧</span>
         <div class="card-body">
-          <div class="card-title">10. Числительные 1–100<span class="badge badge-audio">аудио</span></div>
-          <div class="card-es">Numerales 1–100</div>
-          <div class="card-sub">Аудио — числа от 1 до 100</div>
+          <div class="card-title">10. Numerales 1–100<span class="badge badge-audio i18n-audio">audio</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="14"></div>
         </div>
       </a>
       <a class="card" href="11.Ejercicio numerales.html">
         <span class="card-icon">🔢</span>
         <div class="card-body">
-          <div class="card-title">11. Числительные</div>
-          <div class="card-es">Ejercicio de numerales</div>
-          <div class="card-sub">Базовые числа</div>
+          <div class="card-title">11. Ejercicio de numerales</div>
+          <div class="card-sub i18n-sub" data-i18n-idx="15"></div>
         </div>
       </a>
       <a class="card" href="12. Numerales 100-10 millones.mp3">
         <span class="card-icon">🎧</span>
         <div class="card-body">
-          <div class="card-title">12. Числительные 100 – 10 млн<span class="badge badge-audio">аудио</span></div>
-          <div class="card-es">Numerales 100 – 10 millones</div>
-          <div class="card-sub">Аудио — большие числа</div>
+          <div class="card-title">12. Numerales 100 – 10 millones<span class="badge badge-audio i18n-audio">audio</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="16"></div>
         </div>
       </a>
       <a class="card" href="13. Vocabulario inicial y 5 textos con audio.html">
         <span class="card-icon">📖</span>
         <div class="card-body">
-          <div class="card-title">13. Начальный словарь + 5 текстов<span class="badge badge-audio">аудио</span></div>
-          <div class="card-es">Vocabulario inicial y 5 textos</div>
-          <div class="card-sub">Лексика и первые тексты с аудио</div>
+          <div class="card-title">13. Vocabulario inicial y 5 textos<span class="badge badge-audio i18n-audio">audio</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="17"></div>
         </div>
       </a>
       <a class="card" href="28. Numerales complejos.html">
         <span class="card-icon">🧮</span>
         <div class="card-body">
-          <div class="card-title">28. Числительные (сложные)<span class="badge badge-audio">аудио</span></div>
-          <div class="card-es">Numerales complejos</div>
-          <div class="card-sub">Порядковые, дроби, большие числа</div>
+          <div class="card-title">28. Numerales complejos<span class="badge badge-audio i18n-audio">audio</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="18"></div>
         </div>
       </a>
       <a class="card" href="45. Audio y ejercicio de repaso de numeros.html">
         <span class="card-icon">🔢</span>
         <div class="card-body">
-          <div class="card-title">45. Повторение числительных<span class="badge badge-audio">аудио</span></div>
-          <div class="card-es">Repaso de números</div>
-          <div class="card-sub">Аудио и упражнение на повторение чисел</div>
+          <div class="card-title">45. Repaso de números<span class="badge badge-audio i18n-audio">audio</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="19"></div>
         </div>
       </a>
       <a class="card" href="48. Acciones inmediatas.html">
         <span class="card-icon">⚡</span>
         <div class="card-body">
-          <div class="card-title">48. Действия в настоящем</div>
-          <div class="card-es">Acciones inmediatas</div>
+          <div class="card-title">48. Acciones inmediatas</div>
+          <div class="card-sub i18n-sub" data-i18n-idx="20"></div>
         </div>
       </a>
     </div>
@@ -686,63 +754,56 @@
   <div class="section">
     <div class="section-title">
       <span class="dot dot-pink"></span>
-      Вокабуляр
+      <span class="sec-primary">Vocabulario</span><span class="sec-secondary i18n-sec" data-i18n-sec="2"></span>
     </div>
     <div class="grid">
       <a class="card" href="Vocabulario.html">
         <span class="card-icon">📚</span>
         <div class="card-body">
-          <div class="card-title">Вокабуляр — 34 дня<span class="badge badge-audio">аудио</span></div>
-          <div class="card-es">Vocabulario — 34 días</div>
-          <div class="card-sub">Слова по дням с аудио</div>
+          <div class="card-title">Vocabulario — 34 días<span class="badge badge-audio i18n-audio">audio</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="21"></div>
         </div>
       </a>
       <a class="card" href="Tarjetas de vocabulario.html">
         <span class="card-icon">🖼️</span>
         <div class="card-body">
-          <div class="card-title">Карточки — первые слова</div>
-          <div class="card-es">Tarjetas de vocabulario</div>
-          <div class="card-sub">143 карточки «слово + картинка»</div>
+          <div class="card-title">Tarjetas de vocabulario</div>
+          <div class="card-sub i18n-sub" data-i18n-idx="22"></div>
         </div>
       </a>
       <a class="card" href="Modismos coloquiales y Hacer-Poner.html">
         <span class="card-icon">🗯️</span>
         <div class="card-body">
-          <div class="card-title">Разговорные словечки и hacer/poner</div>
-          <div class="card-es">Modismos coloquiales y hacer/poner</div>
-          <div class="card-sub">Аргентинизмы, испанизмы, устойчивые выражения</div>
+          <div class="card-title">Modismos coloquiales y hacer/poner</div>
+          <div class="card-sub i18n-sub" data-i18n-idx="23"></div>
         </div>
       </a>
       <a class="card" href="50. Expresiones emotivas con traduccion, explicacion y con audio.html">
         <span class="card-icon">😲</span>
         <div class="card-body">
-          <div class="card-title">50. Эмоциональные выражения<span class="badge badge-audio">аудио</span></div>
-          <div class="card-es">Expresiones emotivas</div>
-          <div class="card-sub">98 выражений по 10 категориям — перевод, объяснение, аудио</div>
+          <div class="card-title">50. Expresiones emotivas<span class="badge badge-audio i18n-audio">audio</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="24"></div>
         </div>
       </a>
       <a class="card" href="Vocabulario/Vocabulario A1.1.pdf">
         <span class="card-icon">📄</span>
         <div class="card-body">
-          <div class="card-title">Общий словарь A1.1<span class="badge badge-pdf">PDF</span></div>
-          <div class="card-es">Vocabulario A1.1</div>
-          <div class="card-sub">Алфавитный список для печати</div>
+          <div class="card-title">Vocabulario A1.1<span class="badge badge-pdf">PDF</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="25"></div>
         </div>
       </a>
       <a class="card" href="Vocabulario/Vocabulario A1.2 (2).docx">
         <span class="card-icon">📝</span>
         <div class="card-body">
-          <div class="card-title">Общий словарь A1.2<span class="badge badge-docx">DOCX</span></div>
-          <div class="card-es">Vocabulario A1.2</div>
-          <div class="card-sub">Объединённый испанско-русский словарь</div>
+          <div class="card-title">Vocabulario A1.2<span class="badge badge-docx">DOCX</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="26"></div>
         </div>
       </a>
       <a class="card" href="Vocabulario/1-14 dias vocabulario.docx">
         <span class="card-icon">📝</span>
         <div class="card-body">
-          <div class="card-title">Словарь дней 1–14<span class="badge badge-docx">DOCX</span></div>
-          <div class="card-es">Vocabulario días 1–14</div>
-          <div class="card-sub">Алфавитный список слов первых 14 дней</div>
+          <div class="card-title">Vocabulario días 1–14<span class="badge badge-docx">DOCX</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="27"></div>
         </div>
       </a>
     </div>
@@ -752,47 +813,42 @@
   <div class="section">
     <div class="section-title">
       <span class="dot dot-green"></span>
-      Тексты и диалоги A1
+      <span class="sec-primary">Textos y diálogos A1</span><span class="sec-secondary i18n-sec" data-i18n-sec="3"></span>
     </div>
     <div class="grid">
       <a class="card" href="14. La casa de Marta con audio.html">
         <span class="card-icon">🏠</span>
         <div class="card-body">
-          <div class="card-title">14. Дом Марты<span class="badge badge-audio">аудио</span></div>
-          <div class="card-es">La casa de Marta</div>
-          <div class="card-sub">Дом, комнаты, мебель</div>
+          <div class="card-title">14. La casa de Marta<span class="badge badge-audio i18n-audio">audio</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="28"></div>
         </div>
       </a>
       <a class="card" href="15. Rosario Martinez ejercicios con audio.html">
         <span class="card-icon">🎙️</span>
         <div class="card-body">
-          <div class="card-title">15. Росарио Мартинес<span class="badge badge-audio">аудио</span></div>
-          <div class="card-es">Rosario Martínez</div>
-          <div class="card-sub">Упражнения по тексту</div>
+          <div class="card-title">15. Rosario Martínez<span class="badge badge-audio i18n-audio">audio</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="29"></div>
         </div>
       </a>
       <a class="card" href="17. Conversacion.html">
         <span class="card-icon">💬</span>
         <div class="card-body">
-          <div class="card-title">17. Диалог</div>
-          <div class="card-es">Conversación</div>
-          <div class="card-sub">Разговорные упражнения</div>
+          <div class="card-title">17. Conversación</div>
+          <div class="card-sub i18n-sub" data-i18n-idx="30"></div>
         </div>
       </a>
       <a class="card" href="20.La casa y la vida cotidiana.html">
         <span class="card-icon">🏡</span>
         <div class="card-body">
-          <div class="card-title">20. Дом и повседневная жизнь<span class="badge badge-audio">аудио</span></div>
-          <div class="card-es">La casa y la vida cotidiana</div>
-          <div class="card-sub">Comprensión auditiva — la casa</div>
+          <div class="card-title">20. La casa y la vida cotidiana<span class="badge badge-audio i18n-audio">audio</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="31"></div>
         </div>
       </a>
       <a class="card" href="Interiores.html">
         <span class="card-icon">🛋️</span>
         <div class="card-body">
-          <div class="card-title">Интерьеры дома<span class="badge badge-audio">аудио</span></div>
-          <div class="card-es">Interiores</div>
-          <div class="card-sub">Кухня, гостиная, ванная — hay/estar, артикли</div>
+          <div class="card-title">Interiores<span class="badge badge-audio i18n-audio">audio</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="32"></div>
         </div>
       </a>
     </div>
@@ -802,86 +858,77 @@
   <div class="section">
     <div class="section-title">
       <span class="dot dot-gold"></span>
-      Грамматика A1 – A2
+      <span class="sec-primary">Gramática A1 – A2</span><span class="sec-secondary i18n-sec" data-i18n-sec="4"></span>
     </div>
     <div class="grid">
       <a class="card" href="23. Perifrasis verbales ejercicios.html">
         <span class="card-icon">🔧</span>
         <div class="card-body">
-          <div class="card-title">23. Глагольные перифразы (упражнения)</div>
-          <div class="card-es">Perífrasis verbales — ejercicios</div>
-          <div class="card-sub">Práctica ELE A2</div>
+          <div class="card-title">23. Perífrasis verbales — ejercicios</div>
+          <div class="card-sub i18n-sub" data-i18n-idx="33"></div>
         </div>
       </a>
       <a class="card" href="25. Pronombres personales como CD y CI.html">
         <span class="card-icon">🔤</span>
         <div class="card-body">
-          <div class="card-title">25. Личные местоимения (CD и CI)</div>
-          <div class="card-es">Pronombres personales como CD y CI</div>
-          <div class="card-sub">Прямое и косвенное дополнение — часть 1</div>
+          <div class="card-title">25. Pronombres personales como CD y CI</div>
+          <div class="card-sub i18n-sub" data-i18n-idx="34"></div>
         </div>
       </a>
       <a class="card" href="25a. Pronombres personales como CD y CI.html">
         <span class="card-icon">🔤</span>
         <div class="card-body">
-          <div class="card-title">25a. Личные местоимения (CD и CI) — часть 2</div>
-          <div class="card-es">Pronombres personales como CD y CI. Parte 2</div>
-          <div class="card-sub">Местоимения в винительном и дательном падеже</div>
+          <div class="card-title">25a. Pronombres personales como CD y CI. Parte 2</div>
+          <div class="card-sub i18n-sub" data-i18n-idx="35"></div>
         </div>
       </a>
       <a class="card" href="26. Perifrtasis verbales con audio.html">
         <span class="card-icon">🔧</span>
         <div class="card-body">
-          <div class="card-title">26. Глагольные перифразы<span class="badge badge-audio">аудио</span></div>
-          <div class="card-es">Perífrasis verbales</div>
+          <div class="card-title">26. Perífrasis verbales<span class="badge badge-audio i18n-audio">audio</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="36"></div>
         </div>
       </a>
       <a class="card" href="27. Participio Pasado y Preterito Perfecto de Indicativo.html">
         <span class="card-icon">📌</span>
         <div class="card-body">
-          <div class="card-title">27. Participio Pasado y Pretérito Perfecto</div>
-          <div class="card-es">Participio Pasado y Pretérito Perfecto de Indicativo</div>
-          <div class="card-sub">Причастие прошедшего времени и настоящее совершённое время</div>
+          <div class="card-title">27. Participio Pasado y Pretérito Perfecto de Indicativo</div>
+          <div class="card-sub i18n-sub" data-i18n-idx="37"></div>
         </div>
       </a>
       <a class="card" href="28. Imperativo afirmativo 2 parte.html">
         <span class="card-icon">👆</span>
         <div class="card-body">
-          <div class="card-title">28. Imperativo afirmativo — часть 2</div>
-          <div class="card-es">Imperativo afirmativo. Parte 2</div>
-          <div class="card-sub">Продолжение упражнений на утвердительный императив</div>
+          <div class="card-title">28. Imperativo afirmativo. Parte 2</div>
+          <div class="card-sub i18n-sub" data-i18n-idx="38"></div>
         </div>
       </a>
       <a class="card" href="29. Imperativo afirmativo con vos.html">
         <span class="card-icon">👆</span>
         <div class="card-body">
           <div class="card-title">29. Imperativo afirmativo con vos</div>
-          <div class="card-es">Imperativo afirmativo con vos</div>
-          <div class="card-sub">Утвердительный императив с формой «vos»</div>
+          <div class="card-sub i18n-sub" data-i18n-idx="39"></div>
         </div>
       </a>
       <a class="card" href="30. Imperativo afirmativo.html">
         <span class="card-icon">👆</span>
         <div class="card-body">
           <div class="card-title">30. Imperativo afirmativo</div>
-          <div class="card-es">Imperativo afirmativo</div>
-          <div class="card-sub">Утвердительный императив — правило и 8 особых форм</div>
+          <div class="card-sub i18n-sub" data-i18n-idx="40"></div>
         </div>
       </a>
       <a class="card" href="31. Ejercicio Imperativo.html">
         <span class="card-icon">✋</span>
         <div class="card-body">
-          <div class="card-title">31. Упражнение — Imperativo</div>
-          <div class="card-es">Ejercicio de Imperativo</div>
-          <div class="card-sub">Практика повелительного наклонения</div>
+          <div class="card-title">31. Ejercicio de Imperativo</div>
+          <div class="card-sub i18n-sub" data-i18n-idx="41"></div>
         </div>
       </a>
       <a class="card" href="33a.Ejercicios interactivos articulos.html">
         <span class="card-icon">🅰️</span>
         <div class="card-body">
-          <div class="card-title">33a. Артикли (интерактивно)</div>
-          <div class="card-es">Artículos — ejercicios interactivos</div>
-          <div class="card-sub">Artículos en español para ELE A1</div>
+          <div class="card-title">33a. Artículos — ejercicios interactivos</div>
+          <div class="card-sub i18n-sub" data-i18n-idx="42"></div>
         </div>
       </a>
     </div>
@@ -891,103 +938,91 @@
   <div class="section">
     <div class="section-title">
       <span class="dot dot-pink"></span>
-      Глагольные времена A2 – B1
+      <span class="sec-primary">Tiempos verbales A2 – B1</span><span class="sec-secondary i18n-sec" data-i18n-sec="5"></span>
     </div>
     <div class="grid">
       <a class="card" href="28. Preterito Perfecto de Indicativo.html">
         <span class="card-icon">⏱️</span>
         <div class="card-body">
-          <div class="card-title">28. Pretérito Perfecto<span class="badge badge-audio">аудио</span></div>
-          <div class="card-es">Pretérito Perfecto de Indicativo</div>
-          <div class="card-sub">Настоящее совершённое время</div>
+          <div class="card-title">28. Pretérito Perfecto de Indicativo<span class="badge badge-audio i18n-audio">audio</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="43"></div>
         </div>
       </a>
       <a class="card" href="32. Preterito Indefinido de Indicativo.html">
         <span class="card-icon">⏮️</span>
         <div class="card-body">
-          <div class="card-title">32. Pretérito Indefinido</div>
-          <div class="card-es">Pretérito Indefinido de Indicativo</div>
-          <div class="card-sub">Простое прошедшее время</div>
+          <div class="card-title">32. Pretérito Indefinido de Indicativo</div>
+          <div class="card-sub i18n-sub" data-i18n-idx="44"></div>
         </div>
       </a>
       <a class="card" href="33. Pluscuamperfecto de indicativo.html">
         <span class="card-icon">⏪</span>
         <div class="card-body">
-          <div class="card-title">33. Pluscuamperfecto</div>
-          <div class="card-es">Pluscuamperfecto de Indicativo</div>
-          <div class="card-sub">Давнопрошедшее время</div>
+          <div class="card-title">33. Pluscuamperfecto de Indicativo</div>
+          <div class="card-sub i18n-sub" data-i18n-idx="45"></div>
         </div>
       </a>
       <a class="card" href="35. Preterito perfecto, indefinido, pluscuamperfecto de Indicativo.html">
         <span class="card-icon">📊</span>
         <div class="card-body">
-          <div class="card-title">35. Perfecto, Indefinido, Pluscuamperfecto</div>
-          <div class="card-es">Perfecto, Indefinido y Pluscuamperfecto</div>
-          <div class="card-sub">Сравнение трёх прошедших времён</div>
+          <div class="card-title">35. Perfecto, Indefinido y Pluscuamperfecto</div>
+          <div class="card-sub i18n-sub" data-i18n-idx="46"></div>
         </div>
       </a>
       <a class="card" href="37. Repaso de los tiempos de Indicativo.html">
         <span class="card-icon">🗓️</span>
         <div class="card-body">
-          <div class="card-title">37. Повторение времён Indicativo</div>
-          <div class="card-es">Repaso de los tiempos de Indicativo</div>
-          <div class="card-sub">Все времена изъявительного наклонения</div>
+          <div class="card-title">37. Repaso de los tiempos de Indicativo</div>
+          <div class="card-sub i18n-sub" data-i18n-idx="47"></div>
         </div>
       </a>
       <a class="card" href="39. Ejercicio del verbo tratar.html">
         <span class="card-icon">🎯</span>
         <div class="card-body">
-          <div class="card-title">39. Глагол «tratar»</div>
-          <div class="card-es">El verbo tratar</div>
-          <div class="card-sub">Значения и употребление</div>
+          <div class="card-title">39. El verbo tratar</div>
+          <div class="card-sub i18n-sub" data-i18n-idx="48"></div>
         </div>
       </a>
       <a class="card" href="44. Repaso de los tiempos verbales.html">
         <span class="card-icon">📋</span>
         <div class="card-body">
-          <div class="card-title">44. Повторение глагольных времён</div>
-          <div class="card-es">Repaso de los tiempos verbales</div>
-          <div class="card-sub">Комплексное повторение</div>
+          <div class="card-title">44. Repaso de los tiempos verbales</div>
+          <div class="card-sub i18n-sub" data-i18n-idx="49"></div>
         </div>
       </a>
       <a class="card" href="47. Preterito Imperfecto de Indicativo.html">
         <span class="card-icon">🔄</span>
         <div class="card-body">
-          <div class="card-title">47. Pretérito Imperfecto</div>
-          <div class="card-es">Pretérito Imperfecto de Indicativo</div>
-          <div class="card-sub">Прошедшее незавершённое</div>
+          <div class="card-title">47. Pretérito Imperfecto de Indicativo</div>
+          <div class="card-sub i18n-sub" data-i18n-idx="50"></div>
         </div>
       </a>
       <a class="card" href="64. Presente de Subjuntivo.html">
         <span class="card-icon">🌀</span>
         <div class="card-body">
           <div class="card-title">64. Presente de Subjuntivo</div>
-          <div class="card-es">Presente de Subjuntivo</div>
-          <div class="card-sub">Настоящее сослагательного наклонения</div>
+          <div class="card-sub i18n-sub" data-i18n-idx="51"></div>
         </div>
       </a>
       <a class="card" href="Conversacion. Tiempos verbales Presnete, preterito perfecto, indefinido, imperfecto.html">
         <span class="card-icon">🗣️</span>
         <div class="card-body">
-          <div class="card-title">Путешествие по временам (устно)</div>
-          <div class="card-es">Viaje por los tiempos</div>
-          <div class="card-sub">Устное повторение: presente, perfecto, indefinido, imperfecto</div>
+          <div class="card-title">Viaje por los tiempos</div>
+          <div class="card-sub i18n-sub" data-i18n-idx="52"></div>
         </div>
       </a>
       <a class="card" href="62. Pares de sustantivos.html">
         <span class="card-icon">🔗</span>
         <div class="card-body">
-          <div class="card-title">62. Пары существительных</div>
-          <div class="card-es">Pares de sustantivos</div>
-          <div class="card-sub">Паронимы и похожие слова</div>
+          <div class="card-title">62. Pares de sustantivos</div>
+          <div class="card-sub i18n-sub" data-i18n-idx="53"></div>
         </div>
       </a>
       <a class="card" href="63. Prefijos.html">
         <span class="card-icon">🧩</span>
         <div class="card-body">
-          <div class="card-title">63. Приставки</div>
-          <div class="card-es">Prefijos</div>
-          <div class="card-sub">Словообразование — prefijos</div>
+          <div class="card-title">63. Prefijos</div>
+          <div class="card-sub i18n-sub" data-i18n-idx="54"></div>
         </div>
       </a>
     </div>
@@ -997,55 +1032,49 @@
   <div class="section">
     <div class="section-title">
       <span class="dot dot-violet"></span>
-      Повторение и контроль A1
+      <span class="sec-primary">Repaso y control A1</span><span class="sec-secondary i18n-sec" data-i18n-sec="6"></span>
     </div>
     <div class="grid">
       <a class="card" href="16.Autoevaluacion Tema 3. El trabajo. Con audio.html">
         <span class="card-icon">💼</span>
         <div class="card-body">
-          <div class="card-title">16. Самопроверка. Тема 3 — Работа<span class="badge badge-audio">аудио</span></div>
-          <div class="card-es">Autoevaluación Tema 3. El trabajo</div>
-          <div class="card-sub">Профессии, глаголы и расписание</div>
+          <div class="card-title">16. Autoevaluación Tema 3. El trabajo<span class="badge badge-audio i18n-audio">audio</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="55"></div>
         </div>
       </a>
       <a class="card" href="21. Repaso general A1a.html">
         <span class="card-icon">✅</span>
         <div class="card-body">
-          <div class="card-title">21. Общее повторение A1 — часть A</div>
-          <div class="card-es">Repaso general A1 (parte A)</div>
-          <div class="card-sub">Комплексный тест уровня A1</div>
+          <div class="card-title">21. Repaso general A1 (parte A)</div>
+          <div class="card-sub i18n-sub" data-i18n-idx="56"></div>
         </div>
       </a>
       <a class="card" href="22. Repaso general A1b.html">
         <span class="card-icon">✅</span>
         <div class="card-body">
-          <div class="card-title">22. Общее повторение A1 — часть B</div>
-          <div class="card-es">Repaso general A1 (parte B)</div>
-          <div class="card-sub">Продолжение теста A1</div>
+          <div class="card-title">22. Repaso general A1 (parte B)</div>
+          <div class="card-sub i18n-sub" data-i18n-idx="57"></div>
         </div>
       </a>
       <a class="card" href="23. Ejercicios comunicativos A0-A1 repaso con audio.html">
         <span class="card-icon">🗣️</span>
         <div class="card-body">
-          <div class="card-title">23. Коммуникативные упражнения A0–A1<span class="badge badge-audio">аудио</span></div>
-          <div class="card-es">Ejercicios comunicativos A0–A1</div>
-          <div class="card-sub">Итоговое повторение с аудио</div>
+          <div class="card-title">23. Ejercicios comunicativos A0–A1<span class="badge badge-audio i18n-audio">audio</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="58"></div>
         </div>
       </a>
       <a class="card" href="46. Quieres ser millonario_ Ejercicios de repaso.html">
         <span class="card-icon">🏆</span>
         <div class="card-body">
-          <div class="card-title">46. Хочешь стать миллионером?</div>
-          <div class="card-es">¿Quieres ser millonario?</div>
-          <div class="card-sub">Викторина — повторение вопросительных слов</div>
+          <div class="card-title">46. ¿Quieres ser millonario?</div>
+          <div class="card-sub i18n-sub" data-i18n-idx="59"></div>
         </div>
       </a>
       <a class="card" href="59. Tareas comunicativas.html">
         <span class="card-icon">🎤</span>
         <div class="card-body">
-          <div class="card-title">59. Устные коммуникативные задания</div>
-          <div class="card-es">Tareas comunicativas</div>
-          <div class="card-sub">Работа в парах — аудирование и рассказ о себе</div>
+          <div class="card-title">59. Tareas comunicativas</div>
+          <div class="card-sub i18n-sub" data-i18n-idx="60"></div>
         </div>
       </a>
     </div>
@@ -1055,55 +1084,49 @@
   <div class="section">
     <div class="section-title">
       <span class="dot dot-orange"></span>
-      Страны и география
+      <span class="sec-primary">Países y geografía</span><span class="sec-secondary i18n-sec" data-i18n-sec="7"></span>
     </div>
     <div class="grid">
       <a class="card" href="24. Buenos Aires interactivo con audio.html">
         <span class="card-icon">🏙️</span>
         <div class="card-body">
-          <div class="card-title">24. Буэнос-Айрес (интерактивно)<span class="badge badge-audio">аудио</span></div>
-          <div class="card-es">Buenos Aires interactivo</div>
-          <div class="card-sub">Город, история, описание</div>
+          <div class="card-title">24. Buenos Aires interactivo<span class="badge badge-audio i18n-audio">audio</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="61"></div>
         </div>
       </a>
       <a class="card" href="23. Nombres geograficos.pdf">
         <span class="card-icon">📄</span>
         <div class="card-body">
-          <div class="card-title">Географические названия<span class="badge badge-pdf">PDF</span></div>
-          <div class="card-es">Nombres geográficos</div>
-          <div class="card-sub">Испанские топонимы</div>
+          <div class="card-title">Nombres geográficos<span class="badge badge-pdf">PDF</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="62"></div>
         </div>
       </a>
       <a class="card" href="52. España y LA con audio.html">
         <span class="card-icon">🌍</span>
         <div class="card-body">
-          <div class="card-title">52. Испания и Латинская Америка<span class="badge badge-audio">аудио</span></div>
-          <div class="card-es">España y Latinoamérica</div>
-          <div class="card-sub">Страны, столицы, культура</div>
+          <div class="card-title">52. España y Latinoamérica<span class="badge badge-audio i18n-audio">audio</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="63"></div>
         </div>
       </a>
       <a class="card" href="53. Historia de España con audio.html">
         <span class="card-icon">🏛️</span>
         <div class="card-body">
-          <div class="card-title">53. История Испании<span class="badge badge-audio">аудио</span></div>
-          <div class="card-es">Historia de España</div>
-          <div class="card-sub">Краткая история Испании до 1975 года</div>
+          <div class="card-title">53. Historia de España<span class="badge badge-audio i18n-audio">audio</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="64"></div>
         </div>
       </a>
       <a class="card" href="55. La geografía de Argentina.html">
         <span class="card-icon">🏔️</span>
         <div class="card-body">
-          <div class="card-title">55. География Аргентины</div>
-          <div class="card-es">La geografía de Argentina</div>
-          <div class="card-sub">Провинции, реки, горы — уровень A1</div>
+          <div class="card-title">55. La geografía de Argentina</div>
+          <div class="card-sub i18n-sub" data-i18n-idx="65"></div>
         </div>
       </a>
       <a class="card" href="56. La geografia de España.html">
         <span class="card-icon">🗺️</span>
         <div class="card-body">
-          <div class="card-title">56. География Испании<span class="badge badge-audio">аудио</span></div>
-          <div class="card-es">La geografía de España</div>
-          <div class="card-sub">Регионы, реки, горы</div>
+          <div class="card-title">56. La geografía de España<span class="badge badge-audio i18n-audio">audio</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="66"></div>
         </div>
       </a>
     </div>
@@ -1113,110 +1136,98 @@
   <div class="section">
     <div class="section-title">
       <span class="dot dot-blue"></span>
-      Тексты и истории A2 – B1
+      <span class="sec-primary">Textos e historias A2 – B1</span><span class="sec-secondary i18n-sec" data-i18n-sec="8"></span>
     </div>
     <div class="grid">
       <a class="card" href="16. El caso de la tarjeta azul con audio.html">
         <span class="card-icon">🃏</span>
         <div class="card-body">
-          <div class="card-title">16. Дело о синей карточке<span class="badge badge-audio">аудио</span></div>
-          <div class="card-es">El caso de la tarjeta azul</div>
-          <div class="card-sub">Детективная история</div>
+          <div class="card-title">16. El caso de la tarjeta azul<span class="badge badge-audio i18n-audio">audio</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="67"></div>
         </div>
       </a>
       <a class="card" href="18. El viaje con audio.html">
         <span class="card-icon">✈️</span>
         <div class="card-body">
-          <div class="card-title">18. Путешествие<span class="badge badge-audio">аудио</span></div>
-          <div class="card-es">El viaje</div>
-          <div class="card-sub">El viaje — история с упражнениями</div>
+          <div class="card-title">18. El viaje<span class="badge badge-audio i18n-audio">audio</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="68"></div>
         </div>
       </a>
       <a class="card" href="19. En una cafeteria de Buenos Aires.html">
         <span class="card-icon">☕</span>
         <div class="card-body">
-          <div class="card-title">19. В кафе Буэнос-Айреса</div>
-          <div class="card-es">En una cafetería de Buenos Aires</div>
-          <div class="card-sub">Разговор в кафе</div>
+          <div class="card-title">19. En una cafetería de Buenos Aires</div>
+          <div class="card-sub i18n-sub" data-i18n-idx="69"></div>
         </div>
       </a>
       <a class="card" href="34. David y Ofelia con audio.html">
         <span class="card-icon">💑</span>
         <div class="card-body">
-          <div class="card-title">34. Давид и Офелия<span class="badge badge-audio">аудио</span></div>
-          <div class="card-es">David y Ofelia</div>
-          <div class="card-sub">История с упражнениями</div>
+          <div class="card-title">34. David y Ofelia<span class="badge badge-audio i18n-audio">audio</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="70"></div>
         </div>
       </a>
       <a class="card" href="36. Luna y Mora con audio.html">
         <span class="card-icon">🐾</span>
         <div class="card-body">
-          <div class="card-title">36. Луна и Мора<span class="badge badge-audio">аудио</span></div>
-          <div class="card-es">Luna y Mora</div>
-          <div class="card-sub">История с упражнениями + перевод на русский</div>
+          <div class="card-title">36. Luna y Mora<span class="badge badge-audio i18n-audio">audio</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="71"></div>
         </div>
       </a>
       <a class="card" href="38. El misterio de la caja con audio.html">
         <span class="card-icon">📦</span>
         <div class="card-body">
-          <div class="card-title">38. Тайна ящика<span class="badge badge-audio">аудио</span></div>
-          <div class="card-es">El misterio de la caja</div>
-          <div class="card-sub">Детективная история</div>
+          <div class="card-title">38. El misterio de la caja<span class="badge badge-audio i18n-audio">audio</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="72"></div>
         </div>
       </a>
       <a class="card" href="46. La Mudanza con 8 acentos.html">
         <span class="card-icon">📦</span>
         <div class="card-body">
-          <div class="card-title">46. Переезд (8 вариантов произношения)<span class="badge badge-audio">аудио</span></div>
-          <div class="card-es">La mudanza</div>
-          <div class="card-sub">La Mudanza — упражнение на произношение</div>
+          <div class="card-title">46. La mudanza<span class="badge badge-audio i18n-audio">audio</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="73"></div>
         </div>
       </a>
       <a class="card" href="46a. La mudanza con traduccion.html">
         <span class="card-icon">📦</span>
         <div class="card-body">
-          <div class="card-title">46a. Переезд (с переводом)</div>
-          <div class="card-es">La mudanza con traducción</div>
-          <div class="card-sub">Полный текст с переводом на русский</div>
+          <div class="card-title">46a. La mudanza con traducción</div>
+          <div class="card-sub i18n-sub" data-i18n-idx="74"></div>
         </div>
       </a>
       <a class="card" href="43. El ricachon tacano con audio.html">
         <span class="card-icon">💰</span>
         <div class="card-body">
-          <div class="card-title">43. Богатый скряга<span class="badge badge-audio">аудио</span></div>
-          <div class="card-es">El ricachón tacaño</div>
+          <div class="card-title">43. El ricachón tacaño<span class="badge badge-audio i18n-audio">audio</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="75"></div>
         </div>
       </a>
       <a class="card" href="49. Conversaciones sobre el pasado.html">
         <span class="card-icon">🗨️</span>
         <div class="card-body">
-          <div class="card-title">49. Разговоры о прошлом</div>
-          <div class="card-es">Conversaciones sobre el pasado</div>
-          <div class="card-sub">ELE A2+ · диалоги в прошедших временах</div>
+          <div class="card-title">49. Conversaciones sobre el pasado</div>
+          <div class="card-sub i18n-sub" data-i18n-idx="76"></div>
         </div>
       </a>
       <a class="card" href="57. Collar de jade.html">
         <span class="card-icon">📿</span>
         <div class="card-body">
-          <div class="card-title">57. Нефритовое ожерелье</div>
-          <div class="card-es">Collar de jade</div>
-          <div class="card-sub">Текст с упражнениями</div>
+          <div class="card-title">57. Collar de jade</div>
+          <div class="card-sub i18n-sub" data-i18n-idx="77"></div>
         </div>
       </a>
       <a class="card" href="58. Conversacion. La semana.html">
         <span class="card-icon">🗓️</span>
         <div class="card-body">
-          <div class="card-title">58. La semana<span class="badge badge-audio">аудио</span></div>
-          <div class="card-es">La semana</div>
-          <div class="card-sub">Pretérito Perfecto и глагольные перифразы — текст с аудио</div>
+          <div class="card-title">58. La semana<span class="badge badge-audio i18n-audio">audio</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="78"></div>
         </div>
       </a>
       <a class="card" href="102a. VIajas sin sorpresas. pag.130.mp3">
         <span class="card-icon">🎧</span>
         <div class="card-body">
           <div class="card-title">Viajas sin sorpresas<span class="badge badge-mp3">mp3</span></div>
-          <div class="card-es">Viajas sin sorpresas</div>
-          <div class="card-sub">Аудио — путешествия без сюрпризов (стр. 130)</div>
+          <div class="card-sub i18n-sub" data-i18n-idx="79"></div>
         </div>
       </a>
     </div>
@@ -1226,16 +1237,16 @@
   <div class="section">
     <div class="section-title">
       <span class="dot dot-green"></span>
-      Жизненные ситуации
+      <span class="sec-primary">Situaciones de la vida</span><span class="sec-secondary i18n-sec" data-i18n-sec="9"></span>
     </div>
     <div class="grid">
       <div class="card-with-extra">
         <a class="card" href="Situacion Alquiler de vivienda.html">
           <span class="card-icon">🏘️</span>
           <div class="card-body">
-            <div class="card-title">Аренда жилья</div>
-            <div class="card-es">Situación: alquiler de vivienda</div>
-          </div>
+          <div class="card-title">Situación: alquiler de vivienda</div>
+          <div class="card-sub i18n-sub" data-i18n-idx="80"></div>
+        </div>
         </a>
         <a class="card-pdf-link" href="Situacion Alquiler de vivienda.pdf">📄 PDF</a>
       </div>
@@ -1243,9 +1254,9 @@
         <a class="card" href="Situacion En el banco.html">
           <span class="card-icon">🏦</span>
           <div class="card-body">
-            <div class="card-title">В банке</div>
-            <div class="card-es">Situación: en el banco</div>
-          </div>
+          <div class="card-title">Situación: en el banco</div>
+          <div class="card-sub i18n-sub" data-i18n-idx="81"></div>
+        </div>
         </a>
         <a class="card-pdf-link" href="Situacion En el banco.pdf">📄 PDF</a>
       </div>
@@ -1253,18 +1264,17 @@
         <a class="card" href="Situacion En el medico.html">
           <span class="card-icon">🩺</span>
           <div class="card-body">
-            <div class="card-title">У врача</div>
-            <div class="card-es">Situación: en el médico</div>
-          </div>
+          <div class="card-title">Situación: en el médico</div>
+          <div class="card-sub i18n-sub" data-i18n-idx="82"></div>
+        </div>
         </a>
         <a class="card-pdf-link" href="Situaciones medicas.pdf">📄 PDF</a>
       </div>
       <a class="card" href="40. La gastronomia española. Verbo gustar.html">
         <span class="card-icon">🥘</span>
         <div class="card-body">
-          <div class="card-title">40. Гастрономия Испании<span class="badge badge-audio">аудио</span></div>
-          <div class="card-es">La gastronomía española</div>
-          <div class="card-sub">Блюда, напитки, gustar / encantar / fascinar</div>
+          <div class="card-title">40. La gastronomía española<span class="badge badge-audio i18n-audio">audio</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="83"></div>
         </div>
       </a>
     </div>
@@ -1274,103 +1284,91 @@
   <div class="section">
     <div class="section-title">
       <span class="dot dot-gold"></span>
-      Español en Marcha A1 – A2
+      <span class="sec-primary">Español en Marcha A1 – A2</span><span class="sec-secondary i18n-sec" data-i18n-sec="10"></span>
     </div>
     <div class="grid">
       <a class="card" href="Español en Marcha. Interiores. Ejercicios de las pags 48 y 49.html">
         <span class="card-icon">🛋️</span>
         <div class="card-body">
-          <div class="card-title">Интерьеры — стр. 48–49<span class="badge badge-audio">аудио</span></div>
-          <div class="card-es">Interiores</div>
-          <div class="card-sub">Español en Marcha A1-A2 · комнаты и мебель</div>
+          <div class="card-title">Interiores<span class="badge badge-audio i18n-audio">audio</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="84"></div>
         </div>
       </a>
       <a class="card" href="Español en Marcha. Interiores 2. Ejercicios de la pag 49.html">
         <span class="card-icon">🛏️</span>
         <div class="card-body">
-          <div class="card-title">Интерьеры 2 — стр. 49</div>
-          <div class="card-es">Vivienda e interiores</div>
-          <div class="card-sub">Español en Marcha A1-A2 · sala, comedor, dormitorio, cocina</div>
+          <div class="card-title">Vivienda e interiores</div>
+          <div class="card-sub i18n-sub" data-i18n-idx="85"></div>
         </div>
       </a>
       <a class="card" href="Español en Marcha. VIaje y patio. Espanol en marcha. Pags. 50-51.html">
         <span class="card-icon">🏡</span>
         <div class="card-body">
-          <div class="card-title">Дом мечты и патио — стр. 50–51<span class="badge badge-audio">аудио</span></div>
-          <div class="card-es">Viaje y patio</div>
-          <div class="card-sub">Español en Marcha A1-A2 · vivienda, reservas, servicios de hotel</div>
+          <div class="card-title">Viaje y patio<span class="badge badge-audio i18n-audio">audio</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="86"></div>
         </div>
       </a>
       <a class="card" href="Español en Marcha. Comunicacion y cultura. Pags. 52-53.html">
         <span class="card-icon">🗨️</span>
         <div class="card-body">
-          <div class="card-title">Коммуникация и культура — стр. 52–53<span class="badge badge-audio">аудио</span></div>
-          <div class="card-es">Comunicación y cultura</div>
-          <div class="card-sub">Español en Marcha A1-A2 · патио, побережье, города Испании</div>
+          <div class="card-title">Comunicación y cultura<span class="badge badge-audio i18n-audio">audio</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="87"></div>
         </div>
       </a>
       <a class="card" href="Español en Marcha. Comer fuera de casa. Ejercicios de la pag. 57.html">
         <span class="card-icon">🍽️</span>
         <div class="card-body">
-          <div class="card-title">Еда вне дома — стр. 57</div>
-          <div class="card-es">Comer fuera de casa</div>
-          <div class="card-sub">Español en Marcha A1-A2 · рестораны и кафе, лексика</div>
+          <div class="card-title">Comer fuera de casa</div>
+          <div class="card-sub i18n-sub" data-i18n-idx="88"></div>
         </div>
       </a>
       <a class="card" href="Español en Marcha. Actividades de tiempo libre. Pags. 59-60.html">
         <span class="card-icon">🎭</span>
         <div class="card-body">
-          <div class="card-title">Досуг и свободное время — стр. 59–60<span class="badge badge-audio">аудио</span></div>
-          <div class="card-es">Actividades de tiempo libre</div>
-          <div class="card-sub">Español en Marcha A1-A2 · свободное время, увлечения</div>
+          <div class="card-title">Actividades de tiempo libre<span class="badge badge-audio i18n-audio">audio</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="89"></div>
         </div>
       </a>
       <a class="card" href="Español en Marcha. Comunicación y cultura. Uso del imperativo afirmativo. Pags 61-62.html">
         <span class="card-icon">👆</span>
         <div class="card-body">
-          <div class="card-title">Императив: коммуникация и культура — стр. 61–62<span class="badge badge-audio">аудио</span></div>
-          <div class="card-es">Uso del imperativo afirmativo</div>
-          <div class="card-sub">Español en Marcha A1-A2 · употребление утвердительного императива</div>
+          <div class="card-title">Uso del imperativo afirmativo<span class="badge badge-audio i18n-audio">audio</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="90"></div>
         </div>
       </a>
       <a class="card" href="Español en Marcha. Comunicación y cultura. Comidas y costumbres. Pags 63-64.html">
         <span class="card-icon">🍲</span>
         <div class="card-body">
-          <div class="card-title">Еда и обычаи — стр. 63–64<span class="badge badge-audio">аудио</span></div>
-          <div class="card-es">Comidas y costumbres</div>
-          <div class="card-sub">Español en Marcha A1-A2 · Испания и Латинская Америка</div>
+          <div class="card-title">Comidas y costumbres<span class="badge badge-audio i18n-audio">audio</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="91"></div>
         </div>
       </a>
       <a class="card" href="Español en Marcha. Caracter, rutina, verbos ser y estar. Ejercicios de las pags 127-128.html">
         <span class="card-icon">🧠</span>
         <div class="card-body">
-          <div class="card-title">Характер, распорядок, ser/estar — стр. 127–128<span class="badge badge-audio">аудио</span></div>
-          <div class="card-es">Carácter, rutina, ser y estar</div>
-          <div class="card-sub">Español en Marcha A1-A2 · прилагательные характера, ser и estar</div>
+          <div class="card-title">Carácter, rutina, ser y estar<span class="badge badge-audio i18n-audio">audio</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="92"></div>
         </div>
       </a>
       <a class="card" href="Español en Marcha. Costumbres. Ejercicios de las pags 130-132.html">
         <span class="card-icon">🌐</span>
         <div class="card-body">
-          <div class="card-title">Обычаи — стр. 130–132<span class="badge badge-audio">аудио</span></div>
-          <div class="card-es">Costumbres</div>
-          <div class="card-sub">Español en Marcha A1-A2 · обязанность, запрет и разрешение</div>
+          <div class="card-title">Costumbres<span class="badge badge-audio i18n-audio">audio</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="93"></div>
         </div>
       </a>
       <a class="card" href="Español en Marcha. Un lugar para vivir. Ejercicios de las pags 136-137.html">
         <span class="card-icon">🏘️</span>
         <div class="card-body">
-          <div class="card-title">Место для жизни — стр. 136–137</div>
-          <div class="card-es">Un lugar para vivir</div>
-          <div class="card-sub">Español en Marcha A1-A2 · жильё, me gustaría + infinitivo</div>
+          <div class="card-title">Un lugar para vivir</div>
+          <div class="card-sub i18n-sub" data-i18n-idx="94"></div>
         </div>
       </a>
       <a class="card" href="Español en Marcha. Que has hecho el fin de semana. Libro del estudiante. Pag138. Cuderno pag. 88.html">
         <span class="card-icon">🗓️</span>
         <div class="card-body">
-          <div class="card-title">Что ты делал на выходных? — стр. 138<span class="badge badge-audio">аудио</span></div>
-          <div class="card-es">¿Qué has hecho el fin de semana?</div>
-          <div class="card-sub">Español en Marcha A1-A2 · Pretérito Perfecto</div>
+          <div class="card-title">¿Qué has hecho el fin de semana?<span class="badge badge-audio i18n-audio">audio</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="95"></div>
         </div>
       </a>
     </div>
@@ -1380,47 +1378,42 @@
   <div class="section">
     <div class="section-title">
       <span class="dot dot-pink"></span>
-      Muerte en Valencia — детектив с тестами
+      <span class="sec-primary">Muerte en Valencia — novela policíaca con tests</span><span class="sec-secondary i18n-sec" data-i18n-sec="11"></span>
     </div>
     <div class="grid">
       <a class="card" href="Muerte en Valencia interactiva con audio.html">
         <span class="card-icon">🕵️</span>
         <div class="card-body">
-          <div class="card-title">Смерть в Валенсии<span class="badge badge-audio">аудио</span></div>
-          <div class="card-es">Muerte en Valencia</div>
-          <div class="card-sub">Интерактивный детектив (части I–IV)</div>
+          <div class="card-title">Muerte en Valencia<span class="badge badge-audio i18n-audio">audio</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="96"></div>
         </div>
       </a>
       <a class="card" href="Tests Muerte en Valencia partes I y II.html">
         <span class="card-icon">📝</span>
         <div class="card-body">
-          <div class="card-title">Тест — части I и II</div>
-          <div class="card-es">Test: partes I y II</div>
-          <div class="card-sub">Comprensión lectora · partes I y II</div>
+          <div class="card-title">Test: partes I y II</div>
+          <div class="card-sub i18n-sub" data-i18n-idx="97"></div>
         </div>
       </a>
       <a class="card" href="Tests Muerte en Valencia. Partes I, II y III.html">
         <span class="card-icon">📝</span>
         <div class="card-body">
-          <div class="card-title">Тест — части I, II и III</div>
-          <div class="card-es">Test: partes I, II y III</div>
-          <div class="card-sub">Comprensión lectora · partes I, II y III</div>
+          <div class="card-title">Test: partes I, II y III</div>
+          <div class="card-sub i18n-sub" data-i18n-idx="98"></div>
         </div>
       </a>
       <a class="card" href="Tests Muerte en Valencia. Partes IV.html">
         <span class="card-icon">🔍</span>
         <div class="card-body">
-          <div class="card-title">Тест — часть IV. Кто убийца?</div>
-          <div class="card-es">Test: parte IV</div>
-          <div class="card-sub">Comprensión lectora · parte IV</div>
+          <div class="card-title">Test: parte IV</div>
+          <div class="card-sub i18n-sub" data-i18n-idx="99"></div>
         </div>
       </a>
       <a class="card" href="Repaso.html">
         <span class="card-icon">🔁</span>
         <div class="card-body">
-          <div class="card-title">Повторение ELE A1</div>
-          <div class="card-es">Ejercicios de repaso</div>
-          <div class="card-sub">Персонажи и лексика · артикли · Presente de Indicativo</div>
+          <div class="card-title">Ejercicios de repaso</div>
+          <div class="card-sub i18n-sub" data-i18n-idx="100"></div>
         </div>
       </a>
     </div>
@@ -1430,74 +1423,66 @@
   <div class="section">
     <div class="section-title">
       <span class="dot dot-orange"></span>
-      Caribe, amor y muerte — роман с аудио
+      <span class="sec-primary">Caribe, amor y muerte — novela con audio</span><span class="sec-secondary i18n-sec" data-i18n-sec="12"></span>
     </div>
     <div class="grid">
       <div class="card-with-extra">
         <a class="card" href="Castro Monica. Caribe, amor y muerte.mp3">
           <span class="card-icon">🎧</span>
           <div class="card-body">
-            <div class="card-title">Карибы, любовь и смерть — полная аудиокнига<span class="badge badge-mp3">mp3</span></div>
-            <div class="card-es">Caribe, amor y muerte — Mónica Castro</div>
-            <div class="card-sub">Аудиокнига целиком, все главы одним файлом</div>
-          </div>
+          <div class="card-title">Caribe, amor y muerte — Mónica Castro<span class="badge badge-mp3">mp3</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="101"></div>
+        </div>
         </a>
         <a class="card-pdf-link" href="Castro Mónica. Caribe, amor y muerte (2).pdf">📄 PDF</a>
       </div>
       <a class="card" href="Caribe. Amor y muerte. Capitulos 1-3.mp3">
         <span class="card-icon">🎧</span>
         <div class="card-body">
-          <div class="card-title">Карибы, любовь и смерть — главы 1–3<span class="badge badge-mp3">mp3</span></div>
-          <div class="card-es">Caribe, amor y muerte — capítulos 1–3</div>
-          <div class="card-sub">Аудиокнига — первые три главы</div>
+          <div class="card-title">Caribe, amor y muerte — capítulos 1–3<span class="badge badge-mp3">mp3</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="102"></div>
         </div>
       </a>
       <a class="card" href="Capiulo 4. Caribe. Amor y muerte.mp3">
         <span class="card-icon">🎧</span>
         <div class="card-body">
-          <div class="card-title">Карибы, любовь и смерть — глава 4<span class="badge badge-mp3">mp3</span></div>
-          <div class="card-es">Caribe, amor y muerte — capítulo 4</div>
-          <div class="card-sub">Аудиокнига — глава 4</div>
+          <div class="card-title">Caribe, amor y muerte — capítulo 4<span class="badge badge-mp3">mp3</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="103"></div>
         </div>
       </a>
       <a class="card" href="Capiulo 5. Caribe. Amor y muerte.mp3">
         <span class="card-icon">🎧</span>
         <div class="card-body">
-          <div class="card-title">Карибы, любовь и смерть — глава 5<span class="badge badge-mp3">mp3</span></div>
-          <div class="card-es">Caribe, amor y muerte — capítulo 5</div>
-          <div class="card-sub">Аудиокнига — глава 5</div>
+          <div class="card-title">Caribe, amor y muerte — capítulo 5<span class="badge badge-mp3">mp3</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="104"></div>
         </div>
       </a>
       <a class="card" href="Capitulos 6-7. Caribe. Amor y muerte.mp3">
         <span class="card-icon">🎧</span>
         <div class="card-body">
-          <div class="card-title">Карибы, любовь и смерть — главы 6–7<span class="badge badge-mp3">mp3</span></div>
-          <div class="card-es">Caribe, amor y muerte — capítulos 6–7</div>
-          <div class="card-sub">Аудиокнига — главы 6–7</div>
+          <div class="card-title">Caribe, amor y muerte — capítulos 6–7<span class="badge badge-mp3">mp3</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="105"></div>
         </div>
       </a>
       <a class="card" href="Capitulos 8-11. Caribe. Amor y muerte.mp3">
         <span class="card-icon">🎧</span>
         <div class="card-body">
-          <div class="card-title">Карибы, любовь и смерть — главы 8–11<span class="badge badge-mp3">mp3</span></div>
-          <div class="card-es">Caribe, amor y muerte — capítulos 8–11</div>
-          <div class="card-sub">Аудиокнига — главы 8–11</div>
+          <div class="card-title">Caribe, amor y muerte — capítulos 8–11<span class="badge badge-mp3">mp3</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="106"></div>
         </div>
       </a>
       <a class="card" href="Caribe, amor y muerte. Tareas capitulos 3 y 4.html">
         <span class="card-icon">🏝️</span>
         <div class="card-body">
-          <div class="card-title">Задания — главы 3 и 4<span class="badge badge-audio">аудио</span></div>
-          <div class="card-es">Tareas capítulos 3 y 4</div>
-          <div class="card-sub">Верно/неверно, антонимы, порядок событий, лексика</div>
+          <div class="card-title">Tareas capítulos 3 y 4<span class="badge badge-audio i18n-audio">audio</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="107"></div>
         </div>
       </a>
       <a class="card" href="Caribe, amor y muerte. Tareas capitulos 5 y 6.html">
         <span class="card-icon">🏝️</span>
         <div class="card-body">
-          <div class="card-title">Задания — главы 5 и 6<span class="badge badge-audio">аудио</span></div>
-          <div class="card-es">Tareas capítulos 5 y 6</div>
-          <div class="card-sub">Верно/неверно, антонимы, порядок событий, лексика</div>
+          <div class="card-title">Tareas capítulos 5 y 6<span class="badge badge-audio i18n-audio">audio</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="108"></div>
         </div>
       </a>
     </div>
@@ -1507,52 +1492,48 @@
   <div class="section">
     <div class="section-title">
       <span class="dot dot-violet"></span>
-      Литература и культура
+      <span class="sec-primary">Literatura y cultura</span><span class="sec-secondary i18n-sec" data-i18n-sec="13"></span>
     </div>
     <div class="grid">
       <a class="card" href="54. Isaac Asimov. Cuanto se divertian.html">
         <span class="card-icon">🤖</span>
         <div class="card-body">
-          <div class="card-title">54. Азимов — «Как им было весело»</div>
-          <div class="card-es">Cuánto se divertían — Isaac Asimov</div>
-          <div class="card-sub">Рассказ с упражнениями</div>
+          <div class="card-title">54. Cuánto se divertían — Isaac Asimov</div>
+          <div class="card-sub i18n-sub" data-i18n-idx="109"></div>
         </div>
       </a>
       <a class="card" href="60. Gabriela Mistral. Caricia.html">
         <span class="card-icon">🌹</span>
         <div class="card-body">
-          <div class="card-title">60. Габриэла Мистраль — «Ласка»<span class="badge badge-audio">аудио</span></div>
-          <div class="card-es">Caricia — Gabriela Mistral</div>
-          <div class="card-sub">Стихотворение с упражнениями</div>
+          <div class="card-title">60. Caricia — Gabriela Mistral<span class="badge badge-audio i18n-audio">audio</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="110"></div>
         </div>
       </a>
       <a class="card" href="61. Versos para aprender con audio.html">
         <span class="card-icon">📜</span>
         <div class="card-body">
-          <div class="card-title">61. Стихи для обучения<span class="badge badge-audio">аудио</span></div>
-          <div class="card-es">Versos para aprender</div>
-          <div class="card-sub">Интерактивные стихотворения</div>
+          <div class="card-title">61. Versos para aprender<span class="badge badge-audio i18n-audio">audio</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="111"></div>
         </div>
       </a>
       <a class="card" href="51. Dichos y proverbios con audio.html">
         <span class="card-icon">💡</span>
         <div class="card-body">
-          <div class="card-title">51. Пословицы и поговорки<span class="badge badge-audio">аудио</span></div>
-          <div class="card-es">Dichos y proverbios</div>
+          <div class="card-title">51. Dichos y proverbios<span class="badge badge-audio i18n-audio">audio</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="112"></div>
         </div>
       </a>
       <a class="card" href="Dichos.pdf">
         <span class="card-icon">📄</span>
         <div class="card-body">
-          <div class="card-title">Пословицы (список)<span class="badge badge-pdf">PDF</span></div>
-          <div class="card-es">Dichos</div>
-          <div class="card-sub">Справочный материал</div>
+          <div class="card-title">Dichos<span class="badge badge-pdf">PDF</span></div>
+          <div class="card-sub i18n-sub" data-i18n-idx="113"></div>
         </div>
       </a>
     </div>
   </div>
 
-  <div class="no-results" id="noResults">Ничего не найдено. Попробуйте другой запрос.</div>
+  <div class="no-results" id="noResults"></div>
 
 </div>
 
@@ -1623,7 +1604,7 @@
 
       noResults.classList.toggle('show', visibleCount === 0);
       countEl.textContent = visibleCount > 0
-        ? 'Найдено: ' + visibleCount
+        ? (window.__I18N_FOUND__||'Found:') + ' ' + visibleCount
         : '';
     }
 
@@ -1687,6 +1668,99 @@
 
     start();
   })();
+</script>
+
+<script>
+window.__I18N_DATA__ = {"ui": {"es": {"lang_name": "Español", "page_desc": "Ejercicios interactivos para estudiantes de español — del alfabeto al subjuntivo", "search_ph": "Buscar ejercicios…", "search_clear": "Borrar", "search_found": "Encontrados:", "no_results": "No se ha encontrado nada. Prueba con otra búsqueda.", "lang_label": "Idioma de la página", "disclaimer": "Estos materiales se crearon originalmente para estudiantes de habla rusa. La interfaz está en español, pero muchos ejercicios, explicaciones y traducciones dentro de ellos siguen en ruso. Puedes cambiar el idioma de la página más abajo ↓", "back": "← Al inicio"}, "en": {"lang_name": "English", "page_desc": "Interactive exercises for learners of Spanish — from the alphabet to the subjunctive", "search_ph": "Search exercises…", "search_clear": "Clear", "search_found": "Found:", "no_results": "Nothing found. Try a different search.", "lang_label": "Page language", "disclaimer": "These materials were originally created for Russian-speaking learners. The interface switches language, but many exercises, explanations and translations inside them stay in Russian. You can change the page language below ↓", "back": "← Home"}, "ru": {"lang_name": "Русский", "page_desc": "Интерактивные упражнения для изучающих испанский язык — от алфавита до сослагательного наклонения", "search_ph": "Поиск по упражнениям…", "search_clear": "Очистить", "search_found": "Найдено:", "no_results": "Ничего не найдено. Попробуйте другой запрос.", "lang_label": "Язык страницы", "disclaimer": "", "back": "← На главную"}, "uk": {"lang_name": "Українська", "page_desc": "Інтерактивні вправи для тих, хто вивчає іспанську — від абетки до умовного способу", "search_ph": "Пошук за вправами…", "search_clear": "Очистити", "search_found": "Знайдено:", "no_results": "Нічого не знайдено. Спробуйте інший запит.", "lang_label": "Мова сторінки", "disclaimer": "Ці матеріали спочатку створювалися для російськомовних користувачів. Інтерфейс перемикає мову, але багато вправ, пояснень і перекладів усередині них залишаються російською. Мову сторінки можна змінити нижче ↓", "back": "← На головну"}}, "cards": {"113": {"t": {"en": "Sayings (list)", "ru": "Пословицы (список)", "uk": "Прислів'я (список)"}, "s": {"en": "Reference material", "ru": "Справочный материал", "uk": "Довідковий матеріал"}}, "112": {"t": {"en": "Sayings and proverbs", "ru": "Пословицы и поговорки", "uk": "Прислів'я та приказки"}, "s": {"en": "", "ru": "", "uk": ""}}, "111": {"t": {"en": "Verses to learn", "ru": "Стихи для обучения", "uk": "Вірші для навчання"}, "s": {"en": "Interactive poems", "ru": "Интерактивные стихотворения", "uk": "Інтерактивні вірші"}}, "110": {"t": {"en": "Gabriela Mistral — “Caress”", "ru": "Габриэла Мистраль — «Ласка»", "uk": "Габрієла Містраль — «Пестощі»"}, "s": {"en": "A poem with exercises", "ru": "Стихотворение с упражнениями", "uk": "Вірш з вправами"}}, "109": {"t": {"en": "Asimov — “The Fun They Had”", "ru": "Азимов — «Как им было весело»", "uk": "Азімов — «Як їм було весело»"}, "s": {"en": "A short story with exercises", "ru": "Рассказ с упражнениями", "uk": "Оповідання з вправами"}}, "108": {"t": {"en": "Tasks chapters 5 and 6", "ru": "Задания — главы 5 и 6", "uk": "Завдання — розділи 5 і 6"}, "s": {"en": "True/false, antonyms, sequence of events, vocabulary", "ru": "Верно/неверно, антонимы, порядок событий, лексика", "uk": "Правда/неправда, антоніми, порядок подій, лексика"}}, "107": {"t": {"en": "Tasks chapters 3 and 4", "ru": "Задания — главы 3 и 4", "uk": "Завдання — розділи 3 і 4"}, "s": {"en": "True/false, antonyms, sequence of events, vocabulary", "ru": "Верно/неверно, антонимы, порядок событий, лексика", "uk": "Правда/неправда, антоніми, порядок подій, лексика"}}, "106": {"t": {"en": "Caribbean, love and death — chapters 8–11", "ru": "Карибы, любовь и смерть — главы 8–11", "uk": "Кариби, любов і смерть — розділи 8–11"}, "s": {"en": "Audiobook — chapters 8–11", "ru": "Аудиокнига — главы 8–11", "uk": "Аудіокнига — розділи 8–11"}}, "105": {"t": {"en": "Caribbean, love and death — chapters 6–7", "ru": "Карибы, любовь и смерть — главы 6–7", "uk": "Кариби, любов і смерть — розділи 6–7"}, "s": {"en": "Audiobook — chapters 6–7", "ru": "Аудиокнига — главы 6–7", "uk": "Аудіокнига — розділи 6–7"}}, "104": {"t": {"en": "Caribbean, love and death — chapter 5", "ru": "Карибы, любовь и смерть — глава 5", "uk": "Кариби, любов і смерть — розділ 5"}, "s": {"en": "Audiobook — chapter 5", "ru": "Аудиокнига — глава 5", "uk": "Аудіокнига — розділ 5"}}, "103": {"t": {"en": "Caribbean, love and death — chapter 4", "ru": "Карибы, любовь и смерть — глава 4", "uk": "Кариби, любов і смерть — розділ 4"}, "s": {"en": "Audiobook — chapter 4", "ru": "Аудиокнига — глава 4", "uk": "Аудіокнига — розділ 4"}}, "102": {"t": {"en": "Caribbean, love and death — chapters 1–3", "ru": "Карибы, любовь и смерть — главы 1–3", "uk": "Кариби, любов і смерть — розділи 1–3"}, "s": {"en": "Audiobook — first three chapters", "ru": "Аудиокнига — первые три главы", "uk": "Аудіокнига — перші три розділи"}}, "101": {"t": {"en": "Caribbean, love and death — full audiobook", "ru": "Карибы, любовь и смерть — полная аудиокнига", "uk": "Кариби, любов і смерть — повна аудіокнига"}, "s": {"en": "The whole audiobook, all chapters in one file", "ru": "Аудиокнига целиком, все главы одним файлом", "uk": "Аудіокнига цілком, усі розділи одним файлом"}}, "100": {"t": {"en": "Review ELE A1", "ru": "Повторение ELE A1", "uk": "Повторення ELE A1"}, "s": {"en": "Characters and vocabulary · articles · Present tense", "ru": "Персонажи и лексика · артикли · Presente de Indicativo", "uk": "Персонажі та лексика · артиклі · Presente de Indicativo"}}, "99": {"t": {"en": "Test: part IV. Who is the killer?", "ru": "Тест — часть IV. Кто убийца?", "uk": "Тест — частина IV. Хто вбивця?"}, "s": {"en": "Reading comprehension · part IV", "ru": "Comprensión lectora · parte IV", "uk": "Comprensión lectora · parte IV"}}, "98": {"t": {"en": "Test: parts I, II and III", "ru": "Тест — части I, II и III", "uk": "Тест — частини I, II і III"}, "s": {"en": "Reading comprehension · parts I, II and III", "ru": "Comprensión lectora · partes I, II y III", "uk": "Comprensión lectora · partes I, II y III"}}, "97": {"t": {"en": "Test: parts I and II", "ru": "Тест — части I и II", "uk": "Тест — частини I і II"}, "s": {"en": "Reading comprehension · parts I and II", "ru": "Comprensión lectora · partes I y II", "uk": "Comprensión lectora · partes I y II"}}, "96": {"t": {"en": "Death in Valencia", "ru": "Смерть в Валенсии", "uk": "Смерть у Валенсії"}, "s": {"en": "Interactive detective story (parts I–IV)", "ru": "Интерактивный детектив (части I–IV)", "uk": "Інтерактивний детектив (частини I–IV)"}}, "95": {"t": {"en": "What did you do at the weekend? — p. 138", "ru": "Что ты делал на выходных? — стр. 138", "uk": "Що ти робив на вихідних? — стор. 138"}, "s": {"en": "Español en Marcha A1-A2 · Present Perfect", "ru": "Español en Marcha A1-A2 · Pretérito Perfecto", "uk": "Español en Marcha A1-A2 · Pretérito Perfecto"}}, "94": {"t": {"en": "A place to live — pp. 136–137", "ru": "Место для жизни — стр. 136–137", "uk": "Місце для життя — стор. 136–137"}, "s": {"en": "Español en Marcha A1-A2 · housing, me gustaría + infinitive", "ru": "Español en Marcha A1-A2 · жильё, me gustaría + infinitivo", "uk": "Español en Marcha A1-A2 · житло, me gustaría + infinitivo"}}, "93": {"t": {"en": "Customs — pp. 130–132", "ru": "Обычаи — стр. 130–132", "uk": "Звичаї — стор. 130–132"}, "s": {"en": "Español en Marcha A1-A2 · obligation, prohibition and permission", "ru": "Español en Marcha A1-A2 · обязанность, запрет и разрешение", "uk": "Español en Marcha A1-A2 · обов'язок, заборона та дозвіл"}}, "92": {"t": {"en": "Character, routine, ser/estar — pp. 127–128", "ru": "Характер, распорядок, ser/estar — стр. 127–128", "uk": "Характер, розпорядок, ser/estar — стор. 127–128"}, "s": {"en": "Español en Marcha A1-A2 · character adjectives, ser and estar", "ru": "Español en Marcha A1-A2 · прилагательные характера, ser и estar", "uk": "Español en Marcha A1-A2 · прикметники характеру, ser та estar"}}, "91": {"t": {"en": "Food and customs — pp. 63–64", "ru": "Еда и обычаи — стр. 63–64", "uk": "Їжа та звичаї — стор. 63–64"}, "s": {"en": "Español en Marcha A1-A2 · Spain and Latin America", "ru": "Español en Marcha A1-A2 · Испания и Латинская Америка", "uk": "Español en Marcha A1-A2 · Іспанія та Латинська Америка"}}, "90": {"t": {"en": "The imperative: communication and culture — pp. 61–62", "ru": "Императив: коммуникация и культура — стр. 61–62", "uk": "Імператив: комунікація та культура — стор. 61–62"}, "s": {"en": "Español en Marcha A1-A2 · use of the affirmative imperative", "ru": "Español en Marcha A1-A2 · употребление утвердительного императива", "uk": "Español en Marcha A1-A2 · вживання стверджувального імператива"}}, "89": {"t": {"en": "Leisure and free time — pp. 59–60", "ru": "Досуг и свободное время — стр. 59–60", "uk": "Дозвілля та вільний час — стор. 59–60"}, "s": {"en": "Español en Marcha A1-A2 · free time, hobbies", "ru": "Español en Marcha A1-A2 · свободное время, увлечения", "uk": "Español en Marcha A1-A2 · вільний час, захоплення"}}, "88": {"t": {"en": "Eating out — p. 57", "ru": "Еда вне дома — стр. 57", "uk": "Їжа поза домом — стор. 57"}, "s": {"en": "Español en Marcha A1-A2 · restaurants and cafés, vocabulary", "ru": "Español en Marcha A1-A2 · рестораны и кафе, лексика", "uk": "Español en Marcha A1-A2 · ресторани та кафе, лексика"}}, "87": {"t": {"en": "Communication and culture — pp. 52–53", "ru": "Коммуникация и культура — стр. 52–53", "uk": "Комунікація та культура — стор. 52–53"}, "s": {"en": "Español en Marcha A1-A2 · patios, the coast, Spanish cities", "ru": "Español en Marcha A1-A2 · патио, побережье, города Испании", "uk": "Español en Marcha A1-A2 · патіо, узбережжя, міста Іспанії"}}, "86": {"t": {"en": "Dream home and patio — pp. 50–51", "ru": "Дом мечты и патио — стр. 50–51", "uk": "Дім мрії та патіо — стор. 50–51"}, "s": {"en": "Español en Marcha A1-A2 · housing, reservations, hotel services", "ru": "Español en Marcha A1-A2 · vivienda, reservas, servicios de hotel", "uk": "Español en Marcha A1-A2 · житло, бронювання, послуги готелю"}}, "85": {"t": {"en": "Interiors 2 — p. 49", "ru": "Интерьеры 2 — стр. 49", "uk": "Інтер'єри 2 — стор. 49"}, "s": {"en": "Español en Marcha A1-A2 · sala, comedor, dormitorio, cocina", "ru": "Español en Marcha A1-A2 · sala, comedor, dormitorio, cocina", "uk": "Español en Marcha A1-A2 · sala, comedor, dormitorio, cocina"}}, "84": {"t": {"en": "Interiors — pp. 48–49", "ru": "Интерьеры — стр. 48–49", "uk": "Інтер'єри — стор. 48–49"}, "s": {"en": "Español en Marcha A1-A2 · rooms and furniture", "ru": "Español en Marcha A1-A2 · комнаты и мебель", "uk": "Español en Marcha A1-A2 · кімнати та меблі"}}, "83": {"t": {"en": "Spanish gastronomy", "ru": "Гастрономия Испании", "uk": "Гастрономія Іспанії"}, "s": {"en": "Dishes, drinks, gustar / encantar / fascinar", "ru": "Блюда, напитки, gustar / encantar / fascinar", "uk": "Страви, напої, gustar / encantar / fascinar"}}, "82": {"t": {"en": "Situation: at the doctor's", "ru": "У врача", "uk": "У лікаря"}, "s": {"en": "", "ru": "", "uk": ""}}, "81": {"t": {"en": "Situation: at the bank", "ru": "В банке", "uk": "У банку"}, "s": {"en": "", "ru": "", "uk": ""}}, "80": {"t": {"en": "Situation: renting a home", "ru": "Аренда жилья", "uk": "Оренда житла"}, "s": {"en": "", "ru": "", "uk": ""}}, "79": {"t": {"en": "Travelling without surprises", "ru": "Viajas sin sorpresas", "uk": "Viajas sin sorpresas"}, "s": {"en": "Audio — travelling without surprises (p. 130)", "ru": "Аудио — путешествия без сюрпризов (стр. 130)", "uk": "Аудіо — подорож без сюрпризів (стор. 130)"}}, "78": {"t": {"en": "The week", "ru": "La semana", "uk": "La semana"}, "s": {"en": "Present Perfect and verbal periphrases — text with audio", "ru": "Pretérito Perfecto и глагольные перифразы — текст с аудио", "uk": "Pretérito Perfecto та дієслівні перифрази — текст з аудіо"}}, "77": {"t": {"en": "The jade necklace", "ru": "Нефритовое ожерелье", "uk": "Нефритове намисто"}, "s": {"en": "A text with exercises", "ru": "Текст с упражнениями", "uk": "Текст з вправами"}}, "76": {"t": {"en": "Conversations about the past", "ru": "Разговоры о прошлом", "uk": "Розмови про минуле"}, "s": {"en": "ELE A2+ · dialogues in past tenses", "ru": "ELE A2+ · диалоги в прошедших временах", "uk": "ELE A2+ · діалоги в минулих часах"}}, "75": {"t": {"en": "The stingy rich man", "ru": "Богатый скряга", "uk": "Багатий скнара"}, "s": {"en": "", "ru": "", "uk": ""}}, "74": {"t": {"en": "The move (with translation)", "ru": "Переезд (с переводом)", "uk": "Переїзд (з перекладом)"}, "s": {"en": "Full text with Russian translation", "ru": "Полный текст с переводом на русский", "uk": "Повний текст з перекладом російською"}}, "73": {"t": {"en": "The move (8 pronunciations)", "ru": "Переезд (8 вариантов произношения)", "uk": "Переїзд (8 варіантів вимови)"}, "s": {"en": "La Mudanza — a pronunciation exercise", "ru": "La Mudanza — упражнение на произношение", "uk": "La Mudanza — вправа на вимову"}}, "72": {"t": {"en": "The mystery of the box", "ru": "Тайна ящика", "uk": "Таємниця скриньки"}, "s": {"en": "A detective story", "ru": "Детективная история", "uk": "Детективна історія"}}, "71": {"t": {"en": "Luna and Mora", "ru": "Луна и Мора", "uk": "Луна та Мора"}, "s": {"en": "A story with exercises + Russian translation", "ru": "История с упражнениями + перевод на русский", "uk": "Історія з вправами + переклад російською"}}, "70": {"t": {"en": "David and Ofelia", "ru": "Давид и Офелия", "uk": "Давід та Офелія"}, "s": {"en": "A story with exercises", "ru": "История с упражнениями", "uk": "Історія з вправами"}}, "69": {"t": {"en": "In a Buenos Aires café", "ru": "В кафе Буэнос-Айреса", "uk": "У кафе Буенос-Айреса"}, "s": {"en": "A conversation at a café", "ru": "Разговор в кафе", "uk": "Розмова в кафе"}}, "68": {"t": {"en": "The journey", "ru": "Путешествие", "uk": "Подорож"}, "s": {"en": "El viaje — a story with exercises", "ru": "El viaje — история с упражнениями", "uk": "El viaje — історія з вправами"}}, "67": {"t": {"en": "The case of the blue card", "ru": "Дело о синей карточке", "uk": "Справа про синю картку"}, "s": {"en": "A detective story", "ru": "Детективная история", "uk": "Детективна історія"}}, "66": {"t": {"en": "Geography of Spain", "ru": "География Испании", "uk": "Географія Іспанії"}, "s": {"en": "Regions, rivers, mountains", "ru": "Регионы, реки, горы", "uk": "Регіони, річки, гори"}}, "65": {"t": {"en": "Geography of Argentina", "ru": "География Аргентины", "uk": "Географія Аргентини"}, "s": {"en": "Provinces, rivers, mountains — level A1", "ru": "Провинции, реки, горы — уровень A1", "uk": "Провінції, річки, гори — рівень A1"}}, "64": {"t": {"en": "History of Spain", "ru": "История Испании", "uk": "Історія Іспанії"}, "s": {"en": "A brief history of Spain up to 1975", "ru": "Краткая история Испании до 1975 года", "uk": "Коротка історія Іспанії до 1975 року"}}, "63": {"t": {"en": "Spain and Latin America", "ru": "Испания и Латинская Америка", "uk": "Іспанія та Латинська Америка"}, "s": {"en": "Countries, capitals, culture", "ru": "Страны, столицы, культура", "uk": "Країни, столиці, культура"}}, "62": {"t": {"en": "Geographical names", "ru": "Географические названия", "uk": "Географічні назви"}, "s": {"en": "Spanish place names", "ru": "Испанские топонимы", "uk": "Іспанські топоніми"}}, "61": {"t": {"en": "Buenos Aires interactive", "ru": "Буэнос-Айрес (интерактивно)", "uk": "Буенос-Айрес (інтерактивно)"}, "s": {"en": "City, history, description", "ru": "Город, история, описание", "uk": "Місто, історія, опис"}}, "60": {"t": {"en": "Communicative tasks", "ru": "Устные коммуникативные задания", "uk": "Усні комунікативні завдання"}, "s": {"en": "Pair work — listening and talking about yourself", "ru": "Работа в парах — аудирование и рассказ о себе", "uk": "Робота в парах — аудіювання та розповідь про себе"}}, "59": {"t": {"en": "Do you want to be a millionaire?", "ru": "Хочешь стать миллионером?", "uk": "Хочеш стати мільйонером?"}, "s": {"en": "Quiz — review of question words", "ru": "Викторина — повторение вопросительных слов", "uk": "Вікторина — повторення питальних слів"}}, "58": {"t": {"en": "Communicative exercises A0–A1", "ru": "Коммуникативные упражнения A0–A1", "uk": "Комунікативні вправи A0–A1"}, "s": {"en": "Final review with audio", "ru": "Итоговое повторение с аудио", "uk": "Підсумкове повторення з аудіо"}}, "57": {"t": {"en": "General A1 review — part B", "ru": "Общее повторение A1 — часть B", "uk": "Загальне повторення A1 — частина B"}, "s": {"en": "Continuation of the A1 test", "ru": "Продолжение теста A1", "uk": "Продовження тесту A1"}}, "56": {"t": {"en": "General A1 review — part A", "ru": "Общее повторение A1 — часть A", "uk": "Загальне повторення A1 — частина A"}, "s": {"en": "Comprehensive A1-level test", "ru": "Комплексный тест уровня A1", "uk": "Комплексний тест рівня A1"}}, "55": {"t": {"en": "Self-assessment Topic 3 — Work", "ru": "Самопроверка. Тема 3 — Работа", "uk": "Самоперевірка. Тема 3 — Робота"}, "s": {"en": "Professions, verbs and schedule", "ru": "Профессии, глаголы и расписание", "uk": "Професії, дієслова та розклад"}}, "54": {"t": {"en": "Prefixes", "ru": "Приставки", "uk": "Префікси"}, "s": {"en": "Word formation — prefixes", "ru": "Словообразование — prefijos", "uk": "Словотвір — prefijos"}}, "53": {"t": {"en": "Pairs of nouns", "ru": "Пары существительных", "uk": "Пари іменників"}, "s": {"en": "Paronyms and similar words", "ru": "Паронимы и похожие слова", "uk": "Пароніми та схожі слова"}}, "52": {"t": {"en": "A journey through the tenses (oral)", "ru": "Путешествие по временам (устно)", "uk": "Подорож часами (усно)"}, "s": {"en": "Oral review: presente, perfecto, indefinido, imperfecto", "ru": "Устное повторение: presente, perfecto, indefinido, imperfecto", "uk": "Усне повторення: presente, perfecto, indefinido, imperfecto"}}, "51": {"t": {"en": "Present Subjunctive", "ru": "Presente de Subjuntivo", "uk": "Presente de Subjuntivo"}, "s": {"en": "Present tense of the subjunctive mood", "ru": "Настоящее сослагательного наклонения", "uk": "Теперішній час умовного способу"}}, "50": {"t": {"en": "Imperfect (Indicative)", "ru": "Pretérito Imperfecto", "uk": "Pretérito Imperfecto"}, "s": {"en": "Past imperfective", "ru": "Прошедшее незавершённое", "uk": "Минулий недоконаний"}}, "49": {"t": {"en": "Review of verb tenses", "ru": "Повторение глагольных времён", "uk": "Повторення дієслівних часів"}, "s": {"en": "Comprehensive review", "ru": "Комплексное повторение", "uk": "Комплексне повторення"}}, "48": {"t": {"en": "The verb tratar", "ru": "Глагол «tratar»", "uk": "Дієслово «tratar»"}, "s": {"en": "Meanings and usage", "ru": "Значения и употребление", "uk": "Значення та вживання"}}, "47": {"t": {"en": "Review of Indicative tenses", "ru": "Повторение времён Indicativo", "uk": "Повторення часів Indicativo"}, "s": {"en": "All tenses of the indicative mood", "ru": "Все времена изъявительного наклонения", "uk": "Усі часи дійсного способу"}}, "46": {"t": {"en": "Perfect, Preterite and Pluperfect", "ru": "Perfecto, Indefinido, Pluscuamperfecto", "uk": "Perfecto, Indefinido, Pluscuamperfecto"}, "s": {"en": "Comparison of the three past tenses", "ru": "Сравнение трёх прошедших времён", "uk": "Порівняння трьох минулих часів"}}, "45": {"t": {"en": "Past Perfect (Indicative)", "ru": "Pluscuamperfecto", "uk": "Pluscuamperfecto"}, "s": {"en": "Pluperfect tense", "ru": "Давнопрошедшее время", "uk": "Давноминулий час"}}, "44": {"t": {"en": "Preterite (Indicative)", "ru": "Pretérito Indefinido", "uk": "Pretérito Indefinido"}, "s": {"en": "Simple past tense", "ru": "Простое прошедшее время", "uk": "Простий минулий час"}}, "43": {"t": {"en": "Present Perfect (Indicative)", "ru": "Pretérito Perfecto", "uk": "Pretérito Perfecto"}, "s": {"en": "Present perfect tense", "ru": "Настоящее совершённое время", "uk": "Теперішній доконаний час"}}, "42": {"t": {"en": "Articles — interactive exercises", "ru": "Артикли (интерактивно)", "uk": "Артиклі (інтерактивно)"}, "s": {"en": "Articles in Spanish for ELE A1", "ru": "Artículos en español para ELE A1", "uk": "Artículos en español для ELE A1"}}, "41": {"t": {"en": "Imperative exercise", "ru": "Упражнение — Imperativo", "uk": "Вправа — Imperativo"}, "s": {"en": "Imperative mood practice", "ru": "Практика повелительного наклонения", "uk": "Практика наказового способу"}}, "40": {"t": {"en": "Affirmative imperative", "ru": "Imperativo afirmativo", "uk": "Imperativo afirmativo"}, "s": {"en": "Affirmative imperative — rule and 8 special forms", "ru": "Утвердительный императив — правило и 8 особых форм", "uk": "Стверджувальний імператив — правило та 8 особливих форм"}}, "39": {"t": {"en": "Affirmative imperative with vos", "ru": "Imperativo afirmativo con vos", "uk": "Imperativo afirmativo con vos"}, "s": {"en": "Affirmative imperative with the “vos” form", "ru": "Утвердительный императив с формой «vos»", "uk": "Стверджувальний імператив з формою «vos»"}}, "38": {"t": {"en": "Affirmative imperative. Part 2", "ru": "Imperativo afirmativo — часть 2", "uk": "Imperativo afirmativo — частина 2"}, "s": {"en": "More exercises on the affirmative imperative", "ru": "Продолжение упражнений на утвердительный императив", "uk": "Продовження вправ на стверджувальний імператив"}}, "37": {"t": {"en": "Past participle and Present Perfect", "ru": "Participio Pasado y Pretérito Perfecto", "uk": "Participio Pasado та Pretérito Perfecto"}, "s": {"en": "Past participle and present perfect tense", "ru": "Причастие прошедшего времени и настоящее совершённое время", "uk": "Дієприкметник минулого часу та теперішній доконаний час"}}, "36": {"t": {"en": "Verbal periphrases", "ru": "Глагольные перифразы", "uk": "Дієслівні перифрази"}, "s": {"en": "", "ru": "", "uk": ""}}, "35": {"t": {"en": "Personal pronouns as DO and IO. Part 2", "ru": "Личные местоимения (CD и CI) — часть 2", "uk": "Особові займенники (CD та CI) — частина 2"}, "s": {"en": "Pronouns in the accusative and dative", "ru": "Местоимения в винительном и дательном падеже", "uk": "Займенники у знахідному та давальному відмінку"}}, "34": {"t": {"en": "Personal pronouns as DO and IO", "ru": "Личные местоимения (CD и CI)", "uk": "Особові займенники (CD та CI)"}, "s": {"en": "Direct and indirect object — part 1", "ru": "Прямое и косвенное дополнение — часть 1", "uk": "Прямий та непрямий додаток — частина 1"}}, "33": {"t": {"en": "Verbal periphrases — exercises", "ru": "Глагольные перифразы (упражнения)", "uk": "Дієслівні перифрази (вправи)"}, "s": {"en": "ELE A2 practice", "ru": "Práctica ELE A2", "uk": "Práctica ELE A2"}}, "32": {"t": {"en": "Interiors", "ru": "Интерьеры дома", "uk": "Інтер'єри дому"}, "s": {"en": "Kitchen, living room, bathroom — hay/estar, articles", "ru": "Кухня, гостиная, ванная — hay/estar, артикли", "uk": "Кухня, вітальня, ванна — hay/estar, артиклі"}}, "31": {"t": {"en": "The house and daily life", "ru": "Дом и повседневная жизнь", "uk": "Дім і повсякденне життя"}, "s": {"en": "Listening comprehension — the house", "ru": "Comprensión auditiva — la casa", "uk": "Comprensión auditiva — la casa"}}, "30": {"t": {"en": "Conversation", "ru": "Диалог", "uk": "Діалог"}, "s": {"en": "Speaking exercises", "ru": "Разговорные упражнения", "uk": "Розмовні вправи"}}, "29": {"t": {"en": "Rosario Martínez", "ru": "Росарио Мартинес", "uk": "Росаріо Мартінес"}, "s": {"en": "Exercises based on the text", "ru": "Упражнения по тексту", "uk": "Вправи за текстом"}}, "28": {"t": {"en": "Marta's house", "ru": "Дом Марты", "uk": "Дім Марти"}, "s": {"en": "Home, rooms, furniture", "ru": "Дом, комнаты, мебель", "uk": "Дім, кімнати, меблі"}}, "27": {"t": {"en": "Vocabulary days 1–14", "ru": "Словарь дней 1–14", "uk": "Словник днів 1–14"}, "s": {"en": "Alphabetical word list for the first 14 days", "ru": "Алфавитный список слов первых 14 дней", "uk": "Абетковий список слів перших 14 днів"}}, "26": {"t": {"en": "General vocabulary A1.2", "ru": "Общий словарь A1.2", "uk": "Загальний словник A1.2"}, "s": {"en": "Combined Spanish–Russian glossary", "ru": "Объединённый испанско-русский словарь", "uk": "Об'єднаний іспансько-російський словник"}}, "25": {"t": {"en": "General vocabulary A1.1", "ru": "Общий словарь A1.1", "uk": "Загальний словник A1.1"}, "s": {"en": "Alphabetical list for printing", "ru": "Алфавитный список для печати", "uk": "Абетковий список для друку"}}, "24": {"t": {"en": "Emotive expressions", "ru": "Эмоциональные выражения", "uk": "Емоційні вирази"}, "s": {"en": "98 expressions in 10 categories — translation, explanation, audio", "ru": "98 выражений по 10 категориям — перевод, объяснение, аудио", "uk": "98 виразів у 10 категоріях — переклад, пояснення, аудіо"}}, "23": {"t": {"en": "Colloquial idioms and hacer/poner", "ru": "Разговорные словечки и hacer/poner", "uk": "Розмовні слівця та hacer/poner"}, "s": {"en": "Argentinisms, Hispanisms, set phrases", "ru": "Аргентинизмы, испанизмы, устойчивые выражения", "uk": "Аргентинізми, іспанізми, усталені вирази"}}, "22": {"t": {"en": "Vocabulary flashcards", "ru": "Карточки — первые слова", "uk": "Картки — перші слова"}, "s": {"en": "143 “word + picture” cards", "ru": "143 карточки «слово + картинка»", "uk": "143 картки «слово + малюнок»"}}, "21": {"t": {"en": "Vocabulary — 34 days", "ru": "Вокабуляр — 34 дня", "uk": "Вокабуляр — 34 дні"}, "s": {"en": "Words day by day, with audio", "ru": "Слова по дням с аудио", "uk": "Слова за днями з аудіо"}}, "20": {"t": {"en": "Immediate actions", "ru": "Действия в настоящем", "uk": "Дії в теперішньому"}, "s": {"en": "", "ru": "", "uk": ""}}, "19": {"t": {"en": "Numbers review", "ru": "Повторение числительных", "uk": "Повторення числівників"}, "s": {"en": "Audio and review exercise on numbers", "ru": "Аудио и упражнение на повторение чисел", "uk": "Аудіо та вправа на повторення чисел"}}, "18": {"t": {"en": "Complex numerals", "ru": "Числительные (сложные)", "uk": "Числівники (складні)"}, "s": {"en": "Ordinals, fractions, large numbers", "ru": "Порядковые, дроби, большие числа", "uk": "Порядкові, дроби, великі числа"}}, "17": {"t": {"en": "Initial vocabulary + 5 texts", "ru": "Начальный словарь + 5 текстов", "uk": "Початковий словник + 5 текстів"}, "s": {"en": "Vocabulary and first texts with audio", "ru": "Лексика и первые тексты с аудио", "uk": "Лексика та перші тексти з аудіо"}}, "16": {"t": {"en": "Numbers 100 – 10 million", "ru": "Числительные 100 – 10 млн", "uk": "Числівники 100 – 10 млн"}, "s": {"en": "Audio — large numbers", "ru": "Аудио — большие числа", "uk": "Аудіо — великі числа"}}, "15": {"t": {"en": "Numbers exercise", "ru": "Числительные", "uk": "Числівники"}, "s": {"en": "Basic numbers", "ru": "Базовые числа", "uk": "Базові числа"}}, "14": {"t": {"en": "Numbers 1–100", "ru": "Числительные 1–100", "uk": "Числівники 1–100"}, "s": {"en": "Audio — numbers from 1 to 100", "ru": "Аудио — числа от 1 до 100", "uk": "Аудіо — числа від 1 до 100"}}, "13": {"t": {"en": "In the morning", "ru": "По утрам", "uk": "Зранку"}, "s": {"en": "Daily routine", "ru": "Распорядок дня", "uk": "Розпорядок дня"}}, "12": {"t": {"en": "My day", "ru": "Мой день", "uk": "Мій день"}, "s": {"en": "Daily routine — text", "ru": "Распорядок дня — текст", "uk": "Розпорядок дня — текст"}}, "11": {"t": {"en": "The family", "ru": "La familia", "uk": "Родина"}, "s": {"en": "Vocabulary — family members", "ru": "Словарь — члены семьи", "uk": "Словник — члени родини"}}, "10": {"t": {"en": "Reflexive verbs. Meals", "ru": "Verbos reflexivos. Еда и распорядок", "uk": "Зворотні дієслова. Їжа і розпорядок"}, "s": {"en": "Reflexive verbs — meals and daily routine", "ru": "Возвратные глаголы — еда, приёмы пищи, режим дня", "uk": "Зворотні дієслова — їжа, прийоми їжі, режим дня"}}, "9": {"t": {"en": "Reflexive verbs", "ru": "Verbos reflexivos", "uk": "Зворотні дієслова"}, "s": {"en": "Reflexive verbs", "ru": "Возвратные глаголы", "uk": "Зворотні дієслова"}}, "8": {"t": {"en": "Present tense (Indicative)", "ru": "Presente de Indicativo", "uk": "Теперішній час (Indicativo)"}, "s": {"en": "Present tense — conjugation", "ru": "Настоящее время — спряжение", "uk": "Теперішній час — відмінювання"}}, "7": {"t": {"en": "The Díaz López family", "ru": "Семья Диас Лопес", "uk": "Родина Діас Лопес"}, "s": {"en": "Family, describing people (drag-and-drop)", "ru": "Семья, описание людей (интерактив drag-and-drop)", "uk": "Родина, опис людей (інтерактив drag-and-drop)"}}, "6": {"t": {"en": "Introductions and basic questions", "ru": "Презентация и базовые вопросы", "uk": "Презентація та базові питання"}, "s": {"en": "Meeting people and simple phrases", "ru": "Знакомство и простые фразы", "uk": "Знайомство та прості фрази"}}, "5": {"t": {"en": "Articles", "ru": "Артикли", "uk": "Артиклі"}, "s": {"en": "Definite and indefinite articles — theory and exercises", "ru": "Определённые и неопределённые артикли — теория и упражнения", "uk": "Означені та неозначені артиклі — теорія і вправи"}}, "4": {"t": {"en": "The first text", "ru": "Первый текст", "uk": "Перший текст"}, "s": {"en": "ELE A0 · first connected text in Spanish", "ru": "ELE A0 · первый связный текст на испанском", "uk": "ELE A0 · перший зв'язний текст іспанською"}}, "3": {"t": {"en": "Ser and estar. Introduction", "ru": "Ser y estar. Презентация", "uk": "Ser та estar. Презентація"}, "s": {"en": "The verbs “to be” — basics", "ru": "Глаголы «быть» — основы", "uk": "Дієслова «бути» — основи"}}, "2": {"t": {"en": "Tongue twisters", "ru": "Скороговорки", "uk": "Скоромовки"}, "s": {"en": "Trabalenguas — pronunciation practice", "ru": "Trabalenguas — упражнения на произношение", "uk": "Trabalenguas — вправи на вимову"}}, "1": {"t": {"en": "Pronunciation", "ru": "Произношение", "uk": "Вимова"}, "s": {"en": "Sounds and phonetic rules", "ru": "Звуки и фонетические правила", "uk": "Звуки та фонетичні правила"}}, "0": {"t": {"en": "Alphabet", "ru": "Алфавит", "uk": "Абетка"}, "s": {"en": "Letters and their names", "ru": "Буквы и их названия", "uk": "Літери та їхні назви"}}}, "secs": {"13": {"en": "Literature and culture", "ru": "Литература и культура", "uk": "Література та культура"}, "12": {"en": "Caribe, amor y muerte — novel with audio", "ru": "Caribe, amor y muerte — роман с аудио", "uk": "Caribe, amor y muerte — роман з аудіо"}, "11": {"en": "Muerte en Valencia — detective story with tests", "ru": "Muerte en Valencia — детектив с тестами", "uk": "Muerte en Valencia — детектив з тестами"}, "10": {"en": "Español en Marcha A1 – A2", "ru": "Español en Marcha A1 – A2", "uk": "Español en Marcha A1 – A2"}, "9": {"en": "Life situations", "ru": "Жизненные ситуации", "uk": "Життєві ситуації"}, "8": {"en": "Texts and stories A2 – B1", "ru": "Тексты и истории A2 – B1", "uk": "Тексти та історії A2 – B1"}, "7": {"en": "Countries and geography", "ru": "Страны и география", "uk": "Країни та географія"}, "6": {"en": "Review and assessment A1", "ru": "Повторение и контроль A1", "uk": "Повторення та контроль A1"}, "5": {"en": "Verb tenses A2 – B1", "ru": "Глагольные времена A2 – B1", "uk": "Дієслівні часи A2 – B1"}, "4": {"en": "Grammar A1 – A2", "ru": "Грамматика A1 – A2", "uk": "Граматика A1 – A2"}, "3": {"en": "Texts and dialogues A1", "ru": "Тексты и диалоги A1", "uk": "Тексти та діалоги A1"}, "2": {"en": "Vocabulary", "ru": "Вокабуляр", "uk": "Вокабуляр"}, "1": {"en": "Beginner level A0 – A1", "ru": "Начальный уровень A0 – A1", "uk": "Початковий рівень A0 – A1"}, "0": {"en": "Phonetics and alphabet", "ru": "Фонетика и алфавит", "uk": "Фонетика та абетка"}}};
+</script>
+<script>
+/* ── Spanish-first i18n: Spanish is primary; EN/RU/UK duplicate as a secondary line ── */
+(function () {
+  var DATA = window.__I18N_DATA__;
+  var LANGS = ['es', 'en', 'ru', 'uk'];
+  var DEFAULT = 'es';
+  var STORE_KEY = 'pageLang';
+
+  var htmlLangMap = { es: 'es', en: 'en', ru: 'ru', uk: 'uk' };
+  var AUDIO_LABEL = { es: 'audio', en: 'audio', ru: 'аудио', uk: 'аудіо' };
+
+  function getLang() {
+    var saved = null;
+    try { saved = localStorage.getItem(STORE_KEY); } catch (e) {}
+    return LANGS.indexOf(saved) !== -1 ? saved : DEFAULT;
+  }
+  function setLang(lang) {
+    try { localStorage.setItem(STORE_KEY, lang); } catch (e) {}
+  }
+
+  var disclaimerBar = document.getElementById('disclaimerBar');
+  var disclaimerText = document.getElementById('disclaimerText');
+  var langLabel = document.getElementById('langLabel');
+  var pageDesc = document.getElementById('pageDesc');
+  var searchInput = document.getElementById('siteSearch');
+  var searchClear = document.getElementById('searchClear');
+  var noResults = document.getElementById('noResults');
+  var langButtons = Array.prototype.slice.call(document.querySelectorAll('.lang-btn'));
+
+  function apply(lang) {
+    var ui = DATA.ui[lang];
+    document.documentElement.setAttribute('lang', htmlLangMap[lang] || 'es');
+
+    // Card secondary lines
+    document.querySelectorAll('.i18n-sub').forEach(function (el) {
+      var idx = el.getAttribute('data-i18n-idx');
+      var c = DATA.cards[idx];
+      if (!c || lang === 'es') { el.textContent = ''; return; }
+      var t = (c.t && c.t[lang]) || '';
+      var s = (c.s && c.s[lang]) || '';
+      el.textContent = s ? (t + ' · ' + s) : t;
+    });
+
+    // Section secondary lines
+    document.querySelectorAll('.i18n-sec').forEach(function (el) {
+      var i = el.getAttribute('data-i18n-sec');
+      var sec = DATA.secs[i];
+      el.textContent = (lang === 'es' || !sec) ? '' : (sec[lang] || '');
+    });
+
+    // Audio badges
+    var audioLabel = AUDIO_LABEL[lang] || 'audio';
+    document.querySelectorAll('.i18n-audio').forEach(function (el) {
+      el.textContent = audioLabel;
+    });
+
+    // Chrome
+    if (pageDesc) pageDesc.textContent = ui.page_desc;
+    if (searchInput) searchInput.setAttribute('placeholder', ui.search_ph);
+    if (searchClear) searchClear.setAttribute('aria-label', ui.search_clear);
+    if (noResults) noResults.textContent = ui.no_results;
+    if (langLabel) langLabel.textContent = ui.lang_label;
+    window.__I18N_FOUND__ = ui.search_found;
+
+    // Disclaimer: only for non-Russian, non-Spanish-only variants (en, uk)
+    if (ui.disclaimer) {
+      disclaimerText.textContent = ui.disclaimer;
+      disclaimerBar.classList.add('show');
+    } else {
+      disclaimerBar.classList.remove('show');
+    }
+
+    // Active button state
+    langButtons.forEach(function (b) {
+      b.classList.toggle('is-active', b.getAttribute('data-lang') === lang);
+    });
+  }
+
+  langButtons.forEach(function (b) {
+    b.addEventListener('click', function () {
+      var lang = b.getAttribute('data-lang');
+      setLang(lang);
+      apply(lang);
+    });
+  });
+
+  apply(getLang());
+})();
 </script>
 
 </body>
