@@ -107,6 +107,7 @@
     display: block;
     opacity: 0;
     transition: opacity .6s ease;
+    pointer-events: none;
   }
   /* Первый слайд остаётся в потоке и формирует высоту контейнера */
   .banner-carousel .banner-slide:first-child {
@@ -117,7 +118,7 @@
     position: absolute;
     inset: 0;
   }
-  .banner-carousel .banner-slide.is-active { opacity: 1; }
+  .banner-carousel .banner-slide.is-active { opacity: 1; pointer-events: auto; }
   .banner-carousel .banner-slide img {
     display: block;
     width: 100%;
