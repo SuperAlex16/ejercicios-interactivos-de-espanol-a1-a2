@@ -568,10 +568,10 @@
     <div class="banner-carousel" id="bannerCarousel">
       <div class="banner-track">
         <a href="https://telegram.me/notilingobot" target="_blank" rel="noopener noreferrer" class="banner-slide is-active">
-          <img src="Banner1.png" alt="NotiLingo Bot — Telegram">
+          <img class="banner-img" data-banner="telegram" src="banner-telegram-es.png" alt="NotiLingo Bot — Telegram">
         </a>
         <a href="https://chromewebstore.google.com/detail/notilingo/mplnodgdfcnodgccpegmmonbmpfejcgd?hl=ru&authuser=0&pageId=none&pli=1" target="_blank" rel="noopener noreferrer" class="banner-slide">
-          <img src="Banner2.png" alt="NotiLingo — Chrome Web Store">
+          <img class="banner-img" data-banner="extension" src="banner-extension-es.png" alt="NotiLingo — Chrome Web Store">
         </a>
       </div>
       <button class="banner-nav banner-prev" type="button" aria-label="Предыдущий баннер">‹</button>
@@ -1727,6 +1727,12 @@ window.__I18N_DATA__ = {"ui": {"es": {"lang_name": "Español", "page_desc": "Eje
     var audioLabel = AUDIO_LABEL[lang] || 'audio';
     document.querySelectorAll('.i18n-audio').forEach(function (el) {
       el.textContent = audioLabel;
+    });
+
+    // Banners (Telegram / Extension) switch with the page language
+    document.querySelectorAll('.banner-img').forEach(function (img) {
+      var type = img.getAttribute('data-banner');
+      img.setAttribute('src', 'banner-' + type + '-' + lang + '.png');
     });
 
     // Chrome
