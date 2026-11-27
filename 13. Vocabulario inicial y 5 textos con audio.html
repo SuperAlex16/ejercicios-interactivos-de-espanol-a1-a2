@@ -8,6 +8,7 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="alternate icon" href="favicon.ico" type="image/x-icon">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
 <style>
     :root {
       --bg: #f5f7fb;
@@ -210,12 +211,21 @@
     .open-questions li {
       margin-bottom: 0.55rem;
     }
+
+.drag-bank { display:flex; flex-direction:column; gap:.45rem; margin:.5rem 0; }
+.drag-card { background:#eff6ff; color:#1e3a8a; border:1px solid #bfdbfe; border-radius:9px; box-shadow:none; text-align:left; padding:.55rem .7rem; cursor:grab; font-size:.95rem; overflow-wrap:anywhere; }
+.drag-card:active { cursor:grabbing; }
+.drag-card[aria-pressed="true"] { outline:2px solid #2563eb; background:#dbeafe; }
+.drag-card[hidden] { display:none; }
+.drop-zone { width:100%; min-height:3rem; border:2px dashed #94a3b8; border-radius:10px; background:#f8fafc; color:#475569; box-shadow:none; padding:.65rem; font-size:.95rem; overflow-wrap:anywhere; }
+.drop-zone.over { background:#dbeafe; border-color:#2563eb; }
+.drop-zone.filled { border-style:solid; border-color:#2563eb; background:#eff6ff; color:#1e3a8a; }
 </style>
 </head>
 <body>
 <header>
 <div class="wrap">
-<h1>Ejercicios interactivos de ELE A0-A1</h1><p class="instruction">Прослушайте каждый текст и одновременно читайте его. Затем выполните задания на понимание, «верно/неверно» и лексику. В конце каждого текста используйте открытые вопросы, чтобы пересказать историю устно или письменно.</p>
+<h1>Ejercicios interactivos de ELE A0-A1</h1><p class="instruction">Прослушайте каждый текст и одновременно читайте его. Затем выполните задания на понимание, «верно/неверно» и лексику. В конце каждого текста используйте открытые вопросы, чтобы пересказать историю устно или письменно.</p><p class="instruction">Перетащите ответ в поле под вариантами. Можно также нажать на вариант, а затем на поле ответа. Чтобы изменить ответ, нажмите на заполненное поле.</p>
 <div class="toolbar">
 <button onclick="checkAll()" type="button">Comprobar respuestas</button>
 <button class="secondary" onclick="resetAll()" type="button">Reiniciar</button>
@@ -233,67 +243,39 @@
 <div class="block">
 <h4>Comprensión lectora</h4>
 <div class="question">
-<label for="q1">1. ¿Qué tiene Ana en la bolsa?</label>
-<select data-answer="Un libro, una llave, agua y un móvil." data-correct="b" id="q1">
-<option value="">Elige una opción</option>
-<option value="a">Un perro, una taza y un plato.</option>
-<option value="b">Un libro, una llave, agua y un móvil.</option>
-<option value="c">Una sartén, un vaso y un cuchillo.</option>
-</select>
+<label id="label-q1">1. ¿Qué tiene Ana en la bolsa?</label>
+<div class="drag-exercise" id="q1" data-correct="b" data-answer="Un libro, una llave, agua y un móvil." data-value="" role="group" aria-labelledby="label-q1"><div class="drag-bank"><button type="button" class="drag-card" draggable="true" data-value="a" aria-pressed="false">Un perro, una taza y un plato.</button><button type="button" class="drag-card" draggable="true" data-value="b" aria-pressed="false">Un libro, una llave, agua y un móvil.</button><button type="button" class="drag-card" draggable="true" data-value="c" aria-pressed="false">Una sartén, un vaso y un cuchillo.</button></div><button type="button" class="drop-zone" aria-label="Zona de respuesta">Arrastra aquí tu respuesta</button></div>
 <div class="feedback" id="f-q1"></div>
 </div>
 <div class="question">
-<label for="q2">2. ¿Dónde trabaja Olga?</label>
-<select data-answer="Olga trabaja en un hospital." data-correct="c" id="q2">
-<option value="">Elige una opción</option>
-<option value="a">En una universidad.</option>
-<option value="b">En un bar.</option>
-<option value="c">En un hospital.</option>
-</select>
+<label id="label-q2">2. ¿Dónde trabaja Olga?</label>
+<div class="drag-exercise" id="q2" data-correct="c" data-answer="Olga trabaja en un hospital." data-value="" role="group" aria-labelledby="label-q2"><div class="drag-bank"><button type="button" class="drag-card" draggable="true" data-value="a" aria-pressed="false">En una universidad.</button><button type="button" class="drag-card" draggable="true" data-value="b" aria-pressed="false">En un bar.</button><button type="button" class="drag-card" draggable="true" data-value="c" aria-pressed="false">En un hospital.</button></div><button type="button" class="drop-zone" aria-label="Zona de respuesta">Arrastra aquí tu respuesta</button></div>
 <div class="feedback" id="f-q2"></div>
 </div>
 </div>
 <div class="block">
 <h4>Verdadero / Falso</h4>
 <div class="question">
-<label for="q3">3. Ana es casada.</label>
-<select data-answer="Falso. Ana es soltera." data-correct="falso" id="q3">
-<option value="">Elige una opción</option>
-<option value="verdadero">Verdadero</option>
-<option value="falso">Falso</option>
-</select>
+<label id="label-q3">3. Ana es casada.</label>
+<div class="drag-exercise" id="q3" data-correct="falso" data-answer="Falso. Ana es soltera." data-value="" role="group" aria-labelledby="label-q3"><div class="drag-bank"><button type="button" class="drag-card" draggable="true" data-value="verdadero" aria-pressed="false">Verdadero</button><button type="button" class="drag-card" draggable="true" data-value="falso" aria-pressed="false">Falso</button></div><button type="button" class="drop-zone" aria-label="Zona de respuesta">Arrastra aquí tu respuesta</button></div>
 <div class="feedback" id="f-q3"></div>
 </div>
 <div class="question">
-<label for="q4">4. El domingo, la familia camina al bar.</label>
-<select data-answer="Verdadero. El domingo todos caminan al bar." data-correct="verdadero" id="q4">
-<option value="">Elige una opción</option>
-<option value="falso">Falso</option>
-<option value="verdadero">Verdadero</option>
-</select>
+<label id="label-q4">4. El domingo, la familia camina al bar.</label>
+<div class="drag-exercise" id="q4" data-correct="verdadero" data-answer="Verdadero. El domingo todos caminan al bar." data-value="" role="group" aria-labelledby="label-q4"><div class="drag-bank"><button type="button" class="drag-card" draggable="true" data-value="falso" aria-pressed="false">Falso</button><button type="button" class="drag-card" draggable="true" data-value="verdadero" aria-pressed="false">Verdadero</button></div><button type="button" class="drop-zone" aria-label="Zona de respuesta">Arrastra aquí tu respuesta</button></div>
 <div class="feedback" id="f-q4"></div>
 </div>
 </div>
 <div class="block">
 <h4>Vocabulario</h4>
 <div class="question">
-<label for="q5">5. “Sobrino” es...</label>
-<select data-answer="Sobrino = hijo del hermano o de la hermana." data-correct="a" id="q5">
-<option value="">Elige una opción</option>
-<option value="a">el hijo del hermano o de la hermana.</option>
-<option value="b">el padre de la madre.</option>
-<option value="c">el novio de una prima.</option>
-</select>
+<label id="label-q5">5. “Sobrino” es...</label>
+<div class="drag-exercise" id="q5" data-correct="a" data-answer="Sobrino = hijo del hermano o de la hermana." data-value="" role="group" aria-labelledby="label-q5"><div class="drag-bank"><button type="button" class="drag-card" draggable="true" data-value="a" aria-pressed="false">el hijo del hermano o de la hermana.</button><button type="button" class="drag-card" draggable="true" data-value="b" aria-pressed="false">el padre de la madre.</button><button type="button" class="drag-card" draggable="true" data-value="c" aria-pressed="false">el novio de una prima.</button></div><button type="button" class="drop-zone" aria-label="Zona de respuesta">Arrastra aquí tu respuesta</button></div>
 <div class="feedback" id="f-q5"></div>
 </div>
 <div class="question">
-<label for="q6">6. “Llave” es...</label>
-<select data-answer="Llave = objeto para abrir una puerta." data-correct="b" id="q6">
-<option value="">Elige una opción</option>
-<option value="a">una bebida caliente.</option>
-<option value="b">un objeto para abrir una puerta.</option>
-<option value="c">un mueble para dormir.</option>
-</select>
+<label id="label-q6">6. “Llave” es...</label>
+<div class="drag-exercise" id="q6" data-correct="b" data-answer="Llave = objeto para abrir una puerta." data-value="" role="group" aria-labelledby="label-q6"><div class="drag-bank"><button type="button" class="drag-card" draggable="true" data-value="a" aria-pressed="false">una bebida caliente.</button><button type="button" class="drag-card" draggable="true" data-value="b" aria-pressed="false">un objeto para abrir una puerta.</button><button type="button" class="drag-card" draggable="true" data-value="c" aria-pressed="false">un mueble para dormir.</button></div><button type="button" class="drop-zone" aria-label="Zona de respuesta">Arrastra aquí tu respuesta</button></div>
 <div class="feedback" id="f-q6"></div>
 </div>
 </div>
@@ -308,67 +290,39 @@
 <div class="block">
 <h4>Comprensión lectora</h4>
 <div class="question">
-<label for="q7">7. ¿Para quién cocina José?</label>
-<select data-answer="José cocina para su madre y su padre." data-correct="c" id="q7">
-<option value="">Elige una opción</option>
-<option value="a">Para su primo y su sobrino.</option>
-<option value="b">Para sus vecinos.</option>
-<option value="c">Para su madre y su padre.</option>
-</select>
+<label id="label-q7">7. ¿Para quién cocina José?</label>
+<div class="drag-exercise" id="q7" data-correct="c" data-answer="José cocina para su madre y su padre." data-value="" role="group" aria-labelledby="label-q7"><div class="drag-bank"><button type="button" class="drag-card" draggable="true" data-value="a" aria-pressed="false">Para su primo y su sobrino.</button><button type="button" class="drag-card" draggable="true" data-value="b" aria-pressed="false">Para sus vecinos.</button><button type="button" class="drag-card" draggable="true" data-value="c" aria-pressed="false">Para su madre y su padre.</button></div><button type="button" class="drop-zone" aria-label="Zona de respuesta">Arrastra aquí tu respuesta</button></div>
 <div class="feedback" id="f-q7"></div>
 </div>
 <div class="question">
-<label for="q8">8. ¿Qué cocina José en la olla?</label>
-<select data-answer="José cocina sopa en la olla." data-correct="a" id="q8">
-<option value="">Elige una opción</option>
-<option value="a">Sopa.</option>
-<option value="b">Té.</option>
-<option value="c">Café.</option>
-</select>
+<label id="label-q8">8. ¿Qué cocina José en la olla?</label>
+<div class="drag-exercise" id="q8" data-correct="a" data-answer="José cocina sopa en la olla." data-value="" role="group" aria-labelledby="label-q8"><div class="drag-bank"><button type="button" class="drag-card" draggable="true" data-value="a" aria-pressed="false">Sopa.</button><button type="button" class="drag-card" draggable="true" data-value="b" aria-pressed="false">Té.</button><button type="button" class="drag-card" draggable="true" data-value="c" aria-pressed="false">Café.</button></div><button type="button" class="drop-zone" aria-label="Zona de respuesta">Arrastra aquí tu respuesta</button></div>
 <div class="feedback" id="f-q8"></div>
 </div>
 </div>
 <div class="block">
 <h4>Verdadero / Falso</h4>
 <div class="question">
-<label for="q9">9. Clara lava el plato y la cuchara.</label>
-<select data-answer="Verdadero. Clara lava el plato y la cuchara." data-correct="verdadero" id="q9">
-<option value="">Elige una opción</option>
-<option value="verdadero">Verdadero</option>
-<option value="falso">Falso</option>
-</select>
+<label id="label-q9">9. Clara lava el plato y la cuchara.</label>
+<div class="drag-exercise" id="q9" data-correct="verdadero" data-answer="Verdadero. Clara lava el plato y la cuchara." data-value="" role="group" aria-labelledby="label-q9"><div class="drag-bank"><button type="button" class="drag-card" draggable="true" data-value="verdadero" aria-pressed="false">Verdadero</button><button type="button" class="drag-card" draggable="true" data-value="falso" aria-pressed="false">Falso</button></div><button type="button" class="drop-zone" aria-label="Zona de respuesta">Arrastra aquí tu respuesta</button></div>
 <div class="feedback" id="f-q9"></div>
 </div>
 <div class="question">
-<label for="q10">10. En la mesa hay un cepillo de dientes.</label>
-<select data-answer="Falso. En la mesa hay un plato, un vaso, un cuchillo, un tenedor, una cuchara y servilletas." data-correct="falso" id="q10">
-<option value="">Elige una opción</option>
-<option value="falso">Falso</option>
-<option value="verdadero">Verdadero</option>
-</select>
+<label id="label-q10">10. En la mesa hay un cepillo de dientes.</label>
+<div class="drag-exercise" id="q10" data-correct="falso" data-answer="Falso. En la mesa hay un plato, un vaso, un cuchillo, un tenedor, una cuchara y servilletas." data-value="" role="group" aria-labelledby="label-q10"><div class="drag-bank"><button type="button" class="drag-card" draggable="true" data-value="falso" aria-pressed="false">Falso</button><button type="button" class="drag-card" draggable="true" data-value="verdadero" aria-pressed="false">Verdadero</button></div><button type="button" class="drop-zone" aria-label="Zona de respuesta">Arrastra aquí tu respuesta</button></div>
 <div class="feedback" id="f-q10"></div>
 </div>
 </div>
 <div class="block">
 <h4>Vocabulario</h4>
 <div class="question">
-<label for="q11">11. “Sartén” es...</label>
-<select data-answer="Sartén = utensilio para cocinar." data-correct="b" id="q11">
-<option value="">Elige una opción</option>
-<option value="a">una habitación de la casa.</option>
-<option value="b">un utensilio para cocinar.</option>
-<option value="c">un animal pequeño.</option>
-</select>
+<label id="label-q11">11. “Sartén” es...</label>
+<div class="drag-exercise" id="q11" data-correct="b" data-answer="Sartén = utensilio para cocinar." data-value="" role="group" aria-labelledby="label-q11"><div class="drag-bank"><button type="button" class="drag-card" draggable="true" data-value="a" aria-pressed="false">una habitación de la casa.</button><button type="button" class="drag-card" draggable="true" data-value="b" aria-pressed="false">un utensilio para cocinar.</button><button type="button" class="drag-card" draggable="true" data-value="c" aria-pressed="false">un animal pequeño.</button></div><button type="button" class="drop-zone" aria-label="Zona de respuesta">Arrastra aquí tu respuesta</button></div>
 <div class="feedback" id="f-q11"></div>
 </div>
 <div class="question">
-<label for="q12">12. “Servilletas” son...</label>
-<select data-answer="Servilletas = papel o tela para limpiarse en la mesa." data-correct="c" id="q12">
-<option value="">Elige una opción</option>
-<option value="a">objetos para abrir puertas.</option>
-<option value="b">utensilios para cortar carne.</option>
-<option value="c">papel o tela para limpiarse en la mesa.</option>
-</select>
+<label id="label-q12">12. “Servilletas” son...</label>
+<div class="drag-exercise" id="q12" data-correct="c" data-answer="Servilletas = papel o tela para limpiarse en la mesa." data-value="" role="group" aria-labelledby="label-q12"><div class="drag-bank"><button type="button" class="drag-card" draggable="true" data-value="a" aria-pressed="false">objetos para abrir puertas.</button><button type="button" class="drag-card" draggable="true" data-value="b" aria-pressed="false">utensilios para cortar carne.</button><button type="button" class="drag-card" draggable="true" data-value="c" aria-pressed="false">papel o tela para limpiarse en la mesa.</button></div><button type="button" class="drop-zone" aria-label="Zona de respuesta">Arrastra aquí tu respuesta</button></div>
 <div class="feedback" id="f-q12"></div>
 </div>
 </div>
@@ -383,67 +337,39 @@
 <div class="block">
 <h4>Comprensión lectora</h4>
 <div class="question">
-<label for="q13">13. ¿Cómo se llama el perro?</label>
-<select data-answer="El perro se llama Milo." data-correct="b" id="q13">
-<option value="">Elige una opción</option>
-<option value="a">Coco.</option>
-<option value="b">Milo.</option>
-<option value="c">Marcos.</option>
-</select>
+<label id="label-q13">13. ¿Cómo se llama el perro?</label>
+<div class="drag-exercise" id="q13" data-correct="b" data-answer="El perro se llama Milo." data-value="" role="group" aria-labelledby="label-q13"><div class="drag-bank"><button type="button" class="drag-card" draggable="true" data-value="a" aria-pressed="false">Coco.</button><button type="button" class="drag-card" draggable="true" data-value="b" aria-pressed="false">Milo.</button><button type="button" class="drag-card" draggable="true" data-value="c" aria-pressed="false">Marcos.</button></div><button type="button" class="drop-zone" aria-label="Zona de respuesta">Arrastra aquí tu respuesta</button></div>
 <div class="feedback" id="f-q13"></div>
 </div>
 <div class="question">
-<label for="q14">14. ¿Dónde está el loro?</label>
-<select data-answer="El loro está en una jaula." data-correct="a" id="q14">
-<option value="">Elige una opción</option>
-<option value="a">En una jaula.</option>
-<option value="b">En una bañera.</option>
-<option value="c">En un armario.</option>
-</select>
+<label id="label-q14">14. ¿Dónde está el loro?</label>
+<div class="drag-exercise" id="q14" data-correct="a" data-answer="El loro está en una jaula." data-value="" role="group" aria-labelledby="label-q14"><div class="drag-bank"><button type="button" class="drag-card" draggable="true" data-value="a" aria-pressed="false">En una jaula.</button><button type="button" class="drag-card" draggable="true" data-value="b" aria-pressed="false">En una bañera.</button><button type="button" class="drag-card" draggable="true" data-value="c" aria-pressed="false">En un armario.</button></div><button type="button" class="drop-zone" aria-label="Zona de respuesta">Arrastra aquí tu respuesta</button></div>
 <div class="feedback" id="f-q14"></div>
 </div>
 </div>
 <div class="block">
 <h4>Verdadero / Falso</h4>
 <div class="question">
-<label for="q15">15. Lucía camina al veterinario cada sábado.</label>
-<select data-answer="Verdadero. Lucía camina al veterinario cada sábado." data-correct="verdadero" id="q15">
-<option value="">Elige una opción</option>
-<option value="falso">Falso</option>
-<option value="verdadero">Verdadero</option>
-</select>
+<label id="label-q15">15. Lucía camina al veterinario cada sábado.</label>
+<div class="drag-exercise" id="q15" data-correct="verdadero" data-answer="Verdadero. Lucía camina al veterinario cada sábado." data-value="" role="group" aria-labelledby="label-q15"><div class="drag-bank"><button type="button" class="drag-card" draggable="true" data-value="falso" aria-pressed="false">Falso</button><button type="button" class="drag-card" draggable="true" data-value="verdadero" aria-pressed="false">Verdadero</button></div><button type="button" class="drop-zone" aria-label="Zona de respuesta">Arrastra aquí tu respuesta</button></div>
 <div class="feedback" id="f-q15"></div>
 </div>
 <div class="question">
-<label for="q16">16. El gato se llama Coco.</label>
-<select data-answer="Falso. El gato se llama Marcos; Coco es el loro." data-correct="falso" id="q16">
-<option value="">Elige una opción</option>
-<option value="verdadero">Verdadero</option>
-<option value="falso">Falso</option>
-</select>
+<label id="label-q16">16. El gato se llama Coco.</label>
+<div class="drag-exercise" id="q16" data-correct="falso" data-answer="Falso. El gato se llama Marcos; Coco es el loro." data-value="" role="group" aria-labelledby="label-q16"><div class="drag-bank"><button type="button" class="drag-card" draggable="true" data-value="verdadero" aria-pressed="false">Verdadero</button><button type="button" class="drag-card" draggable="true" data-value="falso" aria-pressed="false">Falso</button></div><button type="button" class="drop-zone" aria-label="Zona de respuesta">Arrastra aquí tu respuesta</button></div>
 <div class="feedback" id="f-q16"></div>
 </div>
 </div>
 <div class="block">
 <h4>Vocabulario</h4>
 <div class="question">
-<label for="q17">17. “Correa” es...</label>
-<select data-answer="Correa = objeto para pasear al perro." data-correct="b" id="q17">
-<option value="">Elige una opción</option>
-<option value="a">una comida para la familia.</option>
-<option value="b">un objeto para pasear al perro.</option>
-<option value="c">un mueble del dormitorio.</option>
-</select>
+<label id="label-q17">17. “Correa” es...</label>
+<div class="drag-exercise" id="q17" data-correct="b" data-answer="Correa = objeto para pasear al perro." data-value="" role="group" aria-labelledby="label-q17"><div class="drag-bank"><button type="button" class="drag-card" draggable="true" data-value="a" aria-pressed="false">una comida para la familia.</button><button type="button" class="drag-card" draggable="true" data-value="b" aria-pressed="false">un objeto para pasear al perro.</button><button type="button" class="drag-card" draggable="true" data-value="c" aria-pressed="false">un mueble del dormitorio.</button></div><button type="button" class="drop-zone" aria-label="Zona de respuesta">Arrastra aquí tu respuesta</button></div>
 <div class="feedback" id="f-q17"></div>
 </div>
 <div class="question">
-<label for="q18">18. “Pienso” es...</label>
-<select data-answer="Pienso = comida para animales." data-correct="a" id="q18">
-<option value="">Elige una opción</option>
-<option value="a">comida para animales.</option>
-<option value="b">ropa para el invierno.</option>
-<option value="c">una bebida para el desayuno.</option>
-</select>
+<label id="label-q18">18. “Pienso” es...</label>
+<div class="drag-exercise" id="q18" data-correct="a" data-answer="Pienso = comida para animales." data-value="" role="group" aria-labelledby="label-q18"><div class="drag-bank"><button type="button" class="drag-card" draggable="true" data-value="a" aria-pressed="false">comida para animales.</button><button type="button" class="drag-card" draggable="true" data-value="b" aria-pressed="false">ropa para el invierno.</button><button type="button" class="drag-card" draggable="true" data-value="c" aria-pressed="false">una bebida para el desayuno.</button></div><button type="button" class="drop-zone" aria-label="Zona de respuesta">Arrastra aquí tu respuesta</button></div>
 <div class="feedback" id="f-q18"></div>
 </div>
 </div>
@@ -458,67 +384,39 @@
 <div class="block">
 <h4>Comprensión lectora</h4>
 <div class="question">
-<label for="q19">19. ¿Dónde vive Rosa?</label>
-<select data-answer="Rosa vive en una casa en Granada." data-correct="c" id="q19">
-<option value="">Elige una opción</option>
-<option value="a">En un hospital en Madrid.</option>
-<option value="b">En una universidad en Granada.</option>
-<option value="c">En una casa en Granada.</option>
-</select>
+<label id="label-q19">19. ¿Dónde vive Rosa?</label>
+<div class="drag-exercise" id="q19" data-correct="c" data-answer="Rosa vive en una casa en Granada." data-value="" role="group" aria-labelledby="label-q19"><div class="drag-bank"><button type="button" class="drag-card" draggable="true" data-value="a" aria-pressed="false">En un hospital en Madrid.</button><button type="button" class="drag-card" draggable="true" data-value="b" aria-pressed="false">En una universidad en Granada.</button><button type="button" class="drag-card" draggable="true" data-value="c" aria-pressed="false">En una casa en Granada.</button></div><button type="button" class="drop-zone" aria-label="Zona de respuesta">Arrastra aquí tu respuesta</button></div>
 <div class="feedback" id="f-q19"></div>
 </div>
 <div class="question">
-<label for="q20">20. ¿Cuántas sillas tiene Rosa en casa?</label>
-<select data-answer="Rosa tiene 12 sillas en casa." data-correct="b" id="q20">
-<option value="">Elige una opción</option>
-<option value="a">4</option>
-<option value="b">12</option>
-<option value="c">2</option>
-</select>
+<label id="label-q20">20. ¿Cuántas sillas tiene Rosa en casa?</label>
+<div class="drag-exercise" id="q20" data-correct="b" data-answer="Rosa tiene 12 sillas en casa." data-value="" role="group" aria-labelledby="label-q20"><div class="drag-bank"><button type="button" class="drag-card" draggable="true" data-value="a" aria-pressed="false">4</button><button type="button" class="drag-card" draggable="true" data-value="b" aria-pressed="false">12</button><button type="button" class="drag-card" draggable="true" data-value="c" aria-pressed="false">2</button></div><button type="button" class="drop-zone" aria-label="Zona de respuesta">Arrastra aquí tu respuesta</button></div>
 <div class="feedback" id="f-q20"></div>
 </div>
 </div>
 <div class="block">
 <h4>Verdadero / Falso</h4>
 <div class="question">
-<label for="q21">21. Rosa vive con su novio.</label>
-<select data-answer="Verdadero. Rosa vive con su novio." data-correct="verdadero" id="q21">
-<option value="">Elige una opción</option>
-<option value="verdadero">Verdadero</option>
-<option value="falso">Falso</option>
-</select>
+<label id="label-q21">21. Rosa vive con su novio.</label>
+<div class="drag-exercise" id="q21" data-correct="verdadero" data-answer="Verdadero. Rosa vive con su novio." data-value="" role="group" aria-labelledby="label-q21"><div class="drag-bank"><button type="button" class="drag-card" draggable="true" data-value="verdadero" aria-pressed="false">Verdadero</button><button type="button" class="drag-card" draggable="true" data-value="falso" aria-pressed="false">Falso</button></div><button type="button" class="drop-zone" aria-label="Zona de respuesta">Arrastra aquí tu respuesta</button></div>
 <div class="feedback" id="f-q21"></div>
 </div>
 <div class="question">
-<label for="q22">22. Rosa tiene zapatillas azules.</label>
-<select data-answer="Falso. Rosa tiene zapatillas rojas." data-correct="falso" id="q22">
-<option value="">Elige una opción</option>
-<option value="falso">Falso</option>
-<option value="verdadero">Verdadero</option>
-</select>
+<label id="label-q22">22. Rosa tiene zapatillas azules.</label>
+<div class="drag-exercise" id="q22" data-correct="falso" data-answer="Falso. Rosa tiene zapatillas rojas." data-value="" role="group" aria-labelledby="label-q22"><div class="drag-bank"><button type="button" class="drag-card" draggable="true" data-value="falso" aria-pressed="false">Falso</button><button type="button" class="drag-card" draggable="true" data-value="verdadero" aria-pressed="false">Verdadero</button></div><button type="button" class="drop-zone" aria-label="Zona de respuesta">Arrastra aquí tu respuesta</button></div>
 <div class="feedback" id="f-q22"></div>
 </div>
 </div>
 <div class="block">
 <h4>Vocabulario</h4>
 <div class="question">
-<label for="q23">23. “Armario” es...</label>
-<select data-answer="Armario = mueble para guardar ropa u otros objetos." data-correct="a" id="q23">
-<option value="">Elige una opción</option>
-<option value="a">un mueble para guardar ropa u otros objetos.</option>
-<option value="b">un animal de granja.</option>
-<option value="c">una bebida caliente.</option>
-</select>
+<label id="label-q23">23. “Armario” es...</label>
+<div class="drag-exercise" id="q23" data-correct="a" data-answer="Armario = mueble para guardar ropa u otros objetos." data-value="" role="group" aria-labelledby="label-q23"><div class="drag-bank"><button type="button" class="drag-card" draggable="true" data-value="a" aria-pressed="false">un mueble para guardar ropa u otros objetos.</button><button type="button" class="drag-card" draggable="true" data-value="b" aria-pressed="false">un animal de granja.</button><button type="button" class="drag-card" draggable="true" data-value="c" aria-pressed="false">una bebida caliente.</button></div><button type="button" class="drop-zone" aria-label="Zona de respuesta">Arrastra aquí tu respuesta</button></div>
 <div class="feedback" id="f-q23"></div>
 </div>
 <div class="question">
-<label for="q24">24. “Zapatillas” son...</label>
-<select data-answer="Zapatillas = calzado cómodo para los pies." data-correct="c" id="q24">
-<option value="">Elige una opción</option>
-<option value="a">muebles del salón.</option>
-<option value="b">objetos para cocinar.</option>
-<option value="c">calzado cómodo para los pies.</option>
-</select>
+<label id="label-q24">24. “Zapatillas” son...</label>
+<div class="drag-exercise" id="q24" data-correct="c" data-answer="Zapatillas = calzado cómodo para los pies." data-value="" role="group" aria-labelledby="label-q24"><div class="drag-bank"><button type="button" class="drag-card" draggable="true" data-value="a" aria-pressed="false">muebles del salón.</button><button type="button" class="drag-card" draggable="true" data-value="b" aria-pressed="false">objetos para cocinar.</button><button type="button" class="drag-card" draggable="true" data-value="c" aria-pressed="false">calzado cómodo para los pies.</button></div><button type="button" class="drop-zone" aria-label="Zona de respuesta">Arrastra aquí tu respuesta</button></div>
 <div class="feedback" id="f-q24"></div>
 </div>
 </div>
@@ -533,67 +431,39 @@
 <div class="block">
 <h4>Comprensión lectora</h4>
 <div class="question">
-<label for="q25">25. ¿Por qué camina Juan al instituto?</label>
-<select data-answer="Juan camina al instituto porque no tiene tiempo para el autobús." data-correct="b" id="q25">
-<option value="">Elige una opción</option>
-<option value="a">Porque tiene un caballo.</option>
-<option value="b">Porque no tiene tiempo para el autobús.</option>
-<option value="c">Porque trabaja allí como profesor.</option>
-</select>
+<label id="label-q25">25. ¿Por qué camina Juan al instituto?</label>
+<div class="drag-exercise" id="q25" data-correct="b" data-answer="Juan camina al instituto porque no tiene tiempo para el autobús." data-value="" role="group" aria-labelledby="label-q25"><div class="drag-bank"><button type="button" class="drag-card" draggable="true" data-value="a" aria-pressed="false">Porque tiene un caballo.</button><button type="button" class="drag-card" draggable="true" data-value="b" aria-pressed="false">Porque no tiene tiempo para el autobús.</button><button type="button" class="drag-card" draggable="true" data-value="c" aria-pressed="false">Porque trabaja allí como profesor.</button></div><button type="button" class="drop-zone" aria-label="Zona de respuesta">Arrastra aquí tu respuesta</button></div>
 <div class="feedback" id="f-q25"></div>
 </div>
 <div class="question">
-<label for="q26">26. ¿Quién estudia en el instituto?</label>
-<select data-answer="Tomás estudia en el instituto." data-correct="a" id="q26">
-<option value="">Elige una opción</option>
-<option value="a">Tomás.</option>
-<option value="b">Pablo.</option>
-<option value="c">Elena.</option>
-</select>
+<label id="label-q26">26. ¿Quién estudia en el instituto?</label>
+<div class="drag-exercise" id="q26" data-correct="a" data-answer="Tomás estudia en el instituto." data-value="" role="group" aria-labelledby="label-q26"><div class="drag-bank"><button type="button" class="drag-card" draggable="true" data-value="a" aria-pressed="false">Tomás.</button><button type="button" class="drag-card" draggable="true" data-value="b" aria-pressed="false">Pablo.</button><button type="button" class="drag-card" draggable="true" data-value="c" aria-pressed="false">Elena.</button></div><button type="button" class="drop-zone" aria-label="Zona de respuesta">Arrastra aquí tu respuesta</button></div>
 <div class="feedback" id="f-q26"></div>
 </div>
 </div>
 <div class="block">
 <h4>Verdadero / Falso</h4>
 <div class="question">
-<label for="q27">27. Tomás tiene 19 años.</label>
-<select data-answer="Verdadero. Tomás tiene 19 años." data-correct="verdadero" id="q27">
-<option value="">Elige una opción</option>
-<option value="falso">Falso</option>
-<option value="verdadero">Verdadero</option>
-</select>
+<label id="label-q27">27. Tomás tiene 19 años.</label>
+<div class="drag-exercise" id="q27" data-correct="verdadero" data-answer="Verdadero. Tomás tiene 19 años." data-value="" role="group" aria-labelledby="label-q27"><div class="drag-bank"><button type="button" class="drag-card" draggable="true" data-value="falso" aria-pressed="false">Falso</button><button type="button" class="drag-card" draggable="true" data-value="verdadero" aria-pressed="false">Verdadero</button></div><button type="button" class="drop-zone" aria-label="Zona de respuesta">Arrastra aquí tu respuesta</button></div>
 <div class="feedback" id="f-q27"></div>
 </div>
 <div class="question">
-<label for="q28">28. Juan tiene mucho dinero.</label>
-<select data-answer="Falso. Juan tiene poco dinero." data-correct="falso" id="q28">
-<option value="">Elige una opción</option>
-<option value="verdadero">Verdadero</option>
-<option value="falso">Falso</option>
-</select>
+<label id="label-q28">28. Juan tiene mucho dinero.</label>
+<div class="drag-exercise" id="q28" data-correct="falso" data-answer="Falso. Juan tiene poco dinero." data-value="" role="group" aria-labelledby="label-q28"><div class="drag-bank"><button type="button" class="drag-card" draggable="true" data-value="verdadero" aria-pressed="false">Verdadero</button><button type="button" class="drag-card" draggable="true" data-value="falso" aria-pressed="false">Falso</button></div><button type="button" class="drop-zone" aria-label="Zona de respuesta">Arrastra aquí tu respuesta</button></div>
 <div class="feedback" id="f-q28"></div>
 </div>
 </div>
 <div class="block">
 <h4>Vocabulario</h4>
 <div class="question">
-<label for="q29">29. “Bar” es...</label>
-<select data-answer="Bar = lugar para tomar café, té o cerveza." data-correct="c" id="q29">
-<option value="">Elige una opción</option>
-<option value="a">un animal de granja.</option>
-<option value="b">un mueble del dormitorio.</option>
-<option value="c">un lugar para tomar café, té o cerveza.</option>
-</select>
+<label id="label-q29">29. “Bar” es...</label>
+<div class="drag-exercise" id="q29" data-correct="c" data-answer="Bar = lugar para tomar café, té o cerveza." data-value="" role="group" aria-labelledby="label-q29"><div class="drag-bank"><button type="button" class="drag-card" draggable="true" data-value="a" aria-pressed="false">un animal de granja.</button><button type="button" class="drag-card" draggable="true" data-value="b" aria-pressed="false">un mueble del dormitorio.</button><button type="button" class="drag-card" draggable="true" data-value="c" aria-pressed="false">un lugar para tomar café, té o cerveza.</button></div><button type="button" class="drop-zone" aria-label="Zona de respuesta">Arrastra aquí tu respuesta</button></div>
 <div class="feedback" id="f-q29"></div>
 </div>
 <div class="question">
-<label for="q30">30. “Mal tiempo” significa...</label>
-<select data-answer="Mal tiempo = lluvia, viento u otras condiciones meteorológicas malas." data-correct="b" id="q30">
-<option value="">Elige una opción</option>
-<option value="a">mucho estudio en la universidad.</option>
-<option value="b">lluvia, viento u otras condiciones meteorológicas malas.</option>
-<option value="c">muchas personas en la calle.</option>
-</select>
+<label id="label-q30">30. “Mal tiempo” significa...</label>
+<div class="drag-exercise" id="q30" data-correct="b" data-answer="Mal tiempo = lluvia, viento u otras condiciones meteorológicas malas." data-value="" role="group" aria-labelledby="label-q30"><div class="drag-bank"><button type="button" class="drag-card" draggable="true" data-value="a" aria-pressed="false">mucho estudio en la universidad.</button><button type="button" class="drag-card" draggable="true" data-value="b" aria-pressed="false">lluvia, viento u otras condiciones meteorológicas malas.</button><button type="button" class="drag-card" draggable="true" data-value="c" aria-pressed="false">muchas personas en la calle.</button></div><button type="button" class="drop-zone" aria-label="Zona de respuesta">Arrastra aquí tu respuesta</button></div>
 <div class="feedback" id="f-q30"></div>
 </div>
 </div>
@@ -604,20 +474,62 @@
     Material elaborado en HTML para práctica inicial de lectura y léxico en ELE A0-A1.
   </footer>
 <script>
+
+    function setAnswer(ex, value) {
+      const cards = [...ex.querySelectorAll('.drag-card')];
+      const chosen = cards.find(c => c.dataset.value === value);
+      ex.dataset.value = chosen ? value : '';
+      cards.forEach(c => { c.hidden = c === chosen; c.setAttribute('aria-pressed','false'); });
+      const zone = ex.querySelector('.drop-zone');
+      zone.textContent = chosen ? chosen.textContent : 'Arrastra aquí tu respuesta';
+      zone.classList.toggle('filled', !!chosen);
+      zone.setAttribute('aria-label', chosen ? 'Respuesta: ' + chosen.textContent + '. Pulsa para retirar.' : 'Zona de respuesta');
+      const feedback = document.getElementById('f-' + ex.id);
+      feedback.className = 'feedback'; feedback.textContent = '';
+      document.getElementById('score').textContent = '';
+    }
+    document.querySelectorAll('.drag-exercise').forEach(ex => {
+      const cards = [...ex.querySelectorAll('.drag-card')];
+      const zone = ex.querySelector('.drop-zone');
+      let dragged = null;
+      cards.forEach(card => {
+        card.addEventListener('dragstart', e => {
+          dragged = card; e.dataTransfer.setData('text/plain', ex.id + ':' + card.dataset.value); e.dataTransfer.effectAllowed = 'move';
+        });
+        card.addEventListener('dragend', () => { dragged = null; zone.classList.remove('over'); });
+        card.addEventListener('click', () => {
+          const was = card.getAttribute('aria-pressed') === 'true';
+          cards.forEach(c => c.setAttribute('aria-pressed','false'));
+          if (!was) card.setAttribute('aria-pressed','true');
+        });
+      });
+      zone.addEventListener('dragover', e => { if (dragged) { e.preventDefault(); e.dataTransfer.dropEffect='move'; zone.classList.add('over'); } });
+      zone.addEventListener('dragleave', () => zone.classList.remove('over'));
+      zone.addEventListener('drop', e => {
+        e.preventDefault(); zone.classList.remove('over');
+        if (dragged && e.dataTransfer.getData('text/plain') === ex.id + ':' + dragged.dataset.value) setAnswer(ex, dragged.dataset.value);
+        dragged = null;
+      });
+      zone.addEventListener('click', () => {
+        const selected = cards.find(c => c.getAttribute('aria-pressed') === 'true');
+        if (selected) setAnswer(ex, selected.dataset.value); else if (ex.dataset.value) setAnswer(ex, '');
+      });
+    });
+
     function allSelects() {
-      return Array.from(document.querySelectorAll('select[data-correct]'));
+      return Array.from(document.querySelectorAll('.drag-exercise[data-correct]'));
     }
 
     function markQuestion(select) {
       const feedback = document.getElementById('f-' + select.id);
       const correct = select.dataset.correct;
       const answer = select.dataset.answer;
-      if (!select.value) {
+      if (!select.dataset.value) {
         feedback.className = 'feedback bad';
         feedback.textContent = 'Falta una respuesta.';
         return false;
       }
-      if (select.value === correct) {
+      if (select.dataset.value === correct) {
         feedback.className = 'feedback ok';
         feedback.textContent = 'Correcto.';
         return true;
@@ -641,7 +553,7 @@
 
     function resetAll() {
       allSelects().forEach(select => {
-        select.selectedIndex = 0;
+        setAnswer(select, "");
         const feedback = document.getElementById('f-' + select.id);
         feedback.className = 'feedback';
         feedback.textContent = '';

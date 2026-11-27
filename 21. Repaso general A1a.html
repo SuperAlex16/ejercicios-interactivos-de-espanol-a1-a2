@@ -1,13 +1,15 @@
 <!DOCTYPE html>
+
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>¡Aprende Español! — Ejercicios ELE A1</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="alternate icon" href="favicon.ico" type="image/x-icon">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,500&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,500&amp;family=Nunito:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet"/>
 <style>
 :root {
   --terra:   #C1440E;
@@ -287,856 +289,630 @@ select:focus,.txt-in:focus{outline:none;border-color:var(--terra)}
 
 /* ── STAR RATING ── */
 .stars{font-size:2rem;margin-bottom:6px}
+
+.dd-bank{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:10px}.dd-chip{font:inherit;font-size:.9rem;font-weight:800;background:#fff;border:2px solid var(--terra);color:var(--terra);border-radius:12px;padding:6px 12px;cursor:grab}.dd-chip[aria-pressed=true]{background:var(--terra);color:white}.dd-target{width:100%;min-height:48px;border:2px dashed var(--naranja);border-radius:10px;background:var(--crema);color:var(--gris);font:inherit;font-size:.86rem;padding:9px;cursor:pointer}.dd-target.filled{background:#fff;color:var(--terra);font-weight:900;border-style:solid}.dd-target.over{background:var(--arena);border-color:var(--terra)}.dd-clear{border:0;background:transparent;color:var(--gris);font:inherit;font-size:.78rem;cursor:pointer;margin-top:5px}.dd-chip:focus-visible,.dd-target:focus-visible,.dd-clear:focus-visible{outline:3px solid var(--azul);outline-offset:2px}
 </style>
 </head>
 <body>
-
 <header>
-  <span class="header-flags">🇪🇸 📚 🇷🇺</span>
-  <h1>¡Aprende Español!</h1>
-  <div class="subtitle">Ejercicios interactivos ELE A1 · Días 1–14</div>
+<span class="header-flags">🇪🇸 📚 🇷🇺</span>
+<h1>¡Aprende Español!</h1>
+<div class="subtitle">Ejercicios interactivos ELE A1 · Días 1–14</div>
 </header>
-
 <div class="progress-wrap">
-  <div class="prog-label" id="prog-label">Progreso: 0 / 5 ejercicios completados</div>
-  <div class="prog-bar"><div class="prog-fill" id="prog-fill"></div></div>
+<div class="prog-label" id="prog-label">Progreso: 0 / 5 ejercicios completados</div>
+<div class="prog-bar"><div class="prog-fill" id="prog-fill"></div></div>
 </div>
-
 <nav>
-  <button class="tab active" onclick="showTab(0,this)">1 · Presente</button>
-  <button class="tab" onclick="showTab(1,this)">2 · Ir a + inf</button>
-  <button class="tab" onclick="showTab(2,this)">3 · Perífrasis</button>
-  <button class="tab" onclick="showTab(3,this)">4 · Ser vs Estar</button>
-  <button class="tab" onclick="showTab(4,this)">5 · Estar/Tener/Hay</button>
+<button class="tab active" onclick="showTab(0,this)">1 · Presente</button>
+<button class="tab" onclick="showTab(1,this)">2 · Ir a + inf</button>
+<button class="tab" onclick="showTab(2,this)">3 · Perífrasis</button>
+<button class="tab" onclick="showTab(3,this)">4 · Ser vs Estar</button>
+<button class="tab" onclick="showTab(4,this)">5 · Estar/Tener/Hay</button>
 </nav>
-
 <main>
-
 <!-- ═══════════════════════════════════════════════════
      SECCIÓN 1: PRESENTE DE INDICATIVO
 ═══════════════════════════════════════════════════ -->
 <section class="section active" id="sec0">
-  <div class="sec-num">Ejercicio 1</div>
-  <h2 class="sec-title">Presente de Indicativo</h2>
-  <p class="sec-sub">Verbos del vocabulario: cocinar, buscar, levantarse, ducharse, salir, volver, ver, almorzar, lavar</p>
-
-  <div class="instruction">
-    Поставьте глаголы в скобках в нужную форму настоящего времени (Presente de Indicativo). Выберите правильный вариант из списка.
+<div class="sec-num">Ejercicio 1</div>
+<h2 class="sec-title">Presente de Indicativo</h2>
+<p class="sec-sub">Verbos del vocabulario: cocinar, buscar, levantarse, ducharse, salir, volver, ver, almorzar, lavar</p>
+<div class="instruction">
+    Поставьте глаголы в скобках в нужную форму настоящего времени (Presente de Indicativo). Перетащите правильный вариант в поле ответа.
   </div>
-
-  <!-- Reference table -->
-  <div class="ref-box">
-    <h3>📋 Tabla de referencia — Conjugaciones</h3>
-    <div class="verb-grid">
-      <div class="verb-col">
-        <div class="vhead">buscar (–ar)</div>
-        <div class="vrow"><span class="pronoun">yo</span><span class="form">busco</span></div>
-        <div class="vrow"><span class="pronoun">tú</span><span class="form">buscas</span></div>
-        <div class="vrow"><span class="pronoun">él/ella</span><span class="form">busca</span></div>
-        <div class="vrow"><span class="pronoun">nosotros</span><span class="form">buscamos</span></div>
-        <div class="vrow"><span class="pronoun">vosotros</span><span class="form">buscáis</span></div>
-        <div class="vrow"><span class="pronoun">ellos</span><span class="form">buscan</span></div>
-      </div>
-      <div class="verb-col">
-        <div class="vhead">volver (–er, o→ue)</div>
-        <div class="vrow"><span class="pronoun">yo</span><span class="form">vuelvo</span></div>
-        <div class="vrow"><span class="pronoun">tú</span><span class="form">vuelves</span></div>
-        <div class="vrow"><span class="pronoun">él/ella</span><span class="form">vuelve</span></div>
-        <div class="vrow"><span class="pronoun">nosotros</span><span class="form">volvemos</span></div>
-        <div class="vrow"><span class="pronoun">vosotros</span><span class="form">volvéis</span></div>
-        <div class="vrow"><span class="pronoun">ellos</span><span class="form">vuelven</span></div>
-      </div>
-      <div class="verb-col">
-        <div class="vhead">salir (–ir, irreg.)</div>
-        <div class="vrow"><span class="pronoun">yo</span><span class="form">salgo</span></div>
-        <div class="vrow"><span class="pronoun">tú</span><span class="form">sales</span></div>
-        <div class="vrow"><span class="pronoun">él/ella</span><span class="form">sale</span></div>
-        <div class="vrow"><span class="pronoun">nosotros</span><span class="form">salimos</span></div>
-        <div class="vrow"><span class="pronoun">vosotros</span><span class="form">salís</span></div>
-        <div class="vrow"><span class="pronoun">ellos</span><span class="form">salen</span></div>
-      </div>
-      <div class="verb-col">
-        <div class="vhead">almorzar (o→ue)</div>
-        <div class="vrow"><span class="pronoun">yo</span><span class="form">almuerzo</span></div>
-        <div class="vrow"><span class="pronoun">tú</span><span class="form">almuerzas</span></div>
-        <div class="vrow"><span class="pronoun">él/ella</span><span class="form">almuerza</span></div>
-        <div class="vrow"><span class="pronoun">nosotros</span><span class="form">almorzamos</span></div>
-        <div class="vrow"><span class="pronoun">vosotros</span><span class="form">almorzáis</span></div>
-        <div class="vrow"><span class="pronoun">ellos</span><span class="form">almuerzan</span></div>
-      </div>
-      <div class="verb-col">
-        <div class="vhead">levantarse (reflex.)</div>
-        <div class="vrow"><span class="pronoun">yo</span><span class="form">me levanto</span></div>
-        <div class="vrow"><span class="pronoun">tú</span><span class="form">te levantas</span></div>
-        <div class="vrow"><span class="pronoun">él/ella</span><span class="form">se levanta</span></div>
-        <div class="vrow"><span class="pronoun">nosotros</span><span class="form">nos levantamos</span></div>
-        <div class="vrow"><span class="pronoun">vosotros</span><span class="form">os levantáis</span></div>
-        <div class="vrow"><span class="pronoun">ellos</span><span class="form">se levantan</span></div>
-      </div>
-      <div class="verb-col">
-        <div class="vhead">ducharse (reflex.)</div>
-        <div class="vrow"><span class="pronoun">yo</span><span class="form">me ducho</span></div>
-        <div class="vrow"><span class="pronoun">tú</span><span class="form">te duchas</span></div>
-        <div class="vrow"><span class="pronoun">él/ella</span><span class="form">se ducha</span></div>
-        <div class="vrow"><span class="pronoun">nosotros</span><span class="form">nos duchamos</span></div>
-        <div class="vrow"><span class="pronoun">vosotros</span><span class="form">os ducháis</span></div>
-        <div class="vrow"><span class="pronoun">ellos</span><span class="form">se duchan</span></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="ex-grid" id="ex1-cards">
-
-    <div class="card" data-answer="cocino" id="c1_1">
-      <div class="illus">🍳<span>cocinar = готовить</span></div>
-      <div class="card-q">Yo ___ (cocinar) todos los días en casa.</div>
-      <select onchange="clearCard('c1_1')">
-        <option value="">— elige —</option>
-        <option value="cocino">cocino</option>
-        <option value="cocinas">cocinas</option>
-        <option value="cocina">cocina</option>
-        <option value="cocinamos">cocinamos</option>
-      </select>
-      <div class="feedback" id="fb_c1_1"></div>
-    </div>
-
-    <div class="card" data-answer="buscas" id="c1_2">
-      <div class="illus">🔍<span>buscar = искать</span></div>
-      <div class="card-q">Tú ___ (buscar) las llaves de casa.</div>
-      <select onchange="clearCard('c1_2')">
-        <option value="">— elige —</option>
-        <option value="busco">busco</option>
-        <option value="buscas">buscas</option>
-        <option value="busca">busca</option>
-        <option value="buscan">buscan</option>
-      </select>
-      <div class="feedback" id="fb_c1_2"></div>
-    </div>
-
-    <div class="card" data-answer="se levanta" id="c1_3">
-      <div class="illus">🌅<span>levantarse = вставать</span></div>
-      <div class="card-q">María ___ (levantarse) a las 7 de la mañana.</div>
-      <select onchange="clearCard('c1_3')">
-        <option value="">— elige —</option>
-        <option value="se levantan">se levantan</option>
-        <option value="me levanto">me levanto</option>
-        <option value="se levanta">se levanta</option>
-        <option value="te levantas">te levantas</option>
-      </select>
-      <div class="feedback" id="fb_c1_3"></div>
-    </div>
-
-    <div class="card" data-answer="almorzamos" id="c1_4">
-      <div class="illus">🍽️<span>almorzar = обедать</span></div>
-      <div class="card-q">Nosotros ___ (almorzar) juntos en el trabajo.</div>
-      <select onchange="clearCard('c1_4')">
-        <option value="">— elige —</option>
-        <option value="almorzamos">almorzamos</option>
-        <option value="almuerzo">almuerzo</option>
-        <option value="almuerzan">almuerzan</option>
-        <option value="almorzáis">almorzáis</option>
-      </select>
-      <div class="feedback" id="fb_c1_4"></div>
-    </div>
-
-    <div class="card" data-answer="vuelven" id="c1_5">
-      <div class="illus">🚪<span>volver = возвращаться</span></div>
-      <div class="card-q">Ellos ___ (volver) a casa muy tarde.</div>
-      <select onchange="clearCard('c1_5')">
-        <option value="">— elige —</option>
-        <option value="vuelvo">vuelvo</option>
-        <option value="vuelves">vuelves</option>
-        <option value="vuelve">vuelve</option>
-        <option value="vuelven">vuelven</option>
-      </select>
-      <div class="feedback" id="fb_c1_5"></div>
-    </div>
-
-    <div class="card" data-answer="salgo" id="c1_6">
-      <div class="illus">🚶‍♂️<span>salir = выходить</span></div>
-      <div class="card-q">Yo ___ (salir) de casa a las 8 cada mañana.</div>
-      <select onchange="clearCard('c1_6')">
-        <option value="">— elige —</option>
-        <option value="salgo">salgo</option>
-        <option value="sales">sales</option>
-        <option value="sale">sale</option>
-        <option value="salimos">salimos</option>
-      </select>
-      <div class="feedback" id="fb_c1_6"></div>
-    </div>
-
-    <div class="card" data-answer="veis" id="c1_7">
-      <div class="illus">📺<span>ver la tele = смотреть телевизор</span></div>
-      <div class="card-q">Vosotros ___ (ver) la tele por la noche.</div>
-      <select onchange="clearCard('c1_7')">
-        <option value="">— elige —</option>
-        <option value="ven">ven</option>
-        <option value="veis">veis</option>
-        <option value="veo">veo</option>
-        <option value="ve">ve</option>
-      </select>
-      <div class="feedback" id="fb_c1_7"></div>
-    </div>
-
-    <div class="card" data-answer="se ducha" id="c1_8">
-      <div class="illus">🚿<span>ducharse = принимать душ</span></div>
-      <div class="card-q">Carlos ___ (ducharse) por la mañana antes de trabajar.</div>
-      <select onchange="clearCard('c1_8')">
-        <option value="">— elige —</option>
-        <option value="me ducho">me ducho</option>
-        <option value="te duchas">te duchas</option>
-        <option value="se ducha">se ducha</option>
-        <option value="nos duchamos">nos duchamos</option>
-      </select>
-      <div class="feedback" id="fb_c1_8"></div>
-    </div>
-
-    <div class="card" data-answer="lavan" id="c1_9">
-      <div class="illus">🧹<span>lavar = мыть</span></div>
-      <div class="card-q">Los niños ___ (lavar) los platos después de comer.</div>
-      <select onchange="clearCard('c1_9')">
-        <option value="">— elige —</option>
-        <option value="lavo">lavo</option>
-        <option value="lava">lava</option>
-        <option value="lavan">lavan</option>
-        <option value="laváis">laváis</option>
-      </select>
-      <div class="feedback" id="fb_c1_9"></div>
-    </div>
-
-  </div>
-
-  <button class="check-btn" onclick="checkSection(0)">✔ Comprobar respuestas</button>
-  <button class="reset-btn" onclick="resetSection(0)">↺ Reiniciar</button>
-  <div class="score-box" id="score0"><div class="stars" id="stars0"></div><div class="score-num" id="snum0"></div><div class="score-msg" id="smsg0"></div></div>
+<!-- Reference table -->
+<div class="ref-box">
+<h3>📋 Tabla de referencia — Conjugaciones</h3>
+<div class="verb-grid">
+<div class="verb-col">
+<div class="vhead">buscar (–ar)</div>
+<div class="vrow"><span class="pronoun">yo</span><span class="form">busco</span></div>
+<div class="vrow"><span class="pronoun">tú</span><span class="form">buscas</span></div>
+<div class="vrow"><span class="pronoun">él/ella</span><span class="form">busca</span></div>
+<div class="vrow"><span class="pronoun">nosotros</span><span class="form">buscamos</span></div>
+<div class="vrow"><span class="pronoun">vosotros</span><span class="form">buscáis</span></div>
+<div class="vrow"><span class="pronoun">ellos</span><span class="form">buscan</span></div>
+</div>
+<div class="verb-col">
+<div class="vhead">volver (–er, o→ue)</div>
+<div class="vrow"><span class="pronoun">yo</span><span class="form">vuelvo</span></div>
+<div class="vrow"><span class="pronoun">tú</span><span class="form">vuelves</span></div>
+<div class="vrow"><span class="pronoun">él/ella</span><span class="form">vuelve</span></div>
+<div class="vrow"><span class="pronoun">nosotros</span><span class="form">volvemos</span></div>
+<div class="vrow"><span class="pronoun">vosotros</span><span class="form">volvéis</span></div>
+<div class="vrow"><span class="pronoun">ellos</span><span class="form">vuelven</span></div>
+</div>
+<div class="verb-col">
+<div class="vhead">salir (–ir, irreg.)</div>
+<div class="vrow"><span class="pronoun">yo</span><span class="form">salgo</span></div>
+<div class="vrow"><span class="pronoun">tú</span><span class="form">sales</span></div>
+<div class="vrow"><span class="pronoun">él/ella</span><span class="form">sale</span></div>
+<div class="vrow"><span class="pronoun">nosotros</span><span class="form">salimos</span></div>
+<div class="vrow"><span class="pronoun">vosotros</span><span class="form">salís</span></div>
+<div class="vrow"><span class="pronoun">ellos</span><span class="form">salen</span></div>
+</div>
+<div class="verb-col">
+<div class="vhead">almorzar (o→ue)</div>
+<div class="vrow"><span class="pronoun">yo</span><span class="form">almuerzo</span></div>
+<div class="vrow"><span class="pronoun">tú</span><span class="form">almuerzas</span></div>
+<div class="vrow"><span class="pronoun">él/ella</span><span class="form">almuerza</span></div>
+<div class="vrow"><span class="pronoun">nosotros</span><span class="form">almorzamos</span></div>
+<div class="vrow"><span class="pronoun">vosotros</span><span class="form">almorzáis</span></div>
+<div class="vrow"><span class="pronoun">ellos</span><span class="form">almuerzan</span></div>
+</div>
+<div class="verb-col">
+<div class="vhead">levantarse (reflex.)</div>
+<div class="vrow"><span class="pronoun">yo</span><span class="form">me levanto</span></div>
+<div class="vrow"><span class="pronoun">tú</span><span class="form">te levantas</span></div>
+<div class="vrow"><span class="pronoun">él/ella</span><span class="form">se levanta</span></div>
+<div class="vrow"><span class="pronoun">nosotros</span><span class="form">nos levantamos</span></div>
+<div class="vrow"><span class="pronoun">vosotros</span><span class="form">os levantáis</span></div>
+<div class="vrow"><span class="pronoun">ellos</span><span class="form">se levantan</span></div>
+</div>
+<div class="verb-col">
+<div class="vhead">ducharse (reflex.)</div>
+<div class="vrow"><span class="pronoun">yo</span><span class="form">me ducho</span></div>
+<div class="vrow"><span class="pronoun">tú</span><span class="form">te duchas</span></div>
+<div class="vrow"><span class="pronoun">él/ella</span><span class="form">se ducha</span></div>
+<div class="vrow"><span class="pronoun">nosotros</span><span class="form">nos duchamos</span></div>
+<div class="vrow"><span class="pronoun">vosotros</span><span class="form">os ducháis</span></div>
+<div class="vrow"><span class="pronoun">ellos</span><span class="form">se duchan</span></div>
+</div>
+</div>
+</div>
+<div class="ex-grid" id="ex1-cards">
+<div class="card" data-answer="cocino" id="c1_1">
+<div class="illus">🍳<span>cocinar = готовить</span></div>
+<div class="card-q">Yo ___ (cocinar) todos los días en casa.</div>
+<div class="dd-widget"><div aria-label="Opciones de respuesta" class="dd-bank"><button aria-pressed="false" class="dd-chip" data-value="cocino" draggable="true" type="button">cocino</button><button aria-pressed="false" class="dd-chip" data-value="cocinas" draggable="true" type="button">cocinas</button><button aria-pressed="false" class="dd-chip" data-value="cocina" draggable="true" type="button">cocina</button><button aria-pressed="false" class="dd-chip" data-value="cocinamos" draggable="true" type="button">cocinamos</button></div><button aria-label="Colocar respuesta" class="dd-target" data-value="" type="button">Arrastra aquí · Перетащите сюда</button><button class="dd-clear" type="button">↺ Quitar respuesta</button></div>
+<div class="feedback" id="fb_c1_1"></div>
+</div>
+<div class="card" data-answer="buscas" id="c1_2">
+<div class="illus">🔍<span>buscar = искать</span></div>
+<div class="card-q">Tú ___ (buscar) las llaves de casa.</div>
+<div class="dd-widget"><div aria-label="Opciones de respuesta" class="dd-bank"><button aria-pressed="false" class="dd-chip" data-value="busco" draggable="true" type="button">busco</button><button aria-pressed="false" class="dd-chip" data-value="buscas" draggable="true" type="button">buscas</button><button aria-pressed="false" class="dd-chip" data-value="busca" draggable="true" type="button">busca</button><button aria-pressed="false" class="dd-chip" data-value="buscan" draggable="true" type="button">buscan</button></div><button aria-label="Colocar respuesta" class="dd-target" data-value="" type="button">Arrastra aquí · Перетащите сюда</button><button class="dd-clear" type="button">↺ Quitar respuesta</button></div>
+<div class="feedback" id="fb_c1_2"></div>
+</div>
+<div class="card" data-answer="se levanta" id="c1_3">
+<div class="illus">🌅<span>levantarse = вставать</span></div>
+<div class="card-q">María ___ (levantarse) a las 7 de la mañana.</div>
+<div class="dd-widget"><div aria-label="Opciones de respuesta" class="dd-bank"><button aria-pressed="false" class="dd-chip" data-value="se levantan" draggable="true" type="button">se levantan</button><button aria-pressed="false" class="dd-chip" data-value="me levanto" draggable="true" type="button">me levanto</button><button aria-pressed="false" class="dd-chip" data-value="se levanta" draggable="true" type="button">se levanta</button><button aria-pressed="false" class="dd-chip" data-value="te levantas" draggable="true" type="button">te levantas</button></div><button aria-label="Colocar respuesta" class="dd-target" data-value="" type="button">Arrastra aquí · Перетащите сюда</button><button class="dd-clear" type="button">↺ Quitar respuesta</button></div>
+<div class="feedback" id="fb_c1_3"></div>
+</div>
+<div class="card" data-answer="almorzamos" id="c1_4">
+<div class="illus">🍽️<span>almorzar = обедать</span></div>
+<div class="card-q">Nosotros ___ (almorzar) juntos en el trabajo.</div>
+<div class="dd-widget"><div aria-label="Opciones de respuesta" class="dd-bank"><button aria-pressed="false" class="dd-chip" data-value="almorzamos" draggable="true" type="button">almorzamos</button><button aria-pressed="false" class="dd-chip" data-value="almuerzo" draggable="true" type="button">almuerzo</button><button aria-pressed="false" class="dd-chip" data-value="almuerzan" draggable="true" type="button">almuerzan</button><button aria-pressed="false" class="dd-chip" data-value="almorzáis" draggable="true" type="button">almorzáis</button></div><button aria-label="Colocar respuesta" class="dd-target" data-value="" type="button">Arrastra aquí · Перетащите сюда</button><button class="dd-clear" type="button">↺ Quitar respuesta</button></div>
+<div class="feedback" id="fb_c1_4"></div>
+</div>
+<div class="card" data-answer="vuelven" id="c1_5">
+<div class="illus">🚪<span>volver = возвращаться</span></div>
+<div class="card-q">Ellos ___ (volver) a casa muy tarde.</div>
+<div class="dd-widget"><div aria-label="Opciones de respuesta" class="dd-bank"><button aria-pressed="false" class="dd-chip" data-value="vuelvo" draggable="true" type="button">vuelvo</button><button aria-pressed="false" class="dd-chip" data-value="vuelves" draggable="true" type="button">vuelves</button><button aria-pressed="false" class="dd-chip" data-value="vuelve" draggable="true" type="button">vuelve</button><button aria-pressed="false" class="dd-chip" data-value="vuelven" draggable="true" type="button">vuelven</button></div><button aria-label="Colocar respuesta" class="dd-target" data-value="" type="button">Arrastra aquí · Перетащите сюда</button><button class="dd-clear" type="button">↺ Quitar respuesta</button></div>
+<div class="feedback" id="fb_c1_5"></div>
+</div>
+<div class="card" data-answer="salgo" id="c1_6">
+<div class="illus">🚶‍♂️<span>salir = выходить</span></div>
+<div class="card-q">Yo ___ (salir) de casa a las 8 cada mañana.</div>
+<div class="dd-widget"><div aria-label="Opciones de respuesta" class="dd-bank"><button aria-pressed="false" class="dd-chip" data-value="salgo" draggable="true" type="button">salgo</button><button aria-pressed="false" class="dd-chip" data-value="sales" draggable="true" type="button">sales</button><button aria-pressed="false" class="dd-chip" data-value="sale" draggable="true" type="button">sale</button><button aria-pressed="false" class="dd-chip" data-value="salimos" draggable="true" type="button">salimos</button></div><button aria-label="Colocar respuesta" class="dd-target" data-value="" type="button">Arrastra aquí · Перетащите сюда</button><button class="dd-clear" type="button">↺ Quitar respuesta</button></div>
+<div class="feedback" id="fb_c1_6"></div>
+</div>
+<div class="card" data-answer="veis" id="c1_7">
+<div class="illus">📺<span>ver la tele = смотреть телевизор</span></div>
+<div class="card-q">Vosotros ___ (ver) la tele por la noche.</div>
+<div class="dd-widget"><div aria-label="Opciones de respuesta" class="dd-bank"><button aria-pressed="false" class="dd-chip" data-value="ven" draggable="true" type="button">ven</button><button aria-pressed="false" class="dd-chip" data-value="veis" draggable="true" type="button">veis</button><button aria-pressed="false" class="dd-chip" data-value="veo" draggable="true" type="button">veo</button><button aria-pressed="false" class="dd-chip" data-value="ve" draggable="true" type="button">ve</button></div><button aria-label="Colocar respuesta" class="dd-target" data-value="" type="button">Arrastra aquí · Перетащите сюда</button><button class="dd-clear" type="button">↺ Quitar respuesta</button></div>
+<div class="feedback" id="fb_c1_7"></div>
+</div>
+<div class="card" data-answer="se ducha" id="c1_8">
+<div class="illus">🚿<span>ducharse = принимать душ</span></div>
+<div class="card-q">Carlos ___ (ducharse) por la mañana antes de trabajar.</div>
+<div class="dd-widget"><div aria-label="Opciones de respuesta" class="dd-bank"><button aria-pressed="false" class="dd-chip" data-value="me ducho" draggable="true" type="button">me ducho</button><button aria-pressed="false" class="dd-chip" data-value="te duchas" draggable="true" type="button">te duchas</button><button aria-pressed="false" class="dd-chip" data-value="se ducha" draggable="true" type="button">se ducha</button><button aria-pressed="false" class="dd-chip" data-value="nos duchamos" draggable="true" type="button">nos duchamos</button></div><button aria-label="Colocar respuesta" class="dd-target" data-value="" type="button">Arrastra aquí · Перетащите сюда</button><button class="dd-clear" type="button">↺ Quitar respuesta</button></div>
+<div class="feedback" id="fb_c1_8"></div>
+</div>
+<div class="card" data-answer="lavan" id="c1_9">
+<div class="illus">🧹<span>lavar = мыть</span></div>
+<div class="card-q">Los niños ___ (lavar) los platos después de comer.</div>
+<div class="dd-widget"><div aria-label="Opciones de respuesta" class="dd-bank"><button aria-pressed="false" class="dd-chip" data-value="lavo" draggable="true" type="button">lavo</button><button aria-pressed="false" class="dd-chip" data-value="lava" draggable="true" type="button">lava</button><button aria-pressed="false" class="dd-chip" data-value="lavan" draggable="true" type="button">lavan</button><button aria-pressed="false" class="dd-chip" data-value="laváis" draggable="true" type="button">laváis</button></div><button aria-label="Colocar respuesta" class="dd-target" data-value="" type="button">Arrastra aquí · Перетащите сюда</button><button class="dd-clear" type="button">↺ Quitar respuesta</button></div>
+<div class="feedback" id="fb_c1_9"></div>
+</div>
+</div>
+<button class="check-btn" onclick="checkSection(0)">✔ Comprobar respuestas</button>
+<button class="reset-btn" onclick="resetSection(0)">↺ Reiniciar</button>
+<div class="score-box" id="score0"><div class="stars" id="stars0"></div><div class="score-num" id="snum0"></div><div class="score-msg" id="smsg0"></div></div>
 </section>
-
-
 <!-- ═══════════════════════════════════════════════════
      SECCIÓN 2: IR A + INFINITIVO
 ═══════════════════════════════════════════════════ -->
 <section class="section" id="sec1">
-  <div class="sec-num">Ejercicio 2</div>
-  <h2 class="sec-title">Ir a + infinitivo · Futuro próximo</h2>
-  <p class="sec-sub">Expresar planes e intenciones: voy a cocinar, vas a salir…</p>
-
-  <div class="instruction">
-    Конструкция «ir a + инфинитив» используется для выражения ближайших планов. Выберите правильную форму глагола «ir». Нужно учитывать подлежащее в каждом предложении.
+<div class="sec-num">Ejercicio 2</div>
+<h2 class="sec-title">Ir a + infinitivo · Futuro próximo</h2>
+<p class="sec-sub">Expresar planes e intenciones: voy a cocinar, vas a salir…</p>
+<div class="instruction">
+    Конструкция «ir a + инфинитив» используется для выражения ближайших планов. Перетащите правильную форму глагола «ir» в поле ответа. Нужно учитывать подлежащее в каждом предложении.
   </div>
-
-  <div class="theory">
-    <h3>📌 Ir a + infinitivo — Futuro próximo</h3>
-    <div class="formula">SUJETO + <span class="hl-terra">ir</span> (presente) + <span class="hl-azul">a</span> + INFINITIVO</div>
-    <p><span class="hl-terra">Voy a</span> cocinar esta noche. → <em>(Я собираюсь готовить этим вечером.)</em></p>
-    <p><span class="hl-terra">Vas a</span> buscar trabajo mañana. → <em>(Ты собираешься искать работу завтра.)</em></p>
-    <p><span class="hl-terra">Va a</span> salir el próximo viernes. → <em>(Он/она собирается выйти в следующую пятницу.)</em></p>
-    <table class="vtable" style="margin-top:14px">
-      <thead><tr><th>Pronombre</th><th>Ir a</th></tr></thead>
-      <tbody>
-        <tr><td>yo</td><td class="v-form">voy a</td></tr>
-        <tr><td>tú</td><td class="v-form">vas a</td></tr>
-        <tr><td>él / ella / usted</td><td class="v-form">va a</td></tr>
-        <tr><td>nosotros/as</td><td class="v-form">vamos a</td></tr>
-        <tr><td>vosotros/as</td><td class="v-form">vais a</td></tr>
-        <tr><td>ellos / ellas / ustedes</td><td class="v-form">van a</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="ex-grid two-col" id="ex2-cards">
-
-    <div class="card" data-answer="voy a" id="c2_1">
-      <div class="illus">🛒<span>ir a la compra = идти за покупками</span></div>
-      <div class="card-q">Esta tarde yo ___ ir a la compra al supermercado.</div>
-      <select onchange="clearCard('c2_1')">
-        <option value="">— elige —</option>
-        <option value="voy a">voy a</option>
-        <option value="vas a">vas a</option>
-        <option value="va a">va a</option>
-        <option value="van a">van a</option>
-      </select>
-      <div class="feedback" id="fb_c2_1"></div>
-    </div>
-
-    <div class="card" data-answer="va a" id="c2_2">
-      <div class="illus">🎬<span>ver una peli = смотреть кино</span></div>
-      <div class="card-q">El viernes por la noche, Ana ___ ver una peli en el cine.</div>
-      <select onchange="clearCard('c2_2')">
-        <option value="">— elige —</option>
-        <option value="voy a">voy a</option>
-        <option value="vas a">vas a</option>
-        <option value="va a">va a</option>
-        <option value="vamos a">vamos a</option>
-      </select>
-      <div class="feedback" id="fb_c2_2"></div>
-    </div>
-
-    <div class="card" data-answer="vamos a" id="c2_3">
-      <div class="illus">🎂<span>celebración = празднование</span></div>
-      <div class="card-q">Este fin de semana nosotros ___ celebrar el cumpleaños de Laura.</div>
-      <select onchange="clearCard('c2_3')">
-        <option value="">— elige —</option>
-        <option value="va a">va a</option>
-        <option value="vais a">vais a</option>
-        <option value="vamos a">vamos a</option>
-        <option value="van a">van a</option>
-      </select>
-      <div class="feedback" id="fb_c2_3"></div>
-    </div>
-
-    <div class="card" data-answer="vas a" id="c2_4">
-      <div class="illus">🔌<span>cargador = зарядное устройство</span></div>
-      <div class="card-q">¿Tú ___ buscar el cargador del móvil ahora?</div>
-      <select onchange="clearCard('c2_4')">
-        <option value="">— elige —</option>
-        <option value="voy a">voy a</option>
-        <option value="vas a">vas a</option>
-        <option value="va a">va a</option>
-        <option value="vais a">vais a</option>
-      </select>
-      <div class="feedback" id="fb_c2_4"></div>
-    </div>
-
-    <div class="card" data-answer="van a" id="c2_5">
-      <div class="illus">🤝<span>reunirse = собираться</span></div>
-      <div class="card-q">El lunes, Pedro y Luis ___ reunirse para hablar de negocios.</div>
-      <select onchange="clearCard('c2_5')">
-        <option value="">— elige —</option>
-        <option value="va a">va a</option>
-        <option value="vais a">vais a</option>
-        <option value="van a">van a</option>
-        <option value="vamos a">vamos a</option>
-      </select>
-      <div class="feedback" id="fb_c2_5"></div>
-    </div>
-
-    <div class="card" data-answer="vais a" id="c2_6">
-      <div class="illus">🍷<span>copa = бокал</span></div>
-      <div class="card-q">¿Vosotros ___ poner la mesa antes de la cena?</div>
-      <select onchange="clearCard('c2_6')">
-        <option value="">— elige —</option>
-        <option value="van a">van a</option>
-        <option value="vais a">vais a</option>
-        <option value="vamos a">vamos a</option>
-        <option value="va a">va a</option>
-      </select>
-      <div class="feedback" id="fb_c2_6"></div>
-    </div>
-
-  </div>
-
-  <div class="divider"></div>
-  <p style="font-weight:800;color:var(--terra);margin-bottom:16px">✏️ Parte B — Escribe la forma correcta</p>
-  <div class="instruction">Напишите форму глагола «ir a» + инфинитив в правильной форме для данного подлежащего.</div>
-
-  <div class="ex-grid two-col">
-
-    <div class="card" data-answer="voy a salir" id="c2_7">
-      <div class="illus">🚶‍♀️<span>salir = выходить</span></div>
-      <div class="card-q">Yo / salir esta noche → Yo ___</div>
-      <input type="text" class="txt-in" placeholder="voy/vas/va... a salir" onchange="clearCard('c2_7')">
-      <div class="feedback" id="fb_c2_7"></div>
-    </div>
-
-    <div class="card" data-answer="va a cocinar" id="c2_8">
-      <div class="illus">👨‍🍳<span>cocinar = готовить</span></div>
-      <div class="card-q">Él / cocinar esta noche → Él ___</div>
-      <input type="text" class="txt-in" placeholder="voy/vas/va... a cocinar" onchange="clearCard('c2_8')">
-      <div class="feedback" id="fb_c2_8"></div>
-    </div>
-
-  </div>
-
-  <button class="check-btn" onclick="checkSection(1)">✔ Comprobar respuestas</button>
-  <button class="reset-btn" onclick="resetSection(1)">↺ Reiniciar</button>
-  <div class="score-box" id="score1"><div class="stars" id="stars1"></div><div class="score-num" id="snum1"></div><div class="score-msg" id="smsg1"></div></div>
+<div class="theory">
+<h3>📌 Ir a + infinitivo — Futuro próximo</h3>
+<div class="formula">SUJETO + <span class="hl-terra">ir</span> (presente) + <span class="hl-azul">a</span> + INFINITIVO</div>
+<p><span class="hl-terra">Voy a</span> cocinar esta noche. → <em>(Я собираюсь готовить этим вечером.)</em></p>
+<p><span class="hl-terra">Vas a</span> buscar trabajo mañana. → <em>(Ты собираешься искать работу завтра.)</em></p>
+<p><span class="hl-terra">Va a</span> salir el próximo viernes. → <em>(Он/она собирается выйти в следующую пятницу.)</em></p>
+<table class="vtable" style="margin-top:14px">
+<thead><tr><th>Pronombre</th><th>Ir a</th></tr></thead>
+<tbody>
+<tr><td>yo</td><td class="v-form">voy a</td></tr>
+<tr><td>tú</td><td class="v-form">vas a</td></tr>
+<tr><td>él / ella / usted</td><td class="v-form">va a</td></tr>
+<tr><td>nosotros/as</td><td class="v-form">vamos a</td></tr>
+<tr><td>vosotros/as</td><td class="v-form">vais a</td></tr>
+<tr><td>ellos / ellas / ustedes</td><td class="v-form">van a</td></tr>
+</tbody>
+</table>
+</div>
+<div class="ex-grid two-col" id="ex2-cards">
+<div class="card" data-answer="voy a" id="c2_1">
+<div class="illus">🛒<span>ir a la compra = идти за покупками</span></div>
+<div class="card-q">Esta tarde yo ___ ir a la compra al supermercado.</div>
+<div class="dd-widget"><div aria-label="Opciones de respuesta" class="dd-bank"><button aria-pressed="false" class="dd-chip" data-value="voy a" draggable="true" type="button">voy a</button><button aria-pressed="false" class="dd-chip" data-value="vas a" draggable="true" type="button">vas a</button><button aria-pressed="false" class="dd-chip" data-value="va a" draggable="true" type="button">va a</button><button aria-pressed="false" class="dd-chip" data-value="van a" draggable="true" type="button">van a</button></div><button aria-label="Colocar respuesta" class="dd-target" data-value="" type="button">Arrastra aquí · Перетащите сюда</button><button class="dd-clear" type="button">↺ Quitar respuesta</button></div>
+<div class="feedback" id="fb_c2_1"></div>
+</div>
+<div class="card" data-answer="va a" id="c2_2">
+<div class="illus">🎬<span>ver una peli = смотреть кино</span></div>
+<div class="card-q">El viernes por la noche, Ana ___ ver una peli en el cine.</div>
+<div class="dd-widget"><div aria-label="Opciones de respuesta" class="dd-bank"><button aria-pressed="false" class="dd-chip" data-value="voy a" draggable="true" type="button">voy a</button><button aria-pressed="false" class="dd-chip" data-value="vas a" draggable="true" type="button">vas a</button><button aria-pressed="false" class="dd-chip" data-value="va a" draggable="true" type="button">va a</button><button aria-pressed="false" class="dd-chip" data-value="vamos a" draggable="true" type="button">vamos a</button></div><button aria-label="Colocar respuesta" class="dd-target" data-value="" type="button">Arrastra aquí · Перетащите сюда</button><button class="dd-clear" type="button">↺ Quitar respuesta</button></div>
+<div class="feedback" id="fb_c2_2"></div>
+</div>
+<div class="card" data-answer="vamos a" id="c2_3">
+<div class="illus">🎂<span>celebración = празднование</span></div>
+<div class="card-q">Este fin de semana nosotros ___ celebrar el cumpleaños de Laura.</div>
+<div class="dd-widget"><div aria-label="Opciones de respuesta" class="dd-bank"><button aria-pressed="false" class="dd-chip" data-value="va a" draggable="true" type="button">va a</button><button aria-pressed="false" class="dd-chip" data-value="vais a" draggable="true" type="button">vais a</button><button aria-pressed="false" class="dd-chip" data-value="vamos a" draggable="true" type="button">vamos a</button><button aria-pressed="false" class="dd-chip" data-value="van a" draggable="true" type="button">van a</button></div><button aria-label="Colocar respuesta" class="dd-target" data-value="" type="button">Arrastra aquí · Перетащите сюда</button><button class="dd-clear" type="button">↺ Quitar respuesta</button></div>
+<div class="feedback" id="fb_c2_3"></div>
+</div>
+<div class="card" data-answer="vas a" id="c2_4">
+<div class="illus">🔌<span>cargador = зарядное устройство</span></div>
+<div class="card-q">¿Tú ___ buscar el cargador del móvil ahora?</div>
+<div class="dd-widget"><div aria-label="Opciones de respuesta" class="dd-bank"><button aria-pressed="false" class="dd-chip" data-value="voy a" draggable="true" type="button">voy a</button><button aria-pressed="false" class="dd-chip" data-value="vas a" draggable="true" type="button">vas a</button><button aria-pressed="false" class="dd-chip" data-value="va a" draggable="true" type="button">va a</button><button aria-pressed="false" class="dd-chip" data-value="vais a" draggable="true" type="button">vais a</button></div><button aria-label="Colocar respuesta" class="dd-target" data-value="" type="button">Arrastra aquí · Перетащите сюда</button><button class="dd-clear" type="button">↺ Quitar respuesta</button></div>
+<div class="feedback" id="fb_c2_4"></div>
+</div>
+<div class="card" data-answer="van a" id="c2_5">
+<div class="illus">🤝<span>reunirse = собираться</span></div>
+<div class="card-q">El lunes, Pedro y Luis ___ reunirse para hablar de negocios.</div>
+<div class="dd-widget"><div aria-label="Opciones de respuesta" class="dd-bank"><button aria-pressed="false" class="dd-chip" data-value="va a" draggable="true" type="button">va a</button><button aria-pressed="false" class="dd-chip" data-value="vais a" draggable="true" type="button">vais a</button><button aria-pressed="false" class="dd-chip" data-value="van a" draggable="true" type="button">van a</button><button aria-pressed="false" class="dd-chip" data-value="vamos a" draggable="true" type="button">vamos a</button></div><button aria-label="Colocar respuesta" class="dd-target" data-value="" type="button">Arrastra aquí · Перетащите сюда</button><button class="dd-clear" type="button">↺ Quitar respuesta</button></div>
+<div class="feedback" id="fb_c2_5"></div>
+</div>
+<div class="card" data-answer="vais a" id="c2_6">
+<div class="illus">🍷<span>copa = бокал</span></div>
+<div class="card-q">¿Vosotros ___ poner la mesa antes de la cena?</div>
+<div class="dd-widget"><div aria-label="Opciones de respuesta" class="dd-bank"><button aria-pressed="false" class="dd-chip" data-value="van a" draggable="true" type="button">van a</button><button aria-pressed="false" class="dd-chip" data-value="vais a" draggable="true" type="button">vais a</button><button aria-pressed="false" class="dd-chip" data-value="vamos a" draggable="true" type="button">vamos a</button><button aria-pressed="false" class="dd-chip" data-value="va a" draggable="true" type="button">va a</button></div><button aria-label="Colocar respuesta" class="dd-target" data-value="" type="button">Arrastra aquí · Перетащите сюда</button><button class="dd-clear" type="button">↺ Quitar respuesta</button></div>
+<div class="feedback" id="fb_c2_6"></div>
+</div>
+</div>
+<div class="divider"></div>
+<p style="font-weight:800;color:var(--terra);margin-bottom:16px">✏️ Parte B — Escribe la forma correcta</p>
+<div class="instruction">Напишите форму глагола «ir a» + инфинитив в правильной форме для данного подлежащего.</div>
+<div class="ex-grid two-col">
+<div class="card" data-answer="voy a salir" id="c2_7">
+<div class="illus">🚶‍♀️<span>salir = выходить</span></div>
+<div class="card-q">Yo / salir esta noche → Yo ___</div>
+<input class="txt-in" onchange="clearCard('c2_7')" placeholder="voy/vas/va... a salir" type="text"/>
+<div class="feedback" id="fb_c2_7"></div>
+</div>
+<div class="card" data-answer="va a cocinar" id="c2_8">
+<div class="illus">👨‍🍳<span>cocinar = готовить</span></div>
+<div class="card-q">Él / cocinar esta noche → Él ___</div>
+<input class="txt-in" onchange="clearCard('c2_8')" placeholder="voy/vas/va... a cocinar" type="text"/>
+<div class="feedback" id="fb_c2_8"></div>
+</div>
+</div>
+<button class="check-btn" onclick="checkSection(1)">✔ Comprobar respuestas</button>
+<button class="reset-btn" onclick="resetSection(1)">↺ Reiniciar</button>
+<div class="score-box" id="score1"><div class="stars" id="stars1"></div><div class="score-num" id="snum1"></div><div class="score-msg" id="smsg1"></div></div>
 </section>
-
-
 <!-- ═══════════════════════════════════════════════════
      SECCIÓN 3: PERÍFRASIS VERBALES
 ═══════════════════════════════════════════════════ -->
 <section class="section" id="sec2">
-  <div class="sec-num">Ejercicio 3</div>
-  <h2 class="sec-title">Perífrasis verbales</h2>
-  <p class="sec-sub">empezar a · comenzar a · terminar de · acabar de · soler + inf · tener que + inf</p>
-
-  <div class="instruction">
-    Глагольные перифразы — это конструкции, состоящие из вспомогательного глагола + инфинитива. Выберите правильную перифразу для каждого предложения. Обратите внимание на значение каждой конструкции!
+<div class="sec-num">Ejercicio 3</div>
+<h2 class="sec-title">Perífrasis verbales</h2>
+<p class="sec-sub">empezar a · comenzar a · terminar de · acabar de · soler + inf · tener que + inf</p>
+<div class="instruction">
+    Глагольные перифразы — это конструкции, состоящие из вспомогательного глагола + инфинитива. Перетащите правильную перифразу в поле ответа для каждого предложения. Обратите внимание на значение каждой конструкции!
   </div>
-
-  <!-- Theory cards -->
-  <div class="perf-list">
-    <div class="perf-item">
-      <div class="perf-badge">empezar a + inf<br>comenzar a + inf</div>
-      <div class="perf-text">
-        <strong>Начинать что-то делать</strong> (начало действия)<br>
-        <span class="perf-ru">Я начинаю готовить. → Empiezo a cocinar.</span>
-      </div>
-    </div>
-    <div class="perf-item">
-      <div class="perf-badge b-oliva">terminar de + inf<br>acabar de + inf</div>
-      <div class="perf-text">
-        <strong>terminar de</strong> = заканчивать что-то делать &nbsp;|&nbsp; <strong>acabar de</strong> = только что что-то сделать (недавнее прошлое)<br>
-        <span class="perf-ru">Acabo de llegar. = Я только что приехал. &nbsp;|&nbsp; Termino de cocinar a las 8. = Я заканчиваю готовить в 8.</span>
-      </div>
-    </div>
-    <div class="perf-item">
-      <div class="perf-badge b-azul">soler + inf</div>
-      <div class="perf-text">
-        <strong>Обычно что-то делать</strong> (привычное действие)<br>
-        <span class="perf-ru">Suelo levantarme a las 7. = Я обычно встаю в 7.</span>
-      </div>
-    </div>
-    <div class="perf-item">
-      <div class="perf-badge b-naranja">tener que + inf</div>
-      <div class="perf-text">
-        <strong>Нужно / надо что-то сделать</strong> (обязательство)<br>
-        <span class="perf-ru">Tengo que estudiar. = Мне нужно учиться.</span>
-      </div>
-    </div>
-    <div class="perf-item">
-      <div class="perf-badge b-cielo">ponerse a + inf</div>
-      <div class="perf-text">
-        <strong>Внезапно начать что-то делать</strong><br>
-        <span class="perf-ru">Se puso a llorar. = Он вдруг заплакал.</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="divider"></div>
-  <p style="font-weight:800;color:var(--terra);margin-bottom:8px">🎯 Elige la perífrasis correcta</p>
-  <div class="instruction">Выберите подходящую перифразу. Учитывайте смысл предложения!</div>
-
-  <div class="ex-grid two-col" id="ex3-cards">
-
-    <div class="card" data-answer="Suelo" id="c3_1">
-      <div class="illus">☕<span>soler = обычно делать</span></div>
-      <div class="card-q">___ tomar café con leche y cereales por las mañanas. <em>(Я обычно пью кофе с молоком и хлопья по утрам.)</em></div>
-      <select onchange="clearCard('c3_1')">
-        <option value="">— elige —</option>
-        <option value="Suelo">Suelo</option>
-        <option value="Acabo de">Acabo de</option>
-        <option value="Tengo que">Tengo que</option>
-        <option value="Empiezo a">Empiezo a</option>
-      </select>
-      <div class="feedback" id="fb_c3_1"></div>
-    </div>
-
-    <div class="card" data-answer="Acabo de" id="c3_2">
-      <div class="illus">🛒<span>ir a la compra = идти за покупками</span></div>
-      <div class="card-q">___ ir a la compra. El zumo de naranja todavía está frío. <em>(Я только что вернулась из магазина.)</em></div>
-      <select onchange="clearCard('c3_2')">
-        <option value="">— elige —</option>
-        <option value="Suelo">Suelo</option>
-        <option value="Acabo de">Acabo de</option>
-        <option value="Tengo que">Tengo que</option>
-        <option value="Termino de">Termino de</option>
-      </select>
-      <div class="feedback" id="fb_c3_2"></div>
-    </div>
-
-    <div class="card" data-answer="Tengo que" id="c3_3">
-      <div class="illus">📋<span>lavar = мыть</span></div>
-      <div class="card-q">___ lavar los platos antes de salir. <em>(Мне нужно помыть посуду перед выходом.)</em></div>
-      <select onchange="clearCard('c3_3')">
-        <option value="">— elige —</option>
-        <option value="Suelo">Suelo</option>
-        <option value="Acabo de">Acabo de</option>
-        <option value="Tengo que">Tengo que</option>
-        <option value="Empiezo a">Empiezo a</option>
-      </select>
-      <div class="feedback" id="fb_c3_3"></div>
-    </div>
-
-    <div class="card" data-answer="Empiezo a" id="c3_4">
-      <div class="illus">🎓<span>empezar a = начинать</span></div>
-      <div class="card-q">___ entender el español. ¡Es una buena señal! <em>(Я начинаю понимать испанский.)</em></div>
-      <select onchange="clearCard('c3_4')">
-        <option value="">— elige —</option>
-        <option value="Suelo">Suelo</option>
-        <option value="Acabo de">Acabo de</option>
-        <option value="Tengo que">Tengo que</option>
-        <option value="Empiezo a">Empiezo a</option>
-      </select>
-      <div class="feedback" id="fb_c3_4"></div>
-    </div>
-
-    <div class="card" data-answer="Termina de" id="c3_5">
-      <div class="illus">🍳<span>terminar de = заканчивать</span></div>
-      <div class="card-q">Pedro ___ cocinar a las dos. Después ponemos la mesa. <em>(Педро заканчивает готовить в два часа.)</em></div>
-      <select onchange="clearCard('c3_5')">
-        <option value="">— elige —</option>
-        <option value="Termina de">Termina de</option>
-        <option value="Acaba de">Acaba de</option>
-        <option value="Tiene que">Tiene que</option>
-        <option value="Suele">Suele</option>
-      </select>
-      <div class="feedback" id="fb_c3_5"></div>
-    </div>
-
-    <div class="card" data-answer="Suele" id="c3_6">
-      <div class="illus">🌙<span>acostarse = ложиться спать</span></div>
-      <div class="card-q">Mi abuela ___ acostarse a las 10 de la noche. <em>(Моя бабушка обычно ложится спать в 10 вечера.)</em></div>
-      <select onchange="clearCard('c3_6')">
-        <option value="">— elige —</option>
-        <option value="Suele">Suele</option>
-        <option value="Acaba de">Acaba de</option>
-        <option value="Tiene que">Tiene que</option>
-        <option value="Termina de">Termina de</option>
-      </select>
-      <div class="feedback" id="fb_c3_6"></div>
-    </div>
-
-    <div class="card" data-answer="tenemos que" id="c3_7">
-      <div class="illus">💊<span>doler = болеть</span></div>
-      <div class="card-q">Me duele la muela. ___ ir al dentista hoy. <em>(У меня болит зуб. Нам нужно идти к врачу.)</em></div>
-      <select onchange="clearCard('c3_7')">
-        <option value="">— elige —</option>
-        <option value="solemos">solemos</option>
-        <option value="acabamos de">acabamos de</option>
-        <option value="tenemos que">tenemos que</option>
-        <option value="empezamos a">empezamos a</option>
-      </select>
-      <div class="feedback" id="fb_c3_7"></div>
-    </div>
-
-    <div class="card" data-answer="acaban de" id="c3_8">
-      <div class="illus">🏠<span>volver = возвращаться</span></div>
-      <div class="card-q">Los niños ___ volver del colegio. Tienen mucha hambre. <em>(Дети только что вернулись из школы.)</em></div>
-      <select onchange="clearCard('c3_8')">
-        <option value="">— elige —</option>
-        <option value="suelen">suelen</option>
-        <option value="acaban de">acaban de</option>
-        <option value="tienen que">tienen que</option>
-        <option value="terminan de">terminan de</option>
-      </select>
-      <div class="feedback" id="fb_c3_8"></div>
-    </div>
-
-  </div>
-
-  <button class="check-btn" onclick="checkSection(2)">✔ Comprobar respuestas</button>
-  <button class="reset-btn" onclick="resetSection(2)">↺ Reiniciar</button>
-  <div class="score-box" id="score2"><div class="stars" id="stars2"></div><div class="score-num" id="snum2"></div><div class="score-msg" id="smsg2"></div></div>
+<!-- Theory cards -->
+<div class="perf-list">
+<div class="perf-item">
+<div class="perf-badge">empezar a + inf<br/>comenzar a + inf</div>
+<div class="perf-text">
+<strong>Начинать что-то делать</strong> (начало действия)<br/>
+<span class="perf-ru">Я начинаю готовить. → Empiezo a cocinar.</span>
+</div>
+</div>
+<div class="perf-item">
+<div class="perf-badge b-oliva">terminar de + inf<br/>acabar de + inf</div>
+<div class="perf-text">
+<strong>terminar de</strong> = заканчивать что-то делать  |  <strong>acabar de</strong> = только что что-то сделать (недавнее прошлое)<br/>
+<span class="perf-ru">Acabo de llegar. = Я только что приехал.  |  Termino de cocinar a las 8. = Я заканчиваю готовить в 8.</span>
+</div>
+</div>
+<div class="perf-item">
+<div class="perf-badge b-azul">soler + inf</div>
+<div class="perf-text">
+<strong>Обычно что-то делать</strong> (привычное действие)<br/>
+<span class="perf-ru">Suelo levantarme a las 7. = Я обычно встаю в 7.</span>
+</div>
+</div>
+<div class="perf-item">
+<div class="perf-badge b-naranja">tener que + inf</div>
+<div class="perf-text">
+<strong>Нужно / надо что-то сделать</strong> (обязательство)<br/>
+<span class="perf-ru">Tengo que estudiar. = Мне нужно учиться.</span>
+</div>
+</div>
+<div class="perf-item">
+<div class="perf-badge b-cielo">ponerse a + inf</div>
+<div class="perf-text">
+<strong>Внезапно начать что-то делать</strong><br/>
+<span class="perf-ru">Se puso a llorar. = Он вдруг заплакал.</span>
+</div>
+</div>
+</div>
+<div class="divider"></div>
+<p style="font-weight:800;color:var(--terra);margin-bottom:8px">🎯 Elige la perífrasis correcta</p>
+<div class="instruction">Перетащите подходящую перифразу в поле ответа. Учитывайте смысл предложения!</div>
+<div class="ex-grid two-col" id="ex3-cards">
+<div class="card" data-answer="Suelo" id="c3_1">
+<div class="illus">☕<span>soler = обычно делать</span></div>
+<div class="card-q">___ tomar café con leche y cereales por las mañanas. <em>(Я обычно пью кофе с молоком и хлопья по утрам.)</em></div>
+<div class="dd-widget"><div aria-label="Opciones de respuesta" class="dd-bank"><button aria-pressed="false" class="dd-chip" data-value="Suelo" draggable="true" type="button">Suelo</button><button aria-pressed="false" class="dd-chip" data-value="Acabo de" draggable="true" type="button">Acabo de</button><button aria-pressed="false" class="dd-chip" data-value="Tengo que" draggable="true" type="button">Tengo que</button><button aria-pressed="false" class="dd-chip" data-value="Empiezo a" draggable="true" type="button">Empiezo a</button></div><button aria-label="Colocar respuesta" class="dd-target" data-value="" type="button">Arrastra aquí · Перетащите сюда</button><button class="dd-clear" type="button">↺ Quitar respuesta</button></div>
+<div class="feedback" id="fb_c3_1"></div>
+</div>
+<div class="card" data-answer="Acabo de" id="c3_2">
+<div class="illus">🛒<span>ir a la compra = идти за покупками</span></div>
+<div class="card-q">___ ir a la compra. El zumo de naranja todavía está frío. <em>(Я только что вернулась из магазина.)</em></div>
+<div class="dd-widget"><div aria-label="Opciones de respuesta" class="dd-bank"><button aria-pressed="false" class="dd-chip" data-value="Suelo" draggable="true" type="button">Suelo</button><button aria-pressed="false" class="dd-chip" data-value="Acabo de" draggable="true" type="button">Acabo de</button><button aria-pressed="false" class="dd-chip" data-value="Tengo que" draggable="true" type="button">Tengo que</button><button aria-pressed="false" class="dd-chip" data-value="Termino de" draggable="true" type="button">Termino de</button></div><button aria-label="Colocar respuesta" class="dd-target" data-value="" type="button">Arrastra aquí · Перетащите сюда</button><button class="dd-clear" type="button">↺ Quitar respuesta</button></div>
+<div class="feedback" id="fb_c3_2"></div>
+</div>
+<div class="card" data-answer="Tengo que" id="c3_3">
+<div class="illus">📋<span>lavar = мыть</span></div>
+<div class="card-q">___ lavar los platos antes de salir. <em>(Мне нужно помыть посуду перед выходом.)</em></div>
+<div class="dd-widget"><div aria-label="Opciones de respuesta" class="dd-bank"><button aria-pressed="false" class="dd-chip" data-value="Suelo" draggable="true" type="button">Suelo</button><button aria-pressed="false" class="dd-chip" data-value="Acabo de" draggable="true" type="button">Acabo de</button><button aria-pressed="false" class="dd-chip" data-value="Tengo que" draggable="true" type="button">Tengo que</button><button aria-pressed="false" class="dd-chip" data-value="Empiezo a" draggable="true" type="button">Empiezo a</button></div><button aria-label="Colocar respuesta" class="dd-target" data-value="" type="button">Arrastra aquí · Перетащите сюда</button><button class="dd-clear" type="button">↺ Quitar respuesta</button></div>
+<div class="feedback" id="fb_c3_3"></div>
+</div>
+<div class="card" data-answer="Empiezo a" id="c3_4">
+<div class="illus">🎓<span>empezar a = начинать</span></div>
+<div class="card-q">___ entender el español. ¡Es una buena señal! <em>(Я начинаю понимать испанский.)</em></div>
+<div class="dd-widget"><div aria-label="Opciones de respuesta" class="dd-bank"><button aria-pressed="false" class="dd-chip" data-value="Suelo" draggable="true" type="button">Suelo</button><button aria-pressed="false" class="dd-chip" data-value="Acabo de" draggable="true" type="button">Acabo de</button><button aria-pressed="false" class="dd-chip" data-value="Tengo que" draggable="true" type="button">Tengo que</button><button aria-pressed="false" class="dd-chip" data-value="Empiezo a" draggable="true" type="button">Empiezo a</button></div><button aria-label="Colocar respuesta" class="dd-target" data-value="" type="button">Arrastra aquí · Перетащите сюда</button><button class="dd-clear" type="button">↺ Quitar respuesta</button></div>
+<div class="feedback" id="fb_c3_4"></div>
+</div>
+<div class="card" data-answer="Termina de" id="c3_5">
+<div class="illus">🍳<span>terminar de = заканчивать</span></div>
+<div class="card-q">Pedro ___ cocinar a las dos. Después ponemos la mesa. <em>(Педро заканчивает готовить в два часа.)</em></div>
+<div class="dd-widget"><div aria-label="Opciones de respuesta" class="dd-bank"><button aria-pressed="false" class="dd-chip" data-value="Termina de" draggable="true" type="button">Termina de</button><button aria-pressed="false" class="dd-chip" data-value="Acaba de" draggable="true" type="button">Acaba de</button><button aria-pressed="false" class="dd-chip" data-value="Tiene que" draggable="true" type="button">Tiene que</button><button aria-pressed="false" class="dd-chip" data-value="Suele" draggable="true" type="button">Suele</button></div><button aria-label="Colocar respuesta" class="dd-target" data-value="" type="button">Arrastra aquí · Перетащите сюда</button><button class="dd-clear" type="button">↺ Quitar respuesta</button></div>
+<div class="feedback" id="fb_c3_5"></div>
+</div>
+<div class="card" data-answer="Suele" id="c3_6">
+<div class="illus">🌙<span>acostarse = ложиться спать</span></div>
+<div class="card-q">Mi abuela ___ acostarse a las 10 de la noche. <em>(Моя бабушка обычно ложится спать в 10 вечера.)</em></div>
+<div class="dd-widget"><div aria-label="Opciones de respuesta" class="dd-bank"><button aria-pressed="false" class="dd-chip" data-value="Suele" draggable="true" type="button">Suele</button><button aria-pressed="false" class="dd-chip" data-value="Acaba de" draggable="true" type="button">Acaba de</button><button aria-pressed="false" class="dd-chip" data-value="Tiene que" draggable="true" type="button">Tiene que</button><button aria-pressed="false" class="dd-chip" data-value="Termina de" draggable="true" type="button">Termina de</button></div><button aria-label="Colocar respuesta" class="dd-target" data-value="" type="button">Arrastra aquí · Перетащите сюда</button><button class="dd-clear" type="button">↺ Quitar respuesta</button></div>
+<div class="feedback" id="fb_c3_6"></div>
+</div>
+<div class="card" data-answer="tenemos que" id="c3_7">
+<div class="illus">💊<span>doler = болеть</span></div>
+<div class="card-q">Me duele la muela. ___ ir al dentista hoy. <em>(У меня болит зуб. Нам нужно идти к врачу.)</em></div>
+<div class="dd-widget"><div aria-label="Opciones de respuesta" class="dd-bank"><button aria-pressed="false" class="dd-chip" data-value="solemos" draggable="true" type="button">solemos</button><button aria-pressed="false" class="dd-chip" data-value="acabamos de" draggable="true" type="button">acabamos de</button><button aria-pressed="false" class="dd-chip" data-value="tenemos que" draggable="true" type="button">tenemos que</button><button aria-pressed="false" class="dd-chip" data-value="empezamos a" draggable="true" type="button">empezamos a</button></div><button aria-label="Colocar respuesta" class="dd-target" data-value="" type="button">Arrastra aquí · Перетащите сюда</button><button class="dd-clear" type="button">↺ Quitar respuesta</button></div>
+<div class="feedback" id="fb_c3_7"></div>
+</div>
+<div class="card" data-answer="acaban de" id="c3_8">
+<div class="illus">🏠<span>volver = возвращаться</span></div>
+<div class="card-q">Los niños ___ volver del colegio. Tienen mucha hambre. <em>(Дети только что вернулись из школы.)</em></div>
+<div class="dd-widget"><div aria-label="Opciones de respuesta" class="dd-bank"><button aria-pressed="false" class="dd-chip" data-value="suelen" draggable="true" type="button">suelen</button><button aria-pressed="false" class="dd-chip" data-value="acaban de" draggable="true" type="button">acaban de</button><button aria-pressed="false" class="dd-chip" data-value="tienen que" draggable="true" type="button">tienen que</button><button aria-pressed="false" class="dd-chip" data-value="terminan de" draggable="true" type="button">terminan de</button></div><button aria-label="Colocar respuesta" class="dd-target" data-value="" type="button">Arrastra aquí · Перетащите сюда</button><button class="dd-clear" type="button">↺ Quitar respuesta</button></div>
+<div class="feedback" id="fb_c3_8"></div>
+</div>
+</div>
+<button class="check-btn" onclick="checkSection(2)">✔ Comprobar respuestas</button>
+<button class="reset-btn" onclick="resetSection(2)">↺ Reiniciar</button>
+<div class="score-box" id="score2"><div class="stars" id="stars2"></div><div class="score-num" id="snum2"></div><div class="score-msg" id="smsg2"></div></div>
 </section>
-
-
 <!-- ═══════════════════════════════════════════════════
      SECCIÓN 4: SER VS ESTAR
 ═══════════════════════════════════════════════════ -->
 <section class="section" id="sec3">
-  <div class="sec-num">Ejercicio 4</div>
-  <h2 class="sec-title">Ser vs Estar</h2>
-  <p class="sec-sub">Dos verbos para «быть» — ¡muy diferentes!</p>
-
-  <div class="instruction">
+<div class="sec-num">Ejercicio 4</div>
+<h2 class="sec-title">Ser vs Estar</h2>
+<p class="sec-sub">Dos verbos para «быть» — ¡muy diferentes!</p>
+<div class="instruction">
     В испанском языке есть два глагола «быть»: SER и ESTAR. Нажмите на правильный глагол для каждого предложения. Подсказка: SER — постоянные качества; ESTAR — временные состояния и местоположение.
   </div>
-
-  <div class="theory">
-    <h3>📌 SER vs ESTAR — Regla fundamental</h3>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:12px">
-      <div style="background:#E8F0FB;border-radius:10px;padding:14px">
-        <div style="font-weight:900;color:var(--azul);margin-bottom:8px;font-size:1.05rem">SER 🔵</div>
-        <div style="font-size:.88rem;line-height:1.8;color:var(--texto)">
-          ✦ Identidad: Yo <strong>soy</strong> estudiante.<br>
-          ✦ Origen: Ella <strong>es</strong> de Madrid.<br>
-          ✦ Características permanentes: El azúcar <strong>es</strong> blanca.<br>
-          ✦ Profesión: Él <strong>es</strong> hombre de negocios.<br>
+<div class="theory">
+<h3>📌 SER vs ESTAR — Regla fundamental</h3>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:12px">
+<div style="background:#E8F0FB;border-radius:10px;padding:14px">
+<div style="font-weight:900;color:var(--azul);margin-bottom:8px;font-size:1.05rem">SER 🔵</div>
+<div style="font-size:.88rem;line-height:1.8;color:var(--texto)">
+          ✦ Identidad: Yo <strong>soy</strong> estudiante.<br/>
+          ✦ Origen: Ella <strong>es</strong> de Madrid.<br/>
+          ✦ Características permanentes: El azúcar <strong>es</strong> blanca.<br/>
+          ✦ Profesión: Él <strong>es</strong> hombre de negocios.<br/>
           ✦ Materiales / descripción objetiva
         </div>
-      </div>
-      <div style="background:#E8F5EC;border-radius:10px;padding:14px">
-        <div style="font-weight:900;color:var(--oliva);margin-bottom:8px;font-size:1.05rem">ESTAR 🟢</div>
-        <div style="font-size:.88rem;line-height:1.8;color:var(--texto)">
-          ✦ Estado temporal: Estoy <strong>cansada</strong>.<br>
-          ✦ Localización: El libro <strong>está</strong> en la mesa.<br>
-          ✦ Resultado de una acción: La tienda <strong>está</strong> cerrada.<br>
-          ✦ Estado de ánimo / salud<br>
+</div>
+<div style="background:#E8F5EC;border-radius:10px;padding:14px">
+<div style="font-weight:900;color:var(--oliva);margin-bottom:8px;font-size:1.05rem">ESTAR 🟢</div>
+<div style="font-size:.88rem;line-height:1.8;color:var(--texto)">
+          ✦ Estado temporal: Estoy <strong>cansada</strong>.<br/>
+          ✦ Localización: El libro <strong>está</strong> en la mesa.<br/>
+          ✦ Resultado de una acción: La tienda <strong>está</strong> cerrada.<br/>
+          ✦ Estado de ánimo / salud<br/>
           ✦ Estar enfermo, estar cansado…
         </div>
-      </div>
-    </div>
-    <table class="vtable">
-      <thead><tr><th>Pronombre</th><th>SER</th><th>ESTAR</th></tr></thead>
-      <tbody>
-        <tr><td>yo</td><td class="v-form">soy</td><td class="v-form">estoy</td></tr>
-        <tr><td>tú</td><td class="v-form">eres</td><td class="v-form">estás</td></tr>
-        <tr><td>él/ella</td><td class="v-form">es</td><td class="v-form">está</td></tr>
-        <tr><td>nosotros</td><td class="v-form">somos</td><td class="v-form">estamos</td></tr>
-        <tr><td>vosotros</td><td class="v-form">sois</td><td class="v-form">estáis</td></tr>
-        <tr><td>ellos</td><td class="v-form">son</td><td class="v-form">están</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="ex-grid two-col" id="ex4-cards">
-
-    <div class="card" data-answer="está" id="c4_1">
-      <div class="illus">😴<span>cansado = уставший</span></div>
-      <div class="card-q">María ___ muy cansada después del trabajo.</div>
-      <div class="toggle-wrap">
-        <button class="tog" onclick="selectToggle(this,'c4_1','es')">es</button>
-        <button class="tog" onclick="selectToggle(this,'c4_1','está')">está</button>
-      </div>
-      <div class="feedback" id="fb_c4_1"></div>
-    </div>
-
-    <div class="card" data-answer="es" id="c4_2">
-      <div class="illus">💼<span>hombre de negocios = бизнесмен</span></div>
-      <div class="card-q">Mi padre ___ hombre de negocios. Trabaja mucho.</div>
-      <div class="toggle-wrap">
-        <button class="tog" onclick="selectToggle(this,'c4_2','es')">es</button>
-        <button class="tog" onclick="selectToggle(this,'c4_2','está')">está</button>
-      </div>
-      <div class="feedback" id="fb_c4_2"></div>
-    </div>
-
-    <div class="card" data-answer="está" id="c4_3">
-      <div class="illus">🤒<span>estar enfermo = болеть</span></div>
-      <div class="card-q">Juan no va al trabajo hoy porque ___ enfermo.</div>
-      <div class="toggle-wrap">
-        <button class="tog" onclick="selectToggle(this,'c4_3','es')">es</button>
-        <button class="tog" onclick="selectToggle(this,'c4_3','está')">está</button>
-      </div>
-      <div class="feedback" id="fb_c4_3"></div>
-    </div>
-
-    <div class="card" data-answer="es" id="c4_4">
-      <div class="illus">🧂<span>sal = соль</span></div>
-      <div class="card-q">La sal ___ blanca y el azúcar también.</div>
-      <div class="toggle-wrap">
-        <button class="tog" onclick="selectToggle(this,'c4_4','es')">es</button>
-        <button class="tog" onclick="selectToggle(this,'c4_4','está')">está</button>
-      </div>
-      <div class="feedback" id="fb_c4_4"></div>
-    </div>
-
-    <div class="card" data-answer="está" id="c4_5">
-      <div class="illus">🏬<span>tienda = магазин</span></div>
-      <div class="card-q">La tienda ___ cerrada los domingos.</div>
-      <div class="toggle-wrap">
-        <button class="tog" onclick="selectToggle(this,'c4_5','es')">es</button>
-        <button class="tog" onclick="selectToggle(this,'c4_5','está')">está</button>
-      </div>
-      <div class="feedback" id="fb_c4_5"></div>
-    </div>
-
-    <div class="card" data-answer="es" id="c4_6">
-      <div class="illus">🧡<span>fácil/difícil = лёгкий/трудный</span></div>
-      <div class="card-q">El español ___ fácil si practicas todos los días.</div>
-      <div class="toggle-wrap">
-        <button class="tog" onclick="selectToggle(this,'c4_6','es')">es</button>
-        <button class="tog" onclick="selectToggle(this,'c4_6','está')">está</button>
-      </div>
-      <div class="feedback" id="fb_c4_6"></div>
-    </div>
-
-    <div class="card" data-answer="está" id="c4_7">
-      <div class="illus">🏪<span>cerca = рядом</span></div>
-      <div class="card-q">La parada de autobús ___ cerca del supermercado.</div>
-      <div class="toggle-wrap">
-        <button class="tog" onclick="selectToggle(this,'c4_7','es')">es</button>
-        <button class="tog" onclick="selectToggle(this,'c4_7','está')">está</button>
-      </div>
-      <div class="feedback" id="fb_c4_7"></div>
-    </div>
-
-    <div class="card" data-answer="es" id="c4_8">
-      <div class="illus">🎉<span>cumpleaños = день рождения</span></div>
-      <div class="card-q">Hoy ___ el cumpleaños de mi mejor amiga.</div>
-      <div class="toggle-wrap">
-        <button class="tog" onclick="selectToggle(this,'c4_8','es')">es</button>
-        <button class="tog" onclick="selectToggle(this,'c4_8','está')">está</button>
-      </div>
-      <div class="feedback" id="fb_c4_8"></div>
-    </div>
-
-    <div class="card" data-answer="están" id="c4_9">
-      <div class="illus">😒<span>aburrido = скучный</span></div>
-      <div class="card-q">Los niños ___ aburridos. No hay nada que hacer.</div>
-      <div class="toggle-wrap">
-        <button class="tog" onclick="selectToggle(this,'c4_9','son')">son</button>
-        <button class="tog" onclick="selectToggle(this,'c4_9','están')">están</button>
-      </div>
-      <div class="feedback" id="fb_c4_9"></div>
-    </div>
-
-    <div class="card" data-answer="son" id="c4_10">
-      <div class="illus">💰<span>barato/caro = дешёвый/дорогой</span></div>
-      <div class="card-q">Los zapatos de cuero ___ caros siempre.</div>
-      <div class="toggle-wrap">
-        <button class="tog" onclick="selectToggle(this,'c4_10','son')">son</button>
-        <button class="tog" onclick="selectToggle(this,'c4_10','están')">están</button>
-      </div>
-      <div class="feedback" id="fb_c4_10"></div>
-    </div>
-
-  </div>
-
-  <button class="check-btn" onclick="checkSection(3)">✔ Comprobar respuestas</button>
-  <button class="reset-btn" onclick="resetSection(3)">↺ Reiniciar</button>
-  <div class="score-box" id="score3"><div class="stars" id="stars3"></div><div class="score-num" id="snum3"></div><div class="score-msg" id="smsg3"></div></div>
+</div>
+</div>
+<table class="vtable">
+<thead><tr><th>Pronombre</th><th>SER</th><th>ESTAR</th></tr></thead>
+<tbody>
+<tr><td>yo</td><td class="v-form">soy</td><td class="v-form">estoy</td></tr>
+<tr><td>tú</td><td class="v-form">eres</td><td class="v-form">estás</td></tr>
+<tr><td>él/ella</td><td class="v-form">es</td><td class="v-form">está</td></tr>
+<tr><td>nosotros</td><td class="v-form">somos</td><td class="v-form">estamos</td></tr>
+<tr><td>vosotros</td><td class="v-form">sois</td><td class="v-form">estáis</td></tr>
+<tr><td>ellos</td><td class="v-form">son</td><td class="v-form">están</td></tr>
+</tbody>
+</table>
+</div>
+<div class="ex-grid two-col" id="ex4-cards">
+<div class="card" data-answer="está" id="c4_1">
+<div class="illus">😴<span>cansado = уставший</span></div>
+<div class="card-q">María ___ muy cansada después del trabajo.</div>
+<div class="toggle-wrap">
+<button class="tog" onclick="selectToggle(this,'c4_1','es')">es</button>
+<button class="tog" onclick="selectToggle(this,'c4_1','está')">está</button>
+</div>
+<div class="feedback" id="fb_c4_1"></div>
+</div>
+<div class="card" data-answer="es" id="c4_2">
+<div class="illus">💼<span>hombre de negocios = бизнесмен</span></div>
+<div class="card-q">Mi padre ___ hombre de negocios. Trabaja mucho.</div>
+<div class="toggle-wrap">
+<button class="tog" onclick="selectToggle(this,'c4_2','es')">es</button>
+<button class="tog" onclick="selectToggle(this,'c4_2','está')">está</button>
+</div>
+<div class="feedback" id="fb_c4_2"></div>
+</div>
+<div class="card" data-answer="está" id="c4_3">
+<div class="illus">🤒<span>estar enfermo = болеть</span></div>
+<div class="card-q">Juan no va al trabajo hoy porque ___ enfermo.</div>
+<div class="toggle-wrap">
+<button class="tog" onclick="selectToggle(this,'c4_3','es')">es</button>
+<button class="tog" onclick="selectToggle(this,'c4_3','está')">está</button>
+</div>
+<div class="feedback" id="fb_c4_3"></div>
+</div>
+<div class="card" data-answer="es" id="c4_4">
+<div class="illus">🧂<span>sal = соль</span></div>
+<div class="card-q">La sal ___ blanca y el azúcar también.</div>
+<div class="toggle-wrap">
+<button class="tog" onclick="selectToggle(this,'c4_4','es')">es</button>
+<button class="tog" onclick="selectToggle(this,'c4_4','está')">está</button>
+</div>
+<div class="feedback" id="fb_c4_4"></div>
+</div>
+<div class="card" data-answer="está" id="c4_5">
+<div class="illus">🏬<span>tienda = магазин</span></div>
+<div class="card-q">La tienda ___ cerrada los domingos.</div>
+<div class="toggle-wrap">
+<button class="tog" onclick="selectToggle(this,'c4_5','es')">es</button>
+<button class="tog" onclick="selectToggle(this,'c4_5','está')">está</button>
+</div>
+<div class="feedback" id="fb_c4_5"></div>
+</div>
+<div class="card" data-answer="es" id="c4_6">
+<div class="illus">🧡<span>fácil/difícil = лёгкий/трудный</span></div>
+<div class="card-q">El español ___ fácil si practicas todos los días.</div>
+<div class="toggle-wrap">
+<button class="tog" onclick="selectToggle(this,'c4_6','es')">es</button>
+<button class="tog" onclick="selectToggle(this,'c4_6','está')">está</button>
+</div>
+<div class="feedback" id="fb_c4_6"></div>
+</div>
+<div class="card" data-answer="está" id="c4_7">
+<div class="illus">🏪<span>cerca = рядом</span></div>
+<div class="card-q">La parada de autobús ___ cerca del supermercado.</div>
+<div class="toggle-wrap">
+<button class="tog" onclick="selectToggle(this,'c4_7','es')">es</button>
+<button class="tog" onclick="selectToggle(this,'c4_7','está')">está</button>
+</div>
+<div class="feedback" id="fb_c4_7"></div>
+</div>
+<div class="card" data-answer="es" id="c4_8">
+<div class="illus">🎉<span>cumpleaños = день рождения</span></div>
+<div class="card-q">Hoy ___ el cumpleaños de mi mejor amiga.</div>
+<div class="toggle-wrap">
+<button class="tog" onclick="selectToggle(this,'c4_8','es')">es</button>
+<button class="tog" onclick="selectToggle(this,'c4_8','está')">está</button>
+</div>
+<div class="feedback" id="fb_c4_8"></div>
+</div>
+<div class="card" data-answer="están" id="c4_9">
+<div class="illus">😒<span>aburrido = скучный</span></div>
+<div class="card-q">Los niños ___ aburridos. No hay nada que hacer.</div>
+<div class="toggle-wrap">
+<button class="tog" onclick="selectToggle(this,'c4_9','son')">son</button>
+<button class="tog" onclick="selectToggle(this,'c4_9','están')">están</button>
+</div>
+<div class="feedback" id="fb_c4_9"></div>
+</div>
+<div class="card" data-answer="son" id="c4_10">
+<div class="illus">💰<span>barato/caro = дешёвый/дорогой</span></div>
+<div class="card-q">Los zapatos de cuero ___ caros siempre.</div>
+<div class="toggle-wrap">
+<button class="tog" onclick="selectToggle(this,'c4_10','son')">son</button>
+<button class="tog" onclick="selectToggle(this,'c4_10','están')">están</button>
+</div>
+<div class="feedback" id="fb_c4_10"></div>
+</div>
+</div>
+<button class="check-btn" onclick="checkSection(3)">✔ Comprobar respuestas</button>
+<button class="reset-btn" onclick="resetSection(3)">↺ Reiniciar</button>
+<div class="score-box" id="score3"><div class="stars" id="stars3"></div><div class="score-num" id="snum3"></div><div class="score-msg" id="smsg3"></div></div>
 </section>
-
-
 <!-- ═══════════════════════════════════════════════════
      SECCIÓN 5: ESTAR / TENER / HAY
 ═══════════════════════════════════════════════════ -->
 <section class="section" id="sec4">
-  <div class="sec-num">Ejercicio 5</div>
-  <h2 class="sec-title">Estar · Tener · Hay</h2>
-  <p class="sec-sub">Tres expresiones muy útiles — y muy diferentes</p>
-
-  <div class="instruction">
+<div class="sec-num">Ejercicio 5</div>
+<h2 class="sec-title">Estar · Tener · Hay</h2>
+<p class="sec-sub">Tres expresiones muy útiles — y muy diferentes</p>
+<div class="instruction">
     Три разные конструкции: ESTAR (местонахождение / состояние), TENER (иметь / обладать), HAY (существование — «есть», «имеется»). Выберите правильный вариант для каждого предложения.
   </div>
-
-  <div class="theory">
-    <h3>📌 ESTAR vs TENER vs HAY</h3>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px">
-      <div style="background:#E8F5EC;border-radius:10px;padding:14px">
-        <div style="font-weight:900;color:var(--oliva);font-size:1.05rem;margin-bottom:8px">ESTAR 🟢</div>
-        <div style="font-size:.87rem;line-height:1.8">Localización:<br><em>El libro <strong>está</strong> en la mesa.</em><br><br>Estado:<br><em>Estoy <strong>cansado</strong>.</em></div>
-      </div>
-      <div style="background:#FEF3E2;border-radius:10px;padding:14px">
-        <div style="font-weight:900;color:var(--naranja);font-size:1.05rem;margin-bottom:8px">TENER 🟠</div>
-        <div style="font-size:.87rem;line-height:1.8">Posesión:<br><em>Tengo <strong>una sartén</strong>.</em><br><br>Sensación física:<br><em>Tengo <strong>hambre</strong>.</em></div>
-      </div>
-      <div style="background:#FDF5CC;border-radius:10px;padding:14px">
-        <div style="font-weight:900;color:#9B7A00;font-size:1.05rem;margin-bottom:8px">HAY 🟡</div>
-        <div style="font-size:.87rem;line-height:1.8">Existencia (invariable):<br><em><strong>Hay</strong> un mercado cerca.</em><br><em><strong>Hay</strong> muchas personas.</em><br><br>= есть / имеется / существует</div>
-      </div>
-    </div>
-    <div style="margin-top:14px;background:var(--crema);border-radius:10px;padding:12px 16px;font-size:.88rem">
-      <strong>⚠️ Atención:</strong> <strong>HAY</strong> es siempre invariable (no cambia con singular/plural).<br>
+<div class="theory">
+<h3>📌 ESTAR vs TENER vs HAY</h3>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px">
+<div style="background:#E8F5EC;border-radius:10px;padding:14px">
+<div style="font-weight:900;color:var(--oliva);font-size:1.05rem;margin-bottom:8px">ESTAR 🟢</div>
+<div style="font-size:.87rem;line-height:1.8">Localización:<br/><em>El libro <strong>está</strong> en la mesa.</em><br/><br/>Estado:<br/><em>Estoy <strong>cansado</strong>.</em></div>
+</div>
+<div style="background:#FEF3E2;border-radius:10px;padding:14px">
+<div style="font-weight:900;color:var(--naranja);font-size:1.05rem;margin-bottom:8px">TENER 🟠</div>
+<div style="font-size:.87rem;line-height:1.8">Posesión:<br/><em>Tengo <strong>una sartén</strong>.</em><br/><br/>Sensación física:<br/><em>Tengo <strong>hambre</strong>.</em></div>
+</div>
+<div style="background:#FDF5CC;border-radius:10px;padding:14px">
+<div style="font-weight:900;color:#9B7A00;font-size:1.05rem;margin-bottom:8px">HAY 🟡</div>
+<div style="font-size:.87rem;line-height:1.8">Existencia (invariable):<br/><em><strong>Hay</strong> un mercado cerca.</em><br/><em><strong>Hay</strong> muchas personas.</em><br/><br/>= есть / имеется / существует</div>
+</div>
+</div>
+<div style="margin-top:14px;background:var(--crema);border-radius:10px;padding:12px 16px;font-size:.88rem">
+<strong>⚠️ Atención:</strong> <strong>HAY</strong> es siempre invariable (no cambia con singular/plural).<br/>
       «Hay <em>un</em> mercado» / «Hay <em>muchos</em> mercados» → siempre <em>hay</em>.
     </div>
-  </div>
-
-  <div class="ex-grid two-col" id="ex5-cards">
-
-    <div class="card" data-answer="Hay" id="c5_1">
-      <div class="illus">🏪<span>cerca = рядом</span></div>
-      <div class="card-q">___ una tienda de aceite de oliva cerca de mi casa.</div>
-      <div class="toggle-wrap">
-        <button class="tog" onclick="selectToggle3(this,'c5_1','Hay')">Hay</button>
-        <button class="tog" onclick="selectToggle3(this,'c5_1','Está')">Está</button>
-        <button class="tog" onclick="selectToggle3(this,'c5_1','Tiene')">Tiene</button>
-      </div>
-      <div class="feedback" id="fb_c5_1"></div>
-    </div>
-
-    <div class="card" data-answer="Tengo" id="c5_2">
-      <div class="illus">😰<span>doler = болеть</span></div>
-      <div class="card-q">___ dolor de estómago. No voy a almorzar hoy.</div>
-      <div class="toggle-wrap">
-        <button class="tog" onclick="selectToggle3(this,'c5_2','Hay')">Hay</button>
-        <button class="tog" onclick="selectToggle3(this,'c5_2','Estoy')">Estoy</button>
-        <button class="tog" onclick="selectToggle3(this,'c5_2','Tengo')">Tengo</button>
-      </div>
-      <div class="feedback" id="fb_c5_2"></div>
-    </div>
-
-    <div class="card" data-answer="Está" id="c5_3">
-      <div class="illus">🍳<span>sartén = сковорода</span></div>
-      <div class="card-q">La sartén ___ en el cajón de la cocina.</div>
-      <div class="toggle-wrap">
-        <button class="tog" onclick="selectToggle3(this,'c5_3','Hay')">Hay</button>
-        <button class="tog" onclick="selectToggle3(this,'c5_3','Está')">Está</button>
-        <button class="tog" onclick="selectToggle3(this,'c5_3','Tiene')">Tiene</button>
-      </div>
-      <div class="feedback" id="fb_c5_3"></div>
-    </div>
-
-    <div class="card" data-answer="Hay" id="c5_4">
-      <div class="illus">👥<span>gente = люди</span></div>
-      <div class="card-q">___ mucha gente en la tienda hoy. Hay que esperar.</div>
-      <div class="toggle-wrap">
-        <button class="tog" onclick="selectToggle3(this,'c5_4','Hay')">Hay</button>
-        <button class="tog" onclick="selectToggle3(this,'c5_4','Están')">Están</button>
-        <button class="tog" onclick="selectToggle3(this,'c5_4','Tienen')">Tienen</button>
-      </div>
-      <div class="feedback" id="fb_c5_4"></div>
-    </div>
-
-    <div class="card" data-answer="tiene" id="c5_5">
-      <div class="illus">🧵<span>hilo = нитка</span></div>
-      <div class="card-q">Mi abuela ___ una caja llena de hilos y agujas para coser.</div>
-      <div class="toggle-wrap">
-        <button class="tog" onclick="selectToggle3(this,'c5_5','hay')">hay</button>
-        <button class="tog" onclick="selectToggle3(this,'c5_5','está')">está</button>
-        <button class="tog" onclick="selectToggle3(this,'c5_5','tiene')">tiene</button>
-      </div>
-      <div class="feedback" id="fb_c5_5"></div>
-    </div>
-
-    <div class="card" data-answer="están" id="c5_6">
-      <div class="illus">🥄<span>cubiertos = столовые приборы</span></div>
-      <div class="card-q">Los cubiertos — la cuchara, el tenedor y el cuchillo — ___ en el cajón.</div>
-      <div class="toggle-wrap">
-        <button class="tog" onclick="selectToggle3(this,'c5_6','hay')">hay</button>
-        <button class="tog" onclick="selectToggle3(this,'c5_6','están')">están</button>
-        <button class="tog" onclick="selectToggle3(this,'c5_6','tienen')">tienen</button>
-      </div>
-      <div class="feedback" id="fb_c5_6"></div>
-    </div>
-
-    <div class="card" data-answer="Hay" id="c5_7">
-      <div class="illus">🧃<span>zumo = сок</span></div>
-      <div class="card-q">___ zumo de naranja, de manzana y de piña en la nevera.</div>
-      <div class="toggle-wrap">
-        <button class="tog" onclick="selectToggle3(this,'c5_7','Hay')">Hay</button>
-        <button class="tog" onclick="selectToggle3(this,'c5_7','Están')">Están</button>
-        <button class="tog" onclick="selectToggle3(this,'c5_7','Tienen')">Tienen</button>
-      </div>
-      <div class="feedback" id="fb_c5_7"></div>
-    </div>
-
-    <div class="card" data-answer="Tenemos" id="c5_8">
-      <div class="illus">🎂<span>cumpleaños = день рождения</span></div>
-      <div class="card-q">___ una celebración importante mañana. ¡El cumpleaños de papá!</div>
-      <div class="toggle-wrap">
-        <button class="tog" onclick="selectToggle3(this,'c5_8','Hay')">Hay</button>
-        <button class="tog" onclick="selectToggle3(this,'c5_8','Estamos')">Estamos</button>
-        <button class="tog" onclick="selectToggle3(this,'c5_8','Tenemos')">Tenemos</button>
-      </div>
-      <div class="feedback" id="fb_c5_8"></div>
-    </div>
-
-  </div>
-
-  <div class="divider"></div>
-  <p style="font-weight:800;color:var(--terra);margin-bottom:8px">✏️ Parte B — Escribe: hay / está / tiene</p>
-  <div class="instruction">Напишите нужный глагол: hay, está/están или tiene/tienen. Учтите: HAY — для существования; ESTAR — для места; TENER — для обладания.</div>
-
-  <div class="ex-grid two-col">
-    <div class="card" data-answer="hay" id="c5_9">
-      <div class="illus">🔌<span>interruptor = выключатель</span></div>
-      <div class="card-q">___ un interruptor detrás de la puerta.</div>
-      <input type="text" class="txt-in" placeholder="hay / está / tiene" onchange="clearCard('c5_9')">
-      <div class="feedback" id="fb_c5_9"></div>
-    </div>
-    <div class="card" data-answer="está" id="c5_10">
-      <div class="illus">☕<span>cafetera = кофеварка</span></div>
-      <div class="card-q">La cafetera ___ encima de la mesa de la cocina.</div>
-      <input type="text" class="txt-in" placeholder="hay / está / tiene" onchange="clearCard('c5_10')">
-      <div class="feedback" id="fb_c5_10"></div>
-    </div>
-  </div>
-
-  <button class="check-btn" onclick="checkSection(4)">✔ Comprobar respuestas</button>
-  <button class="reset-btn" onclick="resetSection(4)">↺ Reiniciar</button>
-  <div class="score-box" id="score4"><div class="stars" id="stars4"></div><div class="score-num" id="snum4"></div><div class="score-msg" id="smsg4"></div></div>
+</div>
+<div class="ex-grid two-col" id="ex5-cards">
+<div class="card" data-answer="Hay" id="c5_1">
+<div class="illus">🏪<span>cerca = рядом</span></div>
+<div class="card-q">___ una tienda de aceite de oliva cerca de mi casa.</div>
+<div class="toggle-wrap">
+<button class="tog" onclick="selectToggle3(this,'c5_1','Hay')">Hay</button>
+<button class="tog" onclick="selectToggle3(this,'c5_1','Está')">Está</button>
+<button class="tog" onclick="selectToggle3(this,'c5_1','Tiene')">Tiene</button>
+</div>
+<div class="feedback" id="fb_c5_1"></div>
+</div>
+<div class="card" data-answer="Tengo" id="c5_2">
+<div class="illus">😰<span>doler = болеть</span></div>
+<div class="card-q">___ dolor de estómago. No voy a almorzar hoy.</div>
+<div class="toggle-wrap">
+<button class="tog" onclick="selectToggle3(this,'c5_2','Hay')">Hay</button>
+<button class="tog" onclick="selectToggle3(this,'c5_2','Estoy')">Estoy</button>
+<button class="tog" onclick="selectToggle3(this,'c5_2','Tengo')">Tengo</button>
+</div>
+<div class="feedback" id="fb_c5_2"></div>
+</div>
+<div class="card" data-answer="Está" id="c5_3">
+<div class="illus">🍳<span>sartén = сковорода</span></div>
+<div class="card-q">La sartén ___ en el cajón de la cocina.</div>
+<div class="toggle-wrap">
+<button class="tog" onclick="selectToggle3(this,'c5_3','Hay')">Hay</button>
+<button class="tog" onclick="selectToggle3(this,'c5_3','Está')">Está</button>
+<button class="tog" onclick="selectToggle3(this,'c5_3','Tiene')">Tiene</button>
+</div>
+<div class="feedback" id="fb_c5_3"></div>
+</div>
+<div class="card" data-answer="Hay" id="c5_4">
+<div class="illus">👥<span>gente = люди</span></div>
+<div class="card-q">___ mucha gente en la tienda hoy. Hay que esperar.</div>
+<div class="toggle-wrap">
+<button class="tog" onclick="selectToggle3(this,'c5_4','Hay')">Hay</button>
+<button class="tog" onclick="selectToggle3(this,'c5_4','Están')">Están</button>
+<button class="tog" onclick="selectToggle3(this,'c5_4','Tienen')">Tienen</button>
+</div>
+<div class="feedback" id="fb_c5_4"></div>
+</div>
+<div class="card" data-answer="tiene" id="c5_5">
+<div class="illus">🧵<span>hilo = нитка</span></div>
+<div class="card-q">Mi abuela ___ una caja llena de hilos y agujas para coser.</div>
+<div class="toggle-wrap">
+<button class="tog" onclick="selectToggle3(this,'c5_5','hay')">hay</button>
+<button class="tog" onclick="selectToggle3(this,'c5_5','está')">está</button>
+<button class="tog" onclick="selectToggle3(this,'c5_5','tiene')">tiene</button>
+</div>
+<div class="feedback" id="fb_c5_5"></div>
+</div>
+<div class="card" data-answer="están" id="c5_6">
+<div class="illus">🥄<span>cubiertos = столовые приборы</span></div>
+<div class="card-q">Los cubiertos — la cuchara, el tenedor y el cuchillo — ___ en el cajón.</div>
+<div class="toggle-wrap">
+<button class="tog" onclick="selectToggle3(this,'c5_6','hay')">hay</button>
+<button class="tog" onclick="selectToggle3(this,'c5_6','están')">están</button>
+<button class="tog" onclick="selectToggle3(this,'c5_6','tienen')">tienen</button>
+</div>
+<div class="feedback" id="fb_c5_6"></div>
+</div>
+<div class="card" data-answer="Hay" id="c5_7">
+<div class="illus">🧃<span>zumo = сок</span></div>
+<div class="card-q">___ zumo de naranja, de manzana y de piña en la nevera.</div>
+<div class="toggle-wrap">
+<button class="tog" onclick="selectToggle3(this,'c5_7','Hay')">Hay</button>
+<button class="tog" onclick="selectToggle3(this,'c5_7','Están')">Están</button>
+<button class="tog" onclick="selectToggle3(this,'c5_7','Tienen')">Tienen</button>
+</div>
+<div class="feedback" id="fb_c5_7"></div>
+</div>
+<div class="card" data-answer="Tenemos" id="c5_8">
+<div class="illus">🎂<span>cumpleaños = день рождения</span></div>
+<div class="card-q">___ una celebración importante mañana. ¡El cumpleaños de papá!</div>
+<div class="toggle-wrap">
+<button class="tog" onclick="selectToggle3(this,'c5_8','Hay')">Hay</button>
+<button class="tog" onclick="selectToggle3(this,'c5_8','Estamos')">Estamos</button>
+<button class="tog" onclick="selectToggle3(this,'c5_8','Tenemos')">Tenemos</button>
+</div>
+<div class="feedback" id="fb_c5_8"></div>
+</div>
+</div>
+<div class="divider"></div>
+<p style="font-weight:800;color:var(--terra);margin-bottom:8px">✏️ Parte B — Escribe: hay / está / tiene</p>
+<div class="instruction">Напишите нужный глагол: hay, está/están или tiene/tienen. Учтите: HAY — для существования; ESTAR — для места; TENER — для обладания.</div>
+<div class="ex-grid two-col">
+<div class="card" data-answer="hay" id="c5_9">
+<div class="illus">🔌<span>interruptor = выключатель</span></div>
+<div class="card-q">___ un interruptor detrás de la puerta.</div>
+<input class="txt-in" onchange="clearCard('c5_9')" placeholder="hay / está / tiene" type="text"/>
+<div class="feedback" id="fb_c5_9"></div>
+</div>
+<div class="card" data-answer="está" id="c5_10">
+<div class="illus">☕<span>cafetera = кофеварка</span></div>
+<div class="card-q">La cafetera ___ encima de la mesa de la cocina.</div>
+<input class="txt-in" onchange="clearCard('c5_10')" placeholder="hay / está / tiene" type="text"/>
+<div class="feedback" id="fb_c5_10"></div>
+</div>
+</div>
+<button class="check-btn" onclick="checkSection(4)">✔ Comprobar respuestas</button>
+<button class="reset-btn" onclick="resetSection(4)">↺ Reiniciar</button>
+<div class="score-box" id="score4"><div class="stars" id="stars4"></div><div class="score-num" id="snum4"></div><div class="score-msg" id="smsg4"></div></div>
 </section>
-
 </main>
-
 <footer style="background:#2C1810;color:rgba(255,255,255,.6);text-align:center;padding:24px;font-size:.85rem;font-weight:600">
-  📚 Ejercicios ELE A1 · Vocabulario Días 1–14 &nbsp;|&nbsp; ¡Buena suerte! Удачи!
+  📚 Ejercicios ELE A1 · Vocabulario Días 1–14  |  ¡Buena suerte! Удачи!
 </footer>
-
 <script>
 // ──────────────────────────────────────────────
 //  TAB NAVIGATION
@@ -1191,8 +967,8 @@ function selectToggle3(btn, cardId, value) {
 //  GET CARD VALUE (select / input / toggle)
 // ──────────────────────────────────────────────
 function getCardValue(card) {
-  const sel = card.querySelector('select');
-  if (sel) return sel.value.trim();
+  const target = card.querySelector('.dd-target');
+  if (target) return target.dataset.value.trim();
   const inp = card.querySelector('.txt-in');
   if (inp) return inp.value.trim().toLowerCase();
   const wrap = card.querySelector('.toggle-wrap');
@@ -1265,8 +1041,8 @@ function resetSection(secIdx) {
   cards.forEach(id => {
     const card = document.getElementById(id);
     card.classList.remove('correct','incorrect');
-    const sel = card.querySelector('select');
-    if (sel) sel.value = '';
+    const widget = card.querySelector('.dd-widget');
+    if (widget) setDrop(widget, '');
     const inp = card.querySelector('.txt-in');
     if (inp) inp.value = '';
     const wrap = card.querySelector('.toggle-wrap');
@@ -1292,6 +1068,30 @@ function updateProgress() {
   document.getElementById('prog-fill').style.width = pct + '%';
   document.getElementById('prog-label').textContent = 'Progreso: ' + n + ' / 5 ejercicios completados';
 }
+
+function setDrop(widget, value) {
+ const target = widget.querySelector('.dd-target');
+ target.dataset.value = value;
+ const chip = Array.from(widget.querySelectorAll('.dd-chip')).find(c => c.dataset.value === value);
+ target.textContent = chip ? chip.textContent : 'Arrastra aquí · Перетащите сюда';
+ target.classList.toggle('filled', !!chip);
+ widget.querySelectorAll('.dd-chip').forEach(c => c.setAttribute('aria-pressed','false'));
+ clearCard(widget.closest('.card').id);
+}
+let dragging = null;
+document.querySelectorAll('.dd-widget').forEach(widget => {
+ const target = widget.querySelector('.dd-target');
+ widget.querySelectorAll('.dd-chip').forEach(chip => {
+  chip.addEventListener('dragstart', e => {dragging = chip; e.dataTransfer.setData('text/plain',chip.dataset.value); e.dataTransfer.effectAllowed='copy';});
+  chip.addEventListener('dragend', () => {dragging=null; target.classList.remove('over');});
+  chip.addEventListener('click', () => {setDrop(widget,chip.dataset.value);});
+ });
+ target.addEventListener('dragover', e => {if(dragging && dragging.closest('.dd-widget')===widget){e.preventDefault();e.dataTransfer.dropEffect='copy';target.classList.add('over');}});
+ target.addEventListener('dragleave', () => target.classList.remove('over'));
+ target.addEventListener('drop', e => {e.preventDefault();target.classList.remove('over');if(dragging && dragging.closest('.dd-widget')===widget) setDrop(widget,dragging.dataset.value);dragging=null;});
+ target.addEventListener('click', () => {if(target.dataset.value) setDrop(widget,'');});
+ widget.querySelector('.dd-clear').addEventListener('click', () => setDrop(widget,''));
+});
 </script>
 </body>
 </html>
